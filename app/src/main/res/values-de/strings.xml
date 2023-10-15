@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Flat Fusion</string>
+    <string name="welcome">Wilkommen</string>
+    <string name="register">Registrieren</string>
+    <string name="cancel">Abbrechen</string>
+</resources>
