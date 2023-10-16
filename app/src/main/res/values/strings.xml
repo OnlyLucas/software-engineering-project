@@ -9,10 +9,18 @@
     <string name="password">Password</string>
     <string name="register">Register</string>
     <string name="cancel">Cancel</string>
-    <string name="logOut">Log out</string>
+    <string name="log_out">Log out</string>
     <string name="settings">Settings</string>
-    Please login with you information
-    E-Mail address
-    Password
-    WG Tool
+    <string name="flat_settings">flat settings</string>
+    <string name="change_password">Change Password</string>
+    <string name="change_e_mail">Change e-mail</string>
+    <string name="go_back">Go Back</string>
+    <string name="personal_settings">Personal Settings</string>
+    <string name="leave_flat_share">Leave flat share</string>
+    <string name="manage_flat_share">Manage flat share</string>
+    <string name="create_flat_share">Create flat share</string>
+    <string name="please_login_with_you_information">Please login with you information</string>
+    <string name="shopping_list">Shopping List</string>
+    <string name="budget">Budget</string>
+    <string name="cleaning_plan">Cleaning Plan</string>
 </resources>

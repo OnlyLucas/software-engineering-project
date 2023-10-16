@@ -1,7 +1,6 @@
 package com.example.software_engineering_project;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -10,6 +9,7 @@ import android.widget.Button;
 public class MainScreen extends AppCompatActivity {
 
     private Button logOutButton;
+    private Button goSettingsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,14 @@ public class MainScreen extends AppCompatActivity {
             Intent LoginScreen = new Intent(MainScreen.this,LoginScreen.class);
             startActivity(LoginScreen);
         });
+
+        goSettingsButton = findViewById(R.id.goSettingsButtons);
+        goSettingsButton.setOnClickListener(view -> {
+            Intent SettingScreen = new Intent(MainScreen.this,SettingScreen.class);
+            startActivity(SettingScreen);
+        });
+
+
     }
 }
 

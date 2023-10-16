@@ -11,7 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/my_primary"
-        android:alpha="0.7"/>
+        android:alpha="0.7">
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,10 +23,9 @@
         android:padding="28dp">
 
 
-
         <ImageView
             android:layout_width="56dp"
-            android:layout_height="52dp"
+            android:layout_height="56dp"
             android:src="@drawable/house_icon" />
 
         <TextView
@@ -40,8 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
-            >
+            android:layout_gravity="center_horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -66,13 +66,13 @@
 
         <View
             android:layout_width="wrap_content"
-            android:layout_height="80dp"/>
+            android:layout_height="80dp" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/shoppingListButton"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:text="Shopping List"
+            android:text="@string/shopping_list"
             app:icon="@drawable/shopping_list_icon"
             android:textSize="32dp"
             app:iconSize="48dp"
@@ -83,7 +83,7 @@
             android:id="@+id/budgetButton"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:text="Budget"
+            android:text="@string/budget"
             app:icon="@drawable/budget_icon"
             android:textSize="32dp"
             app:iconSize="48dp"
@@ -95,7 +95,7 @@
             android:id="@+id/cleaningPlanButton"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:text="Cleaning Plan"
+            android:text="@string/cleaning_plan"
             app:icon="@drawable/cleaning_icon"
             android:textSize="32dp"
             app:iconSize="48dp"
@@ -131,7 +131,7 @@
                     android:id="@+id/logOutButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/logOut"
+                    android:text="@string/log_out"
                     android:drawableLeft="@drawable/logout_icon"
                     android:layout_weight="1"
                     android:backgroundTint="@color/my_primary"/>
@@ -141,6 +141,7 @@
                     android:layout_height="1dp"/>
 
                 <Button
+                    android:id="@+id/goSettingsButtons"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/settings"
