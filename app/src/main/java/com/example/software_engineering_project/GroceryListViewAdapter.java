@@ -39,6 +39,7 @@ class GroceryListViewAdapter extends ArrayAdapter<String> {
             ImageView copy = convertView.findViewById(R.id.copy);
             TextView number = convertView.findViewById(R.id.number);
 
+
             number.setText(position + 1 + ".");
             name.setText(list.get(position));
 

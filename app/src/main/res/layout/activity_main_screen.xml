@@ -11,9 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/my_primary"
-        android:alpha="0.7">
-
-    </RelativeLayout>
+        android:alpha="0.7"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -74,7 +72,7 @@
             android:layout_height="80dp"
             android:text="@string/shopping_list"
             app:icon="@drawable/shopping_list_icon"
-            android:textSize="32dp"
+            android:textSize="32sp"
             app:iconSize="48dp"
             app:cornerRadius="32dp"
             android:backgroundTint="@color/my_secondary"/>
