@@ -23,4 +23,6 @@
     <string name="shopping_list">Einkaufsliste</string>
     <string name="budget">Haushaltsbuch</string>
     <string name="cleaning_plan">Putzplan</string>
+    <string name="are_you_sure_you_want_to_change_your_password">Sind Sie sicher dass Sie Ihr Passwort ändern möchten?</string>
+    <string name="are_you_sure_you_want_to_change_your_mail">Sind Sie sicher, dass Sie Ihre E-Mail Adresse ändern wollen?</string>
 </resources>

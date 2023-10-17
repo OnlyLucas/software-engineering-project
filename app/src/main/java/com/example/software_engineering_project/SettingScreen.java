@@ -10,6 +10,8 @@ public class SettingScreen extends AppCompatActivity {
 
 
     private Button goBackButton;
+    private Button changePasswordScreenButton;
+    private Button changeMailScreenButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +25,18 @@ public class SettingScreen extends AppCompatActivity {
         goBackButton.setOnClickListener(view -> {
             Intent MainScreen = new Intent(SettingScreen.this,MainScreen.class);
             startActivity(MainScreen);
+        });
+
+        changePasswordScreenButton = findViewById(R.id.changePasswordScreenButton);
+        changePasswordScreenButton.setOnClickListener(view -> {
+            Intent ChangePasswordScreen = new Intent(SettingScreen.this,ChangePasswordScreen.class);
+            startActivity(ChangePasswordScreen);
+        });
+
+        changeMailScreenButton = findViewById(R.id.changeMailScreenButton);
+        changeMailScreenButton.setOnClickListener(view -> {
+            Intent ChangeMailScreen = new Intent(SettingScreen.this, ChangeMailScreen.class);
+            startActivity(ChangeMailScreen);
         });
     }
 }

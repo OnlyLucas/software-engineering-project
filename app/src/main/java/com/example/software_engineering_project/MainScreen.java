@@ -10,6 +10,7 @@ public class MainScreen extends AppCompatActivity {
 
     private Button logOutButton;
     private Button goSettingsButton;
+    private Button groceryListButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,12 @@ public class MainScreen extends AppCompatActivity {
         logOutButton.setOnClickListener(view -> {
             Intent LoginScreen = new Intent(MainScreen.this,LoginScreen.class);
             startActivity(LoginScreen);
+        });
+
+        groceryListButton = findViewById(R.id.groceryListButton);
+        groceryListButton.setOnClickListener(view -> {
+            Intent GroceryListMain = new Intent(MainScreen.this,GroceryListMain.class);
+            startActivity(GroceryListMain);
         });
 
         goSettingsButton = findViewById(R.id.goSettingsButtons);
