@@ -4,6 +4,7 @@ package com.example.software_engineering_project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.gesture.Gesture;
 import android.media.Image;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -33,11 +35,15 @@ public class GroceryListMain extends AppCompatActivity {
     static GroceryListViewAdapter adapter;
     static ArrayList<String> items;
     static Context context;
+    private Button goBackButtonGroceryList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grocery_list_main);
+
+        this.addButtons();
+
         listView = findViewById(R.id.list);
         input = findViewById(R.id.input);
         enter = findViewById(R.id.add);
@@ -153,5 +159,14 @@ public class GroceryListMain extends AppCompatActivity {
         if (t != null) t.cancel();
         t = Toast.makeText(context, s, Toast.LENGTH_SHORT);
         t.show();
+    }
+
+
+    private void addButtons() {
+        goBackButtonGroceryList = findViewById(R.id.goBackButtonGroceryList);
+        goBackButtonGroceryList.setOnClickListener(view -> {
+            Intent MainScreen = new Intent(GroceryListMain.this, MainScreen.class);
+            startActivity(MainScreen);
+        });
     }
 }
