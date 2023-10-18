@@ -13,12 +13,13 @@
         android:id="@+id/header">
 
         <EditText
+            android:id="@+id/input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Enter item here"
             android:layout_centerInParent="true"
-            android:id="@+id/input" />
+            android:layout_centerVertical="true"
+            android:ems="10"
+            android:hint="@string/enter_item_here" />
 
         <ImageView
             android:layout_width="40sp"

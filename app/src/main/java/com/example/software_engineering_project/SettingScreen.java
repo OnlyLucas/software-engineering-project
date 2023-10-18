@@ -12,6 +12,8 @@ public class SettingScreen extends AppCompatActivity {
     private Button goBackButton;
     private Button changePasswordScreenButton;
     private Button changeMailScreenButton;
+
+    private Button manageFlatShareButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,12 @@ public class SettingScreen extends AppCompatActivity {
         changeMailScreenButton.setOnClickListener(view -> {
             Intent ChangeMailScreen = new Intent(SettingScreen.this, ChangeMailScreen.class);
             startActivity(ChangeMailScreen);
+        });
+
+        manageFlatShareButton = findViewById(R.id.manageFlatShareButton);
+        manageFlatShareButton.setOnClickListener(view -> {
+            Intent ManageFlatShareScreen = new Intent(SettingScreen.this, ManageFlatShareMain.class);
+            startActivity(ManageFlatShareScreen);
         });
     }
 }

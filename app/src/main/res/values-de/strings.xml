@@ -25,4 +25,8 @@
     <string name="cleaning_plan">Putzplan</string>
     <string name="are_you_sure_you_want_to_change_your_password">Sind Sie sicher dass Sie Ihr Passwort ändern möchten?</string>
     <string name="are_you_sure_you_want_to_change_your_mail">Sind Sie sicher, dass Sie Ihre E-Mail Adresse ändern wollen?</string>
+    <string name="enter_item_here">Artikel hier eintragen</string>
+    <string name="name_of_flat">Name der WG</string>
+    <string name="enter_mail_here">Mail-Adresse hier eintragen</string>
+    <string name="save_changes">Änderungen speichern</string>
 </resources>

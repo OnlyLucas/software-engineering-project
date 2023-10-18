@@ -13,14 +13,20 @@
         android:theme="@style/Theme.Softwareengineeringproject"
         tools:targetApi="31">
         <activity
+            android:name=".MangageFlatShareViewAdapter"
+            android:exported="false" />
+        <activity
+            android:name=".ManageFlatShareMain"
+            android:exported="false" />
+        <activity
             android:name=".GroceryListViewAdapter"
             android:exported="false" />
         <activity
             android:name=".GroceryListMain"
             android:exported="false" />
-        <activity
+<!--        <activity
             android:name=".ShoppingListScreen"
-            android:exported="false" />
+            android:exported="false" />-->
         <activity
             android:name=".ChangeMailScreen"
             android:exported="false" />
