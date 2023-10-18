@@ -1,4 +1,4 @@
-package com.example.software_engineering_project;
+package com.example.software_engineering_project.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
+import com.example.software_engineering_project.R;
 
 public class ChangePasswordScreen extends AppCompatActivity {
 
@@ -22,7 +24,7 @@ public class ChangePasswordScreen extends AppCompatActivity {
     private void addButtons(){
         goBackButton = findViewById(R.id.goBackButton);
         goBackButton.setOnClickListener(view -> {
-            Intent SettingScreen = new Intent(ChangePasswordScreen.this,SettingScreen.class);
+            Intent SettingScreen = new Intent(ChangePasswordScreen.this, com.example.software_engineering_project.controller.SettingScreen.class);
             startActivity(SettingScreen);
         });
 

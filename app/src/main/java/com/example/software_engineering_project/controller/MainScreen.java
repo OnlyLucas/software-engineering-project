@@ -1,10 +1,12 @@
-package com.example.software_engineering_project;
+package com.example.software_engineering_project.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Button;
+
+import com.example.software_engineering_project.R;
 
 public class MainScreen extends AppCompatActivity {
 
@@ -36,13 +38,13 @@ public class MainScreen extends AppCompatActivity {
 
         groceryListButton = findViewById(R.id.groceryListButton);
         groceryListButton.setOnClickListener(view -> {
-            Intent GroceryListMain = new Intent(MainScreen.this,GroceryListMain.class);
+            Intent GroceryListMain = new Intent(MainScreen.this, com.example.software_engineering_project.controller.GroceryListMain.class);
             startActivity(GroceryListMain);
         });
 
         goSettingsButton = findViewById(R.id.goSettingsButtons);
         goSettingsButton.setOnClickListener(view -> {
-            Intent SettingScreen = new Intent(MainScreen.this,SettingScreen.class);
+            Intent SettingScreen = new Intent(MainScreen.this, com.example.software_engineering_project.controller.SettingScreen.class);
             startActivity(SettingScreen);
         });
 

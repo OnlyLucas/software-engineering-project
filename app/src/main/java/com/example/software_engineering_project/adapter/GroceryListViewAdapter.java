@@ -1,4 +1,4 @@
-package com.example.software_engineering_project;
+package com.example.software_engineering_project.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,9 +12,12 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.software_engineering_project.controller.GroceryListMain;
+import com.example.software_engineering_project.R;
+
 import java.util.ArrayList;
 
-class GroceryListViewAdapter extends ArrayAdapter<String> {
+public class GroceryListViewAdapter extends ArrayAdapter<String> {
     ArrayList<String> list;
     Context context;
 

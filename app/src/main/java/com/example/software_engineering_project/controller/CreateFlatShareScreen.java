@@ -1,4 +1,4 @@
-package com.example.software_engineering_project;
+package com.example.software_engineering_project.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,45 +13,42 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.adapter.CreateFlatShareViewAdapter;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class ManageFlatShareMain extends AppCompatActivity {
+public class CreateFlatShareScreen extends AppCompatActivity {
     static ListView listView;
-    EditText input;
+    EditText input_name, input_mail;
     ImageView enter;
-    static ManageFlatShareViewAdapter adapter;
+    static CreateFlatShareViewAdapter adapter;
     static ArrayList<String> items;
     static Context context;
-    private Button goBackButtonManageFlatShare;
+    private Button goBackButtonCreateFlatShare;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_flat_share_main);
+        setContentView(R.layout.activity_create_flat_share_screen);
 
         this.addButtons();
 
         listView = findViewById(R.id.list);
-        input = findViewById(R.id.input);
+        input_name = findViewById(R.id.input_name);
+        input_mail = findViewById(R.id.input_mail);
         enter = findViewById(R.id.add);
         context = getApplicationContext();
 
         // add hardcoded items to list
         items = new ArrayList<>();
 
-        //Auslesebefehl für Datenbank
-        items.add("Jonas");
-        items.add("Nikos");
-        items.add("Lucas");
-        items.add("Meike");
-        items.add("Laura");
-
         listView.setLongClickable(true);
-        adapter = new ManageFlatShareViewAdapter(this, items);
+        adapter = new CreateFlatShareViewAdapter(this, items);
         listView.setAdapter(adapter);
 
         // Display the person's name when the person's row is clicked
@@ -59,22 +56,20 @@ public class ManageFlatShareMain extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String clickedItem = (String) listView.getItemAtPosition(position);
-                Toast.makeText(ManageFlatShareMain.this, clickedItem, Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateFlatShareScreen.this, clickedItem, Toast.LENGTH_SHORT).show();
             }
         });
-
-
 
         // add person when the user presses the add button
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String text = input.getText().toString();
+                String text = input_mail.getText().toString();
                 if (text.length() == 0) {
                     makeToast("Enter an e-mail.");
                 } else {
                     addItem(text);
-                    input.setText("");
+                    input_mail.setText("");
                     makeToast("Added " + text);
                     loadContent();
                 }
@@ -95,7 +90,7 @@ public class ManageFlatShareMain extends AppCompatActivity {
             stream.read(content);
 
             String s = new String(content);
-            // [Jonas, Nikos, Lucas, Meike, Laura]
+            // [Jonas]
             s = s.substring(1, s.length() - 1);
             String split[] = s.split(", ");
 
@@ -104,7 +99,7 @@ public class ManageFlatShareMain extends AppCompatActivity {
                 items = new ArrayList<>();
             else items = new ArrayList<>(Arrays.asList(split));
 
-            adapter = new ManageFlatShareViewAdapter(this, items);
+            adapter = new CreateFlatShareViewAdapter(this, items);
             listView.setAdapter(adapter);
         } catch (Exception e) {
             e.printStackTrace();
@@ -149,9 +144,9 @@ public class ManageFlatShareMain extends AppCompatActivity {
 
 
     private void addButtons() {
-        goBackButtonManageFlatShare = findViewById(R.id.goBackButtonManageFlatShare);
-        goBackButtonManageFlatShare.setOnClickListener(view -> {
-            Intent SettingScreen = new Intent(ManageFlatShareMain.this, SettingScreen.class);
+        goBackButtonCreateFlatShare = findViewById(R.id.goBackButtonCreateFlatShare);
+        goBackButtonCreateFlatShare.setOnClickListener(view -> {
+            Intent SettingScreen = new Intent(CreateFlatShareScreen.this, com.example.software_engineering_project.controller.SettingScreen.class);
             startActivity(SettingScreen);
         });
     }

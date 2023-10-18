@@ -1,10 +1,12 @@
-package com.example.software_engineering_project;
+package com.example.software_engineering_project.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
+import com.example.software_engineering_project.R;
 
 public class SettingScreen extends AppCompatActivity {
 
@@ -25,19 +27,19 @@ public class SettingScreen extends AppCompatActivity {
     private void addButtons(){
         goBackButton = findViewById(R.id.goBackButton);
         goBackButton.setOnClickListener(view -> {
-            Intent MainScreen = new Intent(SettingScreen.this,MainScreen.class);
+            Intent MainScreen = new Intent(SettingScreen.this, com.example.software_engineering_project.controller.MainScreen.class);
             startActivity(MainScreen);
         });
 
         changePasswordScreenButton = findViewById(R.id.changePasswordScreenButton);
         changePasswordScreenButton.setOnClickListener(view -> {
-            Intent ChangePasswordScreen = new Intent(SettingScreen.this,ChangePasswordScreen.class);
+            Intent ChangePasswordScreen = new Intent(SettingScreen.this, com.example.software_engineering_project.controller.ChangePasswordScreen.class);
             startActivity(ChangePasswordScreen);
         });
 
         changeMailScreenButton = findViewById(R.id.changeMailScreenButton);
         changeMailScreenButton.setOnClickListener(view -> {
-            Intent ChangeMailScreen = new Intent(SettingScreen.this, ChangeMailScreen.class);
+            Intent ChangeMailScreen = new Intent(SettingScreen.this, com.example.software_engineering_project.controller.ChangeMailScreen.class);
             startActivity(ChangeMailScreen);
         });
 
@@ -49,7 +51,7 @@ public class SettingScreen extends AppCompatActivity {
 
         manageFlatShareButton = findViewById(R.id.createFlatShareButton);
         manageFlatShareButton.setOnClickListener(view -> {
-            Intent CreateFlatShareScreen = new Intent(SettingScreen.this, CreateFlatShareScreen.class);
+            Intent CreateFlatShareScreen = new Intent(SettingScreen.this, com.example.software_engineering_project.controller.CreateFlatShareScreen.class);
             startActivity(CreateFlatShareScreen);
         });
     }

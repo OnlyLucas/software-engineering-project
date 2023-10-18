@@ -13,22 +13,22 @@
         android:theme="@style/Theme.Softwareengineeringproject"
         tools:targetApi="31">
         <activity
-            android:name=".CreateFlatShareViewAdapter"
+            android:name=".adapter.CreateFlatShareViewAdapter"
             android:exported="false" />
         <activity
-            android:name=".CreateFlatShareScreen"
+            android:name=".controller.CreateFlatShareScreen"
             android:exported="false" />
         <activity
-            android:name=".ManageFlatShareViewAdapter"
+            android:name=".adapter.ManageFlatShareViewAdapter"
             android:exported="false" />
         <activity
-            android:name=".ManageFlatShareMain"
+            android:name=".controller.ManageFlatShareMain"
             android:exported="false" />
         <activity
             android:name=".GroceryListViewAdapter"
             android:exported="false" />
         <activity
-            android:name=".GroceryListMain"
+            android:name=".controller.GroceryListMain"
             android:exported="false" />
         <!--
         <activity
@@ -36,22 +36,22 @@
             android:exported="false" />
         -->
         <activity
-            android:name=".ChangeMailScreen"
+            android:name=".controller.ChangeMailScreen"
             android:exported="false" />
         <activity
-            android:name=".ChangePasswordScreen"
+            android:name=".controller.ChangePasswordScreen"
             android:exported="false" />
         <activity
-            android:name=".SettingScreen"
+            android:name=".controller.SettingScreen"
             android:exported="false" />
         <activity
-            android:name=".RegisterScreen"
+            android:name=".controller.RegisterScreen"
             android:exported="false" />
         <activity
-            android:name=".MainScreen"
+            android:name=".controller.MainScreen"
             android:exported="false" />
         <activity
-            android:name=".LoginScreen"
+            android:name=".controller.LoginScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

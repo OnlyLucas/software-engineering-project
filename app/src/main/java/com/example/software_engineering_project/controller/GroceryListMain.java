@@ -1,28 +1,24 @@
-package com.example.software_engineering_project;
+package com.example.software_engineering_project.controller;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.gesture.Gesture;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.adapter.GroceryListViewAdapter;
+
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -165,7 +161,7 @@ public class GroceryListMain extends AppCompatActivity {
     private void addButtons() {
         goBackButtonGroceryList = findViewById(R.id.goBackButtonGroceryList);
         goBackButtonGroceryList.setOnClickListener(view -> {
-            Intent MainScreen = new Intent(GroceryListMain.this, MainScreen.class);
+            Intent MainScreen = new Intent(GroceryListMain.this, com.example.software_engineering_project.controller.MainScreen.class);
             startActivity(MainScreen);
         });
     }

@@ -1,4 +1,4 @@
-package com.example.software_engineering_project;
+package com.example.software_engineering_project.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
+import com.example.software_engineering_project.R;
 
 public class ChangeMailScreen extends AppCompatActivity {
 
@@ -22,7 +24,7 @@ public class ChangeMailScreen extends AppCompatActivity {
     private void addButtons(){
         goBackButtonMail = findViewById(R.id.goBackButtonMail);
         goBackButtonMail.setOnClickListener(view -> {
-            Intent SettingScreen = new Intent(ChangeMailScreen.this,SettingScreen.class);
+            Intent SettingScreen = new Intent(ChangeMailScreen.this, com.example.software_engineering_project.controller.SettingScreen.class);
             startActivity(SettingScreen);
         });
 
