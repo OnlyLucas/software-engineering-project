@@ -19,7 +19,7 @@
             android:name=".CreateFlatShareScreen"
             android:exported="false" />
         <activity
-            android:name=".MangageFlatShareViewAdapter"
+            android:name=".ManageFlatShareViewAdapter"
             android:exported="false" />
         <activity
             android:name=".ManageFlatShareMain"

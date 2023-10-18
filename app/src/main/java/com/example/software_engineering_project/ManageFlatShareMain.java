@@ -23,7 +23,7 @@ public class ManageFlatShareMain extends AppCompatActivity {
     static ListView listView;
     EditText input;
     ImageView enter;
-    static MangageFlatShareViewAdapter adapter;
+    static ManageFlatShareViewAdapter adapter;
     static ArrayList<String> items;
     static Context context;
     private Button goBackButtonManageFlatShare;
@@ -51,7 +51,7 @@ public class ManageFlatShareMain extends AppCompatActivity {
         items.add("Laura");
 
         listView.setLongClickable(true);
-        adapter = new MangageFlatShareViewAdapter(this, items);
+        adapter = new ManageFlatShareViewAdapter(this, items);
         listView.setAdapter(adapter);
 
         // Display the person's name when the person's row is clicked
@@ -104,7 +104,7 @@ public class ManageFlatShareMain extends AppCompatActivity {
                 items = new ArrayList<>();
             else items = new ArrayList<>(Arrays.asList(split));
 
-            adapter = new MangageFlatShareViewAdapter(this, items);
+            adapter = new ManageFlatShareViewAdapter(this, items);
             listView.setAdapter(adapter);
         } catch (Exception e) {
             e.printStackTrace();

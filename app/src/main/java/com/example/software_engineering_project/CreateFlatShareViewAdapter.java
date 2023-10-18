@@ -22,7 +22,7 @@ public class CreateFlatShareViewAdapter extends ArrayAdapter<String> {
     // @param context: the Context from the MainActivity
     // @param items: The list of items in our Grocery List
     public CreateFlatShareViewAdapter(Context context, ArrayList<String> items) {
-        super(context, R.layout.activity_mangage_flat_share_view_adapter, items);
+        super(context, R.layout.activity_create_flat_share_view_adapter, items);
         this.context = context;
         list = items;
     }
@@ -33,7 +33,7 @@ public class CreateFlatShareViewAdapter extends ArrayAdapter<String> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.activity_mangage_flat_share_view_adapter, null);
+            convertView = mInflater.inflate(R.layout.activity_create_flat_share_view_adapter, null);
             TextView name = convertView.findViewById(R.id.name);
             ImageView remove = convertView.findViewById(R.id.remove);
             TextView number = convertView.findViewById(R.id.number);

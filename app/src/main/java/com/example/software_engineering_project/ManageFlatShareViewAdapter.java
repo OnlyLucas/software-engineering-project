@@ -14,14 +14,14 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class MangageFlatShareViewAdapter extends ArrayAdapter<String> {
+public class ManageFlatShareViewAdapter extends ArrayAdapter<String> {
     ArrayList<String> list;
     Context context;
 
     // The ListViewAdapter Constructor
     // @param context: the Context from the MainActivity
     // @param items: The list of items in our Grocery List
-    public MangageFlatShareViewAdapter(Context context, ArrayList<String> items) {
+    public ManageFlatShareViewAdapter(Context context, ArrayList<String> items) {
         super(context, R.layout.activity_mangage_flat_share_view_adapter, items);
         this.context = context;
         list = items;
