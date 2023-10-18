@@ -46,5 +46,11 @@ public class SettingScreen extends AppCompatActivity {
             Intent ManageFlatShareScreen = new Intent(SettingScreen.this, ManageFlatShareMain.class);
             startActivity(ManageFlatShareScreen);
         });
+
+        manageFlatShareButton = findViewById(R.id.createFlatShareButton);
+        manageFlatShareButton.setOnClickListener(view -> {
+            Intent CreateFlatShareScreen = new Intent(SettingScreen.this, CreateFlatShareScreen.class);
+            startActivity(CreateFlatShareScreen);
+        });
     }
 }

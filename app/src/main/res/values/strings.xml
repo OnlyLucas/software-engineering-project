@@ -29,4 +29,5 @@
     <string name="name_of_flat">Name of flat</string>
     <string name="enter_mail_here">Enter mail here</string>
     <string name="save_changes">Save Changes</string>
+    <string name="enter_flat_share_name">Enter flat share name</string>
 </resources>

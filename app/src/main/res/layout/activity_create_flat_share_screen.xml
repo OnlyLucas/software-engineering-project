@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    tools:context=".SettingScreen">
+    tools:context=".CreateFlatShareScreen">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,6 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:background="@color/black"
+        android:alpha="0.8"
         android:gravity="center"
         android:padding="28dp">
 
@@ -77,17 +79,18 @@
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/createFlatShareButton"
+            android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/create_flat_share" />
 
         <Button
-            android:id="@+id/manageFlatShareButton"
+            android:id="@+id/button4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autoSizeMaxTextSize="320dp"
-            android:text="@string/manage_flat_share" />
+            android:text="@string/manage_flat_share"
+            />
 
         <Button
             android:id="@+id/button3"
@@ -109,19 +112,16 @@
             android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/changePasswordScreenButton"
+            android:id="@+id/button5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/change_password" />
+            android:text="@string/change_password"/>
 
         <Button
-            android:id="@+id/changeMailScreenButton"
+            android:id="@+id/button6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/change_e_mail" />
-
-
-
 
 
     </LinearLayout>
@@ -141,6 +141,55 @@
             android:gravity="center_horizontal"
             android:padding="16dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/create_flat_share"
+                android:textStyle="bold"
+                android:alpha="0.7"
+                android:textSize="24sp"
+                android:paddingBottom="40dp"/>
+
+            <EditText
+                android:id="@+id/input_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:ems="10"
+                android:hint="@string/enter_flat_share_name" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100sp"
+                android:background="#F1FEFF"
+                android:id="@+id/header"
+                android:gravity="center_horizontal">
+
+                <EditText
+                    android:id="@+id/input_mail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:ems="10"
+                    android:hint="@string/enter_mail_here" />
+
+                <ImageView
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:layout_toRightOf="@+id/input_mail"
+                    android:id="@+id/add"
+                    android:layout_marginLeft="7sp"
+                    android:src="@drawable/add_symbol"
+                    android:layout_centerVertical="true" />
+
+            </LinearLayout>
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/list"
+                android:background="@color/white"
+                android:layout_below="@+id/header"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -149,11 +198,24 @@
                 android:gravity="center_horizontal">
 
                 <Button
-                    android:id="@+id/goBackButton"
+                    android:id="@+id/goBackButtonCreateFlatShare"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/go_back"
                     android:drawableLeft="@drawable/go_back_icon_small"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/my_primary"/>
+
+                <View
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"/>
+
+                <Button
+                    android:id="@+id/saveChangesButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/save_changes"
+                    android:drawableLeft="@drawable/save_icon"
                     android:layout_weight="1"
                     android:backgroundTint="@color/my_primary"/>
 
@@ -164,7 +226,6 @@
                 android:layout_height="10dp"/>
 
         </LinearLayout>
-
 
     </androidx.cardview.widget.CardView>
 
