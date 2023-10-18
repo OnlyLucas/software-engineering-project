@@ -144,7 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:alpha="0.7"
-                android:paddingBottom="40dp"
+                android:paddingBottom="20dp"
                 android:text="@string/create_flat_share"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -152,7 +152,7 @@
             <LinearLayout
                 android:id="@+id/header1"
                 android:layout_width="match_parent"
-                android:layout_height="100sp"
+                android:layout_height="wrap_content"
                 android:background="#F1FEFF"
                 android:gravity="center_horizontal">
 
@@ -164,13 +164,17 @@
                     android:ems="10"
                     android:hint="@string/enter_flat_share_name" />
 
-            </LinearLayout>
+                <View
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:layout_marginLeft="7sp"/>
 
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/header2"
                 android:layout_width="match_parent"
-                android:layout_height="100sp"
+                android:layout_height="wrap_content"
                 android:background="#F1FEFF"
                 android:gravity="center_horizontal">
 
