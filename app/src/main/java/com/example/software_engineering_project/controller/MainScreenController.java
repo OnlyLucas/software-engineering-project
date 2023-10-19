@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.example.software_engineering_project.R;
 
-public class MainScreen extends AppCompatActivity {
+public class MainScreenController extends AppCompatActivity {
 
     private Button logOutButton;
     private Button goSettingsButton;
@@ -32,19 +32,19 @@ public class MainScreen extends AppCompatActivity {
     private void addButtons(){
         logOutButton = findViewById(R.id.logOutButton);
         logOutButton.setOnClickListener(view -> {
-            Intent LoginScreen = new Intent(MainScreen.this,LoginScreen.class);
+            Intent LoginScreen = new Intent(MainScreenController.this, LoginScreenController.class);
             startActivity(LoginScreen);
         });
 
         groceryListButton = findViewById(R.id.groceryListButton);
         groceryListButton.setOnClickListener(view -> {
-            Intent GroceryListMain = new Intent(MainScreen.this, com.example.software_engineering_project.controller.GroceryListMain.class);
+            Intent GroceryListMain = new Intent(MainScreenController.this, GroceryListController.class);
             startActivity(GroceryListMain);
         });
 
         goSettingsButton = findViewById(R.id.goSettingsButtons);
         goSettingsButton.setOnClickListener(view -> {
-            Intent SettingScreen = new Intent(MainScreen.this, com.example.software_engineering_project.controller.SettingScreen.class);
+            Intent SettingScreen = new Intent(MainScreenController.this, SettingScreenController.class);
             startActivity(SettingScreen);
         });
 

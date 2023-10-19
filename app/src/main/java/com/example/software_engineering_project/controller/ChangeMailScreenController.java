@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import com.example.software_engineering_project.R;
 
-public class ChangeMailScreen extends AppCompatActivity {
+public class ChangeMailScreenController extends AppCompatActivity {
 
     private Button goBackButtonMail;
     private Button saveChangesButtonMail;
@@ -24,14 +24,14 @@ public class ChangeMailScreen extends AppCompatActivity {
     private void addButtons(){
         goBackButtonMail = findViewById(R.id.goBackButtonMail);
         goBackButtonMail.setOnClickListener(view -> {
-            Intent SettingScreen = new Intent(ChangeMailScreen.this, com.example.software_engineering_project.controller.SettingScreen.class);
+            Intent SettingScreen = new Intent(ChangeMailScreenController.this, SettingScreenController.class);
             startActivity(SettingScreen);
         });
 
         saveChangesButtonMail = findViewById(R.id.saveChangesButtonMail);
         saveChangesButtonMail.setOnClickListener(view -> {
 
-            new AlertDialog.Builder(ChangeMailScreen.this)
+            new AlertDialog.Builder(ChangeMailScreenController.this)
                     .setTitle(R.string.change_e_mail)
                     .setMessage(R.string.are_you_sure_you_want_to_change_your_mail)
 
@@ -39,7 +39,7 @@ public class ChangeMailScreen extends AppCompatActivity {
                     // The dialog is automatically dismissed when a dialog button is clicked.
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent SettingScreen = new Intent(ChangeMailScreen.this,SettingScreen.class);
+                            Intent SettingScreen = new Intent(ChangeMailScreenController.this, SettingScreenController.class);
                             startActivity(SettingScreen);
                         }
                     })

@@ -13,22 +13,22 @@
         android:theme="@style/Theme.Softwareengineeringproject"
         tools:targetApi="31">
         <activity
-            android:name=".adapter.CreateFlatShareViewAdapter"
+            android:name=".adapter.CreateFlatShareListViewAdapter"
             android:exported="false" />
         <activity
-            android:name=".controller.CreateFlatShareScreen"
+            android:name=".controller.CreateFlatShareScreenController"
             android:exported="false" />
         <activity
-            android:name=".adapter.ManageFlatShareViewAdapter"
+            android:name=".adapter.ManageFlatShareListViewAdapter"
             android:exported="false" />
         <activity
-            android:name=".controller.ManageFlatShareMain"
+            android:name=".controller.ManageFlatShareController"
             android:exported="false" />
         <activity
-            android:name=".GroceryListViewAdapter"
+            android:name=".adapter.GroceryListListViewAdapter"
             android:exported="false" />
         <activity
-            android:name=".controller.GroceryListMain"
+            android:name=".controller.GroceryListController"
             android:exported="false" />
         <!--
         <activity
@@ -36,22 +36,22 @@
             android:exported="false" />
         -->
         <activity
-            android:name=".controller.ChangeMailScreen"
+            android:name=".controller.ChangeMailScreenController"
             android:exported="false" />
         <activity
-            android:name=".controller.ChangePasswordScreen"
+            android:name=".controller.ChangePasswordScreenController"
             android:exported="false" />
         <activity
-            android:name=".controller.SettingScreen"
+            android:name=".controller.SettingScreenController"
             android:exported="false" />
         <activity
-            android:name=".controller.RegisterScreen"
+            android:name=".controller.RegisterScreenController"
             android:exported="false" />
         <activity
-            android:name=".controller.MainScreen"
+            android:name=".controller.MainScreenController"
             android:exported="false" />
         <activity
-            android:name=".controller.LoginScreen"
+            android:name=".controller.LoginScreenController"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

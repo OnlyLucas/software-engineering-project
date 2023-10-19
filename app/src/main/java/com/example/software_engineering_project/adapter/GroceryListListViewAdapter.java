@@ -12,20 +12,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.software_engineering_project.controller.GroceryListMain;
+import com.example.software_engineering_project.controller.GroceryListController;
 import com.example.software_engineering_project.R;
 
 import java.util.ArrayList;
 
-public class GroceryListViewAdapter extends ArrayAdapter<String> {
+public class GroceryListListViewAdapter extends ArrayAdapter<String> {
     ArrayList<String> list;
     Context context;
 
     // The ListViewAdapter Constructor
     // @param context: the Context from the MainActivity
     // @param items: The list of items in our Grocery List
-    public GroceryListViewAdapter(Context context, ArrayList<String> items) {
-        super(context, R.layout.activity_grocery_list_view_adapter, items);
+    public GroceryListListViewAdapter(Context context, ArrayList<String> items) {
+        super(context, R.layout.activity_grocery_list_list_view_adapter, items);
         this.context = context;
         list = items;
     }
@@ -36,7 +36,7 @@ public class GroceryListViewAdapter extends ArrayAdapter<String> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.activity_grocery_list_view_adapter, null);
+            convertView = mInflater.inflate(R.layout.activity_grocery_list_list_view_adapter, null);
             TextView name = convertView.findViewById(R.id.name);
             ImageView remove = convertView.findViewById(R.id.remove);
             ImageView copy = convertView.findViewById(R.id.copy);
@@ -51,13 +51,13 @@ public class GroceryListViewAdapter extends ArrayAdapter<String> {
             remove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    GroceryListMain.removeItem(position);
+                    GroceryListController.removeItem(position);
                 }
             });
             copy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    GroceryListMain.addItem(list.get(position));
+                    GroceryListController.addItem(list.get(position));
                 }
             });
         }

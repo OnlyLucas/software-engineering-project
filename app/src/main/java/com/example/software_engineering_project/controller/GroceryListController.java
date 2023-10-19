@@ -15,20 +15,18 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.adapter.GroceryListViewAdapter;
+import com.example.software_engineering_project.adapter.GroceryListListViewAdapter;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class GroceryListMain extends AppCompatActivity {
+public class GroceryListController extends AppCompatActivity {
 
     static ListView listView;
     EditText input;
     ImageView enter;
-    static GroceryListViewAdapter adapter;
+    static GroceryListListViewAdapter adapter;
     static ArrayList<String> items;
     static Context context;
     private Button goBackButtonGroceryList;
@@ -36,7 +34,7 @@ public class GroceryListMain extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_grocery_list_main);
+        setContentView(R.layout.activity_grocery_list_screen);
 
         this.addButtons();
 
@@ -56,7 +54,7 @@ public class GroceryListMain extends AppCompatActivity {
         items.add("Kiwi");
 
         listView.setLongClickable(true);
-        adapter = new GroceryListViewAdapter(this, items);
+        adapter = new GroceryListListViewAdapter(this, items);
         listView.setAdapter(adapter);
 
         // Display the item name when the item's row is clicked
@@ -64,7 +62,7 @@ public class GroceryListMain extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String clickedItem = (String) listView.getItemAtPosition(position);
-                Toast.makeText(GroceryListMain.this, clickedItem, Toast.LENGTH_SHORT).show();
+                Toast.makeText(GroceryListController.this, clickedItem, Toast.LENGTH_SHORT).show();
             }
         });
         // Remove an item when its row is long pressed
@@ -90,35 +88,6 @@ public class GroceryListMain extends AppCompatActivity {
                 }
             }
         });
-        loadContent();
-    }
-
-    // function to read grocery list from file and load it into ListView
-    public void loadContent() {
-        File path = getApplicationContext().getFilesDir();
-        File readFrom = new File(path, "list.txt");
-        byte[] content = new byte[(int) readFrom.length()];
-
-        FileInputStream stream = null;
-        try {
-            stream = new FileInputStream(readFrom);
-            stream.read(content);
-
-            String s = new String(content);
-            // [Apple, Banana, Kiwi, Strawberry]
-            s = s.substring(1, s.length() - 1);
-            String split[] = s.split(", ");
-
-            // There may be no items in the grocery list.
-            if (split.length == 1 && split[0].isEmpty())
-                items = new ArrayList<>();
-            else items = new ArrayList<>(Arrays.asList(split));
-
-            adapter = new GroceryListViewAdapter(this, items);
-            listView.setAdapter(adapter);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     // Override onDestroy() to save the contents of the grocery list right before the app is terminated
@@ -161,7 +130,7 @@ public class GroceryListMain extends AppCompatActivity {
     private void addButtons() {
         goBackButtonGroceryList = findViewById(R.id.goBackButtonGroceryList);
         goBackButtonGroceryList.setOnClickListener(view -> {
-            Intent MainScreen = new Intent(GroceryListMain.this, com.example.software_engineering_project.controller.MainScreen.class);
+            Intent MainScreen = new Intent(GroceryListController.this, MainScreenController.class);
             startActivity(MainScreen);
         });
     }

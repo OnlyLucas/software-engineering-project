@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import com.example.software_engineering_project.R;
 
-public class ChangePasswordScreen extends AppCompatActivity {
+public class ChangePasswordScreenController extends AppCompatActivity {
 
     private Button goBackButton;
     private Button saveChangesButton;
@@ -24,14 +24,14 @@ public class ChangePasswordScreen extends AppCompatActivity {
     private void addButtons(){
         goBackButton = findViewById(R.id.goBackButton);
         goBackButton.setOnClickListener(view -> {
-            Intent SettingScreen = new Intent(ChangePasswordScreen.this, com.example.software_engineering_project.controller.SettingScreen.class);
+            Intent SettingScreen = new Intent(ChangePasswordScreenController.this, SettingScreenController.class);
             startActivity(SettingScreen);
         });
 
         saveChangesButton = findViewById(R.id.saveChangesButton);
         saveChangesButton.setOnClickListener(view -> {
 
-            new AlertDialog.Builder(ChangePasswordScreen.this)
+            new AlertDialog.Builder(ChangePasswordScreenController.this)
                     .setTitle(R.string.change_password)
                     .setMessage(R.string.are_you_sure_you_want_to_change_your_password)
 
@@ -39,7 +39,7 @@ public class ChangePasswordScreen extends AppCompatActivity {
                     // The dialog is automatically dismissed when a dialog button is clicked.
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent SettingScreen = new Intent(ChangePasswordScreen.this,SettingScreen.class);
+                            Intent SettingScreen = new Intent(ChangePasswordScreenController.this, SettingScreenController.class);
                             startActivity(SettingScreen);
                         }
                     })

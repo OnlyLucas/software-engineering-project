@@ -14,19 +14,17 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.adapter.ManageFlatShareViewAdapter;
+import com.example.software_engineering_project.adapter.ManageFlatShareListViewAdapter;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class ManageFlatShareMain extends AppCompatActivity {
+public class ManageFlatShareController extends AppCompatActivity {
     static ListView listView;
     EditText input;
     ImageView enter;
-    static ManageFlatShareViewAdapter adapter;
+    static ManageFlatShareListViewAdapter adapter;
     static ArrayList<String> items;
     static Context context;
     private Button goBackButtonManageFlatShare;
@@ -34,7 +32,7 @@ public class ManageFlatShareMain extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_flat_share_main);
+        setContentView(R.layout.activity_manage_flat_share_screen);
 
         this.addButtons();
 
@@ -54,7 +52,7 @@ public class ManageFlatShareMain extends AppCompatActivity {
         items.add("Laura");
 
         listView.setLongClickable(true);
-        adapter = new ManageFlatShareViewAdapter(this, items);
+        adapter = new ManageFlatShareListViewAdapter(this, items);
         listView.setAdapter(adapter);
 
         // Display the person's name when the person's row is clicked
@@ -62,7 +60,7 @@ public class ManageFlatShareMain extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String clickedItem = (String) listView.getItemAtPosition(position);
-                Toast.makeText(ManageFlatShareMain.this, clickedItem, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ManageFlatShareController.this, clickedItem, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -79,39 +77,10 @@ public class ManageFlatShareMain extends AppCompatActivity {
                     addItem(text);
                     input.setText("");
                     makeToast("Added " + text);
-                    loadContent();
                 }
             }
         });
 
-    }
-
-    // function to read flat share member list from file and load it into ListView
-    public void loadContent() {
-        File path = getApplicationContext().getFilesDir();
-        File readFrom = new File(path, "list.txt");
-        byte[] content = new byte[(int) readFrom.length()];
-
-        FileInputStream stream = null;
-        try {
-            stream = new FileInputStream(readFrom);
-            stream.read(content);
-
-            String s = new String(content);
-            // [Jonas, Nikos, Lucas, Meike, Laura]
-            s = s.substring(1, s.length() - 1);
-            String split[] = s.split(", ");
-
-            // There may be no items in the grocery list.
-            if (split.length == 1 && split[0].isEmpty())
-                items = new ArrayList<>();
-            else items = new ArrayList<>(Arrays.asList(split));
-
-            adapter = new ManageFlatShareViewAdapter(this, items);
-            listView.setAdapter(adapter);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     // Override onDestroy() to save the contents of the grocery list right before the app is terminated
@@ -154,7 +123,7 @@ public class ManageFlatShareMain extends AppCompatActivity {
     private void addButtons() {
         goBackButtonManageFlatShare = findViewById(R.id.goBackButtonManageFlatShare);
         goBackButtonManageFlatShare.setOnClickListener(view -> {
-            Intent SettingScreen = new Intent(ManageFlatShareMain.this, com.example.software_engineering_project.controller.SettingScreen.class);
+            Intent SettingScreen = new Intent(ManageFlatShareController.this, SettingScreenController.class);
             startActivity(SettingScreen);
         });
     }

@@ -12,20 +12,20 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.software_engineering_project.controller.ManageFlatShareMain;
+import com.example.software_engineering_project.controller.ManageFlatShareController;
 import com.example.software_engineering_project.R;
 
 import java.util.ArrayList;
 
-public class ManageFlatShareViewAdapter extends ArrayAdapter<String> {
+public class ManageFlatShareListViewAdapter extends ArrayAdapter<String> {
     ArrayList<String> list;
     Context context;
 
     // The ListViewAdapter Constructor
     // @param context: the Context from the MainActivity
     // @param items: The list of items in our Grocery List
-    public ManageFlatShareViewAdapter(Context context, ArrayList<String> items) {
-        super(context, R.layout.activity_mangage_flat_share_view_adapter, items);
+    public ManageFlatShareListViewAdapter(Context context, ArrayList<String> items) {
+        super(context, R.layout.activity_mangage_flat_share_list_view_adapter, items);
         this.context = context;
         list = items;
     }
@@ -36,7 +36,7 @@ public class ManageFlatShareViewAdapter extends ArrayAdapter<String> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.activity_mangage_flat_share_view_adapter, null);
+            convertView = mInflater.inflate(R.layout.activity_mangage_flat_share_list_view_adapter, null);
             TextView name = convertView.findViewById(R.id.name);
             ImageView remove = convertView.findViewById(R.id.remove);
             TextView number = convertView.findViewById(R.id.number);
@@ -50,7 +50,7 @@ public class ManageFlatShareViewAdapter extends ArrayAdapter<String> {
             remove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ManageFlatShareMain.removeItem(position);
+                    ManageFlatShareController.removeItem(position);
                 }
             });
         }

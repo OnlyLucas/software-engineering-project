@@ -14,19 +14,17 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.adapter.CreateFlatShareViewAdapter;
+import com.example.software_engineering_project.adapter.CreateFlatShareListViewAdapter;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class CreateFlatShareScreen extends AppCompatActivity {
+public class CreateFlatShareScreenController extends AppCompatActivity {
     static ListView listView;
     EditText input_name, input_mail;
     ImageView enter;
-    static CreateFlatShareViewAdapter adapter;
+    static CreateFlatShareListViewAdapter adapter;
     static ArrayList<String> items;
     static Context context;
     private Button goBackButtonCreateFlatShare;
@@ -48,7 +46,7 @@ public class CreateFlatShareScreen extends AppCompatActivity {
         items = new ArrayList<>();
 
         listView.setLongClickable(true);
-        adapter = new CreateFlatShareViewAdapter(this, items);
+        adapter = new CreateFlatShareListViewAdapter(this, items);
         listView.setAdapter(adapter);
 
         // Display the person's name when the person's row is clicked
@@ -56,7 +54,7 @@ public class CreateFlatShareScreen extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String clickedItem = (String) listView.getItemAtPosition(position);
-                Toast.makeText(CreateFlatShareScreen.this, clickedItem, Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateFlatShareScreenController.this, clickedItem, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -71,39 +69,10 @@ public class CreateFlatShareScreen extends AppCompatActivity {
                     addItem(text);
                     input_mail.setText("");
                     makeToast("Added " + text);
-                    loadContent();
                 }
             }
         });
 
-    }
-
-    // function to read flat share member list from file and load it into ListView
-    public void loadContent() {
-        File path = getApplicationContext().getFilesDir();
-        File readFrom = new File(path, "list.txt");
-        byte[] content = new byte[(int) readFrom.length()];
-
-        FileInputStream stream = null;
-        try {
-            stream = new FileInputStream(readFrom);
-            stream.read(content);
-
-            String s = new String(content);
-            // [Jonas]
-            s = s.substring(1, s.length() - 1);
-            String split[] = s.split(", ");
-
-            // There may be no items in the grocery list.
-            if (split.length == 1 && split[0].isEmpty())
-                items = new ArrayList<>();
-            else items = new ArrayList<>(Arrays.asList(split));
-
-            adapter = new CreateFlatShareViewAdapter(this, items);
-            listView.setAdapter(adapter);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     // Override onDestroy() to save the contents of the grocery list right before the app is terminated
@@ -146,7 +115,7 @@ public class CreateFlatShareScreen extends AppCompatActivity {
     private void addButtons() {
         goBackButtonCreateFlatShare = findViewById(R.id.goBackButtonCreateFlatShare);
         goBackButtonCreateFlatShare.setOnClickListener(view -> {
-            Intent SettingScreen = new Intent(CreateFlatShareScreen.this, com.example.software_engineering_project.controller.SettingScreen.class);
+            Intent SettingScreen = new Intent(CreateFlatShareScreenController.this, SettingScreenController.class);
             startActivity(SettingScreen);
         });
     }
