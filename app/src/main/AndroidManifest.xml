@@ -30,11 +30,6 @@
         <activity
             android:name=".controller.GroceryListController"
             android:exported="false" />
-        <!--
-        <activity
-            android:name=".ShoppingListScreen"
-            android:exported="false" />
-        -->
         <activity
             android:name=".controller.ChangeMailScreenController"
             android:exported="false" />
