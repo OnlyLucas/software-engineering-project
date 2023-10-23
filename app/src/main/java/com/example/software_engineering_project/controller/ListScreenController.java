@@ -83,12 +83,12 @@ public abstract class ListScreenController<T> extends AppCompatActivity {
             public void onClick(View view) {
                 String text = input.getText().toString();
                 if (text == null || text.length() == 0) {
-                    makeToast("Enter an item.");
+                    makeToast(getString(R.string.enter_an_item));
                 } else {
                     // either abstract method createObjectFromString or method in method in model class
                     //addItem();
                     input.setText("");
-                    makeToast("Added " + text);
+                    makeToast(getString(R.string.added) + text);
                 }
             }
         });
@@ -110,9 +110,13 @@ public abstract class ListScreenController<T> extends AppCompatActivity {
 
     // function to remove an item given its index in the grocery list.
     public void removeItem(int i) {
-        makeToast("Removed: " + items.get(i));
+        makeToast(getString(R.string.removed) + items.get(i));
         items.remove(i);
         listView.setAdapter(adapter);
+    }
+
+    public void uncheckItem(int i){
+        makeToast(getString(R.string.unchecked) + items.get(i));
     }
 
     // function to add an item given its name.

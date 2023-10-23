@@ -30,4 +30,8 @@
     <string name="enter_mail_here">Enter mail here</string>
     <string name="save_changes">Save Changes</string>
     <string name="enter_flat_share_name">Enter flat share name</string>
+    <string name="removed">"Removed: "</string>
+    <string name="added">"Added "</string>
+    <string name="enter_an_item">Enter an item.</string>
+    <string name="unchecked">Unchecked :</string>
 </resources>

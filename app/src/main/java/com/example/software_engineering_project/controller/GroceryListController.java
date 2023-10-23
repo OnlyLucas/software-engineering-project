@@ -111,11 +111,16 @@ public class GroceryListController extends AppCompatActivity {
         listView.setAdapter(adapter);
     }
 
+    public static void uncheckItem(int i) {
+        makeToast("Unchecked: " + items.get(i));
+    }
+
     // function to add an item given its name.
     public static void addItem(String item) {
         items.add(item);
         listView.setAdapter(adapter);
     }
+
 
     // function to make a Toast given a string
     static Toast t;

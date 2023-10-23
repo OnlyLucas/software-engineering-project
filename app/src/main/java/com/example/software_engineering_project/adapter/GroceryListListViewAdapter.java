@@ -39,6 +39,7 @@ public class GroceryListListViewAdapter extends ArrayAdapter<String> {
             convertView = mInflater.inflate(R.layout.activity_grocery_list_list_view_adapter, null);
             TextView name = convertView.findViewById(R.id.name);
             ImageView remove = convertView.findViewById(R.id.remove);
+            ImageView unchecked = convertView.findViewById(R.id.unchecked);
             ImageView copy = convertView.findViewById(R.id.copy);
             TextView number = convertView.findViewById(R.id.number);
 
@@ -52,6 +53,13 @@ public class GroceryListListViewAdapter extends ArrayAdapter<String> {
                 @Override
                 public void onClick(View view) {
                     GroceryListController.removeItem(position);
+                }
+            });
+
+            unchecked.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    GroceryListController.uncheckItem(position);
                 }
             });
             copy.setOnClickListener(new View.OnClickListener() {
