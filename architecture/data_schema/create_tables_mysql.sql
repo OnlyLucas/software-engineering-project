@@ -48,7 +48,7 @@ CREATE TABLE `group_groceries` (
   `group_id` varchar(36),
   `name` varchar(255) COMMENT 'We agreed to include amounts here',
   `created_by` varchar(36),
-  `created_at` timestamptz DEFAULT (CURRENT_TIMESTAMP()),
+  `created_at` timestamp DEFAULT (CURRENT_TIMESTAMP()),
   `is_completed` boolean COMMENT 'If true shown in history',
   `completed_by` varchar(36),
   `completed_at` timestamp
