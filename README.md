@@ -10,6 +10,7 @@ A household planner for living groups. It contains a shopping list, cleaning pla
 * Figma
 * Android Scene Builder
 * MaterialFX (adds Material Components to JavaFX and SceneBuilder)
-### Backend
+### Database
 * MySQL/Postgres/HSQLDB? (Database)
-* 
+
+![Database Scheme](https://github.com/OnlyLucas/software-engineering-project/blob/76375f4d45d6ea3dbf4ea56b99ecc15887e17cf0/architecture/data_schema/data_schema.pdf)
