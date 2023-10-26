@@ -13,6 +13,7 @@ public class MainScreenController extends AppCompatActivity {
     private Button logOutButton;
     private Button goSettingsButton;
     private Button groceryListButton;
+    private Button cleaningPlanButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,12 @@ public class MainScreenController extends AppCompatActivity {
         goSettingsButton.setOnClickListener(view -> {
             Intent SettingScreen = new Intent(MainScreenController.this, SettingScreenController.class);
             startActivity(SettingScreen);
+        });
+
+        cleaningPlanButton = findViewById(R.id.cleaningPlanButton);
+        cleaningPlanButton.setOnClickListener(view -> {
+            Intent CleaningPlan = new Intent(MainScreenController.this, CleaningPlanController.class);
+            startActivity(CleaningPlan);
         });
 
 
