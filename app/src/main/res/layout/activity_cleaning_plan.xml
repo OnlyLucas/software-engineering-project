@@ -47,72 +47,79 @@
         app:cardCornerRadius="28dp"
         android:layout_marginBottom="-20dp">
 
-        <RelativeLayout
+        <fragment
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:background="#F1FEFF"
-            android:id="@+id/footerCleaningPlan">
+            class="com.example.software_engineering_project.CleaningPlanFragment"
+            android:id="@+id/fragment_main_cleaning_plan"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@color/my_accent"
-                android:gravity="center_horizontal"
-                android:padding="16dp">
-
-                <LinearLayout
+        <!--
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center_horizontal"
-                    android:gravity="center_horizontal"/>
+                    android:paddingBottom="10dp"
+                    android:background="#F1FEFF"
+                    android:id="@+id/footerCleaningPlan">
 
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_horizontal">
-
-                    <Button
-                        android:id="@+id/goBackButtonCleaningPlan"
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/go_back"
-                        android:drawableLeft="@drawable/go_back_icon_small"
-                        android:layout_weight="1"
-                        android:backgroundTint="@color/my_primary"/>
+                        android:orientation="vertical"
+                        android:background="@color/my_accent"
+                        android:gravity="center_horizontal"
+                        android:padding="16dp">
 
-                    <View
-                        android:layout_width="10dp"
-                        android:layout_height="match_parent"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center_horizontal"/>
 
-                    <Button
-                        android:id="@+id/editCleaningPlan"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/edit"
-                        android:drawableLeft="@drawable/go_back_icon_small"
-                        android:layout_weight="1"
-                        android:backgroundTint="@color/my_primary"/>
 
-                </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_horizontal">
 
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="10dp"/>
+                            <Button
+                                android:id="@+id/goBackButtonCleaningPlan"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/go_back"
+                                android:drawableLeft="@drawable/go_back_icon_small"
+                                android:layout_weight="1"
+                                android:backgroundTint="@color/my_primary"/>
 
-            </LinearLayout>
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="match_parent"/>
+
+                            <Button
+                                android:id="@+id/editCleaningPlan"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="@string/edit"
+                                android:drawableLeft="@drawable/go_back_icon_small"
+                                android:layout_weight="1"
+                                android:backgroundTint="@color/my_primary"/>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="wrap_content"
+                            android:layout_height="10dp"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+        -->
+
+
+
+            </androidx.cardview.widget.CardView>
 
         </RelativeLayout>
-
-
-
-
-
-    </androidx.cardview.widget.CardView>
-
-</RelativeLayout>
 

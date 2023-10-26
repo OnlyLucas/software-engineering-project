@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CleaningPlanFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/my_accent"
+        android:gravity="center_horizontal"
+        android:padding="16dp"
+        android:id="@+id/fragment_main_cleaning_plan">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <Button
+                android:id="@+id/goBackButtonCleaningPlan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Test Fragment"
+                android:drawableLeft="@drawable/go_back_icon_small"
+                android:layout_weight="1"
+                android:backgroundTint="@color/my_primary"/>
+            <View
+                android:layout_width="10dp"
+                android:layout_height="match_parent"/>
+            <Button
+                android:id="@+id/editCleaningPlan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/edit"
+                android:drawableLeft="@drawable/go_back_icon_small"
+                android:layout_weight="1"
+                android:backgroundTint="@color/my_primary"/>
+
+        </LinearLayout>
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"/>
+    </LinearLayout>
+</FrameLayout>
