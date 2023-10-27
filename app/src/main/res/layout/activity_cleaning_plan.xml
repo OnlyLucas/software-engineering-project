@@ -14,7 +14,7 @@
         android:background="#F1FEFF"
         android:id="@+id/header">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -27,7 +27,7 @@
                 android:textStyle="bold"
                 android:text="Cleaning Plan"/>
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </LinearLayout>
 
 
 
@@ -50,8 +50,9 @@
         <fragment
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            class="com.example.software_engineering_project.CleaningPlanFragment"
-            android:id="@+id/fragment_main_cleaning_plan"/>
+            android:id="@+id/fragment_cleaning_plan"
+            class="com.example.software_engineering_project.CleaningPlanFragment"/>
+
 
         <!--
                 <RelativeLayout

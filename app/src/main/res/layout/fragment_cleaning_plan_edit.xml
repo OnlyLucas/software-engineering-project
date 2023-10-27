@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CleaningPlanFragment">
+    tools:context=".CleaningPlanEditFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,7 +12,7 @@
         android:background="@color/my_accent"
         android:gravity="center_horizontal"
         android:padding="16dp"
-        android:id="@+id/fragment_cleaning_plan">
+        android:id="@+id/fragment_cleaning_plan_edit">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                 android:id="@+id/goBackButtonCleaningPlan"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Test Fragment"
+                android:text="Edit Fragment"
                 android:drawableLeft="@drawable/go_back_icon_small"
                 android:layout_weight="1"
                 android:backgroundTint="@color/my_primary"/>
