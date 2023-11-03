@@ -36,7 +36,7 @@
     </LinearLayout>
 
 
-    <FrameLayout
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/contentFragment"
         android:layout_width="match_parent"
         android:layout_height="590dp"

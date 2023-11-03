@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.example.software_engineering_project.FragmentGroceryListController;
 import com.example.software_engineering_project.R;
 
 public class MainScreenController extends AppCompatActivity {
@@ -23,6 +24,11 @@ public class MainScreenController extends AppCompatActivity {
         setContentView(R.layout.activity_main_screen);
         this.addButtons();
 
+
+
+        //FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        //transaction.add(R.id.contentFragment, fragmentGroceryListController).commit();
+
     }
 
     public void callFragment(Fragment fragment) {
@@ -37,8 +43,10 @@ public class MainScreenController extends AppCompatActivity {
 
         groceryListButton = findViewById(R.id.groceryListButton);
         groceryListButton.setOnClickListener(view -> {
-            Fragment fragment = new Fragment(R.layout.fragment_grocery_list_screen);
-            callFragment(fragment);
+            //Fragment fragment = new Fragment(R.layout.fragment_grocery_list_screen);
+            //callFragment(fragment);
+            FragmentGroceryListController fragmentGroceryListController = new FragmentGroceryListController();
+            callFragment(fragmentGroceryListController);
         });
 
         goSettingsButton = findViewById(R.id.goSettingsButtons);
