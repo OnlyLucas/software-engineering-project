@@ -1,9 +1,11 @@
 package com.example.software_engineering_project.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.os.Bundle;
-import android.widget.TextView;
 import android.widget.Button;
 
 import com.example.software_engineering_project.R;
@@ -20,39 +22,36 @@ public class MainScreenController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
         this.addButtons();
-        this.setWelcomeMessage();
 
     }
 
-    private void setWelcomeMessage(){
-        String name = "Meike";
-        TextView textView = findViewById(R.id.text_view_name);
-        textView.setText(name);
+    public void callFragment(Fragment fragment) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.contentFragment, fragment);
+        transaction.commit();
     }
+
 
     private void addButtons(){
-        logOutButton = findViewById(R.id.logOutButton);
-        logOutButton.setOnClickListener(view -> {
-            Intent LoginScreen = new Intent(MainScreenController.this, LoginScreenController.class);
-            startActivity(LoginScreen);
-        });
 
         groceryListButton = findViewById(R.id.groceryListButton);
         groceryListButton.setOnClickListener(view -> {
-            Intent GroceryListMain = new Intent(MainScreenController.this, GroceryListController.class);
-            startActivity(GroceryListMain);
+            Fragment fragment = new Fragment(R.layout.fragment_grocery_list_screen);
+            callFragment(fragment);
         });
 
         goSettingsButton = findViewById(R.id.goSettingsButtons);
         goSettingsButton.setOnClickListener(view -> {
-            Intent SettingScreen = new Intent(MainScreenController.this, SettingScreenController.class);
-            startActivity(SettingScreen);
+            Fragment fragment = new Fragment(R.layout.fragment_setting_screen);
+            callFragment(fragment);
+
         });
 
         cleaningPlanButton = findViewById(R.id.cleaningPlanButton);
         cleaningPlanButton.setOnClickListener(view -> {
-            Intent CleaningPlan = new Intent(MainScreenController.this, CleaningPlanController.class);
-            startActivity(CleaningPlan);
+            Fragment fragment = new Fragment(R.layout.fragment_cleaning_plan);
+            callFragment(fragment);
         });
 
 

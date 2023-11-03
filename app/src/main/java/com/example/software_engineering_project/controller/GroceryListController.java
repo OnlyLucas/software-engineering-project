@@ -4,7 +4,6 @@ package com.example.software_engineering_project.controller;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,14 +28,11 @@ public class GroceryListController extends AppCompatActivity {
     static GroceryListListViewAdapter adapter;
     static ArrayList<String> items;
     static Context context;
-    private Button goBackButtonGroceryList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_grocery_list_screen);
-
-        this.addButtons();
+        setContentView(R.layout.fragment_grocery_list_screen);
 
         listView = findViewById(R.id.list);
         input = findViewById(R.id.input);
@@ -131,12 +127,4 @@ public class GroceryListController extends AppCompatActivity {
         t.show();
     }
 
-
-    private void addButtons() {
-        goBackButtonGroceryList = findViewById(R.id.goBackButtonGroceryList);
-        goBackButtonGroceryList.setOnClickListener(view -> {
-            Intent MainScreen = new Intent(GroceryListController.this, MainScreenController.class);
-            startActivity(MainScreen);
-        });
-    }
 }

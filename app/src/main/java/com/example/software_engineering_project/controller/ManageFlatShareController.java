@@ -32,7 +32,7 @@ public class ManageFlatShareController extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_flat_share_screen);
+        setContentView(R.layout.fragment_manage_flat_share_screen);
 
         this.addButtons();
 

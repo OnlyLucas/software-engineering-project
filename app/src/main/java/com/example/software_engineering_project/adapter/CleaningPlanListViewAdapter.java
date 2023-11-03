@@ -37,7 +37,7 @@ public class CleaningPlanListViewAdapter extends ArrayAdapter<String> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.activity_grocery_list_list_view_adapter, null);
+            convertView = mInflater.inflate(R.layout.grocery_list_list_view_adapter, null);
             TextView name = convertView.findViewById(R.id.name);
             ImageView remove = convertView.findViewById(R.id.remove);
             ImageView unchecked = convertView.findViewById(R.id.unchecked);

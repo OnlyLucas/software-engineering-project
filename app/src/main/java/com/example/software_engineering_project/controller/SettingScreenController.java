@@ -1,6 +1,9 @@
 package com.example.software_engineering_project.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,9 +22,15 @@ public class SettingScreenController extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_setting_screen);
-
+        setContentView(R.layout.fragment_setting_screen);
         this.addButtons();
+    }
+
+    public void callFragment(Fragment fragment) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.contentFragment, fragment);
+        transaction.commit();
     }
 
     private void addButtons(){
@@ -45,8 +54,9 @@ public class SettingScreenController extends AppCompatActivity {
 
         manageFlatShareButton = findViewById(R.id.manageFlatShareButton);
         manageFlatShareButton.setOnClickListener(view -> {
-            Intent ManageFlatShareScreen = new Intent(SettingScreenController.this, ManageFlatShareController.class);
-            startActivity(ManageFlatShareScreen);
+            Fragment fragment = new Fragment(R.layout.fragment_manage_flat_share_screen);
+            callFragment(fragment);
+
         });
 
         manageFlatShareButton = findViewById(R.id.createFlatShareButton);

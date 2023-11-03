@@ -13,37 +13,16 @@
         android:theme="@style/Theme.Softwareengineeringproject"
         tools:targetApi="31" >
         <activity
-            android:name=".adapter.CleaningPlanListViewAdapter"
-            android:exported="false" />
-        <activity
-            android:name=".controller.CleaningPlanController"
-            android:exported="false" />
-        <activity
             android:name=".adapter.CreateFlatShareListViewAdapter"
             android:exported="false" />
         <activity
             android:name=".controller.CreateFlatShareScreenController"
             android:exported="false" />
         <activity
-            android:name=".adapter.ManageFlatShareListViewAdapter"
-            android:exported="false" />
-        <activity
-            android:name=".controller.ManageFlatShareController"
-            android:exported="false" />
-        <activity
-            android:name=".adapter.GroceryListListViewAdapter"
-            android:exported="false" />
-        <activity
-            android:name=".controller.GroceryListController"
-            android:exported="false" />
-        <activity
             android:name=".controller.ChangeMailScreenController"
             android:exported="false" />
         <activity
             android:name=".controller.ChangePasswordScreenController"
-            android:exported="false" />
-        <activity
-            android:name=".controller.SettingScreenController"
             android:exported="false" />
         <activity
             android:name=".controller.RegisterScreenController"
