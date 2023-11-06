@@ -1,0 +1,13 @@
+spring:
+  server:
+    port: 1337
+  datasource:
+    driver: com.mysql.jdbc.Driver
+    username: <admin>
+    password: <password>
+    url: <url>
+    dialect: org.hibernate.dialect.MySQLDialect
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect

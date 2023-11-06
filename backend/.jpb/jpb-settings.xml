@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PersistenceUnitSettings">
+    <persistence-units>
+      <persistence-unit name="my_sql_pu">
+        <packages>
+          <package value="com.flatfusion.backend" />
+        </packages>
+      </persistence-unit>
+      <persistence-unit name="Default" persistenceXmlPath="src/main/resources/META-INF/persistence.xml">
+        <packages>
+          <package value="com.flatfusion.backend" />
+        </packages>
+      </persistence-unit>
+    </persistence-units>
+  </component>
+</project>
