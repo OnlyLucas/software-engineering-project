@@ -23,7 +23,7 @@
             android:layout_width="40sp"
             android:layout_height="40sp"
             android:layout_toRightOf="@+id/input"
-            android:id="@+id/add"
+            android:id="@+id/enter"
             android:layout_marginLeft="7sp"
             android:src="@drawable/add_item"
             android:layout_centerVertical="true" />

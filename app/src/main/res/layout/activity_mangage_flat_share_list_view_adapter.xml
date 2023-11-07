@@ -5,16 +5,16 @@
     android:padding="15sp">
 
     <TextView
-        android:id="@+id/number"
+        android:id="@+id/number1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/name"
+        android:layout_alignBaseline="@id/name1"
         android:layout_marginBottom="2sp"
         android:textColor="#A9E0F4"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/name1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -33,7 +33,7 @@
         android:src="@drawable/edit" />-->
 
     <ImageView
-        android:id="@+id/remove"
+        android:id="@+id/remove1"
         android:layout_width="22sp"
         android:layout_height="22sp"
         android:layout_alignParentRight="true"

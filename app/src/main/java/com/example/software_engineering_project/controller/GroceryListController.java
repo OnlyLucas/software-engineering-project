@@ -32,11 +32,11 @@ public class GroceryListController extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_grocery_list_screen);
+        setContentView(R.layout.fragment_grocery_list_controller);
 
         listView = findViewById(R.id.list);
         input = findViewById(R.id.input);
-        enter = findViewById(R.id.add);
+        enter = findViewById(R.id.enter);
         context = getApplicationContext();
 
         // add hardcoded items to grocery list
