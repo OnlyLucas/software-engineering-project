@@ -25,7 +25,7 @@ public class GroceryListListViewAdapter extends ArrayAdapter<String> {
     // @param context: the Context from the MainActivity
     // @param items: The list of items in our Grocery List
     public GroceryListListViewAdapter(Context context, ArrayList<String> items) {
-        super(context, R.layout.grocery_list_list_view_adapter, items);
+        super(context, R.layout.activity_grocery_list_list_view_adapter, items);
         this.context = context;
         list = items;
     }
@@ -36,7 +36,7 @@ public class GroceryListListViewAdapter extends ArrayAdapter<String> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.grocery_list_list_view_adapter, null);
+            convertView = mInflater.inflate(R.layout.activity_grocery_list_list_view_adapter, null);
             TextView name = convertView.findViewById(R.id.name);
             ImageView remove = convertView.findViewById(R.id.remove);
             ImageView unchecked = convertView.findViewById(R.id.unchecked);
