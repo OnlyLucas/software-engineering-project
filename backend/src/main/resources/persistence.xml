@@ -10,11 +10,20 @@
         <class>org.acme.Employee</class>
         <class>org.acme.Person</class>
         <class>org.acme.Address</class>
+        <class>com.flatfusion.backend.entities.UserEntity</class>
+        <class>com.flatfusion.backend.entities.GroupEntity</class>
+        <class>com.flatfusion.backend.entities.GroupMembershipEntity</class>
+        <class>com.flatfusion.backend.entities.GroupGroceryEntity</class>
+        <class>com.flatfusion.backend.entities.CleaningEntity</class>
+        <class>com.flatfusion.backend.entities.CleaningTemplateEntity</class>
+        <class>com.flatfusion.backend.entities.PaymentEntity</class>
+        <class>com.flatfusion.backend.entities.PaymentParticipationEntity</class>
+        <class>com.flatfusion.backend.entities.PaymentsChangeEntity</class>
         <properties>
-            <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-            <property name="hibernate.connection.url">url</property>
-            <property name="hibernate.connection.username">username</property>
-            <property name="hibernate.connection.password">password</property>
+            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver">com.mysql.jdbc.Driver</property>
+            <property name="hibernate.connection.url" value="jdbc:mysql://flatfusion.hopto.org:3306/flatfusion">url</property>
+            <property name="hibernate.connection.username" value="admin">username</property>
+            <property name="hibernate.connection.password" value="q'8,HbPY2hmG@_&lt;9Xz.+&quot;A">password</property>
             <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         </properties>
     </persistence-unit>
