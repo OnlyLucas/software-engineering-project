@@ -12,8 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.software_engineering_project.controller.FragmentGroceryListController;
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.controller.GroceryListController;
 
 import java.util.ArrayList;
 
@@ -26,7 +26,7 @@ public class CleaningPlanListViewAdapter extends ArrayAdapter<String> {
     // @param context: the Context from the MainActivity
     // @param items: The list of items in our Grocery List
     public CleaningPlanListViewAdapter(Context context, ArrayList<String> items) {
-        super(context, R.layout.activity_cleaning_plan_list_view_adapter, items);
+        super(context, R.layout.cleaning_plan_list_view_adapter, items);
         this.context = context;
         list = items;
     }
@@ -53,20 +53,20 @@ public class CleaningPlanListViewAdapter extends ArrayAdapter<String> {
             remove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    GroceryListController.removeItem(position);
+                    FragmentGroceryListController.removeItem(position);
                 }
             });
 
             unchecked.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    GroceryListController.uncheckItem(position);
+                    FragmentGroceryListController.uncheckItem(position);
                 }
             });
             copy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    GroceryListController.addItem(list.get(position));
+                    FragmentGroceryListController.addItem(list.get(position));
                 }
             });
         }

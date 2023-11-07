@@ -36,7 +36,7 @@ public class CreateFlatShareScreenController extends AppCompatActivity {
 
         this.addButtons();
 
-        listView = findViewById(R.id.list);
+        listView = findViewById(R.id.groceryList);
         input_name = findViewById(R.id.input_name);
         input_mail = findViewById(R.id.input_mail);
         enter = findViewById(R.id.add);

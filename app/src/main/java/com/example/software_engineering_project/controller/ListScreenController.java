@@ -19,7 +19,6 @@ import com.example.software_engineering_project.R;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 
 public abstract class ListScreenController<T> extends AppCompatActivity {
 
@@ -48,7 +47,7 @@ public abstract class ListScreenController<T> extends AppCompatActivity {
 
         this.addButtons();
 
-        listView = findViewById(R.id.list);
+        listView = findViewById(R.id.groceryList);
         input = findViewById(R.id.input);
         enter = findViewById(R.id.add);
         context = getApplicationContext();

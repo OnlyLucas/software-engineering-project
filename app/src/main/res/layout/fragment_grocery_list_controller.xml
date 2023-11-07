@@ -3,45 +3,70 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentGroceryListController">
-
-    <RelativeLayout
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="100sp"
-        android:background="#F1FEFF">
-
-        <EditText
-            android:id="@+id/input"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:ems="10"
-            android:hint="@string/enter_item_here" />
-
-        <ImageView
-            android:layout_width="40sp"
-            android:layout_height="40sp"
-            android:layout_toRightOf="@+id/input"
-            android:id="@+id/enter"
-            android:layout_marginLeft="7sp"
-            android:src="@drawable/add_item"
-            android:layout_centerVertical="true" />
-
-    </RelativeLayout>
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".controller.FragmentGroceryListController">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/header">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp">
 
         <ListView
-            android:id="@+id/list"
+            android:id="@+id/groceryList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:background="@color/white"/>
 
     </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="-28dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="-28dp"
+            app:cardBackgroundColor="@color/my_accent"
+            app:cardCornerRadius="14dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true">
+
+                <EditText
+                    android:id="@+id/input"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:hint="@string/enter_item_here" />
+
+                <ImageView
+                    android:id="@+id/enter"
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:layout_marginLeft="7sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@+id/input"
+                    android:src="@drawable/add_item" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_below="@id/input" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
 
 </RelativeLayout>

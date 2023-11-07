@@ -36,7 +36,7 @@ public class ManageFlatShareController extends AppCompatActivity {
 
         this.addButtons();
 
-        listView = findViewById(R.id.list);
+        listView = findViewById(R.id.groceryList);
         input = findViewById(R.id.input);
         enter = findViewById(R.id.add);
         context = getApplicationContext();

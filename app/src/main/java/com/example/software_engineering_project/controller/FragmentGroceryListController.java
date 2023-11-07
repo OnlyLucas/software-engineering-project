@@ -1,4 +1,4 @@
-package com.example.software_engineering_project;
+package com.example.software_engineering_project.controller;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,8 +15,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.GroceryListListViewAdapter;
-import com.example.software_engineering_project.controller.GroceryListController;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -61,7 +61,7 @@ public class FragmentGroceryListController extends Fragment {
 
 
         fragmentView = inflater.inflate(R.layout.fragment_grocery_list_controller, container, false);
-        listView = fragmentView.findViewById(R.id.list);
+        listView = fragmentView.findViewById(R.id.groceryList);
         context = getActivity();
         //ArrayAdapter<String> adapter = new ArrayAdapter<String> (getActivity().getApplicationContext(), R.layout.grocery_list_list_view_adapter, R.id.name ,items);
         listView.setLongClickable(true);

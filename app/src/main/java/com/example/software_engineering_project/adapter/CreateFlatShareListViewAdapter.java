@@ -43,7 +43,7 @@ public class CreateFlatShareListViewAdapter extends ArrayAdapter<String> {
 
 
             number.setText(position + 1 + ".");
-            name.setText(list.get(position);
+            name.setText(list.get(position));
 
             // Listeners for duplicating and removing an item.
             // They use the static removeItem and addItem methods created in MainActivity.
