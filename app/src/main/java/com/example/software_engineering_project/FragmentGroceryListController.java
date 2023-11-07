@@ -55,11 +55,10 @@ public class FragmentGroceryListController extends Fragment {
         items.add("Dieter");
 
 
-        //HERE IS SOMETHING WRONG
 
-        //listView = fragmentView.findViewById(R.id.list);
-        //input = input.findViewById(R.id.input);
-        //enter = fragmentView.findViewById(R.id.enter);
+
+
+
 
         fragmentView = inflater.inflate(R.layout.fragment_grocery_list_controller, container, false);
         listView = fragmentView.findViewById(R.id.list);
@@ -68,6 +67,10 @@ public class FragmentGroceryListController extends Fragment {
         listView.setLongClickable(true);
         //ArrayAdapter<String> adapter = new GroceryListListViewAdapter(getActivity(), items);
         listView.setAdapter(adapter);
+
+        input = fragmentView.findViewById(R.id.input);
+        enter = fragmentView.findViewById(R.id.enter);
+        //listView = fragmentView.findViewById(R.id.list); DEPRICATED
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -86,15 +89,21 @@ public class FragmentGroceryListController extends Fragment {
             }
         });
 
-        //HERE IS SOMETHING WRONG
-        /**
+
         enter.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println("Test");
+                String text = input.getText().toString();
+                if (text == null || text.length() == 0) {
+                    makeToast("Enter an item.");
+                } else {
+                    addItem(text);
+                    input.setText("");
+                    makeToast("Added " + text);
+                }
             }
         });
-         */
+
 
         return fragmentView;
     }
