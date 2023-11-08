@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Flat Fusion</string>
     <string name="welcome">Wilkommen</string>
-    <string name="welcome_main_screen">Wilkommen,&#160;</string>
     <string name="first_name">Vorname</string>
     <string name="surname">Nachname</string>
     <string name="email">E-Mail</string>
