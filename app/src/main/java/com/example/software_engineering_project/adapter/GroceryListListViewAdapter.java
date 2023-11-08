@@ -8,16 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.controller.FragmentGroceryListController;
 import com.example.software_engineering_project.R;
 
-import java.util.ArrayList;
-
 public class GroceryListListViewAdapter extends ArrayAdapter<String> {
+
     ArrayList<String> list;
     Context context;
 
@@ -37,12 +36,12 @@ public class GroceryListListViewAdapter extends ArrayAdapter<String> {
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.grocery_list_list_view_adapter, null);
+
             TextView name = convertView.findViewById(R.id.name);
             ImageView remove = convertView.findViewById(R.id.remove);
             ImageView unchecked = convertView.findViewById(R.id.unchecked);
             ImageView copy = convertView.findViewById(R.id.copy);
             TextView number = convertView.findViewById(R.id.number);
-
 
             number.setText(position + 1 + ".");
             name.setText(list.get(position));
@@ -64,7 +63,9 @@ public class GroceryListListViewAdapter extends ArrayAdapter<String> {
             });
 
         }
+
         return convertView;
+
     }
 
 }

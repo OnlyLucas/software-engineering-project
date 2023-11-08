@@ -1,7 +1,6 @@
 package com.example.software_engineering_project.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,15 +11,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.adapter.ManageFlatShareListViewAdapter;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
+import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.adapter.ManageFlatShareListViewAdapter;
+
 public class ManageFlatShareController extends AppCompatActivity {
+
     static ListView listView;
     EditText input;
     ImageView enter;
@@ -31,6 +30,7 @@ public class ManageFlatShareController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_manage_flat_share_screen);
 
@@ -62,9 +62,8 @@ public class ManageFlatShareController extends AppCompatActivity {
                 String clickedItem = (String) listView.getItemAtPosition(position);
                 Toast.makeText(ManageFlatShareController.this, clickedItem, Toast.LENGTH_SHORT).show();
             }
+
         });
-
-
 
         // add person when the user presses the add button
         enter.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +78,7 @@ public class ManageFlatShareController extends AppCompatActivity {
                     makeToast("Added " + text);
                 }
             }
+
         });
 
     }
@@ -86,6 +86,7 @@ public class ManageFlatShareController extends AppCompatActivity {
     // Override onDestroy() to save the contents of the grocery list right before the app is terminated
     @Override
     protected void onDestroy() {
+
         File path = getApplicationContext().getFilesDir();
         try {
             FileOutputStream writer = new FileOutputStream(new File(path, "list.txt"));
@@ -95,36 +96,45 @@ public class ManageFlatShareController extends AppCompatActivity {
             e.printStackTrace();
         }
         super.onDestroy();
+
     }
 
     // function to remove a member given its index in the list.
     public static void removeItem(int i) {
+
         makeToast("Removed: " + items.get(i));
         items.remove(i);
         listView.setAdapter(adapter);
+
     }
 
     // function to add an item given its name.
     public static void addItem(String item) {
+
         items.add(item);
         listView.setAdapter(adapter);
+
     }
 
     // function to make a Toast given a string
     static Toast t;
 
     private static void makeToast(String s) {
+
         if (t != null) t.cancel();
         t = Toast.makeText(context, s, Toast.LENGTH_SHORT);
         t.show();
+
     }
 
-
     private void addButtons() {
+
         goBackButtonManageFlatShare = findViewById(R.id.goBackButtonManageFlatShare);
         goBackButtonManageFlatShare.setOnClickListener(view -> {
             Intent SettingScreen = new Intent(ManageFlatShareController.this, FragmentSettingsController.class);
             startActivity(SettingScreen);
         });
+
     }
+
 }

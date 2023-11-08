@@ -1,7 +1,6 @@
 package com.example.software_engineering_project.controller;
 
 import android.widget.ArrayAdapter;
-
 import java.util.ArrayList;
 
 public class TestController extends ListScreenController<String> {
@@ -22,6 +21,7 @@ public class TestController extends ListScreenController<String> {
 
     @Override
     public ArrayList<String> loadItems() {
+
         ArrayList<String> list = new ArrayList();
 
         //Auslesebefehl für Datenbank
@@ -31,5 +31,7 @@ public class TestController extends ListScreenController<String> {
         list.add("Strawberry");
         list.add("Kiwi");
         return list;
+
     }
+
 }

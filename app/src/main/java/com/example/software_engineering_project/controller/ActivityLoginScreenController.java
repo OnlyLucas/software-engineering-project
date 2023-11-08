@@ -15,9 +15,11 @@ public class ActivityLoginScreenController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
         this.addButtons();
+
     }
 
     private void addButtons(){
@@ -33,5 +35,7 @@ public class ActivityLoginScreenController extends AppCompatActivity {
             Intent registerScreen = new Intent(ActivityLoginScreenController.this, ActivityRegisterScreenController.class);
             startActivity(registerScreen);
         });
+
     }
+
 }

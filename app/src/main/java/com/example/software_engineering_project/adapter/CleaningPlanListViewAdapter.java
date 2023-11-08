@@ -8,14 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import java.util.ArrayList;
 
 import com.example.software_engineering_project.controller.FragmentGroceryListController;
 import com.example.software_engineering_project.R;
-
-import java.util.ArrayList;
 
 public class CleaningPlanListViewAdapter extends ArrayAdapter<String> {
 
@@ -38,6 +36,7 @@ public class CleaningPlanListViewAdapter extends ArrayAdapter<String> {
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.grocery_list_list_view_adapter, null);
+
             TextView name = convertView.findViewById(R.id.name);
             ImageView remove = convertView.findViewById(R.id.remove);
             ImageView unchecked = convertView.findViewById(R.id.unchecked);
@@ -63,13 +62,18 @@ public class CleaningPlanListViewAdapter extends ArrayAdapter<String> {
                     FragmentGroceryListController.uncheckItem(position);
                 }
             });
+
             copy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     FragmentGroceryListController.addItem(list.get(position));
                 }
             });
+
         }
+
         return convertView;
+
     }
+
 }

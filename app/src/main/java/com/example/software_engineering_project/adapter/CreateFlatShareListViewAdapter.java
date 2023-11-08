@@ -2,7 +2,6 @@ package com.example.software_engineering_project.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,11 +10,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import java.util.ArrayList;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.controller.FragmentCreateFlatShareController;
-
-import java.util.ArrayList;
 
 public class CreateFlatShareListViewAdapter extends ArrayAdapter<String> {
     ArrayList<String> list;
@@ -37,10 +35,10 @@ public class CreateFlatShareListViewAdapter extends ArrayAdapter<String> {
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.create_flat_share_list_view_adapter, null);
+
             TextView name = convertView.findViewById(R.id.name);
             ImageView remove = convertView.findViewById(R.id.remove);
             TextView number = convertView.findViewById(R.id.number);
-
 
             number.setText(position + 1 + ".");
             name.setText(list.get(position));
@@ -53,8 +51,11 @@ public class CreateFlatShareListViewAdapter extends ArrayAdapter<String> {
                     FragmentCreateFlatShareController.removeItem(position);
                 }
             });
+
         }
+
         return convertView;
+
     }
 
 }

@@ -1,11 +1,9 @@
 package com.example.software_engineering_project.controller;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,16 +26,17 @@ public class FragmentSettingsController extends Fragment {
     static FragmentChangeMailController fragmentChangeMailController;
     static FragmentCreateFlatShareController fragmentCreateFlatShareController;
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         fragmentView = inflater.inflate(R.layout.fragment_setting_screen, container, false);
         this.addButtons();
 
-
         return fragmentView;
+
     }
 
     private void addButtons(){
+
         fragmentChangePasswordController = new FragmentChangePasswordController();
         changePasswordButton = fragmentView.findViewById(R.id.changePasswordButton);
         changePasswordButton.setOnClickListener(view -> {
@@ -55,13 +54,16 @@ public class FragmentSettingsController extends Fragment {
         createFlatShareButton.setOnClickListener(view -> {
             callFragment(fragmentCreateFlatShareController);
         });
+
     }
 
     private void callFragment(Fragment fragment){
+
         FragmentManager fm = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.contentFragmentSettingScreen, fragment);
         transaction.commit();
+
     }
 
 }

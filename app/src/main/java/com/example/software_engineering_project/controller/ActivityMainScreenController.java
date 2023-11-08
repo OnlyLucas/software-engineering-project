@@ -19,11 +19,10 @@ public class ActivityMainScreenController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
         this.addButtons();
-
-
 
         //FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         //transaction.add(R.id.contentFragment, fragmentGroceryListController).commit();
@@ -31,10 +30,12 @@ public class ActivityMainScreenController extends AppCompatActivity {
     }
 
     public void callFragment(Fragment fragment) {
+
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.contentFragmentMainScreen, fragment);
         transaction.commit();
+
     }
 
 
@@ -61,8 +62,8 @@ public class ActivityMainScreenController extends AppCompatActivity {
             callFragment(fragment);
         });
 
-
     }
+
 }
 
 

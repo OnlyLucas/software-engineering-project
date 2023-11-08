@@ -1,8 +1,6 @@
 package com.example.software_engineering_project.controller;
 
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -13,12 +11,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import com.example.software_engineering_project.R;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+
+import com.example.software_engineering_project.R;
 
 public abstract class ListScreenController<T> extends AppCompatActivity {
 
@@ -29,19 +26,21 @@ public abstract class ListScreenController<T> extends AppCompatActivity {
     ArrayList<T> items;
     static Context context;
     private Button goBackButtonGroceryList;
-
     private int activity;
 
     /**
      * @param activity is the activity for a controller of a certain screen
      */
     public ListScreenController(int activity, ArrayAdapter<String> adapter){
+
         this.activity = activity;
         this.adapter = adapter;
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(activity);
 
@@ -66,7 +65,9 @@ public abstract class ListScreenController<T> extends AppCompatActivity {
                 String clickedItem = (String) listView.getItemAtPosition(position);
                 Toast.makeText(ListScreenController.this, clickedItem, Toast.LENGTH_SHORT).show();
             }
+
         });
+
         // Remove an item when its row is long pressed
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
@@ -74,12 +75,14 @@ public abstract class ListScreenController<T> extends AppCompatActivity {
                 removeItem(i);
                 return false;
             }
+
         });
 
         // add item when the user presses the enter button
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String text = input.getText().toString();
                 if (text == null || text.length() == 0) {
                     makeToast(getString(R.string.enter_an_item));
@@ -89,13 +92,17 @@ public abstract class ListScreenController<T> extends AppCompatActivity {
                     input.setText("");
                     makeToast(getString(R.string.added) + text);
                 }
+
             }
+
         });
+
     }
 
     // Override onDestroy() to save the contents of the grocery list right before the app is terminated
     @Override
     protected void onDestroy() {
+
         File path = getApplicationContext().getFilesDir();
         try {
             FileOutputStream writer = new FileOutputStream(new File(path, "list.txt"));
@@ -105,13 +112,16 @@ public abstract class ListScreenController<T> extends AppCompatActivity {
             e.printStackTrace();
         }
         super.onDestroy();
+
     }
 
     // function to remove an item given its index in the grocery list.
     public void removeItem(int i) {
+
         makeToast(getString(R.string.removed) + items.get(i));
         items.remove(i);
         listView.setAdapter(adapter);
+
     }
 
     public void uncheckItem(int i){
@@ -120,20 +130,25 @@ public abstract class ListScreenController<T> extends AppCompatActivity {
 
     // function to add an item given its name.
     public void addItem(T item) {
+
         items.add(item);
         listView.setAdapter(adapter);
+
     }
 
     // function to make a Toast given a string
     static Toast t;
 
     private static void makeToast(String s) {
+
         if (t != null) t.cancel();
         t = Toast.makeText(context, s, Toast.LENGTH_SHORT);
         t.show();
+
     }
 
     public abstract void addButtons();
 
     public abstract ArrayList<T> loadItems();
+
 }

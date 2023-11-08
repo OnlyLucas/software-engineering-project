@@ -21,6 +21,7 @@ public class CleaningPlanEditFragment extends DialogFragment {
     public static Fragment getInstance() {
         return new CleaningPlanEditFragment();
     }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -34,4 +35,5 @@ public class CleaningPlanEditFragment extends DialogFragment {
     public void addButtons(){
 
     }
+
 }

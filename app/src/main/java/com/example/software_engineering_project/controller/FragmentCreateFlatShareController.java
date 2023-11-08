@@ -2,9 +2,7 @@ package com.example.software_engineering_project.controller;
 
 import android.content.Context;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +12,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.adapter.CreateFlatShareListViewAdapter;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+
+import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.adapter.CreateFlatShareListViewAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,8 +36,7 @@ public class FragmentCreateFlatShareController extends Fragment {
     private Button cancelCreateFlatShare;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         adapter = new CreateFlatShareListViewAdapter(getActivity(), items);
         items.add("Meike");
@@ -49,9 +45,7 @@ public class FragmentCreateFlatShareController extends Fragment {
         items.add("Nikos");
         items.add("Jonas");
 
-
         fragmentView = inflater.inflate(R.layout.fragment_create_flat_share, container, false);
-
 
         context = getActivity();
         listView = fragmentView.findViewById(R.id.flatShareMemberList);
@@ -63,22 +57,27 @@ public class FragmentCreateFlatShareController extends Fragment {
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String clickedItem = (String) listView.getItemAtPosition(position);
                 Toast.makeText(getActivity(), clickedItem, Toast.LENGTH_SHORT).show();
             }
+
         });
 
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
                 removeItem(position);
                 return false;
             }
+
         });
 
         enter.setOnClickListener(new AdapterView.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 String text = input_mail.getText().toString();
@@ -89,15 +88,19 @@ public class FragmentCreateFlatShareController extends Fragment {
                     input_mail.setText("");
                     makeToast("Added " + text);
                 }
+
             }
+
         });
 
         return fragmentView;
+
     }
 
     // Override onDestroy() to save the contents of the grocery list right before the app is terminated
     @Override
     public void onDestroy() {
+
         File path = context.getApplicationContext().getFilesDir();
         try {
             FileOutputStream writer = new FileOutputStream(new File(path, "list.txt"));
@@ -107,13 +110,16 @@ public class FragmentCreateFlatShareController extends Fragment {
             e.printStackTrace();
         }
         super.onDestroy();
+
     }
 
     // function to remove an item given its index in the grocery list.
     public static void removeItem(int i) {
+
         makeToast("Removed: " + items.get(i));
         items.remove(i);
         listView.setAdapter(adapter);
+
     }
 
     public static void uncheckItem(int i) {
@@ -122,16 +128,21 @@ public class FragmentCreateFlatShareController extends Fragment {
 
     // function to add an item given its name.
     public static void addItem(String item) {
+
         items.add(item);
         listView.setAdapter(adapter);
+
     }
 
     // function to make a Toast given a string
     static Toast t;
 
     private static void makeToast(String s) {
+
         if (t != null) t.cancel();
         t = Toast.makeText(context, s, Toast.LENGTH_SHORT);
         t.show();
+
     }
+
 }

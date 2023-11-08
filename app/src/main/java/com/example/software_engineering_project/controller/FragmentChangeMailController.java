@@ -1,11 +1,9 @@
 package com.example.software_engineering_project.controller;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,21 +22,25 @@ public class FragmentChangeMailController extends Fragment {
     private Button cancelChangeMail;
     private Button saveChangeMail;
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         fragmentView = inflater.inflate(R.layout.fragment_change_mail, container, false);
         this.addButtons();
         return fragmentView;
+
     }
 
     private void removeFragment(Fragment fragment) {
+
         FragmentManager fm = requireActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.remove(fragment);
         transaction.commit();
+
     }
 
     private void addButtons() {
+
         cancelChangeMail = fragmentView.findViewById(R.id.cancelChangeMail);
         cancelChangeMail.setOnClickListener(view -> {
             Fragment fragment = FragmentSettingsController.fragmentChangeMailController;
@@ -53,5 +55,7 @@ public class FragmentChangeMailController extends Fragment {
             Fragment fragment = FragmentSettingsController.fragmentChangeMailController;
             removeFragment(fragment);
         });
+
     }
+
 }
