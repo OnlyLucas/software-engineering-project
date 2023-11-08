@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
-    tools:context=".controller.ChangePasswordScreenController">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".controller.FragmentChangeMailController">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:cardCornerRadius="28dp"
-        android:layout_marginBottom="-20dp">
-
+        android:layout_marginBottom="-28dp"
+        app:cardBackgroundColor="@color/my_accent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,7 +24,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Change Password"
+                android:text="@string/change_e_mail"
                 android:textStyle="bold"
                 android:alpha="0.7"
                 android:textSize="24sp"
@@ -34,7 +33,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Current Password"
+                android:text="@string/change_e_mail"
                 android:textStyle="bold"
                 android:layout_gravity="left"
                 android:alpha="0.7"/>
@@ -48,7 +47,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Create New Password"
+                android:text="@string/enter_new_e_mail"
                 android:textStyle="bold"
                 android:layout_gravity="left"
                 android:layout_marginTop="20dp"
@@ -63,7 +62,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Confirm New Password"
+                android:text="@string/confirm_new_e_mail"
                 android:textStyle="bold"
                 android:layout_gravity="left"
                 android:layout_marginTop="20dp"
@@ -74,32 +73,30 @@
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:drawableEnd="@drawable/password_icon"/>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_horizontal"
-                android:layout_marginTop="50dp"
-                android:layout_marginBottom="20dp">
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="28dp">
 
                 <Button
-                    android:id="@+id/goBackButton"
+                    android:id="@+id/cancelChangeMail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/go_back"
+                    android:text="@string/cancel"
                     android:drawableLeft="@drawable/go_back_icon_small"
                     android:layout_weight="1"
                     android:backgroundTint="@color/my_primary"
                     android:layout_marginRight="10dp"/>
 
-
                 <Button
-                    android:id="@+id/saveChangesButton"
+                    android:id="@+id/saveChangeMail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Save Changes"
+                    android:text="Save"
                     android:drawableLeft="@drawable/save_icon"
                     android:layout_weight="1"
                     android:backgroundTint="@color/my_primary"
@@ -110,5 +107,6 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
 
 </RelativeLayout>

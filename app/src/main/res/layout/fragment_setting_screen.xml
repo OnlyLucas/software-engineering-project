@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".controller.FragmentSettingsController">
 
-
     <LinearLayout
         android:id="@+id/linearLayoutSettings"
         android:layout_width="match_parent"
@@ -54,16 +53,16 @@
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"
             android:textSize="24sp"
-            android:textColor="@color/white" />
+            android:textColor="@color/my_accent" />
 
         <Button
-            android:id="@+id/changePasswordScreenButton"
+            android:id="@+id/changePasswordButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/change_password" />
 
         <Button
-            android:id="@+id/changeMailScreenButton"
+            android:id="@+id/changeMailButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/change_e_mail" />
@@ -73,8 +72,6 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/contentFragmentSettingScreen"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/linearLayoutSettings"
-        android:layout_alignParentBottom="true"/>
+        android:layout_height="match_parent"/>
 
 </RelativeLayout>

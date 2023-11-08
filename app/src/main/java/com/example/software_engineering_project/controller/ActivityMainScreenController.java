@@ -50,7 +50,7 @@ public class ActivityMainScreenController extends AppCompatActivity {
 
         goSettingsButton = findViewById(R.id.goSettingsButtons);
         goSettingsButton.setOnClickListener(view -> {
-            Fragment fragment = new Fragment(R.layout.fragment_setting_screen);
+            FragmentSettingsController fragment = new FragmentSettingsController();
             callFragment(fragment);
 
         });

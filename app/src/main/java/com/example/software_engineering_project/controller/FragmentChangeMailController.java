@@ -13,22 +13,20 @@ import android.widget.Button;
 
 import com.example.software_engineering_project.R;
 
-import java.util.Objects;
-
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FragmentChangePasswordController #newInstance} factory method to
+ * Use the {@link FragmentChangeMailController #newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentChangePasswordController extends Fragment {
+public class FragmentChangeMailController extends Fragment {
 
     View fragmentView;
-    private Button cancelChangePassword;
-    private Button saveChangePassword;
+    private Button cancelChangeMail;
+    private Button saveChangeMail;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        fragmentView = inflater.inflate(R.layout.fragment_change_password, container, false);
+        fragmentView = inflater.inflate(R.layout.fragment_change_mail, container, false);
         this.addButtons();
         return fragmentView;
     }
@@ -41,18 +39,18 @@ public class FragmentChangePasswordController extends Fragment {
     }
 
     private void addButtons() {
-        cancelChangePassword = fragmentView.findViewById(R.id.cancelChangePassword);
-        cancelChangePassword.setOnClickListener(view -> {
-            Fragment fragment = FragmentSettingsController.fragmentChangePasswordController;
+        cancelChangeMail = fragmentView.findViewById(R.id.cancelChangeMail);
+        cancelChangeMail.setOnClickListener(view -> {
+            Fragment fragment = FragmentSettingsController.fragmentChangeMailController;
             removeFragment(fragment);
         });
 
-        saveChangePassword = fragmentView.findViewById(R.id.saveChangePassword);
-        saveChangePassword.setOnClickListener(view -> {
+        saveChangeMail = fragmentView.findViewById(R.id.saveChangeMail);
+        saveChangeMail.setOnClickListener(view -> {
 
             //Daten müssen hier noch gesaved werden
 
-            Fragment fragment = FragmentSettingsController.fragmentChangePasswordController;
+            Fragment fragment = FragmentSettingsController.fragmentChangeMailController;
             removeFragment(fragment);
         });
     }

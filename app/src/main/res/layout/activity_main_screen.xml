@@ -41,9 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="590dp"
         android:layout_above="@+id/mainCardView"
-        android:layout_below="@+id/mainScreenTop"
-        android:layout_marginTop="-1dp"
-        android:layout_marginBottom="1dp" />
+        android:layout_below="@+id/mainScreenTop"/>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/mainCardView"
@@ -55,12 +53,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center_horizontal">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/cleaningPlanButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="60dp"
                     android:backgroundTint="@color/my_secondary"
                     app:icon="@drawable/cleaning_icon"
                     android:layout_marginEnd="10dp"
@@ -69,7 +69,7 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/budgetButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="60dp"
                     android:backgroundTint="@color/my_secondary"
                     app:icon="@drawable/budget_icon"
                     android:layout_marginEnd="10dp"
@@ -78,7 +78,7 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/groceryListButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="60dp"
                     android:backgroundTint="@color/my_secondary"
                     app:icon="@drawable/shopping_list_icon"
                     android:layout_marginEnd="10dp"
@@ -87,7 +87,7 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/goSettingsButtons"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="60dp"
                     android:backgroundTint="@color/my_secondary"
                     app:icon="@drawable/settings_icon"
                     app:iconSize="32dp" />

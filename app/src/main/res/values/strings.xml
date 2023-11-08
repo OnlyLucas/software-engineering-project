@@ -13,7 +13,7 @@
     <string name="settings">Settings</string>
     <string name="flat_settings">Flat Settings</string>
     <string name="change_password">Change Password</string>
-    <string name="change_e_mail">Change e-mail</string>
+    <string name="change_e_mail">Change E-mail</string>
     <string name="go_back">Go Back</string>
     <string name="personal_settings">Personal Settings</string>
     <string name="leave_flat_share">Leave flat share</string>
@@ -37,4 +37,6 @@
     <string name="edit">Edit</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_new_e_mail">Enter New E-Mail</string>
+    <string name="confirm_new_e_mail">Confirm New E-Mail</string>
 </resources>
