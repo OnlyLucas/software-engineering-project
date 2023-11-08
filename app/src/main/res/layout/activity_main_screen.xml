@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg"
 
-    tools:context=".controller.MainScreenController">
+    tools:context=".controller.ActivityMainScreenController">
 
 
 
@@ -37,7 +37,7 @@
 
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/contentFragment"
+        android:id="@+id/contentFragmentMainScreen"
         android:layout_width="match_parent"
         android:layout_height="590dp"
         android:layout_above="@+id/mainCardView"

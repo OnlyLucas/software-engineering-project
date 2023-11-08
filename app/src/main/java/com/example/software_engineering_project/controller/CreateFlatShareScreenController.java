@@ -115,7 +115,7 @@ public class CreateFlatShareScreenController extends AppCompatActivity {
     private void addButtons() {
         goBackButtonCreateFlatShare = findViewById(R.id.goBackButtonCreateFlatShare);
         goBackButtonCreateFlatShare.setOnClickListener(view -> {
-            Intent SettingScreen = new Intent(CreateFlatShareScreenController.this, SettingScreenController.class);
+            Intent SettingScreen = new Intent(CreateFlatShareScreenController.this, FragmentSettingsController.class);
             startActivity(SettingScreen);
         });
     }

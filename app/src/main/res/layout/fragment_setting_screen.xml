@@ -3,10 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.SettingScreenController">
+    tools:context=".controller.FragmentSettingsController">
 
 
     <LinearLayout
+        android:id="@+id/linearLayoutSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -68,5 +69,12 @@
             android:text="@string/change_e_mail" />
 
     </LinearLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/contentFragmentSettingScreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linearLayoutSettings"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

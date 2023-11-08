@@ -25,13 +25,13 @@
             android:name=".controller.ChangePasswordScreenController"
             android:exported="false" />
         <activity
-            android:name=".controller.RegisterScreenController"
+            android:name=".controller.ActivityRegisterScreenController"
             android:exported="false" />
         <activity
-            android:name=".controller.MainScreenController"
+            android:name=".controller.ActivityMainScreenController"
             android:exported="false" />
         <activity
-            android:name=".controller.LoginScreenController"
+            android:name=".controller.ActivityLoginScreenController"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

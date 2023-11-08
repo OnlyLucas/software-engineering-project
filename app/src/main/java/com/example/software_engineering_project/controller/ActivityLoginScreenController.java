@@ -8,7 +8,7 @@ import android.widget.Button;
 import com.example.software_engineering_project.R;
 
 
-public class LoginScreenController extends AppCompatActivity {
+public class ActivityLoginScreenController extends AppCompatActivity {
 
     private Button loginButton;
     private Button registerButton;
@@ -24,13 +24,13 @@ public class LoginScreenController extends AppCompatActivity {
 
         loginButton=findViewById(R.id.loginButton);
         loginButton.setOnClickListener(view -> {
-            Intent mainScreen = new Intent(LoginScreenController.this, MainScreenController.class);
+            Intent mainScreen = new Intent(ActivityLoginScreenController.this, ActivityMainScreenController.class);
             startActivity(mainScreen);
         });
 
         registerButton=findViewById(R.id.registerButton);
         registerButton.setOnClickListener(view -> {
-            Intent registerScreen = new Intent(LoginScreenController.this, RegisterScreenController.class);
+            Intent registerScreen = new Intent(ActivityLoginScreenController.this, ActivityRegisterScreenController.class);
             startActivity(registerScreen);
         });
     }

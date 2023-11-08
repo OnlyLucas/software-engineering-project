@@ -24,7 +24,7 @@ public class ChangePasswordScreenController extends AppCompatActivity {
     private void addButtons(){
         goBackButton = findViewById(R.id.goBackButton);
         goBackButton.setOnClickListener(view -> {
-            Intent SettingScreen = new Intent(ChangePasswordScreenController.this, SettingScreenController.class);
+            Intent SettingScreen = new Intent(ChangePasswordScreenController.this, FragmentSettingsController.class);
             startActivity(SettingScreen);
         });
 
@@ -39,7 +39,7 @@ public class ChangePasswordScreenController extends AppCompatActivity {
                     // The dialog is automatically dismissed when a dialog button is clicked.
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent SettingScreen = new Intent(ChangePasswordScreenController.this, SettingScreenController.class);
+                            Intent SettingScreen = new Intent(ChangePasswordScreenController.this, FragmentSettingsController.class);
                             startActivity(SettingScreen);
                         }
                     })

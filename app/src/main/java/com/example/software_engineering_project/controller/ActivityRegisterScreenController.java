@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import com.example.software_engineering_project.R;
 
-public class RegisterScreenController extends AppCompatActivity {
+public class ActivityRegisterScreenController extends AppCompatActivity {
 
 
     private Button cancelButton;
@@ -25,7 +25,7 @@ public class RegisterScreenController extends AppCompatActivity {
     private void addButtons(){
         cancelButton=findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(view -> {
-            Intent loginScreen = new Intent(RegisterScreenController.this, LoginScreenController.class);
+            Intent loginScreen = new Intent(ActivityRegisterScreenController.this, ActivityLoginScreenController.class);
             startActivity(loginScreen);
         });
     }

@@ -1,20 +1,13 @@
 package com.example.software_engineering_project.controller;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
 
-import com.example.software_engineering_project.CleaningPlanEditFragment;
-import com.example.software_engineering_project.CleaningPlanFragment;
 import com.example.software_engineering_project.R;
-
-import java.lang.reflect.Array;
 
 public class CleaningPlanController extends AppCompatActivity {
 
@@ -32,7 +25,7 @@ public class CleaningPlanController extends AppCompatActivity {
     private void addButtons() {
         goBackButtonCleaningPlan = findViewById(R.id.goBackButtonCleaningPlan);
         goBackButtonCleaningPlan.setOnClickListener(view -> {
-            Intent MainScreen = new Intent(CleaningPlanController.this, MainScreenController.class);
+            Intent MainScreen = new Intent(CleaningPlanController.this, ActivityMainScreenController.class);
             startActivity(MainScreen);
         });
 

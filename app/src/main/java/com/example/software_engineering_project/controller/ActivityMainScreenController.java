@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import com.example.software_engineering_project.R;
 
-public class MainScreenController extends AppCompatActivity {
+public class ActivityMainScreenController extends AppCompatActivity {
 
     private Button logOutButton;
     private Button goSettingsButton;
@@ -33,7 +33,7 @@ public class MainScreenController extends AppCompatActivity {
     public void callFragment(Fragment fragment) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(R.id.contentFragment, fragment);
+        transaction.replace(R.id.contentFragmentMainScreen, fragment);
         transaction.commit();
     }
 
