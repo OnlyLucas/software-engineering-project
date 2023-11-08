@@ -12,8 +12,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.software_engineering_project.controller.CreateFlatShareScreenController;
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.controller.FragmentCreateFlatShareController;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ public class CreateFlatShareListViewAdapter extends ArrayAdapter<String> {
     // @param context: the Context from the MainActivity
     // @param items: The list of items in our Grocery List
     public CreateFlatShareListViewAdapter(Context context, ArrayList<String> items) {
-        super(context, R.layout.activity_create_flat_share_list_view_adapter, items);
+        super(context, R.layout.create_flat_share_list_view_adapter, items);
         this.context = context;
         list = items;
     }
@@ -36,7 +36,7 @@ public class CreateFlatShareListViewAdapter extends ArrayAdapter<String> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.activity_create_flat_share_list_view_adapter, null);
+            convertView = mInflater.inflate(R.layout.create_flat_share_list_view_adapter, null);
             TextView name = convertView.findViewById(R.id.name);
             ImageView remove = convertView.findViewById(R.id.remove);
             TextView number = convertView.findViewById(R.id.number);
@@ -50,7 +50,7 @@ public class CreateFlatShareListViewAdapter extends ArrayAdapter<String> {
             remove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    CreateFlatShareScreenController.removeItem(position);
+                    FragmentCreateFlatShareController.removeItem(position);
                 }
             });
         }

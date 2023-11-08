@@ -1,11 +1,13 @@
 package com.example.software_engineering_project.controller;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,51 +22,68 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
-public class CreateFlatShareScreenController extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ * Use the {@link FragmentCreateFlatShareController #newInstance} factory method to
+ * create an instance of this fragment.
+ */
+public class FragmentCreateFlatShareController extends Fragment {
+
+    View fragmentView;
     static ListView listView;
     EditText input_name, input_mail;
     ImageView enter;
     static CreateFlatShareListViewAdapter adapter;
-    static ArrayList<String> items;
+    static ArrayList<String> items = new ArrayList<>();
     static Context context;
-    private Button goBackButtonCreateFlatShare;
+    private Button cancelCreateFlatShare;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_flat_share_screen);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        this.addButtons();
+        adapter = new CreateFlatShareListViewAdapter(getActivity(), items);
+        items.add("Meike");
+        items.add("Lucas");
+        items.add("Laura");
+        items.add("Nikos");
+        items.add("Jonas");
 
-        listView = findViewById(R.id.groceryList);
-        input_name = findViewById(R.id.input_name);
-        input_mail = findViewById(R.id.input_mail);
-        enter = findViewById(R.id.add);
-        context = getApplicationContext();
 
-        // add hardcoded items to list
-        items = new ArrayList<>();
+        fragmentView = inflater.inflate(R.layout.fragment_create_flat_share, container, false);
+
+
+        context = getActivity();
+        listView = fragmentView.findViewById(R.id.flatShareMemberList);
+        input_name = fragmentView.findViewById(R.id.input_name);
+        input_mail = fragmentView.findViewById(R.id.input_mail);
+        enter = fragmentView.findViewById(R.id.addFlatShareMember);
 
         listView.setLongClickable(true);
-        adapter = new CreateFlatShareListViewAdapter(this, items);
         listView.setAdapter(adapter);
 
-        // Display the person's name when the person's row is clicked
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String clickedItem = (String) listView.getItemAtPosition(position);
-                Toast.makeText(CreateFlatShareScreenController.this, clickedItem, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), clickedItem, Toast.LENGTH_SHORT).show();
             }
         });
 
-        // add person when the user presses the add button
-        enter.setOnClickListener(new View.OnClickListener() {
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
+                removeItem(position);
+                return false;
+            }
+        });
+
+        enter.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String text = input_mail.getText().toString();
                 if (text.length() == 0) {
-                    makeToast("Enter an e-mail.");
+                    makeToast("Enter an e-mail");
                 } else {
                     addItem(text);
                     input_mail.setText("");
@@ -73,12 +92,13 @@ public class CreateFlatShareScreenController extends AppCompatActivity {
             }
         });
 
+        return fragmentView;
     }
 
     // Override onDestroy() to save the contents of the grocery list right before the app is terminated
     @Override
-    protected void onDestroy() {
-        File path = getApplicationContext().getFilesDir();
+    public void onDestroy() {
+        File path = context.getApplicationContext().getFilesDir();
         try {
             FileOutputStream writer = new FileOutputStream(new File(path, "list.txt"));
             writer.write(items.toString().getBytes());
@@ -89,11 +109,15 @@ public class CreateFlatShareScreenController extends AppCompatActivity {
         super.onDestroy();
     }
 
-    // function to remove a member given its index in the list.
+    // function to remove an item given its index in the grocery list.
     public static void removeItem(int i) {
         makeToast("Removed: " + items.get(i));
         items.remove(i);
         listView.setAdapter(adapter);
+    }
+
+    public static void uncheckItem(int i) {
+        makeToast("Unchecked: " + items.get(i));
     }
 
     // function to add an item given its name.
@@ -109,14 +133,5 @@ public class CreateFlatShareScreenController extends AppCompatActivity {
         if (t != null) t.cancel();
         t = Toast.makeText(context, s, Toast.LENGTH_SHORT);
         t.show();
-    }
-
-
-    private void addButtons() {
-        goBackButtonCreateFlatShare = findViewById(R.id.goBackButtonCreateFlatShare);
-        goBackButtonCreateFlatShare.setOnClickListener(view -> {
-            Intent SettingScreen = new Intent(CreateFlatShareScreenController.this, FragmentSettingsController.class);
-            startActivity(SettingScreen);
-        });
     }
 }

@@ -62,14 +62,16 @@ public class FragmentGroceryListController extends Fragment {
 
         fragmentView = inflater.inflate(R.layout.fragment_grocery_list_controller, container, false);
         listView = fragmentView.findViewById(R.id.groceryList);
+        input = fragmentView.findViewById(R.id.input);
+        enter = fragmentView.findViewById(R.id.enter);
         context = getActivity();
         //ArrayAdapter<String> adapter = new ArrayAdapter<String> (getActivity().getApplicationContext(), R.layout.grocery_list_list_view_adapter, R.id.name ,items);
         listView.setLongClickable(true);
+
         //ArrayAdapter<String> adapter = new GroceryListListViewAdapter(getActivity(), items);
         listView.setAdapter(adapter);
 
-        input = fragmentView.findViewById(R.id.input);
-        enter = fragmentView.findViewById(R.id.enter);
+
         //listView = fragmentView.findViewById(R.id.list); DEPRICATED
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -94,7 +96,7 @@ public class FragmentGroceryListController extends Fragment {
             @Override
             public void onClick(View view) {
                 String text = input.getText().toString();
-                if (text == null || text.length() == 0) {
+                if (text.length() == 0) {
                     makeToast("Enter an item.");
                 } else {
                     addItem(text);

@@ -23,8 +23,10 @@ public class FragmentSettingsController extends Fragment {
     View fragmentView;
     private Button changePasswordButton;
     private Button changeMailButton;
+    private Button createFlatShareButton;
     static FragmentChangePasswordController fragmentChangePasswordController;
     static FragmentChangeMailController fragmentChangeMailController;
+    static FragmentCreateFlatShareController fragmentCreateFlatShareController;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,6 +48,12 @@ public class FragmentSettingsController extends Fragment {
         changeMailButton = fragmentView.findViewById(R.id.changeMailButton);
         changeMailButton.setOnClickListener(view -> {
             callFragment(fragmentChangeMailController);
+        });
+
+        fragmentCreateFlatShareController = new FragmentCreateFlatShareController();
+        createFlatShareButton = fragmentView.findViewById(R.id.createFlatShareButton);
+        createFlatShareButton.setOnClickListener(view -> {
+            callFragment(fragmentCreateFlatShareController);
         });
     }
 
