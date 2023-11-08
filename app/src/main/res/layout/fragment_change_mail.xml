@@ -33,7 +33,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/change_e_mail"
+                android:text="@string/current_e_mail"
                 android:textStyle="bold"
                 android:layout_gravity="left"
                 android:alpha="0.7"/>
@@ -96,7 +96,7 @@
                     android:id="@+id/saveChangeMail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Save"
+                    android:text="@string/save"
                     android:drawableLeft="@drawable/save_icon"
                     android:layout_weight="1"
                     android:backgroundTint="@color/my_primary"
@@ -107,6 +107,5 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
 
 </RelativeLayout>

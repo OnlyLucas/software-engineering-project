@@ -11,7 +11,7 @@
     <string name="settings">Einstellungen</string>
     <string name="register_info">Bitte registrieren Sie sich!</string>
     <string name="flat_settings">WG Einstellungen</string>
-    <string name="change_password">Password ändern</string>
+    <string name="change_password">Passwort ändern</string>
     <string name="change_e_mail">E-Mail ändern</string>
     <string name="go_back">Zurück</string>
     <string name="personal_settings">Persönliche Einstellungen</string>
@@ -27,6 +27,14 @@
     <string name="enter_item_here">Artikel hier eintragen</string>
     <string name="name_of_flat">Name der WG</string>
     <string name="enter_mail_here">Mail-Adresse hier eintragen</string>
-    <string name="save_changes">Speichern</string>
     <string name="enter_flat_share_name">Name der WG hier eintragen</string>
+    <string name="login">Anmelden</string>
+    <string name="edit">Bearbeiten</string>
+    <string name="enter_new_e_mail">Neue E-Mail eingeben</string>
+    <string name="confirm_new_e_mail">Neue E-Mail bestätigen</string>
+    <string name="save">Speichern</string>
+    <string name="current_e_mail">Aktuelle E-Mail</string>
+    <string name="current_password">Aktuelles Passwort</string>
+    <string name="enter_new_password">Neues Passwort eingeben</string>
+    <string name="confirm_new_password">Neues Passwort bestätigen</string>
 </resources>

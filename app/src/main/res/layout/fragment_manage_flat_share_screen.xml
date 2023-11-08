@@ -12,7 +12,6 @@
         android:background="@color/my_primary"
         android:alpha="0.7"/>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -130,7 +129,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="-20dp">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -211,7 +209,7 @@
                     android:id="@+id/saveChangePassword"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/save_changes"
+                    android:text="@string/save"
                     android:drawableLeft="@drawable/save_icon"
                     android:layout_weight="1"
                     android:backgroundTint="@color/my_primary"/>
@@ -223,7 +221,6 @@
                 android:layout_height="10dp"/>
 
         </LinearLayout>
-
 
     </androidx.cardview.widget.CardView>
 

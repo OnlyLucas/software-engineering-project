@@ -27,7 +27,6 @@
     <string name="enter_item_here">Enter item here</string>
     <string name="name_of_flat">Name of flat</string>
     <string name="enter_mail_here">Enter mail here</string>
-    <string name="save_changes">Save Changes</string>
     <string name="enter_flat_share_name">Enter flat share name</string>
     <string name="removed">"Removed: "</string>
     <string name="added">"Added "</string>
@@ -36,7 +35,12 @@
     <string name="edit">Edit</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="enter_new_e_mail">Enter New E-Mail</string>
-    <string name="confirm_new_e_mail">Confirm New E-Mail</string>
+    <string name="enter_new_e_mail">Enter new e-mail</string>
+    <string name="confirm_new_e_mail">Confirm new e-mail</string>
     <string name="save">Save</string>
+    <string name="login">Login</string>
+    <string name="current_e_mail">Current e-mail</string>
+    <string name="current_password">Current password</string>
+    <string name="enter_new_password">Enter new password</string>
+    <string name="confirm_new_password">Confirm new password</string>
 </resources>

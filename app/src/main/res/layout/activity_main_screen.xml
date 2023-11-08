@@ -5,10 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-
     tools:context=".controller.ActivityMainScreenController">
-
-
 
     <LinearLayout
         android:id="@+id/mainScreenTop"
@@ -17,7 +14,6 @@
         android:orientation="vertical"
         android:gravity="center"
         android:padding="28dp">
-
 
         <ImageView
             android:layout_width="56dp"
@@ -34,7 +30,6 @@
             android:textColor="@color/white" />
 
     </LinearLayout>
-
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/contentFragmentMainScreen"
@@ -91,7 +86,6 @@
                     android:backgroundTint="@color/my_secondary"
                     app:icon="@drawable/settings_icon"
                     app:iconSize="32dp" />
-
 
             </LinearLayout>
 
