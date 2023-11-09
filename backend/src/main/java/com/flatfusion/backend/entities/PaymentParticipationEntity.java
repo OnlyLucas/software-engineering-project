@@ -11,8 +11,14 @@ import java.util.Objects;
 @jakarta.persistence.Table(name = "payment_participations", schema = "flatfusion")
 @IdClass(PaymentParticipationEntityPK.class)
 public class PaymentParticipationEntity {
-    @EmbeddedId
-    PaymentParticipationEntityPK id;
+//    @EmbeddedId
+//    PaymentParticipationEntityPK id;
+
+    @Id
+    private String paymentId;
+    @Id
+    private String userId;
+
     @ManyToOne
     @MapsId("paymentId")
     @JoinColumn(

@@ -44,6 +44,10 @@ public class PaymentsChangeEntity {
     @Column(name = "changed_at", nullable = true)
     private Timestamp changedAt;
 
+    @Basic
+    @Column(name = "payment_name", nullable = false, length = 255)
+    private String name;
+
     public String getId() {
         return id;
     }
@@ -100,16 +104,44 @@ public class PaymentsChangeEntity {
         this.changedAt = changedAt;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPayment(PaymentEntity payment) {
+        this.payment = payment;
+    }
+
+    public UserEntity getPaidByUser() {
+        return paidByUser;
+    }
+
+    public void setPaidByUser(UserEntity paidByUser) {
+        this.paidByUser = paidByUser;
+    }
+
+    public UserEntity getChangedByUser() {
+        return changedByUser;
+    }
+
+    public void setChangedByUser(UserEntity changedByUser) {
+        this.changedByUser = changedByUser;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PaymentsChangeEntity that = (PaymentsChangeEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(payment, that.payment) && Objects.equals(amount, that.amount) && Objects.equals(currencyCode, that.currencyCode) && Objects.equals(paidByUser, that.paidByUser) && Objects.equals(changedByUser, that.changedByUser) && Objects.equals(changedAt, that.changedAt);
+        return Objects.equals(id, that.id) && Objects.equals(payment, that.payment) && Objects.equals(amount, that.amount) && Objects.equals(currencyCode, that.currencyCode) && Objects.equals(paidByUser, that.paidByUser) && Objects.equals(changedByUser, that.changedByUser) && Objects.equals(changedAt, that.changedAt) && Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, payment, amount, currencyCode, paidByUser, changedByUser, changedAt);
+        return Objects.hash(id, payment, amount, currencyCode, paidByUser, changedByUser, changedAt, name);
     }
 }

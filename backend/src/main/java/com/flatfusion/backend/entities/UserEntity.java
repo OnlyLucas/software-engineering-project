@@ -35,7 +35,7 @@ public class UserEntity {
     @Basic
     @Column(name = "created_at", nullable = true)
     private Timestamp createdAt;
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "userId")
     private Set<GroupMembershipEntity> groupMemberships;
 
     public UUID getId() {

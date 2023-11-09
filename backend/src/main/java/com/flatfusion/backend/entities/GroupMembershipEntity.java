@@ -9,8 +9,14 @@ import java.util.Objects;
 @jakarta.persistence.Table(name = "group_memberships", schema = "flatfusion")
 @IdClass(GroupMembershipEntityPK.class)
 public class GroupMembershipEntity {
-    @EmbeddedId
-    GroupMembershipEntityPK id;
+//    @EmbeddedId
+//    GroupMembershipEntityPK id;
+
+    @Id
+    private String userId;
+    @Id
+    private String groupId;
+
     @ManyToOne
     @MapsId("groupId")
     @JoinColumn(

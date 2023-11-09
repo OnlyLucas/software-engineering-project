@@ -36,6 +36,10 @@ public class PaymentEntity {
     @Column(name = "created_at", nullable = true)
     private Timestamp createdAt;
 
+    @Basic
+    @Column(name = "payment_name", nullable = false, length = 255)
+    private String name;
+
     public String getId() {
         return id;
     }
@@ -84,16 +88,25 @@ public class PaymentEntity {
         this.createdAt = createdAt;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PaymentEntity that = (PaymentEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(amount, that.amount) && Objects.equals(currencyCode, that.currencyCode) && Objects.equals(paidByUser, that.paidByUser) && Objects.equals(createdByUser, that.createdByUser) && Objects.equals(createdAt, that.createdAt);
+        return Objects.equals(id, that.id) && Objects.equals(amount, that.amount) && Objects.equals(currencyCode, that.currencyCode) && Objects.equals(paidByUser, that.paidByUser) && Objects.equals(createdByUser, that.createdByUser) && Objects.equals(createdAt, that.createdAt) && Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, amount, currencyCode, paidByUser, createdByUser, createdAt);
+        return Objects.hash(id, amount, currencyCode, paidByUser, createdByUser, createdAt, name);
     }
+
 }
