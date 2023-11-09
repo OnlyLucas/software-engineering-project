@@ -1,8 +1,8 @@
 CREATE TABLE `users` (
   `id` varchar(36) PRIMARY KEY,
-  `email` varchar(255),
+  `email` varchar(255) NOT NULL,
   `username` varchar(255),
-  `password` varchar(255),
+  `password` varchar(255) NOT NULL,
   `first_name` varchar(255),
   `last_name` varchar(255),
   `created_at` timestamp DEFAULT (CURRENT_TIMESTAMP())
@@ -10,9 +10,9 @@ CREATE TABLE `users` (
 
 CREATE TABLE `groups` (
   `id` varchar(36) PRIMARY KEY,
-  `name` varchar(255),
+  `group_name` varchar(255) NOT NULL,
   `description` varchar(255),
-  `created_by` varchar(36),
+  `created_by` varchar(36) NOT NULL,
   `created_at` timestamp DEFAULT (CURRENT_TIMESTAMP())
 );
 
@@ -24,11 +24,11 @@ CREATE TABLE `group_memberships` (
 );
 
 CREATE TABLE `cleaning_template` (
-  `id` varchar(36) PRIMARY KEY,
-  `name` varchar(255),
+  `id` varchar(36) PRIMARY KEY NOT NULL,
+  `task_name` varchar(255) NOT NULL,
   `description` varchar(255),
-  `start_date` date,
-  `end_date` date,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
   `interval` integer COMMENT 'Interval in days',
   `created_by` varchar(36),
   `created_at` timestamp DEFAULT (CURRENT_TIMESTAMP())
@@ -38,16 +38,16 @@ CREATE TABLE `cleanings` (
   `id` varchar(36) PRIMARY KEY,
   `user_id` varchar(36),
   `cleaning_template` varchar(36),
-  `date` date,
+  `date` date NOT NULL,
   `is_completed` boolean,
   `completed_at` timestamp
 );
 
 CREATE TABLE `group_groceries` (
   `id` varchar(36) PRIMARY KEY,
-  `group_id` varchar(36),
-  `name` varchar(255) COMMENT 'We agreed to include amounts here',
-  `created_by` varchar(36),
+  `group_id` varchar(36) NOT NULL,
+  `grocery_name` varchar(255) NOT NULL COMMENT 'We agreed to include amounts here',
+  `created_by` varchar(36) NOT NULL,
   `created_at` timestamp DEFAULT (CURRENT_TIMESTAMP()),
   `is_completed` boolean COMMENT 'If true shown in history',
   `completed_by` varchar(36),
@@ -56,29 +56,31 @@ CREATE TABLE `group_groceries` (
 
 CREATE TABLE `payments` (
   `id` varchar(36) PRIMARY KEY,
-  `amount` decimal(11, 2),
+  `payment_name` varchar(255) NOT NULL,
+  `amount` decimal(11, 2) NOT NULL,
   `currency_code` char(3),
-  `paid_by` varchar(36),
-  `created_by` varchar(36),
+  `paid_by` varchar(36) NOT NULL,
+  `created_by` varchar(36) NOT NULL,
   `created_at` timestamp DEFAULT (CURRENT_TIMESTAMP())
 );
 
 CREATE TABLE `payments_changes` (
   `id` varchar(36) PRIMARY KEY,
   `payment_id` varchar(36),
-  `amount` decimal(11, 2),
+  `payment_name` varchar(255) NOT NULL,
+  `amount` decimal(11, 2) NOT NULL,
   `currency_code` char(3),
-  `paid_by` varchar(36),
-  `changed_by` varchar(36),
+  `paid_by` varchar(36) NOT NULL,
+  `changed_by` varchar(36) NOT NULL,
   `changed_at` timestamp DEFAULT (CURRENT_TIMESTAMP())
 );
 
 CREATE TABLE `payment_participations` (
   `payment_id` varchar(36),
   `user_id` varchar(36),
-  `participation_amount` decimal(11, 2),
+  `participation_amount` decimal(11, 2) NOT NULL,
   `currency_code` char(3),
-  `is_paid` boolean,
+  `is_paid` boolean NOT NULL,
   `paid_at` timestamp,
   PRIMARY KEY (`payment_id`, `user_id`)
 );
