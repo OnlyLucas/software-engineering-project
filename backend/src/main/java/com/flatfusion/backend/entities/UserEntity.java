@@ -1,28 +1,33 @@
 package com.flatfusion.backend.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.sql.Timestamp;
 import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
 
 @Entity
 @Table(name = "users", schema = "flatfusion")
 public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id", nullable = false, length = 36)
-    private String id;
+    @Column(name = "id", nullable = false, columnDefinition = "VARCHAR(36)")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    private UUID id;
     @Basic
-    @Column(name = "email", nullable = true, length = 255)
+    @Column(name = "email", nullable = false, length = 255)
     private String email;
     @Basic
     @Column(name = "username", nullable = true, length = 255)
     private String username;
     @Basic
-    @Column(name = "password", nullable = true, length = 255)
+    @Column(name = "password", nullable = false, length = 255)
     private String password;
     @Basic
-    @Column(name = "first_name", nullable = true, length = 255)
+    @Column(name = "first_name", nullable = false, length = 255)
     private String firstName;
     @Basic
     @Column(name = "last_name", nullable = true, length = 255)
@@ -30,12 +35,14 @@ public class UserEntity {
     @Basic
     @Column(name = "created_at", nullable = true)
     private Timestamp createdAt;
+    @OneToMany(mappedBy = "users")
+    private Set<GroupMembershipEntity> groupMemberships;
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -85,6 +92,14 @@ public class UserEntity {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Set<GroupMembershipEntity> getGroupMemberships() {
+        return groupMemberships;
+    }
+
+    public void setGroupMemberships(Set<GroupMembershipEntity> groupMemberships) {
+        this.groupMemberships = groupMemberships;
     }
 
     @Override

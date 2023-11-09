@@ -1,6 +1,10 @@
 package com.flatfusion.backend.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.Type;
+import org.hibernate.type.NumericBooleanConverter;
+import org.hibernate.type.SqlTypes;
 
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -14,15 +18,17 @@ public class GroupGroceryEntity {
     private String id;
     @ManyToOne
     @JoinColumn(
-            name = "group_id"
+            name = "group_id",
+            nullable = false
     )
     private GroupEntity group;
     @Basic
-    @Column(name = "name", nullable = true, length = 255)
+    @Column(name = "name", nullable = false, length = 255)
     private String name;
     @ManyToOne
     @JoinColumn(
-            name = "created_by"
+            name = "created_by",
+            nullable = false
     )
     private UserEntity createdByUser;
 
@@ -30,8 +36,9 @@ public class GroupGroceryEntity {
     @Column(name = "created_at", nullable = true)
     private Timestamp createdAt;
     @Basic
-    @Column(name = "is_completed", nullable = true)
-    private Byte isCompleted;
+    @Column(name = "is_completed")
+    @Convert(converter = NumericBooleanConverter.class)
+    private Boolean isCompleted = false;
 
     @ManyToOne
     @JoinColumn(
@@ -83,11 +90,11 @@ public class GroupGroceryEntity {
         this.createdAt = createdAt;
     }
 
-    public Byte getIsCompleted() {
+    public Boolean getIsCompleted() {
         return isCompleted;
     }
 
-    public void setIsCompleted(Byte isCompleted) {
+    public void setIsCompleted(Boolean isCompleted) {
         this.isCompleted = isCompleted;
     }
 

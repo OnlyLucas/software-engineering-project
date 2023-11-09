@@ -1,6 +1,7 @@
 package com.flatfusion.backend.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.type.NumericBooleanConverter;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -15,13 +16,16 @@ public class CleaningEntity {
     private String id;
     @ManyToOne
     @JoinColumn(
-            name = "user_id"
+            name = "user_id",
+            nullable = false
     )
     private UserEntity user;
-    @Column(name = "date", nullable = true)
+    @Column(name = "date", nullable = false)
     private Date date;
     @Column(name = "is_completed", nullable = true)
-    private Byte isCompleted;
+    @Convert(converter = NumericBooleanConverter.class)
+    private Boolean isCompleted = false;
+
     @Column(name = "completed_at", nullable = true)
     private Timestamp completedAt;
     @ManyToOne
@@ -62,11 +66,11 @@ public class CleaningEntity {
         this.date = date;
     }
 
-    public Byte getIsCompleted() {
+    public Boolean getIsCompleted() {
         return isCompleted;
     }
 
-    public void setIsCompleted(Byte isCompleted) {
+    public void setIsCompleted(Boolean isCompleted) {
         this.isCompleted = isCompleted;
     }
 

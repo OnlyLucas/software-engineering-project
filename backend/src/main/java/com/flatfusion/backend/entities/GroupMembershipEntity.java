@@ -9,12 +9,25 @@ import java.util.Objects;
 @jakarta.persistence.Table(name = "group_memberships", schema = "flatfusion")
 @IdClass(GroupMembershipEntityPK.class)
 public class GroupMembershipEntity {
-    @Id
+    @EmbeddedId
+    GroupMembershipEntityPK id;
     @ManyToOne
+    @MapsId("groupId")
     @JoinColumn(
             name = "group_id"
     )
     private GroupEntity group;
+
+    @ManyToOne
+    @MapsId("userId")
+    @JoinColumn(
+            name = "user_id"
+    )
+    private UserEntity user;
+
+    @Basic
+    @Column(name = "created_at", nullable = true)
+    private Timestamp createdAt;
 
     public GroupEntity getGroup() {
         return group;
@@ -24,13 +37,6 @@ public class GroupMembershipEntity {
         this.group = groupId;
     }
 
-    @Id
-    @ManyToOne
-    @JoinColumn(
-            name = "user_id"
-    )
-    private UserEntity user;
-
     public UserEntity getUser() {
         return user;
     }
@@ -38,10 +44,6 @@ public class GroupMembershipEntity {
     public void setUser(UserEntity userId) {
         this.user = userId;
     }
-
-    @Basic
-    @Column(name = "created_at", nullable = true)
-    private Timestamp createdAt;
 
     public Timestamp getCreatedAt() {
         return createdAt;

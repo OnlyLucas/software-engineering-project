@@ -15,11 +15,12 @@ public class PaymentsChangeEntity {
     private String id;
     @ManyToOne
     @JoinColumn(
-            name = "payment_id"
+            name = "payment_id",
+            nullable = false
     )
     private PaymentEntity payment;
     @Basic
-    @Column(name = "amount", nullable = true, precision = 2)
+    @Column(name = "amount", nullable = false, precision = 2)
     private BigDecimal amount;
     @Basic
     @Column(name = "currency_code", nullable = true, length = 3)
@@ -27,13 +28,15 @@ public class PaymentsChangeEntity {
 
     @ManyToOne
     @JoinColumn(
-            name = "paid_by"
+            name = "paid_by",
+            nullable = false
     )
     private UserEntity paidByUser;
 
     @ManyToOne
     @JoinColumn(
-            name = "changed_by"
+            name = "changed_by",
+            nullable = false
     )
     private UserEntity changedByUser;
 

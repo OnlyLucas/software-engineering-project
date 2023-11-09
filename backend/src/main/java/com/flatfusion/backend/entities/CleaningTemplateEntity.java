@@ -14,23 +14,24 @@ public class CleaningTemplateEntity {
     @Column(name = "id", nullable = false, length = 36)
     private String id;
     @Basic
-    @Column(name = "name", nullable = true, length = 255)
+    @Column(name = "name", nullable = false, length = 255)
     private String name;
     @Basic
     @Column(name = "description", nullable = true, length = 255)
     private String description;
     @Basic
-    @Column(name = "start_date", nullable = true)
+    @Column(name = "start_date", nullable = false)
     private Date startDate;
     @Basic
-    @Column(name = "end_date", nullable = true)
+    @Column(name = "end_date", nullable = false)
     private Date endDate;
     @Basic
     @Column(name = "interval", nullable = true)
     private Integer interval;
     @ManyToOne
     @JoinColumn(
-            name = "created_by"
+            name = "created_by",
+            nullable = false
     )
     private UserEntity createdByUser;
 

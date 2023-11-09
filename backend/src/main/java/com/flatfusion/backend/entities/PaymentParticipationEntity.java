@@ -1,6 +1,7 @@
 package com.flatfusion.backend.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.type.NumericBooleanConverter;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -10,12 +11,40 @@ import java.util.Objects;
 @jakarta.persistence.Table(name = "payment_participations", schema = "flatfusion")
 @IdClass(PaymentParticipationEntityPK.class)
 public class PaymentParticipationEntity {
-    @Id
+    @EmbeddedId
+    PaymentParticipationEntityPK id;
     @ManyToOne
+    @MapsId("paymentId")
     @JoinColumn(
-            name = "payment_id"
+            name = "payment_id",
+            nullable = false
     )
     private PaymentEntity payment;
+
+    @ManyToOne
+    @MapsId("userId")
+    @JoinColumn(
+            name = "user_id",
+            nullable = false
+    )
+    private UserEntity user;
+
+    @Basic
+    @Column(name = "participation_amount", nullable = false, precision = 2)
+    private BigDecimal participationAmount;
+
+    @Basic
+    @Column(name = "currency_code", nullable = true, length = 3)
+    private String currencyCode;
+
+    @Basic
+    @Column(name = "is_paid", nullable = true)
+    @Convert(converter = NumericBooleanConverter.class)
+    private Boolean isPaid = false;
+
+    @Basic
+    @Column(name = "paid_at", nullable = true)
+    private Timestamp paidAt;
 
     public PaymentEntity getPayment() {
         return payment;
@@ -25,14 +54,6 @@ public class PaymentParticipationEntity {
         this.payment = paymentId;
     }
 
-    @Id
-    @ManyToOne
-    @JoinColumn(
-            name = "user_id"
-    )
-    private UserEntity user;
-
-
     public UserEntity getUser() {
         return user;
     }
@@ -40,10 +61,6 @@ public class PaymentParticipationEntity {
     public void setUser(UserEntity userId) {
         this.user = userId;
     }
-
-    @Basic
-    @Column(name = "participation_amount", nullable = true, precision = 2)
-    private BigDecimal participationAmount;
 
     public BigDecimal getParticipationAmount() {
         return participationAmount;
@@ -53,10 +70,6 @@ public class PaymentParticipationEntity {
         this.participationAmount = participationAmount;
     }
 
-    @Basic
-    @Column(name = "currency_code", nullable = true, length = 3)
-    private String currencyCode;
-
     public String getCurrencyCode() {
         return currencyCode;
     }
@@ -65,21 +78,13 @@ public class PaymentParticipationEntity {
         this.currencyCode = currencyCode;
     }
 
-    @Basic
-    @Column(name = "is_paid", nullable = true)
-    private Byte isPaid;
-
-    public Byte getIsPaid() {
+    public Boolean getIsPaid() {
         return isPaid;
     }
 
-    public void setIsPaid(Byte isPaid) {
+    public void setIsPaid(Boolean isPaid) {
         this.isPaid = isPaid;
     }
-
-    @Basic
-    @Column(name = "paid_at", nullable = true)
-    private Timestamp paidAt;
 
     public Timestamp getPaidAt() {
         return paidAt;

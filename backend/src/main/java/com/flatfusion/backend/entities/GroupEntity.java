@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "groups", schema = "flatfusion")
@@ -13,19 +14,28 @@ public class GroupEntity {
     @Column(name = "id", nullable = false, length = 36)
     private String id;
     @Basic
-    @Column(name = "name", nullable = true, length = 255)
+    @Column(name = "name", nullable = false, length = 255)
     private String name;
     @Basic
     @Column(name = "description", nullable = true, length = 255)
     private String description;
     @ManyToOne
     @JoinColumn(
-            name = "created_by"
+            name = "created_by",
+            nullable = false
     )
     private UserEntity createdByUser;
     @Basic
     @Column(name = "created_at", nullable = true)
     private Timestamp createdAt;
+
+    @ManyToMany
+    @JoinTable(
+            name = "group_memberships",
+            joinColumns = {@JoinColumn(name = "group_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")}
+    )
+    private Set<UserEntity> groupMembers;
 
     public String getId() {
         return id;
@@ -65,6 +75,14 @@ public class GroupEntity {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Set<UserEntity> getGroupMembers() {
+        return groupMembers;
+    }
+
+    public void setGroupMembers(Set<UserEntity> groupMembers) {
+        this.groupMembers = groupMembers;
     }
 
     @Override

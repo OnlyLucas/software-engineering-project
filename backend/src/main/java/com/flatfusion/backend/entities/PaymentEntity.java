@@ -14,20 +14,22 @@ public class PaymentEntity {
     @Column(name = "id", nullable = false, length = 36)
     private String id;
     @Basic
-    @Column(name = "amount", nullable = true, precision = 2)
+    @Column(name = "amount", nullable = false, precision = 2)
     private BigDecimal amount;
     @Basic
     @Column(name = "currency_code", nullable = true, length = 3)
     private String currencyCode;
     @ManyToOne
     @JoinColumn(
-            name = "paid_by"
+            name = "paid_by",
+            nullable = false
     )
     private UserEntity paidByUser;
 
     @ManyToOne
     @JoinColumn(
-            name = "created_by"
+            name = "created_by",
+            nullable = false
     )
     private UserEntity createdByUser;
     @Basic
