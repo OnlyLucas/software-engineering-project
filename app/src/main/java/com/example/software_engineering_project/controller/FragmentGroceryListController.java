@@ -37,7 +37,6 @@ public class FragmentGroceryListController extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        //adapter = new ArrayAdapter<String> (getActivity().getApplicationContext(), R.layout.grocery_list_list_view_adapter, R.id.name ,items);
         adapter = new GroceryListListViewAdapter(getActivity(),items);
         items.add("5 Apples");
         items.add("Banana");

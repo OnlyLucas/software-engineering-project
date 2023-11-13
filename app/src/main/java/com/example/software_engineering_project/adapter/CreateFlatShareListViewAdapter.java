@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.controller.FragmentCreateFlatShareController;
+import com.example.software_engineering_project.controller.FragmentManageFlatShareController;
 
 public class CreateFlatShareListViewAdapter extends ArrayAdapter<String> {
     ArrayList<String> list;
@@ -23,7 +23,7 @@ public class CreateFlatShareListViewAdapter extends ArrayAdapter<String> {
     // @param context: the Context from the MainActivity
     // @param items: The list of items in our Grocery List
     public CreateFlatShareListViewAdapter(Context context, ArrayList<String> items) {
-        super(context, R.layout.create_flat_share_list_view_adapter, items);
+        super(context, R.layout.manage_flat_share_list_view_adapter, items);
         this.context = context;
         list = items;
     }
@@ -34,7 +34,7 @@ public class CreateFlatShareListViewAdapter extends ArrayAdapter<String> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.create_flat_share_list_view_adapter, null);
+            convertView = mInflater.inflate(R.layout.manage_flat_share_list_view_adapter, null);
 
             TextView name = convertView.findViewById(R.id.name);
             ImageView remove = convertView.findViewById(R.id.remove);
@@ -48,7 +48,7 @@ public class CreateFlatShareListViewAdapter extends ArrayAdapter<String> {
             remove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    FragmentCreateFlatShareController.removeItem(position);
+                    FragmentManageFlatShareController.removeItem(position);
                 }
             });
 

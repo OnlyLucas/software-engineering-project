@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".controller.FragmentCreateFlatShareController">
+    tools:context=".controller.FragmentManageFlatShareController">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -75,7 +75,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="7sp"
                     android:layout_toRightOf="@+id/input_mail"
-                    android:src="@drawable/add_symbol" />
+                    android:src="@drawable/add_symbol_gray" />
 
             </LinearLayout>
 

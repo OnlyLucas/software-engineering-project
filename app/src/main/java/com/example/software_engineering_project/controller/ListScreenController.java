@@ -48,7 +48,7 @@ public abstract class ListScreenController<T> extends AppCompatActivity {
 
         listView = findViewById(R.id.groceryList);
         input = findViewById(R.id.input);
-        enter = findViewById(R.id.add);
+        enter = findViewById(R.id.enter);
         context = getApplicationContext();
 
         // add hardcoded items to grocery list

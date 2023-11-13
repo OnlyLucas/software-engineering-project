@@ -3,60 +3,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragment_cleaning_plan"
-    tools:context=".controller.CleaningPlanFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".controller.FragmentCleaningPlanController">
 
-    <ListView
-        android:id="@+id/cleaningPlanList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/fragment_cleaning_plan_header"/>
 
-    <LinearLayout
-        android:id="@+id/fragment_cleaning_plan_header"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
         android:layout_height="wrap_content"
-        android:background="@color/my_accent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-20dp"
+        app:cardCornerRadius="28dp"
+        app:cardBackgroundColor="@color/my_accent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <Button
-                android:id="@+id/goBackButtonCleaningPlan"
-                android:layout_width="0dp"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/my_primary"
-                android:drawableLeft="@drawable/go_back_icon_small"
-                android:text="Test Fragment" />
+                android:minHeight="200dp">
 
-            <View
-                android:layout_width="10dp"
-                android:layout_height="match_parent" />
+                <RelativeLayout
+                    android:id="@+id/headerCleaningPlan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/editCleaningPlan"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/my_primary"
-                android:drawableLeft="@drawable/go_back_icon_small"
-                android:onClick="testMethode"
-                android:text="@string/edit" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:alpha="0.7"
+                        android:paddingBottom="20dp"
+                        android:text="@string/cleaning_plan"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:layout_centerInParent="true"/>
+
+                    <ImageView
+                        android:id="@+id/addCleaningPlan"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp"
+                        android:layout_marginStart="7sp"
+                        android:src="@drawable/add_symbol_blue"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="10dp"/>
+                </RelativeLayout>
+
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/contentFragmentCleaningPlan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/headerCleaningPlan"
+                    android:layout_marginBottom="10dp"/>
+
+            </RelativeLayout>
 
         </LinearLayout>
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="10dp" />
-
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

@@ -1,3 +1,5 @@
+import com.android.ide.common.repository.main
+
 plugins {
     id("com.android.application")
 }

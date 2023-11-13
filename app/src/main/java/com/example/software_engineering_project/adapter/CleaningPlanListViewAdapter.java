@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
+import com.example.software_engineering_project.controller.FragmentCleaningPlanController;
+import com.example.software_engineering_project.controller.FragmentCleaningPlanListController;
 import com.example.software_engineering_project.controller.FragmentGroceryListController;
 import com.example.software_engineering_project.R;
 
@@ -35,7 +37,7 @@ public class CleaningPlanListViewAdapter extends ArrayAdapter<String> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.grocery_list_list_view_adapter, null);
+            convertView = mInflater.inflate(R.layout.cleaning_plan_list_view_adapter, null);
 
             TextView name = convertView.findViewById(R.id.name);
             ImageView remove = convertView.findViewById(R.id.remove);
@@ -52,21 +54,21 @@ public class CleaningPlanListViewAdapter extends ArrayAdapter<String> {
             remove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    FragmentGroceryListController.removeItem(position);
+                    FragmentCleaningPlanListController.removeItem(position);
                 }
             });
 
             unchecked.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    FragmentGroceryListController.uncheckItem(position);
+                    FragmentCleaningPlanListController.uncheckItem(position);
                 }
             });
 
             copy.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    FragmentGroceryListController.addItem(list.get(position));
+                    FragmentCleaningPlanListController.addItem(list.get(position));
                 }
             });
 

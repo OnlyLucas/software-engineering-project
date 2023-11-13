@@ -12,7 +12,6 @@ import com.example.software_engineering_project.R;
 
 public class ActivityMainScreenController extends AppCompatActivity {
 
-    private Button logOutButton;
     private Button goSettingsButton;
     private Button groceryListButton;
     private Button cleaningPlanButton;
@@ -52,15 +51,15 @@ public class ActivityMainScreenController extends AppCompatActivity {
 
         goSettingsButton = findViewById(R.id.goSettingsButtons);
         goSettingsButton.setOnClickListener(view -> {
-            FragmentSettingsController fragment = new FragmentSettingsController();
-            callFragment(fragment);
+            FragmentSettingsController fragmentSettingsController = new FragmentSettingsController();
+            callFragment(fragmentSettingsController);
 
         });
 
         cleaningPlanButton = findViewById(R.id.cleaningPlanButton);
         cleaningPlanButton.setOnClickListener(view -> {
-            Fragment fragment = new Fragment(R.layout.fragment_cleaning_plan);
-            callFragment(fragment);
+            FragmentCleaningPlanController fragmentCleaningPlanController = new FragmentCleaningPlanController();
+            callFragment(fragmentCleaningPlanController);
         });
 
     }
