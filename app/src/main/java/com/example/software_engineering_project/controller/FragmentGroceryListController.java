@@ -48,7 +48,7 @@ public class FragmentGroceryListController extends Fragment {
         items.add("Jonas");
         items.add("Dieter");
 
-        fragmentView = inflater.inflate(R.layout.fragment_grocery_list_controller, container, false);
+        fragmentView = inflater.inflate(R.layout.fragment_grocery_list, container, false);
         listView = fragmentView.findViewById(R.id.groceryList);
 
         input = fragmentView.findViewById(R.id.input);

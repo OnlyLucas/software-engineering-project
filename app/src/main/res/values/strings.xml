@@ -43,4 +43,5 @@
     <string name="current_password">Current password</string>
     <string name="enter_new_password">Enter new password</string>
     <string name="confirm_new_password">Confirm new password</string>
+    <string name="grocery_list">Grocery List</string>
 </resources>

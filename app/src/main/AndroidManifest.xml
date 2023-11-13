@@ -16,19 +16,11 @@
             android:name=".adapter.CreateFlatShareListViewAdapter"
             android:exported="false" />
         <activity
-            android:name=".controller.CreateFlatShareScreenController"
-            android:exported="false" />
-        <activity
-            android:name=".controller.ChangeMailScreenController"
-            android:exported="false" />
-        <activity
-            android:name=".controller.ChangePasswordScreenController"
-            android:exported="false" />
-        <activity
             android:name=".controller.ActivityRegisterScreenController"
             android:exported="false" />
         <activity
             android:name=".controller.ActivityMainScreenController"
+            android:windowSoftInputMode="adjustNothing"
             android:exported="false" />
         <activity
             android:name=".controller.ActivityLoginScreenController"
