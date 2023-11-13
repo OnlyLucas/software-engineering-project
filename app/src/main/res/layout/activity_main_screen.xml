@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:padding="28dp">
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp">
 
         <ImageView
             android:layout_width="56dp"
@@ -34,7 +35,7 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/contentFragmentMainScreen"
         android:layout_width="match_parent"
-        android:layout_height="590dp"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/mainCardView"
         android:layout_below="@+id/mainScreenTop"/>
 

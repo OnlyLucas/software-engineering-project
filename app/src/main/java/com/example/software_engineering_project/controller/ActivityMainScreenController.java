@@ -45,6 +45,7 @@ public class ActivityMainScreenController extends AppCompatActivity {
         groceryListButton.setOnClickListener(view -> {
             //Fragment fragment = new Fragment(R.layout.fragment_grocery_list_screen);
             //callFragment(fragment);
+            FragmentGroceryListController.items.clear();
             FragmentGroceryListController fragmentGroceryListController = new FragmentGroceryListController();
             callFragment(fragmentGroceryListController);
         });

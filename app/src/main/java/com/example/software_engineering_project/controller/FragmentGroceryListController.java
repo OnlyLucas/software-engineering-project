@@ -39,14 +39,14 @@ public class FragmentGroceryListController extends Fragment {
 
         //adapter = new ArrayAdapter<String> (getActivity().getApplicationContext(), R.layout.grocery_list_list_view_adapter, R.id.name ,items);
         adapter = new GroceryListListViewAdapter(getActivity(),items);
-        items.add("Gerhard");
-        items.add("Hans");
-        items.add("Meike");
-        items.add("Lucas");
-        items.add("Laura");
-        items.add("Nikos");
-        items.add("Jonas");
-        items.add("Dieter");
+        items.add("5 Apples");
+        items.add("Banana");
+        items.add("Strawberry");
+        items.add("Tea");
+        items.add("Salt");
+        items.add("Sugar");
+        items.add("Cucumber");
+        items.add("Pear");
 
         fragmentView = inflater.inflate(R.layout.fragment_grocery_list, container, false);
         listView = fragmentView.findViewById(R.id.groceryList);

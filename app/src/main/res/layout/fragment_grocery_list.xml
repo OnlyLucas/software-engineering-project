@@ -51,19 +51,21 @@
                         android:layout_height="40sp"
                         android:layout_marginStart="7sp"
                         android:layout_marginTop="20dp"
-                        android:layout_toRightOf="@+id/input"
-                        android:src="@drawable/add_item" />
+                        android:src="@drawable/add_item"
+                        android:contentDescription="@string/add_item_to_grocery_list" />
                 </LinearLayout>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="300dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="200dp"
                     android:paddingBottom="40dp">
 
                     <ListView
                         android:id="@+id/groceryList"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+
                         android:background="@color/my_accent" />
 
                 </RelativeLayout>

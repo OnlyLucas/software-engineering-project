@@ -20,7 +20,7 @@
             android:exported="false" />
         <activity
             android:name=".controller.ActivityMainScreenController"
-            android:windowSoftInputMode="adjustNothing"
+            android:windowSoftInputMode="stateVisible|adjustNothing"
             android:exported="false" />
         <activity
             android:name=".controller.ActivityLoginScreenController"
