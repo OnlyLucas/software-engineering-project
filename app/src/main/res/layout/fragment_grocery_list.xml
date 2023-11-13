@@ -52,7 +52,7 @@
                         android:layout_marginStart="7sp"
                         android:layout_marginTop="20dp"
                         android:src="@drawable/add_item"
-                        android:contentDescription="@string/add_item_to_grocery_list" />
+                        android:contentDescription="Add Item to Grocery List" />
                 </LinearLayout>
 
                 <RelativeLayout

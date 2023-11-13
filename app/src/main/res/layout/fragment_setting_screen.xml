@@ -66,7 +66,15 @@
             android:layout_height="wrap_content"
             android:text="@string/change_e_mail" />
 
+        <Button
+            android:id="@+id/logOutButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/log_out"
+            android:layout_marginTop="50dp"/>
+
     </LinearLayout>
+
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/contentFragmentSettingScreen"
