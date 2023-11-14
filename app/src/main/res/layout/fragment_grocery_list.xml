@@ -26,7 +26,7 @@
                     android:layout_height="wrap_content"
                     android:alpha="0.7"
                     android:paddingBottom="20dp"
-                    android:text="@string/grocery_list"
+                    android:text="@string/grocerylist"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 

@@ -34,7 +34,6 @@
     <string name="unchecked">Unchecked :</string>
     <string name="edit">Edit</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="enter_new_e_mail">Enter new e-mail</string>
     <string name="confirm_new_e_mail">Confirm new e-mail</string>
     <string name="save">Save</string>
@@ -43,5 +42,9 @@
     <string name="current_password">Current password</string>
     <string name="enter_new_password">Enter new password</string>
     <string name="confirm_new_password">Confirm new password</string>
-    <string name="grocery_list">Grocery List</string>
+    <string name="grocerylist">Grocery List</string>
+    <string name="grocery_nlist">Grocery\nList</string>
+    <string name="budget_n">Budget\n</string>
+    <string name="cleaning_nplan">Cleaning\nPlan</string>
+    <string name="settings_n">Settings\n</string>
 </resources>

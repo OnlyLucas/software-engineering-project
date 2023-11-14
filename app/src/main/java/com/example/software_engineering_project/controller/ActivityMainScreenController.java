@@ -47,12 +47,15 @@ public class ActivityMainScreenController extends AppCompatActivity {
             FragmentGroceryListController.items.clear();
             FragmentGroceryListController fragmentGroceryListController = new FragmentGroceryListController();
             callFragment(fragmentGroceryListController);
+
+            addMenuBarTint(groceryListButton);
         });
 
         goSettingsButton = findViewById(R.id.goSettingsButtons);
         goSettingsButton.setOnClickListener(view -> {
             FragmentSettingsController fragmentSettingsController = new FragmentSettingsController();
             callFragment(fragmentSettingsController);
+            addMenuBarTint(goSettingsButton);
 
         });
 
@@ -60,9 +63,18 @@ public class ActivityMainScreenController extends AppCompatActivity {
         cleaningPlanButton.setOnClickListener(view -> {
             FragmentCleaningPlanController fragmentCleaningPlanController = new FragmentCleaningPlanController();
             callFragment(fragmentCleaningPlanController);
+            addMenuBarTint(cleaningPlanButton);
         });
 
     }
+
+    private void addMenuBarTint(Button button) {
+        cleaningPlanButton.setBackgroundColor(getColor(R.color.navBar));
+        goSettingsButton.setBackgroundColor(getColor(R.color.navBar));
+        groceryListButton.setBackgroundColor(getColor(R.color.navBar));
+        button.setBackgroundColor(getColor(R.color.navBarSelected));
+    }
+
 
 }
 

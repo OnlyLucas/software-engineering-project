@@ -37,4 +37,8 @@
     <string name="current_password">Aktuelles Passwort</string>
     <string name="enter_new_password">Neues Passwort eingeben</string>
     <string name="confirm_new_password">Neues Passwort bestätigen</string>
+    <string name="grocery_nlist">Einkaufs-\nliste</string>
+    <string name="budget_n">"Haushalts- \nbuch "</string>
+    <string name="cleaning_nplan">Putzplan\n</string>
+    <string name="settings_n">Einstell-\nungen</string>
 </resources>
