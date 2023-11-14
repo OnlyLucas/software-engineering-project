@@ -22,7 +22,7 @@ public class GroupEntity {
     @Column(name = "group_name", length = 255)
     private String name;
     @Basic
-    @Column(name = "description", nullable = true, length = 255)
+    @Column(name = "group_description", nullable = true, length = 255)
     private String description;
 //    @ManyToOne
 //    @JoinColumn(
