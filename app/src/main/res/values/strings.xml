@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Flat Fusion</string>
     <string name="welcome">Welcome</string>
-    <string name="welcome_main_screen">Welcome,&#160;</string>
     <string name="register_info">Please register yourself!</string>
     <string name="first_name">First Name</string>
     <string name="surname">Surname</string>
@@ -9,10 +8,43 @@
     <string name="password">Password</string>
     <string name="register">Register</string>
     <string name="cancel">Cancel</string>
-    <string name="logOut">Log out</string>
+    <string name="log_out">Log out</string>
     <string name="settings">Settings</string>
-    Please login with you information
-    E-Mail address
-    Password
-    WG Tool
+    <string name="flat_settings">Flat Settings</string>
+    <string name="change_password">Change Password</string>
+    <string name="change_e_mail">Change E-mail</string>
+    <string name="go_back">Go Back</string>
+    <string name="personal_settings">Personal Settings</string>
+    <string name="leave_flat_share">Leave flat share</string>
+    <string name="manage_flat_share">Manage flat share</string>
+    <string name="create_flat_share">Create flat share</string>
+    <string name="please_login_with_you_information">Please login with you information</string>
+    <string name="shopping_list">Shopping List</string>
+    <string name="budget">Budget</string>
+    <string name="cleaning_plan">Cleaning Plan</string>
+    <string name="are_you_sure_you_want_to_change_your_password">Are you sure you want to change your password?</string>
+    <string name="are_you_sure_you_want_to_change_your_mail">Are you sure you want to change your mail?</string>
+    <string name="enter_item_here">Enter item here</string>
+    <string name="name_of_flat">Name of flat</string>
+    <string name="enter_mail_here">Enter mail here</string>
+    <string name="enter_flat_share_name">Enter flat share name</string>
+    <string name="removed">"Removed: "</string>
+    <string name="added">"Added "</string>
+    <string name="enter_an_item">Enter an item.</string>
+    <string name="unchecked">Unchecked :</string>
+    <string name="edit">Edit</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="enter_new_e_mail">Enter new e-mail</string>
+    <string name="confirm_new_e_mail">Confirm new e-mail</string>
+    <string name="save">Save</string>
+    <string name="login">Login</string>
+    <string name="current_e_mail">Current e-mail</string>
+    <string name="current_password">Current password</string>
+    <string name="enter_new_password">Enter new password</string>
+    <string name="confirm_new_password">Confirm new password</string>
+    <string name="grocerylist">Grocery List</string>
+    <string name="grocery_nlist">Grocery\nList</string>
+    <string name="budget_n">Budget\n</string>
+    <string name="cleaning_nplan">Cleaning\nPlan</string>
+    <string name="settings_n">Settings\n</string>
 </resources>

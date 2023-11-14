@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".controller.FragmentSettingsController">
+
+    <LinearLayout
+        android:id="@+id/linearLayoutSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="28dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/flat_settings"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="24sp"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/createFlatShareButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/create_flat_share" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/leave_flat_share" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="40dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/personal_settings"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="24sp"
+            android:textColor="@color/my_accent" />
+
+        <Button
+            android:id="@+id/changePasswordButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/change_password" />
+
+        <Button
+            android:id="@+id/changeMailButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/change_e_mail" />
+
+        <Button
+            android:id="@+id/logOutButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/log_out"
+            android:layout_marginTop="50dp"/>
+
+    </LinearLayout>
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/contentFragmentSettingScreen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</RelativeLayout>

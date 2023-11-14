@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    tools:context=".LoginScreen">
+    tools:context=".controller.ActivityLoginScreenController">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -60,7 +60,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Please login with you information"
+                android:text="@string/please_login_with_you_information"
                 android:alpha="0.7"/>
 
             <View
@@ -97,12 +97,6 @@
                 android:inputType="textPassword"
                 android:drawableEnd="@drawable/password_icon"/>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-            </RelativeLayout>
 
             <View
                 android:layout_width="wrap_content"
@@ -112,7 +106,7 @@
                 android:id="@+id/loginButton"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Login"
+                android:text="@string/login"
                 app:cornerRadius="32dp"/>
 
             <View
@@ -132,7 +126,6 @@
                 android:layout_height="15dp"/>
 
         </LinearLayout>
-
 
     </androidx.cardview.widget.CardView>
 
