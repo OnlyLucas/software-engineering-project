@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,6 +28,7 @@ import java.util.ArrayList;
 public class FragmentCleaningPlanController extends Fragment {
 
     View fragmentView;
+    ImageView addCleaningPlan;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,9 +38,17 @@ public class FragmentCleaningPlanController extends Fragment {
         callFragment(fragmentCleaningPlanListController);
         fragmentView = inflater.inflate(R.layout.fragment_cleaning_plan, container, false);
         //context = getActivity();
+        addButtons();
         return fragmentView;
     }
 
+    private void addButtons() {
+        FragmentCleaningPlanAddController fragmentCleaningPlanAddController = new FragmentCleaningPlanAddController();
+        addCleaningPlan = fragmentView.findViewById(R.id.addCleaningPlan);
+        addCleaningPlan.setOnClickListener(v -> {
+            callFragment(fragmentCleaningPlanAddController);
+        });
+    }
 
 
     private void callFragment(Fragment fragment){
