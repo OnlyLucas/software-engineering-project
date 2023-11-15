@@ -28,4 +28,11 @@ public class RESTControllerExceptionHandler extends ResponseEntityExceptionHandl
         // TODO Add Logging
         return super.handleExceptionInternal(ex, null, new HttpHeaders(), HttpStatusCode.valueOf(400), request);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    private ResponseEntity<Object> handleIllegalArgumentException(MethodArgumentTypeMismatchException ex, WebRequest request){
+        // TODO maybe add proper APIError Object
+        // TODO Add Logging
+        return super.handleExceptionInternal(ex, null, new HttpHeaders(), HttpStatusCode.valueOf(400), request);
+    }
 }

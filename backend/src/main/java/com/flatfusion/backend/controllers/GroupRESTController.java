@@ -24,7 +24,7 @@ public class GroupRESTController //extends RESTController<GroupEntityRepository>
     private GroupEntityRepository groupRepository;
 
     @GetMapping("/{id}")
-    public ResponseEntity<GroupEntity> getUserById(@PathVariable String id, WebRequest request){
+    public ResponseEntity<GroupEntity> getUserById(@PathVariable UUID id, WebRequest request){
         System.out.println("This is the request id: " + id);
         Optional<GroupEntity> group = groupRepository.findById(id);
 

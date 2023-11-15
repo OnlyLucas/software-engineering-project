@@ -3,11 +3,10 @@ spring:
     port: 1337
   datasource:
     driver: com.mysql.jdbc.Driver
-    username: <admin>
-    password: <password>
-    url: <url>
-    dialect: org.hibernate.dialect.MySQLDialect
+    username: ${db_user_name}
+    password: ${db_password}
+    url: ${db_url}
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
+        dialect: org.hibernate.dialect.MySQL8Dialect

@@ -1,21 +1,23 @@
 package com.flatfusion.backend.entities;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.sql.Timestamp;
 import java.util.Objects;
-import java.util.Set;
-
+import java.util.UUID;
 
 
 //TODO fix hashCode() and equals() methods
 @Entity
-@Table(name = "groups", schema = "flatfusion")
+@Table(name = "living_groups", schema = "flatfusion")
 public class GroupEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id", nullable = false, length = 36)
-    private String id;
+    @Column(name = "id", nullable = false, columnDefinition = "VARCHAR(36)")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    private UUID id;
 
     // Name escaping for mysql database
     @Basic
@@ -42,11 +44,11 @@ public class GroupEntity {
 //    )
 //    private Set<UserEntity> groupMembers;
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

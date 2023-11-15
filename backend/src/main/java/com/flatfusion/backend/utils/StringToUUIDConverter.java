@@ -11,9 +11,11 @@ import java.util.UUID;
 public class StringToUUIDConverter implements Converter<String, UUID> {
     @Override
     public UUID convert(@NonNull String uuid) {
+        System.out.println("----Convert called----");
         try{
             return UUID.fromString(uuid);
         } catch (MethodArgumentTypeMismatchException e){
+            System.out.println("Wrong parameter: " + uuid);
             return null;
         }
     }
