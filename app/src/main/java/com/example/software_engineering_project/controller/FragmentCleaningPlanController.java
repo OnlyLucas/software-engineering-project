@@ -27,8 +27,10 @@ import java.util.ArrayList;
  */
 public class FragmentCleaningPlanController extends Fragment {
 
-    View fragmentView;
+    static View fragmentView;
     ImageView addCleaningPlan;
+    ImageView goBackCleaningPlan;
+    ImageView saveCleaningPlan;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,7 +49,21 @@ public class FragmentCleaningPlanController extends Fragment {
         addCleaningPlan = fragmentView.findViewById(R.id.addCleaningPlan);
         addCleaningPlan.setOnClickListener(v -> {
             callFragment(fragmentCleaningPlanAddController);
+            goBackCleaningPlan.setVisibility(View.VISIBLE);
+            saveCleaningPlan.setVisibility(View.VISIBLE);
+            addCleaningPlan.setVisibility(View.INVISIBLE);
         });
+        FragmentCleaningPlanListController fragmentCleaningPlanListController = new FragmentCleaningPlanListController();
+        goBackCleaningPlan = fragmentView.findViewById(R.id.goBackCleaningPlan);
+        goBackCleaningPlan.setOnClickListener(v -> {
+            callFragment(fragmentCleaningPlanListController);
+            goBackCleaningPlan.setVisibility(View.INVISIBLE);
+            saveCleaningPlan.setVisibility(View.INVISIBLE);
+            addCleaningPlan.setVisibility(View.VISIBLE);
+        });
+
+
+        saveCleaningPlan = fragmentView.findViewById(R.id.saveCleaningPlan);
     }
 
 

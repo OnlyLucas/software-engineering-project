@@ -1,12 +1,12 @@
 package com.example.software_engineering_project.controller;
 
+import android.os.Bundle;
+import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.os.Bundle;
-import android.widget.Button;
 
 import com.example.software_engineering_project.R;
 
@@ -21,10 +21,7 @@ public class ActivityMainScreenController extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
-        this.addButtons();
-
-        //FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        //transaction.add(R.id.contentFragment, fragmentGroceryListController).commit();
+        addButtons();
 
     }
 
@@ -38,16 +35,13 @@ public class ActivityMainScreenController extends AppCompatActivity {
     }
 
 
-    private void addButtons(){
+    private void addButtons() {
 
         groceryListButton = findViewById(R.id.groceryListButton);
         groceryListButton.setOnClickListener(view -> {
-            //Fragment fragment = new Fragment(R.layout.fragment_grocery_list_screen);
-            //callFragment(fragment);
             FragmentGroceryListController.items.clear();
             FragmentGroceryListController fragmentGroceryListController = new FragmentGroceryListController();
             callFragment(fragmentGroceryListController);
-
             addMenuBarTint(groceryListButton);
         });
 
@@ -69,23 +63,12 @@ public class ActivityMainScreenController extends AppCompatActivity {
     }
 
     private void addMenuBarTint(Button button) {
+
         cleaningPlanButton.setBackgroundColor(getColor(R.color.navBar));
         goSettingsButton.setBackgroundColor(getColor(R.color.navBar));
         groceryListButton.setBackgroundColor(getColor(R.color.navBar));
         button.setBackgroundColor(getColor(R.color.navBarSelected));
+
     }
 
-
 }
-
-
-/** Just to save the old version
- * cancelButton=findViewById(R.id.cancelButton);
- *         cancelButton.setOnClickListener(new View.OnClickListener() {
- *             @Override
- *             public void onClick(View view) {
- *                 Intent loginScreen = new Intent(RegisterScreen.this, LoginScreen.class);
- *                 startActivity(loginScreen);
- *             }
- *         });
- */

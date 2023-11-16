@@ -34,6 +34,7 @@ public class FragmentCleaningPlanListController extends Fragment {
                              Bundle savedInstanceState) {
 
         adapter = new CleaningPlanListViewAdapter(getActivity(), items);
+        items.clear();
         items.add("Kehren");
         items.add("Wischen");
         items.add("Bad");

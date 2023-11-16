@@ -3,23 +3,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".controller.FragmentCleaningPlanAddController">
 
-    <TextView
-        android:id="@+id/textViewShowDate"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/enterNameAddCleaningPlan"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="date"
-        android:textSize="30sp"
-        android:layout_below="@id/datePickerButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginBottom="10dp"
 
-    <Button
-        android:id="@+id/datePickerButton"
+        android:hint="Name"
+        android:visibility="visible" />
+
+    <EditText
+        android:id="@+id/enterDescriptionCleaningPlan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/enterNameAddCleaningPlan"
+        android:layout_marginBottom="10dp"
+        android:hint="Enter Description here"
+        android:inputType="textMultiLine"
+        android:maxLines="10" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/datePickerCleaningPlan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="open date picker"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_below="@id/enterDescriptionCleaningPlan"
+        android:layout_marginBottom="10dp"
+        android:text="Select Date Range"
+        app:icon="@drawable/calender_icon" />
+
+    <Spinner
+        android:id="@+id/chooseInterval"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/datePickerCleaningPlan"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown" />
+
+
 </RelativeLayout>

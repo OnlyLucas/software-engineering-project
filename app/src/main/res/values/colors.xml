@@ -9,6 +9,7 @@
     <color name="my_accent">#CCCCFF</color>
     <color name="navBar">#F8EDE3</color>
     <color name="navBarSelected">#C6BDB5</color>
+    <color name="listViewTint">#dfd5cc</color>
     <color name="iconBlack">#272727</color>
 
 </resources>

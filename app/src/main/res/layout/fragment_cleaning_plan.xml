@@ -32,6 +32,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <ImageView
+                        android:id="@+id/goBackCleaningPlan"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp"
+                        android:layout_marginStart="7sp"
+                        android:src="@drawable/go_back_icon"
+                        android:layout_alignParentStart="true"
+                        android:visibility="invisible"
+                        android:layout_marginEnd="10dp"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -50,6 +60,18 @@
                         android:src="@drawable/add_symbol_blue"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="10dp"/>
+
+                    <ImageView
+                        android:id="@+id/saveCleaningPlan"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp"
+                        android:layout_marginStart="7sp"
+                        android:src="@drawable/save_icon"
+                        android:layout_alignParentEnd="true"
+                        android:visibility="invisible"
+                        android:layout_marginEnd="10dp"/>
+
+
                 </RelativeLayout>
 
                 <androidx.fragment.app.FragmentContainerView
