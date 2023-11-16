@@ -3,75 +3,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".controller.FragmentSettingsController">
 
-    <LinearLayout
-        android:id="@+id/linearLayoutSettings"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:padding="28dp">
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-28dp"
+        app:cardBackgroundColor="@color/navBar"
+        app:cardCornerRadius="28dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/flat_settings"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif-medium"
-            android:textSize="24sp"
-            android:textColor="@color/black" />
-
-        <Button
-            android:id="@+id/createFlatShareButton"
+        <LinearLayout
+            android:id="@+id/linearLayoutSettings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/create_flat_share" />
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="28dp">
 
-        <Button
-            android:id="@+id/button3"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/flat_settings"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="24sp"
+                android:textColor="@color/black" />
+
+            <Button
+                android:id="@+id/createFlatShareButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/create_flat_share"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/listViewTint"/>
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/leave_flat_share"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/listViewTint"
+                android:layout_marginBottom="40dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/personal_settings"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                />
+
+            <Button
+                android:id="@+id/changePasswordButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/change_password"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/listViewTint"/>
+
+            <Button
+                android:id="@+id/changeMailButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/change_e_mail"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/listViewTint"/>
+
+            <Button
+                android:id="@+id/logOutButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/log_out"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="100dp"
+                android:textColor="@color/black"
+                android:backgroundTint="@color/navBarSelected"/>
+
+        </LinearLayout>
+
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/contentFragmentSettingScreen"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/leave_flat_share" />
+            android:layout_height="match_parent"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="40dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/personal_settings"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif-medium"
-            android:textSize="24sp"
-            android:textColor="@color/my_accent" />
-
-        <Button
-            android:id="@+id/changePasswordButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/change_password" />
-
-        <Button
-            android:id="@+id/changeMailButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/change_e_mail" />
-
-        <Button
-            android:id="@+id/logOutButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/log_out"
-            android:layout_marginTop="50dp"/>
-
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/contentFragmentSettingScreen"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
 </RelativeLayout>
