@@ -1,7 +1,6 @@
 package com.example.software_engineering_project.controller;
 
 import android.content.Context;
-import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +14,6 @@ import androidx.fragment.app.Fragment;
 import com.example.software_engineering_project.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
-import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 
 import java.util.Date;
 
@@ -44,14 +42,10 @@ public class FragmentCleaningPlanAddController extends Fragment {
 
     private void addButtons() {
         datePickerCleaningPlan = fragmentView.findViewById(R.id.datePickerCleaningPlan);
-        datePickerCleaningPlan.setOnClickListener(v -> {
-            showDatePickerDialog();
-        });
+        datePickerCleaningPlan.setOnClickListener(v -> showDatePickerDialog());
 
         saveCleaningPlan = FragmentCleaningPlanController.fragmentView.findViewById(R.id.saveCleaningPlan);
-        saveCleaningPlan.setOnClickListener(v -> {
-            setLog();
-        });
+        saveCleaningPlan.setOnClickListener(v -> setLog());
 
     }
 
@@ -60,17 +54,14 @@ public class FragmentCleaningPlanAddController extends Fragment {
         MaterialDatePicker<Pair<Long, Long>> materialDatePicker = MaterialDatePicker.Builder.dateRangePicker().setTitleText("Select Date").build();
         materialDatePicker.show(requireActivity().getSupportFragmentManager(), "TAG");
 
-        materialDatePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Pair<Long, Long>>() {
-            @Override
-            public void onPositiveButtonClick(Pair<Long, Long> selection) {
+        materialDatePicker.addOnPositiveButtonClickListener(selection -> {
 
-                Long startDate = selection.first;
-                Long endDate = selection.second;
-                CharSequence charSequence = materialDatePicker.getHeaderText();
-                datePickerCleaningPlan.setText(charSequence);
-                saveSelectedDate(String.valueOf(startDate), startDate);
+            Long startDate = selection.first;
+            Long endDate = selection.second;
+            CharSequence charSequence = materialDatePicker.getHeaderText();
+            datePickerCleaningPlan.setText(charSequence);
+            saveSelectedDate(String.valueOf(startDate), startDate);
 
-            }
         });
 
     }
@@ -82,8 +73,13 @@ public class FragmentCleaningPlanAddController extends Fragment {
 
     private void setLog() {
         Date date = new Date(startDateLong);
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        String string1 = formatter.format(date);
+
+        /*
+         * @SuppressLint("SimpleDateFormat")
+         *         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+         *         String string1 = formatter.format(date);
+         */
+
         Log.e("DatePicker", String.valueOf(date));
     }
 }
