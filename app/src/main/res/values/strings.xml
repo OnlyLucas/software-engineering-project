@@ -50,4 +50,5 @@
     <string name="select_date_range">Select Date Range</string>
     <string name="enter_description_here">Enter Description here</string>
     <string name="name">Name</string>
+    <string name="name_of_cleaning_plan">Name of Cleaning Plan</string>
 </resources>

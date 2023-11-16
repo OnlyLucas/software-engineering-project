@@ -11,8 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-
-        android:hint="@string/name"
+        android:hint="@string/name_of_cleaning_plan"
         android:visibility="visible" />
 
     <EditText
@@ -31,15 +30,20 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/enterDescriptionCleaningPlan"
         android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/listViewTint"
+        android:textColor="@color/black"
         android:text="@string/select_date_range"
-        app:icon="@drawable/calender_icon" />
+        app:icon="@drawable/calender_icon"
+        app:iconTint="@color/black"/>
 
     <Spinner
         android:id="@+id/chooseInterval"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/datePickerCleaningPlan"
-        android:spinnerMode="dropdown" />
+        android:background="@null"
+        android:spinnerMode="dropdown"
+        android:paddingBottom="15dp"/>
 
 
 </RelativeLayout>

@@ -11,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="-20dp"
+        android:layout_marginBottom="-28dp"
         app:cardCornerRadius="28dp"
-        app:cardBackgroundColor="@color/my_accent">
+        app:cardBackgroundColor="@color/navBar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,7 +40,8 @@
                         android:src="@drawable/go_back_icon"
                         android:layout_alignParentStart="true"
                         android:visibility="invisible"
-                        android:layout_marginEnd="10dp"/>
+                        android:layout_marginEnd="10dp"
+                        app:tint="@color/my_secondary" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -59,7 +60,9 @@
                         android:layout_marginStart="7sp"
                         android:src="@drawable/add_symbol_blue"
                         android:layout_alignParentEnd="true"
-                        android:layout_marginEnd="10dp"/>
+                        android:layout_marginEnd="10dp"
+                        android:visibility="visible"
+                        app:tint="@color/my_secondary"/>
 
                     <ImageView
                         android:id="@+id/saveCleaningPlan"
@@ -69,7 +72,8 @@
                         android:src="@drawable/save_icon"
                         android:layout_alignParentEnd="true"
                         android:visibility="invisible"
-                        android:layout_marginEnd="10dp"/>
+                        android:layout_marginEnd="10dp"
+                        app:tint="@color/my_secondary"/>
 
 
                 </RelativeLayout>
