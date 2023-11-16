@@ -1,5 +1,6 @@
 package com.flatfusion.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -12,8 +13,8 @@ import java.util.UUID;
 //TODO fix hashCode() and equals() methods
 @Entity
 @Table(name = "living_groups", schema = "flatfusion")
-public class GroupEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class GroupEntity implements EntityInterface{
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     @Column(name = "id", nullable = false, columnDefinition = "VARCHAR(36)")
     @JdbcTypeCode(SqlTypes.VARCHAR)
@@ -34,6 +35,7 @@ public class GroupEntity {
 //    private UserEntity createdByUser;
     @Basic
     @Column(name = "created_at", nullable = true)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
 
 //    @ManyToMany

@@ -1,20 +1,25 @@
 package com.flatfusion.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "cleaning_template", schema = "flatfusion")
-public class CleaningTemplateEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CleaningTemplateEntity implements EntityInterface{
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "id", nullable = false, length = 36)
-    private String id;
+    @Column(name = "id", nullable = false, columnDefinition = "VARCHAR(36)")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    private UUID id;
     @Basic
-    @Column(name = "name", nullable = false, length = 255)
+    @Column(name = "task_name", nullable = false, length = 255)
     private String name;
     @Basic
     @Column(name = "description", nullable = true, length = 255)
@@ -37,13 +42,14 @@ public class CleaningTemplateEntity {
 
     @Basic
     @Column(name = "created_at", nullable = true)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

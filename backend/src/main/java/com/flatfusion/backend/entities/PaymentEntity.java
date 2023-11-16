@@ -1,18 +1,23 @@
 package com.flatfusion.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "payments", schema = "flatfusion")
-public class PaymentEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PaymentEntity implements EntityInterface{
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "id", nullable = false, length = 36)
-    private String id;
+    @Column(name = "id", nullable = false, columnDefinition = "VARCHAR(36)")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    private UUID id;
     @Basic
     @Column(name = "amount", nullable = false, precision = 2)
     private BigDecimal amount;
@@ -34,17 +39,18 @@ public class PaymentEntity {
     private UserEntity createdByUser;
     @Basic
     @Column(name = "created_at", nullable = true)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
 
     @Basic
     @Column(name = "payment_name", nullable = false, length = 255)
     private String name;
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

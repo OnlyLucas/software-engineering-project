@@ -3,3 +3,8 @@ spring:
     active: test
 server:
   port: 1337
+
+logging:
+  level:
+    web: debug
+

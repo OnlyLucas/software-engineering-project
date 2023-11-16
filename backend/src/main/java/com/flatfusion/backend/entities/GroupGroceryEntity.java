@@ -1,5 +1,6 @@
 package com.flatfusion.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.Type;
@@ -8,14 +9,17 @@ import org.hibernate.type.SqlTypes;
 
 import java.sql.Timestamp;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "group_groceries", schema = "flatfusion")
-public class GroupGroceryEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class GroupGroceryEntity implements EntityInterface{
+
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "id", nullable = false, length = 36)
-    private String id;
+    @Column(name = "id", nullable = false, columnDefinition = "VARCHAR(36)")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    private UUID id;
     @ManyToOne
     @JoinColumn(
             name = "group_id",
@@ -34,6 +38,7 @@ public class GroupGroceryEntity {
 
     @Basic
     @Column(name = "created_at", nullable = true)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
     @Basic
     @Column(name = "is_completed")
@@ -48,13 +53,14 @@ public class GroupGroceryEntity {
 
     @Basic
     @Column(name = "completed_at", nullable = true)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp completedAt;
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

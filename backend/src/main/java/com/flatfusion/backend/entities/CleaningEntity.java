@@ -1,19 +1,24 @@
 package com.flatfusion.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.NumericBooleanConverter;
+import org.hibernate.type.SqlTypes;
 
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "cleanings", schema = "flatfusion")
-public class CleaningEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CleaningEntity implements EntityInterface{
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "id", nullable = false, length = 36)
-    private String id;
+    @Column(name = "id", nullable = false, columnDefinition = "VARCHAR(36)")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    private UUID id;
     @ManyToOne
     @JoinColumn(
             name = "user_id",
@@ -27,6 +32,7 @@ public class CleaningEntity {
     private Boolean isCompleted = false;
 
     @Column(name = "completed_at", nullable = true)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp completedAt;
     @ManyToOne
     @JoinColumn(
@@ -34,11 +40,11 @@ public class CleaningEntity {
     )
     private CleaningTemplateEntity cleaningTemplate;
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

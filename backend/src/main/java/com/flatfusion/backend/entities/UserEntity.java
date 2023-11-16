@@ -1,9 +1,9 @@
 package com.flatfusion.backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-
 import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.Set;
@@ -11,8 +11,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "users", schema = "flatfusion")
-public class UserEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UserEntity implements EntityInterface{
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     @Column(name = "id", nullable = false, columnDefinition = "VARCHAR(36)")
     @JdbcTypeCode(SqlTypes.VARCHAR)
@@ -34,6 +34,7 @@ public class UserEntity {
     private String lastName;
     @Basic
     @Column(name = "created_at", nullable = true)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
     @OneToMany(mappedBy = "userId")
     private Set<GroupMembershipEntity> groupMemberships;
@@ -113,5 +114,19 @@ public class UserEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id, email, username, password, firstName, lastName, createdAt);
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", createdAt=" + createdAt +
+                ", groupMemberships=" + groupMemberships +
+                '}';
     }
 }
