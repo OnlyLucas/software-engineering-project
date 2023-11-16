@@ -2,51 +2,51 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15sp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="5dp">
 
-    <TextView
-        android:id="@+id/number"
+    <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@id/name"
-        android:layout_marginBottom="2sp"
-        android:textColor="#A9E0F4"
-        android:textStyle="bold" />
+        android:layout_height="50dp"
+        app:cardCornerRadius="12dp"
+        android:background="@color/navBar">
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="28sp"
-        android:textColor="#000"
-        android:textSize="20sp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/background">
 
-    <ImageView
-        android:id="@+id/unchecked"
-        android:layout_width="22sp"
-        android:layout_height="22sp"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="18sp"
-        android:layout_toLeftOf="@id/copy"
-        android:src="@drawable/shoppingcart_icon" />
+            <TextView
+                android:id="@+id/numberCleaningPlan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/nameCleaningPlan"
+                android:layout_marginStart="10sp"
+                android:layout_centerVertical="true"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:textStyle="bold"/>
 
-    <ImageView
-        android:id="@+id/copy"
-        android:layout_width="22sp"
-        android:layout_height="22sp"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="18sp"
-        android:layout_toLeftOf="@id/remove"
-        android:src="@drawable/copy" />
+            <TextView
+                android:id="@+id/nameCleaningPlan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="28sp"
+                android:textColor="#000"
+                android:textSize="20sp" />
 
-    <ImageView
-        android:id="@+id/remove"
-        android:layout_width="22sp"
-        android:layout_height="22sp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="18sp"
-        android:src="@drawable/remove" />
+
+            <ImageView
+                android:id="@+id/removeCleaningPlan"
+                android:layout_width="22sp"
+                android:layout_height="22sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="18sp"
+                android:src="@drawable/remove" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

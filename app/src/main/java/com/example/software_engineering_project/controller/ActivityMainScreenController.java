@@ -67,7 +67,7 @@ public class ActivityMainScreenController extends AppCompatActivity {
         cleaningPlanButton.setBackgroundColor(getColor(R.color.background));
         goSettingsButton.setBackgroundColor(getColor(R.color.background));
         groceryListButton.setBackgroundColor(getColor(R.color.background));
-        button.setBackgroundColor(getColor(R.color.navBarSelected));
+        button.setBackgroundColor(getColor(R.color.primary));
 
     }
 

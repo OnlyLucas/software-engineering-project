@@ -36,9 +36,9 @@ public class CreateFlatShareListViewAdapter extends ArrayAdapter<String> {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.manage_flat_share_list_view_adapter, null);
 
-            TextView name = convertView.findViewById(R.id.name);
-            ImageView remove = convertView.findViewById(R.id.remove);
-            TextView number = convertView.findViewById(R.id.number);
+            TextView name = convertView.findViewById(R.id.nameCleaningPlan);
+            ImageView remove = convertView.findViewById(R.id.removeCleaningPlan);
+            TextView number = convertView.findViewById(R.id.numberCleaningPlan);
 
             number.setText(position + 1 + ".");
             name.setText(list.get(position));

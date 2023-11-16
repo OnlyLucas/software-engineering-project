@@ -9,25 +9,25 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         app:cardCornerRadius="12dp"
-        android:background="@color/navBar">
+        android:background="@color/background">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@color/listViewTint">
+            android:background="@color/background">
 
             <TextView
-                android:id="@+id/number"
+                android:id="@+id/numberGroceryList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/name"
+                android:layout_alignBaseline="@id/nameGroceryList"
                 android:layout_marginStart="10sp"
                 android:layout_centerVertical="true"
                 android:textColor="@color/black"
                 android:textSize="17sp"
                 android:textStyle="bold"/>
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/nameGroceryList"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -36,17 +36,26 @@
                 android:textSize="22sp" />
 
             <ImageView
-                android:id="@+id/unchecked"
+                android:id="@+id/uncheckedGroceryList"
                 android:layout_width="22sp"
                 android:layout_height="22sp"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="18sp"
-                android:layout_toStartOf="@id/remove"
+                android:layout_toStartOf="@id/removeGroceryList"
                 android:src="@drawable/shoppingcart_icon" />
+
+            <ImageView
+                android:id="@+id/copyGroceryList"
+                android:layout_width="22sp"
+                android:layout_height="22sp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="18sp"
+                android:layout_toStartOf="@id/uncheckedGroceryList"
+                android:src="@drawable/copy" />
 
 
             <ImageView
-                android:id="@+id/remove"
+                android:id="@+id/removeGroceryList"
                 android:layout_width="22sp"
                 android:layout_height="22sp"
                 android:layout_alignParentEnd="true"

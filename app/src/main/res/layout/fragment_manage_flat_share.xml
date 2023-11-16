@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:alpha="0.7"
                 android:paddingBottom="20dp"
-                android:text="@string/create_flat_share"
+                android:text="@string/manage_flat_share"
                 android:textSize="24sp"
                 android:textStyle="bold"/>
 
@@ -87,7 +87,8 @@
                     android:id="@+id/flatShareMemberList"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/white" />
+                    android:divider="@null"
+                    android:background="@color/background2" />
 
             </LinearLayout>
 
@@ -103,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/primary"
+                    android:backgroundTint="@color/secondary"
                     android:drawableStart="@drawable/go_back_icon_small"
                     android:text="@string/cancel" />
 
@@ -117,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/secondary"
+                    android:backgroundTint="@color/primary"
                     android:drawableStart="@drawable/save_icon"
                     android:text="@string/save" />
 

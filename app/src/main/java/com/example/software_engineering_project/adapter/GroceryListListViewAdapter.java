@@ -37,11 +37,11 @@ public class GroceryListListViewAdapter extends ArrayAdapter<String> {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.grocery_list_list_view_adapter, null);
 
-            TextView name = convertView.findViewById(R.id.name);
-            ImageView remove = convertView.findViewById(R.id.remove);
-            ImageView unchecked = convertView.findViewById(R.id.unchecked);
-            ImageView copy = convertView.findViewById(R.id.copy);
-            TextView number = convertView.findViewById(R.id.number);
+            TextView name = convertView.findViewById(R.id.nameGroceryList);
+            ImageView remove = convertView.findViewById(R.id.removeGroceryList);
+            ImageView unchecked = convertView.findViewById(R.id.uncheckedGroceryList);
+            ImageView copy = convertView.findViewById(R.id.copyGroceryList);
+            TextView number = convertView.findViewById(R.id.numberGroceryList);
 
             number.setText(position + 1 + ".");
             name.setText(list.get(position));
