@@ -20,7 +20,7 @@
             android:exported="false" />
         <activity
             android:name=".controller.ActivityMainScreenController"
-            android:windowSoftInputMode="stateVisible|adjustNothing"
+            android:windowSoftInputMode="stateVisible|adjustPan"
             android:exported="false" />
         <activity
             android:name=".controller.ActivityLoginScreenController"
