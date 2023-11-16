@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
 
-        android:hint="Name"
+        android:hint="@string/name"
         android:visibility="visible" />
 
     <EditText
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/enterNameAddCleaningPlan"
         android:layout_marginBottom="10dp"
-        android:hint="Enter Description here"
+        android:hint="@string/enter_description_here"
         android:inputType="textMultiLine"
         android:maxLines="10" />
 
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/enterDescriptionCleaningPlan"
         android:layout_marginBottom="10dp"
-        android:text="Select Date Range"
+        android:text="@string/select_date_range"
         app:icon="@drawable/calender_icon" />
 
     <Spinner
@@ -39,7 +39,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/datePickerCleaningPlan"
-        android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown" />
 
 

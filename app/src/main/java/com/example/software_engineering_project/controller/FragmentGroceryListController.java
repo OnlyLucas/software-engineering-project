@@ -53,13 +53,10 @@ public class FragmentGroceryListController extends Fragment {
         input = fragmentView.findViewById(R.id.input);
         enter = fragmentView.findViewById(R.id.enter);
         context = getActivity();
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String> (getActivity().getApplicationContext(), R.layout.grocery_list_list_view_adapter, R.id.name ,items);
         listView.setLongClickable(true);
 
-        //ArrayAdapter<String> adapter = new GroceryListListViewAdapter(getActivity(), items);
         listView.setAdapter(adapter);
 
-        //listView = fragmentView.findViewById(R.id.list); DEPRICATED
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

@@ -6,15 +6,20 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.adapter.SpinnerListAdapter;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -22,7 +27,7 @@ import java.util.Date;
  * Use the {@link FragmentCleaningPlanAddController #newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentCleaningPlanAddController extends Fragment {
+public class FragmentCleaningPlanAddController extends Fragment implements AdapterView.OnItemSelectedListener{
 
     MaterialButton datePickerCleaningPlan;
     ImageView saveCleaningPlan;
@@ -30,13 +35,17 @@ public class FragmentCleaningPlanAddController extends Fragment {
     Context context;
     String startDateString;
     Long startDateLong;
+    public static Spinner spinner;
+
+    String test;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         fragmentView = inflater.inflate(R.layout.fragment_cleaning_plan_add, container, false);
-        addButtons();
         context = getActivity();
+        addButtons();
+        implementSpinner();
         return fragmentView;
     }
 
@@ -81,5 +90,34 @@ public class FragmentCleaningPlanAddController extends Fragment {
          */
 
         Log.e("DatePicker", String.valueOf(date));
+    }
+
+    private void implementSpinner() {
+
+
+        //final String[] paths = {"Weekly", "Bi-Weekly", "Monthly"};
+        ArrayList<String> paths = new ArrayList<>();
+        paths.add("Weekly");
+        paths.add("Bi-Weekly");
+        paths.add("Monthly");
+
+        spinner = fragmentView.findViewById(R.id.chooseInterval);
+        ArrayAdapter<String> adapter = new SpinnerListAdapter(context, paths);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+
+
+    }
+
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        SpinnerListAdapter.setText(String.valueOf(spinner.getSelectedItem()));
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

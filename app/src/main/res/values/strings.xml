@@ -47,4 +47,7 @@
     <string name="budget_n">Budget\n</string>
     <string name="cleaning_nplan">Cleaning\nPlan</string>
     <string name="settings_n">Settings\n</string>
+    <string name="select_date_range">Select Date Range</string>
+    <string name="enter_description_here">Enter Description here</string>
+    <string name="name">Name</string>
 </resources>
