@@ -30,11 +30,11 @@ public class FragmentChangeMailController extends Fragment {
 
     }
 
-    private void removeFragment(Fragment fragment) {
+    private void callFragment(Fragment fragment) {
 
         FragmentManager fm = requireActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        transaction.remove(fragment);
+        transaction.replace(R.id.contentFragmentMainScreen,fragment);
         transaction.commit();
 
     }
@@ -43,8 +43,8 @@ public class FragmentChangeMailController extends Fragment {
 
         cancelChangeMail = fragmentView.findViewById(R.id.cancelChangeMail);
         cancelChangeMail.setOnClickListener(view -> {
-            Fragment fragment = FragmentSettingsController.fragmentChangeMailController;
-            removeFragment(fragment);
+            FragmentSettingsController fragment = new FragmentSettingsController();
+            callFragment(fragment);
         });
 
         saveChangeMail = fragmentView.findViewById(R.id.saveChangeMail);
@@ -52,8 +52,8 @@ public class FragmentChangeMailController extends Fragment {
 
             //Daten müssen hier noch gesaved werden
 
-            Fragment fragment = FragmentSettingsController.fragmentChangeMailController;
-            removeFragment(fragment);
+            FragmentSettingsController fragment = new FragmentSettingsController();
+            callFragment(fragment);
         });
 
     }

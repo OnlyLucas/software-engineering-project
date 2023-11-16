@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="-28dp"
-        app:cardBackgroundColor="@color/navBar"
+        app:cardBackgroundColor="@color/background2"
         app:cardCornerRadius="28dp">
 
         <LinearLayout
@@ -82,7 +82,7 @@
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="100dp"
                 android:textColor="@color/black"
-                android:backgroundTint="@color/navBarSelected"/>
+                android:backgroundTint="@color/accent1"/>
 
         </LinearLayout>
 

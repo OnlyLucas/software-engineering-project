@@ -30,11 +30,11 @@ public class FragmentChangePasswordController extends Fragment {
 
     }
 
-    private void removeFragment(Fragment fragment) {
+    private void callFragment(Fragment fragment) {
 
         FragmentManager fm = requireActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        transaction.remove(fragment);
+        transaction.replace(R.id.contentFragmentMainScreen,fragment);
         transaction.commit();
 
     }
@@ -43,8 +43,8 @@ public class FragmentChangePasswordController extends Fragment {
 
         cancelChangePassword = fragmentView.findViewById(R.id.cancelChangePassword);
         cancelChangePassword.setOnClickListener(view -> {
-            Fragment fragment = FragmentSettingsController.fragmentChangePasswordController;
-            removeFragment(fragment);
+            FragmentSettingsController fragment = new FragmentSettingsController();
+            callFragment(fragment);
         });
 
         saveChangePassword = fragmentView.findViewById(R.id.saveChangePassword);
@@ -52,8 +52,8 @@ public class FragmentChangePasswordController extends Fragment {
 
             //Daten müssen hier noch gesaved werden
 
-            Fragment fragment = FragmentSettingsController.fragmentChangePasswordController;
-            removeFragment(fragment);
+            FragmentSettingsController fragment = new FragmentSettingsController();
+            callFragment(fragment);
         });
 
     }

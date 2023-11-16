@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/my_primary"
+        android:background="@color/background"
         android:alpha="0.7"/>
 
     <LinearLayout
@@ -52,7 +52,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/my_primary"
+                android:textColor="@color/primary"
                 android:text="@string/welcome"
                 android:textSize="32sp"
                 android:textStyle="bold"/>
@@ -153,7 +153,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_weight="3"
-                    android:backgroundTint="@color/my_primary"
+                    android:backgroundTint="@color/primary"
                     android:text="@string/cancel"
                     app:cornerRadius="32dp" />
 
@@ -165,7 +165,7 @@
                     android:id="@+id/registerButton"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:backgroundTint="@color/my_secondary"
+                    android:backgroundTint="@color/secondary"
                     android:text="@string/register"
                     android:layout_weight="2"
                     app:cornerRadius="32dp" />

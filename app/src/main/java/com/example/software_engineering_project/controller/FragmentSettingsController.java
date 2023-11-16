@@ -1,5 +1,6 @@
 package com.example.software_engineering_project.controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -22,6 +23,7 @@ public class FragmentSettingsController extends Fragment {
     private Button changePasswordButton;
     private Button changeMailButton;
     private Button createFlatShareButton;
+    private Button logOutButton;
     static FragmentChangePasswordController fragmentChangePasswordController;
     static FragmentChangeMailController fragmentChangeMailController;
     static FragmentManageFlatShareController fragmentManageFlatShareController;
@@ -55,13 +57,19 @@ public class FragmentSettingsController extends Fragment {
             callFragment(fragmentManageFlatShareController);
         });
 
+        logOutButton = fragmentView.findViewById(R.id.logOutButton);
+        logOutButton.setOnClickListener(view -> {
+            Intent loginScreen = new Intent(requireActivity(), ActivityLoginScreenController.class);
+            startActivity(loginScreen);
+        });
+
     }
 
     private void callFragment(Fragment fragment){
 
         FragmentManager fm = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(R.id.contentFragmentSettingScreen, fragment);
+        transaction.replace(R.id.contentFragmentMainScreen, fragment);
         transaction.commit();
 
     }

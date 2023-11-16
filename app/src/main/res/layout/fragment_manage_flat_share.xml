@@ -12,7 +12,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="-20dp"
         app:cardCornerRadius="28dp"
-        app:cardBackgroundColor="@color/my_accent">
+        app:cardBackgroundColor="@color/background2">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                 android:id="@+id/header1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/my_accent"
+                android:background="@color/background2"
                 android:gravity="center_horizontal">
 
                 <EditText
@@ -56,7 +56,7 @@
                 android:id="@+id/header2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/my_accent"
+                android:background="@color/background2"
                 android:gravity="center_horizontal"
                 android:paddingBottom="10dp">
 
@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/my_primary"
+                    android:backgroundTint="@color/primary"
                     android:drawableStart="@drawable/go_back_icon_small"
                     android:text="@string/cancel" />
 
@@ -117,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginTop="10dp"
-                    android:backgroundTint="@color/my_primary"
+                    android:backgroundTint="@color/secondary"
                     android:drawableStart="@drawable/save_icon"
                     android:text="@string/save" />
 

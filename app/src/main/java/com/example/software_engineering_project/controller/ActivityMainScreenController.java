@@ -64,9 +64,9 @@ public class ActivityMainScreenController extends AppCompatActivity {
 
     private void addMenuBarTint(Button button) {
 
-        cleaningPlanButton.setBackgroundColor(getColor(R.color.navBar));
-        goSettingsButton.setBackgroundColor(getColor(R.color.navBar));
-        groceryListButton.setBackgroundColor(getColor(R.color.navBar));
+        cleaningPlanButton.setBackgroundColor(getColor(R.color.background));
+        goSettingsButton.setBackgroundColor(getColor(R.color.background));
+        groceryListButton.setBackgroundColor(getColor(R.color.background));
         button.setBackgroundColor(getColor(R.color.navBarSelected));
 
     }

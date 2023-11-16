@@ -4,9 +4,13 @@
     <color name="white">#FFFFFFFF</color>
 
 
-    <color name="my_primary">#007BA7</color>
-    <color name="my_secondary">#CC00BFFF</color>
-    <color name="my_accent">#CCCCFF</color>
+    <color name="primary">#a7ae9e</color>
+    <color name="secondary">#a1887f</color>
+    <color name="background">#e5d9c7</color>
+    <color name="background2">#F8EDE3</color>
+    <color name="accent1">#d08d8d</color>
+    <color name="accent2">#b67272</color>
+
     <color name="navBar">#F8EDE3</color>
     <color name="navBar0.5">#CCF8EDE3</color>
     <color name="navBarSelected">#C6BDB5</color>

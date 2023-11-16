@@ -14,7 +14,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/listViewTint">
+            android:background="@color/background">
 
             <TextView
                 android:id="@+id/nameOfInterval"

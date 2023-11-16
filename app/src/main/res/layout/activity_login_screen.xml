@@ -10,8 +10,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/my_primary"
-        android:alpha="0.7"/>
+        android:background="@color/background"
+        android:alpha="0.6"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +23,8 @@
         <ImageView
             android:layout_width="56dp"
             android:layout_height="52dp"
-            android:src="@drawable/house_icon" />
+            android:src="@drawable/house_icon"
+            app:tint="@color/secondary" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -32,7 +33,7 @@
             android:textStyle="bold"
             android:fontFamily="sans-serif-medium"
             android:textSize="32sp"
-            android:textColor="@color/white" />
+            android:textColor="@color/secondary" />
 
     </LinearLayout>
 
@@ -52,7 +53,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/my_primary"
+                android:textColor="@color/primary"
                 android:text="@string/welcome"
                 android:textSize="32sp"
                 android:textStyle="bold"/>
@@ -107,6 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:text="@string/login"
+                android:backgroundTint="@color/primary"
                 app:cornerRadius="32dp"/>
 
             <View
@@ -116,9 +118,9 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/registerButton"
                 android:layout_width="match_parent"
-                android:backgroundTint="@color/my_secondary"
                 android:layout_height="60dp"
                 android:text="@string/register"
+                app:backgroundTint="@color/secondary"
                 app:cornerRadius="32dp"/>
 
             <View
