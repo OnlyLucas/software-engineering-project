@@ -8,7 +8,7 @@ CREATE TABLE "users" (
   "created_at" timestamp DEFAULT (CURRENT_TIMESTAMP())
 );
 
-CREATE TABLE "groups" (
+CREATE TABLE "living_groups" (
   "id" varchar(36) PRIMARY KEY,
   "group_name" varchar NOT NULL,
   "description" varchar,
@@ -91,9 +91,9 @@ COMMENT ON COLUMN "group_groceries"."grocery_name" IS 'We agreed to include amou
 
 COMMENT ON COLUMN "group_groceries"."is_completed" IS 'If true shown in history';
 
-ALTER TABLE "groups" ADD FOREIGN KEY ("created_by") REFERENCES "users" ("id");
+ALTER TABLE "living_groups" ADD FOREIGN KEY ("created_by") REFERENCES "users" ("id");
 
-ALTER TABLE "group_memberships" ADD FOREIGN KEY ("group_id") REFERENCES "groups" ("id");
+ALTER TABLE "group_memberships" ADD FOREIGN KEY ("group_id") REFERENCES "living_groups" ("id");
 
 ALTER TABLE "group_memberships" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
@@ -103,7 +103,7 @@ ALTER TABLE "cleanings" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
 ALTER TABLE "cleanings" ADD FOREIGN KEY ("cleaning_template") REFERENCES "cleaning_template" ("id");
 
-ALTER TABLE "group_groceries" ADD FOREIGN KEY ("group_id") REFERENCES "groups" ("id");
+ALTER TABLE "group_groceries" ADD FOREIGN KEY ("group_id") REFERENCES "living_groups" ("id");
 
 ALTER TABLE "group_groceries" ADD FOREIGN KEY ("created_by") REFERENCES "users" ("id");
 
