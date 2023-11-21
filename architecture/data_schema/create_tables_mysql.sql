@@ -17,10 +17,10 @@ CREATE TABLE `groups` (
 );
 
 CREATE TABLE `group_memberships` (
+  `id` varchar(36) PRIMARY KEY,
   `group_id` varchar(36),
   `user_id` varchar(36),
-  `created_at` timestamp DEFAULT (CURRENT_TIMESTAMP()),
-  PRIMARY KEY (`group_id`, `user_id`)
+  `created_at` timestamp DEFAULT (CURRENT_TIMESTAMP())
 );
 
 CREATE TABLE `cleaning_template` (
@@ -76,13 +76,13 @@ CREATE TABLE `payments_changes` (
 );
 
 CREATE TABLE `payment_participations` (
+  `id` varchar(36) PRIMARY KEY,
   `payment_id` varchar(36),
   `user_id` varchar(36),
   `participation_amount` decimal(11, 2) NOT NULL,
   `currency_code` char(3),
   `is_paid` boolean NOT NULL,
-  `paid_at` timestamp,
-  PRIMARY KEY (`payment_id`, `user_id`)
+  `paid_at` timestamp
 );
 
 ALTER TABLE `groups` ADD FOREIGN KEY (`created_by`) REFERENCES `users` (`id`);
