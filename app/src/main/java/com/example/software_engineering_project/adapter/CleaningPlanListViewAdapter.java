@@ -54,8 +54,6 @@ public class CleaningPlanListViewAdapter extends ArrayAdapter<String> {
                 }
             });
 
-
-
         }
 
         return convertView;
