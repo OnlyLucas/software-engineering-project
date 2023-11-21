@@ -35,7 +35,6 @@ public class FragmentCleaningPlanController extends Fragment {
         FragmentCleaningPlanListController fragmentCleaningPlanListController = new FragmentCleaningPlanListController();
         callFragment(fragmentCleaningPlanListController);
         fragmentView = inflater.inflate(R.layout.fragment_cleaning_plan, container, false);
-        //context = getActivity();
         addButtons();
         return fragmentView;
     }

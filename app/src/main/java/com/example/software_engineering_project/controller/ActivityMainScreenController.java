@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.software_engineering_project.FragmentBudgetMainController;
 import com.example.software_engineering_project.R;
 
 public class ActivityMainScreenController extends AppCompatActivity {
@@ -15,6 +16,7 @@ public class ActivityMainScreenController extends AppCompatActivity {
     private Button goSettingsButton;
     private Button groceryListButton;
     private Button cleaningPlanButton;
+    private Button budgetButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,13 @@ public class ActivityMainScreenController extends AppCompatActivity {
             addMenuBarTint(cleaningPlanButton);
         });
 
+        budgetButton = findViewById(R.id.budgetButton);
+        budgetButton.setOnClickListener(view -> {
+            FragmentBudgetMainController fragmentBudgetMainController = new FragmentBudgetMainController();
+            callFragment(fragmentBudgetMainController);
+            addMenuBarTint(budgetButton);
+        });
+
     }
 
     private void addMenuBarTint(Button button) {
@@ -67,6 +76,7 @@ public class ActivityMainScreenController extends AppCompatActivity {
         cleaningPlanButton.setBackgroundColor(getColor(R.color.background));
         goSettingsButton.setBackgroundColor(getColor(R.color.background));
         groceryListButton.setBackgroundColor(getColor(R.color.background));
+        budgetButton.setBackgroundColor(getColor(R.color.background));
         button.setBackgroundColor(getColor(R.color.primary));
 
     }

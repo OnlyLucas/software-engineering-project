@@ -24,7 +24,7 @@ public class CleaningPlanListViewAdapter extends ArrayAdapter<String> {
     // @param context: the Context from the MainActivity
     // @param items: The list of items in our Grocery List
     public CleaningPlanListViewAdapter(Context context, ArrayList<String> items) {
-        super(context, R.layout.cleaning_plan_list_view_adapter, items);
+        super(context, R.layout.adapter_cleaning_plan_list_view, items);
         this.context = context;
         list = items;
     }
@@ -35,7 +35,7 @@ public class CleaningPlanListViewAdapter extends ArrayAdapter<String> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.cleaning_plan_list_view_adapter, null);
+            convertView = mInflater.inflate(R.layout.adapter_cleaning_plan_list_view, null);
 
             TextView name = convertView.findViewById(R.id.nameCleaningPlan);
             ImageView remove = convertView.findViewById(R.id.removeCleaningPlan);

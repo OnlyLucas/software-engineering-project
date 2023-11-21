@@ -27,7 +27,7 @@ public class SpinnerListAdapter extends ArrayAdapter<String> implements AdapterV
     // @param context: the Context from the MainActivity
     // @param items: The list of items in our Grocery List
     public SpinnerListAdapter(Context context, ArrayList<String> items) {
-        super(context, R.layout.grocery_list_list_view_adapter, items);
+        super(context, R.layout.adapter_grocery_list_list_view, items);
         this.context = context;
         list = items;
     }
@@ -38,7 +38,7 @@ public class SpinnerListAdapter extends ArrayAdapter<String> implements AdapterV
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.spinner_list_view_adapter, null);
+            convertView = mInflater.inflate(R.layout.adapter_spinner_list_view, null);
 
             nameOfInterval = convertView.findViewById(R.id.nameOfInterval);
         }

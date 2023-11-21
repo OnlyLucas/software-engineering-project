@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentBudgetMainController">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-28dp"
+        app:cardBackgroundColor="@color/background2"
+        app:cardCornerRadius="28dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="200dp">
+
+                <RelativeLayout
+                    android:id="@+id/headerBudget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/goBackBudgetMain"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="7sp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/go_back_icon"
+                        android:visibility="invisible"
+                        app:tint="@color/secondary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:alpha="0.7"
+                        android:paddingBottom="20dp"
+                        android:text="@string/budget"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/addExpense"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="7sp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/add_symbol_blue"
+                        android:visibility="visible"
+                        app:tint="@color/primary" />
+
+                    <ImageView
+                        android:id="@+id/saveExpense"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="7sp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/save_icon"
+                        android:visibility="invisible"
+                        app:tint="@color/primary" />
+
+                </RelativeLayout>
+
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/contentFragmentBudgetMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/headerBudget"
+                    android:layout_marginBottom="10dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
