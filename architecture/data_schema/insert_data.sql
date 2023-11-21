@@ -10,11 +10,11 @@ INSERT INTO `living_groups` (`id`, `group_name`, `group_description`, `created_b
 INSERT INTO `living_groups` (`id`, `group_name`, `group_description`, `created_by`) VALUES ('00000000-0000-0000-0000-000000000001', 'Group 2', 'Group description 2', '00000000-0000-0000-0000-000000000004');
 
 -- Group Memberships
-INSERT INTO `group_memberships` (`group_id`, `user_id`) VALUES ('00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000');
-INSERT INTO `group_memberships` (`group_id`, `user_id`) VALUES ('00000000-0000-0000-0000-000000000000', ‘00000000-0000-0000-0000-000000000001’);
-INSERT INTO `group_memberships` (`group_id`, `user_id`) VALUES ('00000000-0000-0000-0000-000000000000', ‘00000000-0000-0000-0000-000000000002’);
-INSERT INTO `group_memberships` (`group_id`, `user_id`) VALUES ('00000000-0000-0000-0000-000000000000', ‘00000000-0000-0000-0000-000000000003’);
-INSERT INTO `group_memberships` (`group_id`, `user_id`) VALUES (‘00000000-0000-0000-0000-000000000001’, ‘00000000-0000-0000-0000-000000000004’);
+INSERT INTO `group_memberships` (`id`, `group_id`, `user_id`) VALUES ('00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000');
+INSERT INTO `group_memberships` (`id`, `group_id`, `user_id`) VALUES ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000000', ‘00000000-0000-0000-0000-000000000001’);
+INSERT INTO `group_memberships` (`id`, `group_id`, `user_id`) VALUES ('00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000000', ‘00000000-0000-0000-0000-000000000002’);
+INSERT INTO `group_memberships` (`id`, `group_id`, `user_id`) VALUES ('00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000000', ‘00000000-0000-0000-0000-000000000003’);
+INSERT INTO `group_memberships` (`id`, `group_id`, `user_id`) VALUES ('00000000-0000-0000-0000-000000000004', ‘00000000-0000-0000-0000-000000000001’, ‘00000000-0000-0000-0000-000000000004’);
 
 -- Cleaning Templates
 INSERT INTO `cleaning_template` (`id`, `task_name`, `description`, `start_date`, `end_date`, `interval`, `created_by`) VALUES (‘00000000-0000-0000-0000-000000000000’, 'Clean the floor', 'Ensure that the floor is cleaned and mopped', '2023-11-24', '2024-02-24', '7', '00000000-0000-0000-0000-000000000000');
@@ -36,9 +36,9 @@ INSERT INTO `payments_changes` (`id`, `payment_id`, `payment_name`, `amount`, `c
 INSERT INTO `payments_changes` (`id`, `payment_id`, `payment_name`, `amount`, `currency_code`, `paid_by`, `changed_by`) VALUES ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000000', 'Rent', '1000.00', 'EUR', '00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000');
 
 -- Payment Participations
-INSERT INTO `payment_participations` (`payment_id`, `user_id`, `participation_amount`, `currency_code`, `is_paid`, `paid_at`) VALUES ('00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000', '250.00', 'EUR', true, CURRENT_TIMESTAMP);
-INSERT INTO `payment_participations` (`payment_id`, `user_id`, `participation_amount`, `currency_code`, `is_paid`, `paid_at`) VALUES ('00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000001', '250.00', 'EUR', true, CURRENT_TIMESTAMP);
-INSERT INTO `payment_participations` (`payment_id`, `user_id`, `participation_amount`, `currency_code`, `is_paid`, `paid_at`) VALUES ('00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000002', '250.00', 'EUR', true, CURRENT_TIMESTAMP);
-INSERT INTO `payment_participations` (`payment_id`, `user_id`, `participation_amount`, `currency_code`, `is_paid`, `paid_at`) VALUES ('00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000003', '250.00', 'EUR', true, CURRENT_TIMESTAMP);
-INSERT INTO `payment_participations` (`payment_id`, `user_id`, `participation_amount`, `currency_code`, `is_paid`, `paid_at`) VALUES ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000000', '30.00', 'EUR', true, CURRENT_TIMESTAMP);
-INSERT INTO `payment_participations` (`payment_id`, `user_id`, `participation_amount`, `currency_code`, `is_paid`, `paid_at`) VALUES ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001', '30.00', 'EUR', true, CURRENT_TIMESTAMP);
+INSERT INTO `payment_participations` (`id`, `payment_id`, `user_id`, `participation_amount`, `currency_code`, `is_paid`, `paid_at`) VALUES ('00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000', '250.00', 'EUR', true, CURRENT_TIMESTAMP);
+INSERT INTO `payment_participations` (`id`, `payment_id`, `user_id`, `participation_amount`, `currency_code`, `is_paid`, `paid_at`) VALUES ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000001', '250.00', 'EUR', true, CURRENT_TIMESTAMP);
+INSERT INTO `payment_participations` (`id`, `payment_id`, `user_id`, `participation_amount`, `currency_code`, `is_paid`, `paid_at`) VALUES ('00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000002', '250.00', 'EUR', true, CURRENT_TIMESTAMP);
+INSERT INTO `payment_participations` (`id`, `payment_id`, `user_id`, `participation_amount`, `currency_code`, `is_paid`, `paid_at`) VALUES ('00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000003', '250.00', 'EUR', true, CURRENT_TIMESTAMP);
+INSERT INTO `payment_participations` (`id`, `payment_id`, `user_id`, `participation_amount`, `currency_code`, `is_paid`, `paid_at`) VALUES ('00000000-0000-0000-0000-000000000004', '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000000', '30.00', 'EUR', true, CURRENT_TIMESTAMP);
+INSERT INTO `payment_participations` (`id`, `payment_id`, `user_id`, `participation_amount`, `currency_code`, `is_paid`, `paid_at`) VALUES ('00000000-0000-0000-0000-000000000005', '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001', '30.00', 'EUR', true, CURRENT_TIMESTAMP);
