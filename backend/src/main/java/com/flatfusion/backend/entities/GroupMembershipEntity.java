@@ -11,23 +11,12 @@ import java.util.UUID;
 
 @Entity
 @jakarta.persistence.Table(name = "group_memberships", schema = "flatfusion")
-@IdClass(GroupMembershipEntityPK.class)
-public class GroupMembershipEntity {
-//    @EmbeddedId
-//    GroupMembershipEntityPK id;
-
-    // TODO maybe implement EntityInterface
-    // TODO check if setUUID is right here
-
+public class GroupMembershipEntity implements EntityInterface {
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    @Column(name = "user_id", nullable = false, columnDefinition = "VARCHAR(36)")
+    @Column(name = "id", nullable = false, columnDefinition = "VARCHAR(36)")
     @JdbcTypeCode(SqlTypes.VARCHAR)
-    private UUID userId;
-
-    @Id
-    @Column(name = "group_id", nullable = false, columnDefinition = "VARCHAR(36)")
-    @JdbcTypeCode(SqlTypes.VARCHAR)
-    private UUID groupId;
+    private UUID id;
 
     @ManyToOne
     @MapsId("groupId")
@@ -47,6 +36,15 @@ public class GroupMembershipEntity {
     @Column(name = "created_at", nullable = true)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
+
+    public UUID getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
     public GroupEntity getGroup() {
         return group;

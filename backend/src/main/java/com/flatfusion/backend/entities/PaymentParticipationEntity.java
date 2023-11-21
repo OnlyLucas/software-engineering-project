@@ -2,7 +2,9 @@ package com.flatfusion.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.NumericBooleanConverter;
+import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -11,18 +13,12 @@ import java.util.UUID;
 
 @Entity
 @jakarta.persistence.Table(name = "payment_participations", schema = "flatfusion")
-@IdClass(PaymentParticipationEntityPK.class)
-public class PaymentParticipationEntity {
-//    @EmbeddedId
-//    PaymentParticipationEntityPK id;
-
-    // TODO maybe implement EntityInterface
-    // TODO check if setUUID is right here
-
+public class PaymentParticipationEntity implements EntityInterface {
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
-    private UUID paymentId;
-    @Id
-    private UUID userId;
+    @Column(name = "id", nullable = false, columnDefinition = "VARCHAR(36)")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    private UUID id;
 
     @ManyToOne
     @MapsId("paymentId")
@@ -57,6 +53,14 @@ public class PaymentParticipationEntity {
     @Column(name = "paid_at", nullable = true)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp paidAt;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
     public PaymentEntity getPayment() {
         return payment;
