@@ -19,14 +19,12 @@ public class GroupMembershipEntity implements EntityInterface {
     private UUID id;
 
     @ManyToOne
-    @MapsId("groupId")
     @JoinColumn(
             name = "group_id"
     )
     private GroupEntity group;
 
     @ManyToOne
-    @MapsId("userId")
     @JoinColumn(
             name = "user_id"
     )

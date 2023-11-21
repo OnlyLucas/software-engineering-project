@@ -1,12 +1,13 @@
 package com.flatfusion.backend.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 import java.sql.Timestamp;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -25,6 +26,8 @@ public class UserEntity implements EntityInterface{
     private String username;
     @Basic
     @Column(name = "password", nullable = false, length = 255)
+    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String password;
     @Basic
     @Column(name = "first_name", nullable = false, length = 255)
@@ -36,8 +39,6 @@ public class UserEntity implements EntityInterface{
     @Column(name = "created_at", nullable = true)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
-    @OneToMany(mappedBy = "userId")
-    private Set<GroupMembershipEntity> groupMemberships;
 
     public UUID getId() {
         return id;
@@ -95,14 +96,6 @@ public class UserEntity implements EntityInterface{
         this.createdAt = createdAt;
     }
 
-    public Set<GroupMembershipEntity> getGroupMemberships() {
-        return groupMemberships;
-    }
-
-    public void setGroupMemberships(Set<GroupMembershipEntity> groupMemberships) {
-        this.groupMemberships = groupMemberships;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -126,7 +119,7 @@ public class UserEntity implements EntityInterface{
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", createdAt=" + createdAt +
-                ", groupMemberships=" + groupMemberships +
+                ", groupMemberships=" +
                 '}';
     }
 }

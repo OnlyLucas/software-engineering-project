@@ -1,16 +1,11 @@
 package com.flatfusion.backend.controllers;
 import com.flatfusion.backend.entities.EntityInterface;
-import com.flatfusion.backend.entities.UserEntity;
-import com.flatfusion.backend.repositories.UserEntityRepository;
-import jakarta.persistence.metamodel.IdentifiableType;
 import org.hibernate.PropertyValueException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
@@ -38,7 +33,7 @@ public class RESTController<T extends EntityInterface> {
     public ResponseEntity<T> getById(@PathVariable UUID id, WebRequest request){
 
         System.out.println("This is the request id for the generic controller: " + id);
-
+        logger.info("This is the request id for the controller: " + id);
         Optional<T> entity = repository.findById(id);
 
         if(entity.isEmpty()){

@@ -21,7 +21,6 @@ public class PaymentParticipationEntity implements EntityInterface {
     private UUID id;
 
     @ManyToOne
-    @MapsId("paymentId")
     @JoinColumn(
             name = "payment_id",
             nullable = false
@@ -29,7 +28,6 @@ public class PaymentParticipationEntity implements EntityInterface {
     private PaymentEntity payment;
 
     @ManyToOne
-    @MapsId("userId")
     @JoinColumn(
             name = "user_id",
             nullable = false

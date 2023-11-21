@@ -3,7 +3,6 @@ package com.flatfusion.backend.entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.Type;
 import org.hibernate.type.NumericBooleanConverter;
 import org.hibernate.type.SqlTypes;
 
@@ -27,7 +26,7 @@ public class GroupGroceryEntity implements EntityInterface{
     )
     private GroupEntity group;
     @Basic
-    @Column(name = "name", nullable = false, length = 255)
+    @Column(name = "grocery_name", nullable = false, length = 255)
     private String name;
     @ManyToOne
     @JoinColumn(

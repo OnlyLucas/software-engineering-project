@@ -7,9 +7,9 @@ import org.hibernate.type.SqlTypes;
 
 import java.sql.Timestamp;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
 
+// TODO Group members included?
 @Entity
 @Table(name = "living_groups", schema = "flatfusion")
 public class GroupEntity implements EntityInterface{
@@ -39,13 +39,13 @@ public class GroupEntity implements EntityInterface{
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
 
-    @ManyToMany
-    @JoinTable(
-            name = "group_memberships",
-            joinColumns = {@JoinColumn(name = "group_id")},
-            inverseJoinColumns = {@JoinColumn(name = "user_id")}
-    )
-    private Set<UserEntity> groupMembers;
+//    @ManyToMany
+//    @JoinTable(
+//            name = "group_memberships",
+//            joinColumns = {@JoinColumn(name = "group_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "user_id")}
+//    )
+//    private Set<UserEntity> groupMembers;
 
     public UUID getId() {
         return id;
@@ -87,24 +87,24 @@ public class GroupEntity implements EntityInterface{
         this.createdAt = createdAt;
     }
 
-    public Set<UserEntity> getGroupMembers() {
-        return groupMembers;
-    }
-
-    public void setGroupMembers(Set<UserEntity> groupMembers) {
-        this.groupMembers = groupMembers;
-    }
+//    public Set<UserEntity> getGroupMembers() {
+//        return groupMembers;
+//    }
+//
+//    public void setGroupMembers(Set<UserEntity> groupMembers) {
+//        this.groupMembers = groupMembers;
+//    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GroupEntity that = (GroupEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(createdByUser, that.createdByUser) && Objects.equals(createdAt, that.createdAt) && Objects.equals(groupMembers, that.groupMembers);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(createdByUser, that.createdByUser) && Objects.equals(createdAt, that.createdAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, createdByUser, createdAt, groupMembers);
+        return Objects.hash(id, name, description, createdByUser, createdAt);
     }
 }
