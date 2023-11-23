@@ -17,10 +17,10 @@
             android:background="@color/background">
 
             <TextView
-                android:id="@+id/numberCleaningPlan"
+                android:id="@+id/numberManageFlatShare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/nameCleaningPlan"
+                android:layout_alignBaseline="@id/nameManageFlatShare"
                 android:layout_marginStart="10sp"
                 android:layout_centerVertical="true"
                 android:textColor="@color/black"
@@ -28,7 +28,7 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/nameCleaningPlan"
+                android:id="@+id/nameManageFlatShare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -37,7 +37,7 @@
                 android:textSize="20sp" />
 
             <ImageView
-                android:id="@+id/removeCleaningPlan"
+                android:id="@+id/removeManageFlatShare"
                 android:layout_width="22sp"
                 android:layout_height="22sp"
                 android:layout_alignParentRight="true"

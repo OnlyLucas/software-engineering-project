@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".controller.FragmentManageFlatShareController">
 
     <androidx.cardview.widget.CardView
@@ -11,8 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="-20dp"
-        app:cardCornerRadius="28dp"
-        app:cardBackgroundColor="@color/background2">
+        app:cardBackgroundColor="@color/background2"
+        app:cardCornerRadius="28dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,7 +28,7 @@
                 android:paddingBottom="20dp"
                 android:text="@string/manage_flat_share"
                 android:textSize="24sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/header1"
@@ -48,7 +48,7 @@
                 <View
                     android:layout_width="40sp"
                     android:layout_height="40sp"
-                    android:layout_marginLeft="7sp"/>
+                    android:layout_marginLeft="7sp" />
 
             </LinearLayout>
 
@@ -87,8 +87,8 @@
                     android:id="@+id/flatShareMemberList"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:divider="@null"
-                    android:background="@color/background2" />
+                    android:background="@color/background2"
+                    android:divider="@null" />
 
             </LinearLayout>
 
@@ -102,11 +102,12 @@
                     android:id="@+id/cancelCreateFlatShare"
                     android:layout_width="48dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginTop="10dp"
+                    android:layout_weight="1"
                     android:backgroundTint="@color/secondary"
-                    android:drawableStart="@drawable/go_back_icon_small"
-                    android:text="@string/cancel" />
+                    android:drawableLeft="@drawable/go_back_icon_small"
+                    android:text="@string/cancel"
+                    tools:ignore="RtlHardcoded" />
 
                 <View
                     android:layout_width="10dp"
@@ -116,11 +117,12 @@
                     android:id="@+id/saveChangePassword"
                     android:layout_width="48dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_marginTop="10dp"
+                    android:layout_weight="1"
                     android:backgroundTint="@color/primary"
-                    android:drawableStart="@drawable/save_icon"
-                    android:text="@string/save" />
+                    android:drawableLeft="@drawable/save_icon"
+                    android:text="@string/save"
+                    tools:ignore="RtlHardcoded" />
 
             </LinearLayout>
 

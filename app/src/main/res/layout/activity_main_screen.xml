@@ -1,143 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@color/secondary"
+    android:fitsSystemWindows="true"
     tools:context=".controller.ActivityMainScreenController">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
-        android:alpha="0.5"/>
+        android:background="@drawable/bg" >
 
-    <LinearLayout
-        android:id="@+id/mainScreenTop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp">
-
-        <ImageView
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:src="@drawable/house_icon"
-            app:tint="@color/secondary"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/app_name"
-            android:textColor="@color/secondary"
-            android:textSize="32sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/contentFragmentMainScreen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/mainCardView"
-        android:layout_below="@+id/mainScreenTop" />
-
-
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/mainCardView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:cardBackgroundColor="@color/background">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background"
+            android:alpha="0.5"/>
 
         <LinearLayout
+            android:id="@+id/mainScreenTop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="@color/primary"
-                />
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:src="@drawable/house_icon"
+                app:tint="@color/secondary"/>
 
-            <LinearLayout
-                android:id="@+id/mainNavBar"
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/cleaningPlanButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/background"
-                    android:text="@string/cleaning_nplan"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    app:icon="@drawable/cleaning_icon"
-                    app:iconGravity="textTop"
-                    app:iconPadding="5dp"
-                    app:iconSize="40dp"
-                    app:iconTint="@color/iconBlack" />
-
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/budgetButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/background"
-                    android:text="@string/budget_n"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    app:icon="@drawable/budget_icon"
-                    app:iconGravity="textTop"
-                    app:iconPadding="5dp"
-                    app:iconSize="40dp"
-                    app:iconTint="@color/iconBlack" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/groceryListButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/background"
-                    android:text="@string/grocery_nlist"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    app:icon="@drawable/shopping_list_icon"
-                    app:iconGravity="textTop"
-                    app:iconPadding="5dp"
-                    app:iconSize="40dp"
-                    app:iconTint="@color/iconBlack"/>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/goSettingsButtons"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/background"
-                    android:text="@string/settings_n"
-                    android:textColor="@color/black"
-                    android:textSize="12sp"
-                    app:icon="@drawable/settings_icon"
-                    app:iconGravity="textTop"
-                    app:iconPadding="5dp"
-                    app:iconSize="40dp"
-                    app:iconTint="@color/iconBlack" />
-
-            </LinearLayout>
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/app_name"
+                android:textColor="@color/secondary"
+                android:textSize="32sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/contentFragmentMainScreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/mainCardView"
+            android:layout_below="@+id/mainScreenTop" />
+
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/mainCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:cardBackgroundColor="@color/background">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@color/primary"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/mainNavBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/cleaningPlanButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/background"
+                        android:text="@string/cleaning_nplan"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        app:icon="@drawable/cleaning_icon"
+                        app:iconGravity="textTop"
+                        app:iconPadding="5dp"
+                        app:iconSize="40dp"
+                        app:iconTint="@color/iconBlack" />
+
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/budgetButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/background"
+                        android:text="@string/budget_n"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        app:icon="@drawable/budget_icon"
+                        app:iconGravity="textTop"
+                        app:iconPadding="5dp"
+                        app:iconSize="40dp"
+                        app:iconTint="@color/iconBlack" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/groceryListButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/background"
+                        android:text="@string/grocery_nlist"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        app:icon="@drawable/shopping_list_icon"
+                        app:iconGravity="textTop"
+                        app:iconPadding="5dp"
+                        app:iconSize="40dp"
+                        app:iconTint="@color/iconBlack"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/goSettingsButtons"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/background"
+                        android:text="@string/settings_n"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        app:icon="@drawable/settings_icon"
+                        app:iconGravity="textTop"
+                        app:iconPadding="5dp"
+                        app:iconSize="40dp"
+                        app:iconTint="@color/iconBlack" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
 
 
 
-    </androidx.cardview.widget.CardView>
 
-</RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
