@@ -13,4 +13,4 @@ A household planner for living groups. It contains a shopping list, cleaning pla
 ### Database
 * MySQL/Postgres/HSQLDB? (Database)
 
-![Database Scheme](https://github.com/OnlyLucas/software-engineering-project/blob/8a2dbe10753c55cbdcf8cd1cc382b5f18bcad605/architecture/data_schema/database_schema.png)
+![Database Scheme](https://github.com/OnlyLucas/software-engineering-project/blob/architecture/architecture/data_schema/database_schema.png)
