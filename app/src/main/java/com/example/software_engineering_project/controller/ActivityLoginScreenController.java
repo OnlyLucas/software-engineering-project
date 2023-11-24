@@ -3,6 +3,7 @@ package com.example.software_engineering_project.controller;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 
 import com.example.software_engineering_project.R;
@@ -14,24 +15,63 @@ import java.io.IOException;
 import java.util.UUID;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.jackson.JacksonConverterFactory;
 
 
 public class ActivityLoginScreenController extends AppCompatActivity {
 
     private Button loginButton;
     private Button registerButton;
+    private UserService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        System.out.println("Test 1");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
         this.addButtons();
 
-        //TODO delete
-         test();
+//        // Initialize Retrofit
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl("http://localhost:80/v1/") // Replace with your API base URL
+//                .addConverterFactory(JacksonConverterFactory.create())
+//                .build();
+//
+//        // Create an instance of the API service
+//        apiService = retrofit.create(UserService.class);
+//
+//        // Make the sample request
+//        makeSampleRequest();
+//        //TODO delete
+//         test();
     }
+
+//    private void makeSampleRequest() {
+//        // Example: Make a request to get user data
+//        UUID userId = UUID.fromString("00000000-0000-0000-0000-000000000000");
+//        Call<User> userCall = apiService.getUser(userId);
+//        userCall.enqueue(new Callback<User>() {
+//            @Override
+//            public void onResponse(Call<User> call, Response<User> response) {
+//                if (response.isSuccessful()) {
+//                    User user = response.body();
+//                    // Process the user data
+//                } else {
+//                    // Handle the error
+//                    Log.e("SampleRequest", "Failed to get user. Error code: " + response.code());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<User> call, Throwable t) {
+//                // Handle the failure
+//                Log.e("SampleRequest", "Request failed: " + t.getMessage(), t);
+//            }
+//        });
+//    }
 
     private void test(){
         {
