@@ -86,22 +86,6 @@ public class PaymentsChangeEntity implements EntityInterface{
         this.currencyCode = currencyCode;
     }
 
-    public UserEntity getPaidBy() {
-        return paidByUser;
-    }
-
-    public void setPaidBy(UserEntity paidByUser) {
-        this.paidByUser = paidByUser;
-    }
-
-    public UserEntity getChangedBy() {
-        return changedByUser;
-    }
-
-    public void setChangedBy(UserEntity changedByUser) {
-        this.changedByUser = changedByUser;
-    }
-
     public Timestamp getChangedAt() {
         return changedAt;
     }
@@ -149,5 +133,19 @@ public class PaymentsChangeEntity implements EntityInterface{
     @Override
     public int hashCode() {
         return Objects.hash(id, payment, amount, currencyCode, paidByUser, changedByUser, changedAt, name);
+    }
+
+    @Override
+    public String toString() {
+        return "PaymentsChangeEntity{" +
+                "id=" + id +
+                ", payment=" + payment +
+                ", amount=" + amount +
+                ", currencyCode='" + currencyCode + '\'' +
+                ", paidByUser=" + paidByUser +
+                ", changedByUser=" + changedByUser +
+                ", changedAt=" + changedAt +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
