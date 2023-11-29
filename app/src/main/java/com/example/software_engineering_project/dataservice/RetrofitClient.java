@@ -7,7 +7,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 public class RetrofitClient{
     private static Retrofit retrofit = null;
 
-    private static final String BASE_URL = "http://localhost:1337";
+    private static final String BASE_URL = "http://10.0.2.2:1337/v1/";
 
     private RetrofitClient() {}
 

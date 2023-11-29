@@ -1,5 +1,7 @@
 package com.example.software_engineering_project.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Objects;
 import java.util.UUID;
 import java.sql.Timestamp;
@@ -10,6 +12,8 @@ public class User {
     private String username;
     private String firstName;
     private String lastName;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
 
     public UUID getId() {
