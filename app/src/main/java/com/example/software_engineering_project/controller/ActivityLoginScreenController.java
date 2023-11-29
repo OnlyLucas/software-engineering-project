@@ -3,23 +3,19 @@ package com.example.software_engineering_project.controller;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
-
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.dataservice.UserApiClient;
+import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.dataservice.UserService;
 import com.example.software_engineering_project.entity.User;
 
-import java.io.IOException;
 import java.util.UUID;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.jackson.JacksonConverterFactory;
-
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.observers.DisposableObserver;
+import io.reactivex.rxjava3.schedulers.Schedulers;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 
 public class ActivityLoginScreenController extends AppCompatActivity {
 
@@ -46,71 +42,36 @@ public class ActivityLoginScreenController extends AppCompatActivity {
 //        // Make the sample request
 //        makeSampleRequest();
 //        //TODO delete
-//         test();
+         test();
     }
 
-//    private void makeSampleRequest() {
-//        // Example: Make a request to get user data
-//        UUID userId = UUID.fromString("00000000-0000-0000-0000-000000000000");
-//        Call<User> userCall = apiService.getUser(userId);
-//        userCall.enqueue(new Callback<User>() {
-//            @Override
-//            public void onResponse(Call<User> call, Response<User> response) {
-//                if (response.isSuccessful()) {
-//                    User user = response.body();
-//                    // Process the user data
-//                } else {
-//                    // Handle the error
-//                    Log.e("SampleRequest", "Failed to get user. Error code: " + response.code());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<User> call, Throwable t) {
-//                // Handle the failure
-//                Log.e("SampleRequest", "Request failed: " + t.getMessage(), t);
-//            }
-//        });
-//    }
+    private void test() {
+        UserService service = RetrofitClient.getInstance().create(UserService.class);
 
-    private void test(){
-        {
-            UserApiClient apiClient = new UserApiClient();
-            UserService userService = apiClient.getUserService();
+        Observable<User> user = service.getEntity(UUID.fromString("00000000-0000-0000-0000-000000000000"));
 
-            // Example: Get user by ID
-            UUID userId = UUID.fromString("00000000-0000-0000-0000-000000000000");
-            Call<User> userCall = userService.getUser(userId);
-
-            try {
-                Response<User> userResponse = userCall.execute();
-                if (userResponse.isSuccessful()) {
-                    User user = userResponse.body();
-                    System.out.println("User: " + user);
-                } else {
-                    System.err.println("Failed to get user. Error code: " + userResponse.code());
+        user.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeWith(new DisposableObserver<User>() {
+    
+                @Override
+                public void onNext(@NonNull User user) {
+                    loginButton.setText(user.toString());
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            // Example: Create a new user
-            User newUser = new User();
-            // Set user properties...
-            Call<User> createUserCall = userService.createUser(newUser);
-
-            try {
-                Response<User> createUserResponse = createUserCall.execute();
-                if (createUserResponse.isSuccessful()) {
-                    User createdUser = createUserResponse.body();
-                    System.out.println("Created User: " + createdUser);
-                } else {
-                    System.err.println("Failed to create user. Error code: " + createUserResponse.code());
+    
+                @Override
+                public void onError(Throwable e) {
+                    System.out.println("Error while loading user" + e.toString());
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+    
+                @Override
+                public void onComplete() {
+                    System.out.println("User fetching completed");
+                }
+    
+            });
+        
+        loginButton.setText("Test");
     }
 
     private void addButtons(){
