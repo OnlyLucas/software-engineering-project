@@ -34,11 +34,13 @@ public class ActivityLoginScreenController extends AppCompatActivity {
     }
 
     private void test() {
+        // Creates API service
         UserService service = RetrofitClient.getInstance().create(UserService.class);
 
-        Observable<User> user = service.getEntity(UUID.fromString("00000000-0000-0000-0000-000000000000"));
-
-        user.subscribeOn(Schedulers.io())
+        // Creates observable object.
+        // If something changes with the object, the methods in the observer are executed
+        DisposableObserver<User> user = service.getEntity(UUID.fromString("00000000-0000-0000-0000-000000000000"))
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeWith(new DisposableObserver<User>() {
     
