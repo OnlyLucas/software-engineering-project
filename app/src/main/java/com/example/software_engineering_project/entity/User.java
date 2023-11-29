@@ -12,7 +12,6 @@ public class User {
     private String username;
     private String firstName;
     private String lastName;
-
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
 

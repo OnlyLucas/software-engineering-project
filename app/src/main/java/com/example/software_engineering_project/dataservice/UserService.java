@@ -15,6 +15,4 @@ public interface UserService {
 
     @POST("users")
     Observable<User> createEntity(@Body User user);
-
-    // Add other API endpoints as needed
 }

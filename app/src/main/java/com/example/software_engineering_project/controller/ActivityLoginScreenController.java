@@ -21,7 +21,6 @@ public class ActivityLoginScreenController extends AppCompatActivity {
 
     private Button loginButton;
     private Button registerButton;
-    private UserService apiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,17 +29,6 @@ public class ActivityLoginScreenController extends AppCompatActivity {
         setContentView(R.layout.activity_login_screen);
         this.addButtons();
 
-//        // Initialize Retrofit
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("http://localhost:80/v1/") // Replace with your API base URL
-//                .addConverterFactory(JacksonConverterFactory.create())
-//                .build();
-//
-//        // Create an instance of the API service
-//        apiService = retrofit.create(UserService.class);
-//
-//        // Make the sample request
-//        makeSampleRequest();
 //        //TODO delete
          test();
     }
