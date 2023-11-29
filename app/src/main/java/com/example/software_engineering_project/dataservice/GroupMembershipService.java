@@ -2,7 +2,7 @@ package com.example.software_engineering_project.dataservice;
 
 import com.example.software_engineering_project.entity.GroupMembership;
 
-import retrofit2.Call;
+import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -13,8 +13,8 @@ import java.util.UUID;
 public interface GroupMembershipService {
 
     @GET("group-memberships/{id}")
-    Call<GroupMembership> getGroupMembership(@Path("id") UUID groupMembershipId);
+    Observable<GroupMembership> getGroupMembership(@Path("id") UUID groupMembershipId);
 
     @POST("group-memberships")
-    Call<Void> createGroupMembership(@Body GroupMembership groupMembership);
+    Observable<GroupMembership> createGroupMembership(@Body GroupMembership groupMembership);
 }

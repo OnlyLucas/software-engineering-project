@@ -9,7 +9,7 @@ public class Group {
     private UUID id;
     private String name;
     private String description;
-    private User createdByUser;
+    private User createdBy;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
 
@@ -37,12 +37,12 @@ public class Group {
         this.description = description;
     }
 
-    public User getCreatedByUser() {
-        return createdByUser;
+    public User getCreatedBy() {
+        return createdBy;
     }
 
-    public void setCreatedByUser(User createdByUser) {
-        this.createdByUser = createdByUser;
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
     }
 
     public Timestamp getCreatedAt() {
@@ -58,12 +58,12 @@ public class Group {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Group that = (Group) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(createdByUser, that.createdByUser) && Objects.equals(createdAt, that.createdAt);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(createdBy, that.createdBy) && Objects.equals(createdAt, that.createdAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, createdByUser, createdAt);
+        return Objects.hash(id, name, description, createdBy, createdAt);
     }
 
     @Override
@@ -72,7 +72,7 @@ public class Group {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", createdByUser=" + createdByUser +
+                ", createdBy=" + createdBy +
                 ", createdAt=" + createdAt +
                 '}';
     }

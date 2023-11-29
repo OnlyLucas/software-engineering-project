@@ -2,7 +2,7 @@ package com.example.software_engineering_project.dataservice;
 
 import com.example.software_engineering_project.entity.GroupGrocery;
 
-import retrofit2.Call;
+import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -13,8 +13,8 @@ import java.util.UUID;
 public interface GroupGroceryService {
 
     @GET("group-groceries/{id}")
-    Call<GroupGrocery> getGroupGrocery(@Path("id") UUID groupGroceryId);
+    Observable<GroupGrocery> getGroupGrocery(@Path("id") UUID groupGroceryId);
 
     @POST("group-groceries")
-    Call<Void> createGroupGrocery(@Body GroupGrocery groupGrocery);
+    Observable<GroupGrocery> createGroupGrocery(@Body GroupGrocery groupGrocery);
 }
