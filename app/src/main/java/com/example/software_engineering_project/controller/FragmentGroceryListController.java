@@ -15,9 +15,19 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.GroceryListListViewAdapter;
+import com.example.software_engineering_project.dataservice.GroupGroceryService;
+import com.example.software_engineering_project.dataservice.GroupService;
+import com.example.software_engineering_project.dataservice.RetrofitClient;
+import com.example.software_engineering_project.entity.Group;
+import com.example.software_engineering_project.entity.GroupGrocery;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.annotations.NonNull;
+import io.reactivex.rxjava3.observers.DisposableObserver;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,6 +74,45 @@ public class FragmentGroceryListController extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String clickedItem = (String) listView.getItemAtPosition(position);
                 Toast.makeText(getActivity(), clickedItem, Toast.LENGTH_SHORT).show();
+                EditText input = fragmentView.findViewById(R.id.input);
+                String inputString = input.getText().toString();
+
+                GroupGroceryService service = RetrofitClient.getInstance().create(GroupGroceryService.class);
+                GroupService serviceGroup = RetrofitClient.getInstance().create(GroupService.class);
+                DisposableObserver<GroupGrocery> groupGrocery = service.getGroupGrocery(UUID.fromString("00000000-0000-0000-0000-000000000000"))
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(new DisposableObserver<GroupGrocery>() {
+
+                            @Override
+                            public void onNext(@NonNull GroupGrocery grocery) {
+                                grocery.setId(UUID.randomUUID());
+                                grocery.setName(inputString);
+                                Group group = new Group();
+                                grocery.setGroup(group);
+                                service.createGroupGrocery(grocery)
+                                        .subscribeOn(Schedulers.io())
+                                        .observeOn(AndroidSchedulers.mainThread())
+                                        .subscribe(updatedUser -> {
+                                            // Handle the updated user
+                                            System.out.println("User updated successfully");
+                                        }, throwable -> {
+                                            // Handle errors in the update process
+                                            System.out.println("Error updating user: " + throwable.getMessage());
+                                        });
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                                System.out.println("Error while loading user" + e.toString());
+                            }
+
+                            @Override
+                            public void onComplete() {
+                                System.out.println("User fetching completed");
+                            }
+
+                        });
             }
 
         });
