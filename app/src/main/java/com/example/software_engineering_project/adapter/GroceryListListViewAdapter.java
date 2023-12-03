@@ -8,19 +8,21 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import java.util.ArrayList;
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.controller.FragmentGroceryListController;
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.entity.GroupGrocery;
 
-public class GroceryListListViewAdapter extends ArrayAdapter<String> {
+public class GroceryListListViewAdapter extends ArrayAdapter<GroupGrocery> {
 
-    ArrayList<String> list;
+    List<GroupGrocery> list;
     Context context;
 
-    public GroceryListListViewAdapter(Context context, ArrayList<String> items) {
+    public GroceryListListViewAdapter(Context context, List<GroupGrocery> items) {
         super(context, R.layout.adapter_grocery_list_list_view, items);
         this.context = context;
         list = items;
@@ -41,7 +43,7 @@ public class GroceryListListViewAdapter extends ArrayAdapter<String> {
             TextView number = convertView.findViewById(R.id.numberGroceryList);
 
             number.setText(position + 1 + ".");
-            name.setText(list.get(position));
+            name.setText(list.get(position).toString());
 
             // Listeners for duplicating and removing an item.
             // They use the static removeItem and addItem methods created in MainActivity.

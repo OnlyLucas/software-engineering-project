@@ -3,6 +3,8 @@ package com.example.software_engineering_project.controller;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +16,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import com.example.software_engineering_project.R;
@@ -24,6 +26,9 @@ import com.example.software_engineering_project.dataservice.GroupService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.entity.GroupGrocery;
+import com.example.software_engineering_project.viewmodel.GroceryRepository;
+import com.example.software_engineering_project.viewmodel.UserViewModel;
+
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.observers.DisposableObserver;
@@ -40,22 +45,34 @@ public class FragmentGroceryListController extends Fragment {
     static ListView listView;
     EditText input;
     ImageView enter;
-    static ArrayList<String>  items = new ArrayList<>();
-    static ArrayAdapter<String> adapter;
+    //static ArrayList<String>  items = new ArrayList<>();
+    static GroceryRepository groceryRepository;
+    static LiveData<List<GroupGrocery>> groceryLiveData;
+
+
+    static ArrayAdapter<GroupGrocery> adapter;
     static Context context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        groceryRepository = new GroceryRepository();
+        groceryLiveData = groceryRepository.getGroupGroceries();
 
-        adapter = new GroceryListListViewAdapter(getActivity(),items);
-        items.add("5 Apples");
-        items.add("Banana");
-        items.add("Strawberry");
-        items.add("Tea");
-        items.add("Salt");
-        items.add("Sugar");
-        items.add("Cucumber");
-        items.add("Pear");
+        // TODO maybe wont update, as list is altered, not exchanged
+        groceryLiveData.observe(getViewLifecycleOwner(), groceryList -> {
+            adapter = new GroceryListListViewAdapter(getActivity(), groceryList);
+            listView.setAdapter(adapter);
+        });
+
+
+//        items.add("5 Apples");
+//        items.add("Banana");
+//        items.add("Strawberry");
+//        items.add("Tea");
+//        items.add("Salt");
+//        items.add("Sugar");
+//        items.add("Cucumber");
+//        items.add("Pear");
 
         fragmentView = inflater.inflate(R.layout.fragment_grocery_list, container, false);
         listView = fragmentView.findViewById(R.id.groceryList);
@@ -131,11 +148,16 @@ public class FragmentGroceryListController extends Fragment {
         enter.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
             public void onClick(View view) {
+                GroupGrocery grocery = new GroupGrocery();
                 String text = input.getText().toString();
+
                 if (text.length() == 0) {
                     makeToast("Enter an item.");
                 } else {
-                    addItem(text);
+                    grocery.setName(text);
+                    grocery.setCreatedByUser(UserViewModel.getCurrentAppUser().getValue());
+                    grocery.setGroup(UserViewModel.getCurrentGroup().getValue());
+                    addItem(grocery);
                     input.setText("");
                     makeToast("Added " + text);
                 }
@@ -145,7 +167,6 @@ public class FragmentGroceryListController extends Fragment {
         });
 
         return fragmentView;
-
     }
 
     // Override onDestroy() to save the contents of the grocery list right before the app is terminated
@@ -155,7 +176,7 @@ public class FragmentGroceryListController extends Fragment {
         File path = context.getApplicationContext().getFilesDir();
         try {
             FileOutputStream writer = new FileOutputStream(new File(path, "list.txt"));
-            writer.write(items.toString().getBytes());
+            writer.write(groceryLiveData.getValue().toString().getBytes());
             writer.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -165,35 +186,30 @@ public class FragmentGroceryListController extends Fragment {
     }
 
     // function to remove an item given its index in the grocery list.
-    public static void removeItem(int i) {
+    public static void removeItem(int item) {
+        GroupGrocery grocery = groceryLiveData.getValue().get(item);
 
-        makeToast("Removed: " + items.get(i));
-        items.remove(i);
-        listView.setAdapter(adapter);
+        makeToast("Removed: " + grocery.toString());
 
+        groceryRepository.deleteGroupGrocery(grocery);
     }
 
     public static void uncheckItem(int i) {
-        makeToast("Unchecked: " + items.get(i));
+        makeToast("Unchecked: " + groceryLiveData.getValue().get(i));
     }
 
     // function to add an item given its name.
-    public static void addItem(String item) {
-
-        items.add(item);
-        listView.setAdapter(adapter);
-
+    public void addItem(GroupGrocery item) {
+        groceryRepository.insertGroupGrocery(item);
     }
 
     // function to make a Toast given a string
     static Toast t;
 
     private static void makeToast(String s) {
-
         if (t != null) t.cancel();
         t = Toast.makeText(context, s, Toast.LENGTH_SHORT);
         t.show();
-
     }
 
 }

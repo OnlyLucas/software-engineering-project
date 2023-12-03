@@ -12,7 +12,7 @@ import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
-public interface UserService {
+public interface UserService{
     @GET("users/{id}")
     Observable<User> getEntity(@Path("id") UUID userId);
 

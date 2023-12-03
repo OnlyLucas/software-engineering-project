@@ -82,6 +82,11 @@ public class GroupGrocery {
         this.completedAt = completedAt;
     }
 
+    public GroupGrocery(){
+        this.id = UUID.randomUUID();
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
