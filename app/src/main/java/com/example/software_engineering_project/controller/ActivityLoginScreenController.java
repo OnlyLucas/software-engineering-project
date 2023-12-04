@@ -12,7 +12,6 @@ import com.example.software_engineering_project.entity.User;
 import java.util.UUID;
 
 import io.reactivex.rxjava3.annotations.NonNull;
-import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.observers.DisposableObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -24,12 +23,11 @@ public class ActivityLoginScreenController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("Test 1");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
         this.addButtons();
 
-//        //TODO delete
+//       TODO delete
          test();
     }
 

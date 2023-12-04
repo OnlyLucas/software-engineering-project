@@ -43,7 +43,8 @@ public class GroceryListListViewAdapter extends ArrayAdapter<GroupGrocery> {
             TextView number = convertView.findViewById(R.id.numberGroceryList);
 
             number.setText(position + 1 + ".");
-            name.setText(list.get(position).toString());
+            GroupGrocery current = list.get(position);
+            name.setText(current.getName());
 
             // Listeners for duplicating and removing an item.
             // They use the static removeItem and addItem methods created in MainActivity.

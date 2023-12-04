@@ -5,6 +5,7 @@ import com.example.software_engineering_project.entity.GroupGrocery;
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -25,4 +26,7 @@ public interface GroupGroceryService {
 
     @POST("group-groceries")
     Call<GroupGrocery> createGroupGroceryCall(@Body GroupGrocery groupGrocery);
+
+    @DELETE("group-groceries/{id}")
+    Call<GroupGrocery> deleteGroupGrocery(@Path("id") UUID groupGroceryId);
 }

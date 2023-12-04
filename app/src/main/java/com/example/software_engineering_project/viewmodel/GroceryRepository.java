@@ -38,6 +38,7 @@ public class GroceryRepository {
             public void onResponse(Call<GroupGrocery> call, Response<GroupGrocery> response) {
                 if(response.isSuccessful()){
                     groupGroceries.getValue().add(groupGrocery);
+                    fetchGroupGroceries();
                 }
             }
 
@@ -52,10 +53,34 @@ public class GroceryRepository {
 
     // TODO implement properly with API call
     public void deleteGroupGrocery(GroupGrocery groupGrocery) {
-        try{
-            groupGroceries.getValue().remove(groupGrocery);
-        } catch (NullPointerException e){
+        try {
+            // Perform the API call to delete the group grocery on the server
+            Call<GroupGrocery> call = groceryService.deleteGroupGrocery(groupGrocery.getId());
+            call.enqueue(new Callback<GroupGrocery>() {
+                @Override
+                public void onResponse(Call<GroupGrocery> call, Response<GroupGrocery> response) {
+                    if (response.isSuccessful()) {
+                        // Get updated Group Groceries from backend to show it in frontend
+                        fetchGroupGroceries();
+                        System.out.println("Deletion of Group Grocery successful");
+                    } else {
+                        // If the server-side deletion is not successful, handle accordingly
+                        // For example, show an error message
+                        System.out.println("Failed to delete group grocery on the server");
+                        String errorMessage = "Failed to delete group grocery on the server";
+                        // Handle the error message appropriately
+                    }
+                }
 
+                @Override
+                public void onFailure(Call<GroupGrocery> call, Throwable t) {
+                    // Handle the failure of the API call (e.g., network issues)
+                    String errorMessage = "Failed to delete group grocery. Check your network connection.";
+                    // Handle the error message appropriately
+                }
+            });
+        } catch (NullPointerException e) {
+            // Handle the case where groupGroceries or groupGroceries.getValue() is null
         }
     }
 

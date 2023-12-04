@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,11 +46,8 @@ public class FragmentGroceryListController extends Fragment {
     static ListView listView;
     EditText input;
     ImageView enter;
-    //static ArrayList<String>  items = new ArrayList<>();
     static GroceryRepository groceryRepository;
     static LiveData<List<GroupGrocery>> groceryLiveData;
-
-
     static ArrayAdapter<GroupGrocery> adapter;
     static Context context;
 
@@ -64,16 +62,6 @@ public class FragmentGroceryListController extends Fragment {
             listView.setAdapter(adapter);
         });
 
-
-//        items.add("5 Apples");
-//        items.add("Banana");
-//        items.add("Strawberry");
-//        items.add("Tea");
-//        items.add("Salt");
-//        items.add("Sugar");
-//        items.add("Cucumber");
-//        items.add("Pear");
-
         fragmentView = inflater.inflate(R.layout.fragment_grocery_list, container, false);
         listView = fragmentView.findViewById(R.id.groceryList);
 
@@ -81,16 +69,14 @@ public class FragmentGroceryListController extends Fragment {
         enter = fragmentView.findViewById(R.id.enter);
         context = getActivity();
         listView.setLongClickable(true);
-
         listView.setAdapter(adapter);
-
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String clickedItem = (String) listView.getItemAtPosition(position);
-                Toast.makeText(getActivity(), clickedItem, Toast.LENGTH_SHORT).show();
+                GroupGrocery grocery = groceryLiveData.getValue().get(position);
+                makeToast(grocery.getName());
                 EditText input = fragmentView.findViewById(R.id.input);
                 String inputString = input.getText().toString();
 
@@ -111,22 +97,22 @@ public class FragmentGroceryListController extends Fragment {
                                         .subscribeOn(Schedulers.io())
                                         .observeOn(AndroidSchedulers.mainThread())
                                         .subscribe(updatedUser -> {
-                                            // Handle the updated user
-                                            System.out.println("User updated successfully");
+                                            // Handle the creation of group grocery
+                                            System.out.println("Group grocery added successfully");
                                         }, throwable -> {
-                                            // Handle errors in the update process
-                                            System.out.println("Error updating user: " + throwable.getMessage());
+                                            // Handle errors in the creation process
+                                            System.out.println("Error adding group grocery: " + throwable.getMessage());
                                         });
                             }
 
                             @Override
                             public void onError(Throwable e) {
-                                System.out.println("Error while loading user" + e.toString());
+                                System.out.println("Error while adding group grocery" + e.toString());
                             }
 
                             @Override
                             public void onComplete() {
-                                System.out.println("User fetching completed");
+                                System.out.println("Group grocery adding completed");
                             }
 
                         });
@@ -136,7 +122,6 @@ public class FragmentGroceryListController extends Fragment {
 
         // Remove an item when its row is long pressed
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 removeItem(i);
@@ -188,14 +173,14 @@ public class FragmentGroceryListController extends Fragment {
     // function to remove an item given its index in the grocery list.
     public static void removeItem(int item) {
         GroupGrocery grocery = groceryLiveData.getValue().get(item);
-
-        makeToast("Removed: " + grocery.toString());
-
+        makeToast("Removed: " + grocery.getName());
         groceryRepository.deleteGroupGrocery(grocery);
     }
 
+    //TODO API Call for changing is_completed (and fetching only items which are not completed)
     public static void uncheckItem(int i) {
-        makeToast("Unchecked: " + groceryLiveData.getValue().get(i));
+        GroupGrocery grocery = groceryLiveData.getValue().get(i);
+        makeToast("Unchecked: " + grocery.getName());
     }
 
     // function to add an item given its name.
