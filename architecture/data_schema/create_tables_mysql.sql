@@ -120,7 +120,7 @@ ALTER TABLE `payments` ADD FOREIGN KEY (`created_by`) REFERENCES `users` (`id`);
 
 ALTER TABLE `payments_changes` ADD FOREIGN KEY (`payment_id`) REFERENCES `payments` (`id`);
 
-ALTER TABLE `paymetns_changes` ADD FOREIGN KEY (`group_id`) REFERENCES `living_groups` (`id`);
+ALTER TABLE `payments_changes` ADD FOREIGN KEY (`group_id`) REFERENCES `living_groups` (`id`);
 
 ALTER TABLE `payments_changes` ADD FOREIGN KEY (`paid_by`) REFERENCES `users` (`id`);
 
