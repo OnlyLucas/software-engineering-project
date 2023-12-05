@@ -11,7 +11,7 @@ CREATE TABLE `users` (
 CREATE TABLE `living_groups` (
   `id` varchar(36) PRIMARY KEY,
   `group_name` varchar(255) NOT NULL,
-  `description` varchar(255),
+  `group_description` varchar(255),
   `created_by` varchar(36) NOT NULL,
   `created_at` timestamp DEFAULT (CURRENT_TIMESTAMP())
 );
@@ -27,7 +27,7 @@ CREATE TABLE `cleaning_template` (
   `id` varchar(36) PRIMARY KEY NOT NULL,
   `group_id` varchar(36) NOT NULL,
   `task_name` varchar(255) NOT NULL,
-  `description` varchar(255),
+  `template_description` varchar(255),
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `interval` integer COMMENT 'Interval in days',
