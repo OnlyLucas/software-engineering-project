@@ -18,11 +18,17 @@ public class CleaningTemplateEntity implements EntityInterface{
     @Column(name = "id", nullable = false, columnDefinition = "VARCHAR(36)")
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
+    @ManyToOne
+    @JoinColumn(
+            name = "group_id",
+            nullable = false
+    )
+    private GroupEntity group;
     @Basic
     @Column(name = "task_name", nullable = false, length = 255)
     private String name;
     @Basic
-    @Column(name = "description", nullable = true, length = 255)
+    @Column(name = "template_description", nullable = true, length = 255)
     private String description;
     @Basic
     @Column(name = "start_date", nullable = false)
@@ -49,8 +55,17 @@ public class CleaningTemplateEntity implements EntityInterface{
         return id;
     }
 
+    @Override
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public GroupEntity getGroup() {
+        return group;
+    }
+
+    public void setGroup(GroupEntity group) {
+        this.group = group;
     }
 
     public String getName() {
@@ -114,11 +129,26 @@ public class CleaningTemplateEntity implements EntityInterface{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CleaningTemplateEntity that = (CleaningTemplateEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate) && Objects.equals(interval, that.interval) && Objects.equals(createdByUser, that.createdByUser) && Objects.equals(createdAt, that.createdAt);
+        return Objects.equals(id, that.id) && Objects.equals(group, that.group) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate) && Objects.equals(interval, that.interval) && Objects.equals(createdByUser, that.createdByUser) && Objects.equals(createdAt, that.createdAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, startDate, endDate, interval, createdByUser, createdAt);
+        return Objects.hash(id, group, name, description, startDate, endDate, interval, createdByUser, createdAt);
+    }
+
+    @Override
+    public String toString() {
+        return "CleaningTemplateEntity{" +
+                "id=" + id +
+                ", group=" + group +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", interval=" + interval +
+                ", createdByUser=" + createdByUser +
+                ", createdAt=" + createdAt +
+                '}';
     }
 }

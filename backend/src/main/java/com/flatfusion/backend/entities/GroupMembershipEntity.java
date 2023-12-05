@@ -80,4 +80,14 @@ public class GroupMembershipEntity implements EntityInterface {
     public int hashCode() {
         return Objects.hash(group, user, createdAt);
     }
+
+    @Override
+    public String toString() {
+        return "GroupMembershipEntity{" +
+                "id=" + id +
+                ", group=" + group +
+                ", user=" + user +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }

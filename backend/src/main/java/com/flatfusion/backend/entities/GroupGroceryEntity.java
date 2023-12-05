@@ -131,4 +131,18 @@ public class GroupGroceryEntity implements EntityInterface{
     public int hashCode() {
         return Objects.hash(id, group, name, createdByUser, createdAt, isCompleted, completedByUser, completedAt);
     }
+
+    @Override
+    public String toString() {
+        return "GroupGroceryEntity{" +
+                "id=" + id +
+                ", group=" + group +
+                ", name='" + name + '\'' +
+                ", createdByUser=" + createdByUser +
+                ", createdAt=" + createdAt +
+                ", isCompleted=" + isCompleted +
+                ", completedByUser=" + completedByUser +
+                ", completedAt=" + completedAt +
+                '}';
+    }
 }

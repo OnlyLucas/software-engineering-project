@@ -21,6 +21,12 @@ public class CleaningEntity implements EntityInterface{
     private UUID id;
     @ManyToOne
     @JoinColumn(
+            name = "group_id",
+            nullable = false
+    )
+    private GroupEntity group;
+    @ManyToOne
+    @JoinColumn(
             name = "user_id",
             nullable = false
     )
@@ -44,8 +50,17 @@ public class CleaningEntity implements EntityInterface{
         return id;
     }
 
+    @Override
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public GroupEntity getGroup() {
+        return group;
+    }
+
+    public void setGroup(GroupEntity group) {
+        this.group = group;
     }
 
     public UserEntity getUser() {
@@ -56,14 +71,6 @@ public class CleaningEntity implements EntityInterface{
         this.user = user;
     }
 
-    public CleaningTemplateEntity getCleaningTemplate() {
-        return cleaningTemplate;
-    }
-
-    public void setCleaningTemplate(CleaningTemplateEntity cleaningTemplate) {
-        this.cleaningTemplate = cleaningTemplate;
-    }
-
     public Date getDate() {
         return date;
     }
@@ -72,12 +79,12 @@ public class CleaningEntity implements EntityInterface{
         this.date = date;
     }
 
-    public Boolean getIsCompleted() {
+    public Boolean getCompleted() {
         return isCompleted;
     }
 
-    public void setIsCompleted(Boolean isCompleted) {
-        this.isCompleted = isCompleted;
+    public void setCompleted(Boolean completed) {
+        isCompleted = completed;
     }
 
     public Timestamp getCompletedAt() {
@@ -88,16 +95,37 @@ public class CleaningEntity implements EntityInterface{
         this.completedAt = completedAt;
     }
 
+    public CleaningTemplateEntity getCleaningTemplate() {
+        return cleaningTemplate;
+    }
+
+    public void setCleaningTemplate(CleaningTemplateEntity cleaningTemplate) {
+        this.cleaningTemplate = cleaningTemplate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CleaningEntity that = (CleaningEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(user, that.user) && Objects.equals(cleaningTemplate, that.cleaningTemplate) && Objects.equals(date, that.date) && Objects.equals(isCompleted, that.isCompleted) && Objects.equals(completedAt, that.completedAt);
+        return Objects.equals(id, that.id) && Objects.equals(group, that.group) && Objects.equals(user, that.user) && Objects.equals(date, that.date) && Objects.equals(isCompleted, that.isCompleted) && Objects.equals(completedAt, that.completedAt) && Objects.equals(cleaningTemplate, that.cleaningTemplate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user, cleaningTemplate, date, isCompleted, completedAt);
+        return Objects.hash(id, group, user, date, isCompleted, completedAt, cleaningTemplate);
+    }
+
+    @Override
+    public String toString() {
+        return "CleaningEntity{" +
+                "id=" + id +
+                ", group=" + group +
+                ", user=" + user +
+                ", date=" + date +
+                ", isCompleted=" + isCompleted +
+                ", completedAt=" + completedAt +
+                ", cleaningTemplate=" + cleaningTemplate +
+                '}';
     }
 }

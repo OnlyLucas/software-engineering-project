@@ -29,6 +29,13 @@ public class PaymentParticipationEntity implements EntityInterface {
 
     @ManyToOne
     @JoinColumn(
+            name = "group_id",
+            nullable = false
+    )
+    private GroupEntity group;
+
+    @ManyToOne
+    @JoinColumn(
             name = "user_id",
             nullable = false
     )
@@ -56,6 +63,7 @@ public class PaymentParticipationEntity implements EntityInterface {
         return id;
     }
 
+    @Override
     public void setId(UUID id) {
         this.id = id;
     }
@@ -64,16 +72,24 @@ public class PaymentParticipationEntity implements EntityInterface {
         return payment;
     }
 
-    public void setPayment(PaymentEntity paymentId) {
-        this.payment = paymentId;
+    public void setPayment(PaymentEntity payment) {
+        this.payment = payment;
+    }
+
+    public GroupEntity getGroup() {
+        return group;
+    }
+
+    public void setGroup(GroupEntity group) {
+        this.group = group;
     }
 
     public UserEntity getUser() {
         return user;
     }
 
-    public void setUser(UserEntity userId) {
-        this.user = userId;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
     public BigDecimal getParticipationAmount() {
@@ -92,12 +108,12 @@ public class PaymentParticipationEntity implements EntityInterface {
         this.currencyCode = currencyCode;
     }
 
-    public Boolean getIsPaid() {
+    public Boolean getPaid() {
         return isPaid;
     }
 
-    public void setIsPaid(Boolean isPaid) {
-        this.isPaid = isPaid;
+    public void setPaid(Boolean paid) {
+        isPaid = paid;
     }
 
     public Timestamp getPaidAt() {
@@ -113,11 +129,25 @@ public class PaymentParticipationEntity implements EntityInterface {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PaymentParticipationEntity that = (PaymentParticipationEntity) o;
-        return Objects.equals(payment, that.payment) && Objects.equals(user, that.user) && Objects.equals(participationAmount, that.participationAmount) && Objects.equals(currencyCode, that.currencyCode) && Objects.equals(isPaid, that.isPaid) && Objects.equals(paidAt, that.paidAt);
+        return Objects.equals(id, that.id) && Objects.equals(payment, that.payment) && Objects.equals(group, that.group) && Objects.equals(user, that.user) && Objects.equals(participationAmount, that.participationAmount) && Objects.equals(currencyCode, that.currencyCode) && Objects.equals(isPaid, that.isPaid) && Objects.equals(paidAt, that.paidAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(payment, user, participationAmount, currencyCode, isPaid, paidAt);
+        return Objects.hash(id, payment, group, user, participationAmount, currencyCode, isPaid, paidAt);
+    }
+
+    @Override
+    public String toString() {
+        return "PaymentParticipationEntity{" +
+                "id=" + id +
+                ", payment=" + payment +
+                ", group=" + group +
+                ", user=" + user +
+                ", participationAmount=" + participationAmount +
+                ", currencyCode='" + currencyCode + '\'' +
+                ", isPaid=" + isPaid +
+                ", paidAt=" + paidAt +
+                '}';
     }
 }

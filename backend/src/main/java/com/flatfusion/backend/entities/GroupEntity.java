@@ -107,4 +107,15 @@ public class GroupEntity implements EntityInterface{
     public int hashCode() {
         return Objects.hash(id, name, description, createdByUser, createdAt);
     }
+
+    @Override
+    public String toString() {
+        return "GroupEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", createdByUser=" + createdByUser +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }
