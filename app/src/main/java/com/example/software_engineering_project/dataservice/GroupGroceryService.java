@@ -18,8 +18,11 @@ public interface GroupGroceryService {
     @GET("group-groceries/{id}")
     Observable<GroupGrocery> getGroupGrocery(@Path("id") UUID groupGroceryId);
 
-    @GET("group-groceries/group/{group-id}")
-    Call<List<GroupGrocery>> getGroupGroceries(@Path("group-id") UUID groupGroceryId);
+    @GET("group-groceries/group/{group-id}/isUncompleted")
+    Call<List<GroupGrocery>> getUncompletedGroupGroceries(@Path("group-id") UUID groupGroceryId);
+
+    @GET("group-groceries/group/{group-id}/isCompleted")
+    Call<List<GroupGrocery>> getCompletedGroupGroceries(@Path("group-id") UUID groupGroceryId);
 
     @POST("group-groceries")
     Observable<GroupGrocery> createGroupGrocery(@Body GroupGrocery groupGrocery);

@@ -26,7 +26,7 @@ public class GroceryRepository {
         // Initialize your Retrofit service (you should have a Retrofit setup for your API)
         groceryService = RetrofitClient.getInstance().create(GroupGroceryService.class);
         // Fetch group groceries immediately upon repository creation
-        fetchGroupGroceries();
+        fetchUncompletedGroupGroceries();
     }
 
     public LiveData<List<GroupGrocery>> getGroupGroceries() {
@@ -41,7 +41,7 @@ public class GroceryRepository {
             public void onResponse(Call<GroupGrocery> call, Response<GroupGrocery> response) {
                 if(response.isSuccessful()){
                     groupGroceries.getValue().add(groupGrocery);
-                    fetchGroupGroceries();
+                    fetchUncompletedGroupGroceries();
                     // show toast of success
 //                    ToastUtil.makeToast("Added " + groupGrocery.getName(), context);
                 } else {
@@ -69,13 +69,13 @@ public class GroceryRepository {
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
                         // Get updated Group Groceries from backend to show it in frontend
-                        fetchGroupGroceries();
+                        fetchUncompletedGroupGroceries();
                         System.out.println("Deletion of Group Grocery successful");
 //                        ToastUtil.makeToast("Removed: " + groupGrocery.getName(), context);
                     } else {
                         // If the server-side deletion is not successful, handle accordingly
                         // For example, show an error message
-                        fetchGroupGroceries();
+                        fetchUncompletedGroupGroceries();
                         System.out.println(response.code());
                         System.out.println("Failed to delete group grocery on the server");
 
@@ -102,12 +102,12 @@ public class GroceryRepository {
         }
     }
 
-    private void fetchGroupGroceries() {
+    private void fetchUncompletedGroupGroceries() {
         // Get current group id
         UUID currentGroupId = UserViewModel.getCurrentGroup().getValue().getId();
 
         // Perform the API call to fetch group groceries asynchronously
-        Call<List<GroupGrocery>> call = groceryService.getGroupGroceries(currentGroupId);
+        Call<List<GroupGrocery>> call = groceryService.getUncompletedGroupGroceries(currentGroupId);
         call.enqueue(new Callback<List<GroupGrocery>>() {
             @Override
             public void onResponse(Call<List<GroupGrocery>> call, Response<List<GroupGrocery>> response) {
