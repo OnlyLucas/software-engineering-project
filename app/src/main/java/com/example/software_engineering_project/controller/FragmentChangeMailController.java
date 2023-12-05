@@ -1,5 +1,6 @@
 package com.example.software_engineering_project.controller;
 
+import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.software_engineering_project.R;
 
@@ -21,10 +23,13 @@ public class FragmentChangeMailController extends Fragment {
     View fragmentView;
     private Button cancelChangeMail;
     private Button saveChangeMail;
+    static Context context;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         fragmentView = inflater.inflate(R.layout.fragment_change_mail, container, false);
+        context = getActivity();
         this.addButtons();
         return fragmentView;
 
@@ -44,6 +49,7 @@ public class FragmentChangeMailController extends Fragment {
         cancelChangeMail = fragmentView.findViewById(R.id.cancelChangeMail);
         cancelChangeMail.setOnClickListener(view -> {
             FragmentSettingsController fragment = new FragmentSettingsController();
+            makeToast("Changes discarded");
             callFragment(fragment);
         });
 
@@ -53,8 +59,19 @@ public class FragmentChangeMailController extends Fragment {
             //Daten müssen hier noch gesaved werden
 
             FragmentSettingsController fragment = new FragmentSettingsController();
+            makeToast("New e-mail saved");
             callFragment(fragment);
         });
+
+    }
+
+    static Toast t;
+
+    private static void makeToast(String s) {
+
+        if (t != null) t.cancel();
+        t = Toast.makeText(context, s, Toast.LENGTH_SHORT);
+        t.show();
 
     }
 

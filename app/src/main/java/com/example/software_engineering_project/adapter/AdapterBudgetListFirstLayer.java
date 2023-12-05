@@ -22,7 +22,7 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<String> {
 
     Context context;
 
-    public AdapterBudgetListFirstLayer (Context context, ArrayList<String> items) {
+    public AdapterBudgetListFirstLayer(Context context, ArrayList<String> items) {
         super(context, R.layout.adapter_budget_list_view_first_layer, items);
         this.context = context;
         list = items;
