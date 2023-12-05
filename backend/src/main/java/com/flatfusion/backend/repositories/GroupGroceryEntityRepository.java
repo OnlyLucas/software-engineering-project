@@ -8,5 +8,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface GroupGroceryEntityRepository extends JpaRepository<GroupGroceryEntity, UUID> {
-    Optional<List<GroupGroceryEntity>> findAllByGroupId(UUID uuid);
+    Optional<List<GroupGroceryEntity>> findAllByGroupIdOrderByCreatedAtDesc(UUID uuid);
 }

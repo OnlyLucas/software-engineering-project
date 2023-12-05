@@ -25,7 +25,7 @@ public class GroupGroceryRESTController extends RESTController<GroupGroceryEntit
     @GetMapping("/group/{id}")
     public ResponseEntity<List<GroupGroceryEntity>> getGroupGroceriesByGroupId(@PathVariable UUID id){
         logger.info("Get GroupGroceries by group id:  " + id);
-        Optional<List<GroupGroceryEntity>> entities = repository.findAllByGroupId(id);
+        Optional<List<GroupGroceryEntity>> entities = repository.findAllByGroupIdOrderByCreatedAtDesc(id);
 
         if(entities.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
