@@ -17,7 +17,7 @@ INSERT INTO `group_memberships` (`id`, `group_id`, `user_id`) VALUES ('00000000-
 INSERT INTO `group_memberships` (`id`, `group_id`, `user_id`) VALUES ('00000000-0000-0000-0000-000000000004', '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000004');
 
 -- Cleaning Templates
-INSERT INTO `cleaning_template` (`id`, `group_id`, `task_name`, `description`, `start_date`, `end_date`, `interval`, `created_by`) VALUES ('00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000', 'Clean the floor', 'Ensure that the floor is cleaned and mopped', '2023-11-24', '2024-02-24', '7', '00000000-0000-0000-0000-000000000000');
+INSERT INTO `cleaning_template` (`id`, `group_id`, `task_name`, `template_description`, `start_date`, `end_date`, `interval`, `created_by`) VALUES ('00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000', 'Clean the floor', 'Ensure that the floor is cleaned and mopped', '2023-11-24', '2024-02-24', '7', '00000000-0000-0000-0000-000000000000');
 
 -- Cleanings
 INSERT INTO `cleanings` (`id`, `group_id`, `user_id`, `cleaning_template`, `date`, `is_completed`, `completed_at`) VALUES ('00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000', '2023-11-24', true, null);
