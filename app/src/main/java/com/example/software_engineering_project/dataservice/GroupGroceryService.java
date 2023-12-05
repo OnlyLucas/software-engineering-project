@@ -28,5 +28,5 @@ public interface GroupGroceryService {
     Call<GroupGrocery> createGroupGroceryCall(@Body GroupGrocery groupGrocery);
 
     @DELETE("group-groceries/{id}")
-    Call<GroupGrocery> deleteGroupGrocery(@Path("id") UUID groupGroceryId);
+    Call<Void> deleteGroupGrocery(@Path("id") UUID groupGroceryId);
 }

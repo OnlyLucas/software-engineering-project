@@ -62,11 +62,11 @@ public class GroceryRepository {
     public void deleteGroupGrocery(GroupGrocery groupGrocery, Context context) {
         try {
             // Perform the API call to delete the group grocery on the server
-            Call<GroupGrocery> call = groceryService.deleteGroupGrocery(groupGrocery.getId());
-            call.enqueue(new Callback<GroupGrocery>() {
+            Call<Void> call = groceryService.deleteGroupGrocery(groupGrocery.getId());
+            call.enqueue(new Callback<Void>() {
 
                 @Override
-                public void onResponse(Call<GroupGrocery> call, Response<GroupGrocery> response) {
+                public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
                         // Get updated Group Groceries from backend to show it in frontend
                         fetchGroupGroceries();
@@ -78,14 +78,17 @@ public class GroceryRepository {
                         fetchGroupGroceries();
                         System.out.println(response.code());
                         System.out.println("Failed to delete group grocery on the server");
+
+                        System.out.println(response.body().toString());
+
                         String errorMessage = "Failed to delete group grocery on the server";
-//                        ToastUtil.makeToast("Deletion failed", context);
+//                      ToastUtil.makeToast("Deletion failed", context);
                         // Handle the error message appropriately
                     }
                 }
 
                 @Override
-                public void onFailure(Call<GroupGrocery> call, Throwable t) {
+                public void onFailure(Call<Void> call, Throwable t) {
                     // Handle the failure of the API call (e.g., network issues)
                     String errorMessage = "Failed to delete group grocery. Check your network connection.";
 //                    ToastUtil.makeToast("Deletion failed", context);
