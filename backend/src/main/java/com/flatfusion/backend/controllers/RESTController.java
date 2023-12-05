@@ -67,4 +67,16 @@ public class RESTController<T extends EntityInterface> {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<T> delete(@PathVariable UUID id) {
+        Optional<T> existingEntity = repository.findById(id);
+        if (existingEntity.isPresent()) {
+            repository.deleteById(id);
+            System.out.println("Entity is present.");
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

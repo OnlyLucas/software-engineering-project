@@ -33,11 +33,4 @@ public class GroupGroceryRESTController extends RESTController<GroupGroceryEntit
 
         return new ResponseEntity<>(entities.get(), HttpStatus.OK);
     }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<GroupGroceryEntity> deleteGroupGrocery(@PathVariable UUID id) {
-        repository.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
-
 }
