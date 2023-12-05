@@ -49,7 +49,7 @@ public class FragmentChangeMailController extends Fragment {
         cancelChangeMail = fragmentView.findViewById(R.id.cancelChangeMail);
         cancelChangeMail.setOnClickListener(view -> {
             FragmentSettingsController fragment = new FragmentSettingsController();
-            makeToast("Changes discarded");
+            makeToast(getString(R.string.changes_discarded));
             callFragment(fragment);
         });
 
@@ -59,7 +59,7 @@ public class FragmentChangeMailController extends Fragment {
             //Daten müssen hier noch gesaved werden
 
             FragmentSettingsController fragment = new FragmentSettingsController();
-            makeToast("New e-mail saved");
+            makeToast(getString(R.string.new_e_mail_saved));
             callFragment(fragment);
         });
 

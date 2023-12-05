@@ -83,11 +83,11 @@ public class FragmentGroceryListController extends Fragment {
             public void onClick(View view) {
                 String text = input.getText().toString();
                 if (text.length() == 0) {
-                    makeToast("Enter an item.");
+                    makeToast(getString(R.string.enter_an_item_toast));
                 } else {
                     addItem(text);
                     input.setText("");
-                    makeToast("Added " + text);
+                    makeToast(getString(R.string.added_toast) + text);
                 }
 
             }
@@ -117,14 +117,14 @@ public class FragmentGroceryListController extends Fragment {
     // function to remove an item given its index in the grocery list.
     public static void removeItem(int i) {
 
-        makeToast("Removed: " + items.get(i));
+        makeToast(context.getString(R.string.removed_toast) + items.get(i));
         items.remove(i);
         listView.setAdapter(adapter);
 
     }
 
     public static void uncheckItem(int i) {
-        makeToast("Unchecked: " + items.get(i));
+        makeToast(context.getString(R.string.unchecked_toast) + items.get(i));
     }
 
     // function to add an item given its name.

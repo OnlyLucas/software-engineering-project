@@ -44,8 +44,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="18sp"
-                android:src="@drawable/remove"/>
-
+                android:src="@drawable/remove" />
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>

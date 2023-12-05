@@ -25,7 +25,7 @@ public class FragmentCleaningPlanController extends Fragment {
     @SuppressLint("StaticFieldLeak")
     static View fragmentView;
     ImageView addCleaningPlan;
-    ImageView goBackCleaningPlan;
+    static ImageView goBackCleaningPlan;
     ImageView saveCleaningPlan;
 
     @Override

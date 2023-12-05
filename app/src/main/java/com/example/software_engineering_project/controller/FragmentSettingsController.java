@@ -2,13 +2,14 @@ package com.example.software_engineering_project.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.software_engineering_project.R;
 
@@ -19,14 +20,14 @@ import com.example.software_engineering_project.R;
  */
 public class FragmentSettingsController extends Fragment {
 
+    static FragmentChangePasswordController fragmentChangePasswordController;
+    static FragmentChangeMailController fragmentChangeMailController;
+    static FragmentManageFlatShareController fragmentManageFlatShareController;
     View fragmentView;
     private Button changePasswordButton;
     private Button changeMailButton;
     private Button createFlatShareButton;
     private Button logOutButton;
-    static FragmentChangePasswordController fragmentChangePasswordController;
-    static FragmentChangeMailController fragmentChangeMailController;
-    static FragmentManageFlatShareController fragmentManageFlatShareController;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -37,7 +38,7 @@ public class FragmentSettingsController extends Fragment {
 
     }
 
-    private void addButtons(){
+    private void addButtons() {
 
         fragmentChangePasswordController = new FragmentChangePasswordController();
         changePasswordButton = fragmentView.findViewById(R.id.changePasswordButton);
@@ -65,9 +66,9 @@ public class FragmentSettingsController extends Fragment {
 
     }
 
-    private void callFragment(Fragment fragment){
+    private void callFragment(Fragment fragment) {
 
-        FragmentManager fm = getActivity().getSupportFragmentManager();
+        FragmentManager fm = requireActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.contentFragmentMainScreen, fragment);
         transaction.commit();

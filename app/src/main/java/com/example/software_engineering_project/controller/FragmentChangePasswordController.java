@@ -48,7 +48,7 @@ public class FragmentChangePasswordController extends Fragment {
         cancelChangePassword = fragmentView.findViewById(R.id.cancelChangePassword);
         cancelChangePassword.setOnClickListener(view -> {
             FragmentSettingsController fragment = new FragmentSettingsController();
-            makeToast("Changes discarded");
+            makeToast(getString(R.string.changes_discarded));
             callFragment(fragment);
         });
 
@@ -58,7 +58,7 @@ public class FragmentChangePasswordController extends Fragment {
             //Daten müssen hier noch gesaved werden
 
             FragmentSettingsController fragment = new FragmentSettingsController();
-            makeToast("New password saved");
+            makeToast(getString(R.string.new_password_saved));
             callFragment(fragment);
         });
 
