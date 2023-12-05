@@ -98,6 +98,8 @@ ALTER TABLE `group_memberships` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (
 
 ALTER TABLE `cleaning_template` ADD FOREIGN KEY (`created_by`) REFERENCES `users` (`id`);
 
+ALTER TABLE `cleaning_template` ADD FOREIGN KEY (`group_id`) REFERENCES `living_groups` (`id`);
+
 ALTER TABLE `cleanings` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `cleanings` ADD FOREIGN KEY (`group_id`) REFERENCES `living_groups` (`id`);
