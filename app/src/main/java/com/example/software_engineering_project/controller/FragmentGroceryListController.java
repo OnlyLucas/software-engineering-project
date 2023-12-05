@@ -57,7 +57,6 @@ public class FragmentGroceryListController extends Fragment {
 
         listView.setAdapter(adapter);
 
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
