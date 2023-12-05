@@ -73,8 +73,8 @@ public class RESTController<T extends EntityInterface> {
         Optional<T> existingEntity = repository.findById(id);
         if (existingEntity.isPresent()) {
             repository.deleteById(id);
-            System.out.println("Entity is present.");
-            return new ResponseEntity<>(HttpStatus.OK);
+            logger.info("Entity deleted: " + existingEntity);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
