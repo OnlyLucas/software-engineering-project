@@ -45,16 +45,6 @@
                 android:src="@drawable/shoppingcart_icon" />
 
             <ImageView
-                android:id="@+id/copyGroceryList"
-                android:layout_width="22sp"
-                android:layout_height="22sp"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="18sp"
-                android:layout_toStartOf="@id/uncheckedGroceryList"
-                android:src="@drawable/copy" />
-
-
-            <ImageView
                 android:id="@+id/removeGroceryList"
                 android:layout_width="22sp"
                 android:layout_height="22sp"
@@ -62,12 +52,9 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="30sp"
                 android:src="@drawable/remove" />
+
         </RelativeLayout>
 
-
-
     </androidx.cardview.widget.CardView>
-
-
 
 </RelativeLayout>

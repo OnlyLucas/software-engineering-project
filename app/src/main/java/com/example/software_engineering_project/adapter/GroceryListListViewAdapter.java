@@ -37,7 +37,6 @@ public class GroceryListListViewAdapter extends ArrayAdapter<String> {
             TextView name = convertView.findViewById(R.id.nameGroceryList);
             ImageView remove = convertView.findViewById(R.id.removeGroceryList);
             ImageView unchecked = convertView.findViewById(R.id.uncheckedGroceryList);
-            ImageView copy = convertView.findViewById(R.id.copyGroceryList);
             TextView number = convertView.findViewById(R.id.numberGroceryList);
 
             number.setText(position + 1 + ".");

@@ -98,12 +98,19 @@
                     android:textStyle="bold"
                     android:alpha="0.7"/>
 
-                <EditText
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:drawableEnd="@drawable/password_icon"/>
+                    android:layout_height="match_parent"
+                    android:textColorHint="#B9B8B8"
+                    app:passwordToggleEnabled="true">
 
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:drawableEnd="@drawable/password_icon"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <View
                     android:layout_width="wrap_content"
