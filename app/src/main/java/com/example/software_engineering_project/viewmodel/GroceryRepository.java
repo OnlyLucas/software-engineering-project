@@ -1,11 +1,14 @@
 package com.example.software_engineering_project.viewmodel;
 
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.software_engineering_project.dataservice.GroupGroceryService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.GroupGrocery;
+import com.example.software_engineering_project.util.ToastUtil;
 
 import java.util.List;
 import java.util.UUID;
@@ -30,7 +33,7 @@ public class GroceryRepository {
         return groupGroceries;
     }
 
-    public void insertGroupGrocery(GroupGrocery groupGrocery) {
+    public void insertGroupGrocery(GroupGrocery groupGrocery, Context context) {
         // Perform the API call to insert a new group grocery
         Call<GroupGrocery> call = groceryService.createGroupGroceryCall(groupGrocery);
         call.enqueue(new Callback<GroupGrocery>() {
@@ -39,11 +42,16 @@ public class GroceryRepository {
                 if(response.isSuccessful()){
                     groupGroceries.getValue().add(groupGrocery);
                     fetchGroupGroceries();
+                    // show toast of success
+//                    ToastUtil.makeToast("Added " + groupGrocery.getName(), context);
+                } else {
+//                    ToastUtil.makeToast("Error while adding  " + groupGrocery.getName(), context);
                 }
             }
 
             @Override
             public void onFailure(Call<GroupGrocery> call, Throwable t) {
+//                ToastUtil.makeToast("Error while adding  " + groupGrocery.getName(), context);
                 // Handle the failure if needed
                 // For example, show an error message
             }
@@ -51,23 +59,27 @@ public class GroceryRepository {
     }
 
 
-    // TODO implement properly with API call
-    public void deleteGroupGrocery(GroupGrocery groupGrocery) {
+    public void deleteGroupGrocery(GroupGrocery groupGrocery, Context context) {
         try {
             // Perform the API call to delete the group grocery on the server
             Call<GroupGrocery> call = groceryService.deleteGroupGrocery(groupGrocery.getId());
             call.enqueue(new Callback<GroupGrocery>() {
+
                 @Override
                 public void onResponse(Call<GroupGrocery> call, Response<GroupGrocery> response) {
                     if (response.isSuccessful()) {
                         // Get updated Group Groceries from backend to show it in frontend
                         fetchGroupGroceries();
                         System.out.println("Deletion of Group Grocery successful");
+//                        ToastUtil.makeToast("Removed: " + groupGrocery.getName(), context);
                     } else {
                         // If the server-side deletion is not successful, handle accordingly
                         // For example, show an error message
+                        fetchGroupGroceries();
+                        System.out.println(response.code());
                         System.out.println("Failed to delete group grocery on the server");
                         String errorMessage = "Failed to delete group grocery on the server";
+//                        ToastUtil.makeToast("Deletion failed", context);
                         // Handle the error message appropriately
                     }
                 }
@@ -76,8 +88,11 @@ public class GroceryRepository {
                 public void onFailure(Call<GroupGrocery> call, Throwable t) {
                     // Handle the failure of the API call (e.g., network issues)
                     String errorMessage = "Failed to delete group grocery. Check your network connection.";
+//                    ToastUtil.makeToast("Deletion failed", context);
                     // Handle the error message appropriately
                 }
+
+
             });
         } catch (NullPointerException e) {
             // Handle the case where groupGroceries or groupGroceries.getValue() is null
@@ -96,6 +111,7 @@ public class GroceryRepository {
                 if (response.isSuccessful()) {
                     List<GroupGrocery> groceries = response.body();
                     groupGroceries.setValue(groceries);
+                    System.out.println("Group Grocery fetching completed");
                 }
             }
 
@@ -103,6 +119,7 @@ public class GroceryRepository {
             public void onFailure(Call<List<GroupGrocery>> call, Throwable t) {
                 // Handle the failure if needed
                 // For example, show an error message
+                System.out.println("Failure while fetching group groceries" + t);
             }
         });
     }

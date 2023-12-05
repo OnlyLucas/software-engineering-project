@@ -1,5 +1,6 @@
 package com.example.software_engineering_project.entity;
 
+import com.example.software_engineering_project.viewmodel.UserViewModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.sql.Timestamp;
@@ -17,6 +18,19 @@ public class GroupGrocery {
     private User completedByUser;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp completedAt;
+
+    public GroupGrocery(String name){
+        this.id = UUID.randomUUID();
+        this.group = UserViewModel.getCurrentGroup().getValue();
+        this.createdByUser = UserViewModel.getCurrentAppUser().getValue();
+        this.name = name;
+        long currentTimeMillis = System.currentTimeMillis();
+        this.createdAt  = new Timestamp(currentTimeMillis);
+    }
+
+    public GroupGrocery() {
+        // Default constructor
+    }
 
     public UUID getId() {
         return id;
@@ -81,11 +95,6 @@ public class GroupGrocery {
     public void setCompletedAt(Timestamp completedAt) {
         this.completedAt = completedAt;
     }
-
-    public GroupGrocery(){
-        this.id = UUID.randomUUID();
-    }
-
 
     @Override
     public boolean equals(Object o) {
