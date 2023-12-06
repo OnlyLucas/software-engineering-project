@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.software_engineering_project.R;
 
+
 public class ActivityMainScreenController extends AppCompatActivity {
 
     private Button goSettingsButton;
@@ -48,7 +49,8 @@ public class ActivityMainScreenController extends AppCompatActivity {
     private void addButtons() {
 
         groceryListButton.setOnClickListener(view -> {
-            FragmentGroceryListController.items.clear();
+            // TODO
+            // FragmentGroceryListController.groceryLiveData.getValue().clear();
             FragmentGroceryListController fragmentGroceryListController = new FragmentGroceryListController();
             callFragment(fragmentGroceryListController);
             addMenuBarTint(groceryListButton);

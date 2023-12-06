@@ -6,13 +6,20 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.EditText;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.entity.User;
+import com.example.software_engineering_project.viewmodel.UserRepository;
+import com.example.software_engineering_project.viewmodel.UserViewModel;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,14 +28,16 @@ import com.example.software_engineering_project.R;
  */
 public class FragmentChangeMailController extends Fragment {
 
-    View fragmentView;
+    static UserRepository userRepository;
+    static Context context;
+    private View fragmentView;
     private Button cancelChangeMail;
     private Button saveChangeMail;
-    static Context context;
+    private EditText currentMail, newMail, confirmNewMail;
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        userRepository = new UserRepository();
+        context = getActivity();
         fragmentView = inflater.inflate(R.layout.fragment_change_mail, container, false);
         context = requireActivity();
         loadScreenElements();
@@ -62,9 +71,7 @@ public class FragmentChangeMailController extends Fragment {
         });
 
         saveChangeMail.setOnClickListener(view -> {
-
-            //Daten müssen hier noch gesaved werden
-
+            checkMailChange();
             FragmentSettingsController fragment = new FragmentSettingsController();
             makeToast(getString(R.string.new_e_mail_saved));
             callFragment(fragment);
@@ -72,14 +79,31 @@ public class FragmentChangeMailController extends Fragment {
 
     }
 
-    static Toast t;
+    private void checkMailChange() {
+        currentMail = fragmentView.findViewById(R.id.currentMail);
+        newMail = fragmentView.findViewById(R.id.newMail);
+        confirmNewMail = fragmentView.findViewById(R.id.confirmNewMail);
+        String currentMailString = currentMail.getText().toString();
+        String newMailString = newMail.getText().toString();
+        String confirmMailString = confirmNewMail.getText().toString();
 
-    private static void makeToast(String s) {
+        User user = UserViewModel.getCurrentAppUser().getValue();
 
-        if (t != null) t.cancel();
-        t = Toast.makeText(context, s, Toast.LENGTH_SHORT);
-        t.show();
+        if(user.getEmail().equals(currentMailString)) {
 
+            System.out.println("Correct current mail");
+
+            if(newMailString.equals(confirmMailString)) {
+                System.out.println("Ready to persist new mail " + newMailString);
+                Map<String, String> map = new HashMap<>();
+                map.put("email", newMailString);
+                userRepository.updateEmail(user, map, context);;
+            } else {
+                System.out.println("New mails not matching");
+            }
+        } else {
+            System.out.println("Wrong current mail");
+        }
     }
 
 }
