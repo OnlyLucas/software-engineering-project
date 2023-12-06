@@ -58,6 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_height="200dp"
+        android:divider="@null"
         android:layout_below="@id/newExpenseInvolvedPersons"/>
 
 </RelativeLayout>

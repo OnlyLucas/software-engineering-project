@@ -20,7 +20,7 @@
                 android:id="@+id/checkBoxNewExpenseParticipants"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Meike Hofmann"
+                android:text=""
                 android:textSize="20sp" />
 
         </RelativeLayout>

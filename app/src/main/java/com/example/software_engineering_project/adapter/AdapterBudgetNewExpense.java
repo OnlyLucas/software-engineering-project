@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class AdapterBudgetNewExpense extends ArrayAdapter<String> {
 
     ArrayList<String> list;
-
+    CheckBox checkBoxNewExpenseParticipants;
     Context context;
 
     public AdapterBudgetNewExpense(Context context, ArrayList<String> items) {
@@ -35,10 +35,17 @@ public class AdapterBudgetNewExpense extends ArrayAdapter<String> {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.adapter_budget_new_expense, null);
 
-            CheckBox checkBoxNewExpenseParticipants = convertView.findViewById(R.id.checkBoxNewExpenseParticipants);
+            loadScreenElements(convertView);
+
+            checkBoxNewExpenseParticipants.setText(list.get(position));
         }
 
         return convertView;
+    }
+
+    private void loadScreenElements(View convertView) {
+
+        checkBoxNewExpenseParticipants = convertView.findViewById(R.id.checkBoxNewExpenseParticipants);
     }
 
 
