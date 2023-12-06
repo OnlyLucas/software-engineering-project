@@ -8,6 +8,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 import java.util.List;
@@ -35,4 +36,8 @@ public interface GroupGroceryService {
 
     @DELETE("group-groceries/{id}")
     Call<Void> deleteGroupGrocery(@Path("id") UUID groupGroceryId);
+
+    @PUT("group-groceries/{id}")
+    Call<GroupGrocery> updateGroupGrocery(@Path("id") UUID id, @Body GroupGrocery groupGrocery);
+
 }

@@ -76,9 +76,7 @@ public class GroupGrocery {
         return isCompleted;
     }
 
-    public void setIsCompleted(Boolean isCompleted) {
-        this.isCompleted = isCompleted;
-    }
+    public void setIsCompleted(Boolean isCompleted) { this.isCompleted = isCompleted; }
 
     public User getCompletedByUser() {
         return completedByUser;
@@ -94,6 +92,13 @@ public class GroupGrocery {
 
     public void setCompletedAt(Timestamp completedAt) {
         this.completedAt = completedAt;
+    }
+
+    public void setCompleted() {
+        this.isCompleted = true;
+        this.completedByUser = UserViewModel.getCurrentAppUser().getValue();
+        long currentTimeMillis = System.currentTimeMillis();
+        this.completedAt = new Timestamp(currentTimeMillis);
     }
 
     @Override

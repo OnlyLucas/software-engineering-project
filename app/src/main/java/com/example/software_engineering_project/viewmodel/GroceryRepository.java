@@ -43,15 +43,15 @@ public class GroceryRepository {
                     groupGroceries.getValue().add(groupGrocery);
                     fetchUncompletedGroupGroceries();
                     // show toast of success
-//                    ToastUtil.makeToast("Added " + groupGrocery.getName(), context);
+                    ToastUtil.makeToast("Added " + groupGrocery.getName(), context);
                 } else {
-//                    ToastUtil.makeToast("Error while adding  " + groupGrocery.getName(), context);
+                    ToastUtil.makeToast("Error while adding  " + groupGrocery.getName(), context);
                 }
             }
 
             @Override
             public void onFailure(Call<GroupGrocery> call, Throwable t) {
-//                ToastUtil.makeToast("Error while adding  " + groupGrocery.getName(), context);
+                ToastUtil.makeToast("Error while adding  " + groupGrocery.getName(), context);
                 // Handle the failure if needed
                 // For example, show an error message
             }
@@ -71,7 +71,7 @@ public class GroceryRepository {
                         // Get updated Group Groceries from backend to show it in frontend
                         fetchUncompletedGroupGroceries();
                         System.out.println("Deletion of Group Grocery successful");
-//                        ToastUtil.makeToast("Removed: " + groupGrocery.getName(), context);
+                        ToastUtil.makeToast("Removed: " + groupGrocery.getName(), context);
                     } else {
                         // If the server-side deletion is not successful, handle accordingly
                         // For example, show an error message
@@ -83,7 +83,7 @@ public class GroceryRepository {
                         System.out.println(response.body().toString());
 
                         String errorMessage = "Failed to delete group grocery on the server";
-//                      ToastUtil.makeToast("Deletion failed", context);
+                        ToastUtil.makeToast("Deletion failed", context);
                         // Handle the error message appropriately
                     }
                 }
@@ -92,7 +92,7 @@ public class GroceryRepository {
                 public void onFailure(Call<Void> call, Throwable t) {
                     // Handle the failure of the API call (e.g., network issues)
                     String errorMessage = "Failed to delete group grocery. Check your network connection.";
-//                    ToastUtil.makeToast("Deletion failed", context);
+                    ToastUtil.makeToast("Deletion failed", context);
                     // Handle the error message appropriately
                 }
 
@@ -101,6 +101,30 @@ public class GroceryRepository {
         } catch (NullPointerException e) {
             // Handle the case where groupGroceries or groupGroceries.getValue() is null
         }
+    }
+
+    public void updateGroupGrocery(GroupGrocery grocery, Context context) {
+        // Perform the API call to update group grocery asynchronously
+        Call<GroupGrocery> call = groceryService.updateGroupGrocery(grocery.getId(), grocery);
+        call.enqueue(new Callback<GroupGrocery>() {
+            @Override
+            public void onResponse(Call<GroupGrocery> call, Response<GroupGrocery> response) {
+                if(response.isSuccessful()){
+                    fetchUncompletedGroupGroceries();
+                    // show toast of success
+                    ToastUtil.makeToast("Unchecked " + grocery.getName(), context);
+                } else {
+                    ToastUtil.makeToast("Error while unchecking  " + grocery.getName(), context);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GroupGrocery> call, Throwable t) {
+                ToastUtil.makeToast("Error while unchecking  " + grocery.getName(), context);
+                // Handle the failure if needed
+                // For example, show an error message
+            }
+        });
     }
 
     private void fetchUncompletedGroupGroceries() {

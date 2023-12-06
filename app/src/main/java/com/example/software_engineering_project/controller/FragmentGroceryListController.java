@@ -112,10 +112,10 @@ public class FragmentGroceryListController extends Fragment {
 
     }
 
-    //TODO API Call for changing is_completed (and fetching only items which are not completed)
     public static void uncheckItem(int i) {
         GroupGrocery grocery = groceryLiveData.getValue().get(i);
-        ToastUtil.makeToast("Unchecked: " + grocery.getName(), context);
+        grocery.setCompleted();
+        groceryRepository.updateGroupGrocery(grocery, context);
     }
 
     // function to add an item given its name.
