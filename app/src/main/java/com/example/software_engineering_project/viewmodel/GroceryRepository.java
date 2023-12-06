@@ -76,6 +76,7 @@ public class GroceryRepository {
                         // If the server-side deletion is not successful, handle accordingly
                         // For example, show an error message
                         fetchUncompletedGroupGroceries();
+
                         System.out.println(response.code());
                         System.out.println("Failed to delete group grocery on the server");
 
