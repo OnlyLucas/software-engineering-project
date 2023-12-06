@@ -12,9 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.software_engineering_project.FragmentCleaningPlanListDetailController;
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.controller.FragmentCleaningPlanListController;
 
 import java.util.ArrayList;
 

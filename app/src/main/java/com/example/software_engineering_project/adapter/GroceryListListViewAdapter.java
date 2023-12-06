@@ -18,6 +18,10 @@ import com.example.software_engineering_project.R;
 public class GroceryListListViewAdapter extends ArrayAdapter<String> {
 
     ArrayList<String> list;
+    TextView name;
+    ImageView remove;
+    ImageView unchecked;
+    TextView number;
     Context context;
 
     public GroceryListListViewAdapter(Context context, ArrayList<String> items) {
@@ -34,10 +38,7 @@ public class GroceryListListViewAdapter extends ArrayAdapter<String> {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.adapter_grocery_list_list_view, null);
 
-            TextView name = convertView.findViewById(R.id.nameGroceryList);
-            ImageView remove = convertView.findViewById(R.id.removeGroceryList);
-            ImageView unchecked = convertView.findViewById(R.id.uncheckedGroceryList);
-            TextView number = convertView.findViewById(R.id.numberGroceryList);
+            loadScreenElements(convertView);
 
             number.setText(position + 1 + ".");
             name.setText(list.get(position));
@@ -61,6 +62,15 @@ public class GroceryListListViewAdapter extends ArrayAdapter<String> {
         }
 
         return convertView;
+
+    }
+
+    private void loadScreenElements(View convertView) {
+
+        name = convertView.findViewById(R.id.nameGroceryList);
+        remove = convertView.findViewById(R.id.removeGroceryList);
+        unchecked = convertView.findViewById(R.id.uncheckedGroceryList);
+        number = convertView.findViewById(R.id.numberGroceryList);
 
     }
 

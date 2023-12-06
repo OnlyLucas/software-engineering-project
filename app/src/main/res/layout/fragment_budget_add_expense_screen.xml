@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentBudgetAddExpenseScreenController">
+
+    <TextView
+        android:id="@+id/newExpenseAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Expense"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+    
+    <EditText
+        android:id="@+id/enterNewExpenseAmount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@id/newExpenseAmount"/>
+
+    <TextView
+        android:id="@+id/newExpenseReason"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Reason"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_below="@id/enterNewExpenseAmount"/>
+
+    <EditText
+        android:id="@+id/enterNewExpenseReason"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@id/newExpenseReason"/>
+
+    <TextView
+        android:id="@+id/newExpenseInvolvedPersons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Persons involved"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_below="@id/enterNewExpenseReason"/>
+
+    <ListView
+        android:id="@+id/enterNewExpenseInvolvedPersons"
+        android:layout_width="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_height="200dp"
+        android:layout_below="@id/newExpenseInvolvedPersons"/>
+
+</RelativeLayout>

@@ -1,4 +1,4 @@
-package com.example.software_engineering_project;
+package com.example.software_engineering_project.controller;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.AdapterBudgetListFirstLayer;
 
 import java.util.ArrayList;

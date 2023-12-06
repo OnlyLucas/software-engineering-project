@@ -10,20 +10,15 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FragmentBudgetDetailScreenController #newInstance} factory method to
+ * Use the {@link FragmentBudgetAddExpenseScreenController #newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentBudgetDetailScreenController extends Fragment {
+public class FragmentBudgetAddExpenseScreenController extends Fragment {
 
-    View fragmentView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        fragmentView = inflater.inflate(R.layout.fragment_budget_detail_screen, container, false);
-
-        return fragmentView;
-
+        return inflater.inflate(R.layout.fragment_budget_add_expense_screen, container, false);
     }
 }

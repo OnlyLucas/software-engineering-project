@@ -1,5 +1,6 @@
 package com.example.software_engineering_project.controller;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -25,7 +26,7 @@ public class FragmentChangeMailController extends Fragment {
     private Button saveChangeMail;
     static Context context;
 
-
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         fragmentView = inflater.inflate(R.layout.fragment_change_mail, container, false);
