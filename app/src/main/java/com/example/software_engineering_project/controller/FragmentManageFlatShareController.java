@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.AdapterManageFlatShareListView;
+import com.example.software_engineering_project.util.ToastUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -78,11 +79,11 @@ public class FragmentManageFlatShareController extends Fragment {
             public void onClick(View view) {
                 String text = input_mail.getText().toString();
                 if (text.length() == 0) {
-                    makeToast("Enter an e-mail");
+                    ToastUtil.makeToast("Enter an e-mail", context);
                 } else {
                     addItem(text);
                     input_mail.setText("");
-                    makeToast("Added " + text);
+                    ToastUtil.makeToast("Added " + text, context);
                 }
 
             }
@@ -121,14 +122,14 @@ public class FragmentManageFlatShareController extends Fragment {
     // function to remove an item given its index in the grocery list.
     public static void removeItem(int i) {
 
-        makeToast("Removed: " + items.get(i));
+        ToastUtil.makeToast("Removed: " + items.get(i),context);
         items.remove(i);
         listView.setAdapter(adapter);
 
     }
 
     public static void uncheckItem(int i) {
-        makeToast("Unchecked: " + items.get(i));
+        ToastUtil.makeToast("Unchecked: " + items.get(i),context);
     }
 
     // function to add an item given its name.
@@ -136,17 +137,6 @@ public class FragmentManageFlatShareController extends Fragment {
 
         items.add(item);
         listView.setAdapter(adapter);
-
-    }
-
-    // function to make a Toast given a string
-    static Toast t;
-
-    private static void makeToast(String s) {
-
-        if (t != null) t.cancel();
-        t = Toast.makeText(context, s, Toast.LENGTH_SHORT);
-        t.show();
 
     }
 

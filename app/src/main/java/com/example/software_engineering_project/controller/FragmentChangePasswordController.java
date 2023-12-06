@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.util.ToastUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,7 +56,7 @@ public class FragmentChangePasswordController extends Fragment {
 
         cancelChangePassword.setOnClickListener(view -> {
             FragmentSettingsController fragment = new FragmentSettingsController();
-            makeToast(getString(R.string.changes_discarded));
+            ToastUtil.makeToast(getString(R.string.changes_discarded),context);
             callFragment(fragment);
         });
 
@@ -64,19 +65,9 @@ public class FragmentChangePasswordController extends Fragment {
             //Daten müssen hier noch gesaved werden
 
             FragmentSettingsController fragment = new FragmentSettingsController();
-            makeToast(getString(R.string.new_password_saved));
+            ToastUtil.makeToast(getString(R.string.new_password_saved),context);
             callFragment(fragment);
         });
-
-    }
-
-    static Toast t;
-
-    private static void makeToast(String s) {
-
-        if (t != null) t.cancel();
-        t = Toast.makeText(context, s, Toast.LENGTH_SHORT);
-        t.show();
 
     }
 
