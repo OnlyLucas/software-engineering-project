@@ -20,9 +20,9 @@ import com.example.software_engineering_project.R;
  */
 public class FragmentSettingsController extends Fragment {
 
-    static FragmentChangePasswordController fragmentChangePasswordController;
-    static FragmentChangeMailController fragmentChangeMailController;
-    static FragmentManageFlatShareController fragmentManageFlatShareController;
+    static FragmentChangePasswordController fragmentChangePasswordController = new FragmentChangePasswordController();
+    static FragmentChangeMailController fragmentChangeMailController = new FragmentChangeMailController();
+    static FragmentManageFlatShareController fragmentManageFlatShareController = new FragmentManageFlatShareController();
     View fragmentView;
     private Button changePasswordButton;
     private Button changeMailButton;
@@ -32,7 +32,7 @@ public class FragmentSettingsController extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         fragmentView = inflater.inflate(R.layout.fragment_setting_screen, container, false);
-        this.addButtons();
+        addButtons();
 
         return fragmentView;
 
@@ -40,19 +40,16 @@ public class FragmentSettingsController extends Fragment {
 
     private void addButtons() {
 
-        fragmentChangePasswordController = new FragmentChangePasswordController();
         changePasswordButton = fragmentView.findViewById(R.id.changePasswordButton);
         changePasswordButton.setOnClickListener(view -> {
             callFragment(fragmentChangePasswordController);
         });
 
-        fragmentChangeMailController = new FragmentChangeMailController();
         changeMailButton = fragmentView.findViewById(R.id.changeMailButton);
         changeMailButton.setOnClickListener(view -> {
             callFragment(fragmentChangeMailController);
         });
 
-        fragmentManageFlatShareController = new FragmentManageFlatShareController();
         createFlatShareButton = fragmentView.findViewById(R.id.createFlatShareButton);
         createFlatShareButton.setOnClickListener(view -> {
             callFragment(fragmentManageFlatShareController);

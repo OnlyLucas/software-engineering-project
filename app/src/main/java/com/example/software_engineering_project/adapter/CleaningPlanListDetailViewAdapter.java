@@ -27,7 +27,7 @@ public class CleaningPlanListDetailViewAdapter extends ArrayAdapter<String> {
     // @param context: the Context from the MainActivity
     // @param items: The list of items in our Grocery List
     public CleaningPlanListDetailViewAdapter(Context context, ArrayList<String> items) {
-        super(context, R.layout.adapter_cleaning_plan_list_view, items);
+        super(context, R.layout.adapter_cleaning_plan_list_detail_view, items);
         this.context = context;
         list = items;
     }

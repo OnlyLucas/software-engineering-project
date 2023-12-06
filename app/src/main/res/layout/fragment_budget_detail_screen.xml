@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentBudgetDetailScreenController">
+
+
+    <TextView
+        android:id="@+id/totalCalculatedExpenses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You get/owe back XXXX$."
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:id="@+id/totalOweExpenses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You owe XX$."
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_below="@id/totalCalculatedExpenses"/>
+
+    <ListView
+        android:id="@+id/listOweExpenses"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_below="@id/totalOweExpenses"/>
+
+    <TextView
+        android:id="@+id/totalGetExpenses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="You get back XX$."
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_below="@id/listOweExpenses"/>
+
+    <ListView
+        android:id="@+id/listGetExpenses"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_below="@id/totalGetExpenses"/>
+
+
+</RelativeLayout>

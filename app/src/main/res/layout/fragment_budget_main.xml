@@ -38,11 +38,24 @@
                         android:layout_alignParentStart="true"
                         android:layout_marginStart="7sp"
                         android:layout_marginEnd="10dp"
+                        android:clickable="false"
                         android:src="@drawable/go_back_icon"
                         android:visibility="invisible"
                         app:tint="@color/secondary" />
 
+                    <ImageView
+                        android:id="@+id/showBudgetDetail"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="7sp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/budget_detail_icon"
+                        android:visibility="visible"
+                        app:tint="@color/primary" />
+
                     <TextView
+                        android:id="@+id/budgetHeadline"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
@@ -73,6 +86,7 @@
                         android:src="@drawable/save_icon"
                         android:visibility="invisible"
                         app:tint="@color/primary" />
+
 
                 </RelativeLayout>
 
