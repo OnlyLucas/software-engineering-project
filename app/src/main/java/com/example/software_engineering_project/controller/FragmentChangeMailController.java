@@ -15,6 +15,7 @@ import android.widget.EditText;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.entity.User;
+import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.viewmodel.UserRepository;
 import com.example.software_engineering_project.viewmodel.UserViewModel;
 
@@ -66,14 +67,14 @@ public class FragmentChangeMailController extends Fragment {
 
         cancelChangeMail.setOnClickListener(view -> {
             FragmentSettingsController fragment = new FragmentSettingsController();
-            makeToast(getString(R.string.changes_discarded));
+            ToastUtil.makeToast(getString(R.string.changes_discarded),context);
             callFragment(fragment);
         });
 
         saveChangeMail.setOnClickListener(view -> {
             checkMailChange();
             FragmentSettingsController fragment = new FragmentSettingsController();
-            makeToast(getString(R.string.new_e_mail_saved));
+            ToastUtil.makeToast(getString(R.string.new_e_mail_saved),context);
             callFragment(fragment);
         });
 
