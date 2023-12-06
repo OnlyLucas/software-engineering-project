@@ -20,17 +20,18 @@ import retrofit2.Response;
 public class GroceryRepository {
 
     private GroupGroceryService groceryService;
-    private MutableLiveData<List<GroupGrocery>> groupGroceries = new MutableLiveData<>();
+    private MutableLiveData<List<GroupGrocery>> uncompletedGroupGroceries = new MutableLiveData<>();
+    private MutableLiveData<List<GroupGrocery>> completedGroupGroceries = new MutableLiveData<>();
 
     public GroceryRepository() {
         // Initialize your Retrofit service (you should have a Retrofit setup for your API)
         groceryService = RetrofitClient.getInstance().create(GroupGroceryService.class);
         // Fetch group groceries immediately upon repository creation
-        fetchUncompletedGroupGroceries();
+        fetchGroupGroceries();
     }
 
-    public LiveData<List<GroupGrocery>> getGroupGroceries() {
-        return groupGroceries;
+    public LiveData<List<GroupGrocery>> getUncompletedGroupGroceries() {
+        return uncompletedGroupGroceries;
     }
 
     public void insertGroupGrocery(GroupGrocery groupGrocery, Context context) {
@@ -40,7 +41,7 @@ public class GroceryRepository {
             @Override
             public void onResponse(Call<GroupGrocery> call, Response<GroupGrocery> response) {
                 if(response.isSuccessful()){
-                    groupGroceries.getValue().add(groupGrocery);
+                    uncompletedGroupGroceries.getValue().add(groupGrocery);
                     fetchUncompletedGroupGroceries();
                     // show toast of success
                     ToastUtil.makeToast("Added " + groupGrocery.getName(), context);
@@ -110,7 +111,7 @@ public class GroceryRepository {
             @Override
             public void onResponse(Call<GroupGrocery> call, Response<GroupGrocery> response) {
                 if(response.isSuccessful()){
-                    fetchUncompletedGroupGroceries();
+                    fetchGroupGroceries();
                     // show toast of success
                     ToastUtil.makeToast("Unchecked " + grocery.getName(), context);
                 } else {
@@ -138,8 +139,8 @@ public class GroceryRepository {
             public void onResponse(Call<List<GroupGrocery>> call, Response<List<GroupGrocery>> response) {
                 if (response.isSuccessful()) {
                     List<GroupGrocery> groceries = response.body();
-                    groupGroceries.setValue(groceries);
-                    System.out.println("Group Grocery fetching completed");
+                    uncompletedGroupGroceries.setValue(groceries);
+                    System.out.println("Uncompleted group grocery fetching successful");
                 }
             }
 
@@ -147,8 +148,38 @@ public class GroceryRepository {
             public void onFailure(Call<List<GroupGrocery>> call, Throwable t) {
                 // Handle the failure if needed
                 // For example, show an error message
-                System.out.println("Failure while fetching group groceries" + t);
+                System.out.println("Failure while fetching uncompleted group groceries" + t);
             }
         });
+    }
+
+    private void fetchCompletedGroupGroceries() {
+        // Get current group id
+        UUID currentGroupId = UserViewModel.getCurrentGroup().getValue().getId();
+
+        // Perform the API call to fetch group groceries asynchronously
+        Call<List<GroupGrocery>> call = groceryService.getCompletedGroupGroceries(currentGroupId);
+        call.enqueue(new Callback<List<GroupGrocery>>() {
+            @Override
+            public void onResponse(Call<List<GroupGrocery>> call, Response<List<GroupGrocery>> response) {
+                if (response.isSuccessful()) {
+                    List<GroupGrocery> groceries = response.body();
+                    completedGroupGroceries.setValue(groceries);
+                    System.out.println("Group Grocery fetching successful");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<GroupGrocery>> call, Throwable t) {
+                // Handle the failure if needed
+                // For example, show an error message
+                System.out.println("Failure while fetching completed group groceries" + t);
+            }
+        });
+    }
+
+    public void fetchGroupGroceries(){
+        fetchUncompletedGroupGroceries();
+        fetchCompletedGroupGroceries();
     }
 }

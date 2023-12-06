@@ -34,7 +34,7 @@ public class FragmentGroceryListController extends Fragment {
     EditText input;
     ImageView enter;
     static GroceryRepository groceryRepository;
-    static LiveData<List<GroupGrocery>> groceryLiveData;
+    static LiveData<List<GroupGrocery>> uncompletedGroceryLiveData;
     static ArrayAdapter<GroupGrocery> adapter;
     static Context context;
     static Toast t;
@@ -42,10 +42,10 @@ public class FragmentGroceryListController extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         groceryRepository = new GroceryRepository();
-        groceryLiveData = groceryRepository.getGroupGroceries();
+        uncompletedGroceryLiveData = groceryRepository.getUncompletedGroupGroceries();
 
         // TODO maybe wont update, as list is altered, not exchanged
-        groceryLiveData.observe(getViewLifecycleOwner(), groceryList -> {
+        uncompletedGroceryLiveData.observe(getViewLifecycleOwner(), groceryList -> {
             adapter = new GroceryListListViewAdapter(getActivity(), groceryList);
             listView.setAdapter(adapter);
         });
@@ -64,7 +64,7 @@ public class FragmentGroceryListController extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // Show name of the clicked item
-                GroupGrocery grocery = groceryLiveData.getValue().get(position);
+                GroupGrocery grocery = uncompletedGroceryLiveData.getValue().get(position);
                 ToastUtil.makeToast(grocery.getName(), context);
             }
 
@@ -107,13 +107,13 @@ public class FragmentGroceryListController extends Fragment {
 
     // function to remove an item given its index in the grocery list.
     public static void removeItem(int item) {
-        GroupGrocery grocery = groceryLiveData.getValue().get(item);
+        GroupGrocery grocery = uncompletedGroceryLiveData.getValue().get(item);
         groceryRepository.deleteGroupGrocery(grocery, context);
 
     }
 
     public static void uncheckItem(int i) {
-        GroupGrocery grocery = groceryLiveData.getValue().get(i);
+        GroupGrocery grocery = uncompletedGroceryLiveData.getValue().get(i);
         grocery.setCompleted();
         groceryRepository.updateGroupGrocery(grocery, context);
     }
