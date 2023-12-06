@@ -86,6 +86,7 @@ public class FragmentManageFlatShareController extends Fragment {
                     ToastUtil.makeToast("Added " + text, context);
                 }
 
+
             }
 
         });
