@@ -43,17 +43,24 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         fragmentView = inflater.inflate(R.layout.fragment_cleaning_plan_add, container, false);
-        context = getActivity();
+        context = requireActivity();
+        loadScreenElements();
         addButtons();
         implementSpinner();
         return fragmentView;
     }
 
-    private void addButtons() {
-        datePickerCleaningPlan = fragmentView.findViewById(R.id.datePickerCleaningPlan);
-        datePickerCleaningPlan.setOnClickListener(v -> showDatePickerDialog());
+    private void loadScreenElements() {
 
+        datePickerCleaningPlan = fragmentView.findViewById(R.id.datePickerCleaningPlan);
         saveCleaningPlan = FragmentCleaningPlanController.fragmentView.findViewById(R.id.saveCleaningPlan);
+        spinner = fragmentView.findViewById(R.id.chooseInterval);
+
+    }
+
+    private void addButtons() {
+
+        datePickerCleaningPlan.setOnClickListener(v -> showDatePickerDialog());
         saveCleaningPlan.setOnClickListener(v -> setLog());
 
     }
@@ -101,7 +108,6 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
         paths.add("Bi-Weekly");
         paths.add("Monthly");
 
-        spinner = fragmentView.findViewById(R.id.chooseInterval);
         ArrayAdapter<String> adapter = new SpinnerListAdapter(context, paths);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);

@@ -16,13 +16,19 @@ public class ActivityRegisterScreenController extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_screen);
-        this.addButtons();
+        loadScreenElements();
+        addButtons();
+
+    }
+
+    private void loadScreenElements() {
+
+        cancelButton=findViewById(R.id.cancelButton);
 
     }
 
     private void addButtons(){
 
-        cancelButton=findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(view -> {
             Intent loginScreen = new Intent(ActivityRegisterScreenController.this, ActivityLoginScreenController.class);
             startActivity(loginScreen);

@@ -37,7 +37,11 @@ public class FragmentGroceryListController extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        adapter = new GroceryListListViewAdapter(getActivity(),items);
+        fragmentView = inflater.inflate(R.layout.fragment_grocery_list, container, false);
+        loadScreenElements();
+        context = requireActivity();
+
+        adapter = new GroceryListListViewAdapter(requireActivity(),items);
         items.add("5 Apples");
         items.add("Banana");
         items.add("Strawberry");
@@ -47,12 +51,6 @@ public class FragmentGroceryListController extends Fragment {
         items.add("Cucumber");
         items.add("Pear");
 
-        fragmentView = inflater.inflate(R.layout.fragment_grocery_list, container, false);
-        listView = fragmentView.findViewById(R.id.groceryList);
-
-        input = fragmentView.findViewById(R.id.input);
-        enter = fragmentView.findViewById(R.id.enter);
-        context = getActivity();
         listView.setLongClickable(true);
 
         listView.setAdapter(adapter);
@@ -95,6 +93,14 @@ public class FragmentGroceryListController extends Fragment {
         });
 
         return fragmentView;
+
+    }
+
+    private void loadScreenElements() {
+
+        listView = fragmentView.findViewById(R.id.groceryList);
+        input = fragmentView.findViewById(R.id.input);
+        enter = fragmentView.findViewById(R.id.enter);
 
     }
 

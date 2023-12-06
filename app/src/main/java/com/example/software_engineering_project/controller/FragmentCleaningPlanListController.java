@@ -69,31 +69,32 @@ public class FragmentCleaningPlanListController extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        fragmentView = inflater.inflate(R.layout.fragment_cleaning_plan_list, container, false);
+        loadScreenElements();
+        addButtons();
+        context = requireActivity();
+
         adapter = new CleaningPlanListViewAdapter(getActivity(), items);
         items.clear();
         items.add("Kehren");
         items.add("Wischen");
         items.add("Bad");
 
-
-
-        fragmentView = inflater.inflate(R.layout.fragment_cleaning_plan_list, container, false);
-        listView = fragmentView.findViewById(R.id.cleaningPlanList);
         listView.setAdapter(adapter);
-        addButtons();
-
-        context = getActivity();
-
 
         return fragmentView;
+    }
+
+    private void loadScreenElements() {
+
+        listView = fragmentView.findViewById(R.id.cleaningPlanList);
+
     }
 
     private void addButtons() {
 
         FragmentCleaningPlanListDetailController fragmentCleaningPlanListDetailController = new FragmentCleaningPlanListDetailController();
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            //String clickedItem = (String) listView.getItemAtPosition(position);
-            //Toast.makeText(getActivity(), clickedItem, Toast.LENGTH_SHORT).show();
             callFragment(fragmentCleaningPlanListDetailController);
             FragmentCleaningPlanController.goBackCleaningPlan.setVisibility(View.VISIBLE);
 

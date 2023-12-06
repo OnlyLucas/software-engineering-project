@@ -33,28 +33,33 @@ public class FragmentBudgetMainController extends Fragment {
                              Bundle savedInstanceState) {
 
         fragmentView = inflater.inflate(R.layout.fragment_budget_main, container, false);
+        loadScreenElements();
         callFragment(fragmentBudgetListController);
         addButtons();
         return fragmentView;
     }
 
+    private void loadScreenElements() {
+
+        showBudgetDetail = fragmentView.findViewById(R.id.showBudgetDetail);
+        goBackBudgetMain = fragmentView.findViewById(R.id.goBackBudgetMain);
+        budgetHeadline = fragmentView.findViewById(R.id.budgetHeadline);
+
+    }
+
 
     private void addButtons() {
 
-        showBudgetDetail = fragmentView.findViewById(R.id.showBudgetDetail);
         showBudgetDetail.setOnClickListener(view -> {
             callFragment(fragmentBudgetDetailScreenController);
             replaceButtons(showBudgetDetail, goBackBudgetMain);
-            budgetHeadline = fragmentView.findViewById(R.id.budgetHeadline);
             budgetHeadline.setText("Details");
 
         });
 
-        goBackBudgetMain = fragmentView.findViewById(R.id.goBackBudgetMain);
         goBackBudgetMain.setOnClickListener(view -> {
             callFragment(fragmentBudgetListController);
             replaceButtons(goBackBudgetMain, showBudgetDetail);
-            budgetHeadline = fragmentView.findViewById(R.id.budgetHeadline);
             budgetHeadline.setText(getText(R.string.budget));
         });
 

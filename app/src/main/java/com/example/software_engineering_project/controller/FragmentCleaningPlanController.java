@@ -31,25 +31,32 @@ public class FragmentCleaningPlanController extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-
-        FragmentCleaningPlanListController fragmentCleaningPlanListController = new FragmentCleaningPlanListController();
-        callFragment(fragmentCleaningPlanListController);
         fragmentView = inflater.inflate(R.layout.fragment_cleaning_plan, container, false);
+        FragmentCleaningPlanListController fragmentCleaningPlanListController = new FragmentCleaningPlanListController();
+        laodScreenElements();
+        callFragment(fragmentCleaningPlanListController);
         addButtons();
         return fragmentView;
     }
 
+    private void laodScreenElements() {
+
+        addCleaningPlan = fragmentView.findViewById(R.id.addCleaningPlan);
+        goBackCleaningPlan = fragmentView.findViewById(R.id.goBackCleaningPlan);
+        saveCleaningPlan = fragmentView.findViewById(R.id.saveCleaningPlan);
+
+    }
+
     private void addButtons() {
         FragmentCleaningPlanAddController fragmentCleaningPlanAddController = new FragmentCleaningPlanAddController();
-        addCleaningPlan = fragmentView.findViewById(R.id.addCleaningPlan);
         addCleaningPlan.setOnClickListener(v -> {
             callFragment(fragmentCleaningPlanAddController);
             goBackCleaningPlan.setVisibility(View.VISIBLE);
             saveCleaningPlan.setVisibility(View.VISIBLE);
             addCleaningPlan.setVisibility(View.INVISIBLE);
         });
+
         FragmentCleaningPlanListController fragmentCleaningPlanListController = new FragmentCleaningPlanListController();
-        goBackCleaningPlan = fragmentView.findViewById(R.id.goBackCleaningPlan);
         goBackCleaningPlan.setOnClickListener(v -> {
             callFragment(fragmentCleaningPlanListController);
             goBackCleaningPlan.setVisibility(View.INVISIBLE);
@@ -57,8 +64,9 @@ public class FragmentCleaningPlanController extends Fragment {
             addCleaningPlan.setVisibility(View.VISIBLE);
         });
 
+        //TODO: Save Cleaning Plan hinzufügen!
 
-        saveCleaningPlan = fragmentView.findViewById(R.id.saveCleaningPlan);
+
     }
 
 

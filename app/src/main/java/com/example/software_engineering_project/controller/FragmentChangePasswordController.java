@@ -28,9 +28,17 @@ public class FragmentChangePasswordController extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         fragmentView = inflater.inflate(R.layout.fragment_change_password, container, false);
-        context = getActivity();
-        this.addButtons();
+        context = requireActivity();
+        loadScreenElements();
+        addButtons();
         return fragmentView;
+
+    }
+
+    private void loadScreenElements() {
+
+        cancelChangePassword = fragmentView.findViewById(R.id.cancelChangePassword);
+        saveChangePassword = fragmentView.findViewById(R.id.saveChangePassword);
 
     }
 
@@ -45,14 +53,12 @@ public class FragmentChangePasswordController extends Fragment {
 
     private void addButtons() {
 
-        cancelChangePassword = fragmentView.findViewById(R.id.cancelChangePassword);
         cancelChangePassword.setOnClickListener(view -> {
             FragmentSettingsController fragment = new FragmentSettingsController();
             makeToast(getString(R.string.changes_discarded));
             callFragment(fragment);
         });
 
-        saveChangePassword = fragmentView.findViewById(R.id.saveChangePassword);
         saveChangePassword.setOnClickListener(view -> {
 
             //Daten müssen hier noch gesaved werden

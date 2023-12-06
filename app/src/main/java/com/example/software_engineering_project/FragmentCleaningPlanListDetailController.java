@@ -32,21 +32,22 @@ public class FragmentCleaningPlanListDetailController extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        adapter = new CleaningPlanListDetailViewAdapter(getActivity(), items);
+        fragmentView = inflater.inflate(R.layout.fragment_cleaning_plan_list_detail, container, false);
+        loadScreenElements();
+        context = requireActivity();
+
+        adapter = new CleaningPlanListDetailViewAdapter(context, items);
         items.clear();
         items.add("January");
 
-        fragmentView = inflater.inflate(R.layout.fragment_cleaning_plan_list_detail, container, false);
+        listView.setAdapter(adapter);
+
+        return fragmentView;
+    }
+
+    private void loadScreenElements() {
 
         listView = fragmentView.findViewById(R.id.cleaningPlanListDetail);
 
-        context = requireActivity();
-
-        listView.setAdapter(adapter);
-
-
-
-
-        return fragmentView;
     }
 }

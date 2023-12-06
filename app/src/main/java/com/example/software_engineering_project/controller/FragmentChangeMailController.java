@@ -29,9 +29,17 @@ public class FragmentChangeMailController extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         fragmentView = inflater.inflate(R.layout.fragment_change_mail, container, false);
-        context = getActivity();
-        this.addButtons();
+        context = requireActivity();
+        loadScreenElements();
+        addButtons();
         return fragmentView;
+
+    }
+
+    private void loadScreenElements() {
+
+        cancelChangeMail = fragmentView.findViewById(R.id.cancelChangeMail);
+        saveChangeMail = fragmentView.findViewById(R.id.saveChangeMail);
 
     }
 
@@ -46,14 +54,12 @@ public class FragmentChangeMailController extends Fragment {
 
     private void addButtons() {
 
-        cancelChangeMail = fragmentView.findViewById(R.id.cancelChangeMail);
         cancelChangeMail.setOnClickListener(view -> {
             FragmentSettingsController fragment = new FragmentSettingsController();
             makeToast(getString(R.string.changes_discarded));
             callFragment(fragment);
         });
 
-        saveChangeMail = fragmentView.findViewById(R.id.saveChangeMail);
         saveChangeMail.setOnClickListener(view -> {
 
             //Daten müssen hier noch gesaved werden

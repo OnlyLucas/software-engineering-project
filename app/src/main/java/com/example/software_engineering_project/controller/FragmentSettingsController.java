@@ -32,30 +32,36 @@ public class FragmentSettingsController extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         fragmentView = inflater.inflate(R.layout.fragment_setting_screen, container, false);
+        loadScreenElements();
         addButtons();
 
         return fragmentView;
 
     }
 
-    private void addButtons() {
+    private void loadScreenElements() {
 
         changePasswordButton = fragmentView.findViewById(R.id.changePasswordButton);
+        changeMailButton = fragmentView.findViewById(R.id.changeMailButton);
+        createFlatShareButton = fragmentView.findViewById(R.id.createFlatShareButton);
+        logOutButton = fragmentView.findViewById(R.id.logOutButton);
+
+    }
+
+    private void addButtons() {
+
         changePasswordButton.setOnClickListener(view -> {
             callFragment(fragmentChangePasswordController);
         });
 
-        changeMailButton = fragmentView.findViewById(R.id.changeMailButton);
         changeMailButton.setOnClickListener(view -> {
             callFragment(fragmentChangeMailController);
         });
 
-        createFlatShareButton = fragmentView.findViewById(R.id.createFlatShareButton);
         createFlatShareButton.setOnClickListener(view -> {
             callFragment(fragmentManageFlatShareController);
         });
 
-        logOutButton = fragmentView.findViewById(R.id.logOutButton);
         logOutButton.setOnClickListener(view -> {
             Intent loginScreen = new Intent(requireActivity(), ActivityLoginScreenController.class);
             startActivity(loginScreen);
