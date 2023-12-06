@@ -2,7 +2,6 @@ package com.example.software_engineering_project.dataservice;
 
 import com.example.software_engineering_project.entity.GroupGrocery;
 
-import io.reactivex.rxjava3.core.Observable;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -17,7 +16,7 @@ import java.util.UUID;
 public interface GroupGroceryService {
 
     @GET("group-groceries/{id}")
-    Observable<GroupGrocery> getGroupGrocery(@Path("id") UUID groupGroceryId);
+    Call<GroupGrocery> getGroupGrocery(@Path("id") UUID groupGroceryId);
 
     @GET("group-groceries/group/{group-id}")
     Call<List<GroupGrocery>> getGroupGroceries(@Path("group-id") UUID groupGroceryId);
@@ -29,15 +28,12 @@ public interface GroupGroceryService {
     Call<List<GroupGrocery>> getCompletedGroupGroceries(@Path("group-id") UUID groupGroceryId);
 
     @POST("group-groceries")
-    Observable<GroupGrocery> createGroupGrocery(@Body GroupGrocery groupGrocery);
-
-    @POST("group-groceries")
-    Call<GroupGrocery> createGroupGroceryCall(@Body GroupGrocery groupGrocery);
+    Call<GroupGrocery> createGroupGrocery(@Body GroupGrocery groupGrocery);
 
     @DELETE("group-groceries/{id}")
     Call<Void> deleteGroupGrocery(@Path("id") UUID groupGroceryId);
 
     @PUT("group-groceries/{id}")
-    Call<GroupGrocery> updateGroupGrocery(@Path("id") UUID id, @Body GroupGrocery groupGrocery);
+    Call<GroupGrocery> updateGroupGrocery(@Path("id") UUID groupGroceryId, @Body GroupGrocery groupGrocery);
 
 }

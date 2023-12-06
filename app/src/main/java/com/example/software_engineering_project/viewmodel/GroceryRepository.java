@@ -24,7 +24,7 @@ public class GroceryRepository {
     private MutableLiveData<List<GroupGrocery>> completedGroupGroceries = new MutableLiveData<>();
 
     public GroceryRepository() {
-        // Initialize your Retrofit service (you should have a Retrofit setup for your API)
+        // Initialize Retrofit service
         groceryService = RetrofitClient.getInstance().create(GroupGroceryService.class);
         // Fetch group groceries immediately upon repository creation
         fetchGroupGroceries();
@@ -36,7 +36,7 @@ public class GroceryRepository {
 
     public void insertGroupGrocery(GroupGrocery groupGrocery, Context context) {
         // Perform the API call to insert a new group grocery
-        Call<GroupGrocery> call = groceryService.createGroupGroceryCall(groupGrocery);
+        Call<GroupGrocery> call = groceryService.createGroupGrocery(groupGrocery);
         call.enqueue(new Callback<GroupGrocery>() {
             @Override
             public void onResponse(Call<GroupGrocery> call, Response<GroupGrocery> response) {
