@@ -9,42 +9,46 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         app:cardCornerRadius="12dp"
-        android:background="@color/navBar">
+        android:background="@color/background">
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@color/background">
 
-            <TextView
-                android:id="@+id/numberCleaningPlan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/nameCleaningPlan"
-                android:layout_marginStart="10sp"
-                android:layout_centerVertical="true"
-                android:textColor="@color/black"
-                android:textSize="17sp"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/nameCleaningPlan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="28sp"
-                android:textColor="#000"
-                android:textSize="20sp" />
-
-
             <ImageView
-                android:id="@+id/removeCleaningPlan"
-                android:layout_width="22sp"
-                android:layout_height="22sp"
-                android:layout_alignParentRight="true"
+                android:id="@+id/checkExpenseOwe"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="18sp"
-                android:src="@drawable/remove"/>
+                android:layout_marginStart="10sp"
+                android:src="@drawable/check_expense"
+                app:tint="@color/accent2" />
+
+            <TextView
+                android:id="@+id/nameOfCreditor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/amountOfCredit"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/checkExpenseOwe"
+                android:text="Lucas"
+                android:textColor="@color/black"
+                android:textSize="25sp"/>
+
+            <TextView
+                android:id="@+id/amountOfCredit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="18sp"
+                android:text="- 10$"
+                android:textColor="@color/accent2"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
 
         </RelativeLayout>
 

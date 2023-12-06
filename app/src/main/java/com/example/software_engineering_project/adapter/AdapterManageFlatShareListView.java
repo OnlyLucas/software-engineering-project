@@ -15,14 +15,14 @@ import java.util.ArrayList;
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.controller.FragmentManageFlatShareController;
 
-public class CreateFlatShareListViewAdapter extends ArrayAdapter<String> {
+public class AdapterManageFlatShareListView extends ArrayAdapter<String> {
     ArrayList<String> list;
     Context context;
 
     // The ListViewAdapter Constructor
     // @param context: the Context from the MainActivity
     // @param items: The list of items in our Grocery List
-    public CreateFlatShareListViewAdapter(Context context, ArrayList<String> items) {
+    public AdapterManageFlatShareListView(Context context, ArrayList<String> items) {
         super(context, R.layout.adapter_manage_flat_share_list_view, items);
         this.context = context;
         list = items;
@@ -36,9 +36,9 @@ public class CreateFlatShareListViewAdapter extends ArrayAdapter<String> {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.adapter_manage_flat_share_list_view, null);
 
-            TextView name = convertView.findViewById(R.id.nameCleaningPlan);
-            ImageView remove = convertView.findViewById(R.id.removeCleaningPlan);
-            TextView number = convertView.findViewById(R.id.numberCleaningPlan);
+            TextView name = convertView.findViewById(R.id.nameManageFlatShare);
+            ImageView remove = convertView.findViewById(R.id.removeManageFlatShare);
+            TextView number = convertView.findViewById(R.id.numberManageFlatShare);
 
             number.setText(position + 1 + ".");
             name.setText(list.get(position));

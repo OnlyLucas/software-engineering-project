@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.software_engineering_project.FragmentBudgetMainController;
 import com.example.software_engineering_project.R;
 
 
@@ -24,8 +23,17 @@ public class ActivityMainScreenController extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+        loadScreenElements();
         addButtons();
 
+    }
+
+    private void loadScreenElements() {
+
+        groceryListButton = findViewById(R.id.groceryListButton);
+        goSettingsButton = findViewById(R.id.goSettingsButtons);
+        cleaningPlanButton = findViewById(R.id.cleaningPlanButton);
+        budgetButton = findViewById(R.id.budgetButton);
     }
 
     public void callFragment(Fragment fragment) {
@@ -40,7 +48,6 @@ public class ActivityMainScreenController extends AppCompatActivity {
 
     private void addButtons() {
 
-        groceryListButton = findViewById(R.id.groceryListButton);
         groceryListButton.setOnClickListener(view -> {
             // TODO
             // FragmentGroceryListController.groceryLiveData.getValue().clear();
@@ -49,7 +56,6 @@ public class ActivityMainScreenController extends AppCompatActivity {
             addMenuBarTint(groceryListButton);
         });
 
-        goSettingsButton = findViewById(R.id.goSettingsButtons);
         goSettingsButton.setOnClickListener(view -> {
             FragmentSettingsController fragmentSettingsController = new FragmentSettingsController();
             callFragment(fragmentSettingsController);
@@ -57,14 +63,12 @@ public class ActivityMainScreenController extends AppCompatActivity {
 
         });
 
-        cleaningPlanButton = findViewById(R.id.cleaningPlanButton);
         cleaningPlanButton.setOnClickListener(view -> {
             FragmentCleaningPlanController fragmentCleaningPlanController = new FragmentCleaningPlanController();
             callFragment(fragmentCleaningPlanController);
             addMenuBarTint(cleaningPlanButton);
         });
 
-        budgetButton = findViewById(R.id.budgetButton);
         budgetButton.setOnClickListener(view -> {
             FragmentBudgetMainController fragmentBudgetMainController = new FragmentBudgetMainController();
             callFragment(fragmentBudgetMainController);

@@ -41,9 +41,7 @@
             <EditText
                 android:id="@+id/currentMail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:drawableEnd="@drawable/password_icon"/>
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -57,9 +55,7 @@
             <EditText
                 android:id="@+id/newMail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:drawableEnd="@drawable/password_icon"/>
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -73,9 +69,7 @@
             <EditText
                 android:id="@+id/confirmNewMail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:drawableEnd="@drawable/password_icon"/>
+                android:layout_height="wrap_content"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -93,7 +87,8 @@
                     android:drawableLeft="@drawable/go_back_icon_small"
                     android:layout_weight="1"
                     android:backgroundTint="@color/secondary"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginEnd="10dp"
+                    tools:ignore="RtlHardcoded" />
 
                 <Button
                     android:id="@+id/saveChangeMail"
@@ -103,7 +98,8 @@
                     android:drawableLeft="@drawable/save_icon"
                     android:layout_weight="1"
                     android:backgroundTint="@color/primary"
-                    android:layout_marginLeft="10dp"/>
+                    android:layout_marginLeft="10dp"
+                    tools:ignore="RtlHardcoded" />
 
             </LinearLayout>
 

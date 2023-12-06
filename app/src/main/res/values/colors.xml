@@ -10,6 +10,7 @@
     <color name="background2">#F8EDE3</color>
     <color name="accent1">#d08d8d</color>
     <color name="accent2">#b67272</color>
+    <color name="accent3">#84B672</color>
 
     <color name="navBar">#F8EDE3</color>
     <color name="navBar0.5">#CCF8EDE3</color>

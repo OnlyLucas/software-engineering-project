@@ -35,7 +35,7 @@
                 android:id="@+id/createFlatShareButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/create_flat_share"
+                android:text="@string/manage_flat_share"
                 android:textColor="@color/black"
                 android:backgroundTint="@color/listViewTint"/>
 

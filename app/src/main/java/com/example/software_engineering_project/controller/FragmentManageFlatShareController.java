@@ -17,7 +17,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.adapter.CreateFlatShareListViewAdapter;
+import com.example.software_engineering_project.adapter.AdapterManageFlatShareListView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,7 +30,7 @@ public class FragmentManageFlatShareController extends Fragment {
     static ListView listView;
     EditText input_name, input_mail;
     ImageView enter;
-    static CreateFlatShareListViewAdapter adapter;
+    static AdapterManageFlatShareListView adapter;
     static ArrayList<String> items = new ArrayList<>();
     static Context context;
     private Button cancelCreateFlatShare;
@@ -38,20 +38,16 @@ public class FragmentManageFlatShareController extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        adapter = new CreateFlatShareListViewAdapter(getActivity(), items);
+        fragmentView = inflater.inflate(R.layout.fragment_manage_flat_share, container, false);
+        loadScreenElements();
+        context = requireActivity();
+
+        adapter = new AdapterManageFlatShareListView(getActivity(), items);
         items.add("Meike");
         items.add("Lucas");
         items.add("Laura");
         items.add("Nikos");
         items.add("Jonas");
-
-        fragmentView = inflater.inflate(R.layout.fragment_manage_flat_share, container, false);
-
-        context = getActivity();
-        listView = fragmentView.findViewById(R.id.flatShareMemberList);
-        input_name = fragmentView.findViewById(R.id.input_name);
-        input_mail = fragmentView.findViewById(R.id.input_mail);
-        enter = fragmentView.findViewById(R.id.addFlatShareMember);
 
         listView.setLongClickable(true);
         listView.setAdapter(adapter);
@@ -94,6 +90,15 @@ public class FragmentManageFlatShareController extends Fragment {
         });
 
         return fragmentView;
+
+    }
+
+    private void loadScreenElements() {
+
+        listView = fragmentView.findViewById(R.id.flatShareMemberList);
+        input_name = fragmentView.findViewById(R.id.input_name);
+        input_mail = fragmentView.findViewById(R.id.input_mail);
+        enter = fragmentView.findViewById(R.id.addFlatShareMember);
 
     }
 

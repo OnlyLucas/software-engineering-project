@@ -26,7 +26,7 @@ public abstract class ListScreenController<T> extends AppCompatActivity {
     ArrayList<T> items;
     static Context context;
     private Button goBackButtonGroceryList;
-    private int activity;
+    private final int activity;
 
     /**
      * @param activity is the activity for a controller of a certain screen
@@ -34,7 +34,7 @@ public abstract class ListScreenController<T> extends AppCompatActivity {
     public ListScreenController(int activity, ArrayAdapter<String> adapter){
 
         this.activity = activity;
-        this.adapter = adapter;
+        ListScreenController.adapter = adapter;
 
     }
 

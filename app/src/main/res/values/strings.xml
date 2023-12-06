@@ -53,4 +53,11 @@
     <string name="name_of_cleaning_plan">Name of Cleaning Plan</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="new_e_mail_saved">New e-mail saved</string>
+    <string name="changes_discarded">Changes discarded</string>
+    <string name="new_password_saved">New password saved</string>
+    <string name="removed_toast">"Removed: "</string>
+    <string name="unchecked_toast">"Unchecked: "</string>
+    <string name="enter_an_item_toast">Enter an item.</string>
+    <string name="added_toast">"Added "</string>
 </resources>

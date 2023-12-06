@@ -29,15 +29,16 @@ import com.example.software_engineering_project.viewmodel.GroceryRepository;
  */
 public class FragmentGroceryListController extends Fragment {
 
-    View fragmentView;
-    static ListView listView;
-    EditText input;
-    ImageView enter;
-    static GroceryRepository groceryRepository;
-    static LiveData<List<GroupGrocery>> uncompletedGroceryLiveData;
-    static ArrayAdapter<GroupGrocery> adapter;
-    static Context context;
-    static Toast t;
+    private static ListView listView;
+    private static GroceryRepository groceryRepository;
+    private static LiveData<List<GroupGrocery>> uncompletedGroceryLiveData;
+    private static ArrayAdapter<GroupGrocery> adapter;
+    private static Context context;
+  
+    private EditText input;
+    private ImageView enter;
+    private View fragmentView;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,10 +52,7 @@ public class FragmentGroceryListController extends Fragment {
         });
 
         fragmentView = inflater.inflate(R.layout.fragment_grocery_list, container, false);
-        listView = fragmentView.findViewById(R.id.groceryList);
-
-        input = fragmentView.findViewById(R.id.input);
-        enter = fragmentView.findViewById(R.id.enter);
+        loadScreenElements();
         context = getActivity();
 
         listView.setLongClickable(true);
@@ -88,7 +86,7 @@ public class FragmentGroceryListController extends Fragment {
 
                 if (text.length() == 0) {
                     // if no input
-                    ToastUtil.makeToast("Enter an item.", context);
+                    ToastUtil.makeToast(getString(R.string.enter_an_item_toast), context);
                 } else {
                     // if input exists, create new GroupGrocery with respective attributes
                     GroupGrocery grocery = new GroupGrocery(text);
@@ -109,7 +107,6 @@ public class FragmentGroceryListController extends Fragment {
     public static void removeItem(int item) {
         GroupGrocery grocery = uncompletedGroceryLiveData.getValue().get(item);
         groceryRepository.deleteGroupGrocery(grocery, context);
-
     }
 
     public static void uncheckItem(int i) {
@@ -122,6 +119,11 @@ public class FragmentGroceryListController extends Fragment {
     public void addItem(GroupGrocery item) {
         groceryRepository.insertGroupGrocery(item, context);
     }
-
+  
+    private void loadScreenElements() {
+        listView = fragmentView.findViewById(R.id.groceryList);
+        input = fragmentView.findViewById(R.id.input);
+        enter = fragmentView.findViewById(R.id.enter);
+    }
 
 }

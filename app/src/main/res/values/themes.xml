@@ -10,7 +10,7 @@
         <item name="colorSecondaryVariant">@color/secondary</item>
         <item name="colorOnSecondary">@color/black</item>
 
-        <item name="android:statusBarColor">@color/primary</item>
+        <item name="android:statusBarColor">@color/secondary</item>
     </style>
 
     <style name="Theme.Softwareengineeringproject" parent="Base.Theme.Softwareengineeringproject" />

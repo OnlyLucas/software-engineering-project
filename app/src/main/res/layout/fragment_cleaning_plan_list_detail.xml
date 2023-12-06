@@ -3,14 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.FragmentBudgetListController">
+    tools:context=".controller.FragmentCleaningPlanListDetailController">
 
     <ListView
-        android:id="@+id/budgetListFirstLayer"
-        android:layout_width="wrap_content"
+        android:id="@+id/cleaningPlanListDetail"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@null"
-        android:background="@color/background2" />
-
+        android:divider="@null"/>
 
 </RelativeLayout>

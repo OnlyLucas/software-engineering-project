@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,16 +16,14 @@ import com.example.software_engineering_project.R;
 
 import java.util.ArrayList;
 
-public class AdapterBudgetListFirstLayer extends ArrayAdapter<String> {
+public class AdapterBudgetNewExpense extends ArrayAdapter<String> {
 
     ArrayList<String> list;
-    TextView showMonth;
-    ListView budgetListFirstLayer;
-
+    CheckBox checkBoxNewExpenseParticipants;
     Context context;
 
-    public AdapterBudgetListFirstLayer(Context context, ArrayList<String> items) {
-        super(context, R.layout.adapter_budget_list_view_first_layer, items);
+    public AdapterBudgetNewExpense(Context context, ArrayList<String> items) {
+        super(context, R.layout.adapter_budget_new_expense, items);
         this.context = context;
         list = items;
     }
@@ -35,17 +33,19 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<String> {
     public View getView(int position, @Nullable View convertView, @Nullable ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.adapter_budget_list_view_first_layer, null);
+            convertView = mInflater.inflate(R.layout.adapter_budget_new_expense, null);
+
             loadScreenElements(convertView);
-            showMonth.setText(list.get(position));
+
+            checkBoxNewExpenseParticipants.setText(list.get(position));
         }
 
         return convertView;
     }
 
     private void loadScreenElements(View convertView) {
-        showMonth = convertView.findViewById(R.id.showMonth);
-        budgetListFirstLayer = convertView.findViewById(R.id.budgetListFirstLayer);
+
+        checkBoxNewExpenseParticipants = convertView.findViewById(R.id.checkBoxNewExpenseParticipants);
     }
 
 

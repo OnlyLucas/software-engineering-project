@@ -41,4 +41,5 @@
     <string name="budget_n">"Haushalts- \nbuch "</string>
     <string name="cleaning_nplan">Putzplan\n</string>
     <string name="settings_n">Einstellungen</string>
+    <string name="removed_toast">"Entfernt: "</string>
 </resources>

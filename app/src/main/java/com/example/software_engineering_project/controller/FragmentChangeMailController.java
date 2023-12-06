@@ -1,5 +1,6 @@
 package com.example.software_engineering_project.controller;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -29,18 +30,26 @@ public class FragmentChangeMailController extends Fragment {
 
     static UserRepository userRepository;
     static Context context;
-    View fragmentView;
+    private View fragmentView;
     private Button cancelChangeMail;
     private Button saveChangeMail;
-
     private EditText currentMail, newMail, confirmNewMail;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         userRepository = new UserRepository();
         context = getActivity();
         fragmentView = inflater.inflate(R.layout.fragment_change_mail, container, false);
-        this.addButtons();
+        context = requireActivity();
+        loadScreenElements();
+        addButtons();
         return fragmentView;
+
+    }
+
+    private void loadScreenElements() {
+
+        cancelChangeMail = fragmentView.findViewById(R.id.cancelChangeMail);
+        saveChangeMail = fragmentView.findViewById(R.id.saveChangeMail);
 
     }
 
@@ -55,16 +64,16 @@ public class FragmentChangeMailController extends Fragment {
 
     private void addButtons() {
 
-        cancelChangeMail = fragmentView.findViewById(R.id.cancelChangeMail);
         cancelChangeMail.setOnClickListener(view -> {
             FragmentSettingsController fragment = new FragmentSettingsController();
+            makeToast(getString(R.string.changes_discarded));
             callFragment(fragment);
         });
 
-        saveChangeMail = fragmentView.findViewById(R.id.saveChangeMail);
         saveChangeMail.setOnClickListener(view -> {
             checkMailChange();
             FragmentSettingsController fragment = new FragmentSettingsController();
+            makeToast(getString(R.string.new_e_mail_saved));
             callFragment(fragment);
         });
 

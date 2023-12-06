@@ -22,6 +22,11 @@ public class GroceryListListViewAdapter extends ArrayAdapter<GroupGrocery> {
     List<GroupGrocery> list;
     Context context;
 
+    TextView name;
+    ImageView remove;
+    ImageView unchecked;
+    TextView number;
+
     public GroceryListListViewAdapter(Context context, List<GroupGrocery> items) {
         super(context, R.layout.adapter_grocery_list_list_view, items);
         this.context = context;
@@ -36,11 +41,7 @@ public class GroceryListListViewAdapter extends ArrayAdapter<GroupGrocery> {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.adapter_grocery_list_list_view, null);
 
-            TextView name = convertView.findViewById(R.id.nameGroceryList);
-            ImageView remove = convertView.findViewById(R.id.removeGroceryList);
-            ImageView unchecked = convertView.findViewById(R.id.uncheckedGroceryList);
-            ImageView copy = convertView.findViewById(R.id.copyGroceryList);
-            TextView number = convertView.findViewById(R.id.numberGroceryList);
+            loadScreenElements(convertView);
 
             number.setText(position + 1 + ".");
             GroupGrocery current = list.get(position);
@@ -65,6 +66,15 @@ public class GroceryListListViewAdapter extends ArrayAdapter<GroupGrocery> {
         }
 
         return convertView;
+
+    }
+
+    private void loadScreenElements(View convertView) {
+
+        name = convertView.findViewById(R.id.nameGroceryList);
+        remove = convertView.findViewById(R.id.removeGroceryList);
+        unchecked = convertView.findViewById(R.id.uncheckedGroceryList);
+        number = convertView.findViewById(R.id.numberGroceryList);
 
     }
 

@@ -1,4 +1,4 @@
-package com.example.software_engineering_project;
+package com.example.software_engineering_project.controller;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.AdapterBudgetListFirstLayer;
 
 import java.util.ArrayList;
@@ -30,7 +31,12 @@ public class FragmentBudgetListController extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        adapter = new AdapterBudgetListFirstLayer(getActivity(), items);
+
+        fragmentView = inflater.inflate(R.layout.fragment_budget_list, container, false);
+        loadScreenElements();
+        context = requireActivity();
+
+        adapter = new AdapterBudgetListFirstLayer(context, items);
         items.clear();
         items.add("January");
         items.add("February");
@@ -41,13 +47,14 @@ public class FragmentBudgetListController extends Fragment {
         items.add("July");
         items.add("August");
 
-        fragmentView = inflater.inflate(R.layout.fragment_budget_list, container, false);
-        listView = fragmentView.findViewById(R.id.budgetListFirstLayer);
-
-        context = getActivity();
-
         listView.setAdapter(adapter);
 
         return fragmentView;
+    }
+
+    private void loadScreenElements() {
+
+        listView = fragmentView.findViewById(R.id.budgetListFirstLayer);
+
     }
 }
