@@ -81,7 +81,7 @@ public class FragmentBudgetMainController extends Fragment {
         saveExpense.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentBudgetAddExpenseScreenController.handleClick();
+                FragmentBudgetAddExpenseScreenController.handleSaveClicked();
             }
         });
 

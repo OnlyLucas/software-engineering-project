@@ -41,14 +41,6 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
     private static List<User> selectedUsers = new ArrayList<>();
     private View fragmentView, fragmentViewHeader;
 
-    public static void addSelectedUser(User user) {
-        selectedUsers.add(user);
-    }
-
-    public static void deleteSelectedUser(User user) {
-        selectedUsers.remove(user);
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,7 +64,7 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
         return fragmentView;
     }
 
-    public static void handleClick() {
+    public static void handleSaveClicked() {
         // get the inputs
         String expenseString = expense.getText().toString();
         try {
