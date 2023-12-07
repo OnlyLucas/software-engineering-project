@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -40,5 +41,10 @@ public class UserRESTController extends RESTController<UserEntity>{
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/group/{groupId}")
+    public List<UserEntity> getUsersByGroupId(@PathVariable("groupId") UUID groupId) {
+        return repository.findByGroupId(groupId);
     }
 }
