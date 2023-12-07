@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.CleaningPlanListViewAdapter;
+import com.example.software_engineering_project.util.ToastUtil;
 
 import java.util.ArrayList;
 
@@ -45,7 +46,9 @@ public class FragmentCleaningPlanListController extends Fragment {
     }
 
     public static void uncheckItem(int i) {
-        makeToast("Unchecked: " + items.get(i));
+
+        ToastUtil.makeToast("Unchecked: " + items.get(i), context);
+
     }
 
     // function to add an item given its name.
@@ -53,14 +56,6 @@ public class FragmentCleaningPlanListController extends Fragment {
 
         items.add(item);
         listView.setAdapter(adapter);
-
-    }
-
-    private static void makeToast(String s) {
-
-        if (t != null) t.cancel();
-        t = Toast.makeText(context, s, Toast.LENGTH_SHORT);
-        t.show();
 
     }
 
@@ -82,6 +77,7 @@ public class FragmentCleaningPlanListController extends Fragment {
         listView.setAdapter(adapter);
 
         return fragmentView;
+
     }
 
     private void loadScreenElements() {
@@ -98,14 +94,16 @@ public class FragmentCleaningPlanListController extends Fragment {
             FragmentCleaningPlanController.goBackCleaningPlan.setVisibility(View.VISIBLE);
 
         });
+
     }
 
     private void callFragment(Fragment fragment) {
+
         FragmentManager fm = requireActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.contentFragmentCleaningPlan, fragment);
         transaction.commit();
-    }
 
+    }
 
 }
