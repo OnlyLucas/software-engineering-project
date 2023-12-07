@@ -19,6 +19,9 @@ import java.util.ArrayList;
 public class AdapterBudgetListSecondLayer extends ArrayAdapter<String> {
 
     ArrayList<String> list;
+    static ArrayList<String> items = new ArrayList<>();
+
+    static AdapterBudgetListSecondLayer adapter;
 
     Context context;
 
@@ -38,6 +41,17 @@ public class AdapterBudgetListSecondLayer extends ArrayAdapter<String> {
             TextView showMonth = convertView.findViewById(R.id.showMonth);
             ListView budgetListSecondLayer = convertView.findViewById(R.id.budgetListSecondLayer);
 
+            adapter = new AdapterBudgetListSecondLayer(context, items);
+            items.clear();
+            items.add("January");
+            items.add("February");
+            items.add("March");
+            items.add("April");
+            items.add("May");
+            items.add("June");
+            items.add("July");
+            items.add("August");
+            budgetListSecondLayer.setAdapter(adapter);
             showMonth.setText(list.get(position));
         }
 

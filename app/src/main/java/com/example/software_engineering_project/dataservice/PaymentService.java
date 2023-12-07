@@ -8,6 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface PaymentService {
@@ -17,4 +18,7 @@ public interface PaymentService {
 
     @POST("payments")
     Call<Payment> createPayment(@Body Payment payment);
+
+    @GET("payments/group/{group-id}")
+    Call<List<Payment>> getPayments(@Path("group-id") UUID groupGroceryId);
 }
