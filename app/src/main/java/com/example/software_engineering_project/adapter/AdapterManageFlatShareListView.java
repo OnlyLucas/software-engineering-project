@@ -10,19 +10,20 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import java.util.ArrayList;
+import java.util.List;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.controller.FragmentManageFlatShareController;
+import com.example.software_engineering_project.entity.User;
 
-public class AdapterManageFlatShareListView extends ArrayAdapter<String> {
-    ArrayList<String> list;
+public class AdapterManageFlatShareListView extends ArrayAdapter<User> {
+    List<User> list;
     Context context;
 
     // The ListViewAdapter Constructor
     // @param context: the Context from the MainActivity
     // @param items: The list of items in our Grocery List
-    public AdapterManageFlatShareListView(Context context, ArrayList<String> items) {
+    public AdapterManageFlatShareListView(Context context, List<User> items) {
         super(context, R.layout.adapter_manage_flat_share_list_view, items);
         this.context = context;
         list = items;
@@ -40,8 +41,8 @@ public class AdapterManageFlatShareListView extends ArrayAdapter<String> {
             ImageView remove = convertView.findViewById(R.id.removeManageFlatShare);
             TextView number = convertView.findViewById(R.id.numberManageFlatShare);
 
-            number.setText(position + 1 + ".");
-            name.setText(list.get(position));
+            number.setText(position + 1 + ". ");
+            name.setText(list.get(position).getFirstName());
 
             // Listeners for duplicating and removing an item.
             // They use the static removeItem and addItem methods created in MainActivity.

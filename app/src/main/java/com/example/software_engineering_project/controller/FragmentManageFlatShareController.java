@@ -3,6 +3,8 @@ package com.example.software_engineering_project.controller;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +13,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.AdapterManageFlatShareListView;
+import com.example.software_engineering_project.entity.Group;
+import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
+import com.example.software_engineering_project.viewmodel.GroupMembershipRepository;
+import com.example.software_engineering_project.viewmodel.UserRepository;
+import com.example.software_engineering_project.viewmodel.UserViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +31,10 @@ import com.example.software_engineering_project.util.ToastUtil;
  * create an instance of this fragment.
  */
 public class FragmentManageFlatShareController extends Fragment {
+    private static UserRepository userRepository;
+    private static GroupMembershipRepository groupMembershipRepository;
+
+    private static LiveData<List<User>> currentUsers;
 
     View fragmentView;
     static ListView listView;
@@ -38,17 +47,20 @@ public class FragmentManageFlatShareController extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        userRepository = new UserRepository();
+        groupMembershipRepository = new GroupMembershipRepository();
+        currentUsers = userRepository.getCurrentUsers();
+
 
         fragmentView = inflater.inflate(R.layout.fragment_manage_flat_share, container, false);
         loadScreenElements();
         context = requireActivity();
+        currentUsers = userRepository.getCurrentUsers();
 
-        adapter = new AdapterManageFlatShareListView(getActivity(), items);
-        items.add("Meike");
-        items.add("Lucas");
-        items.add("Laura");
-        items.add("Nikos");
-        items.add("Jonas");
+        currentUsers.observe(getViewLifecycleOwner(), currentUsers -> {
+            adapter = new AdapterManageFlatShareListView(getActivity(), currentUsers);
+            listView.setAdapter(adapter);
+        });
 
         listView.setLongClickable(true);
         listView.setAdapter(adapter);
@@ -57,8 +69,8 @@ public class FragmentManageFlatShareController extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String clickedItem = (String) listView.getItemAtPosition(position);
-                Toast.makeText(getActivity(), clickedItem, Toast.LENGTH_SHORT).show();
+                User user = currentUsers.getValue().get(position);
+                ToastUtil.makeToast(user.getFirstName(), context);
             }
 
         });
@@ -73,13 +85,14 @@ public class FragmentManageFlatShareController extends Fragment {
 
         });
 
+        //TODO enter mail -> find user by mail -> add userMembership to current group
         enter.setOnClickListener(new AdapterView.OnClickListener() {
 
             @Override
             public void onClick(View view) {
                 String text = input_mail.getText().toString();
                 if (text.length() == 0) {
-                    ToastUtil.makeToast("Enter an e-mail", context);
+                    ToastUtil.makeToast("Enter mail here", context);
                 } else {
                     addItem(text);
                     input_mail.setText("");
@@ -104,33 +117,13 @@ public class FragmentManageFlatShareController extends Fragment {
 
     }
 
-    // Override onDestroy() to save the contents of the grocery list right before the app is terminated
-    @Override
-    public void onDestroy() {
-
-        File path = context.getApplicationContext().getFilesDir();
-        try {
-            FileOutputStream writer = new FileOutputStream(new File(path, "list.txt"));
-            writer.write(items.toString().getBytes());
-            writer.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        super.onDestroy();
-
-    }
-
     // function to remove an item given its index in the grocery list.
     public static void removeItem(int i) {
-
-        ToastUtil.makeToast("Removed: " + items.get(i),context);
-        items.remove(i);
+        User user = currentUsers.getValue().get(i);
+        Group group = UserViewModel.getCurrentGroup().getValue();
+        groupMembershipRepository.deleteGroupMembership(user, group, context);
         listView.setAdapter(adapter);
 
-    }
-
-    public static void uncheckItem(int i) {
-        ToastUtil.makeToast("Unchecked: " + items.get(i),context);
     }
 
     // function to add an item given its name.

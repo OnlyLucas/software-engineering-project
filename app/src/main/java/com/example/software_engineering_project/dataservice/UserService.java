@@ -2,6 +2,7 @@ package com.example.software_engineering_project.dataservice;
 
 import com.example.software_engineering_project.entity.User;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -16,9 +17,13 @@ public interface UserService{
     @GET("users/{id}")
     Call<User> getEntity(@Path("id") UUID userId);
 
+    @GET("users/group/{groupId}")
+    Call<List<User>> getUsers(@Path("groupId") UUID groupId);
+
     @POST("users")
     Call<User> createEntity(@Body User user);
 
     @PATCH("users/{id}")
     Call<User> partialUpdateEntity(@Path("id") UUID userId, @Body Map<String, String> updates);
+
 }
