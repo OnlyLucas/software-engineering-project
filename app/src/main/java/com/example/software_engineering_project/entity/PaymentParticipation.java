@@ -10,6 +10,7 @@ import java.util.UUID;
 public class PaymentParticipation {
     private UUID id;
     private Payment payment;
+    private Group group;
     private User user;
     private BigDecimal participationAmount;
     private String currencyCode;
@@ -31,6 +32,14 @@ public class PaymentParticipation {
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public User getUser() {
@@ -78,12 +87,12 @@ public class PaymentParticipation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PaymentParticipation that = (PaymentParticipation) o;
-        return Objects.equals(id, that.id) && Objects.equals(payment, that.payment) && Objects.equals(user, that.user) && Objects.equals(participationAmount, that.participationAmount) && Objects.equals(currencyCode, that.currencyCode) && Objects.equals(isPaid, that.isPaid) && Objects.equals(paidAt, that.paidAt);
+        return Objects.equals(id, that.id) && Objects.equals(payment, that.payment) && Objects.equals(group, that.group) && Objects.equals(user, that.user) && Objects.equals(participationAmount, that.participationAmount) && Objects.equals(currencyCode, that.currencyCode) && Objects.equals(isPaid, that.isPaid) && Objects.equals(paidAt, that.paidAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, payment, user, participationAmount, currencyCode, isPaid, paidAt);
+        return Objects.hash(id, payment, group, user, participationAmount, currencyCode, isPaid, paidAt);
     }
 
     @Override
@@ -91,6 +100,7 @@ public class PaymentParticipation {
         return "PaymentParticipation{" +
                 "id=" + id +
                 ", payment=" + payment +
+                ", group=" + group +
                 ", user=" + user +
                 ", participationAmount=" + participationAmount +
                 ", currencyCode='" + currencyCode + '\'' +
