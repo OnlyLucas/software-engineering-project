@@ -19,7 +19,6 @@ public class PaymentRepository {
         public PaymentRepository() {
             // Initialize Retrofit service
             paymentService = RetrofitClient.getInstance().create(PaymentService.class);
-            // Fetch group groceries immediately upon repository creation
         }
 
     public void createPayment(Payment payment, Context context) {

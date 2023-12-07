@@ -7,11 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.controller.FragmentBudgetAddExpenseScreenController;
 import com.example.software_engineering_project.entity.User;
 
 import java.util.List;
@@ -40,6 +42,31 @@ public class AdapterBudgetNewExpense extends ArrayAdapter<User> {
             User user = list.get(position);
             checkBoxNewExpenseParticipants.setText(user.getFirstName());
         }
+
+        checkBoxNewExpenseParticipants.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                User user = list.get(position);
+                if(!isChecked){
+                    FragmentBudgetAddExpenseScreenController.addUser(user);
+                } else {
+                    FragmentBudgetAddExpenseScreenController.deleteUser(user);
+                }
+            }
+
+        });
+
+        checkBoxNewExpenseParticipants.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                User user = list.get(position);
+                if(!checkBoxNewExpenseParticipants.isSelected()){
+                    FragmentBudgetAddExpenseScreenController.addUser(user);
+                } else {
+                    FragmentBudgetAddExpenseScreenController.deleteUser(user);
+                }
+            }
+        });
 
         return convertView;
     }
