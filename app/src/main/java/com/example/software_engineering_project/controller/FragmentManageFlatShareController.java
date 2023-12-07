@@ -51,11 +51,9 @@ public class FragmentManageFlatShareController extends Fragment {
         groupMembershipRepository = new GroupMembershipRepository();
         currentUsers = userRepository.getCurrentUsers();
 
-
         fragmentView = inflater.inflate(R.layout.fragment_manage_flat_share, container, false);
         loadScreenElements();
         context = requireActivity();
-        currentUsers = userRepository.getCurrentUsers();
 
         currentUsers.observe(getViewLifecycleOwner(), currentUsers -> {
             adapter = new AdapterManageFlatShareListView(getActivity(), currentUsers);

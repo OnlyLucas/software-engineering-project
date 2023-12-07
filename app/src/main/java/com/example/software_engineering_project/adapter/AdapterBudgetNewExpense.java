@@ -7,22 +7,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.software_engineering_project.controller.FragmentBudgetAddExpenseScreenController;
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.entity.User;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class AdapterBudgetNewExpense extends ArrayAdapter<String> {
+public class AdapterBudgetNewExpense extends ArrayAdapter<User> {
 
-    ArrayList<String> list;
+    List<User> list;
     CheckBox checkBoxNewExpenseParticipants;
     Context context;
 
-    public AdapterBudgetNewExpense(Context context, ArrayList<String> items) {
+    public AdapterBudgetNewExpense(Context context, List<User> items) {
         super(context, R.layout.adapter_budget_new_expense, items);
         this.context = context;
         list = items;
@@ -37,7 +38,19 @@ public class AdapterBudgetNewExpense extends ArrayAdapter<String> {
 
             loadScreenElements(convertView);
 
-            checkBoxNewExpenseParticipants.setText(list.get(position));
+            User user = list.get(position);
+            checkBoxNewExpenseParticipants.setText(user.getFirstName());
+
+            checkBoxNewExpenseParticipants.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(!checkBoxNewExpenseParticipants.isSelected()) {
+                        FragmentBudgetAddExpenseScreenController.addSelectedUser(user);
+                    } else {
+                        FragmentBudgetAddExpenseScreenController.deleteSelectedUser(user);
+                    }
+                }
+            });
         }
 
         return convertView;

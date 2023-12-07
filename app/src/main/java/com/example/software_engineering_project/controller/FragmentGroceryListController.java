@@ -13,7 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.Toast;
 import java.util.List;
 
 import com.example.software_engineering_project.R;
@@ -116,7 +115,7 @@ public class FragmentGroceryListController extends Fragment {
     }
 
     // function to add an item given its name.
-    public void addItem(GroupGrocery item) {
+    private void addItem(GroupGrocery item) {
         groceryRepository.insertGroupGrocery(item, context);
     }
   

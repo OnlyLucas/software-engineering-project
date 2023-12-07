@@ -1,5 +1,6 @@
 package com.example.software_engineering_project.entity;
 
+import com.example.software_engineering_project.viewmodel.UserViewModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.math.BigDecimal;
@@ -9,6 +10,7 @@ import java.util.UUID;
 
 public class Payment {
     private UUID id;
+    private Group group;
     private BigDecimal amount;
     private String currencyCode;
     private User paidByUser;
@@ -17,12 +19,36 @@ public class Payment {
     private Timestamp createdAt;
     private String name;
 
+    public Payment() {
+        // Default constructor
+    }
+    public Payment(BigDecimal amount,String name){
+        this.id = UUID.randomUUID();
+        this.group = UserViewModel.getCurrentGroup().getValue();
+        this.amount = amount;
+        this.currencyCode = "EUR";
+        User currentUser = UserViewModel.getCurrentAppUser().getValue();
+        this.paidByUser = currentUser;
+        this.createdByUser = currentUser;
+        long currentTimeMillis = System.currentTimeMillis();
+        this.createdAt  = new Timestamp(currentTimeMillis);
+        this.name = name;
+    }
+
     public UUID getId() {
         return id;
     }
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public BigDecimal getAmount() {
@@ -78,18 +104,19 @@ public class Payment {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Payment payment = (Payment) o;
-        return Objects.equals(id, payment.id) && Objects.equals(amount, payment.amount) && Objects.equals(currencyCode, payment.currencyCode) && Objects.equals(paidByUser, payment.paidByUser) && Objects.equals(createdByUser, payment.createdByUser) && Objects.equals(createdAt, payment.createdAt) && Objects.equals(name, payment.name);
+        return Objects.equals(id, payment.id) && Objects.equals(group, payment.group) && Objects.equals(amount, payment.amount) && Objects.equals(currencyCode, payment.currencyCode) && Objects.equals(paidByUser, payment.paidByUser) && Objects.equals(createdByUser, payment.createdByUser) && Objects.equals(createdAt, payment.createdAt) && Objects.equals(name, payment.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, amount, currencyCode, paidByUser, createdByUser, createdAt, name);
+        return Objects.hash(id, group, amount, currencyCode, paidByUser, createdByUser, createdAt, name);
     }
 
     @Override
     public String toString() {
         return "Payment{" +
                 "id=" + id +
+                ", group=" + group +
                 ", amount=" + amount +
                 ", currencyCode='" + currencyCode + '\'' +
                 ", paidByUser=" + paidByUser +

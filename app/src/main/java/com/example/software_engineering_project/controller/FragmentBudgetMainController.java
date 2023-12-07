@@ -9,10 +9,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.software_engineering_project.FragmentBudgetAddExpenseScreenController;
 import com.example.software_engineering_project.R;
 
 /**
@@ -78,6 +78,12 @@ public class FragmentBudgetMainController extends Fragment {
         });
 
         //TODO: Implement save method to button and create button here
+        saveExpense.setOnClickListener(new AdapterView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentBudgetAddExpenseScreenController.handleClick();
+            }
+        });
 
     }
 
