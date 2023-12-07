@@ -30,10 +30,8 @@ public class FragmentCleaningPlanListController extends Fragment {
     static ArrayAdapter<String> adapter;
     static ArrayList<String> items = new ArrayList<>();
     static Context context;
-    // function to make a Toast given a string
     static Toast t;
-    View fragmentView;
-    ImageView goBackCleaningPlan;
+    private View fragmentView;
 
     // function to remove an item given its index in the grocery list.
     public static void removeItem(int i) {

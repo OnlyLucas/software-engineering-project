@@ -23,11 +23,8 @@ public class FragmentSettingsController extends Fragment {
     static FragmentChangePasswordController fragmentChangePasswordController = new FragmentChangePasswordController();
     static FragmentChangeMailController fragmentChangeMailController = new FragmentChangeMailController();
     static FragmentManageFlatShareController fragmentManageFlatShareController = new FragmentManageFlatShareController();
-    View fragmentView;
-    private Button changePasswordButton;
-    private Button changeMailButton;
-    private Button createFlatShareButton;
-    private Button logOutButton;
+    private View fragmentView;
+    private Button changePasswordButton, changeMailButton, createFlatShareButton, logOutButton;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

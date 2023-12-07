@@ -33,7 +33,6 @@ public class FragmentGroceryListController extends Fragment {
     private static LiveData<List<GroupGrocery>> uncompletedGroceryLiveData;
     private static ArrayAdapter<GroupGrocery> adapter;
     private static Context context;
-  
     private EditText input;
     private ImageView enter;
     private View fragmentView;
@@ -49,13 +48,19 @@ public class FragmentGroceryListController extends Fragment {
             adapter = new GroceryListListViewAdapter(getActivity(), groceryList);
             listView.setAdapter(adapter);
         });
-
+        context = requireActivity();
         fragmentView = inflater.inflate(R.layout.fragment_grocery_list, container, false);
         loadScreenElements();
-        context = getActivity();
+        addButtons();
+
+        listView.setAdapter(adapter);
+
+        return fragmentView;
+    }
+
+    private void addButtons() {
 
         listView.setLongClickable(true);
-        listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -99,7 +104,6 @@ public class FragmentGroceryListController extends Fragment {
 
         });
 
-        return fragmentView;
     }
 
     // function to remove an item given its index in the grocery list.

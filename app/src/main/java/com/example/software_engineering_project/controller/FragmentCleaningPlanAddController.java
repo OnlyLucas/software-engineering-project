@@ -29,15 +29,13 @@ import java.util.Date;
  */
 public class FragmentCleaningPlanAddController extends Fragment implements AdapterView.OnItemSelectedListener{
 
-    MaterialButton datePickerCleaningPlan;
-    ImageView saveCleaningPlan;
-    View fragmentView;
-    Context context;
-    String startDateString;
-    Long startDateLong;
     public static Spinner spinner;
-
-    String test;
+    private MaterialButton datePickerCleaningPlan;
+    private ImageView saveCleaningPlan;
+    private View fragmentView;
+    private Context context;
+    private String startDateString, test;
+    private Long startDateLong;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

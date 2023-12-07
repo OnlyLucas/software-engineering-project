@@ -26,15 +26,14 @@ import java.util.List;
  */
 public class FragmentBudgetListController extends Fragment {
 
-    View fragmentView;
     static ListView listView;
     static ArrayList<String> items = new ArrayList<>();
     static AdapterBudgetListFirstLayer adapter;
     static Context context;
-
     private static LiveData<List<Payment>> currentPayments;
-
     private static PaymentRepository paymentRepository;
+    private View fragmentView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
