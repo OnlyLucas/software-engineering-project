@@ -37,7 +37,7 @@ public class CleaningTemplateEntity implements EntityInterface{
     @Column(name = "end_date", nullable = false)
     private Date endDate;
     @Basic
-    @Column(name = "interval", nullable = true)
+    @Column(name = "interval_task", nullable = true)
     private Integer interval;
     @ManyToOne
     @JoinColumn(
