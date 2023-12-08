@@ -10,20 +10,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import java.util.ArrayList;
+import java.util.List;
 
 import com.example.software_engineering_project.controller.FragmentCleaningPlanListController;
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.entity.CleaningTemplate;
 
-public class CleaningPlanListViewAdapter extends ArrayAdapter<String> {
+public class CleaningPlanListViewAdapter extends ArrayAdapter<CleaningTemplate> {
 
-    ArrayList<String> list;
+    List<CleaningTemplate> list;
     Context context;
 
     // The ListViewAdapter Constructor
     // @param context: the Context from the MainActivity
     // @param items: The list of items in our Grocery List
-    public CleaningPlanListViewAdapter(Context context, ArrayList<String> items) {
+    public CleaningPlanListViewAdapter(Context context, List<CleaningTemplate> items) {
         super(context, R.layout.adapter_cleaning_plan_list_view, items);
         this.context = context;
         list = items;
@@ -43,10 +44,8 @@ public class CleaningPlanListViewAdapter extends ArrayAdapter<String> {
 
 
             number.setText(position + 1 + ".");
-            name.setText(list.get(position));
+            name.setText(list.get(position).getName());
 
-            // Listeners for duplicating and removing an item.
-            // They use the static removeItem and addItem methods created in MainActivity.
             remove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

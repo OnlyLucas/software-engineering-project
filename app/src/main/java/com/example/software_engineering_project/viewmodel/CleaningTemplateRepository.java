@@ -1,0 +1,124 @@
+package com.example.software_engineering_project.viewmodel;
+
+import android.content.Context;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
+import com.example.software_engineering_project.dataservice.CleaningTemplateService;
+import com.example.software_engineering_project.dataservice.RetrofitClient;
+import com.example.software_engineering_project.entity.CleaningTemplate;
+import com.example.software_engineering_project.entity.Group;
+import com.example.software_engineering_project.util.ToastUtil;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class CleaningTemplateRepository {
+
+    private CleaningTemplateService cleaningTemplateService;
+    private MutableLiveData<List<CleaningTemplate>> currentCleaningTemplates = new MutableLiveData<>();
+
+    public CleaningTemplateRepository() {
+        // Initialize Retrofit service
+        cleaningTemplateService = RetrofitClient.getInstance().create(CleaningTemplateService.class);
+        getCleaningTemplates();
+    }
+
+    public void createCleaningTemplate(CleaningTemplate cleaningTemplate, Context context) {
+        Call<CleaningTemplate> call = cleaningTemplateService.createCleaningTemplate(cleaningTemplate);
+        call.enqueue(new Callback<CleaningTemplate>() {
+            @Override
+            public void onResponse(Call<CleaningTemplate> call, Response<CleaningTemplate> response) {
+                if(response.isSuccessful()){
+                    // show toast of success
+                    ToastUtil.makeToast("Added " + cleaningTemplate.getName(), context);
+                } else {
+                    ToastUtil.makeToast("Error while adding  " + cleaningTemplate.getName(), context);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CleaningTemplate> call, Throwable t) {
+                ToastUtil.makeToast("Error while adding  " + cleaningTemplate.getName(), context);
+                // Handle the failure if needed
+                // For example, show an error message
+            }
+        });
+    }
+
+    public void getCleaningTemplates() {
+        // Perform the API call to get users asynchronously
+        Group group = UserViewModel.getCurrentGroup().getValue();
+        Call<List<CleaningTemplate>> call = cleaningTemplateService.getCleaningTemplates(group.getId());
+        call.enqueue(new Callback<List<CleaningTemplate>>(){
+            @Override
+            public void onResponse(Call<List<CleaningTemplate>> call, Response<List<CleaningTemplate>> response) {
+                if (response.isSuccessful()) {
+                    List<CleaningTemplate> cleaningTemplates = response.body();
+                    currentCleaningTemplates.setValue(cleaningTemplates);
+                    System.out.println("Cleaning template fetching successful");
+                    // Handle the received users, e.g., update UI or store in a local database
+                } else {
+                    // Handle API error
+                    System.out.println("Error while fetching cleaning templates");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<CleaningTemplate>> call, Throwable t) {
+                // Handle network failure
+                System.out.println("Network error while fetching cleaning templates");
+            }
+        });
+    }
+
+    public LiveData<List<CleaningTemplate>> getCurrentCleaningTemplates() {
+        return currentCleaningTemplates;
+    }
+
+    public void deleteCleaningTemplate(CleaningTemplate cleaningTemplate, Context context) {
+        try {
+            // Perform the API call to delete the group grocery on the server
+            Call<Void> call = cleaningTemplateService.deleteCleaningTemplate(cleaningTemplate.getId());
+            call.enqueue(new Callback<Void>() {
+
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        // Get updated Group Groceries from backend to show it in frontend
+                        getCleaningTemplates();
+                        System.out.println("Deletion of Cleaning Template successful");
+                        ToastUtil.makeToast("Removed: " + cleaningTemplate.getName(), context);
+                    } else {
+                        // If the server-side deletion is not successful, handle accordingly
+                        // For example, show an error message
+                        System.out.println(response.code());
+                        System.out.println("Failed to delete cleaning template on the server");
+
+                        System.out.println(response.body().toString());
+
+                        String errorMessage = "Failed to delete cleaning template on the server";
+                        ToastUtil.makeToast("Deletion failed", context);
+                        // Handle the error message appropriately
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    // Handle the failure of the API call (e.g., network issues)
+                    String errorMessage = "Failed to delete cleaning template. Check your network connection.";
+                    ToastUtil.makeToast("Deletion failed", context);
+                    // Handle the error message appropriately
+                }
+
+
+            });
+        } catch (NullPointerException e) {
+            // Handle the case where groupGroceries or groupGroceries.getValue() is null
+        }
+    }
+}

@@ -9,6 +9,7 @@ import java.util.UUID;
 
 public class CleaningTemplate {
     private UUID id;
+    private Group group;
     private String name;
     private String description;
     private Date startDate;
@@ -24,6 +25,14 @@ public class CleaningTemplate {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public String getName() {
@@ -87,18 +96,19 @@ public class CleaningTemplate {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CleaningTemplate that = (CleaningTemplate) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate) && Objects.equals(interval, that.interval) && Objects.equals(createdByUser, that.createdByUser) && Objects.equals(createdAt, that.createdAt);
+        return Objects.equals(id, that.id) && Objects.equals(group, that.group) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate) && Objects.equals(interval, that.interval) && Objects.equals(createdByUser, that.createdByUser) && Objects.equals(createdAt, that.createdAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, startDate, endDate, interval, createdByUser, createdAt);
+        return Objects.hash(id, group, name, description, startDate, endDate, interval, createdByUser, createdAt);
     }
 
     @Override
     public String toString() {
         return "CleaningTemplate{" +
                 "id=" + id +
+                ", group=" + group +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", startDate=" + startDate +

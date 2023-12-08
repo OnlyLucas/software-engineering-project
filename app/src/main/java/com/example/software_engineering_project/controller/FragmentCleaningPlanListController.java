@@ -6,19 +6,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LiveData;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.CleaningPlanListViewAdapter;
+import com.example.software_engineering_project.entity.CleaningTemplate;
 import com.example.software_engineering_project.util.ToastUtil;
+import com.example.software_engineering_project.viewmodel.CleaningTemplateRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,31 +31,20 @@ import java.util.ArrayList;
 public class FragmentCleaningPlanListController extends Fragment {
 
     static ListView listView;
-    static ArrayAdapter<String> adapter;
+    static ArrayAdapter<CleaningTemplate> adapter;
     static ArrayList<String> items = new ArrayList<>();
     static Context context;
     static Toast t;
     private View fragmentView;
+    private static LiveData<List<CleaningTemplate>> currentCleaningTemplates;
+    private static CleaningTemplateRepository cleaningTemplateRepository;
 
     // function to remove an item given its index in the grocery list.
     public static void removeItem(int i) {
-
+        CleaningTemplate cleaningTemplate = currentCleaningTemplates.getValue().get(i);
+        cleaningTemplateRepository.deleteCleaningTemplate(cleaningTemplate,context);
         ToastUtil.makeToast("Removed: " + items.get(i), context);
         items.remove(i);
-        listView.setAdapter(adapter);
-
-    }
-
-    public static void uncheckItem(int i) {
-
-        ToastUtil.makeToast("Unchecked: " + items.get(i), context);
-
-    }
-
-    // function to add an item given its name.
-    public static void addItem(String item) {
-
-        items.add(item);
         listView.setAdapter(adapter);
 
     }
@@ -60,19 +52,19 @@ public class FragmentCleaningPlanListController extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        cleaningTemplateRepository = new CleaningTemplateRepository();
 
         fragmentView = inflater.inflate(R.layout.fragment_cleaning_plan_list, container, false);
         loadScreenElements();
         addButtons();
         context = requireActivity();
 
-        adapter = new CleaningPlanListViewAdapter(getActivity(), items);
-        items.clear();
-        items.add("Kehren");
-        items.add("Wischen");
-        items.add("Bad");
-
-        listView.setAdapter(adapter);
+        CleaningTemplateRepository cleaningTemplateRepository = new CleaningTemplateRepository();
+        currentCleaningTemplates = cleaningTemplateRepository.getCurrentCleaningTemplates();
+        currentCleaningTemplates.observe(getViewLifecycleOwner(), currentCleaningTemplates -> {
+            adapter = new CleaningPlanListViewAdapter(getActivity(), currentCleaningTemplates);
+            listView.setAdapter(adapter);
+        });
 
         return fragmentView;
 

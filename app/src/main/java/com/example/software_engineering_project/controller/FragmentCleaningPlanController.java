@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 
 import androidx.fragment.app.Fragment;
@@ -63,7 +64,12 @@ public class FragmentCleaningPlanController extends Fragment {
             addCleaningPlan.setVisibility(View.VISIBLE);
         });
 
-        //TODO: Save Cleaning Plan hinzufügen!
+        saveCleaningPlan.setOnClickListener(new AdapterView.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentCleaningPlanAddController.handleSaveClicked();
+            }
+        });
 
     }
 
