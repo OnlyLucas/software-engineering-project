@@ -32,8 +32,7 @@ public class FragmentChangeMailController extends Fragment {
     static UserRepository userRepository;
     static Context context;
     private View fragmentView;
-    private Button cancelChangeMail;
-    private Button saveChangeMail;
+    private Button cancelChangeMail, saveChangeMail;
     private EditText currentMail, newMail, confirmNewMail;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

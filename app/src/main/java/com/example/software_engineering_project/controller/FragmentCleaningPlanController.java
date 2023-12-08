@@ -24,9 +24,8 @@ public class FragmentCleaningPlanController extends Fragment {
 
     @SuppressLint("StaticFieldLeak")
     static View fragmentView;
-    ImageView addCleaningPlan;
     static ImageView goBackCleaningPlan;
-    ImageView saveCleaningPlan;
+    ImageView addCleaningPlan, saveCleaningPlan;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -66,9 +65,7 @@ public class FragmentCleaningPlanController extends Fragment {
 
         //TODO: Save Cleaning Plan hinzufügen!
 
-
     }
-
 
     private void callFragment(Fragment fragment) {
 
@@ -78,4 +75,5 @@ public class FragmentCleaningPlanController extends Fragment {
         transaction.commit();
 
     }
+
 }

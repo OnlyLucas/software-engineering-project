@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.CleaningPlanListViewAdapter;
+import com.example.software_engineering_project.util.ToastUtil;
 
 import java.util.ArrayList;
 
@@ -30,22 +31,22 @@ public class FragmentCleaningPlanListController extends Fragment {
     static ArrayAdapter<String> adapter;
     static ArrayList<String> items = new ArrayList<>();
     static Context context;
-    // function to make a Toast given a string
     static Toast t;
-    View fragmentView;
-    ImageView goBackCleaningPlan;
+    private View fragmentView;
 
     // function to remove an item given its index in the grocery list.
     public static void removeItem(int i) {
 
-        makeToast("Removed: " + items.get(i));
+        ToastUtil.makeToast("Removed: " + items.get(i), context);
         items.remove(i);
         listView.setAdapter(adapter);
 
     }
 
     public static void uncheckItem(int i) {
-        makeToast("Unchecked: " + items.get(i));
+
+        ToastUtil.makeToast("Unchecked: " + items.get(i), context);
+
     }
 
     // function to add an item given its name.
@@ -53,14 +54,6 @@ public class FragmentCleaningPlanListController extends Fragment {
 
         items.add(item);
         listView.setAdapter(adapter);
-
-    }
-
-    private static void makeToast(String s) {
-
-        if (t != null) t.cancel();
-        t = Toast.makeText(context, s, Toast.LENGTH_SHORT);
-        t.show();
 
     }
 
@@ -82,6 +75,7 @@ public class FragmentCleaningPlanListController extends Fragment {
         listView.setAdapter(adapter);
 
         return fragmentView;
+
     }
 
     private void loadScreenElements() {
@@ -98,14 +92,16 @@ public class FragmentCleaningPlanListController extends Fragment {
             FragmentCleaningPlanController.goBackCleaningPlan.setVisibility(View.VISIBLE);
 
         });
+
     }
 
     private void callFragment(Fragment fragment) {
+
         FragmentManager fm = requireActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.contentFragmentCleaningPlan, fragment);
         transaction.commit();
-    }
 
+    }
 
 }

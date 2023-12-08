@@ -41,11 +41,9 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
     private static Context context;
     private static UserRepository userRepository;
     private static PaymentRepository paymentRepository;
-    private  static PaymentParticipationRepository paymentParticipationRepository;
+    private static PaymentParticipationRepository paymentParticipationRepository;
     private static LiveData<List<User>> currentUsers;
     private static List<User> selectedUsers = new ArrayList<>();
-    private View fragmentView, fragmentViewHeader;
-
     public static void addUser(User user) {
         selectedUsers.add(user);
     }
@@ -53,6 +51,7 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
     public static void deleteUser(User user) {
         selectedUsers.remove(user);
     }
+    private View fragmentView, fragmentViewHeader;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

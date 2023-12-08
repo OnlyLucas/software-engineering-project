@@ -23,11 +23,12 @@ import java.util.ArrayList;
  */
 public class FragmentCleaningPlanListDetailController extends Fragment {
 
-    View fragmentView;
     static ListView listView;
     static ArrayList<String> items = new ArrayList<>();
     static ArrayAdapter<String> adapter;
     static Context context;
+    private View fragmentView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

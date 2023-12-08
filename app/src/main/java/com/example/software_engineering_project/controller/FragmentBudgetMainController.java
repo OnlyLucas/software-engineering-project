@@ -22,17 +22,12 @@ import com.example.software_engineering_project.R;
  */
 public class FragmentBudgetMainController extends Fragment {
 
-    FragmentBudgetListController fragmentBudgetListController = new FragmentBudgetListController();
-    FragmentBudgetDetailScreenController fragmentBudgetDetailScreenController = new FragmentBudgetDetailScreenController();
-    FragmentBudgetAddExpenseScreenController fragmentBudgetAddExpenseScreenController = new FragmentBudgetAddExpenseScreenController();
-    View fragmentView;
-    ImageView showBudgetDetail;
-    ImageView goBackBudgetMain;
-    ImageView addExpense;
-    ImageView saveExpense;
-    TextView budgetHeadline;
-
-
+    private FragmentBudgetListController fragmentBudgetListController = new FragmentBudgetListController();
+    private FragmentBudgetDetailScreenController fragmentBudgetDetailScreenController = new FragmentBudgetDetailScreenController();
+    private FragmentBudgetAddExpenseScreenController fragmentBudgetAddExpenseScreenController = new FragmentBudgetAddExpenseScreenController();
+    private View fragmentView;
+    private ImageView showBudgetDetail, goBackBudgetMain, addExpense, saveExpense;
+    private TextView budgetHeadline;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

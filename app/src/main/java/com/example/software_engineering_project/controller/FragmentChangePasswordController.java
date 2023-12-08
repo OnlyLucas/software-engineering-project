@@ -21,10 +21,9 @@ import com.example.software_engineering_project.util.ToastUtil;
  */
 public class FragmentChangePasswordController extends Fragment {
 
-    View fragmentView;
-    private Button cancelChangePassword;
-    private Button saveChangePassword;
     static Context context;
+    private View fragmentView;
+    private Button cancelChangePassword, saveChangePassword;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

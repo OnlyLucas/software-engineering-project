@@ -3,6 +3,8 @@ package com.example.software_engineering_project.controller;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LiveData;
 
 import android.view.LayoutInflater;
@@ -31,19 +33,18 @@ import com.example.software_engineering_project.viewmodel.UserViewModel;
  * create an instance of this fragment.
  */
 public class FragmentManageFlatShareController extends Fragment {
-    private static UserRepository userRepository;
-    private static GroupMembershipRepository groupMembershipRepository;
 
-    private static LiveData<List<User>> currentUsers;
-
-    View fragmentView;
-    static ListView listView;
-    EditText input_name, input_mail;
-    ImageView enter;
     static AdapterManageFlatShareListView adapter;
     static ArrayList<String> items = new ArrayList<>();
     static Context context;
-    private Button cancelCreateFlatShare;
+    private static UserRepository userRepository;
+    private static GroupMembershipRepository groupMembershipRepository;
+    private static LiveData<List<User>> currentUsers;
+    private static ListView listView;
+    private View fragmentView;
+    private EditText input_name, input_mail;
+    private ImageView enter;
+    private Button cancelManageFlatShare, saveManageFlatShare;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,16 +53,34 @@ public class FragmentManageFlatShareController extends Fragment {
         currentUsers = userRepository.getCurrentUsers();
 
         fragmentView = inflater.inflate(R.layout.fragment_manage_flat_share, container, false);
-        loadScreenElements();
         context = requireActivity();
-
+        loadScreenElements();
+        addButtons();
         currentUsers.observe(getViewLifecycleOwner(), currentUsers -> {
             adapter = new AdapterManageFlatShareListView(getActivity(), currentUsers);
             listView.setAdapter(adapter);
         });
 
-        listView.setLongClickable(true);
         listView.setAdapter(adapter);
+
+        return fragmentView;
+
+    }
+
+    private void loadScreenElements() {
+
+        listView = fragmentView.findViewById(R.id.flatShareMemberList);
+        input_name = fragmentView.findViewById(R.id.input_name);
+        input_mail = fragmentView.findViewById(R.id.input_mail);
+        enter = fragmentView.findViewById(R.id.addFlatShareMember);
+        cancelManageFlatShare = fragmentView.findViewById(R.id.cancelManageFlatShare);
+        saveManageFlatShare = fragmentView.findViewById(R.id.saveManageFlatShare);
+
+    }
+
+    private void addButtons() {
+
+        listView.setLongClickable(true);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -83,6 +102,18 @@ public class FragmentManageFlatShareController extends Fragment {
 
         });
 
+        cancelManageFlatShare.setOnClickListener(view -> {
+            FragmentSettingsController fragment = new FragmentSettingsController();
+            ToastUtil.makeToast(getString(R.string.changes_discarded),context);
+            callFragment(fragment);
+        });
+
+        saveManageFlatShare.setOnClickListener(view -> {
+            FragmentSettingsController fragment = new FragmentSettingsController();
+            ToastUtil.makeToast("Saved", context);
+            callFragment(fragment);
+        });
+
         //TODO enter mail -> find user by mail -> add userMembership to current group
         enter.setOnClickListener(new AdapterView.OnClickListener() {
 
@@ -102,16 +133,14 @@ public class FragmentManageFlatShareController extends Fragment {
 
         });
 
-        return fragmentView;
-
     }
 
-    private void loadScreenElements() {
+    private void callFragment(Fragment fragment) {
 
-        listView = fragmentView.findViewById(R.id.flatShareMemberList);
-        input_name = fragmentView.findViewById(R.id.input_name);
-        input_mail = fragmentView.findViewById(R.id.input_mail);
-        enter = fragmentView.findViewById(R.id.addFlatShareMember);
+        FragmentManager fm = requireActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.contentFragmentMainScreen,fragment);
+        transaction.commit();
 
     }
 
