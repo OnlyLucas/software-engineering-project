@@ -7,26 +7,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.entity.Payment;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class AdapterBudgetListSecondLayer extends ArrayAdapter<String> {
+public class AdapterBudgetListSecondLayer extends ArrayAdapter<Payment> {
 
-    ArrayList<String> list;
-    static ArrayList<String> items = new ArrayList<>();
-
-    static AdapterBudgetListSecondLayer adapter;
+    List<Payment> list;
 
     Context context;
 
-    public AdapterBudgetListSecondLayer (Context context, ArrayList<String> items) {
-        super(context, R.layout.adapter_budget_list_view_second_layer);
+    public AdapterBudgetListSecondLayer (Context context, List<Payment> items) {
+        super(context, R.layout.adapter_budget_list_view_second_layer, items);
         this.context = context;
         list = items;
     }
@@ -38,23 +35,18 @@ public class AdapterBudgetListSecondLayer extends ArrayAdapter<String> {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.adapter_budget_list_view_second_layer, null);
 
-            TextView showMonth = convertView.findViewById(R.id.showMonth);
-            ListView budgetListSecondLayer = convertView.findViewById(R.id.budgetListSecondLayer);
+            System.out.println(list.toString());
 
-            adapter = new AdapterBudgetListSecondLayer(context, items);
-            items.clear();
-            items.add("January");
-            items.add("February");
-            items.add("March");
-            items.add("April");
-            items.add("May");
-            items.add("June");
-            items.add("July");
-            items.add("August");
-            budgetListSecondLayer.setAdapter(adapter);
-            showMonth.setText(list.get(position));
+            //TODO wie bekommt man mehr als nur das erste Payment angezeigt?
+
+            // Create an adapter for the list of payments
+            AdapterPayment adapterPayment = new AdapterPayment(context, list);
+
+            // Set the adapter for the ListView
+            ListView paymentsListView = convertView.findViewById(R.id.paymentsListView);
+            paymentsListView.setAdapter(adapterPayment);
         }
-
         return convertView;
     }
 }
+

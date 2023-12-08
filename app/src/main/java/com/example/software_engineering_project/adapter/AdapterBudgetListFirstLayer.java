@@ -11,29 +11,36 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LiveData;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.entity.Payment;
+import com.example.software_engineering_project.viewmodel.PaymentRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment>{
+public class AdapterBudgetListFirstLayer extends ArrayAdapter<String>{
 
-    List<Payment> list;
+    List<String> list;
     TextView showMonth;
-    ListView budgetListFirstLayer;
+    ListView budgetListSecondLayer;
 
     Context context;
 
     static ArrayList<String> items = new ArrayList<>();
 
     static AdapterBudgetListSecondLayer adapter;
+    private LiveData<List<Payment>> currentPayments;
 
-    public AdapterBudgetListFirstLayer(Context context, List<Payment> items) {
+    private static PaymentRepository paymentRepository;
+
+
+    public AdapterBudgetListFirstLayer(Context context, List<String> items, LiveData<List<Payment>> currentPayments) {
         super(context, R.layout.adapter_budget_list_view_first_layer, items);
         this.context = context;
-        list = items;
+        this.list = items;
+        this.currentPayments = currentPayments;
     }
 
     @NonNull
@@ -41,26 +48,15 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment>{
     public View getView(int position, @Nullable View convertView, @Nullable ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.adapter_budget_list_view_first_layer, null);
+            convertView = mInflater.inflate(R.layout.adapter_budget_list_view_first_layer,null );
             loadScreenElements(convertView);
-            showMonth.setText(list.get(position).getName());
+            showMonth.setText(list.get(position));
 
-            View convertView2 = mInflater.inflate(R.layout.adapter_budget_list_view_second_layer, null);
-            ListView budgetListSecondLayer = convertView.findViewById(R.id.budgetListSecondLayer);
-            TextView showMonth2 = convertView2.findViewById(R.id.expenseDescription);
+            List<Payment> payments = currentPayments.getValue();
 
-            items.add("January");
-            items.add("February");
-            items.add("March");
-            items.add("April");
-            items.add("May");
-            items.add("June");
-            items.add("July");
-            items.add("August");
-            adapter = new AdapterBudgetListSecondLayer(context, items);
+            adapter = new AdapterBudgetListSecondLayer(context, payments);
 
             budgetListSecondLayer.setAdapter(adapter);
-            showMonth2.setText(items.get(position));
         }
 
         return convertView;
@@ -68,7 +64,7 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment>{
 
     private void loadScreenElements(View convertView) {
         showMonth = convertView.findViewById(R.id.showMonth);
-        budgetListFirstLayer = convertView.findViewById(R.id.budgetListFirstLayer);
+        budgetListSecondLayer = convertView.findViewById(R.id.budgetListSecondLayer);
     }
 
 

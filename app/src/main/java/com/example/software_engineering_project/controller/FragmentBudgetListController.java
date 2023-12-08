@@ -32,7 +32,7 @@ public class FragmentBudgetListController extends Fragment {
     static AdapterBudgetListFirstLayer adapter;
     static Context context;
 
-    private static LiveData<List<Payment>> currentPayments;
+    private LiveData<List<Payment>> currentPayments;
 
     private static PaymentRepository paymentRepository;
     @Override
@@ -45,23 +45,21 @@ public class FragmentBudgetListController extends Fragment {
         loadScreenElements();
         context = requireActivity();
 
+        //TODO richtige Liste
+        items.clear();
+        items.add("January");
+        items.add("February");
+        items.add("March");
+        items.add("April");
+        items.add("May");
+        items.add("June");
+        items.add("July");
+        items.add("August");
+
         currentPayments.observe(getViewLifecycleOwner(), currentPayments -> {
-            adapter = new AdapterBudgetListFirstLayer(getActivity(), currentPayments);
+            adapter = new AdapterBudgetListFirstLayer(getActivity(), items, paymentRepository.getCurrentPayments());
             listView.setAdapter(adapter);
         });
-
-//        adapter = new AdapterBudgetListFirstLayer(context, items);
-//        items.clear();
-//        items.add("January");
-//        items.add("February");
-//        items.add("March");
-//        items.add("April");
-//        items.add("May");
-//        items.add("June");
-//        items.add("July");
-//        items.add("August");
-
-        listView.setAdapter(adapter);
 
         return fragmentView;
     }
