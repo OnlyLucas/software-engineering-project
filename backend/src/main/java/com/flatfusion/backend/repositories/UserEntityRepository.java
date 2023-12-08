@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -19,4 +20,7 @@ public interface UserEntityRepository extends JpaRepository<UserEntity, UUID> {
             "u.lastName = CASE WHEN :#{#updates['lastName']} IS NOT NULL THEN :#{#updates['lastName']} ELSE u.lastName END " +
             "WHERE u.id = :userId")
     void partialUpdate(@Param("userId") UUID userId, @Param("updates") Map<String, ?> updates);
+
+    @Query("SELECT u FROM UserEntity u JOIN GroupMembershipEntity gm ON u.id = gm.user.id WHERE gm.group.id = :groupId")
+    List<UserEntity> findByGroupId(@Param("groupId") UUID groupId);
 }
