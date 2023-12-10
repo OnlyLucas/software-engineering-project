@@ -59,6 +59,19 @@ public class PaymentParticipationEntity implements EntityInterface {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp paidAt;
 
+    public PaymentParticipationEntity() {
+    }
+
+    public PaymentParticipationEntity(PaymentEntity payment, GroupEntity group, UserEntity user, BigDecimal participationAmount) {
+        this.id = UUID.randomUUID();
+        this.payment = payment;
+        this.group = group;
+        this.user = user;
+        this.participationAmount = participationAmount;
+        this.currencyCode = currencyCode;
+        this.isPaid = false;
+    }
+
     public UUID getId() {
         return id;
     }

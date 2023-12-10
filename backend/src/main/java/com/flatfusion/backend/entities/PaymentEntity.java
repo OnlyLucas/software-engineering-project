@@ -7,7 +7,9 @@ import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -43,6 +45,10 @@ public class PaymentEntity implements EntityInterface{
             nullable = false
     )
     private UserEntity createdByUser;
+
+    @OneToMany(mappedBy = "payment")
+    private Set<PaymentParticipationEntity> paymentParticipations;
+
     @Basic
     @Column(name = "created_at", nullable = true)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
@@ -51,6 +57,19 @@ public class PaymentEntity implements EntityInterface{
     @Basic
     @Column(name = "payment_name", nullable = false, length = 255)
     private String name;
+
+    public PaymentEntity() {
+    }
+
+    public PaymentEntity(GroupEntity group, BigDecimal amount, UserEntity paidByUser, UserEntity createdByUser, String name) {
+        this.id = UUID.randomUUID();
+        this.group = group;
+        this.amount = amount;
+        this.paidByUser = paidByUser;
+        this.createdByUser = createdByUser;
+        this.createdAt = Timestamp.from(Instant.now());
+        this.name = name;
+    }
 
     public UUID getId() {
         return id;
@@ -99,6 +118,14 @@ public class PaymentEntity implements EntityInterface{
 
     public void setCreatedByUser(UserEntity createdByUser) {
         this.createdByUser = createdByUser;
+    }
+
+    public Set<PaymentParticipationEntity> getPaymentParticipations() {
+        return paymentParticipations;
+    }
+
+    public void setPaymentParticipations(Set<PaymentParticipationEntity> paymentParticipations) {
+        this.paymentParticipations = paymentParticipations;
     }
 
     public Timestamp getCreatedAt() {
