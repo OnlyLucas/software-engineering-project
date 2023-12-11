@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,7 +14,11 @@ import androidx.annotation.Nullable;
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.entity.Payment;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class AdapterBudgetListSecondLayer extends ArrayAdapter<Payment> {
 
@@ -35,17 +39,30 @@ public class AdapterBudgetListSecondLayer extends ArrayAdapter<Payment> {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.adapter_budget_list_view_second_layer, null);
 
-            System.out.println(list.toString());
+            TextView expenseDescription = convertView.findViewById(R.id.expenseDescription);
+            TextView expensePayer = convertView.findViewById(R.id.expensePayer);
+            TextView expenseAmount = convertView.findViewById(R.id.expenseAmount);
+            TextView expenseDate = convertView.findViewById(R.id.expenseDate);
 
-            //TODO wie bekommt man mehr als nur das erste Payment angezeigt?
+            Payment currentPayment = list.get(position);
 
-            // Create an adapter for the list of payments
-            AdapterPayment adapterPayment = new AdapterPayment(context, list);
+            // Customize the layout based on the Payment details
+            expenseDescription.setText(currentPayment.getName());
+            expensePayer.setText(currentPayment.getCreatedByUser().getFirstName() + " paid");
+            expenseAmount.setText(String.format(Locale.getDefault(), "- %s", currentPayment.getAmount()));
 
-            // Set the adapter for the ListView
-            ListView paymentsListView = convertView.findViewById(R.id.paymentsListView);
-            paymentsListView.setAdapter(adapterPayment);
+            // Convert Timestamp to other date format
+            Timestamp timestamp = currentPayment.getCreatedAt();
+            Date date = new Date(timestamp.getTime());
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
+            SimpleDateFormat monthNameFormat = new SimpleDateFormat("MMMM");
+            String monthName = monthNameFormat.format(date);
+            String formattedDate = dateFormat.format(date);
+
+            // Set the formatted
+            expenseDate.setText(formattedDate + " " + monthName);
         }
+
         return convertView;
     }
 }

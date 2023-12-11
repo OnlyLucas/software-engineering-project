@@ -49,7 +49,6 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<String> {
             showMonth.setText(list.get(position));
 
             List<Payment> payments = currentPayments.getValue();
-
             adapter = new AdapterBudgetListSecondLayer(context, payments);
 
             budgetListSecondLayer.setAdapter(adapter);
