@@ -33,7 +33,6 @@ public class PaymentRESTController extends RESTController<PaymentEntity>{
         super(paymentRepository);
     }
 
-
     @GetMapping("/group/{id}")
     public ResponseEntity<List<PaymentEntity>> getPaymentsByGroupId(@PathVariable UUID id){
         logger.info("Get Payments by group id:  " + id);
@@ -48,31 +47,46 @@ public class PaymentRESTController extends RESTController<PaymentEntity>{
 
     // Overriding method from superclass
     @Transactional
-    @PostMapping
-    public ResponseEntity<PaymentEntity> create(PaymentRequest request) {
-        PaymentEntity payment;
+    @PostMapping("/create-with-participations")
+    public ResponseEntity<PaymentEntity> createWithParticipations(@RequestBody PaymentCreationRequest request) {
+        PaymentEntity payment = request.getPayment();;
         List<UserEntity> participatingUsers = new ArrayList<>();
 
-        // Get user and group instance from the repository
-        UUID paidByUserId = request.getPayment().getPaidByUser().getId();
+        UUID paidByUserId;
+        UUID createdByUserId;
+        UUID groupId;
 
-        // TODO check against authentication credentials
-        UUID createdByUserId = request.getPayment().getCreatedByUser().getId();
-        UUID groupId = request.getPayment().getGroup().getId();
+        System.out.println(request.getPayment().toString());
+        System.out.println(request.toString());
+
+        try{
+            // Get user and group instance from the repository
+            paidByUserId = payment.getPaidByUser().getId();
+
+            // TODO check against authentication credentials
+            createdByUserId = payment.getCreatedByUser().getId();
+            groupId = payment.getGroup().getId();
+        } catch (NullPointerException e){
+            logger.info("Missing attributes. Payment not saved: " + request.getPayment());
+            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
 
         Optional<UserEntity> paidByUser = userRepository.findById(paidByUserId);
         Optional<UserEntity> createdByUser = userRepository.findById(createdByUserId);
         Optional<GroupEntity> group = groupRepository.findById(groupId);
 
+        System.out.println(payment);
+
         // check if elements are existing in db
         if (paidByUser.isPresent() && createdByUser.isPresent() && group.isPresent()){
-            payment = request.getPayment();
+
             payment.setCreatedByUser(createdByUser.get());
             payment.setPaidByUser(paidByUser.get());
             payment.setGroup(group.get());
 
             paymentRepository.save(payment);
         } else {
+            logger.info("Missing attributes. Payment not saved: " + request.getPayment());
             return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
@@ -100,7 +114,10 @@ public class PaymentRESTController extends RESTController<PaymentEntity>{
             }
 
             paymentParticipationRepository.save(paymentParticipation);
+            logger.info("PaymentParticipation saved: " + paymentParticipation);
         }
+
+        logger.info("Payment created: " + payment);
 
         //save in repository
         return new ResponseEntity<>(payment, HttpStatus.CREATED);
@@ -123,6 +140,7 @@ public class PaymentRESTController extends RESTController<PaymentEntity>{
             logger.info("Payment deleted: " + payment);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
+            logger.info("Payment not found. Hence no deletion. ID:" + id);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

@@ -15,7 +15,7 @@ import java.util.UUID;
 public class RESTController<T extends EntityInterface> {
 
     protected final JpaRepository<T, UUID> repository;
-    protected final Logger logger = LoggerFactory.getLogger(LoggingController.class);
+    protected final Logger logger = LoggerFactory.getLogger(RESTController.class);
 
     public RESTController(JpaRepository<T, UUID> repository) {
         this.repository = repository;
@@ -23,16 +23,15 @@ public class RESTController<T extends EntityInterface> {
 
     @PostMapping
     public ResponseEntity<T> create(@RequestBody T entity) {
-        System.out.println(entity.toString());
 
         T createdEntity = repository.save(entity);
+        logger.info("Entity created : " + createdEntity);
         return new ResponseEntity<>(createdEntity, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<T> getById(@PathVariable UUID id, WebRequest request){
 
-        System.out.println("This is the request id for the generic controller: " + id);
         logger.info("This is the request id for the controller: " + id);
         Optional<T> entity = repository.findById(id);
 
@@ -53,7 +52,6 @@ public class RESTController<T extends EntityInterface> {
     @PutMapping("/{id}")
     public ResponseEntity<T> update(@PathVariable UUID id, @RequestBody T updatedEntity) {
 
-        System.out.println(updatedEntity.toString());
         Optional<T> existingEntity = repository.findById(id);
 
         if (existingEntity.isPresent()) {

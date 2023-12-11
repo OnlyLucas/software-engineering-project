@@ -1,6 +1,8 @@
 spring:
   profiles:
     active: test
+  mvc:
+    log-request-details: true
 server:
   port: 1337
 

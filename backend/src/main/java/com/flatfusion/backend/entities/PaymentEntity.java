@@ -144,21 +144,23 @@ public class PaymentEntity implements EntityInterface{
         this.name = name;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PaymentEntity that = (PaymentEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(group, that.group) && Objects.equals(amount, that.amount) && Objects.equals(currencyCode, that.currencyCode) && Objects.equals(paidByUser, that.paidByUser) && Objects.equals(createdByUser, that.createdByUser) && Objects.equals(createdAt, that.createdAt) && Objects.equals(name, that.name);
+        return Objects.equals(id, that.id) && Objects.equals(group, that.group) && Objects.equals(amount, that.amount) && Objects.equals(currencyCode, that.currencyCode) && Objects.equals(paidByUser, that.paidByUser) && Objects.equals(createdByUser, that.createdByUser) && Objects.equals(paymentParticipations, that.paymentParticipations) && Objects.equals(createdAt, that.createdAt) && Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, group, amount, currencyCode, paidByUser, createdByUser, createdAt, name);
+        return Objects.hash(id, group, amount, currencyCode, paidByUser, createdByUser, paymentParticipations, createdAt, name);
     }
 
     @Override
-    public String toString() {
+    public String
+    toString() {
         return "PaymentEntity{" +
                 "id=" + id +
                 ", group=" + group +
@@ -166,6 +168,7 @@ public class PaymentEntity implements EntityInterface{
                 ", currencyCode='" + currencyCode + '\'' +
                 ", paidByUser=" + paidByUser +
                 ", createdByUser=" + createdByUser +
+                ", paymentParticipations=" + paymentParticipations +
                 ", createdAt=" + createdAt +
                 ", name='" + name + '\'' +
                 '}';
