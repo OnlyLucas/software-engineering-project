@@ -36,6 +36,8 @@ public class CleaningTemplateEntity implements EntityInterface{
     @Basic
     @Column(name = "end_date", nullable = false)
     private Date endDate;
+
+    //TODO change name to something else than interval (key word)
     @Basic
     @Column(name = "interval", nullable = true)
     private Integer interval;
