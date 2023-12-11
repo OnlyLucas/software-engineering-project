@@ -14,7 +14,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         app:cardCornerRadius="12dp"
         android:layout_below="@id/showMonth"
         android:backgroundTint="@color/background">

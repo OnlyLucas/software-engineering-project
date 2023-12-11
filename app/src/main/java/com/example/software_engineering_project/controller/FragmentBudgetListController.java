@@ -2,14 +2,13 @@ package com.example.software_engineering_project.controller;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.AdapterBudgetListFirstLayer;
@@ -26,15 +25,14 @@ import java.util.List;
  */
 public class FragmentBudgetListController extends Fragment {
 
-    View fragmentView;
-    static ListView listView;
-    static ArrayList<String> items = new ArrayList<>();
-    static AdapterBudgetListFirstLayer adapter;
-    static Context context;
-
+    private static ListView listView;
+    private static ArrayList<String> items = new ArrayList<>();
+    private static AdapterBudgetListFirstLayer adapter;
+    private static Context context;
+    private static PaymentRepository paymentRepository;
+    private View fragmentView;
     private LiveData<List<Payment>> currentPayments;
 
-    private static PaymentRepository paymentRepository;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
