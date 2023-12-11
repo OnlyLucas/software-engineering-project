@@ -20,24 +20,26 @@ import java.util.List;
 
 public class GroceryListListViewAdapter extends ArrayAdapter<GroupGrocery> {
 
-    private List<GroupGrocery> list;
     private Context context;
-    private TextView name;
-    private ImageView remove;
-    private ImageView unchecked;
-    private TextView number;
+    private List<GroupGrocery> list;
+    private TextView name, number;
+    private ImageView remove, unchecked;
 
     public GroceryListListViewAdapter(Context context, List<GroupGrocery> items) {
+
         super(context, R.layout.adapter_grocery_list_list_view, items);
         this.context = context;
         list = items;
+
     }
 
     // The method we override to provide our own layout for each View (row) in the ListView
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
         if (convertView == null) {
+
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.adapter_grocery_list_list_view, null);
 
@@ -47,21 +49,7 @@ public class GroceryListListViewAdapter extends ArrayAdapter<GroupGrocery> {
             GroupGrocery current = list.get(position);
             name.setText(current.getName());
 
-            // Listeners for duplicating and removing an item.
-            // They use the static removeItem and addItem methods created in MainActivity.
-            remove.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    FragmentGroceryListController.removeItem(position);
-                }
-            });
-
-            unchecked.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    FragmentGroceryListController.uncheckItem(position);
-                }
-            });
+            addButtons(position);
 
         }
 
@@ -69,12 +57,32 @@ public class GroceryListListViewAdapter extends ArrayAdapter<GroupGrocery> {
 
     }
 
+    private void addButtons(int position) {
+
+        // Listeners for duplicating and removing an item.
+        // They use the static removeItem and addItem methods created in MainActivity.
+        remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentGroceryListController.removeItem(position);
+            }
+        });
+
+        unchecked.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentGroceryListController.uncheckItem(position);
+            }
+        });
+
+    }
+
     private void loadScreenElements(View convertView) {
 
         name = convertView.findViewById(R.id.nameGroceryList);
+        number = convertView.findViewById(R.id.numberGroceryList);
         remove = convertView.findViewById(R.id.removeGroceryList);
         unchecked = convertView.findViewById(R.id.uncheckedGroceryList);
-        number = convertView.findViewById(R.id.numberGroceryList);
 
     }
 

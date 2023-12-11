@@ -20,20 +20,24 @@ import java.util.List;
 
 public class AdapterBudgetNewExpense extends ArrayAdapter<User> {
 
-    private List<User> list;
     private CheckBox checkBoxNewExpenseParticipants;
     private Context context;
+    private List<User> list;
 
     public AdapterBudgetNewExpense(Context context, List<User> items) {
+
         super(context, R.layout.adapter_budget_new_expense, items);
         this.context = context;
         list = items;
+
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @Nullable ViewGroup parent) {
+
         if (convertView == null) {
+
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.adapter_budget_new_expense, null);
 
@@ -41,9 +45,11 @@ public class AdapterBudgetNewExpense extends ArrayAdapter<User> {
 
             User user = list.get(position);
             checkBoxNewExpenseParticipants.setText(user.getFirstName());
+
         }
 
         checkBoxNewExpenseParticipants.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 User user = list.get(position);
@@ -52,11 +58,13 @@ public class AdapterBudgetNewExpense extends ArrayAdapter<User> {
                 } else {
                     FragmentBudgetAddExpenseScreenController.deleteUser(user);
                 }
+
             }
 
         });
 
         checkBoxNewExpenseParticipants.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 User user = list.get(position);
@@ -65,15 +73,19 @@ public class AdapterBudgetNewExpense extends ArrayAdapter<User> {
                 } else {
                     FragmentBudgetAddExpenseScreenController.deleteUser(user);
                 }
+
             }
+
         });
 
         return convertView;
+
     }
 
     private void loadScreenElements(View convertView) {
 
         checkBoxNewExpenseParticipants = convertView.findViewById(R.id.checkBoxNewExpenseParticipants);
+
     }
 
 

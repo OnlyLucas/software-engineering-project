@@ -19,45 +19,64 @@ import com.example.software_engineering_project.entity.User;
 import java.util.List;
 
 public class AdapterManageFlatShareListView extends ArrayAdapter<User> {
-    private List<User> list;
+
     private Context context;
+    private List<User> list;
+    private TextView name, number;
+    private ImageView remove;
 
     // The ListViewAdapter Constructor
     // @param context: the Context from the MainActivity
     // @param items: The list of items in our Grocery List
     public AdapterManageFlatShareListView(Context context, List<User> items) {
+
         super(context, R.layout.adapter_manage_flat_share_list_view, items);
         this.context = context;
         list = items;
+
     }
 
     // The method we override to provide our own layout for each View (row) in the ListView
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
         if (convertView == null) {
+
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.adapter_manage_flat_share_list_view, null);
 
-            TextView name = convertView.findViewById(R.id.nameManageFlatShare);
-            ImageView remove = convertView.findViewById(R.id.removeManageFlatShare);
-            TextView number = convertView.findViewById(R.id.numberManageFlatShare);
+            loadScreenElements(convertView);
 
             number.setText(position + 1 + ". ");
             name.setText(list.get(position).getFirstName());
 
-            // Listeners for duplicating and removing an item.
-            // They use the static removeItem and addItem methods created in MainActivity.
-            remove.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    FragmentManageFlatShareController.removeItem(position);
-                }
-            });
+            addButtons(position);
 
         }
 
         return convertView;
+
+    }
+
+    private void addButtons(int position) {
+
+        // Listeners for duplicating and removing an item.
+        // They use the static removeItem and addItem methods created in MainActivity.
+        remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManageFlatShareController.removeItem(position);
+            }
+        });
+
+    }
+
+    private void loadScreenElements(View convertView) {
+
+        name = convertView.findViewById(R.id.nameManageFlatShare);
+        number = convertView.findViewById(R.id.numberManageFlatShare);
+        remove = convertView.findViewById(R.id.removeManageFlatShare);
 
     }
 
