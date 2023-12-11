@@ -28,36 +28,20 @@ import java.util.Map;
  */
 public class FragmentChangeMailController extends Fragment {
 
-    static UserRepository userRepository;
     static Context context;
-    private View fragmentView;
+    static UserRepository userRepository;
     private Button cancelChangeMail, saveChangeMail;
-    private EditText currentMail, newMail, confirmNewMail;
+    private EditText confirmNewMail, currentMail, newMail;
+    private View fragmentView;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         userRepository = new UserRepository();
-        context = getActivity();
-        fragmentView = inflater.inflate(R.layout.fragment_change_mail, container, false);
         context = requireActivity();
+        fragmentView = inflater.inflate(R.layout.fragment_change_mail, container, false);
         loadScreenElements();
         addButtons();
         return fragmentView;
-
-    }
-
-    private void loadScreenElements() {
-
-        cancelChangeMail = fragmentView.findViewById(R.id.cancelChangeMail);
-        saveChangeMail = fragmentView.findViewById(R.id.saveChangeMail);
-
-    }
-
-    private void callFragment(Fragment fragment) {
-
-        FragmentManager fm = requireActivity().getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(R.id.contentFragmentMainScreen, fragment);
-        transaction.commit();
 
     }
 
@@ -78,10 +62,17 @@ public class FragmentChangeMailController extends Fragment {
 
     }
 
+    private void callFragment(Fragment fragment) {
+
+        FragmentManager fm = requireActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.contentFragmentMainScreen, fragment);
+        transaction.commit();
+
+    }
+
     private void checkMailChange() {
-        currentMail = fragmentView.findViewById(R.id.currentMail);
-        newMail = fragmentView.findViewById(R.id.newMail);
-        confirmNewMail = fragmentView.findViewById(R.id.confirmNewMail);
+
         String currentMailString = currentMail.getText().toString();
         String newMailString = newMail.getText().toString();
         String confirmMailString = confirmNewMail.getText().toString();
@@ -104,6 +95,17 @@ public class FragmentChangeMailController extends Fragment {
         } else {
             System.out.println("Wrong current mail");
         }
+
+    }
+
+    private void loadScreenElements() {
+
+        cancelChangeMail = fragmentView.findViewById(R.id.cancelChangeMail);
+        confirmNewMail = fragmentView.findViewById(R.id.confirmNewMail);
+        currentMail = fragmentView.findViewById(R.id.currentMail);
+        newMail = fragmentView.findViewById(R.id.newMail);
+        saveChangeMail = fragmentView.findViewById(R.id.saveChangeMail);
+
     }
 
 }

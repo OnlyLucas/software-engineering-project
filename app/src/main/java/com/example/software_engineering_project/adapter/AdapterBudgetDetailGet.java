@@ -16,27 +16,30 @@ import java.util.ArrayList;
 
 public class AdapterBudgetDetailGet extends ArrayAdapter<String> {
 
+    private Context context;
     private ArrayList<String> list;
 
-    private Context context;
-
     public AdapterBudgetDetailGet(Context context, ArrayList<String> items) {
+
         super(context, R.layout.adapter_budget_detail_get, items);
         this.context = context;
         list = items;
+
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @Nullable ViewGroup parent) {
+
         if (convertView == null) {
+
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.adapter_budget_detail_get, null);
-
 
         }
 
         return convertView;
+
     }
 
 

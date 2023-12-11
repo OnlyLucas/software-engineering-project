@@ -18,46 +18,63 @@ import java.util.ArrayList;
 
 public class CleaningPlanListDetailViewAdapter extends ArrayAdapter<String> {
 
-    private ArrayList<String> list;
     private Context context;
+    private ArrayList<String> list;
+    private TextView name, number;
+    ImageView remove;
 
     // The ListViewAdapter Constructor
     // @param context: the Context from the MainActivity
     // @param items: The list of items in our Grocery List
     public CleaningPlanListDetailViewAdapter(Context context, ArrayList<String> items) {
+
         super(context, R.layout.adapter_cleaning_plan_list_detail_view, items);
         this.context = context;
         list = items;
+
     }
 
     // The method we override to provide our own layout for each View (row) in the ListView
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
         if (convertView == null) {
+
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.adapter_cleaning_plan_list_detail_view, null);
 
-            TextView name = convertView.findViewById(R.id.nameCleaningPlan);
-            ImageView remove = convertView.findViewById(R.id.removeCleaningPlan);
-            TextView number = convertView.findViewById(R.id.numberCleaningPlan);
-
+            loadScreenElements(convertView);
 
             number.setText(position + 1 + ".");
             name.setText(list.get(position));
 
-            // Listeners for duplicating and removing an item.
-            // They use the static removeItem and addItem methods created in MainActivity.
-            remove.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //FragmentCleaningPlanListDetailController.removeItem(position);
-                }
-            });
+            addButtons(position);
 
         }
 
         return convertView;
+
+    }
+
+    private void addButtons(int position) {
+
+        // Listeners for duplicating and removing an item.
+        // They use the static removeItem and addItem methods created in MainActivity.
+        remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //FragmentCleaningPlanListDetailController.removeItem(position);
+            }
+        });
+
+    }
+
+    private void loadScreenElements(View convertView) {
+
+        name = convertView.findViewById(R.id.nameCleaningPlan);
+        number = convertView.findViewById(R.id.numberCleaningPlan);
+        remove = convertView.findViewById(R.id.removeCleaningPlan);
 
     }
 

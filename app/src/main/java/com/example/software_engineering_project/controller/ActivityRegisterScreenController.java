@@ -10,7 +10,7 @@ import com.example.software_engineering_project.R;
 
 public class ActivityRegisterScreenController extends AppCompatActivity {
 
-    private Button cancelButton;
+    private Button cancelButton, registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,18 +22,23 @@ public class ActivityRegisterScreenController extends AppCompatActivity {
 
     }
 
-    private void loadScreenElements() {
-
-        cancelButton = findViewById(R.id.cancelButton);
-
-    }
-
     private void addButtons() {
 
         cancelButton.setOnClickListener(view -> {
             Intent loginScreen = new Intent(ActivityRegisterScreenController.this, ActivityLoginScreenController.class);
             startActivity(loginScreen);
         });
+
+        //Todo functionality for Register
+        //registerButton.setOnClickListener();
+
+    }
+
+    private void loadScreenElements() {
+
+        //Todo assign IDs to RegisterScreen's Elements and instantiate
+        cancelButton = findViewById(R.id.cancelButton);
+        registerButton = findViewById(R.id.registerButton);
 
     }
 

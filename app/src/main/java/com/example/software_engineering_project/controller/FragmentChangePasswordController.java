@@ -22,8 +22,8 @@ import com.example.software_engineering_project.util.ToastUtil;
 public class FragmentChangePasswordController extends Fragment {
 
     static Context context;
-    private View fragmentView;
     private Button cancelChangePassword, saveChangePassword;
+    private View fragmentView;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -32,22 +32,6 @@ public class FragmentChangePasswordController extends Fragment {
         loadScreenElements();
         addButtons();
         return fragmentView;
-
-    }
-
-    private void loadScreenElements() {
-
-        cancelChangePassword = fragmentView.findViewById(R.id.cancelChangePassword);
-        saveChangePassword = fragmentView.findViewById(R.id.saveChangePassword);
-
-    }
-
-    private void callFragment(Fragment fragment) {
-
-        FragmentManager fm = requireActivity().getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(R.id.contentFragmentMainScreen, fragment);
-        transaction.commit();
 
     }
 
@@ -67,6 +51,22 @@ public class FragmentChangePasswordController extends Fragment {
             ToastUtil.makeToast(getString(R.string.new_password_saved), context);
             callFragment(fragment);
         });
+
+    }
+
+    private void callFragment(Fragment fragment) {
+
+        FragmentManager fm = requireActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.contentFragmentMainScreen, fragment);
+        transaction.commit();
+
+    }
+
+    private void loadScreenElements() {
+
+        cancelChangePassword = fragmentView.findViewById(R.id.cancelChangePassword);
+        saveChangePassword = fragmentView.findViewById(R.id.saveChangePassword);
 
     }
 

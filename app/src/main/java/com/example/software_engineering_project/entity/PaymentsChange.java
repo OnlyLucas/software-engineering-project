@@ -10,6 +10,7 @@ import java.util.UUID;
 public class PaymentsChange {
     private UUID id;
     private Payment payment;
+    private Group group;
     private BigDecimal amount;
     private String currencyCode;
     private User paidByUser;
@@ -32,6 +33,14 @@ public class PaymentsChange {
 
     public void setPayment(Payment payment) {
         this.payment = payment;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 
     public BigDecimal getAmount() {
@@ -87,12 +96,12 @@ public class PaymentsChange {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PaymentsChange that = (PaymentsChange) o;
-        return Objects.equals(id, that.id) && Objects.equals(payment, that.payment) && Objects.equals(amount, that.amount) && Objects.equals(currencyCode, that.currencyCode) && Objects.equals(paidByUser, that.paidByUser) && Objects.equals(changedByUser, that.changedByUser) && Objects.equals(changedAt, that.changedAt) && Objects.equals(name, that.name);
+        return Objects.equals(id, that.id) && Objects.equals(payment, that.payment) && Objects.equals(group, that.group) && Objects.equals(amount, that.amount) && Objects.equals(currencyCode, that.currencyCode) && Objects.equals(paidByUser, that.paidByUser) && Objects.equals(changedByUser, that.changedByUser) && Objects.equals(changedAt, that.changedAt) && Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, payment, amount, currencyCode, paidByUser, changedByUser, changedAt, name);
+        return Objects.hash(id, payment, group, amount, currencyCode, paidByUser, changedByUser, changedAt, name);
     }
 
     @Override
@@ -100,6 +109,7 @@ public class PaymentsChange {
         return "PaymentsChange{" +
                 "id=" + id +
                 ", payment=" + payment +
+                ", group=" + group +
                 ", amount=" + amount +
                 ", currencyCode='" + currencyCode + '\'' +
                 ", paidByUser=" + paidByUser +

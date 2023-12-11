@@ -1,18 +1,70 @@
-<!-- adapter_budget_list_view_second_layer.xml -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="5dp">
 
-    <!-- Other views in the layout -->
-
-    <ListView
-        android:id="@+id/paymentsListView"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <!-- This ListView will display the payments -->
-    </ListView>
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        android:background="@color/navBar">
 
-    <!-- Other views in the layout -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background">
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/expenseDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="28dp"
+                android:text="Aldi"
+                android:layout_marginBottom="5dp"
+                android:textStyle="bold"
+                android:textColor="#000000"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/expensePayer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_below="@id/expenseDescription"
+                android:text="Meike paid 60$"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/expenseAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="28dp"
+                android:text="- 30$"
+                android:textColor="#FF0000"
+                android:layout_marginTop="10dp"
+                android:textStyle="bold"
+                android:textSize="24sp"/>
+
+            <TextView
+                android:id="@+id/expenseDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="28dp"
+                android:layout_below="@id/expenseAmount"
+                android:text="21. Nov"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:layout_marginBottom="10dp"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

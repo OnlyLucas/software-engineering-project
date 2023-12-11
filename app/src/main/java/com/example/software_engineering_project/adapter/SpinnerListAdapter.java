@@ -19,35 +19,42 @@ import java.util.ArrayList;
 public class SpinnerListAdapter extends ArrayAdapter<String> implements AdapterView.OnItemSelectedListener {
 
     private static TextView nameOfInterval;
-    private ArrayList<String> list;
     private Context context;
+    private ArrayList<String> list;
 
 
     // The ListViewAdapter Constructor
     // @param context: the Context from the MainActivity
     // @param items: The list of items in our Grocery List
     public SpinnerListAdapter(Context context, ArrayList<String> items) {
+
         super(context, R.layout.adapter_grocery_list_list_view, items);
         this.context = context;
         list = items;
-    }
 
-    public static void setText(String itemSelected) {
-        nameOfInterval.setText(itemSelected);
     }
 
     // The method we override to provide our own layout for each View (row) in the ListView
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
         if (convertView == null) {
+
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.adapter_spinner_list_view, null);
 
-            nameOfInterval = convertView.findViewById(R.id.nameOfInterval);
+            loadScreenElements(convertView);
+
         }
 
         return convertView;
+
+    }
+
+    private void loadScreenElements(View convertView) {
+
+        nameOfInterval = convertView.findViewById(R.id.nameOfInterval);
 
     }
 
@@ -60,4 +67,9 @@ public class SpinnerListAdapter extends ArrayAdapter<String> implements AdapterV
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+    public static void setText(String itemSelected) {
+        nameOfInterval.setText(itemSelected);
+    }
+
 }
