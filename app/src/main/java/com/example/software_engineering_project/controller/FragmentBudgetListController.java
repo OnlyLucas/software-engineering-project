@@ -57,7 +57,7 @@ public class FragmentBudgetListController extends Fragment {
         items.add("August");
 
         currentPayments.observe(getViewLifecycleOwner(), currentPayments -> {
-            adapter = new AdapterBudgetListFirstLayer(getActivity(), items, paymentRepository.getCurrentPayments());
+            adapter = new AdapterBudgetListFirstLayer(context, items, paymentRepository.getCurrentPayments());
             listView.setAdapter(adapter);
         });
 

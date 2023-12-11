@@ -18,8 +18,8 @@ import java.util.ArrayList;
 
 public class CleaningPlanListDetailViewAdapter extends ArrayAdapter<String> {
 
-    ArrayList<String> list;
-    Context context;
+    private ArrayList<String> list;
+    private Context context;
 
     // The ListViewAdapter Constructor
     // @param context: the Context from the MainActivity

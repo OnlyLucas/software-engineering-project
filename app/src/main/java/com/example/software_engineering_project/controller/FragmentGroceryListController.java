@@ -2,9 +2,6 @@ package com.example.software_engineering_project.controller;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +10,17 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import java.util.List;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.GroceryListListViewAdapter;
 import com.example.software_engineering_project.entity.GroupGrocery;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.viewmodel.GroceryRepository;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,6 +38,17 @@ public class FragmentGroceryListController extends Fragment {
     private ImageView enter;
     private View fragmentView;
 
+    // function to remove an item given its index in the grocery list.
+    public static void removeItem(int item) {
+        GroupGrocery grocery = uncompletedGroceryLiveData.getValue().get(item);
+        groceryRepository.deleteGroupGrocery(grocery, context);
+    }
+
+    public static void uncheckItem(int i) {
+        GroupGrocery grocery = uncompletedGroceryLiveData.getValue().get(i);
+        grocery.setCompleted();
+        groceryRepository.updateGroupGrocery(grocery, context);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -106,23 +118,11 @@ public class FragmentGroceryListController extends Fragment {
 
     }
 
-    // function to remove an item given its index in the grocery list.
-    public static void removeItem(int item) {
-        GroupGrocery grocery = uncompletedGroceryLiveData.getValue().get(item);
-        groceryRepository.deleteGroupGrocery(grocery, context);
-    }
-
-    public static void uncheckItem(int i) {
-        GroupGrocery grocery = uncompletedGroceryLiveData.getValue().get(i);
-        grocery.setCompleted();
-        groceryRepository.updateGroupGrocery(grocery, context);
-    }
-
     // function to add an item given its name.
     private void addItem(GroupGrocery item) {
         groceryRepository.insertGroupGrocery(item, context);
     }
-  
+
     private void loadScreenElements() {
         listView = fragmentView.findViewById(R.id.groceryList);
         input = fragmentView.findViewById(R.id.input);

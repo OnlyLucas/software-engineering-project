@@ -18,11 +18,11 @@ import java.util.List;
 
 public class AdapterBudgetListSecondLayer extends ArrayAdapter<Payment> {
 
-    List<Payment> list;
+    private List<Payment> list;
 
-    Context context;
+    private Context context;
 
-    public AdapterBudgetListSecondLayer (Context context, List<Payment> items) {
+    public AdapterBudgetListSecondLayer(Context context, List<Payment> items) {
         super(context, R.layout.adapter_budget_list_view_second_layer, items);
         this.context = context;
         list = items;

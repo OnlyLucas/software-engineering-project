@@ -1,17 +1,16 @@
 package com.example.software_engineering_project.controller;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.entity.User;
@@ -57,7 +56,7 @@ public class FragmentChangeMailController extends Fragment {
 
         FragmentManager fm = requireActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(R.id.contentFragmentMainScreen,fragment);
+        transaction.replace(R.id.contentFragmentMainScreen, fragment);
         transaction.commit();
 
     }
@@ -66,14 +65,14 @@ public class FragmentChangeMailController extends Fragment {
 
         cancelChangeMail.setOnClickListener(view -> {
             FragmentSettingsController fragment = new FragmentSettingsController();
-            ToastUtil.makeToast(getString(R.string.changes_discarded),context);
+            ToastUtil.makeToast(getString(R.string.changes_discarded), context);
             callFragment(fragment);
         });
 
         saveChangeMail.setOnClickListener(view -> {
             checkMailChange();
             FragmentSettingsController fragment = new FragmentSettingsController();
-            ToastUtil.makeToast(getString(R.string.new_e_mail_saved),context);
+            ToastUtil.makeToast(getString(R.string.new_e_mail_saved), context);
             callFragment(fragment);
         });
 
@@ -89,15 +88,16 @@ public class FragmentChangeMailController extends Fragment {
 
         User user = UserViewModel.getCurrentAppUser().getValue();
 
-        if(user.getEmail().equals(currentMailString)) {
+        if (user.getEmail().equals(currentMailString)) {
 
             System.out.println("Correct current mail");
 
-            if(newMailString.equals(confirmMailString)) {
+            if (newMailString.equals(confirmMailString)) {
                 System.out.println("Ready to persist new mail " + newMailString);
                 Map<String, String> map = new HashMap<>();
                 map.put("email", newMailString);
-                userRepository.updateEmail(user, map, context);;
+                userRepository.updateEmail(user, map, context);
+                ;
             } else {
                 System.out.println("New mails not matching");
             }

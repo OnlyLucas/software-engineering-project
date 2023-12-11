@@ -35,14 +35,14 @@ public class FragmentCleaningPlanListController extends Fragment {
     static ArrayList<String> items = new ArrayList<>();
     static Context context;
     static Toast t;
-    private View fragmentView;
     private static LiveData<List<CleaningTemplate>> currentCleaningTemplates;
     private static CleaningTemplateRepository cleaningTemplateRepository;
+    private View fragmentView;
 
     // function to remove an item given its index in the grocery list.
     public static void removeItem(int i) {
         CleaningTemplate cleaningTemplate = currentCleaningTemplates.getValue().get(i);
-        cleaningTemplateRepository.deleteCleaningTemplate(cleaningTemplate,context);
+        cleaningTemplateRepository.deleteCleaningTemplate(cleaningTemplate, context);
         ToastUtil.makeToast("Removed: " + items.get(i), context);
         items.remove(i);
         listView.setAdapter(adapter);

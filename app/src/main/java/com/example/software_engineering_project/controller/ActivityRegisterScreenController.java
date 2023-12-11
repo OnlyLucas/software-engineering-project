@@ -1,9 +1,10 @@
 package com.example.software_engineering_project.controller;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.software_engineering_project.R;
 
@@ -23,11 +24,11 @@ public class ActivityRegisterScreenController extends AppCompatActivity {
 
     private void loadScreenElements() {
 
-        cancelButton=findViewById(R.id.cancelButton);
+        cancelButton = findViewById(R.id.cancelButton);
 
     }
 
-    private void addButtons(){
+    private void addButtons() {
 
         cancelButton.setOnClickListener(view -> {
             Intent loginScreen = new Intent(ActivityRegisterScreenController.this, ActivityLoginScreenController.class);

@@ -2,14 +2,14 @@ package com.example.software_engineering_project.controller;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.util.ToastUtil;
@@ -46,7 +46,7 @@ public class FragmentChangePasswordController extends Fragment {
 
         FragmentManager fm = requireActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(R.id.contentFragmentMainScreen,fragment);
+        transaction.replace(R.id.contentFragmentMainScreen, fragment);
         transaction.commit();
 
     }
@@ -55,7 +55,7 @@ public class FragmentChangePasswordController extends Fragment {
 
         cancelChangePassword.setOnClickListener(view -> {
             FragmentSettingsController fragment = new FragmentSettingsController();
-            ToastUtil.makeToast(getString(R.string.changes_discarded),context);
+            ToastUtil.makeToast(getString(R.string.changes_discarded), context);
             callFragment(fragment);
         });
 
@@ -64,7 +64,7 @@ public class FragmentChangePasswordController extends Fragment {
             //Daten müssen hier noch gesaved werden
 
             FragmentSettingsController fragment = new FragmentSettingsController();
-            ToastUtil.makeToast(getString(R.string.new_password_saved),context);
+            ToastUtil.makeToast(getString(R.string.new_password_saved), context);
             callFragment(fragment);
         });
 

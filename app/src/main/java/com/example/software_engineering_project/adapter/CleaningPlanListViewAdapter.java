@@ -8,18 +8,20 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import java.util.List;
 
-import com.example.software_engineering_project.controller.FragmentCleaningPlanListController;
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.controller.FragmentCleaningPlanListController;
 import com.example.software_engineering_project.entity.CleaningTemplate;
+
+import java.util.List;
 
 public class CleaningPlanListViewAdapter extends ArrayAdapter<CleaningTemplate> {
 
-    List<CleaningTemplate> list;
-    Context context;
+    private List<CleaningTemplate> list;
+    private Context context;
 
     // The ListViewAdapter Constructor
     // @param context: the Context from the MainActivity

@@ -16,9 +16,9 @@ import java.util.ArrayList;
 
 public class AdapterBudgetDetailOwe extends ArrayAdapter<String> {
 
-    ArrayList<String> list;
+    private ArrayList<String> list;
 
-    Context context;
+    private Context context;
 
     public AdapterBudgetDetailOwe(Context context, ArrayList<String> items) {
         super(context, R.layout.adapter_budget_detail_owe, items);
@@ -32,7 +32,6 @@ public class AdapterBudgetDetailOwe extends ArrayAdapter<String> {
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.adapter_budget_detail_owe, null);
-
 
 
         }

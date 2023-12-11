@@ -1,7 +1,5 @@
 package com.example.software_engineering_project.adapter;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,15 +8,19 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.controller.FragmentManageFlatShareController;
 import com.example.software_engineering_project.entity.User;
 
+import java.util.List;
+
 public class AdapterManageFlatShareListView extends ArrayAdapter<User> {
-    List<User> list;
-    Context context;
+    private List<User> list;
+    private Context context;
 
     // The ListViewAdapter Constructor
     // @param context: the Context from the MainActivity

@@ -18,9 +18,9 @@ import java.util.ArrayList;
 
 public class SpinnerListAdapter extends ArrayAdapter<String> implements AdapterView.OnItemSelectedListener {
 
-    static TextView nameOfInterval;
-    ArrayList<String> list;
-    Context context;
+    private static TextView nameOfInterval;
+    private ArrayList<String> list;
+    private Context context;
 
 
     // The ListViewAdapter Constructor
@@ -30,6 +30,10 @@ public class SpinnerListAdapter extends ArrayAdapter<String> implements AdapterV
         super(context, R.layout.adapter_grocery_list_list_view, items);
         this.context = context;
         list = items;
+    }
+
+    public static void setText(String itemSelected) {
+        nameOfInterval.setText(itemSelected);
     }
 
     // The method we override to provide our own layout for each View (row) in the ListView
@@ -45,10 +49,6 @@ public class SpinnerListAdapter extends ArrayAdapter<String> implements AdapterV
 
         return convertView;
 
-    }
-
-    public static void setText(String itemSelected) {
-        nameOfInterval.setText(itemSelected);
     }
 
     @Override

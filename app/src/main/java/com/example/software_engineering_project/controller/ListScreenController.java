@@ -1,6 +1,5 @@
 package com.example.software_engineering_project.controller;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
@@ -11,30 +10,43 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.software_engineering_project.R;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
-import com.example.software_engineering_project.R;
-
 public abstract class ListScreenController<T> extends AppCompatActivity {
 
     static ListView listView;
+    static ArrayAdapter<String> adapter;
+    static Context context;
+    // function to make a Toast given a string
+    static Toast t;
+    private final int activity;
     EditText input;
     ImageView enter;
-    static ArrayAdapter<String> adapter;
     ArrayList<T> items;
-    static Context context;
     private Button goBackButtonGroceryList;
-    private final int activity;
 
     /**
      * @param activity is the activity for a controller of a certain screen
      */
-    public ListScreenController(int activity, ArrayAdapter<String> adapter){
+    public ListScreenController(int activity, ArrayAdapter<String> adapter) {
 
         this.activity = activity;
         ListScreenController.adapter = adapter;
+
+    }
+
+    private static void makeToast(String s) {
+
+        if (t != null) t.cancel();
+        t = Toast.makeText(context, s, Toast.LENGTH_SHORT);
+        t.show();
 
     }
 
@@ -124,7 +136,7 @@ public abstract class ListScreenController<T> extends AppCompatActivity {
 
     }
 
-    public void uncheckItem(int i){
+    public void uncheckItem(int i) {
         makeToast(getString(R.string.unchecked) + items.get(i));
     }
 
@@ -133,17 +145,6 @@ public abstract class ListScreenController<T> extends AppCompatActivity {
 
         items.add(item);
         listView.setAdapter(adapter);
-
-    }
-
-    // function to make a Toast given a string
-    static Toast t;
-
-    private static void makeToast(String s) {
-
-        if (t != null) t.cancel();
-        t = Toast.makeText(context, s, Toast.LENGTH_SHORT);
-        t.show();
 
     }
 

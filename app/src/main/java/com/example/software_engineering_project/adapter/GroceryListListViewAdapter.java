@@ -8,24 +8,24 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.software_engineering_project.controller.FragmentGroceryListController;
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.controller.FragmentGroceryListController;
 import com.example.software_engineering_project.entity.GroupGrocery;
+
+import java.util.List;
 
 public class GroceryListListViewAdapter extends ArrayAdapter<GroupGrocery> {
 
-    List<GroupGrocery> list;
-    Context context;
-
-    TextView name;
-    ImageView remove;
-    ImageView unchecked;
-    TextView number;
+    private List<GroupGrocery> list;
+    private Context context;
+    private TextView name;
+    private ImageView remove;
+    private ImageView unchecked;
+    private TextView number;
 
     public GroceryListListViewAdapter(Context context, List<GroupGrocery> items) {
         super(context, R.layout.adapter_grocery_list_list_view, items);

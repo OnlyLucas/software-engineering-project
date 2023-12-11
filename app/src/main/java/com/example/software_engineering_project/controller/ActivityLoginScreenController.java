@@ -3,7 +3,9 @@ package com.example.software_engineering_project.controller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.software_engineering_project.R;
 
 public class ActivityLoginScreenController extends AppCompatActivity {

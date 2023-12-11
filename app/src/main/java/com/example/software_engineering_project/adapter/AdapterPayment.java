@@ -19,8 +19,8 @@ import io.reactivex.rxjava3.annotations.Nullable;
 
 public class AdapterPayment extends ArrayAdapter<Payment> {
 
-    List<Payment> paymentList;
-    Context context;
+    private List<Payment> paymentList;
+    private Context context;
 
     public AdapterPayment(Context context, List<Payment> payments) {
         super(context, R.layout.adapter_payment, payments);

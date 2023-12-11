@@ -2,11 +2,6 @@ package com.example.software_engineering_project.controller;
 
 import android.content.Context;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.LiveData;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import java.util.ArrayList;
-import java.util.List;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LiveData;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.AdapterManageFlatShareListView;
@@ -26,6 +24,9 @@ import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.viewmodel.GroupMembershipRepository;
 import com.example.software_engineering_project.viewmodel.UserRepository;
 import com.example.software_engineering_project.viewmodel.UserViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,6 +46,23 @@ public class FragmentManageFlatShareController extends Fragment {
     private EditText input_name, input_mail;
     private ImageView enter;
     private Button cancelManageFlatShare, saveManageFlatShare;
+
+    // function to remove an item given its index in the grocery list.
+    public static void removeItem(int i) {
+        User user = currentUsers.getValue().get(i);
+        Group group = UserViewModel.getCurrentGroup().getValue();
+        groupMembershipRepository.deleteGroupMembership(user, group, context);
+        listView.setAdapter(adapter);
+
+    }
+
+    // function to add an item given its name.
+    public static void addItem(String item) {
+
+        items.add(item);
+        listView.setAdapter(adapter);
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -104,7 +122,7 @@ public class FragmentManageFlatShareController extends Fragment {
 
         cancelManageFlatShare.setOnClickListener(view -> {
             FragmentSettingsController fragment = new FragmentSettingsController();
-            ToastUtil.makeToast(getString(R.string.changes_discarded),context);
+            ToastUtil.makeToast(getString(R.string.changes_discarded), context);
             callFragment(fragment);
         });
 
@@ -139,25 +157,8 @@ public class FragmentManageFlatShareController extends Fragment {
 
         FragmentManager fm = requireActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(R.id.contentFragmentMainScreen,fragment);
+        transaction.replace(R.id.contentFragmentMainScreen, fragment);
         transaction.commit();
-
-    }
-
-    // function to remove an item given its index in the grocery list.
-    public static void removeItem(int i) {
-        User user = currentUsers.getValue().get(i);
-        Group group = UserViewModel.getCurrentGroup().getValue();
-        groupMembershipRepository.deleteGroupMembership(user, group, context);
-        listView.setAdapter(adapter);
-
-    }
-
-    // function to add an item given its name.
-    public static void addItem(String item) {
-
-        items.add(item);
-        listView.setAdapter(adapter);
 
     }
 

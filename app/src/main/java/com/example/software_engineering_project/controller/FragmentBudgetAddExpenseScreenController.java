@@ -2,17 +2,15 @@ package com.example.software_engineering_project.controller;
 
 import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.AdapterBudgetNewExpense;
@@ -44,6 +42,8 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
     private static PaymentParticipationRepository paymentParticipationRepository;
     private static LiveData<List<User>> currentUsers;
     private static List<User> selectedUsers = new ArrayList<>();
+    private View fragmentView, fragmentViewHeader;
+
     public static void addUser(User user) {
         selectedUsers.add(user);
     }
@@ -51,37 +51,12 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
     public static void deleteUser(User user) {
         selectedUsers.remove(user);
     }
-    private View fragmentView, fragmentViewHeader;
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        userRepository = new UserRepository();
-        currentUsers = userRepository.getCurrentUsers();
-
-        paymentRepository = new PaymentRepository();
-        paymentParticipationRepository = new PaymentParticipationRepository();
-
-        fragmentView = inflater.inflate(R.layout.fragment_budget_add_expense_screen, container, false);
-        fragmentViewHeader = inflater.inflate(R.layout.fragment_budget_main, container, false);
-        context = requireActivity();
-        loadScreenElements();
-
-        currentUsers.observe(getViewLifecycleOwner(), currentUsers -> {
-            adapter = new  AdapterBudgetNewExpense(getActivity(), currentUsers);
-            listView.setAdapter(adapter);
-        });
-
-        listView.setAdapter(adapter);
-
-        return fragmentView;
-    }
 
     public static void handleSaveClicked() {
         Payment payment = checkInputs();
 
         //TODO Auslagerung in Konstruktor; richtige Erfassung der ausgewählten Personen; Payment muss vor PaymentParticipation erstellt sein
-        if (payment != null){
+        if (payment != null) {
             //SparseBooleanArray array = listView.getCheckedItemPositions();
             System.out.println(selectedUsers.toString());
             for (User u : selectedUsers) {
@@ -98,11 +73,11 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
                 paymentParticipation.setCurrencyCode(payment.getCurrencyCode());
                 paymentParticipation.setUser(u);
                 paymentParticipationRepository.createPaymentParticipation(paymentParticipation, context);
-                }
             }
+        }
 
         selectedUsers = new ArrayList<>();
-        }
+    }
 
     private static Payment checkInputs() {
         // get the inputs
@@ -110,7 +85,7 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
         try {
             BigDecimal expenseValue = new BigDecimal(expenseString);
             String reasonString = reason.getText().toString();
-            if (expenseValue.compareTo(new BigDecimal(0)) == -1){
+            if (expenseValue.compareTo(new BigDecimal(0)) == -1) {
                 ToastUtil.makeToast("No negative amount allowed", context);
             } else if (expenseValue.compareTo(new BigDecimal(0)) == 0) {
                 ToastUtil.makeToast("0 is not a valid expense amount", context);
@@ -134,6 +109,29 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
             e.printStackTrace(); // Or log the error, show a message, etc.
         }
         return null;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        userRepository = new UserRepository();
+        currentUsers = userRepository.getCurrentUsers();
+
+        paymentRepository = new PaymentRepository();
+        paymentParticipationRepository = new PaymentParticipationRepository();
+
+        fragmentView = inflater.inflate(R.layout.fragment_budget_add_expense_screen, container, false);
+        fragmentViewHeader = inflater.inflate(R.layout.fragment_budget_main, container, false);
+        context = requireActivity();
+        loadScreenElements();
+
+        currentUsers.observe(getViewLifecycleOwner(), currentUsers -> {
+            adapter = new AdapterBudgetNewExpense(getActivity(), currentUsers);
+            listView.setAdapter(adapter);
+        });
+
+        listView.setAdapter(adapter);
+
+        return fragmentView;
     }
 
     private void loadScreenElements() {

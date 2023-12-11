@@ -1,14 +1,18 @@
 package com.example.software_engineering_project.controller;
 
+import android.content.Context;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.adapter.AdapterBudgetDetailGet;
+import com.example.software_engineering_project.adapter.AdapterBudgetDetailOwe;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,13 +21,22 @@ import com.example.software_engineering_project.R;
  */
 public class FragmentBudgetDetailScreenController extends Fragment {
 
-    View fragmentView;
+    private static ArrayList<String> itemsGet = new ArrayList<>();
+    private static ArrayList<String> itemsOwe = new ArrayList<>();
+    Context context;
+    private View fragmentView;
+    private AdapterBudgetDetailGet adapterBudgetDetailGet;
+    private AdapterBudgetDetailOwe adapterBudgetDetailOwe;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         fragmentView = inflater.inflate(R.layout.fragment_budget_detail_screen, container, false);
+        context = requireActivity();
+
+        //adapterBudgetDetailGet = new AdapterBudgetDetailGet(context,itemsGet, //TODO: Add Code here!);
+        //adapterBudgetDetailOwe = new AdapterBudgetDetailOwe(context, itemsOwe, //TODO: Add Code here!);
 
         return fragmentView;
 

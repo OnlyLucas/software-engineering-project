@@ -32,28 +32,16 @@ import java.util.Date;
  * Use the {@link FragmentCleaningPlanAddController #newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentCleaningPlanAddController extends Fragment implements AdapterView.OnItemSelectedListener{
+public class FragmentCleaningPlanAddController extends Fragment implements AdapterView.OnItemSelectedListener {
 
     public static Spinner spinner;
     private static MaterialButton datePickerCleaningPlan;
+    private static Context context;
+    private static EditText name, description;
     private ImageView saveCleaningPlan;
     private View fragmentView;
-    private static Context context;
     private String startDateString, test;
     private Long startDateLong;
-    private static EditText name, description;
-
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        fragmentView = inflater.inflate(R.layout.fragment_cleaning_plan_add, container, false);
-        context = requireActivity();
-        loadScreenElements();
-        addButtons();
-        implementSpinner();
-        return fragmentView;
-    }
 
     public static void handleSaveClicked() {
         checkInputs();
@@ -64,8 +52,8 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
         String nameString = name.getText().toString();
         String descriptionString = description.getText().toString();
         if (nameString.length() == 0) {
-                ToastUtil.makeToast("Enter name for cleaning plan", context);
-                return false;
+            ToastUtil.makeToast("Enter name for cleaning plan", context);
+            return false;
         } else if (descriptionString.length() == 0) {
             ToastUtil.makeToast("Enter name for cleaning plan", context);
             return false;
@@ -84,8 +72,8 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
             //TODO Dates/ints verstehen und richtig converten
             //cleaningTemplate.setStartDate((java.sql.Date) new Date(start));
             //cleaningTemplate.setEndDate((java.sql.Date) new Date(end));
-            cleaningTemplate.setStartDate(new java.sql.Date(2023-12-12));
-            cleaningTemplate.setEndDate(new java.sql.Date(2024-12-15));
+            cleaningTemplate.setStartDate(new java.sql.Date(2023 - 12 - 12));
+            cleaningTemplate.setEndDate(new java.sql.Date(2024 - 12 - 15));
 
             //TODO Convert selection to int and get DB keyword interval away
             //cleaningTemplate.setInterval(7);
@@ -96,6 +84,17 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
             cleaningTemplateRepository.createCleaningTemplate(cleaningTemplate, context);
             return true;
         }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        fragmentView = inflater.inflate(R.layout.fragment_cleaning_plan_add, container, false);
+        context = requireActivity();
+        loadScreenElements();
+        addButtons();
+        implementSpinner();
+        return fragmentView;
     }
 
     private void loadScreenElements() {

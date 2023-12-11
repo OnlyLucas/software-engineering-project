@@ -1,13 +1,14 @@
 package com.example.software_engineering_project.controller;
 
 import android.widget.ArrayAdapter;
+
 import java.util.ArrayList;
 
 public class TestController extends ListScreenController<String> {
-/**
+    /**
      * @param activity is the activity for a controller of a certain screen
      * @param adapter
- * */
+     */
 
 
     public TestController(int activity, ArrayAdapter<String> adapter) {

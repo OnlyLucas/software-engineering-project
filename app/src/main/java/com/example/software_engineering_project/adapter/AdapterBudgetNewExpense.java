@@ -20,9 +20,9 @@ import java.util.List;
 
 public class AdapterBudgetNewExpense extends ArrayAdapter<User> {
 
-    List<User> list;
-    CheckBox checkBoxNewExpenseParticipants;
-    Context context;
+    private List<User> list;
+    private CheckBox checkBoxNewExpenseParticipants;
+    private Context context;
 
     public AdapterBudgetNewExpense(Context context, List<User> items) {
         super(context, R.layout.adapter_budget_new_expense, items);
@@ -47,7 +47,7 @@ public class AdapterBudgetNewExpense extends ArrayAdapter<User> {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 User user = list.get(position);
-                if(!isChecked){
+                if (!isChecked) {
                     FragmentBudgetAddExpenseScreenController.addUser(user);
                 } else {
                     FragmentBudgetAddExpenseScreenController.deleteUser(user);
@@ -60,7 +60,7 @@ public class AdapterBudgetNewExpense extends ArrayAdapter<User> {
             @Override
             public void onClick(View v) {
                 User user = list.get(position);
-                if(!checkBoxNewExpenseParticipants.isSelected()){
+                if (!checkBoxNewExpenseParticipants.isSelected()) {
                     FragmentBudgetAddExpenseScreenController.addUser(user);
                 } else {
                     FragmentBudgetAddExpenseScreenController.deleteUser(user);
