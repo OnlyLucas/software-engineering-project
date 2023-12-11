@@ -9,21 +9,22 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.AdapterBudgetNewExpense;
 import com.example.software_engineering_project.entity.Payment;
-import com.example.software_engineering_project.entity.PaymentParticipation;
+import com.example.software_engineering_project.entity.PaymentCreationData;
 import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.viewmodel.PaymentParticipationRepository;
 import com.example.software_engineering_project.viewmodel.PaymentRepository;
 import com.example.software_engineering_project.viewmodel.UserRepository;
-import com.example.software_engineering_project.viewmodel.UserViewModel;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,33 +54,29 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
     }
 
     public static void handleSaveClicked() {
-        Payment payment = checkInputs();
+        Payment payment = getPaymentFromInputs();
+        PaymentCreationData requestData = new PaymentCreationData(payment);
 
         //TODO Auslagerung in Konstruktor; richtige Erfassung der ausgewählten Personen; Payment muss vor PaymentParticipation erstellt sein
         if (payment != null) {
             //SparseBooleanArray array = listView.getCheckedItemPositions();
             System.out.println(selectedUsers.toString());
+
             for (User u : selectedUsers) {
-                // Get the user at the current position
-                //User user = (User) listView.getItemAtPosition(i);
 
                 //int amountSelected = listView.getCheckedItemCount();
-                BigDecimal amountPerUser = payment.getAmount().divide(new BigDecimal(selectedUsers.size()));
+                BigDecimal paymentAmountForUser = payment.getAmount().divide(new BigDecimal(selectedUsers.size()), RoundingMode.HALF_UP);
 
-                PaymentParticipation paymentParticipation = new PaymentParticipation();
-                paymentParticipation.setParticipationAmount(amountPerUser);
-                paymentParticipation.setPayment(payment);
-                paymentParticipation.setGroup(UserViewModel.getCurrentGroup().getValue());
-                paymentParticipation.setCurrencyCode(payment.getCurrencyCode());
-                paymentParticipation.setUser(u);
-                paymentParticipationRepository.createPaymentParticipation(paymentParticipation, context);
+                // add users to requestData
+                requestData.getUserParticipations().put(u.getId(), paymentAmountForUser);
             }
-        }
 
-        selectedUsers = new ArrayList<>();
+            paymentRepository.createPayment(requestData, context);
+        }
     }
 
-    private static Payment checkInputs() {
+
+    private static Payment getPaymentFromInputs() {
         // get the inputs
         String expenseString = expense.getText().toString();
         try {
@@ -94,7 +91,6 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
             } else {
                 // add new payment to database
                 Payment payment = new Payment(expenseValue, reasonString);
-                paymentRepository.createPayment(payment, context);
 
                 // empty input field
                 expense.setText("");
@@ -139,5 +135,4 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
         expense = fragmentView.findViewById(R.id.enterNewExpenseAmount);
         reason = fragmentView.findViewById(R.id.enterNewExpenseReason);
     }
-
 }
