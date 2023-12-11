@@ -10,21 +10,23 @@ import com.example.software_engineering_project.R;
 
 public class ActivityLoginScreenController extends AppCompatActivity {
 
-    private Button loginButton;
-    private Button registerButton;
+    private Button loginButton, registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
         loadScreenElements();
         addButtons();
+
     }
 
     private void loadScreenElements() {
 
         loginButton = findViewById(R.id.loginButton);
         registerButton = findViewById(R.id.registerButton);
+
     }
 
     private void addButtons() {

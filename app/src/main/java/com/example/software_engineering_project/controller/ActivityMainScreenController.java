@@ -13,10 +13,7 @@ import com.example.software_engineering_project.R;
 
 public class ActivityMainScreenController extends AppCompatActivity {
 
-    private Button goSettingsButton;
-    private Button groceryListButton;
-    private Button cleaningPlanButton;
-    private Button budgetButton;
+    private Button budgetButton, cleaningPlanButton, goSettingsButton, groceryListButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,24 +24,6 @@ public class ActivityMainScreenController extends AppCompatActivity {
         addButtons();
 
     }
-
-    private void loadScreenElements() {
-
-        groceryListButton = findViewById(R.id.groceryListButton);
-        goSettingsButton = findViewById(R.id.goSettingsButtons);
-        cleaningPlanButton = findViewById(R.id.cleaningPlanButton);
-        budgetButton = findViewById(R.id.budgetButton);
-    }
-
-    public void callFragment(Fragment fragment) {
-
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(R.id.contentFragmentMainScreen, fragment);
-        transaction.commit();
-
-    }
-
 
     private void addButtons() {
 
@@ -84,6 +63,24 @@ public class ActivityMainScreenController extends AppCompatActivity {
         groceryListButton.setBackgroundColor(getColor(R.color.background));
         budgetButton.setBackgroundColor(getColor(R.color.background));
         button.setBackgroundColor(getColor(R.color.primary));
+
+    }
+
+    public void callFragment(Fragment fragment) {
+
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.contentFragmentMainScreen, fragment);
+        transaction.commit();
+
+    }
+
+    private void loadScreenElements() {
+
+        budgetButton = findViewById(R.id.budgetButton);
+        cleaningPlanButton = findViewById(R.id.cleaningPlanButton);
+        goSettingsButton = findViewById(R.id.goSettingsButtons);
+        groceryListButton = findViewById(R.id.groceryListButton);
 
     }
 

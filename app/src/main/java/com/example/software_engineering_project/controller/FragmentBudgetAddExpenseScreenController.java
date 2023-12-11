@@ -33,15 +33,16 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class FragmentBudgetAddExpenseScreenController extends Fragment {
-    private static ListView listView;
-    private static EditText expense, reason;
+
     private static ArrayAdapter<User> adapter;
     private static Context context;
-    private static UserRepository userRepository;
-    private static PaymentRepository paymentRepository;
-    private static PaymentParticipationRepository paymentParticipationRepository;
     private static LiveData<List<User>> currentUsers;
+    private static EditText expense, reason;
+    private static ListView listView;
+    private static PaymentParticipationRepository paymentParticipationRepository;
+    private static PaymentRepository paymentRepository;
     private static List<User> selectedUsers = new ArrayList<>();
+    private static UserRepository userRepository;
     private View fragmentView, fragmentViewHeader;
 
     public static void addUser(User user) {
@@ -53,10 +54,12 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
     }
 
     public static void handleSaveClicked() {
+
         Payment payment = checkInputs();
 
         //TODO Auslagerung in Konstruktor; richtige Erfassung der ausgewählten Personen; Payment muss vor PaymentParticipation erstellt sein
         if (payment != null) {
+
             //SparseBooleanArray array = listView.getCheckedItemPositions();
             System.out.println(selectedUsers.toString());
             for (User u : selectedUsers) {
@@ -73,15 +76,20 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
                 paymentParticipation.setCurrencyCode(payment.getCurrencyCode());
                 paymentParticipation.setUser(u);
                 paymentParticipationRepository.createPaymentParticipation(paymentParticipation, context);
+
             }
+
         }
 
         selectedUsers = new ArrayList<>();
+
     }
 
     private static Payment checkInputs() {
+
         // get the inputs
         String expenseString = expense.getText().toString();
+
         try {
             BigDecimal expenseValue = new BigDecimal(expenseString);
             String reasonString = reason.getText().toString();
@@ -108,11 +116,14 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
             ToastUtil.makeToast("Enter number for expense", context);
             e.printStackTrace(); // Or log the error, show a message, etc.
         }
+
         return null;
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         userRepository = new UserRepository();
         currentUsers = userRepository.getCurrentUsers();
 
@@ -132,12 +143,15 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
         listView.setAdapter(adapter);
 
         return fragmentView;
+
     }
 
     private void loadScreenElements() {
-        listView = fragmentView.findViewById(R.id.enterNewExpenseInvolvedPersons);
+
         expense = fragmentView.findViewById(R.id.enterNewExpenseAmount);
+        listView = fragmentView.findViewById(R.id.enterNewExpenseInvolvedPersons);
         reason = fragmentView.findViewById(R.id.enterNewExpenseReason);
+
     }
 
 }

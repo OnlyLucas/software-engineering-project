@@ -23,14 +23,13 @@ public class FragmentBudgetDetailScreenController extends Fragment {
 
     private static ArrayList<String> itemsGet = new ArrayList<>();
     private static ArrayList<String> itemsOwe = new ArrayList<>();
-    private Context context;
-    private View fragmentView;
     private AdapterBudgetDetailGet adapterBudgetDetailGet;
     private AdapterBudgetDetailOwe adapterBudgetDetailOwe;
+    private Context context;
+    private View fragmentView;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         fragmentView = inflater.inflate(R.layout.fragment_budget_detail_screen, container, false);
         context = requireActivity();
@@ -41,4 +40,5 @@ public class FragmentBudgetDetailScreenController extends Fragment {
         return fragmentView;
 
     }
+
 }

@@ -21,16 +21,15 @@ import com.example.software_engineering_project.R;
  */
 public class FragmentBudgetMainController extends Fragment {
 
-    private FragmentBudgetListController fragmentBudgetListController = new FragmentBudgetListController();
-    private FragmentBudgetDetailScreenController fragmentBudgetDetailScreenController = new FragmentBudgetDetailScreenController();
     private FragmentBudgetAddExpenseScreenController fragmentBudgetAddExpenseScreenController = new FragmentBudgetAddExpenseScreenController();
-    private View fragmentView;
-    private ImageView showBudgetDetail, goBackBudgetMain, addExpense, saveExpense;
+    private FragmentBudgetDetailScreenController fragmentBudgetDetailScreenController = new FragmentBudgetDetailScreenController();
+    private FragmentBudgetListController fragmentBudgetListController = new FragmentBudgetListController();
+    private ImageView addExpense, goBackBudgetMain, saveExpense, showBudgetDetail;
     private TextView budgetHeadline;
+    private View fragmentView;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         fragmentView = inflater.inflate(R.layout.fragment_budget_main, container, false);
         loadScreenElements();
@@ -38,17 +37,6 @@ public class FragmentBudgetMainController extends Fragment {
         addButtons();
         return fragmentView;
     }
-
-    private void loadScreenElements() {
-
-        showBudgetDetail = fragmentView.findViewById(R.id.showBudgetDetail);
-        goBackBudgetMain = fragmentView.findViewById(R.id.goBackBudgetMain);
-        budgetHeadline = fragmentView.findViewById(R.id.budgetHeadline);
-        addExpense = fragmentView.findViewById(R.id.addExpense);
-        saveExpense = fragmentView.findViewById(R.id.saveExpense);
-
-    }
-
 
     private void addButtons() {
 
@@ -81,7 +69,25 @@ public class FragmentBudgetMainController extends Fragment {
 
     }
 
+    private void callFragment(Fragment fragment) {
 
+        FragmentManager fm = requireActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.contentFragmentBudgetMain, fragment);
+        transaction.commit();
+    }
+
+    private void loadScreenElements() {
+
+        addExpense = fragmentView.findViewById(R.id.addExpense);
+        budgetHeadline = fragmentView.findViewById(R.id.budgetHeadline);
+        goBackBudgetMain = fragmentView.findViewById(R.id.goBackBudgetMain);
+        saveExpense = fragmentView.findViewById(R.id.saveExpense);
+        showBudgetDetail = fragmentView.findViewById(R.id.showBudgetDetail);
+
+    }
+
+    //Todo rename params
     private void replaceButtons(ImageView view1, ImageView view2, ImageView view3, ImageView view4) {
 
         view1.setVisibility(View.INVISIBLE);
@@ -95,11 +101,4 @@ public class FragmentBudgetMainController extends Fragment {
 
     }
 
-    private void callFragment(Fragment fragment) {
-
-        FragmentManager fm = requireActivity().getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(R.id.contentFragmentBudgetMain, fragment);
-        transaction.commit();
-    }
 }

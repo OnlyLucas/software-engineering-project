@@ -25,17 +25,17 @@ import java.util.List;
  */
 public class FragmentBudgetListController extends Fragment {
 
-    private static ListView listView;
-    private static ArrayList<String> items = new ArrayList<>();
     private static AdapterBudgetListFirstLayer adapter;
     private static Context context;
+    private static ArrayList<String> items = new ArrayList<>();
+    private static ListView listView;
     private static PaymentRepository paymentRepository;
-    private View fragmentView;
     private LiveData<List<Payment>> currentPayments;
+    private View fragmentView;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         paymentRepository = new PaymentRepository();
         currentPayments = paymentRepository.getCurrentPayments();
 
@@ -60,6 +60,7 @@ public class FragmentBudgetListController extends Fragment {
         });
 
         return fragmentView;
+
     }
 
     private void loadScreenElements() {
