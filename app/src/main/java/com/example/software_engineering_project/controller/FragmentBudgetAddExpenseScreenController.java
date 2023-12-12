@@ -38,16 +38,11 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
     private static EditText expense, reason;
     private static ArrayAdapter<User> adapter;
     private static Context context;
-    private static EditText expense, reason;
     private static List<User> selectedUsers = new ArrayList<>();
-    private static ListView listView;
     private static LiveData<List<User>> currentUsers;
     private static PaymentParticipationRepository paymentParticipationRepository;
     private static UserRepository userRepository;
     private static PaymentRepository paymentRepository;
-    private static PaymentParticipationRepository paymentParticipationRepository;
-    private static LiveData<List<User>> currentUsers;
-    private static List<User> selectedUsers = new ArrayList<>();
     private View fragmentView, fragmentViewHeader;
 
 
@@ -141,6 +136,5 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
         expense = fragmentView.findViewById(R.id.enterNewExpenseAmount);
         listView = fragmentView.findViewById(R.id.enterNewExpenseInvolvedPersons);
         reason = fragmentView.findViewById(R.id.enterNewExpenseReason);
-
     }
 }
