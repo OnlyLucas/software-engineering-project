@@ -9,12 +9,19 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.AdapterBudgetDetailGet;
 import com.example.software_engineering_project.adapter.AdapterBudgetDetailOwe;
+import com.example.software_engineering_project.entity.PaymentParticipation;
+import com.example.software_engineering_project.entity.User;
+import com.example.software_engineering_project.viewmodel.PaymentParticipationRepository;
+import com.example.software_engineering_project.viewmodel.UserViewModel;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,9 +29,11 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class FragmentBudgetDetailScreenController extends Fragment {
-
+    private static PaymentParticipationRepository paymentParticipationRepository;
     private static ArrayList<String> itemsGet = new ArrayList<>();
     private static ArrayList<String> itemsOwe = new ArrayList<>();
+
+    private static LiveData<List<Object[]>> getPaymentParticipationLiveData;
     private AdapterBudgetDetailGet adapterBudgetDetailGet;
     private AdapterBudgetDetailOwe adapterBudgetDetailOwe;
     private Context context;
@@ -35,12 +44,24 @@ public class FragmentBudgetDetailScreenController extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        Group group = UserViewModel.getCurrentGroup().getValue();
+//        User user = UserViewModel.getCurrentAppUser().getValue();
+//        paymentParticipationRepository = new PaymentParticipationRepository();
+//        getPaymentParticipationLiveData = paymentParticipationRepository.getPaymentParticipationsForPaidUser(group.getId(), user.getId());
+//
+//        List<Object[]> listGet = getPaymentParticipationLiveData.getValue();
+//        for (Object[] p: listGet) {
+//            User userGet = (User) p[0];
+//            if(userGet.getId().equals(user.getId())){
+//                listGet.remove(p);
+//            }
+//        }
 
         fragmentView = inflater.inflate(R.layout.fragment_budget_detail_screen, container, false);
         context = requireActivity();
         loadScreenElements();
 
-        adapterBudgetDetailGet = new AdapterBudgetDetailGet(context, itemsGet);
+//        adapterBudgetDetailGet = new AdapterBudgetDetailGet(context, listGet);
         adapterBudgetDetailOwe = new AdapterBudgetDetailOwe(context, itemsOwe);
 
         return fragmentView;
