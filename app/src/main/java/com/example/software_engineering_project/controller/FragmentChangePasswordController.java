@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -23,6 +24,7 @@ public class FragmentChangePasswordController extends Fragment {
 
     static Context context;
     private Button cancelChangePassword, saveChangePassword;
+    private EditText confirmNewPassword, currentPassword, newPassword;
     private View fragmentView;
 
 
@@ -67,6 +69,9 @@ public class FragmentChangePasswordController extends Fragment {
     private void loadScreenElements() {
 
         cancelChangePassword = fragmentView.findViewById(R.id.cancelChangePassword);
+        confirmNewPassword = fragmentView.findViewById(R.id.confirmNewPassword);
+        currentPassword = fragmentView.findViewById(R.id.currentPassword);
+        newPassword = fragmentView.findViewById(R.id.newPassword);
         saveChangePassword = fragmentView.findViewById(R.id.saveChangePassword);
 
     }
