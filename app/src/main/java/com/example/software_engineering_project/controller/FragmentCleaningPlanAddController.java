@@ -2,7 +2,6 @@ package com.example.software_engineering_project.controller;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +19,6 @@ import com.example.software_engineering_project.adapter.SpinnerListAdapter;
 import com.example.software_engineering_project.entity.CleaningTemplate;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.viewmodel.CleaningTemplateRepository;
-import com.example.software_engineering_project.viewmodel.UserViewModel;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
@@ -38,10 +36,11 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
     private static MaterialButton datePickerCleaningPlan;
     private static Context context;
     private static EditText name, description;
+    private static java.sql.Date startDateSql, endDateSql;
+    private static int intervalSelection;
+
     private ImageView saveCleaningPlan;
     private View fragmentView;
-    private String startDateString, test;
-    private Long startDateLong;
 
     public static void handleSaveClicked() {
         checkInputs();
@@ -58,25 +57,8 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
             ToastUtil.makeToast("Enter name for cleaning plan", context);
             return false;
         } else {
-            String interval = spinner.getSelectedItem().toString();
-            int start = datePickerCleaningPlan.getSelectionStart();
-            int end = datePickerCleaningPlan.getSelectionEnd();
-
-            //TODO in Konstruktor von CleaningTemplate auslagern
-            CleaningTemplate cleaningTemplate = new CleaningTemplate();
-            cleaningTemplate.setName(nameString);
-            cleaningTemplate.setDescription(descriptionString);
-            cleaningTemplate.setCreatedByUser(UserViewModel.getCurrentAppUser().getValue());
-            cleaningTemplate.setGroup(UserViewModel.getCurrentGroup().getValue());
-
-            //TODO Dates/ints verstehen und richtig converten
-            //cleaningTemplate.setStartDate((java.sql.Date) new Date(start));
-            //cleaningTemplate.setEndDate((java.sql.Date) new Date(end));
-            cleaningTemplate.setStartDate(new java.sql.Date(2023 - 12 - 12));
-            cleaningTemplate.setEndDate(new java.sql.Date(2024 - 12 - 15));
-
-            //TODO Convert selection to int and get DB keyword interval away
-            //cleaningTemplate.setInterval(7);
+            CleaningTemplate cleaningTemplate = new CleaningTemplate(nameString, descriptionString,
+                    startDateSql, endDateSql, intervalSelection);
 
             //TODO create Cleanings based on selected dates
 
@@ -108,10 +90,7 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
     }
 
     private void addButtons() {
-
         datePickerCleaningPlan.setOnClickListener(v -> showDatePickerDialog());
-        //saveCleaningPlan.setOnClickListener(v -> setLog());
-
     }
 
     private void showDatePickerDialog() {
@@ -123,36 +102,28 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
 
             Long startDate = selection.first;
             Long endDate = selection.second;
+            saveDates(startDate, endDate);
             CharSequence charSequence = materialDatePicker.getHeaderText();
             datePickerCleaningPlan.setText(charSequence);
-            saveSelectedDate(String.valueOf(startDate), startDate);
 
         });
 
     }
 
-    private void saveSelectedDate(String string, Long l) {
-        startDateString = string;
-        startDateLong = l;
+    private java.sql.Date convertLongToSqlDate(Long date){
+        Date utilDate = new Date(date);
+        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+        return sqlDate;
     }
 
-    private void setLog() {
-        Date date = new Date(startDateLong);
-
-        /*
-         * @SuppressLint("SimpleDateFormat")
-         *         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-         *         String string1 = formatter.format(date);
-         */
-
-        Log.e("DatePicker", String.valueOf(date));
+    private void saveDates(Long startDate, Long endDate) {
+        startDateSql = convertLongToSqlDate(startDate);
+        endDateSql = convertLongToSqlDate(endDate);
     }
 
     private void implementSpinner() {
 
-
-        //final String[] paths = {"Weekly", "Bi-Weekly", "Monthly"};
-        //TODO überdenken bzw. ändern
+        //if changed, adoption in Listener required
         ArrayList<String> paths = new ArrayList<>();
         paths.add("Weekly");
         paths.add("Bi-Weekly");
@@ -167,7 +138,15 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        SpinnerListAdapter.setText(String.valueOf(spinner.getSelectedItem()));
+        String text = String.valueOf(spinner.getSelectedItem());
+        SpinnerListAdapter.setText(text);
+        if(position == 0){
+            intervalSelection = 7;
+        } else if(position == 1) {
+            intervalSelection = 14;
+        } else if(position == 2){
+            intervalSelection = 28;
+        }
     }
 
     @Override
