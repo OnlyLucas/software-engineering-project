@@ -78,8 +78,10 @@ public class FragmentCleaningPlanListController extends Fragment {
 
     private void addButtons() {
 
-        FragmentCleaningPlanListDetailController fragmentCleaningPlanListDetailController = new FragmentCleaningPlanListDetailController();
         listView.setOnItemClickListener((parent, view, position, id) -> {
+            CleaningTemplate clicked = (CleaningTemplate) listView.getItemAtPosition(position);
+            System.out.println(clicked.toString());
+            FragmentCleaningPlanListDetailController fragmentCleaningPlanListDetailController = new FragmentCleaningPlanListDetailController(clicked);
             callFragment(fragmentCleaningPlanListDetailController);
             FragmentCleaningPlanController.goBackCleaningPlan.setVisibility(View.VISIBLE);
 

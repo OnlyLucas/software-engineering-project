@@ -13,25 +13,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.entity.Cleaning;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class CleaningPlanListDetailViewAdapter extends ArrayAdapter<String> {
+public class CleaningPlanListDetailViewAdapter extends ArrayAdapter<Cleaning> {
 
+    private List<Cleaning> list;
     private Context context;
-    private ArrayList<String> list;
     private TextView name, number;
     ImageView remove;
 
     // The ListViewAdapter Constructor
     // @param context: the Context from the MainActivity
     // @param items: The list of items in our Grocery List
-    public CleaningPlanListDetailViewAdapter(Context context, ArrayList<String> items) {
-
+    public CleaningPlanListDetailViewAdapter(Context context, List<Cleaning> items) {
         super(context, R.layout.adapter_cleaning_plan_list_detail_view, items);
         this.context = context;
         list = items;
-
     }
 
     // The method we override to provide our own layout for each View (row) in the ListView
@@ -47,7 +46,8 @@ public class CleaningPlanListDetailViewAdapter extends ArrayAdapter<String> {
             loadScreenElements(convertView);
 
             number.setText(position + 1 + ".");
-            name.setText(list.get(position));
+            //TODO Format Date
+            name.setText(list.get(position).getDate().toString());
 
             addButtons(position);
 
