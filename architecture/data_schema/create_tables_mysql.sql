@@ -30,7 +30,7 @@ CREATE TABLE `cleaning_template` (
   `template_description` varchar(255),
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
-  `interval` integer COMMENT 'Interval in days',
+  `cleaning_interval` integer COMMENT 'Interval in days',
   `created_by` varchar(36),
   `created_at` timestamp DEFAULT (CURRENT_TIMESTAMP())
 );
