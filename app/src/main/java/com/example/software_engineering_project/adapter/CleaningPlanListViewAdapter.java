@@ -21,9 +21,10 @@ import java.util.List;
 public class CleaningPlanListViewAdapter extends ArrayAdapter<CleaningTemplate> {
 
     private Context context;
+    private ImageView remove;
     private List<CleaningTemplate> list;
     private TextView name, number;
-    private ImageView remove;
+
 
     // The ListViewAdapter Constructor
     // @param context: the Context from the MainActivity

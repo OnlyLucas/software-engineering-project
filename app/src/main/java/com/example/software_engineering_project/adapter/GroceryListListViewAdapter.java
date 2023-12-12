@@ -21,9 +21,10 @@ import java.util.List;
 public class GroceryListListViewAdapter extends ArrayAdapter<GroupGrocery> {
 
     private Context context;
+    private ImageView remove, unchecked;
     private List<GroupGrocery> list;
     private TextView name, number;
-    private ImageView remove, unchecked;
+
 
     public GroceryListListViewAdapter(Context context, List<GroupGrocery> items) {
 

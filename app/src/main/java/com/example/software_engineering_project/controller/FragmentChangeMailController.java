@@ -34,6 +34,7 @@ public class FragmentChangeMailController extends Fragment {
     private EditText confirmNewMail, currentMail, newMail;
     private View fragmentView;
 
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         userRepository = new UserRepository();

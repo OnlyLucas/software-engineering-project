@@ -34,17 +34,18 @@ import java.util.Date;
  */
 public class FragmentCleaningPlanAddController extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    public static Spinner spinner;
-    private static MaterialButton datePickerCleaningPlan;
+    static Spinner spinner;
     private static Context context;
-    private static EditText name, description;
+    private static EditText description, name;
+    private static MaterialButton datePickerCleaningPlan;
     private ImageView saveCleaningPlan;
-    private View fragmentView;
-    private String startDateString, test;
     private Long startDateLong;
+    private String startDateString, test;
+    private View fragmentView;
 
-    public static void handleSaveClicked() {
-        checkInputs();
+
+    public static void handleSaveClicked() {    //TODO Braucht es diese Methode wirklich oder können wir direkt
+        checkInputs();                          //die checkInputs aufrufen?
     }
 
     private static boolean checkInputs() {
@@ -97,6 +98,40 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
         return fragmentView;
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        SpinnerListAdapter.setText(String.valueOf(spinner.getSelectedItem()));
+        //TODO daten fürs Backend abgreifen
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    private void addButtons() {
+
+        datePickerCleaningPlan.setOnClickListener(v -> showDatePickerDialog());
+
+    }
+
+    private void implementSpinner() {
+
+        //TODO überdenken bzw. ändern
+        ArrayList<String> paths = new ArrayList<>();
+        paths.add("Weekly");
+        paths.add("Bi-Weekly");
+        paths.add("Monthly");
+
+        ArrayAdapter<String> adapter = new SpinnerListAdapter(context, paths);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+
+    }
+
     private void loadScreenElements() {
 
         datePickerCleaningPlan = fragmentView.findViewById(R.id.datePickerCleaningPlan);
@@ -107,10 +142,10 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
 
     }
 
-    private void addButtons() {
+    private void saveSelectedDate(String string, Long l) {
 
-        datePickerCleaningPlan.setOnClickListener(v -> showDatePickerDialog());
-        //saveCleaningPlan.setOnClickListener(v -> setLog());
+        startDateString = string;
+        startDateLong = l;
 
     }
 
@@ -131,47 +166,4 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
 
     }
 
-    private void saveSelectedDate(String string, Long l) {
-        startDateString = string;
-        startDateLong = l;
-    }
-
-    private void setLog() {
-        Date date = new Date(startDateLong);
-
-        /*
-         * @SuppressLint("SimpleDateFormat")
-         *         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-         *         String string1 = formatter.format(date);
-         */
-
-        Log.e("DatePicker", String.valueOf(date));
-    }
-
-    private void implementSpinner() {
-
-
-        //final String[] paths = {"Weekly", "Bi-Weekly", "Monthly"};
-        //TODO überdenken bzw. ändern
-        ArrayList<String> paths = new ArrayList<>();
-        paths.add("Weekly");
-        paths.add("Bi-Weekly");
-        paths.add("Monthly");
-
-        ArrayAdapter<String> adapter = new SpinnerListAdapter(context, paths);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
-
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        SpinnerListAdapter.setText(String.valueOf(spinner.getSelectedItem()));
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 }

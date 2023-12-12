@@ -25,11 +25,12 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<String> {
     private static AdapterBudgetListSecondLayer adapter;
     private static ArrayList<String> items = new ArrayList<>();
     private static PaymentRepository paymentRepository;
-    private ListView budgetListSecondLayer;
     private Context context;
-    private LiveData<List<Payment>> currentPayments;
     private List<String> list;
+    private ListView budgetListSecondLayer;
+    private LiveData<List<Payment>> currentPayments;
     private TextView showMonth;
+
 
     public AdapterBudgetListFirstLayer(Context context, List<String> items, LiveData<List<Payment>> currentPayments) {
 

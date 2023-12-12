@@ -21,9 +21,10 @@ import java.util.List;
 public class AdapterManageFlatShareListView extends ArrayAdapter<User> {
 
     private Context context;
+    private ImageView remove;
     private List<User> list;
     private TextView name, number;
-    private ImageView remove;
+
 
     // The ListViewAdapter Constructor
     // @param context: the Context from the MainActivity

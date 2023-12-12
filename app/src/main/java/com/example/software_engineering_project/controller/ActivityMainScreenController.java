@@ -15,6 +15,7 @@ public class ActivityMainScreenController extends AppCompatActivity {
 
     private Button budgetButton, cleaningPlanButton, goSettingsButton, groceryListButton;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

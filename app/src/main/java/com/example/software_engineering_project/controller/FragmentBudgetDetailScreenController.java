@@ -28,6 +28,7 @@ public class FragmentBudgetDetailScreenController extends Fragment {
     private Context context;
     private View fragmentView;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
