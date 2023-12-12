@@ -1,5 +1,6 @@
 package com.example.software_engineering_project.entity;
 
+import com.example.software_engineering_project.viewmodel.UserViewModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.sql.Date;
@@ -18,6 +19,24 @@ public class CleaningTemplate {
     private User createdByUser;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
+
+    public CleaningTemplate() {
+        //defaul constructor
+    }
+
+    public CleaningTemplate(String name, String description, Date startDate, Date endDate,
+                            int interval) {
+        this.group = UserViewModel.getCurrentGroup().getValue();
+        this.name = name;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        //TODO Change DB keyword interval
+        this.interval = interval;
+        this.createdByUser = UserViewModel.getCurrentAppUser().getValue();
+        this.createdAt = new Timestamp(System.currentTimeMillis());
+
+    }
 
     public UUID getId() {
         return id;
