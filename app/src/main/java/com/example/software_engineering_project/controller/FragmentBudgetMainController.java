@@ -44,7 +44,7 @@ public class FragmentBudgetMainController extends Fragment {
         showBudgetDetail.setOnClickListener(view -> {
             callFragment(fragmentBudgetDetailScreenController);
             replaceButtons(showBudgetDetail, goBackBudgetMain, saveExpense, addExpense);
-            budgetHeadline.setText("Details");
+            budgetHeadline.setText(R.string.details);
 
         });
 
@@ -57,16 +57,11 @@ public class FragmentBudgetMainController extends Fragment {
         addExpense.setOnClickListener(view -> {
             callFragment(fragmentBudgetAddExpenseScreenController);
             replaceButtons(showBudgetDetail, goBackBudgetMain, addExpense, saveExpense);
-            budgetHeadline.setText("Add new Expense");
+            budgetHeadline.setText(R.string.add_new_expense);
         });
 
         //TODO: Implement save method to button and create button here
-        saveExpense.setOnClickListener(new AdapterView.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentBudgetAddExpenseScreenController.handleSaveClicked();
-            }
-        });
+        saveExpense.setOnClickListener(view -> FragmentBudgetAddExpenseScreenController.handleSaveClicked());
 
     }
 

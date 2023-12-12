@@ -18,7 +18,7 @@ import com.example.software_engineering_project.entity.CleaningTemplate;
 
 import java.util.List;
 
-public class CleaningPlanListViewAdapter extends ArrayAdapter<CleaningTemplate> {
+public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> {
 
     private Context context;
     private ImageView remove;
@@ -29,7 +29,7 @@ public class CleaningPlanListViewAdapter extends ArrayAdapter<CleaningTemplate> 
     // The ListViewAdapter Constructor
     // @param context: the Context from the MainActivity
     // @param items: The list of items in our Grocery List
-    public CleaningPlanListViewAdapter(Context context, List<CleaningTemplate> items) {
+    public AdapterCleaningPlanListView(Context context, List<CleaningTemplate> items) {
 
         super(context, R.layout.adapter_cleaning_plan_list_view, items);
         this.context = context;

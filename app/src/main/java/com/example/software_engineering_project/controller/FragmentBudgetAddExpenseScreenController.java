@@ -95,26 +95,26 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
             BigDecimal expenseValue = new BigDecimal(expenseString);
             String reasonString = reason.getText().toString();
             if (expenseValue.compareTo(new BigDecimal(0)) == -1) {
-                ToastUtil.makeToast("No negative amount allowed", context);
+                ToastUtil.makeToast(context.getString(R.string.no_negative_amount_allowed), context);
             } else if (expenseValue.compareTo(new BigDecimal(0)) == 0) {
-                ToastUtil.makeToast("0 is not a valid expense amount", context);
+                ToastUtil.makeToast(context.getString(R.string._0_is_not_a_valid_expense_amount), context);
             } else if (reasonString.length() == 0) {
-                ToastUtil.makeToast("Enter name for expense", context);
+                ToastUtil.makeToast(context.getString(R.string.enter_name_for_expense), context);
             } else {
                 // add new payment to database
                 Payment payment = new Payment(expenseValue, reasonString);
                 paymentRepository.createPayment(payment, context);
 
                 // empty input field
-                expense.setText("");
-                reason.setText("");
+                expense.setText(R.string.empty_input_fields);
+                reason.setText(R.string.empty_input_fields);
 
                 return payment;
             }
 
         } catch (NumberFormatException e) {
             // Handle the case where the input is not a valid BigDecimal
-            ToastUtil.makeToast("Enter number for expense", context);
+            ToastUtil.makeToast(context.getString(R.string.enter_number_for_expense), context);
             e.printStackTrace(); // Or log the error, show a message, etc.
         }
 

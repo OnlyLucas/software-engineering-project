@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -15,7 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LiveData;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.adapter.CleaningPlanListViewAdapter;
+import com.example.software_engineering_project.adapter.AdapterCleaningPlanListView;
 import com.example.software_engineering_project.entity.CleaningTemplate;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.viewmodel.CleaningTemplateRepository;
@@ -44,7 +43,7 @@ public class FragmentCleaningPlanListController extends Fragment {
 
         CleaningTemplate cleaningTemplate = currentCleaningTemplates.getValue().get(i);
         cleaningTemplateRepository.deleteCleaningTemplate(cleaningTemplate, context);
-        ToastUtil.makeToast("Removed: " + items.get(i), context);
+        ToastUtil.makeToast(context.getString(R.string.removed) + items.get(i), context);
         items.remove(i);
         listView.setAdapter(adapter);
 
@@ -64,7 +63,7 @@ public class FragmentCleaningPlanListController extends Fragment {
         CleaningTemplateRepository cleaningTemplateRepository = new CleaningTemplateRepository();
         currentCleaningTemplates = cleaningTemplateRepository.getCurrentCleaningTemplates();
         currentCleaningTemplates.observe(getViewLifecycleOwner(), currentCleaningTemplates -> {
-            adapter = new CleaningPlanListViewAdapter(getActivity(), currentCleaningTemplates);
+            adapter = new AdapterCleaningPlanListView(getActivity(), currentCleaningTemplates);
             listView.setAdapter(adapter);
         });
 

@@ -18,7 +18,7 @@ import com.example.software_engineering_project.entity.GroupGrocery;
 
 import java.util.List;
 
-public class GroceryListListViewAdapter extends ArrayAdapter<GroupGrocery> {
+public class AdapterGroceryListListView extends ArrayAdapter<GroupGrocery> {
 
     private Context context;
     private ImageView remove, unchecked;
@@ -26,7 +26,7 @@ public class GroceryListListViewAdapter extends ArrayAdapter<GroupGrocery> {
     private TextView name, number;
 
 
-    public GroceryListListViewAdapter(Context context, List<GroupGrocery> items) {
+    public AdapterGroceryListListView(Context context, List<GroupGrocery> items) {
 
         super(context, R.layout.adapter_grocery_list_list_view, items);
         this.context = context;

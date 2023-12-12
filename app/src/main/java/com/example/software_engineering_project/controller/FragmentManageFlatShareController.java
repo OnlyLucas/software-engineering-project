@@ -113,7 +113,7 @@ public class FragmentManageFlatShareController extends Fragment {
 
         saveManageFlatShare.setOnClickListener(view -> {
             FragmentSettingsController fragment = new FragmentSettingsController();
-            ToastUtil.makeToast("Saved", context);
+            ToastUtil.makeToast(getString(R.string.saved), context);
             callFragment(fragment);
         });
 
@@ -121,11 +121,11 @@ public class FragmentManageFlatShareController extends Fragment {
         enter.setOnClickListener(view -> {
             String text = inputMail.getText().toString();
             if (text.length() == 0) {
-                ToastUtil.makeToast("Enter mail here", context);
+                ToastUtil.makeToast(getString(R.string.enter_mail_here), context);
             } else {
                 addItem(text);
-                inputMail.setText("");
-                ToastUtil.makeToast("Added " + text, context);
+                inputMail.setText(getString(R.string.empty_input_fields));
+                ToastUtil.makeToast(getString(R.string.added) + text, context);
             }
         });
 

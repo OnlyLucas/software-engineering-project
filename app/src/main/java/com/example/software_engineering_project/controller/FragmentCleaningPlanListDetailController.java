@@ -12,7 +12,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.adapter.CleaningPlanListDetailViewAdapter;
 import com.example.software_engineering_project.entity.Cleaning;
 import com.example.software_engineering_project.entity.CleaningTemplate;
 import com.example.software_engineering_project.viewmodel.CleaningRepository;
@@ -55,7 +54,7 @@ public class FragmentCleaningPlanListDetailController extends Fragment {
         LiveData<List<Cleaning>> cleaningsLiveData = cleaningRepository.getUncompletedCleanings(cleaningTemplate.getId());
         //List<Cleaning> cleanings = cleaningsLiveData.getValue();
 
-        //adapter = new CleaningPlanListDetailViewAdapter(context, cleanings);
+        //adapter = new AdapterCleaningPlanListDetailView(context, cleanings);
         //listView.setAdapter(adapter);
 
         return fragmentView;

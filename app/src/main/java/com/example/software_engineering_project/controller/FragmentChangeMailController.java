@@ -38,10 +38,11 @@ public class FragmentChangeMailController extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         userRepository = new UserRepository();
-        context = requireActivity();
         fragmentView = inflater.inflate(R.layout.fragment_change_mail, container, false);
+        context = requireActivity();
         loadScreenElements();
         addButtons();
+
         return fragmentView;
 
     }
@@ -82,19 +83,19 @@ public class FragmentChangeMailController extends Fragment {
 
         if (user.getEmail().equals(currentMailString)) {
 
-            System.out.println("Correct current mail");
+            System.out.println(getString(R.string.correct_current_mail));
 
             if (newMailString.equals(confirmMailString)) {
-                System.out.println("Ready to persist new mail " + newMailString);
+                System.out.println(getString(R.string.ready_to_persist_new_mail) + newMailString);
                 Map<String, String> map = new HashMap<>();
-                map.put("email", newMailString);
+                map.put(getString(R.string.email), newMailString);
                 userRepository.updateEmail(user, map, context);
                 ;
             } else {
-                System.out.println("New mails not matching");
+                System.out.println(getString(R.string.new_mails_not_matching));
             }
         } else {
-            System.out.println("Wrong current mail");
+            System.out.println(getString(R.string.wrong_current_mail));
         }
 
     }
