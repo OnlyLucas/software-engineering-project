@@ -9,10 +9,12 @@ import com.example.software_engineering_project.dataservice.PaymentService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.entity.Payment;
+import com.example.software_engineering_project.entity.PaymentCreationData;
 import com.example.software_engineering_project.util.ToastUtil;
 
 
 import java.util.List;
+import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -56,23 +58,28 @@ public class PaymentRepository {
         });
     }
 
-    public void createPayment(Payment payment, Context context) {
-        Call<Payment> call = paymentService.createPayment(payment);
+    public void createPayment(PaymentCreationData paymentData , Context context) {
+        Call<Payment> call = paymentService.createPayment(paymentData);
+        System.out.println("Request body for payment: " + call.request().body().toString());
         call.enqueue(new Callback<Payment>() {
             @Override
             public void onResponse(Call<Payment> call, Response<Payment> response) {
                 if(response.isSuccessful()){
                     // show toast of success
-                    ToastUtil.makeToast("Added " + payment.getName(), context);
+                    ToastUtil.makeToast("Added " + paymentData.getPayment().getName(), context);
+                    fetchPayments();
                 } else {
-                    ToastUtil.makeToast("Error while adding  " + payment.getName(), context);
+                    ToastUtil.makeToast("Error while adding payment " + paymentData.getPayment().getName(), context);
+                    System.out.println(response.code());
+                    System.out.println(call);
+                    System.out.println(call.request().body().toString());
                 }
             }
 
             @Override
             public void onFailure(Call<Payment> call, Throwable t) {
-                ToastUtil.makeToast("Error while adding  " + payment.getName(), context);
-                // Handle the failure if needed
+                ToastUtil.makeToast("Error while adding payment. " + paymentData.getPayment().getName(), context);
+                System.out.println("Payment creation error: " + call.request().toString());
                 // For example, show an error message
             }
         });
@@ -80,5 +87,30 @@ public class PaymentRepository {
 
     public LiveData<List<Payment>> getCurrentPayments() {
         return currentPayments;
+    }
+
+    public void fetchPayments(){
+        // Get current group id
+        UUID currentGroupId = UserViewModel.getCurrentGroup().getValue().getId();
+
+        // Perform the API call to fetch group groceries asynchronously
+        Call<List<Payment>> call = paymentService.getPayments(currentGroupId);
+        call.enqueue(new Callback<List<Payment>>() {
+            @Override
+            public void onResponse(Call<List<Payment>> call, Response<List<Payment>> response) {
+                if (response.isSuccessful()) {
+                    List<Payment> payments = response.body();
+                    currentPayments.setValue(payments);
+                    System.out.println("Payment fetching successful");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Payment>> call, Throwable t) {
+                // Handle the failure if needed
+                // For example, show an error message
+                System.out.println("Failure while fetching payments. " + t);
+            }
+        });
     }
 }

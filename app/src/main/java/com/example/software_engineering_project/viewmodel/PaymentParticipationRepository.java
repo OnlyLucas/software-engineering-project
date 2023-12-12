@@ -4,8 +4,12 @@ import android.content.Context;
 
 import com.example.software_engineering_project.dataservice.PaymentParticipationService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
+import com.example.software_engineering_project.entity.Payment;
 import com.example.software_engineering_project.entity.PaymentParticipation;
 import com.example.software_engineering_project.util.ToastUtil;
+
+import java.util.List;
+import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,5 +45,4 @@ public class PaymentParticipationRepository {
             }
         });
     }
-
 }
