@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.NumericBooleanConverter;
 import org.hibernate.type.SqlTypes;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -39,6 +40,11 @@ public class UserEntity implements EntityInterface{
     @Column(name = "created_at", nullable = true)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
+
+    @Basic
+    @Column(name = "is_active", nullable = false)
+    @Convert(converter = NumericBooleanConverter.class)
+    private Boolean isActive;
 
     public UUID getId() {
         return id;
@@ -96,17 +102,25 @@ public class UserEntity implements EntityInterface{
         this.createdAt = createdAt;
     }
 
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserEntity that = (UserEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(email, that.email) && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(createdAt, that.createdAt);
+        return Objects.equals(id, that.id) && Objects.equals(email, that.email) && Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(firstName, that.firstName) && Objects.equals(lastName, that.lastName) && Objects.equals(createdAt, that.createdAt) && Objects.equals(isActive, that.isActive);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, username, password, firstName, lastName, createdAt);
+        return Objects.hash(id, email, username, password, firstName, lastName, createdAt, isActive);
     }
 
     @Override
@@ -119,7 +133,7 @@ public class UserEntity implements EntityInterface{
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", createdAt=" + createdAt +
-                ", groupMemberships=" +
+                ", isActive=" + isActive +
                 '}';
     }
 }

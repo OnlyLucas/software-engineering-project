@@ -39,7 +39,7 @@ public class CleaningTemplateEntity implements EntityInterface{
 
     //TODO change name to something else than interval (key word)
     @Basic
-    @Column(name = "interval", nullable = true)
+    @Column(name = "cleaning_interval", nullable = true)
     private Integer interval;
     @ManyToOne
     @JoinColumn(
