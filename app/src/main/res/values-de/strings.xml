@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Flat Fusion</string>
-    <string name="welcome">Wilkommen</string>
+    <string name="welcome">Willkommen</string>
     <string name="first_name">Vorname</string>
     <string name="surname">Nachname</string>
     <string name="email">E-Mail</string>
@@ -18,7 +18,7 @@
     <string name="leave_flat_share">WG verlassen</string>
     <string name="manage_flat_share">WG bearbeiten</string>
     <string name="create_flat_share">WG erstellen</string>
-    <string name="please_login_with_you_information">Bitte melden Sie sich an!</string>
+    <string name="please_login_with_your_credentials">Bitte melden Sie sich an!</string>
     <string name="shopping_list">Einkaufsliste</string>
     <string name="budget">Haushaltsbuch</string>
     <string name="cleaning_plan">Putzplan</string>
@@ -41,5 +41,27 @@
     <string name="budget_n">"Haushalts- \nbuch "</string>
     <string name="cleaning_nplan">Putzplan\n</string>
     <string name="settings_n">Einstellungen</string>
+    <string name="new_e_mail_saved">Neue E-Mail gespeichert</string>
+    <string name="changes_discarded">Änderungen verworfen</string>
+    <string name="new_password_saved">Neues Passwort gespeichert</string>
     <string name="removed_toast">"Entfernt: "</string>
+    <string name="added_toast">Hinzugefügt</string>
+    <string name="no_negative_amount_allowed">Negative Ausgaben sind nicht erlaubt</string>
+    <string name="_0_is_not_a_valid_expense_amount">0 ist keine erlaubte Ausgabenhöhe</string>
+    <string name="details">Details</string>
+    <string name="add_new_expense">Neue Ausgabe hinzufügen</string>
+    <string name="select_date">Wähle ein Datum</string>
+    <string name="saved">Gespeichert</string>
+    <string name="please_login_with_your_created_credentials">Bitte melden Sie sich mit Ihren erstellten Anmeldedaten an.</string>
+    <string name="added">Hinzugefügt</string>
+    <string name="enter_an_item">Gebe ein Artikel ein.</string>
+    <string name="grocerylist">Einkaufsliste</string>
+    <string name="select_date_range">Wähle einen Zeitraum</string>
+    <string name="enter_description_here">Gebe eine Beschreibung ein</string>
+    <string name="name">Name</string>
+    <string name="name_of_cleaning_plan">Name des Putzplans</string>
+    <string name="enter_an_item_toast">Gebe ein Artikel ein.</string>
+    <string name="enter_name_for_expense">Gebe einen Namen für die Ausgabe ein</string>
+    <string name="enter_number_for_expense">Gebe die Ausgabenhöhe ein</string>
+    <string name="enter_name_for_cleaning_plan">Gebe einen Namen für den Putzplan ein</string>
 </resources>

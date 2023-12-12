@@ -83,6 +83,7 @@
                     android:textStyle="bold"/>
 
                 <EditText
+                    android:id="@+id/firstNameRegister"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName|textCapWords"
@@ -100,6 +101,7 @@
                     android:textStyle="bold"/>
 
                 <EditText
+                    android:id="@+id/surnameRegister"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName|textCapWords"
@@ -117,6 +119,7 @@
                     android:textStyle="bold"/>
 
                 <EditText
+                    android:id="@+id/emailRegister"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
@@ -140,6 +143,7 @@
                     app:passwordToggleEnabled="true">
 
                     <EditText
+                        android:id="@+id/passwordRegister"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
@@ -165,7 +169,7 @@
                     android:orientation="horizontal">
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/cancelButton"
+                        android:id="@+id/cancelButtonRegister"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:layout_weight="3"
@@ -178,7 +182,7 @@
                         android:layout_height="match_parent"/>
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/registerButton"
+                        android:id="@+id/registerButtonRegister"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:backgroundTint="@color/secondary"

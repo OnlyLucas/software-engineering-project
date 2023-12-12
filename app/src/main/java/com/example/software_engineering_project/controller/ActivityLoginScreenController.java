@@ -10,7 +10,7 @@ import com.example.software_engineering_project.R;
 
 public class ActivityLoginScreenController extends AppCompatActivity {
 
-    private Button loginButton, registerButton;
+    private Button loginButton, registerButtonLogin;
 
 
     @Override
@@ -26,7 +26,7 @@ public class ActivityLoginScreenController extends AppCompatActivity {
     private void loadScreenElements() {
 
         loginButton = findViewById(R.id.loginButton);
-        registerButton = findViewById(R.id.registerButton);
+        registerButtonLogin = findViewById(R.id.registerButtonLogin);
 
     }
 
@@ -37,7 +37,7 @@ public class ActivityLoginScreenController extends AppCompatActivity {
             startActivity(mainScreen);
         });
 
-        registerButton.setOnClickListener(view -> {
+        registerButtonLogin.setOnClickListener(view -> {
             Intent registerScreen = new Intent(ActivityLoginScreenController.this, ActivityRegisterScreenController.class);
             startActivity(registerScreen);
         });
