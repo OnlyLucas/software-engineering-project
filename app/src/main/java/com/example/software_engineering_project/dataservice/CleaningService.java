@@ -8,6 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface CleaningService {
@@ -17,4 +18,7 @@ public interface CleaningService {
 
     @POST("cleanings")
     Call<Cleaning> createCleaning(@Body Cleaning cleaning);
+
+    @GET("cleanings/cleaning-template/{templateId}/uncompleted")
+    Call<List<Cleaning>> getUncompletedCleaningsForCleaningTemplate(@Path("templateId") UUID templateId);
 }

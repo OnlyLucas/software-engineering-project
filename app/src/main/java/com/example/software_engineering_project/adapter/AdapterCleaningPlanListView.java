@@ -13,21 +13,25 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.controller.FragmentGroceryListController;
-import com.example.software_engineering_project.entity.GroupGrocery;
+import com.example.software_engineering_project.controller.FragmentCleaningPlanListController;
+import com.example.software_engineering_project.entity.CleaningTemplate;
 
 import java.util.List;
 
-public class GroceryListListViewAdapter extends ArrayAdapter<GroupGrocery> {
+public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> {
 
     private Context context;
-    private List<GroupGrocery> list;
+    private ImageView remove;
+    private List<CleaningTemplate> list;
     private TextView name, number;
-    private ImageView remove, unchecked;
 
-    public GroceryListListViewAdapter(Context context, List<GroupGrocery> items) {
 
-        super(context, R.layout.adapter_grocery_list_list_view, items);
+    // The ListViewAdapter Constructor
+    // @param context: the Context from the MainActivity
+    // @param items: The list of items in our Grocery List
+    public AdapterCleaningPlanListView(Context context, List<CleaningTemplate> items) {
+
+        super(context, R.layout.adapter_cleaning_plan_list_view, items);
         this.context = context;
         list = items;
 
@@ -41,13 +45,12 @@ public class GroceryListListViewAdapter extends ArrayAdapter<GroupGrocery> {
         if (convertView == null) {
 
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.adapter_grocery_list_list_view, null);
+            convertView = mInflater.inflate(R.layout.adapter_cleaning_plan_list_view, null);
 
             loadScreenElements(convertView);
 
             number.setText(position + 1 + ".");
-            GroupGrocery current = list.get(position);
-            name.setText(current.getName());
+            name.setText(list.get(position).getName());
 
             addButtons(position);
 
@@ -59,19 +62,10 @@ public class GroceryListListViewAdapter extends ArrayAdapter<GroupGrocery> {
 
     private void addButtons(int position) {
 
-        // Listeners for duplicating and removing an item.
-        // They use the static removeItem and addItem methods created in MainActivity.
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentGroceryListController.removeItem(position);
-            }
-        });
-
-        unchecked.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentGroceryListController.uncheckItem(position);
+                FragmentCleaningPlanListController.removeItem(position);
             }
         });
 
@@ -79,10 +73,9 @@ public class GroceryListListViewAdapter extends ArrayAdapter<GroupGrocery> {
 
     private void loadScreenElements(View convertView) {
 
-        name = convertView.findViewById(R.id.nameGroceryList);
-        number = convertView.findViewById(R.id.numberGroceryList);
-        remove = convertView.findViewById(R.id.removeGroceryList);
-        unchecked = convertView.findViewById(R.id.uncheckedGroceryList);
+        name = convertView.findViewById(R.id.nameCleaningPlan);
+        number = convertView.findViewById(R.id.numberCleaningPlan);
+        remove = convertView.findViewById(R.id.removeCleaningPlan);
 
     }
 

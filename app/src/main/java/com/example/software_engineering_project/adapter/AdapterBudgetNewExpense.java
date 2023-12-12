@@ -24,6 +24,7 @@ public class AdapterBudgetNewExpense extends ArrayAdapter<User> {
     private Context context;
     private List<User> list;
 
+
     public AdapterBudgetNewExpense(Context context, List<User> items) {
 
         super(context, R.layout.adapter_budget_new_expense, items);
@@ -87,6 +88,5 @@ public class AdapterBudgetNewExpense extends ArrayAdapter<User> {
         checkBoxNewExpenseParticipants = convertView.findViewById(R.id.checkBoxNewExpenseParticipants);
 
     }
-
 
 }

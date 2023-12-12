@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.adapter.GroceryListListViewAdapter;
+import com.example.software_engineering_project.adapter.AdapterGroceryListListView;
 import com.example.software_engineering_project.entity.GroupGrocery;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.viewmodel.GroceryRepository;
@@ -52,12 +52,13 @@ public class FragmentGroceryListController extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         groceryRepository = new GroceryRepository();
         uncompletedGroceryLiveData = groceryRepository.getUncompletedGroupGroceries();
 
         // TODO maybe wont update, as list is altered, not exchanged
         uncompletedGroceryLiveData.observe(getViewLifecycleOwner(), groceryList -> {
-            adapter = new GroceryListListViewAdapter(getActivity(), groceryList);
+            adapter = new AdapterGroceryListListView(getActivity(), groceryList);
             listView.setAdapter(adapter);
         });
         context = requireActivity();
@@ -68,20 +69,17 @@ public class FragmentGroceryListController extends Fragment {
         listView.setAdapter(adapter);
 
         return fragmentView;
+
     }
 
     private void addButtons() {
 
         listView.setLongClickable(true);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // Show name of the clicked item
-                GroupGrocery grocery = uncompletedGroceryLiveData.getValue().get(position);
-                ToastUtil.makeToast(grocery.getName(), context);
-            }
-
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            // Show name of the clicked item
+            GroupGrocery grocery = uncompletedGroceryLiveData.getValue().get(position);
+            ToastUtil.makeToast(grocery.getName(), context);
         });
 
         // Remove an item when its row is long pressed
@@ -109,7 +107,7 @@ public class FragmentGroceryListController extends Fragment {
                     // add new item to database
                     addItem(grocery);
                     // empty input field
-                    input.setText("");
+                    input.setText(R.string.empty_input_fields);
                 }
 
             }
@@ -124,9 +122,11 @@ public class FragmentGroceryListController extends Fragment {
     }
 
     private void loadScreenElements() {
-        listView = fragmentView.findViewById(R.id.groceryList);
-        input = fragmentView.findViewById(R.id.input);
+
         enter = fragmentView.findViewById(R.id.enter);
+        input = fragmentView.findViewById(R.id.input);
+        listView = fragmentView.findViewById(R.id.groceryList);
+
     }
 
 }

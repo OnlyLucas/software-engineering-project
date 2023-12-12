@@ -25,6 +25,7 @@ public class FragmentChangePasswordController extends Fragment {
     private Button cancelChangePassword, saveChangePassword;
     private View fragmentView;
 
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         fragmentView = inflater.inflate(R.layout.fragment_change_password, container, false);

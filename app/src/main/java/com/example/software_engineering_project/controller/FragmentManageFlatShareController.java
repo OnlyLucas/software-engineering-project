@@ -35,26 +35,18 @@ import java.util.List;
  */
 public class FragmentManageFlatShareController extends Fragment {
 
-    static AdapterManageFlatShareListView adapter;
-    static ArrayList<String> items = new ArrayList<>();
-    static Context context;
-    private static UserRepository userRepository;
+    private static AdapterManageFlatShareListView adapter;
+    private static ArrayList<String> items = new ArrayList<>();
+    private static Context context;
     private static GroupMembershipRepository groupMembershipRepository;
-    private static LiveData<List<User>> currentUsers;
     private static ListView listView;
-    private View fragmentView;
-    private EditText input_name, input_mail;
-    private ImageView enter;
+    private static LiveData<List<User>> currentUsers;
+    private static UserRepository userRepository;
     private Button cancelManageFlatShare, saveManageFlatShare;
+    private EditText inputName, inputMail;
+    private ImageView enter;
+    private View fragmentView;
 
-    // function to remove an item given its index in the grocery list.
-    public static void removeItem(int i) {
-        User user = currentUsers.getValue().get(i);
-        Group group = UserViewModel.getCurrentGroup().getValue();
-        groupMembershipRepository.deleteGroupMembership(user, group, context);
-        listView.setAdapter(adapter);
-
-    }
 
     // function to add an item given its name.
     public static void addItem(String item) {
@@ -64,16 +56,31 @@ public class FragmentManageFlatShareController extends Fragment {
 
     }
 
+    // function to remove an item given its index in the grocery list.
+    public static void removeItem(int i) {
+
+        User user = currentUsers.getValue().get(i);
+        Group group = UserViewModel.getCurrentGroup().getValue();
+        groupMembershipRepository.deleteGroupMembership(user, group, context);
+        listView.setAdapter(adapter);
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        //Load Backend
         userRepository = new UserRepository();
         groupMembershipRepository = new GroupMembershipRepository();
         currentUsers = userRepository.getCurrentUsers();
 
+        //Load Frontend
         fragmentView = inflater.inflate(R.layout.fragment_manage_flat_share, container, false);
         context = requireActivity();
         loadScreenElements();
         addButtons();
+
+
         currentUsers.observe(getViewLifecycleOwner(), currentUsers -> {
             adapter = new AdapterManageFlatShareListView(getActivity(), currentUsers);
             listView.setAdapter(adapter);
@@ -85,39 +92,17 @@ public class FragmentManageFlatShareController extends Fragment {
 
     }
 
-    private void loadScreenElements() {
-
-        listView = fragmentView.findViewById(R.id.flatShareMemberList);
-        input_name = fragmentView.findViewById(R.id.input_name);
-        input_mail = fragmentView.findViewById(R.id.input_mail);
-        enter = fragmentView.findViewById(R.id.addFlatShareMember);
-        cancelManageFlatShare = fragmentView.findViewById(R.id.cancelManageFlatShare);
-        saveManageFlatShare = fragmentView.findViewById(R.id.saveManageFlatShare);
-
-    }
-
     private void addButtons() {
 
         listView.setLongClickable(true);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                User user = currentUsers.getValue().get(position);
-                ToastUtil.makeToast(user.getFirstName(), context);
-            }
-
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            User user = currentUsers.getValue().get(position);
+            ToastUtil.makeToast(user.getFirstName(), context);
         });
 
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long l) {
-                removeItem(position);
-                return false;
-            }
-
+        listView.setOnItemLongClickListener((adapterView, view, position, l) -> {
+            removeItem(position);
+            return false;
         });
 
         cancelManageFlatShare.setOnClickListener(view -> {
@@ -128,27 +113,20 @@ public class FragmentManageFlatShareController extends Fragment {
 
         saveManageFlatShare.setOnClickListener(view -> {
             FragmentSettingsController fragment = new FragmentSettingsController();
-            ToastUtil.makeToast("Saved", context);
+            ToastUtil.makeToast(getString(R.string.saved), context);
             callFragment(fragment);
         });
 
         //TODO enter mail -> find user by mail -> add userMembership to current group
-        enter.setOnClickListener(new AdapterView.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                String text = input_mail.getText().toString();
-                if (text.length() == 0) {
-                    ToastUtil.makeToast("Enter mail here", context);
-                } else {
-                    addItem(text);
-                    input_mail.setText("");
-                    ToastUtil.makeToast("Added " + text, context);
-                }
-
-
+        enter.setOnClickListener(view -> {
+            String text = inputMail.getText().toString();
+            if (text.length() == 0) {
+                ToastUtil.makeToast(getString(R.string.enter_mail_here), context);
+            } else {
+                addItem(text);
+                inputMail.setText(getString(R.string.empty_input_fields));
+                ToastUtil.makeToast(getString(R.string.added) + text, context);
             }
-
         });
 
     }
@@ -159,6 +137,17 @@ public class FragmentManageFlatShareController extends Fragment {
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.contentFragmentMainScreen, fragment);
         transaction.commit();
+
+    }
+
+    private void loadScreenElements() {
+
+        cancelManageFlatShare = fragmentView.findViewById(R.id.cancelManageFlatShare);
+        enter = fragmentView.findViewById(R.id.addFlatShareMember);
+        inputMail = fragmentView.findViewById(R.id.input_mail);
+        inputName = fragmentView.findViewById(R.id.input_name);
+        listView = fragmentView.findViewById(R.id.flatShareMemberList);
+        saveManageFlatShare = fragmentView.findViewById(R.id.saveManageFlatShare);
 
     }
 

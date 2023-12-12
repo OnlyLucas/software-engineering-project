@@ -22,33 +22,28 @@ import com.example.software_engineering_project.R;
  */
 public class FragmentCleaningPlanController extends Fragment {
 
-
-    @SuppressLint("StaticFieldLeak")
-    static View fragmentView;
     static ImageView goBackCleaningPlan;
-    ImageView addCleaningPlan, saveCleaningPlan;
+    static View fragmentView;
+    private FragmentCleaningPlanListController fragmentCleaningPlanListController = new FragmentCleaningPlanListController();
+    private FragmentCleaningPlanAddController fragmentCleaningPlanAddController = new FragmentCleaningPlanAddController();
+    private ImageView addCleaningPlan, saveCleaningPlan;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         fragmentView = inflater.inflate(R.layout.fragment_cleaning_plan, container, false);
         FragmentCleaningPlanListController fragmentCleaningPlanListController = new FragmentCleaningPlanListController();
-        laodScreenElements();
+        loadScreenElements();
         callFragment(fragmentCleaningPlanListController);
         addButtons();
+
         return fragmentView;
-    }
-
-    private void laodScreenElements() {
-
-        addCleaningPlan = fragmentView.findViewById(R.id.addCleaningPlan);
-        goBackCleaningPlan = fragmentView.findViewById(R.id.goBackCleaningPlan);
-        saveCleaningPlan = fragmentView.findViewById(R.id.saveCleaningPlan);
 
     }
 
     private void addButtons() {
-        FragmentCleaningPlanAddController fragmentCleaningPlanAddController = new FragmentCleaningPlanAddController();
+
         addCleaningPlan.setOnClickListener(v -> {
             callFragment(fragmentCleaningPlanAddController);
             goBackCleaningPlan.setVisibility(View.VISIBLE);
@@ -56,7 +51,6 @@ public class FragmentCleaningPlanController extends Fragment {
             addCleaningPlan.setVisibility(View.INVISIBLE);
         });
 
-        FragmentCleaningPlanListController fragmentCleaningPlanListController = new FragmentCleaningPlanListController();
         goBackCleaningPlan.setOnClickListener(v -> {
             callFragment(fragmentCleaningPlanListController);
             goBackCleaningPlan.setVisibility(View.INVISIBLE);
@@ -64,12 +58,7 @@ public class FragmentCleaningPlanController extends Fragment {
             addCleaningPlan.setVisibility(View.VISIBLE);
         });
 
-        saveCleaningPlan.setOnClickListener(new AdapterView.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentCleaningPlanAddController.handleSaveClicked();
-            }
-        });
+        saveCleaningPlan.setOnClickListener(view -> FragmentCleaningPlanAddController.handleSaveClicked());
 
     }
 
@@ -79,6 +68,14 @@ public class FragmentCleaningPlanController extends Fragment {
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.contentFragmentCleaningPlan, fragment);
         transaction.commit();
+
+    }
+
+    private void loadScreenElements() {
+
+        addCleaningPlan = fragmentView.findViewById(R.id.addCleaningPlan);
+        goBackCleaningPlan = fragmentView.findViewById(R.id.goBackCleaningPlan);
+        saveCleaningPlan = fragmentView.findViewById(R.id.saveCleaningPlan);
 
     }
 

@@ -4,7 +4,7 @@
     <string name="register_info">Please register yourself!</string>
     <string name="first_name">First Name</string>
     <string name="surname">Surname</string>
-    <string name="email">E-Mail</string>
+    <string name="email">email</string>
     <string name="password">Password</string>
     <string name="register">Register</string>
     <string name="cancel">Cancel</string>
@@ -60,4 +60,18 @@
     <string name="unchecked_toast">"Unchecked: "</string>
     <string name="enter_an_item_toast">Enter an item.</string>
     <string name="added_toast">"Added "</string>
+    <string name="no_negative_amount_allowed">No negative amount allowed</string>
+    <string name="_0_is_not_a_valid_expense_amount">0 is not a valid expense amount</string>
+    <string name="enter_name_for_expense">Enter name for expense</string>
+    <string name="empty_input_fields" />
+    <string name="enter_number_for_expense">Enter number for expense</string>
+    <string name="details">Details</string>
+    <string name="add_new_expense">Add new Expense</string>
+    <string name="correct_current_mail">Correct current mail</string>
+    <string name="ready_to_persist_new_mail">"Ready to persist new mail "</string>
+    <string name="new_mails_not_matching">New mails not matching</string>
+    <string name="wrong_current_mail">Wrong current mail</string>
+    <string name="enter_name_for_cleaning_plan">Enter name for cleaning plan</string>
+    <string name="select_date">Select Date</string>
+    <string name="saved">Saved</string>
 </resources>

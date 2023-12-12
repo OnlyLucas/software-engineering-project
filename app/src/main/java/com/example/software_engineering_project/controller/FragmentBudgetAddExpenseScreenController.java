@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 
@@ -22,6 +21,7 @@ import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.viewmodel.PaymentParticipationRepository;
 import com.example.software_engineering_project.viewmodel.PaymentRepository;
 import com.example.software_engineering_project.viewmodel.UserRepository;
+import com.example.software_engineering_project.viewmodel.UserViewModel;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -38,12 +38,18 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
     private static EditText expense, reason;
     private static ArrayAdapter<User> adapter;
     private static Context context;
+    private static EditText expense, reason;
+    private static List<User> selectedUsers = new ArrayList<>();
+    private static ListView listView;
+    private static LiveData<List<User>> currentUsers;
+    private static PaymentParticipationRepository paymentParticipationRepository;
     private static UserRepository userRepository;
     private static PaymentRepository paymentRepository;
     private static PaymentParticipationRepository paymentParticipationRepository;
     private static LiveData<List<User>> currentUsers;
     private static List<User> selectedUsers = new ArrayList<>();
     private View fragmentView, fragmentViewHeader;
+
 
     public static void addUser(User user) {
         selectedUsers.add(user);
@@ -59,7 +65,6 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
 
         //TODO Auslagerung in Konstruktor; richtige Erfassung der ausgewählten Personen; Payment muss vor PaymentParticipation erstellt sein
         if (payment != null) {
-            //SparseBooleanArray array = listView.getCheckedItemPositions();
             System.out.println(selectedUsers.toString());
 
             for (User u : selectedUsers) {
@@ -83,25 +88,25 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
             BigDecimal expenseValue = new BigDecimal(expenseString);
             String reasonString = reason.getText().toString();
             if (expenseValue.compareTo(new BigDecimal(0)) == -1) {
-                ToastUtil.makeToast("No negative amount allowed", context);
+                ToastUtil.makeToast(context.getString(R.string.no_negative_amount_allowed), context);
             } else if (expenseValue.compareTo(new BigDecimal(0)) == 0) {
-                ToastUtil.makeToast("0 is not a valid expense amount", context);
+                ToastUtil.makeToast(context.getString(R.string._0_is_not_a_valid_expense_amount), context);
             } else if (reasonString.length() == 0) {
-                ToastUtil.makeToast("Enter name for expense", context);
+                ToastUtil.makeToast(context.getString(R.string.enter_name_for_expense), context);
             } else {
                 // add new payment to database
                 Payment payment = new Payment(expenseValue, reasonString);
 
                 // empty input field
-                expense.setText("");
-                reason.setText("");
+                expense.setText(R.string.empty_input_fields);
+                reason.setText(R.string.empty_input_fields);
 
                 return payment;
             }
 
         } catch (NumberFormatException e) {
             // Handle the case where the input is not a valid BigDecimal
-            ToastUtil.makeToast("Enter number for expense", context);
+            ToastUtil.makeToast(context.getString(R.string.enter_number_for_expense), context);
             e.printStackTrace(); // Or log the error, show a message, etc.
         }
         return null;
@@ -109,6 +114,7 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         userRepository = new UserRepository();
         currentUsers = userRepository.getCurrentUsers();
 
@@ -133,6 +139,8 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
     private void loadScreenElements() {
         listView = fragmentView.findViewById(R.id.enterNewExpenseInvolvedPersons);
         expense = fragmentView.findViewById(R.id.enterNewExpenseAmount);
+        listView = fragmentView.findViewById(R.id.enterNewExpenseInvolvedPersons);
         reason = fragmentView.findViewById(R.id.enterNewExpenseReason);
+
     }
 }

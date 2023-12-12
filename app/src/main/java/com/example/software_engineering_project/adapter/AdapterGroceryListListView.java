@@ -13,22 +13,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.controller.FragmentGroceryListController;
+import com.example.software_engineering_project.entity.GroupGrocery;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class CleaningPlanListDetailViewAdapter extends ArrayAdapter<String> {
+public class AdapterGroceryListListView extends ArrayAdapter<GroupGrocery> {
 
     private Context context;
-    private ArrayList<String> list;
+    private ImageView remove, unchecked;
+    private List<GroupGrocery> list;
     private TextView name, number;
-    ImageView remove;
 
-    // The ListViewAdapter Constructor
-    // @param context: the Context from the MainActivity
-    // @param items: The list of items in our Grocery List
-    public CleaningPlanListDetailViewAdapter(Context context, ArrayList<String> items) {
 
-        super(context, R.layout.adapter_cleaning_plan_list_detail_view, items);
+    public AdapterGroceryListListView(Context context, List<GroupGrocery> items) {
+
+        super(context, R.layout.adapter_grocery_list_list_view, items);
         this.context = context;
         list = items;
 
@@ -42,12 +42,13 @@ public class CleaningPlanListDetailViewAdapter extends ArrayAdapter<String> {
         if (convertView == null) {
 
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.adapter_cleaning_plan_list_detail_view, null);
+            convertView = mInflater.inflate(R.layout.adapter_grocery_list_list_view, null);
 
             loadScreenElements(convertView);
 
             number.setText(position + 1 + ".");
-            name.setText(list.get(position));
+            GroupGrocery current = list.get(position);
+            name.setText(current.getName());
 
             addButtons(position);
 
@@ -64,7 +65,14 @@ public class CleaningPlanListDetailViewAdapter extends ArrayAdapter<String> {
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //FragmentCleaningPlanListDetailController.removeItem(position);
+                FragmentGroceryListController.removeItem(position);
+            }
+        });
+
+        unchecked.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentGroceryListController.uncheckItem(position);
             }
         });
 
@@ -72,9 +80,10 @@ public class CleaningPlanListDetailViewAdapter extends ArrayAdapter<String> {
 
     private void loadScreenElements(View convertView) {
 
-        name = convertView.findViewById(R.id.nameCleaningPlan);
-        number = convertView.findViewById(R.id.numberCleaningPlan);
-        remove = convertView.findViewById(R.id.removeCleaningPlan);
+        name = convertView.findViewById(R.id.nameGroceryList);
+        number = convertView.findViewById(R.id.numberGroceryList);
+        remove = convertView.findViewById(R.id.removeGroceryList);
+        unchecked = convertView.findViewById(R.id.uncheckedGroceryList);
 
     }
 

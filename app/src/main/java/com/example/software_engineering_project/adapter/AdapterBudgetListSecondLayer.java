@@ -23,8 +23,9 @@ import java.util.Locale;
 public class AdapterBudgetListSecondLayer extends ArrayAdapter<Payment> {
 
     private Context context;
-    private TextView expenseAmount, expenseDate, expenseDescription, expensePayer;
     private List<Payment> list;
+    private TextView expenseAmount, expenseDate, expenseDescription, expensePayer;
+
 
     public AdapterBudgetListSecondLayer(Context context, List<Payment> items) {
 

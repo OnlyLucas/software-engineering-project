@@ -2,7 +2,6 @@ package com.example.software_engineering_project.controller;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ import androidx.core.util.Pair;
 import androidx.fragment.app.Fragment;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.adapter.SpinnerListAdapter;
+import com.example.software_engineering_project.adapter.AdapterSpinnerList;
 import com.example.software_engineering_project.entity.CleaningTemplate;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.viewmodel.CleaningTemplateRepository;
@@ -25,7 +24,6 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,28 +32,31 @@ import java.util.Date;
  */
 public class FragmentCleaningPlanAddController extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    public static Spinner spinner;
-    private static MaterialButton datePickerCleaningPlan;
+    static Spinner spinner;
     private static Context context;
-    private static EditText name, description;
+    private static EditText description, name;
+    private static MaterialButton datePickerCleaningPlan;
     private ImageView saveCleaningPlan;
-    private View fragmentView;
-    private String startDateString, test;
     private Long startDateLong;
+    private String startDateString, test;
+    private View fragmentView;
 
-    public static void handleSaveClicked() {
-        checkInputs();
+
+    public static void handleSaveClicked() {    //TODO Braucht es diese Methode wirklich oder können wir direkt
+        checkInputs();                          //die checkInputs aufrufen?
     }
 
     private static boolean checkInputs() {
+
         // get the inputs
         String nameString = name.getText().toString();
         String descriptionString = description.getText().toString();
+
         if (nameString.length() == 0) {
-            ToastUtil.makeToast("Enter name for cleaning plan", context);
+            ToastUtil.makeToast(context.getString(R.string.enter_name_for_cleaning_plan), context);
             return false;
         } else if (descriptionString.length() == 0) {
-            ToastUtil.makeToast("Enter name for cleaning plan", context);
+            ToastUtil.makeToast(context.getString(R.string.enter_name_for_cleaning_plan), context);
             return false;
         } else {
             String interval = spinner.getSelectedItem().toString();
@@ -84,6 +85,7 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
             cleaningTemplateRepository.createCleaningTemplate(cleaningTemplate, context);
             return true;
         }
+
     }
 
     @Override
@@ -95,6 +97,41 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
         addButtons();
         implementSpinner();
         return fragmentView;
+
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+        AdapterSpinnerList.setText(String.valueOf(spinner.getSelectedItem()));
+        //TODO daten fürs Backend abgreifen
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    private void addButtons() {
+
+        datePickerCleaningPlan.setOnClickListener(v -> showDatePickerDialog());
+
+    }
+
+    private void implementSpinner() {
+
+        //TODO überdenken bzw. ändern
+        ArrayList<String> paths = new ArrayList<>();
+        paths.add("Weekly");
+        paths.add("Bi-Weekly");
+        paths.add("Monthly");
+
+        ArrayAdapter<String> adapter = new AdapterSpinnerList(context, paths);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+
     }
 
     private void loadScreenElements() {
@@ -107,16 +144,16 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
 
     }
 
-    private void addButtons() {
+    private void saveSelectedDate(String string, Long l) {
 
-        datePickerCleaningPlan.setOnClickListener(v -> showDatePickerDialog());
-        //saveCleaningPlan.setOnClickListener(v -> setLog());
+        startDateString = string;
+        startDateLong = l;
 
     }
 
     private void showDatePickerDialog() {
 
-        MaterialDatePicker<Pair<Long, Long>> materialDatePicker = MaterialDatePicker.Builder.dateRangePicker().setTitleText("Select Date").build();
+        MaterialDatePicker<Pair<Long, Long>> materialDatePicker = MaterialDatePicker.Builder.dateRangePicker().setTitleText(R.string.select_date).build();
         materialDatePicker.show(requireActivity().getSupportFragmentManager(), "TAG");
 
         materialDatePicker.addOnPositiveButtonClickListener(selection -> {
@@ -131,47 +168,4 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
 
     }
 
-    private void saveSelectedDate(String string, Long l) {
-        startDateString = string;
-        startDateLong = l;
-    }
-
-    private void setLog() {
-        Date date = new Date(startDateLong);
-
-        /*
-         * @SuppressLint("SimpleDateFormat")
-         *         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-         *         String string1 = formatter.format(date);
-         */
-
-        Log.e("DatePicker", String.valueOf(date));
-    }
-
-    private void implementSpinner() {
-
-
-        //final String[] paths = {"Weekly", "Bi-Weekly", "Monthly"};
-        //TODO überdenken bzw. ändern
-        ArrayList<String> paths = new ArrayList<>();
-        paths.add("Weekly");
-        paths.add("Bi-Weekly");
-        paths.add("Monthly");
-
-        ArrayAdapter<String> adapter = new SpinnerListAdapter(context, paths);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
-
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        SpinnerListAdapter.setText(String.valueOf(spinner.getSelectedItem()));
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 }

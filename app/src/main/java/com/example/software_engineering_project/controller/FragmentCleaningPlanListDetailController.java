@@ -9,11 +9,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.adapter.CleaningPlanListDetailViewAdapter;
+import com.example.software_engineering_project.entity.Cleaning;
+import com.example.software_engineering_project.entity.CleaningTemplate;
+import com.example.software_engineering_project.viewmodel.CleaningRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,27 +26,38 @@ import java.util.ArrayList;
  */
 public class FragmentCleaningPlanListDetailController extends Fragment {
 
-    static ListView listView;
-    static ArrayList<String> items = new ArrayList<>();
-    static ArrayAdapter<String> adapter;
-    static Context context;
+    private static ArrayAdapter<Cleaning> adapter;
+    private static ArrayList<String> items = new ArrayList<>();
+    private static CleaningRepository cleaningRepository;
+    private static Context context;
+    private static ListView listView;
+    private CleaningTemplate cleaningTemplate;
     private View fragmentView;
 
+
+    public FragmentCleaningPlanListDetailController(CleaningTemplate cleaningTemplate){
+
+        this.cleaningTemplate = cleaningTemplate;
+
+    }
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         fragmentView = inflater.inflate(R.layout.fragment_cleaning_plan_list_detail, container, false);
-        loadScreenElements();
         context = requireActivity();
+        loadScreenElements();
+        cleaningRepository = new CleaningRepository();
 
-        adapter = new CleaningPlanListDetailViewAdapter(context, items);
-        items.clear();
-        items.add("January");
+        //TODO Get next Cleanings for CleaningTemplate
+        LiveData<List<Cleaning>> cleaningsLiveData = cleaningRepository.getUncompletedCleanings(cleaningTemplate.getId());
+        //List<Cleaning> cleanings = cleaningsLiveData.getValue();
 
-        listView.setAdapter(adapter);
+        //adapter = new AdapterCleaningPlanListDetailView(context, cleanings);
+        //listView.setAdapter(adapter);
 
         return fragmentView;
+
     }
 
     private void loadScreenElements() {
@@ -50,4 +65,5 @@ public class FragmentCleaningPlanListDetailController extends Fragment {
         listView = fragmentView.findViewById(R.id.cleaningPlanListDetail);
 
     }
+
 }

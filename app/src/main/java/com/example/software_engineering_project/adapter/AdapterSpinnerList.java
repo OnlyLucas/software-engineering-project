@@ -16,17 +16,17 @@ import com.example.software_engineering_project.R;
 
 import java.util.ArrayList;
 
-public class SpinnerListAdapter extends ArrayAdapter<String> implements AdapterView.OnItemSelectedListener {
+public class AdapterSpinnerList extends ArrayAdapter<String> implements AdapterView.OnItemSelectedListener {
 
     private static TextView nameOfInterval;
-    private Context context;
     private ArrayList<String> list;
+    private Context context;
 
 
     // The ListViewAdapter Constructor
     // @param context: the Context from the MainActivity
     // @param items: The list of items in our Grocery List
-    public SpinnerListAdapter(Context context, ArrayList<String> items) {
+    public AdapterSpinnerList(Context context, ArrayList<String> items) {
 
         super(context, R.layout.adapter_grocery_list_list_view, items);
         this.context = context;

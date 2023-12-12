@@ -20,11 +20,12 @@ import com.example.software_engineering_project.R;
  */
 public class FragmentSettingsController extends Fragment {
 
-    static FragmentChangePasswordController fragmentChangePasswordController = new FragmentChangePasswordController();
-    static FragmentChangeMailController fragmentChangeMailController = new FragmentChangeMailController();
-    static FragmentManageFlatShareController fragmentManageFlatShareController = new FragmentManageFlatShareController();
+    private static FragmentChangePasswordController fragmentChangePasswordController = new FragmentChangePasswordController();
+    private static FragmentChangeMailController fragmentChangeMailController = new FragmentChangeMailController();
+    private static FragmentManageFlatShareController fragmentManageFlatShareController = new FragmentManageFlatShareController();
+    private Button changeMailButton, changePasswordButton, createFlatShareButton, logOutButton;
     private View fragmentView;
-    private Button changePasswordButton, changeMailButton, createFlatShareButton, logOutButton;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -33,15 +34,6 @@ public class FragmentSettingsController extends Fragment {
         addButtons();
 
         return fragmentView;
-
-    }
-
-    private void loadScreenElements() {
-
-        changePasswordButton = fragmentView.findViewById(R.id.changePasswordButton);
-        changeMailButton = fragmentView.findViewById(R.id.changeMailButton);
-        createFlatShareButton = fragmentView.findViewById(R.id.createFlatShareButton);
-        logOutButton = fragmentView.findViewById(R.id.logOutButton);
 
     }
 
@@ -72,6 +64,15 @@ public class FragmentSettingsController extends Fragment {
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.contentFragmentMainScreen, fragment);
         transaction.commit();
+
+    }
+
+    private void loadScreenElements() {
+
+        changeMailButton = fragmentView.findViewById(R.id.changeMailButton);
+        changePasswordButton = fragmentView.findViewById(R.id.changePasswordButton);
+        createFlatShareButton = fragmentView.findViewById(R.id.createFlatShareButton);
+        logOutButton = fragmentView.findViewById(R.id.logOutButton);
 
     }
 

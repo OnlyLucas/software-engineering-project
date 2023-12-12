@@ -12,6 +12,7 @@ public class ActivityLoginScreenController extends AppCompatActivity {
 
     private Button loginButton, registerButton;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

@@ -18,7 +18,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CleaningTemplateRepository {
-
     private CleaningTemplateService cleaningTemplateService;
     private MutableLiveData<List<CleaningTemplate>> currentCleaningTemplates = new MutableLiveData<>();
 

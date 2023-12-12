@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -26,18 +28,32 @@ public class FragmentBudgetDetailScreenController extends Fragment {
     private AdapterBudgetDetailGet adapterBudgetDetailGet;
     private AdapterBudgetDetailOwe adapterBudgetDetailOwe;
     private Context context;
+    private ListView listGetExpenses, listOweExpenses;
+    private TextView totalCalculatedExpenses, totalGetExpenses, totalOweExpenses;
     private View fragmentView;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         fragmentView = inflater.inflate(R.layout.fragment_budget_detail_screen, container, false);
         context = requireActivity();
+        loadScreenElements();
 
         adapterBudgetDetailGet = new AdapterBudgetDetailGet(context, itemsGet);
         adapterBudgetDetailOwe = new AdapterBudgetDetailOwe(context, itemsOwe);
 
         return fragmentView;
+
+    }
+
+    private void loadScreenElements() {
+
+        listGetExpenses = fragmentView.findViewById(R.id.listGetExpenses);
+        listOweExpenses = fragmentView.findViewById(R.id.listOweExpenses);
+        totalCalculatedExpenses = fragmentView.findViewById(R.id.totalCalculatedExpenses);
+        totalGetExpenses = fragmentView.findViewById(R.id.totalGetExpenses);
+        totalOweExpenses = fragmentView.findViewById(R.id.totalOweExpenses);
 
     }
 
