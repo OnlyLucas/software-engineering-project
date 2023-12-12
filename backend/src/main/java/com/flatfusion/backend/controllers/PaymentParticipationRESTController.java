@@ -26,10 +26,23 @@ public class PaymentParticipationRESTController extends RESTController<PaymentPa
         super(repository);
     }
 
-    @GetMapping("/group/{groupId}/user/{userId}")
+    //TODO Change and add URL in frontend & Renaming methods
+    @GetMapping("/group/{groupId}/user/{userId}/get")
     public ResponseEntity<List<Object[]>> findByGroupIdAndPaymentCreatedByUserId(@PathVariable UUID groupId, @PathVariable UUID userId){
-        logger.info("Get Payments by group id:  " + groupId + " and user id: " + userId);
+        logger.info("Get Payments get by group id:  " + groupId + " and user id: " + userId);
         Optional<List<Object[]>> entities = paymentParticipationEntityRepository.findByGroupIdAndPaymentCreatedByUserId(groupId, userId);
+
+        if(entities.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(entities.get(), HttpStatus.OK);
+    }
+
+    @GetMapping("/group/{groupId}/user/{userId}/owe")
+    public ResponseEntity<List<Object[]>> findByGroupIdAndParticipation(@PathVariable UUID groupId, @PathVariable UUID userId){
+        logger.info("Get Payments owe by group id:  " + groupId + " and user id: " + userId);
+        Optional<List<Object[]>> entities = paymentParticipationEntityRepository.findByGroupIdAndParticipation(groupId, userId);
 
         if(entities.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
