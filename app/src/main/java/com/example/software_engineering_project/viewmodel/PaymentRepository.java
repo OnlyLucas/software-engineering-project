@@ -51,7 +51,7 @@ public class PaymentRepository {
             @Override
             public void onFailure(Call<List<Payment>> call, Throwable t) {
                 // Handle network failure
-                System.out.println("Network error while fetching users");
+                System.out.println("Network error while fetching payments");
             }
         });
     }
