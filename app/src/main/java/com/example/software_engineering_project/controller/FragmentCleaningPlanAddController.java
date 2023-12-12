@@ -32,18 +32,19 @@ import java.util.Date;
  */
 public class FragmentCleaningPlanAddController extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    public static Spinner spinner;
+    private static Spinner spinner;
     private static MaterialButton datePickerCleaningPlan;
     private static Context context;
-    private static EditText name, description;
+    private static EditText description, name;
     private static java.sql.Date startDateSql, endDateSql;
     private static int intervalSelection;
 
     private ImageView saveCleaningPlan;
     private View fragmentView;
 
-    public static void handleSaveClicked() {
-        checkInputs();
+
+    public static void handleSaveClicked() {    //TODO Braucht es diese Methode wirklich oder können wir direkt
+        checkInputs();                          //die checkInputs aufrufen?
     }
 
     private static boolean checkInputs() {
@@ -79,35 +80,22 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
         return fragmentView;
     }
 
-    private void loadScreenElements() {
-
-        datePickerCleaningPlan = fragmentView.findViewById(R.id.datePickerCleaningPlan);
-        saveCleaningPlan = FragmentCleaningPlanController.fragmentView.findViewById(R.id.saveCleaningPlan);
-        spinner = fragmentView.findViewById(R.id.chooseInterval);
-        name = fragmentView.findViewById(R.id.enterNameAddCleaningPlan);
-        description = fragmentView.findViewById(R.id.enterDescriptionCleaningPlan);
-
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String text = String.valueOf(spinner.getSelectedItem());
+        SpinnerListAdapter.setText(text);
+        if(position == 0){
+            intervalSelection = 7;
+        } else if(position == 1) {
+            intervalSelection = 14;
+        } else if(position == 2){
+            intervalSelection = 28;
+        }
     }
 
-    private void addButtons() {
-        datePickerCleaningPlan.setOnClickListener(v -> showDatePickerDialog());
-    }
-
-    private void showDatePickerDialog() {
-
-        MaterialDatePicker<Pair<Long, Long>> materialDatePicker = MaterialDatePicker.Builder.dateRangePicker().setTitleText("Select Date").build();
-        materialDatePicker.show(requireActivity().getSupportFragmentManager(), "TAG");
-
-        materialDatePicker.addOnPositiveButtonClickListener(selection -> {
-
-            Long startDate = selection.first;
-            Long endDate = selection.second;
-            saveDates(startDate, endDate);
-            CharSequence charSequence = materialDatePicker.getHeaderText();
-            datePickerCleaningPlan.setText(charSequence);
-
-        });
-
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        //TODO Was soll hier passieren?
     }
 
     private java.sql.Date convertLongToSqlDate(Long date){
@@ -116,9 +104,8 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
         return sqlDate;
     }
 
-    private void saveDates(Long startDate, Long endDate) {
-        startDateSql = convertLongToSqlDate(startDate);
-        endDateSql = convertLongToSqlDate(endDate);
+    private void addButtons() {
+        datePickerCleaningPlan.setOnClickListener(v -> showDatePickerDialog());
     }
 
     private void implementSpinner() {
@@ -136,21 +123,34 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
 
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String text = String.valueOf(spinner.getSelectedItem());
-        SpinnerListAdapter.setText(text);
-        if(position == 0){
-            intervalSelection = 7;
-        } else if(position == 1) {
-            intervalSelection = 14;
-        } else if(position == 2){
-            intervalSelection = 28;
-        }
+    private void loadScreenElements() {
+
+        datePickerCleaningPlan = fragmentView.findViewById(R.id.datePickerCleaningPlan);
+        saveCleaningPlan = FragmentCleaningPlanController.fragmentView.findViewById(R.id.saveCleaningPlan);
+        spinner = fragmentView.findViewById(R.id.chooseInterval);
+        name = fragmentView.findViewById(R.id.enterNameAddCleaningPlan);
+        description = fragmentView.findViewById(R.id.enterDescriptionCleaningPlan);
+
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    private void saveDates(Long startDate, Long endDate) {
+        startDateSql = convertLongToSqlDate(startDate);
+        endDateSql = convertLongToSqlDate(endDate);
+    }
+
+    private void showDatePickerDialog() {
+
+        MaterialDatePicker<Pair<Long, Long>> materialDatePicker = MaterialDatePicker.Builder.dateRangePicker().setTitleText("Select Date").build();
+        materialDatePicker.show(requireActivity().getSupportFragmentManager(), "TAG");
+
+        materialDatePicker.addOnPositiveButtonClickListener(selection -> {
+
+            Long startDate = selection.first;
+            Long endDate = selection.second;
+            saveDates(startDate, endDate);
+            CharSequence charSequence = materialDatePicker.getHeaderText();
+            datePickerCleaningPlan.setText(charSequence);
+        });
 
     }
 }

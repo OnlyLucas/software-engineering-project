@@ -19,8 +19,8 @@ import java.util.ArrayList;
 public class SpinnerListAdapter extends ArrayAdapter<String> implements AdapterView.OnItemSelectedListener {
 
     private static TextView nameOfInterval;
-    private Context context;
     private ArrayList<String> list;
+    private Context context;
 
 
     // The ListViewAdapter Constructor

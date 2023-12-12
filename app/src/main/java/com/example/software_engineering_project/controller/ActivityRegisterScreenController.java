@@ -12,6 +12,7 @@ public class ActivityRegisterScreenController extends AppCompatActivity {
 
     private Button cancelButton, registerButton;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

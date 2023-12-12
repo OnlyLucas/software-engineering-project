@@ -36,14 +36,15 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
 
     private static ArrayAdapter<User> adapter;
     private static Context context;
-    private static LiveData<List<User>> currentUsers;
     private static EditText expense, reason;
+    private static List<User> selectedUsers = new ArrayList<>();
     private static ListView listView;
+    private static LiveData<List<User>> currentUsers;
     private static PaymentParticipationRepository paymentParticipationRepository;
     private static PaymentRepository paymentRepository;
-    private static List<User> selectedUsers = new ArrayList<>();
     private static UserRepository userRepository;
     private View fragmentView, fragmentViewHeader;
+
 
     public static void addUser(User user) {
         selectedUsers.add(user);

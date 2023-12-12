@@ -16,8 +16,9 @@ import java.util.ArrayList;
 
 public class AdapterBudgetDetailOwe extends ArrayAdapter<String> {
 
-    private Context context;
     private ArrayList<String> list;
+    private Context context;
+
 
     public AdapterBudgetDetailOwe(Context context, ArrayList<String> items) {
 

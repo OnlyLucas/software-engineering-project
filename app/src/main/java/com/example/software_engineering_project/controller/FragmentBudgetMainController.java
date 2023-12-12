@@ -28,6 +28,7 @@ public class FragmentBudgetMainController extends Fragment {
     private TextView budgetHeadline;
     private View fragmentView;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
