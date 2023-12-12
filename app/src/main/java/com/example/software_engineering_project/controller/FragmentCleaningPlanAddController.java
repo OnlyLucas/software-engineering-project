@@ -47,9 +47,11 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
     }
 
     private static boolean checkInputs() {
+
         // get the inputs
         String nameString = name.getText().toString();
         String descriptionString = description.getText().toString();
+
         if (nameString.length() == 0) {
             ToastUtil.makeToast(context.getString(R.string.enter_name_for_cleaning_plan), context);
             return false;
@@ -83,6 +85,7 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
             cleaningTemplateRepository.createCleaningTemplate(cleaningTemplate, context);
             return true;
         }
+
     }
 
     @Override
@@ -94,6 +97,7 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
         addButtons();
         implementSpinner();
         return fragmentView;
+
     }
 
     @Override

@@ -37,6 +37,7 @@ public class FragmentBudgetMainController extends Fragment {
         callFragment(fragmentBudgetListController);
         addButtons();
         return fragmentView;
+
     }
 
     private void addButtons() {

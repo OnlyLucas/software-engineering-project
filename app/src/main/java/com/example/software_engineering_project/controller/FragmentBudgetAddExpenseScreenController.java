@@ -118,6 +118,7 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
             e.printStackTrace(); // Or log the error, show a message, etc.
         }
 
+        //Todo do not return null
         return null;
 
     }

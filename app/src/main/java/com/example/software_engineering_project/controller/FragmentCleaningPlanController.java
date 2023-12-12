@@ -79,5 +79,4 @@ public class FragmentCleaningPlanController extends Fragment {
 
     }
 
-
 }

@@ -23,7 +23,7 @@ public class FragmentSettingsController extends Fragment {
     private static FragmentChangePasswordController fragmentChangePasswordController = new FragmentChangePasswordController();
     private static FragmentChangeMailController fragmentChangeMailController = new FragmentChangeMailController();
     private static FragmentManageFlatShareController fragmentManageFlatShareController = new FragmentManageFlatShareController();
-    private Button changePasswordButton, changeMailButton, createFlatShareButton, logOutButton;
+    private Button changeMailButton, changePasswordButton, createFlatShareButton, logOutButton;
     private View fragmentView;
 
 
@@ -69,8 +69,8 @@ public class FragmentSettingsController extends Fragment {
 
     private void loadScreenElements() {
 
-        changePasswordButton = fragmentView.findViewById(R.id.changePasswordButton);
         changeMailButton = fragmentView.findViewById(R.id.changeMailButton);
+        changePasswordButton = fragmentView.findViewById(R.id.changePasswordButton);
         createFlatShareButton = fragmentView.findViewById(R.id.createFlatShareButton);
         logOutButton = fragmentView.findViewById(R.id.logOutButton);
 

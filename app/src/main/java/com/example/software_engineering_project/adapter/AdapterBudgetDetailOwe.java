@@ -31,6 +31,7 @@ public class AdapterBudgetDetailOwe extends ArrayAdapter<String> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @Nullable ViewGroup parent) {
+
         if (convertView == null) {
 
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
@@ -41,6 +42,5 @@ public class AdapterBudgetDetailOwe extends ArrayAdapter<String> {
         return convertView;
 
     }
-
 
 }

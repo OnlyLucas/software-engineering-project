@@ -42,8 +42,7 @@ public class FragmentCleaningPlanListDetailController extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         fragmentView = inflater.inflate(R.layout.fragment_cleaning_plan_list_detail, container, false);
         context = requireActivity();
@@ -58,6 +57,7 @@ public class FragmentCleaningPlanListDetailController extends Fragment {
         //listView.setAdapter(adapter);
 
         return fragmentView;
+
     }
 
     private void loadScreenElements() {
@@ -65,4 +65,5 @@ public class FragmentCleaningPlanListDetailController extends Fragment {
         listView = fragmentView.findViewById(R.id.cleaningPlanListDetail);
 
     }
+
 }

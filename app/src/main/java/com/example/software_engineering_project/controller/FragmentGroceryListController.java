@@ -52,6 +52,7 @@ public class FragmentGroceryListController extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         groceryRepository = new GroceryRepository();
         uncompletedGroceryLiveData = groceryRepository.getUncompletedGroupGroceries();
 
@@ -68,6 +69,7 @@ public class FragmentGroceryListController extends Fragment {
         listView.setAdapter(adapter);
 
         return fragmentView;
+
     }
 
     private void addButtons() {
@@ -120,9 +122,11 @@ public class FragmentGroceryListController extends Fragment {
     }
 
     private void loadScreenElements() {
-        listView = fragmentView.findViewById(R.id.groceryList);
-        input = fragmentView.findViewById(R.id.input);
+
         enter = fragmentView.findViewById(R.id.enter);
+        input = fragmentView.findViewById(R.id.input);
+        listView = fragmentView.findViewById(R.id.groceryList);
+
     }
 
 }
