@@ -19,7 +19,7 @@ import java.util.*;
 @RequestMapping("/v1/payments")
 public class PaymentRESTController extends RESTController<PaymentEntity>{
     @Autowired
-    PaymentEntityRepository paymentRepository;
+    private PaymentEntityRepository paymentRepository;
     @Autowired
     private UserEntityRepository userRepository;
     @Autowired
@@ -28,8 +28,7 @@ public class PaymentRESTController extends RESTController<PaymentEntity>{
     private PaymentParticipationEntityRepository paymentParticipationRepository;
 
     @Autowired
-    public PaymentRESTController(PaymentEntityRepository paymentRepository,
-                                 PaymentParticipationEntityRepository paymentParticipationEntityRepository) {
+    public PaymentRESTController(PaymentEntityRepository paymentRepository){
         super(paymentRepository);
     }
 
@@ -49,7 +48,7 @@ public class PaymentRESTController extends RESTController<PaymentEntity>{
     @Transactional
     @PostMapping("/create-with-participations")
     public ResponseEntity<PaymentEntity> createWithParticipations(@RequestBody PaymentCreationRequest request) {
-        PaymentEntity payment = request.getPayment();;
+        PaymentEntity payment = request.getPayment();
         List<UserEntity> participatingUsers = new ArrayList<>();
 
         UUID paidByUserId;
@@ -144,9 +143,6 @@ public class PaymentRESTController extends RESTController<PaymentEntity>{
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-
-
 
     private BigDecimal getParticipationAmountForUser(PaymentEntity payment, List<UserEntity> participatingUsers, UserEntity user) {
         int participantCount = participatingUsers.size();
