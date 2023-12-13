@@ -31,6 +31,13 @@ public class CleaningEntity implements EntityInterface{
             nullable = false
     )
     private UserEntity user;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "cleaning_template"
+    )
+    private CleaningTemplateEntity cleaningTemplate;
+
     @Column(name = "date", nullable = false)
     private Date date;
     @Column(name = "is_completed", nullable = true)
@@ -40,11 +47,6 @@ public class CleaningEntity implements EntityInterface{
     @Column(name = "completed_at", nullable = true)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp completedAt;
-    @ManyToOne
-    @JoinColumn(
-            name = "cleaning_template"
-    )
-    private CleaningTemplateEntity cleaningTemplate;
 
     public UUID getId() {
         return id;
@@ -71,6 +73,13 @@ public class CleaningEntity implements EntityInterface{
         this.user = user;
     }
 
+    public CleaningTemplateEntity getCleaningTemplate() {
+        return cleaningTemplate;
+    }
+
+    public void setCleaningTemplate(CleaningTemplateEntity cleaningTemplate) {
+        this.cleaningTemplate = cleaningTemplate;
+    }
     public Date getDate() {
         return date;
     }
@@ -95,25 +104,17 @@ public class CleaningEntity implements EntityInterface{
         this.completedAt = completedAt;
     }
 
-    public CleaningTemplateEntity getCleaningTemplate() {
-        return cleaningTemplate;
-    }
-
-    public void setCleaningTemplate(CleaningTemplateEntity cleaningTemplate) {
-        this.cleaningTemplate = cleaningTemplate;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CleaningEntity that = (CleaningEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(group, that.group) && Objects.equals(user, that.user) && Objects.equals(date, that.date) && Objects.equals(isCompleted, that.isCompleted) && Objects.equals(completedAt, that.completedAt) && Objects.equals(cleaningTemplate, that.cleaningTemplate);
+        return Objects.equals(id, that.id) && Objects.equals(group, that.group) && Objects.equals(user, that.user) && Objects.equals(cleaningTemplate, that.cleaningTemplate) && Objects.equals(date, that.date) && Objects.equals(isCompleted, that.isCompleted) && Objects.equals(completedAt, that.completedAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, group, user, date, isCompleted, completedAt, cleaningTemplate);
+        return Objects.hash(id, group, user, cleaningTemplate, date, isCompleted, completedAt);
     }
 
     @Override
@@ -122,10 +123,10 @@ public class CleaningEntity implements EntityInterface{
                 "id=" + id +
                 ", group=" + group +
                 ", user=" + user +
+                ", cleaningTemplate=" + cleaningTemplate +
                 ", date=" + date +
                 ", isCompleted=" + isCompleted +
                 ", completedAt=" + completedAt +
-                ", cleaningTemplate=" + cleaningTemplate +
                 '}';
     }
 }
