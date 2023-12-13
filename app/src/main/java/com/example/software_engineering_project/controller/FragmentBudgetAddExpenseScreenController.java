@@ -132,7 +132,6 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
     }
 
     private void loadScreenElements() {
-        listView = fragmentView.findViewById(R.id.enterNewExpenseInvolvedPersons);
         expense = fragmentView.findViewById(R.id.enterNewExpenseAmount);
         listView = fragmentView.findViewById(R.id.enterNewExpenseInvolvedPersons);
         reason = fragmentView.findViewById(R.id.enterNewExpenseReason);
