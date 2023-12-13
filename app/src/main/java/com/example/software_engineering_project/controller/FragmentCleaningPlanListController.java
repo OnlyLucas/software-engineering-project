@@ -43,7 +43,6 @@ public class FragmentCleaningPlanListController extends Fragment {
         //TODO ggf. Cleanings löschen
         CleaningTemplate cleaningTemplate = currentCleaningTemplates.getValue().get(i);
         cleaningTemplateRepository.deleteCleaningTemplate(cleaningTemplate, context);
-        currentCleaningTemplates = cleaningTemplateRepository.getCurrentCleaningTemplates();
 
     }
 
@@ -72,7 +71,7 @@ public class FragmentCleaningPlanListController extends Fragment {
     private void addButtons() {
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            CleaningTemplate clicked = (CleaningTemplate) listView.getItemAtPosition(position);
+            CleaningTemplate clicked = currentCleaningTemplates.getValue().get(position);
             FragmentCleaningPlanListDetailController fragmentCleaningPlanListDetailController = new FragmentCleaningPlanListDetailController(clicked);
             callFragment(fragmentCleaningPlanListDetailController);
             FragmentCleaningPlanController.goBackCleaningPlan.setVisibility(View.VISIBLE);

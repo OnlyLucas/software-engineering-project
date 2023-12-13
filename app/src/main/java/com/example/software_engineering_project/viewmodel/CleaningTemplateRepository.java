@@ -8,10 +8,10 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.software_engineering_project.dataservice.CleaningTemplateService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.CleaningTemplate;
-import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.util.ToastUtil;
 
 import java.util.List;
+import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,7 +24,7 @@ public class CleaningTemplateRepository {
     public CleaningTemplateRepository() {
         // Initialize Retrofit service
         cleaningTemplateService = RetrofitClient.getInstance().create(CleaningTemplateService.class);
-        getCleaningTemplates();
+        fetchCleaningTemplates();
     }
 
     public void createCleaningTemplate(CleaningTemplate cleaningTemplate, Context context) {
@@ -49,10 +49,12 @@ public class CleaningTemplateRepository {
         });
     }
 
-    public void getCleaningTemplates() {
+    public void fetchCleaningTemplates() {
+
+        UUID currentGroupId = UserViewModel.getCurrentGroup().getValue().getId();
+
         // Perform the API call to get users asynchronously
-        Group group = UserViewModel.getCurrentGroup().getValue();
-        Call<List<CleaningTemplate>> call = cleaningTemplateService.getCleaningTemplates(group.getId());
+        Call<List<CleaningTemplate>> call = cleaningTemplateService.getCleaningTemplates(currentGroupId);
         call.enqueue(new Callback<List<CleaningTemplate>>(){
             @Override
             public void onResponse(Call<List<CleaningTemplate>> call, Response<List<CleaningTemplate>> response) {
@@ -60,9 +62,7 @@ public class CleaningTemplateRepository {
                     List<CleaningTemplate> cleaningTemplates = response.body();
                     currentCleaningTemplates.setValue(cleaningTemplates);
                     System.out.println("Cleaning template fetching successful");
-                    // Handle the received users, e.g., update UI or store in a local database
                 } else {
-                    // Handle API error
                     System.out.println("Error while fetching cleaning templates");
                 }
             }
@@ -89,12 +89,13 @@ public class CleaningTemplateRepository {
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
                         // Get updated Group Groceries from backend to show it in frontend
-                        getCleaningTemplates();
+                        fetchCleaningTemplates();
                         System.out.println("Deletion of Cleaning Template successful");
                         ToastUtil.makeToast("Removed: " + cleaningTemplate.getName(), context);
                     } else {
                         // If the server-side deletion is not successful, handle accordingly
                         // For example, show an error message
+                        fetchCleaningTemplates();
                         System.out.println(response.code());
                         System.out.println("Failed to delete cleaning template on the server");
 

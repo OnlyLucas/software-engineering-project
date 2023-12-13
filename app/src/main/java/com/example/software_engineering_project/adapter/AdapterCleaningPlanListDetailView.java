@@ -15,6 +15,8 @@ import androidx.annotation.Nullable;
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.entity.Cleaning;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class AdapterCleaningPlanListDetailView extends ArrayAdapter<Cleaning> {
@@ -47,8 +49,18 @@ public class AdapterCleaningPlanListDetailView extends ArrayAdapter<Cleaning> {
             loadScreenElements(convertView);
 
             number.setText(position + 1 + ".");
-            //TODO Format Date
-            name.setText(list.get(position).getDate().toString());
+
+            // Format Date
+            Date date = list.get(position).getDate();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
+            SimpleDateFormat monthNameFormat = new SimpleDateFormat("MMMM");
+            SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy");
+            String monthName = monthNameFormat.format(date);
+            String formattedDate = dateFormat.format(date);
+            String yearName = yearFormat.format(date);
+
+            // Set the formatted
+            name.setText(formattedDate + " " + monthName + " " + yearName);
 
             addButtons(position);
 
