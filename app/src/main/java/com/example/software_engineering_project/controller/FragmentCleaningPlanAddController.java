@@ -43,8 +43,8 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
 
 
 
-    public static void handleSaveClicked() {    //TODO Braucht es diese Methode wirklich oder können wir direkt
-        checkInputs();                          //die checkInputs aufrufen?
+    public static void handleSaveClicked() {
+        checkInputs();
     }
 
     private static boolean checkInputs() {

@@ -66,8 +66,6 @@ public class FragmentGroceryListController extends Fragment {
         loadScreenElements();
         addButtons();
 
-        listView.setAdapter(adapter);
-
         return fragmentView;
 
     }

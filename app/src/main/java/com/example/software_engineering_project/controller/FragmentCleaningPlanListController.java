@@ -40,8 +40,10 @@ public class FragmentCleaningPlanListController extends Fragment {
     // function to remove an item given its index in the grocery list.
     public static void removeItem(int i) {
         //TODO UI update when item deleted
+        //TODO ggf. Cleanings löschen
         CleaningTemplate cleaningTemplate = currentCleaningTemplates.getValue().get(i);
         cleaningTemplateRepository.deleteCleaningTemplate(cleaningTemplate, context);
+        currentCleaningTemplates = cleaningTemplateRepository.getCurrentCleaningTemplates();
 
     }
 
@@ -51,17 +53,17 @@ public class FragmentCleaningPlanListController extends Fragment {
 
         cleaningTemplateRepository = new CleaningTemplateRepository();
 
-        fragmentView = inflater.inflate(R.layout.fragment_cleaning_plan_list, container, false);
-        loadScreenElements();
-        addButtons();
-        context = requireActivity();
-
         CleaningTemplateRepository cleaningTemplateRepository = new CleaningTemplateRepository();
         currentCleaningTemplates = cleaningTemplateRepository.getCurrentCleaningTemplates();
         currentCleaningTemplates.observe(getViewLifecycleOwner(), currentCleaningTemplates -> {
             adapter = new AdapterCleaningPlanListView(getActivity(), currentCleaningTemplates);
             listView.setAdapter(adapter);
         });
+
+        fragmentView = inflater.inflate(R.layout.fragment_cleaning_plan_list, container, false);
+        loadScreenElements();
+        addButtons();
+        context = requireActivity();
 
         return fragmentView;
 

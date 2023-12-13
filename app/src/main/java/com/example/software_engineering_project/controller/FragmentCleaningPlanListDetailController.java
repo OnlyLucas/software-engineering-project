@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.adapter.AdapterCleaningPlanListDetailView;
 import com.example.software_engineering_project.entity.Cleaning;
 import com.example.software_engineering_project.entity.CleaningTemplate;
 import com.example.software_engineering_project.viewmodel.CleaningRepository;
@@ -34,6 +35,11 @@ public class FragmentCleaningPlanListDetailController extends Fragment {
     private CleaningTemplate cleaningTemplate;
     private View fragmentView;
 
+    public FragmentCleaningPlanListDetailController(){
+
+        //default constructor
+
+    }
 
     public FragmentCleaningPlanListDetailController(CleaningTemplate cleaningTemplate){
 
@@ -51,10 +57,11 @@ public class FragmentCleaningPlanListDetailController extends Fragment {
 
         //TODO Get next Cleanings for CleaningTemplate
         LiveData<List<Cleaning>> cleaningsLiveData = cleaningRepository.getUncompletedCleanings(cleaningTemplate.getId());
-        //List<Cleaning> cleanings = cleaningsLiveData.getValue();
 
-        //adapter = new AdapterCleaningPlanListDetailView(context, cleanings);
-        //listView.setAdapter(adapter);
+        cleaningsLiveData.observe(getViewLifecycleOwner(), cleaningList -> {
+            adapter = new AdapterCleaningPlanListDetailView(context, cleaningList);
+            listView.setAdapter(adapter);
+        });
 
         return fragmentView;
 
