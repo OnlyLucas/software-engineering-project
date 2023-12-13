@@ -19,12 +19,19 @@
         android:layout_below="@id/showMonth"
         android:backgroundTint="@color/background">
 
-        <ListView
-            android:id="@+id/budgetListSecondLayer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:divider="@null"
-            android:background="@color/background2" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ListView
+                android:id="@+id/budgetListSecondLayer"
+                android:layout_width="wrap_content"
+                android:layout_height="1000dp"
+                android:divider="@null"
+                android:background="@color/background2" />
+
+        </RelativeLayout>
+
 
     </androidx.cardview.widget.CardView>
 
