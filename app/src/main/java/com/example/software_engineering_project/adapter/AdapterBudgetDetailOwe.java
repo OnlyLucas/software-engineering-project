@@ -14,17 +14,18 @@ import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.R;
 
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 
-public class AdapterBudgetDetailOwe extends ArrayAdapter<String> {
+public class AdapterBudgetDetailOwe extends ArrayAdapter<Object[]> {
 
-    private ArrayList<String> list;
+    private List<Object[]> list;
     private Context context;
     private ImageView checkExpenseOwe;
     private TextView amountOfCredit, nameOfCreditor;
 
 
-    public AdapterBudgetDetailOwe(Context context, ArrayList<String> items) {
+    public AdapterBudgetDetailOwe(Context context, List<Object[]> items) {
 
         super(context, R.layout.adapter_budget_detail_owe, items);
         this.context = context;
@@ -41,6 +42,15 @@ public class AdapterBudgetDetailOwe extends ArrayAdapter<String> {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.adapter_budget_detail_owe, null);
             loadScreenElements(convertView);
+
+            Object[] pair = list.get(position);
+            LinkedHashMap<String, Object> userMap = (LinkedHashMap<String, Object>) pair[0];
+
+            Double totalAmount = (Double) pair[1];
+            String name = (String) userMap.get("firstName");
+
+            nameOfCreditor.setText(name);
+            amountOfCredit.setText(totalAmount.toString());
 
         }
 

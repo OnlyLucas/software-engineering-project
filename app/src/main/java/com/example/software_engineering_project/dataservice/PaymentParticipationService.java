@@ -19,7 +19,12 @@ public interface PaymentParticipationService {
     @POST("payment-participations")
     Call<PaymentParticipation> createPaymentParticipation(@Body PaymentParticipation paymentParticipation);
 
-    @GET("payment-participations/group/{groupId}/user/{userId}")
-    Call<List<Object[]>> findByGroupIdAndPaymentCreatedByUserId(
-            @Path("groupId") UUID groupId, @Path("userId") UUID userId);
+    @GET("payment-participations/group/{groupId}/user/{userId}/get")
+    Call<List<Object[]>> getGetPaymentsGroupedByUser(@Path("groupId") UUID groupId, @Path("userId") UUID userId);
+
+    @GET("payment-participations/group/{groupId}/user/{userId}/owe")
+    Call<List<Object[]>> getOwePaymentsGroupedByUser(@Path("groupId") UUID groupId, @Path("userId") UUID userId);
+
+
+
 }

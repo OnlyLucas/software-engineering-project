@@ -6,20 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.entity.PaymentParticipation;
-import com.example.software_engineering_project.entity.User;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class AdapterBudgetDetailGet extends ArrayAdapter<Object[]> {
@@ -29,7 +24,7 @@ public class AdapterBudgetDetailGet extends ArrayAdapter<Object[]> {
     private ImageView checkExpenseGet;
     private TextView amountOfDebt, nameOfDebtor;
 
-
+    //TODO Add Uncheck functionality via Listeners
     public AdapterBudgetDetailGet(Context context, List<Object[]> items) {
 
         super(context, R.layout.adapter_budget_detail_get, items);
@@ -48,13 +43,14 @@ public class AdapterBudgetDetailGet extends ArrayAdapter<Object[]> {
             convertView = mInflater.inflate(R.layout.adapter_budget_detail_get, null);
             loadScreenElements(convertView);
 
-//            Object[] p = list.get(position);
-//            User user = (User) p[0];
-//            BigDecimal totalAmount = (BigDecimal) p[1];
-//            String name = user.getFirstName();
-//
-//            nameOfDebtor.setText(name);
-//            amountOfDebt.setText(totalAmount.toString());
+            Object[] pair = list.get(position);
+            LinkedHashMap<String, Object> userMap = (LinkedHashMap<String, Object>) pair[0];
+
+            Double totalAmount = (Double) pair[1];
+            String name = (String) userMap.get("firstName");
+
+            nameOfDebtor.setText(name);
+            amountOfDebt.setText(totalAmount.toString());
 
         }
 
