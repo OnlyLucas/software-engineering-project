@@ -23,7 +23,7 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
     private Context context;
     private ImageView remove;
     private List<CleaningTemplate> list;
-    private TextView name, number;
+    private TextView name, nextCleaning, number;
 
 
     // The ListViewAdapter Constructor
@@ -75,6 +75,7 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
 
         name = convertView.findViewById(R.id.nameCleaningPlan);
         number = convertView.findViewById(R.id.numberCleaningPlan);
+        nextCleaning = convertView.findViewById(R.id.nextCleaningDate);
         remove = convertView.findViewById(R.id.removeCleaningPlan);
 
     }
