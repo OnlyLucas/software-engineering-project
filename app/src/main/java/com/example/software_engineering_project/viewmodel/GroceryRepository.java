@@ -140,8 +140,10 @@ public class GroceryRepository {
                 if (response.isSuccessful()) {
                     List<GroupGrocery> groceries = response.body();
                     uncompletedGroupGroceries.setValue(groceries);
-                    System.out.println("Uncompleted group grocery fetching successful");
-                }
+                    System.out.println("Uncompleted group groceries fetching successful");
+                } else {
+                System.out.println("Error while fetching uncompleted group groceries");
+            }
             }
 
             @Override
