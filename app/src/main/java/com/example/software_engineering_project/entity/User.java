@@ -15,6 +15,8 @@ public class User {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
 
+    private Boolean isActive;
+
     public UUID getId() {
         return id;
     }
@@ -63,17 +65,25 @@ public class User {
         this.createdAt = createdAt;
     }
 
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(email, user.email) && Objects.equals(username, user.username) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(createdAt, user.createdAt);
+        return Objects.equals(id, user.id) && Objects.equals(email, user.email) && Objects.equals(username, user.username) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(createdAt, user.createdAt) && Objects.equals(isActive, user.isActive);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, username, firstName, lastName, createdAt);
+        return Objects.hash(id, email, username, firstName, lastName, createdAt, isActive);
     }
 
     @Override
@@ -85,6 +95,7 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", createdAt=" + createdAt +
+                ", isActive=" + isActive +
                 '}';
     }
 }

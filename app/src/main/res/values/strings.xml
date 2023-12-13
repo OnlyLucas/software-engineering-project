@@ -4,7 +4,7 @@
     <string name="register_info">Please register yourself!</string>
     <string name="first_name">First Name</string>
     <string name="surname">Surname</string>
-    <string name="email">email</string>
+    <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="register">Register</string>
     <string name="cancel">Cancel</string>
@@ -18,7 +18,7 @@
     <string name="leave_flat_share">Leave flat share</string>
     <string name="manage_flat_share">Manage flat share</string>
     <string name="create_flat_share">Create flat share</string>
-    <string name="please_login_with_you_information">Please login with you information</string>
+    <string name="please_login_with_your_credentials">Please login with your credentials.</string>
     <string name="shopping_list">Shopping List</string>
     <string name="budget">Budget</string>
     <string name="cleaning_plan">Cleaning Plan</string>
@@ -74,4 +74,5 @@
     <string name="enter_name_for_cleaning_plan">Enter name for cleaning plan</string>
     <string name="select_date">Select Date</string>
     <string name="saved">Saved</string>
+    <string name="please_login_with_your_created_credentials">Please login with your created credentials.</string>
 </resources>

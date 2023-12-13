@@ -15,18 +15,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.entity.PaymentParticipation;
+import com.example.software_engineering_project.entity.User;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
-public class AdapterBudgetDetailGet extends ArrayAdapter<String> {
+public class AdapterBudgetDetailGet extends ArrayAdapter<Object[]> {
 
-    private ArrayList<String> list;
+    private List<Object[]> list;
     private Context context;
     private ImageView checkExpenseGet;
     private TextView amountOfDebt, nameOfDebtor;
 
 
-    public AdapterBudgetDetailGet(Context context, ArrayList<String> items) {
+    public AdapterBudgetDetailGet(Context context, List<Object[]> items) {
 
         super(context, R.layout.adapter_budget_detail_get, items);
         this.context = context;
@@ -43,6 +47,14 @@ public class AdapterBudgetDetailGet extends ArrayAdapter<String> {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.adapter_budget_detail_get, null);
             loadScreenElements(convertView);
+
+//            Object[] p = list.get(position);
+//            User user = (User) p[0];
+//            BigDecimal totalAmount = (BigDecimal) p[1];
+//            String name = user.getFirstName();
+//
+//            nameOfDebtor.setText(name);
+//            amountOfDebt.setText(totalAmount.toString());
 
         }
 

@@ -16,7 +16,6 @@ import androidx.lifecycle.LiveData;
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.AdapterCleaningPlanListView;
 import com.example.software_engineering_project.entity.CleaningTemplate;
-import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.viewmodel.CleaningTemplateRepository;
 
 import java.util.ArrayList;
@@ -40,12 +39,9 @@ public class FragmentCleaningPlanListController extends Fragment {
 
     // function to remove an item given its index in the grocery list.
     public static void removeItem(int i) {
-
+        //TODO UI update when item deleted
         CleaningTemplate cleaningTemplate = currentCleaningTemplates.getValue().get(i);
         cleaningTemplateRepository.deleteCleaningTemplate(cleaningTemplate, context);
-        ToastUtil.makeToast(context.getString(R.string.removed) + items.get(i), context);
-        items.remove(i);
-        listView.setAdapter(adapter);
 
     }
 
@@ -75,7 +71,6 @@ public class FragmentCleaningPlanListController extends Fragment {
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             CleaningTemplate clicked = (CleaningTemplate) listView.getItemAtPosition(position);
-            System.out.println(clicked.toString());
             FragmentCleaningPlanListDetailController fragmentCleaningPlanListDetailController = new FragmentCleaningPlanListDetailController(clicked);
             callFragment(fragmentCleaningPlanListDetailController);
             FragmentCleaningPlanController.goBackCleaningPlan.setVisibility(View.VISIBLE);
