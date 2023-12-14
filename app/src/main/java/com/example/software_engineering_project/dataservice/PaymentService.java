@@ -5,6 +5,7 @@ import com.example.software_engineering_project.entity.PaymentCreationData;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -22,4 +23,7 @@ public interface PaymentService {
 
     @GET("payments/group/{group-id}")
     Call<List<Payment>> getPayments(@Path("group-id") UUID groupGroceryId);
+
+    @DELETE("payments/{id}")
+    Call<Void> deletePayment(@Path("id") UUID id);
 }

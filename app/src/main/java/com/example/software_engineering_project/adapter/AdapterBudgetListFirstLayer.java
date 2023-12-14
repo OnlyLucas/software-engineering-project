@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.controller.budget.FragmentBudgetListController;
 import com.example.software_engineering_project.entity.Payment;
 
 import java.sql.Timestamp;
@@ -71,8 +72,17 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
         return convertView;
 
     }
+        private void addButtons(int position) {
+            removeExpense.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FragmentBudgetListController.removeItem(position);
+                }
+            });
+        }
 
-    private void loadScreenElements(View convertView) {
+
+        private void loadScreenElements(View convertView) {
 
         expenseAmount = convertView.findViewById(R.id.expenseAmount);
         expenseDate = convertView.findViewById(R.id.expenseDate);
