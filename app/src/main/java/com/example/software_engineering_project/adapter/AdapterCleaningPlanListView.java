@@ -14,8 +14,11 @@ import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.controller.FragmentCleaningPlanListController;
+import com.example.software_engineering_project.entity.Cleaning;
 import com.example.software_engineering_project.entity.CleaningTemplate;
+import com.example.software_engineering_project.viewmodel.CleaningRepository;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> {
@@ -23,7 +26,7 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
     private Context context;
     private ImageView remove;
     private List<CleaningTemplate> list;
-    private TextView name, nextCleaning, number;
+    private TextView name, nextCleaningDate, number;
 
 
     // The ListViewAdapter Constructor
@@ -42,7 +45,11 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
+        //TODO Datumsanzeige überdenken
         if (convertView == null) {
+//            CleaningRepository cleaningRepository = new CleaningRepository();
+            CleaningTemplate cleaningTemplate = list.get(position);
+//            List<Cleaning> cleanings = cleaningRepository.getUncompletedCleanings(cleaningTemplate.getId()).getValue();
 
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.adapter_cleaning_plan_list_view, null);
@@ -50,7 +57,16 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
             loadScreenElements(convertView);
 
             number.setText(position + 1 + ".");
-            name.setText(list.get(position).getName());
+            name.setText(cleaningTemplate.getName());
+
+//            if (cleanings != null && !cleanings.isEmpty()) {
+//                Cleaning nextCleaning = cleanings.get(0);
+//                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM");
+//                String formattedDate = dateFormat.format(nextCleaning.getDate());
+//                nextCleaningDate.setText(formattedDate);
+//            } else {
+//                System.out.println("Error to get date of next cleaning.");
+//            }
 
             addButtons(position);
 
@@ -75,7 +91,7 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
 
         name = convertView.findViewById(R.id.nameCleaningPlan);
         number = convertView.findViewById(R.id.numberCleaningPlan);
-        nextCleaning = convertView.findViewById(R.id.nextCleaningDate);
+        nextCleaningDate = convertView.findViewById(R.id.nextCleaningDate);
         remove = convertView.findViewById(R.id.removeCleaningPlan);
 
     }

@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.controller.FragmentBudgetDetailScreenController;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -24,7 +25,6 @@ public class AdapterBudgetDetailGet extends ArrayAdapter<Object[]> {
     private ImageView checkExpenseGet;
     private TextView amountOfDebt, nameOfDebtor;
 
-    //TODO Add Uncheck functionality via Listeners
     public AdapterBudgetDetailGet(Context context, List<Object[]> items) {
 
         super(context, R.layout.adapter_budget_detail_get, items);
@@ -51,6 +51,13 @@ public class AdapterBudgetDetailGet extends ArrayAdapter<Object[]> {
 
             nameOfDebtor.setText(name);
             amountOfDebt.setText(totalAmount.toString());
+
+            checkExpenseGet.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FragmentBudgetDetailScreenController.uncheckItemGet(position, context);
+                }
+            });
 
         }
 

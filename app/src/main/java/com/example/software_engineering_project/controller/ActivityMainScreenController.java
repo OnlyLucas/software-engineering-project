@@ -32,26 +32,30 @@ public class ActivityMainScreenController extends AppCompatActivity {
             // TODO
             // FragmentGroceryListController.groceryLiveData.getValue().clear();
             FragmentGroceryListController fragmentGroceryListController = new FragmentGroceryListController();
-            callFragment(fragmentGroceryListController);
+            String tag = "fragment_grocery_list";
+            callFragment(fragmentGroceryListController, tag);
             addMenuBarTint(groceryListButton);
         });
 
         goSettingsButton.setOnClickListener(view -> {
             FragmentSettingsController fragmentSettingsController = new FragmentSettingsController();
-            callFragment(fragmentSettingsController);
+            String tag = "fragment_setting_screen";
+            callFragment(fragmentSettingsController, tag);
             addMenuBarTint(goSettingsButton);
 
         });
 
         cleaningPlanButton.setOnClickListener(view -> {
             FragmentCleaningPlanController fragmentCleaningPlanController = new FragmentCleaningPlanController();
-            callFragment(fragmentCleaningPlanController);
+            String tag = "fragment_cleaning_plan";
+            callFragment(fragmentCleaningPlanController, tag);
             addMenuBarTint(cleaningPlanButton);
         });
 
         budgetButton.setOnClickListener(view -> {
             FragmentBudgetMainController fragmentBudgetMainController = new FragmentBudgetMainController();
-            callFragment(fragmentBudgetMainController);
+            String tag = "fragment_budget_main";
+            callFragment(fragmentBudgetMainController, tag);
             addMenuBarTint(budgetButton);
         });
 
@@ -67,11 +71,11 @@ public class ActivityMainScreenController extends AppCompatActivity {
 
     }
 
-    public void callFragment(Fragment fragment) {
+    public void callFragment(Fragment fragment, String tag) {
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(R.id.contentFragmentMainScreen, fragment);
+        transaction.replace(R.id.contentFragmentMainScreen, fragment,tag);
         transaction.commit();
 
     }
