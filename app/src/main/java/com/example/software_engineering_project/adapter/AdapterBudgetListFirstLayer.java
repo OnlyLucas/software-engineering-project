@@ -6,38 +6,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.LiveData;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.entity.Payment;
-import com.example.software_engineering_project.viewmodel.PaymentRepository;
 
-import java.util.ArrayList;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
-public class AdapterBudgetListFirstLayer extends ArrayAdapter<String> {
+public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
 
-    private static AdapterBudgetListSecondLayer adapter;
-    private static ArrayList<String> items = new ArrayList<>();
-    private static PaymentRepository paymentRepository;
     private Context context;
-    private List<String> list;
-    private ListView budgetListSecondLayer;
-    private LiveData<List<Payment>> currentPayments;
-    private TextView showMonth;
+    private List<Payment> list;
+    private ImageView removeExpense;
+    private TextView expenseAmount, expenseDate, expenseDescription, expensePayer;
 
 
-    public AdapterBudgetListFirstLayer(Context context, List<String> items, LiveData<List<Payment>> currentPayments) {
+    public AdapterBudgetListFirstLayer(Context context, List<Payment> items) {
 
         super(context, R.layout.adapter_budget_list_view_first_layer, items);
         this.context = context;
-        this.list = items;
-        this.currentPayments = currentPayments;
+        list = items;
 
     }
 
@@ -52,12 +48,23 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<String> {
 
             loadScreenElements(convertView);
 
-            showMonth.setText(list.get(position));
+            Payment currentPayment = list.get(position);
 
-            List<Payment> payments = currentPayments.getValue();
-            adapter = new AdapterBudgetListSecondLayer(context, payments);
+            // Customize the layout based on the Payment details
+            expenseDescription.setText(currentPayment.getName());
+            expensePayer.setText(currentPayment.getCreatedByUser().getFirstName() + " paid");
+            expenseAmount.setText(String.format(Locale.getDefault(), "- %s", currentPayment.getAmount()));
 
-            budgetListSecondLayer.setAdapter(adapter);
+            // Convert Timestamp to other date format
+            Timestamp timestamp = currentPayment.getCreatedAt();
+            Date date = new Date(timestamp.getTime());
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
+            SimpleDateFormat monthNameFormat = new SimpleDateFormat("MMMM");
+            String monthName = monthNameFormat.format(date);
+            String formattedDate = dateFormat.format(date);
+
+            // Set the formatted
+            expenseDate.setText(formattedDate + " " + monthName);
 
         }
 
@@ -67,9 +74,13 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<String> {
 
     private void loadScreenElements(View convertView) {
 
-        budgetListSecondLayer = convertView.findViewById(R.id.budgetListSecondLayer);
-        showMonth = convertView.findViewById(R.id.showMonth);
+        expenseAmount = convertView.findViewById(R.id.expenseAmount);
+        expenseDate = convertView.findViewById(R.id.expenseDate);
+        expenseDescription = convertView.findViewById(R.id.expenseDescription);
+        expensePayer = convertView.findViewById(R.id.expensePayer);
+        removeExpense = convertView.findViewById(R.id.removeExpense);
 
     }
 
 }
+

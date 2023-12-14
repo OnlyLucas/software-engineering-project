@@ -59,6 +59,7 @@ public class FragmentBudgetDetailScreenController extends Fragment {
         paymentParticipationRepository.getGetPaymentParticipationsByUserIds(groupId, userIdOwe, userIdGet)
                 .observe((LifecycleOwner) context, affectedPaymentParticipations -> {
                     if (affectedPaymentParticipations != null) {
+
                         for (PaymentParticipation p : affectedPaymentParticipations) {
                             p.setIsPaid(true);
                             paymentParticipationRepository.update(p, context);
@@ -75,8 +76,9 @@ public class FragmentBudgetDetailScreenController extends Fragment {
         LinkedHashMap<String, Object> userMap = (LinkedHashMap<String, Object>) pair[0];
 
         String userIdOweString = (String) userMap.get("id");
-        UUID userIdOwe = UUID.fromString(userIdOweString);
-        UUID userIdGet = UserViewModel.getCurrentAppUser().getValue().getId();
+        String name = (String) userMap.get("firstName");
+        UUID userIdGet = UUID.fromString(userIdOweString);
+        UUID userIdOwe = UserViewModel.getCurrentAppUser().getValue().getId();
         UUID groupId = UserViewModel.getCurrentGroup().getValue().getId();
 
         paymentParticipationRepository.getOwePaymentParticipationsByUserIds(groupId, userIdGet, userIdOwe)
@@ -86,6 +88,7 @@ public class FragmentBudgetDetailScreenController extends Fragment {
                             p.setIsPaid(true);
                             paymentParticipationRepository.update(p, context);
                         }
+                        ToastUtil.makeToast("Paid " + name, context);
                     }
                 });
     }
