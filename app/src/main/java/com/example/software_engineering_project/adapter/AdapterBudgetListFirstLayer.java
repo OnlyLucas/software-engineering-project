@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
 
     private Context context;
     private List<Payment> list;
+    private ImageView removeExpense;
     private TextView expenseAmount, expenseDate, expenseDescription, expensePayer;
 
 
@@ -76,6 +78,7 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
         expenseDate = convertView.findViewById(R.id.expenseDate);
         expenseDescription = convertView.findViewById(R.id.expenseDescription);
         expensePayer = convertView.findViewById(R.id.expensePayer);
+        removeExpense = convertView.findViewById(R.id.removeExpense);
 
     }
 
