@@ -17,8 +17,8 @@ public interface CleaningTemplateService {
     @GET("cleaning-templates/{id}")
     Call<CleaningTemplate> getCleaningTemplate(@Path("id") UUID cleaningTemplateId);
 
-    @POST("cleaning-templates")
-    Call<CleaningTemplate> createCleaningTemplate(@Body CleaningTemplate cleaningTemplate);
+    @POST("cleaning-templates/create-with-cleanings")
+    Call<CleaningTemplate> createCleaningTemplateWithCleanings(@Body CleaningTemplate cleaningTemplate);
 
     @GET("cleaning-templates/group/{group-id}")
     Call<List<CleaningTemplate>> getCleaningTemplates(@Path("group-id") UUID id);

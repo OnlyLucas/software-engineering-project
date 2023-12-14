@@ -43,7 +43,6 @@ public class FragmentCleaningPlanListController extends Fragment {
         //TODO ggf. Cleanings löschen
         CleaningTemplate cleaningTemplate = currentCleaningTemplates.getValue().get(i);
         cleaningTemplateRepository.deleteCleaningTemplate(cleaningTemplate, context);
-
     }
 
     @Override

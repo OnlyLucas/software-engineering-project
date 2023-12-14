@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 public class CleaningTemplate {
@@ -19,6 +20,8 @@ public class CleaningTemplate {
     private User createdByUser;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
+
+    private Set<Cleaning> cleanings;
 
     public CleaningTemplate() {
         //defaul constructor
@@ -110,17 +113,25 @@ public class CleaningTemplate {
         this.createdAt = createdAt;
     }
 
+    public Set<Cleaning> getCleanings() {
+        return cleanings;
+    }
+
+    public void setCleanings(Set<Cleaning> cleanings) {
+        this.cleanings = cleanings;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CleaningTemplate that = (CleaningTemplate) o;
-        return Objects.equals(id, that.id) && Objects.equals(group, that.group) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate) && Objects.equals(interval, that.interval) && Objects.equals(createdByUser, that.createdByUser) && Objects.equals(createdAt, that.createdAt);
+        return Objects.equals(id, that.id) && Objects.equals(group, that.group) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate) && Objects.equals(interval, that.interval) && Objects.equals(createdByUser, that.createdByUser) && Objects.equals(createdAt, that.createdAt) && Objects.equals(cleanings, that.cleanings);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, group, name, description, startDate, endDate, interval, createdByUser, createdAt);
+        return Objects.hash(id, group, name, description, startDate, endDate, interval, createdByUser, createdAt, cleanings);
     }
 
     @Override
@@ -135,6 +146,7 @@ public class CleaningTemplate {
                 ", interval=" + interval +
                 ", createdByUser=" + createdByUser +
                 ", createdAt=" + createdAt +
+                ", cleanings=" + cleanings +
                 '}';
     }
 }

@@ -59,8 +59,10 @@ public class AdapterCleaningPlanListDetailView extends ArrayAdapter<Cleaning> {
             String formattedDate = dateFormat.format(date);
             String yearName = yearFormat.format(date);
 
+            String userName = list.get(position).getUser().getDisplayName();
+
             // Set the formatted
-            name.setText(formattedDate + " " + monthName + " " + yearName);
+            name.setText(userName + ", " +formattedDate + " " + monthName + " " + yearName);
 
             addButtons(position);
 
