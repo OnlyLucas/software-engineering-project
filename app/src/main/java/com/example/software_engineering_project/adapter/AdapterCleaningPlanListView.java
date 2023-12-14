@@ -13,12 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.controller.FragmentCleaningPlanListController;
-import com.example.software_engineering_project.entity.Cleaning;
+import com.example.software_engineering_project.controller.cleanings.FragmentCleaningPlanListController;
 import com.example.software_engineering_project.entity.CleaningTemplate;
-import com.example.software_engineering_project.viewmodel.CleaningRepository;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> {
