@@ -25,7 +25,7 @@
                 android:text="Aldi"
                 android:layout_marginBottom="5dp"
                 android:textStyle="bold"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:textSize="24sp" />
 
             <TextView
@@ -35,7 +35,7 @@
                 android:layout_marginStart="28dp"
                 android:layout_below="@id/expenseDescription"
                 android:text="Meike paid 60$"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:layout_marginBottom="10dp"/>
 
@@ -43,8 +43,8 @@
                 android:id="@+id/expenseAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="55dp"
+                android:layout_toLeftOf="@id/removeExpense"
+                android:layout_marginRight="10dp"
                 android:text="- 30$"
                 android:textColor="#FF0000"
                 android:layout_marginTop="10dp"
@@ -55,11 +55,11 @@
                 android:id="@+id/expenseDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="55dp"
+                android:layout_toLeftOf="@id/removeExpense"
                 android:layout_below="@id/expenseAmount"
+                android:layout_marginRight="10dp"
                 android:text="21. Nov"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:textSize="18sp"
                 android:layout_marginBottom="10dp"/>
 

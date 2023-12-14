@@ -67,22 +67,24 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
             // Set the formatted
             expenseDate.setText(formattedDate + " " + monthName);
 
+            addButtons(position);
+
         }
 
         return convertView;
 
     }
-        private void addButtons(int position) {
-            removeExpense.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    FragmentBudgetListController.removeItem(position);
-                }
-            });
-        }
+    private void addButtons(int position) {
+        removeExpense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentBudgetListController.removeItem(position);
+            }
+        });
 
+    }
 
-        private void loadScreenElements(View convertView) {
+    private void loadScreenElements(View convertView) {
 
         expenseAmount = convertView.findViewById(R.id.expenseAmount);
         expenseDate = convertView.findViewById(R.id.expenseDate);
