@@ -126,7 +126,7 @@ public class PaymentParticipationRepository {
                 if(response.isSuccessful()){
                     // show toast of success
                     List<PaymentParticipation> paymentParticipations = response.body();
-                    getPaymentParticipationsByUserIds.setValue(paymentParticipations);
+                    owePaymentParticipationsByUserIds.setValue(paymentParticipations);
                     System.out.println("Owe Payment Participation fetching successful");
                 } else {
                     System.out.println("Error while fetching Owe Payment Participations");
