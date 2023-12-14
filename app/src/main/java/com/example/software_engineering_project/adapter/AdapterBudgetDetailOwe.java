@@ -13,11 +13,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.controller.FragmentBudgetDetailScreenController;
 
 import java.util.LinkedHashMap;
 import java.util.List;
 
+/**
+ * Custom adapter for displaying budget details related to owed amounts.
+ * This adapter is designed to work with the AdapterBudgetDetailOwe layout.
+ *
+ * The adapter provides functionality to display a list of users with associated credit amounts
+ * and allows users to be marked as "checked" via the checkExpenseOwe ImageView.
+ *
+ * Additionally, the getView method is responsible for inflating the layout and populating it with
+ * user data obtained from the list of Object[] pairs.
+ */
 public class AdapterBudgetDetailOwe extends ArrayAdapter<Object[]> {
 
     private List<Object[]> list;
@@ -26,6 +35,13 @@ public class AdapterBudgetDetailOwe extends ArrayAdapter<Object[]> {
     private TextView amountOfCredit, nameOfCreditor;
 
 
+    /**
+     * Creates a new AdapterBudgetDetailOwe.
+     *
+     * @param context The context in which the adapter is being used.
+     * @param items   The List containing Object[] pairs where the first element is a LinkedHashMap representing a user,
+     *                and the second element is the total amount of credit associated with that user.
+     */
     public AdapterBudgetDetailOwe(Context context, List<Object[]> items) {
 
         super(context, R.layout.adapter_budget_detail_owe, items);
@@ -34,6 +50,14 @@ public class AdapterBudgetDetailOwe extends ArrayAdapter<Object[]> {
 
     }
 
+    /**
+     * Get the view that displays the data at the specified position in the data set.
+     *
+     * @param position    The position of the item within the adapter's data set.
+     * @param convertView The old view to reuse, if possible.
+     * @param parent      The parent that this view will eventually be attached to.
+     * @return The view corresponding to the data at the specified position.
+     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @Nullable ViewGroup parent) {
@@ -52,12 +76,6 @@ public class AdapterBudgetDetailOwe extends ArrayAdapter<Object[]> {
 
             nameOfCreditor.setText(name);
             amountOfCredit.setText(totalAmount.toString());
-            checkExpenseOwe.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    FragmentBudgetDetailScreenController.uncheckItemOwe(position, context);
-                }
-            });
 
         }
 
@@ -65,6 +83,11 @@ public class AdapterBudgetDetailOwe extends ArrayAdapter<Object[]> {
 
     }
 
+    /**
+     * Load screen elements from the layout.
+     *
+     * @param convertView The base view for the layout.
+     */
     private void loadScreenElements(View convertView) {
 
         amountOfCredit = convertView.findViewById(R.id.amountOfCredit);
