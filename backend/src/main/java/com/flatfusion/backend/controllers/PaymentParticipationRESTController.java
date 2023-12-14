@@ -26,11 +26,10 @@ public class PaymentParticipationRESTController extends RESTController<PaymentPa
         super(repository);
     }
 
-    //TODO Change and add URL in frontend & Renaming methods
     @GetMapping("/group/{groupId}/user/{userId}/get")
-    public ResponseEntity<List<Object[]>> findByGroupIdAndPaymentCreatedByUserId(@PathVariable UUID groupId, @PathVariable UUID userId){
+    public ResponseEntity<List<Object[]>> getGetPaymentsGroupedByUser(@PathVariable UUID groupId, @PathVariable UUID userId){
         logger.info("Get Payments get by group id:  " + groupId + " and user id: " + userId);
-        Optional<List<Object[]>> entities = paymentParticipationEntityRepository.findByGroupIdAndPaymentCreatedByUserId(groupId, userId);
+        Optional<List<Object[]>> entities = paymentParticipationEntityRepository.getGetPaymentsGroupedByUser(groupId, userId);
 
         if(entities.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -40,9 +39,9 @@ public class PaymentParticipationRESTController extends RESTController<PaymentPa
     }
 
     @GetMapping("/group/{groupId}/user/{userId}/owe")
-    public ResponseEntity<List<Object[]>> findByGroupIdAndParticipation(@PathVariable UUID groupId, @PathVariable UUID userId){
+    public ResponseEntity<List<Object[]>> getOwePaymentsGroupedByUser(@PathVariable UUID groupId, @PathVariable UUID userId){
         logger.info("Get Payments owe by group id:  " + groupId + " and user id: " + userId);
-        Optional<List<Object[]>> entities = paymentParticipationEntityRepository.findByGroupIdAndParticipation(groupId, userId);
+        Optional<List<Object[]>> entities = paymentParticipationEntityRepository.getOwePaymentsGroupedByUser(groupId, userId);
 
         if(entities.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -50,5 +49,45 @@ public class PaymentParticipationRESTController extends RESTController<PaymentPa
 
         return new ResponseEntity<>(entities.get(), HttpStatus.OK);
     }
+
+    @GetMapping("/group/{groupId}/userOwe/{userIdOwe}/userGet/{userIdGet}")
+    public ResponseEntity<List<PaymentParticipationEntity>> getGetPaymentParticipationsByUserIds(
+            @PathVariable UUID groupId,
+            @PathVariable UUID userIdOwe,
+            @PathVariable UUID userIdGet
+    ) {
+        logger.info("Get Payment Participations Get by group id:  " + groupId + " and user id owe: " + userIdOwe +
+                " and user id get: " + userIdGet);
+
+        Optional<List<PaymentParticipationEntity>> paymentParticipations =
+                paymentParticipationEntityRepository.getGetPaymentParticipationsByUserIds(groupId, userIdOwe, userIdGet);
+
+        if(paymentParticipations.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(paymentParticipations.get(), HttpStatus.OK);
+    }
+
+    @GetMapping("/group/{groupId}/userGet/{userIdGet}/userOwe/{userIdOwe}")
+    public ResponseEntity<List<PaymentParticipationEntity>> getOwePaymentParticipationsByUserIds(
+            @PathVariable UUID groupId,
+            @PathVariable UUID userIdGet,
+            @PathVariable UUID userIdOwe
+    ) {
+        logger.info("Get Payment Participations Owe by group id:  " + groupId + " and user id get: " + userIdGet +
+                " and user id owe: " + userIdOwe);
+
+        Optional<List<PaymentParticipationEntity>> paymentParticipations =
+                paymentParticipationEntityRepository.getOwePaymentParticipationsByUserIds(groupId, userIdGet, userIdOwe);
+
+        if(paymentParticipations.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(paymentParticipations.get(), HttpStatus.OK);
+    }
+
+
 
 }
