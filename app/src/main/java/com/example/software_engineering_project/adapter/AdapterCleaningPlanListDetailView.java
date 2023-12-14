@@ -22,7 +22,7 @@ import java.util.List;
 public class AdapterCleaningPlanListDetailView extends ArrayAdapter<Cleaning> {
 
     private Context context;
-    private ImageView remove;
+    private ImageView done, remove;
     private List<Cleaning> list;
     private TextView name, number;
 
@@ -87,9 +87,10 @@ public class AdapterCleaningPlanListDetailView extends ArrayAdapter<Cleaning> {
 
     private void loadScreenElements(View convertView) {
 
-        name = convertView.findViewById(R.id.nameCleaningPlan);
+        done = convertView.findViewById(R.id.doneCleaning);
+        name = convertView.findViewById(R.id.nameCleaner);
         number = convertView.findViewById(R.id.numberCleaningPlan);
-        remove = convertView.findViewById(R.id.removeCleaningPlan);
+        remove = convertView.findViewById(R.id.removeCleaning);
 
     }
 
