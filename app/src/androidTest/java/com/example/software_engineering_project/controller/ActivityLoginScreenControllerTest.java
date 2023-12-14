@@ -36,7 +36,7 @@ public class ActivityLoginScreenControllerTest {
     }
 
     @Test
-    public void testRegisterButton() {
+    public void testRegisterButtonLogin() {
         // Klick auf den Register-Button
         Espresso.onView(withId(R.id.registerButtonLogin)).perform(ViewActions.click());
 
