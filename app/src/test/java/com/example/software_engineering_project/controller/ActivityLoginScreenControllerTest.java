@@ -42,7 +42,7 @@ public class ActivityLoginScreenControllerTest {
 
         // Verify that the expected activity is started after clicking the login button
         //Intent expectedIntent = new Intent(activity, ActivityMainScreenController.class);
-        //assertTrue(Robolectric.buildActivity(ActivityMainScreenController.class).get().isFinishing());
+        //assertTrue(Robolectric.buildActivity(ActivityMainScreenController.class).get().isFinishing();
     }
 
     @Test
