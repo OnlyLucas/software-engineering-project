@@ -32,24 +32,6 @@ public class PaymentRESTController extends RESTController<PaymentEntity>{
         super(paymentRepository);
     }
 
-
-    @Transactional
-    @DeleteMapping("/{id}")
-    public ResponseEntity<PaymentEntity> delete(@PathVariable UUID id) {
-        Optional<PaymentEntity> existingEntity = paymentRepository.findById(id);
-
-        if (existingEntity.isPresent()) {
-            // delete all payment participations
-            paymentParticipationRepository.deleteAll(existingEntity.get().getPaymentParticipations());
-            // delete payment
-            repository.deleteById(id);
-            logger.info("PaymentParticipation and Payments deleted: " + existingEntity);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
     @GetMapping("/group/{id}")
     public ResponseEntity<List<PaymentEntity>> getPaymentsByGroupId(@PathVariable UUID id){
         logger.info("Get Payments by group id:  " + id);

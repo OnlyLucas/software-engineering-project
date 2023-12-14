@@ -56,7 +56,7 @@ public class CleaningTemplateEntity implements EntityInterface{
     private Timestamp createdAt;
 
     // Cleanings are removed automatically with the removal of the CleaningTemplate
-    @OneToMany(mappedBy = "cleaningTemplate", orphanRemoval = true)
+    @OneToMany(mappedBy = "cleaningTemplate", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CleaningEntity> cleanings;
 
     public CleaningTemplateEntity(){

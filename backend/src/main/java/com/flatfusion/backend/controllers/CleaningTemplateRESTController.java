@@ -154,21 +154,4 @@ public class CleaningTemplateRESTController extends RESTController<CleaningTempl
 
         return newCleanings;
     }
-
-    @Transactional
-    @DeleteMapping("/{id}")
-    public ResponseEntity<CleaningTemplateEntity> delete(@PathVariable UUID id) {
-        Optional<CleaningTemplateEntity> existingEntity = cleaningTemplateRepository.findById(id);
-
-        if (existingEntity.isPresent()) {
-            // delete all cleanings
-            cleaningRepository.deleteAll(existingEntity.get().getCleanings());
-            // delete cleaning template
-            repository.deleteById(id);
-            logger.info("CleaningTemplate and Cleanings deleted: " + existingEntity);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
 }

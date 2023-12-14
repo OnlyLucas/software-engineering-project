@@ -4,31 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89099437-bd15-4ec1-af96-f9b07a22bad3" name="Changes" comment="Add Update &amp; Create methods. Add logging. Update Entity ID types and Generation Strategy.">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/controllers/LoggingController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/entities/EntityInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/utils/StringToTimestampConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="89099437-bd15-4ec1-af96-f9b07a22bad3" name="Changes" comment="#31 Fix payment creation and deletion. Fix cleaning template deletion (cascading deletion of cleanings).">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/backend/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/controllers/GroupRESTController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/controllers/GroupRESTController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/controllers/RESTController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/controllers/RESTController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/controllers/UserRESTController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/controllers/UserRESTController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/entities/CleaningEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/entities/CleaningEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/controllers/CleaningTemplateRESTController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/controllers/CleaningTemplateRESTController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/controllers/PaymentRESTController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/controllers/PaymentRESTController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/entities/CleaningTemplateEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/entities/CleaningTemplateEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/entities/GroupEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/entities/GroupEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/entities/GroupGroceryEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/entities/GroupGroceryEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/entities/GroupMembershipEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/entities/GroupMembershipEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/entities/PaymentEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/entities/PaymentEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/entities/PaymentParticipationEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/entities/PaymentParticipationEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/entities/PaymentParticipationEntityPK.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/entities/PaymentParticipationEntityPK.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/entities/PaymentsChangeEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/entities/PaymentsChangeEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/entities/UserEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/entities/UserEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/exceptions/RESTControllerExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/exceptions/RESTControllerExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/utils/StringToUUIDConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/utils/StringToUUIDConverter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application-test.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application-test.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,35 +98,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JPA.DatabaseSchemaImportDialog": "a3d4cdd0-9392-46d2-928f-7fbe738e94b8",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "android.gradle.sync.needed": "true",
-    "database.data.extractors.current.export.id": "JSON-Groovy.json.groovy",
-    "database.data.extractors.current.id": "JSON-Groovy.json.groovy",
-    "git-widget-placeholder": "crud-server",
-    "last_opened_file_path": "C:/Users/Laura/IdeaProjects/software-engineering-project/backend/src/main/resources/persistence.xml",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.editor",
-    "spring.configuration.checksum": "3241ca6184e7e06d7e2313367e60913a",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JPA.DatabaseSchemaImportDialog&quot;: &quot;a3d4cdd0-9392-46d2-928f-7fbe738e94b8&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;android.gradle.sync.needed&quot;: &quot;true&quot;,
+    &quot;database.data.extractors.current.export.id&quot;: &quot;JSON-Groovy.json.groovy&quot;,
+    &quot;database.data.extractors.current.id&quot;: &quot;JSON-Groovy.json.groovy&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;crud-server&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Laura/IdeaProjects/software-engineering-project/backend/src/main/resources/persistence.xml&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;3241ca6184e7e06d7e2313367e60913a&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\I551386\IdeaProjects\software-engineering-project\frontend" />
@@ -253,8 +233,49 @@
       <workItem from="1699349056714" duration="7404000" />
       <workItem from="1700005579740" duration="4006000" />
       <workItem from="1700128435398" duration="3439000" />
-      <workItem from="1700134519616" duration="17174000" />
+      <workItem from="1700134519616" duration="17881000" />
+      <workItem from="1701250579463" duration="1133000" />
+      <workItem from="1701615029050" duration="4891000" />
+      <workItem from="1701629608392" duration="32000" />
+      <workItem from="1701629658082" duration="1860000" />
+      <workItem from="1701781382304" duration="764000" />
+      <workItem from="1702308976836" duration="1290000" />
+      <workItem from="1702375995460" duration="656000" />
+      <workItem from="1702416872943" duration="1453000" />
+      <workItem from="1702483447153" duration="10175000" />
+      <workItem from="1702509423117" duration="5592000" />
+      <workItem from="1702516543112" duration="790000" />
+      <workItem from="1702554820979" duration="22222000" />
     </task>
+    <task id="LOCAL-00001" summary="Add Update &amp; Create methods. Add logging. Update Entity ID types and Generation Strategy.">
+      <created>1700170445811</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1700170445811</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Adds findByGroupId endpoint to GroupGroceryRESTController">
+      <created>1701631590160</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1701631590160</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Add is_active attribute to User. Changes interval to cleaning_interval for CleaningTemplate.">
+      <created>1702418273544</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1702418273544</updated>
+    </task>
+    <task id="LOCAL-00004" summary="#31 Fix payment creation and deletion. Fix cleaning template deletion (cascading deletion of cleanings).">
+      <created>1702572717179</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1702572717179</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -273,6 +294,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add Update &amp; Create methods. Add logging. Update Entity ID types and Generation Strategy." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Update &amp; Create methods. Add logging. Update Entity ID types and Generation Strategy." />
+    <MESSAGE value="Adds findByGroupId endpoint to GroupGroceryRESTController" />
+    <MESSAGE value="Add is_active attribute to User. Changes interval to cleaning_interval for CleaningTemplate." />
+    <MESSAGE value="#31 Fix payment creation and deletion. Fix cleaning template deletion (cascading deletion of cleanings)." />
+    <option name="LAST_COMMIT_MESSAGE" value="#31 Fix payment creation and deletion. Fix cleaning template deletion (cascading deletion of cleanings)." />
   </component>
 </project>
