@@ -9,18 +9,22 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.AdapterBudgetDetailGet;
 import com.example.software_engineering_project.adapter.AdapterBudgetDetailOwe;
 import com.example.software_engineering_project.entity.Group;
+import com.example.software_engineering_project.entity.PaymentParticipation;
 import com.example.software_engineering_project.entity.User;
+import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.viewmodel.PaymentParticipationRepository;
 import com.example.software_engineering_project.viewmodel.UserViewModel;
 
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,19 +33,62 @@ import java.util.List;
  */
 public class FragmentBudgetDetailScreenController extends Fragment {
     private static PaymentParticipationRepository paymentParticipationRepository;
-    private static ArrayList<String> itemsGet = new ArrayList<>();
-    private static ArrayList<String> itemsOwe = new ArrayList<>();
-
     private static LiveData<List<Object[]>> getPaymentsGroupedByUserLiveData;
     private static LiveData<List<Object[]>> owePaymentsGroupedByUserLiveData;
     private AdapterBudgetDetailGet adapterBudgetDetailGet;
     private AdapterBudgetDetailOwe adapterBudgetDetailOwe;
-    private Context context;
+    private static Context context;
     private ListView listGetExpenses, listOweExpenses;
     private TextView totalCalculatedExpenses, totalGetExpenses, totalOweExpenses;
     private View fragmentView;
     private Double getDouble = new Double(0);
     private Double oweDouble = new Double(0);
+
+    public static void uncheckItemGet(int position, Context context) {
+
+        List<Object[]> list = getPaymentsGroupedByUserLiveData.getValue();
+        Object[] pair = list.get(position);
+        LinkedHashMap<String, Object> userMap = (LinkedHashMap<String, Object>) pair[0];
+
+        String userIdOweString = (String) userMap.get("id");
+        String name = (String) userMap.get("firstName");
+        UUID userIdOwe = UUID.fromString(userIdOweString);
+        UUID userIdGet = UserViewModel.getCurrentAppUser().getValue().getId();
+        UUID groupId = UserViewModel.getCurrentGroup().getValue().getId();
+
+        paymentParticipationRepository.getGetPaymentParticipationsByUserIds(groupId, userIdOwe, userIdGet)
+                .observe((LifecycleOwner) context, affectedPaymentParticipations -> {
+                    if (affectedPaymentParticipations != null) {
+                        for (PaymentParticipation p : affectedPaymentParticipations) {
+                            p.setIsPaid(true);
+                            paymentParticipationRepository.update(p, context);
+                        }
+                        ToastUtil.makeToast("Paid " + name, context);
+                    }
+                });
+    }
+
+    public static void uncheckItemOwe(int position, Context context) {
+
+        List<Object[]> list = owePaymentsGroupedByUserLiveData.getValue();
+        Object[] pair = list.get(position);
+        LinkedHashMap<String, Object> userMap = (LinkedHashMap<String, Object>) pair[0];
+
+        String userIdOweString = (String) userMap.get("id");
+        UUID userIdOwe = UUID.fromString(userIdOweString);
+        UUID userIdGet = UserViewModel.getCurrentAppUser().getValue().getId();
+        UUID groupId = UserViewModel.getCurrentGroup().getValue().getId();
+
+        paymentParticipationRepository.getOwePaymentParticipationsByUserIds(groupId, userIdGet, userIdOwe)
+                .observe((LifecycleOwner) context, affectedPaymentParticipations -> {
+                    if (affectedPaymentParticipations != null) {
+                        for (PaymentParticipation p : affectedPaymentParticipations) {
+                            p.setIsPaid(true);
+                            paymentParticipationRepository.update(p, context);
+                        }
+                    }
+                });
+    }
 
 
     @Override

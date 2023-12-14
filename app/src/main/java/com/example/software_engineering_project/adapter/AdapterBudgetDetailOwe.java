@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.controller.FragmentBudgetDetailScreenController;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -51,6 +52,12 @@ public class AdapterBudgetDetailOwe extends ArrayAdapter<Object[]> {
 
             nameOfCreditor.setText(name);
             amountOfCredit.setText(totalAmount.toString());
+            checkExpenseOwe.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FragmentBudgetDetailScreenController.uncheckItemOwe(position, context);
+                }
+            });
 
         }
 
