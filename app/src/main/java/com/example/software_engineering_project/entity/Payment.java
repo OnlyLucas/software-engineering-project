@@ -22,7 +22,6 @@ public class Payment {
     private Timestamp createdAt;
     private String name;
 
-    @OneToMany(mappedBy = "payment")
     private Set<PaymentParticipation> paymentParticipations;
 
     public Payment() {

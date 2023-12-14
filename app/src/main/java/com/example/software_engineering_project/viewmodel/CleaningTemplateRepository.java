@@ -28,15 +28,18 @@ public class CleaningTemplateRepository {
     }
 
     public void createCleaningTemplate(CleaningTemplate cleaningTemplate, Context context) {
-        Call<CleaningTemplate> call = cleaningTemplateService.createCleaningTemplate(cleaningTemplate);
+        Call<CleaningTemplate> call = cleaningTemplateService.createCleaningTemplateWithCleanings(cleaningTemplate);
         call.enqueue(new Callback<CleaningTemplate>() {
+            // TODO Add internationalization
             @Override
             public void onResponse(Call<CleaningTemplate> call, Response<CleaningTemplate> response) {
                 if(response.isSuccessful()){
                     // show toast of success
                     ToastUtil.makeToast("Added " + cleaningTemplate.getName(), context);
+                    fetchCleaningTemplates();
                 } else {
                     ToastUtil.makeToast("Error while adding  " + cleaningTemplate.getName(), context);
+                    fetchCleaningTemplates();
                 }
             }
 

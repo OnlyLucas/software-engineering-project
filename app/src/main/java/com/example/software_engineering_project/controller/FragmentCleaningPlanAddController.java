@@ -44,10 +44,10 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
 
 
     public static void handleSaveClicked() {
-        checkInputs();
+        checkInputsAndSave();
     }
 
-    private static boolean checkInputs() {
+    private static boolean checkInputsAndSave() {
 
         // get the inputs
         String nameString = name.getText().toString();
@@ -65,20 +65,22 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
 
             //TODO create Cleanings based on selected dates
 
-
             CleaningTemplateRepository cleaningTemplateRepository = new CleaningTemplateRepository();
             cleaningTemplateRepository.createCleaningTemplate(cleaningTemplate, context);
 
-            name.setText("");
-            description.setText("");
-            datePickerCleaningPlan.setTag(null);
-            //TODO Translation
-            datePickerCleaningPlan.setText("Select Date Range");
-            spinner.setSelection(0);
+            resetPickers();
 
             return true;
         }
+    }
 
+    private static void resetPickers(){
+        name.setText("");
+        description.setText("");
+        datePickerCleaningPlan.setTag(null);
+        //TODO Translation
+        datePickerCleaningPlan.setText("Select Date Range");
+        spinner.setSelection(0);
     }
 
     @Override
@@ -104,6 +106,10 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
             intervalSelection = 14;
         } else if(position == 2){
             intervalSelection = 28;
+        } else if(position == 3){
+            intervalSelection = 28 * 2;
+        } else if(position == 3){
+            intervalSelection = 28 * 6;
         }
 
     }
@@ -134,6 +140,8 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
         paths.add("Weekly");
         paths.add("Bi-Weekly");
         paths.add("Monthly");
+        paths.add("Bi-Monthly");
+        paths.add("Half-Yearly");
 
         ArrayAdapter<String> adapter = new AdapterSpinnerList(context, paths);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

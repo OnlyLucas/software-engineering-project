@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.controller.FragmentCleaningPlanListController;
@@ -45,11 +46,8 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        //TODO Datumsanzeige überdenken
         if (convertView == null) {
-//            CleaningRepository cleaningRepository = new CleaningRepository();
             CleaningTemplate cleaningTemplate = list.get(position);
-//            List<Cleaning> cleanings = cleaningRepository.getUncompletedCleanings(cleaningTemplate.getId()).getValue();
 
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.adapter_cleaning_plan_list_view, null);
@@ -59,14 +57,17 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
             number.setText(position + 1 + ".");
             name.setText(cleaningTemplate.getName());
 
-//            if (cleanings != null && !cleanings.isEmpty()) {
-//                Cleaning nextCleaning = cleanings.get(0);
-//                SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM");
-//                String formattedDate = dateFormat.format(nextCleaning.getDate());
-//                nextCleaningDate.setText(formattedDate);
-//            } else {
-//                System.out.println("Error to get date of next cleaning.");
-//            }
+            CleaningRepository cleaningRepository = new CleaningRepository();
+            cleaningRepository.getUncompletedCleanings(cleaningTemplate.getId()).observe((LifecycleOwner) context, cleanings -> {
+                if (cleanings != null && !cleanings.isEmpty()) {
+                    Cleaning nextCleaning = cleanings.get(0);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM");
+                    String formattedDate = dateFormat.format(nextCleaning.getDate());
+                    nextCleaningDate.setText(formattedDate);
+                } else {
+                    System.out.println("Error to get date of next cleaning.");
+                }
+            });
 
             addButtons(position);
 

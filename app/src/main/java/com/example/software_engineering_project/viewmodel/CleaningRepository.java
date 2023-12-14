@@ -42,6 +42,7 @@ public class CleaningRepository {
             @Override
             public void onFailure(Call<List<Cleaning>> call, Throwable t) {
                 // Handle network failure
+                System.out.println("Error: " + t);
                 System.out.println("Network error while fetching cleanings");
             }
         });

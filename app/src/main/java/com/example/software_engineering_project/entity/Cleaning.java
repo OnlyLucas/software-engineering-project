@@ -1,6 +1,7 @@
 package com.example.software_engineering_project.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.sql.Date;
 import java.sql.Timestamp;
