@@ -40,10 +40,16 @@ public class FragmentBudgetDetailScreenController extends Fragment {
     private ListView listGetExpenses, listOweExpenses;
     private TextView totalCalculatedExpenses, totalGetExpenses, totalOweExpenses;
     private View fragmentView;
+    private Double getDouble = new Double(0);
+    private Double oweDouble = new Double(0);
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        fragmentView = inflater.inflate(R.layout.fragment_budget_detail_screen, container, false);
+        context = requireActivity();
+        loadScreenElements();
 
         // get current group and user
         Group group = UserViewModel.getCurrentGroup().getValue();
@@ -52,44 +58,34 @@ public class FragmentBudgetDetailScreenController extends Fragment {
         // get current get and owe payments
         paymentParticipationRepository = new PaymentParticipationRepository();
 
-        final Double[] payments = new Double[2];
-
         getPaymentsGroupedByUserLiveData = paymentParticipationRepository.getGetPaymentsGroupedByUser(group.getId(), user.getId());
         getPaymentsGroupedByUserLiveData.observe(getViewLifecycleOwner(), getPaymentsGroupedByUser -> {
-            adapterBudgetDetailGet = new AdapterBudgetDetailGet(context, getPaymentsGroupedByUserLiveData.getValue());
+            adapterBudgetDetailGet = new AdapterBudgetDetailGet(context, getPaymentsGroupedByUser);
             listGetExpenses.setAdapter(adapterBudgetDetailGet);
-            payments[0] = getTotalGetPayments(getPaymentsGroupedByUser);
+            getDouble = getTotalGetPayments(getPaymentsGroupedByUser);
+            getTotalGetOrOwe(getDouble, oweDouble);
         });
 
         owePaymentsGroupedByUserLiveData = paymentParticipationRepository.getOwePaymentsGroupedByUser(group.getId(), user.getId());
         owePaymentsGroupedByUserLiveData.observe(getViewLifecycleOwner(), owePaymentsGroupedByUser -> {
             adapterBudgetDetailOwe = new AdapterBudgetDetailOwe(context, owePaymentsGroupedByUserLiveData.getValue());
             listOweExpenses.setAdapter(adapterBudgetDetailOwe);
-            payments[1] = getTotalOwePayments(owePaymentsGroupedByUser);
+            oweDouble = getTotalOwePayments(owePaymentsGroupedByUser);
+            getTotalGetOrOwe(getDouble, oweDouble);
         });
-
-        //TODO Calculate total owe or get
-//        double getPayments = getTotalGetPayments(getPaymentsGroupedByUserLiveData.getValue());
-//        double owePayments = getTotalOwePayments(owePaymentsGroupedByUserLiveData.getValue());
-//        getTotalGetOrOwe(getPayments, owePayments);
-
-        fragmentView = inflater.inflate(R.layout.fragment_budget_detail_screen, container, false);
-        context = requireActivity();
-        loadScreenElements();
 
         return fragmentView;
 
     }
 
-    //TODO use this method
     private void getTotalGetOrOwe(Double getPayments, Double owePayments) {
         Double difference = getPayments - owePayments;
         if(difference == 0){
-           totalCalculatedExpenses.setText("In total you do not owe or get any money.");
+            totalCalculatedExpenses.setText("In total you do not owe or get any money.");
         } else if(difference > 0){
-            totalCalculatedExpenses.setText("You get back: " + difference);
+            totalCalculatedExpenses.setText("You get back in total: " + difference);
         } else{
-            totalCalculatedExpenses.setText("You owe: " + difference);
+            totalCalculatedExpenses.setText("You owe in total: " + difference);
         }
     }
 
@@ -104,7 +100,7 @@ public class FragmentBudgetDetailScreenController extends Fragment {
                     }
                 }
                 totalGetExpenses.setText("You get: " + totalAmountGet);
-                return totalAmountGet;
+                return  totalAmountGet;
             }
             return null;
     }
