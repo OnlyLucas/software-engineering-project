@@ -32,6 +32,24 @@ public class PaymentRESTController extends RESTController<PaymentEntity>{
         super(paymentRepository);
     }
 
+
+    @Transactional
+    @DeleteMapping("/{id}")
+    public ResponseEntity<PaymentEntity> delete(@PathVariable UUID id) {
+        Optional<PaymentEntity> existingEntity = paymentRepository.findById(id);
+
+        if (existingEntity.isPresent()) {
+            // delete all payment participations
+            paymentParticipationRepository.deleteAll(existingEntity.get().getPaymentParticipations());
+            // delete payment
+            repository.deleteById(id);
+            logger.info("PaymentParticipation and Payments deleted: " + existingEntity);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @GetMapping("/group/{id}")
     public ResponseEntity<List<PaymentEntity>> getPaymentsByGroupId(@PathVariable UUID id){
         logger.info("Get Payments by group id:  " + id);
@@ -55,14 +73,10 @@ public class PaymentRESTController extends RESTController<PaymentEntity>{
         UUID createdByUserId;
         UUID groupId;
 
-        System.out.println(request.getPayment().toString());
-        System.out.println(request.toString());
-
         try{
             // Get user and group instance from the repository
             paidByUserId = payment.getPaidByUser().getId();
 
-            // TODO check against authentication credentials
             createdByUserId = payment.getCreatedByUser().getId();
             groupId = payment.getGroup().getId();
         } catch (NullPointerException e){
@@ -73,8 +87,6 @@ public class PaymentRESTController extends RESTController<PaymentEntity>{
         Optional<UserEntity> paidByUser = userRepository.findById(paidByUserId);
         Optional<UserEntity> createdByUser = userRepository.findById(createdByUserId);
         Optional<GroupEntity> group = groupRepository.findById(groupId);
-
-        System.out.println(payment);
 
         // check if elements are existing in db
         if (paidByUser.isPresent() && createdByUser.isPresent() && group.isPresent()){
@@ -101,7 +113,6 @@ public class PaymentRESTController extends RESTController<PaymentEntity>{
         // create PaymentParticipationEntities
         for(UserEntity user : participatingUsers){
 
-            // TODO improve the allocation function
             BigDecimal participationAmount = getParticipationAmountForUser(payment, participatingUsers, user);
             PaymentParticipationEntity paymentParticipation = new PaymentParticipationEntity(payment, group.get(), user, participationAmount);
 
@@ -110,6 +121,11 @@ public class PaymentRESTController extends RESTController<PaymentEntity>{
             // if payment has currency code, also store it in paymentParticipation
             if (currencyCode != null || !currencyCode.isBlank()){
                 paymentParticipation.setCurrencyCode(currencyCode);
+            }
+
+            // If user has made the payment, then they have automatically paid their part.
+            if (user.equals(paidByUser.get())){
+                paymentParticipation.setIsPaid(true);
             }
 
             paymentParticipationRepository.save(paymentParticipation);
@@ -122,36 +138,15 @@ public class PaymentRESTController extends RESTController<PaymentEntity>{
         return new ResponseEntity<>(payment, HttpStatus.CREATED);
     }
 
-    @Override
-    @DeleteMapping("/{id}")
-    public ResponseEntity<PaymentEntity> delete(@PathVariable UUID id) {
-        Optional<PaymentEntity> paymentOptional = repository.findById(id);
-        if (paymentOptional.isPresent()) {
-            PaymentEntity payment = paymentOptional.get();
-            Set<PaymentParticipationEntity> paymentParticipations = payment.getPaymentParticipations();
-
-            if(paymentParticipations != null){
-                paymentParticipationRepository.deleteAll(payment.getPaymentParticipations());
-                logger.info("PaymentParticipations deleted: " + paymentParticipations);
-            }
-
-            repository.deleteById(id);
-            logger.info("Payment deleted: " + payment);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            logger.info("Payment not found. Hence no deletion. ID:" + id);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
     private BigDecimal getParticipationAmountForUser(PaymentEntity payment, List<UserEntity> participatingUsers, UserEntity user) {
         int participantCount = participatingUsers.size();
         BigDecimal paymentAmount = payment.getAmount();
 
-        if(participantCount == 0)
+        if(participantCount == 0) {
             return new BigDecimal(0);
+        }
 
         // Half even round mode to minimize cumulative error
-        return paymentAmount.divide(new BigDecimal(participantCount), RoundingMode.HALF_EVEN);
+        return paymentAmount.divide(new BigDecimal(participantCount), 2, RoundingMode.HALF_EVEN);
     }
 }

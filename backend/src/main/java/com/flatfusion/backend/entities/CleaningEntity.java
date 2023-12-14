@@ -8,6 +8,7 @@ import org.hibernate.type.SqlTypes;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -46,6 +47,19 @@ public class CleaningEntity implements EntityInterface{
     )
     private CleaningTemplateEntity cleaningTemplate;
 
+    public CleaningEntity(){
+        //default constructor
+    }
+
+    public CleaningEntity(GroupEntity group, UserEntity user, Date date, CleaningTemplateEntity cleaningTemplate){
+        this.id = UUID.randomUUID();
+        this.group = group;
+        this.user = user;
+        this.date = date;
+        this.isCompleted = false;
+        this.cleaningTemplate = cleaningTemplate;
+    }
+
     public UUID getId() {
         return id;
     }
@@ -79,11 +93,11 @@ public class CleaningEntity implements EntityInterface{
         this.date = date;
     }
 
-    public Boolean getCompleted() {
+    public Boolean getIsCompleted() {
         return isCompleted;
     }
 
-    public void setCompleted(Boolean completed) {
+    public void setIsCompleted(Boolean completed) {
         isCompleted = completed;
     }
 

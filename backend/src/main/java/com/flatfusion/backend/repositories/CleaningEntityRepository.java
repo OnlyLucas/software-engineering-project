@@ -11,5 +11,5 @@ import java.util.UUID;
 
 public interface CleaningEntityRepository extends JpaRepository<CleaningEntity, UUID> {
     @Query("SELECT c FROM CleaningEntity c WHERE c.cleaningTemplate.id = :templateId AND c.isCompleted = false ORDER BY c.date ASC")
-    Optional<List<CleaningEntity>> getUncompletedCleaningsForTemplate(@Param("templateId")UUID templateId);
+    Optional<List<CleaningEntity>> getUncompletedCleaningsForTemplate(@Param("templateId") UUID templateId);
 }

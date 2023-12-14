@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
@@ -21,6 +22,7 @@ public class RESTController<T extends EntityInterface> {
         this.repository = repository;
     }
 
+    @Transactional
     @PostMapping
     public ResponseEntity<T> create(@RequestBody T entity) {
 
@@ -28,6 +30,7 @@ public class RESTController<T extends EntityInterface> {
         logger.info("Entity created : " + createdEntity);
         return new ResponseEntity<>(createdEntity, HttpStatus.CREATED);
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<T> getById(@PathVariable UUID id, WebRequest request){
@@ -49,6 +52,7 @@ public class RESTController<T extends EntityInterface> {
      * @param updatedEntity JSON Representation of the Entity to be updated. The JSON will be mapped to the JAVA Entity.
      * @return OK and the updated entity if the operation was successful. NOT_FOUND if the given entity is not found in the database.
      */
+    @Transactional
     @PutMapping("/{id}")
     public ResponseEntity<T> update(@PathVariable UUID id, @RequestBody T updatedEntity) {
 
@@ -66,6 +70,7 @@ public class RESTController<T extends EntityInterface> {
         }
     }
 
+    @Transactional
     @DeleteMapping("/{id}")
     public ResponseEntity<T> delete(@PathVariable UUID id) {
         Optional<T> existingEntity = repository.findById(id);

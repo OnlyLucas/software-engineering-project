@@ -121,11 +121,11 @@ public class PaymentParticipationEntity implements EntityInterface {
         this.currencyCode = currencyCode;
     }
 
-    public Boolean getPaid() {
+    public Boolean getIsPaid() {
         return isPaid;
     }
 
-    public void setPaid(Boolean paid) {
+    public void setIsPaid(Boolean paid) {
         isPaid = paid;
     }
 

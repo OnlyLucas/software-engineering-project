@@ -46,7 +46,8 @@ public class PaymentEntity implements EntityInterface{
     )
     private UserEntity createdByUser;
 
-    @OneToMany(mappedBy = "payment")
+    // PaymentParticipations are removed automatically with the removal of the Payment
+    @OneToMany(mappedBy = "payment", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<PaymentParticipationEntity> paymentParticipations;
 
     @Basic
@@ -59,6 +60,7 @@ public class PaymentEntity implements EntityInterface{
     private String name;
 
     public PaymentEntity() {
+        //default constructor
     }
 
     public PaymentEntity(GroupEntity group, BigDecimal amount, UserEntity paidByUser, UserEntity createdByUser, String name) {

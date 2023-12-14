@@ -7,7 +7,9 @@ import org.hibernate.type.SqlTypes;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
@@ -39,7 +41,7 @@ public class CleaningTemplateEntity implements EntityInterface{
 
     //TODO change name to something else than interval (key word)
     @Basic
-    @Column(name = "cleaning_interval", nullable = true)
+    @Column(name = "cleaning_interval", nullable = false)
     private Integer interval;
     @ManyToOne
     @JoinColumn(
@@ -52,6 +54,28 @@ public class CleaningTemplateEntity implements EntityInterface{
     @Column(name = "created_at", nullable = true)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
+
+    // Cleanings are removed automatically with the removal of the CleaningTemplate
+    @OneToMany(mappedBy = "cleaningTemplate", orphanRemoval = true)
+    private Set<CleaningEntity> cleanings;
+
+    public CleaningTemplateEntity(){
+        // default constructor for Spring
+    }
+
+    public CleaningTemplateEntity(GroupEntity group, String name, String description, Date startDate,
+                                  Date endDate, Integer interval, UserEntity createdByUser){
+        this.id = UUID.randomUUID();
+        this.group = group;
+        this.name = name;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.interval = interval;
+        this.createdByUser = createdByUser;
+        this.createdAt = Timestamp.from(Instant.now());
+        this.cleanings = null;
+    }
 
     public UUID getId() {
         return id;
@@ -126,17 +150,25 @@ public class CleaningTemplateEntity implements EntityInterface{
         this.createdAt = createdAt;
     }
 
+    public Set<CleaningEntity> getCleanings() {
+        return cleanings;
+    }
+
+    public void setCleanings(Set<CleaningEntity> cleanings) {
+        this.cleanings = cleanings;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CleaningTemplateEntity that = (CleaningTemplateEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(group, that.group) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate) && Objects.equals(interval, that.interval) && Objects.equals(createdByUser, that.createdByUser) && Objects.equals(createdAt, that.createdAt);
+        return Objects.equals(id, that.id) && Objects.equals(group, that.group) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate) && Objects.equals(interval, that.interval) && Objects.equals(createdByUser, that.createdByUser) && Objects.equals(createdAt, that.createdAt) && Objects.equals(cleanings, that.cleanings);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, group, name, description, startDate, endDate, interval, createdByUser, createdAt);
+        return Objects.hash(id, group, name, description, startDate, endDate, interval, createdByUser, createdAt, cleanings);
     }
 
     @Override
@@ -151,6 +183,7 @@ public class CleaningTemplateEntity implements EntityInterface{
                 ", interval=" + interval +
                 ", createdByUser=" + createdByUser +
                 ", createdAt=" + createdAt +
+                ", cleanings=" + cleanings +
                 '}';
     }
 }
