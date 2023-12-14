@@ -38,8 +38,8 @@ public interface PaymentParticipationEntityRepository extends JpaRepository<Paym
     @Query("SELECT p FROM PaymentParticipationEntity p " +
             "WHERE p.group.id = :groupId " +
             "AND p.isPaid = false " +
-            "AND p.user.id = :userIdGet " +
-            "AND p.payment.paidByUser.id = :userIdOwe")
+            "AND p.user.id = :userIdOwe " +
+            "AND p.payment.paidByUser.id = :userIdGet")
     Optional<List<PaymentParticipationEntity>> getOwePaymentParticipationsByUserIds(UUID groupId, UUID userIdGet, UUID userIdOwe);
 
 }
