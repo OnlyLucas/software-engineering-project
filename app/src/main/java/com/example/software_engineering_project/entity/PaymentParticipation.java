@@ -108,4 +108,10 @@ public class PaymentParticipation {
                 ", paidAt=" + paidAt +
                 '}';
     }
+
+    public void setPaid() {
+        this.isPaid = true;
+        long currentTimeMillis = System.currentTimeMillis();
+        this.paidAt = new Timestamp(currentTimeMillis);
+    }
 }
