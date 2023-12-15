@@ -31,11 +31,24 @@ public class FragmentBudgetListController extends Fragment {
     private static LiveData<List<Payment>> currentPayments;
     private View fragmentView;
 
+    /**
+     * Removes a payment item from the budget list at the specified position.
+     *
+     * @param position The position of the payment item to be removed.
+     */
     public static void removeItem(int position) {
         Payment payment = currentPayments.getValue().get(position);
         paymentRepository.deletePayment(payment, context);
     }
 
+    /**
+     * Called to have the fragment instantiate its user interface view.
+     *
+     * @param inflater           The LayoutInflater object that can be used to inflate views.
+     * @param container          If non-null, this is the parent view that the fragment's UI will be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
+     * @return The root view for the fragment's UI.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

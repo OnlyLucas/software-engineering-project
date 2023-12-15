@@ -45,14 +45,28 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
     private View fragmentView, fragmentViewHeader;
 
 
+    /**
+     * Adds a user to the list of selected users for the expense.
+     *
+     * @param user The user to be added.
+     */
     public static void addUser(User user) {
         selectedUsers.add(user);
     }
 
+    /**
+     * Removes a user from the list of selected users for the expense.
+     *
+     * @param user The user to be removed.
+     */
     public static void deleteUser(User user) {
         selectedUsers.remove(user);
     }
 
+    /**
+     * Handles the save action by creating a new payment with the entered details.
+     * It calculates the payment amount for each selected user and creates the payment in the database.
+     */
     public static void handleSaveClicked() {
         Payment payment = getPaymentFromInputs();
         PaymentCreationData requestData = new PaymentCreationData(payment);
@@ -109,6 +123,14 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
         return null;
     }
 
+    /**
+     * Overrides the onCreateView method to inflate the layout and set up the UI elements.
+     *
+     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container          The parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState The Bundle containing the fragment's previously saved state.
+     * @return The inflated View for the fragment.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

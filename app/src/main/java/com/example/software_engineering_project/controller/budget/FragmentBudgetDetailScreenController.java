@@ -44,6 +44,12 @@ public class FragmentBudgetDetailScreenController extends Fragment {
     private Double getDouble = new Double(0);
     private Double oweDouble = new Double(0);
 
+    /**
+     * Unchecks an item in the get category when the user marks a payment as paid.
+     *
+     * @param position The position of the item in the get category.
+     * @param context  The context used for operations.
+     */
     public static void uncheckItemGet(int position, Context context) {
 
         List<Object[]> list = getPaymentsGroupedByUserLiveData.getValue();
@@ -69,6 +75,13 @@ public class FragmentBudgetDetailScreenController extends Fragment {
                 });
     }
 
+
+    /**
+     * Unchecks an item in the owe category when the user marks a payment as paid.
+     *
+     * @param position The position of the item in the owe category.
+     * @param context  The context used for operations.
+     */
     public static void uncheckItemOwe(int position, Context context) {
 
         List<Object[]> list = owePaymentsGroupedByUserLiveData.getValue();
@@ -94,6 +107,14 @@ public class FragmentBudgetDetailScreenController extends Fragment {
     }
 
 
+    /**
+     * Overrides the onCreateView method to inflate the layout and set up the UI elements.
+     *
+     * @param inflater           The LayoutInflater object that can be used to inflate views in the fragment.
+     * @param container          The parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState The Bundle containing the fragment's previously saved state.
+     * @return The inflated View for the fragment.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
