@@ -81,4 +81,8 @@ public class UserRepository {
             }
         });
     }
+
+    public void insertUser(User user, Context context) {
+        //TODO
+    }
 }
