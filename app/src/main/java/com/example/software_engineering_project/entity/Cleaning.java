@@ -1,7 +1,6 @@
 package com.example.software_engineering_project.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -98,5 +97,11 @@ public class Cleaning {
                 ", isCompleted=" + isCompleted +
                 ", completedAt=" + completedAt +
                 '}';
+    }
+
+    public void setCompleted() {
+        this.isCompleted = true;
+        long currentTimeMillis = System.currentTimeMillis();
+        this.completedAt = new Timestamp(currentTimeMillis);
     }
 }

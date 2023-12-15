@@ -4,8 +4,10 @@ import com.example.software_engineering_project.entity.Cleaning;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 import java.util.List;
@@ -21,4 +23,10 @@ public interface CleaningService {
 
     @GET("cleanings/cleaning-template/{templateId}/uncompleted")
     Call<List<Cleaning>> getUncompletedCleaningsForCleaningTemplate(@Path("templateId") UUID templateId);
+
+    @DELETE("cleanings/{id}")
+    Call<Void> deleteCleaning(@Path("id") UUID id);
+
+    @PUT("cleanings/{id}")
+    Call<Cleaning> updateCleaning(@Path("id") UUID id, @Body Cleaning cleaning);
 }

@@ -1,11 +1,14 @@
 package com.example.software_engineering_project.viewmodel;
 
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.software_engineering_project.dataservice.CleaningService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.Cleaning;
+import com.example.software_engineering_project.util.ToastUtil;
 
 import java.util.List;
 import java.util.UUID;
@@ -51,5 +54,66 @@ public class CleaningRepository {
     public LiveData<List<Cleaning>> getUncompletedCleanings(UUID id) {
         fetchUncompletedCleanings(id);
         return uncompletedCleanings;
+    }
+
+    public void deleteCleaning(Cleaning cleaning, Context context) {
+        // Perform the API call to delete the group grocery on the server
+        Call<Void> call = cleaningService.deleteCleaning(cleaning.getId());
+        call.enqueue(new Callback<Void>() {
+
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    // Get updated Group Groceries from backend to show it in frontend
+                    fetchUncompletedCleanings(cleaning.getCleaningTemplate().getId());
+                    System.out.println("Deletion of Cleaning successful");
+                    ToastUtil.makeToast("Removed: " + cleaning.getDate(), context);
+                } else {
+                    // If the server-side deletion is not successful, handle accordingly
+                    // For example, show an error message
+                    System.out.println(response.code());
+                    System.out.println("Failed to delete cleaning on the server");
+
+                    System.out.println(response.body().toString());
+
+                    String errorMessage = "Failed to delete cleaning on the server";
+                    ToastUtil.makeToast("Deletion failed", context);
+                    // Handle the error message appropriately
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                // Handle the failure of the API call (e.g., network issues)
+                String errorMessage = "Failed to delete cleaning. Check your network connection.";
+                ToastUtil.makeToast("Deletion failed", context);
+                // Handle the error message appropriately
+            }
+
+        });
+    }
+
+    public void upadateCleaning(Cleaning cleaning, Context context) {
+        // Perform the API call to update group grocery asynchronously
+        Call<Cleaning> call = cleaningService.updateCleaning(cleaning.getId(), cleaning);
+        call.enqueue(new Callback<Cleaning>() {
+            @Override
+            public void onResponse(Call<Cleaning> call, Response<Cleaning> response) {
+                if(response.isSuccessful()){
+                    fetchUncompletedCleanings(cleaning.getCleaningTemplate().getId());
+                    // show toast of success
+                    ToastUtil.makeToast("Unchecked " + cleaning.getDate(), context);
+                } else {
+                    ToastUtil.makeToast("Error while unchecking  " + cleaning.getDate(), context);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Cleaning> call, Throwable t) {
+                ToastUtil.makeToast("Error while unchecking  " + cleaning.getDate(), context);
+                // Handle the failure if needed
+                // For example, show an error message
+            }
+        });
     }
 }
