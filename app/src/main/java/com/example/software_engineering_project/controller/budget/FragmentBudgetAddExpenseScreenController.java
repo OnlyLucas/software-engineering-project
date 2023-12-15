@@ -71,20 +71,19 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
         Payment payment = getPaymentFromInputs();
         PaymentCreationData requestData = new PaymentCreationData(payment);
 
-        //TODO Auslagerung in Konstruktor; richtige Erfassung der ausgewählten Personen; Payment muss vor PaymentParticipation erstellt sein
         if (payment != null) {
-            System.out.println(selectedUsers.toString());
+            int numberSelectedUsers = selectedUsers.size();
+            if(numberSelectedUsers == 0){
+                ToastUtil.makeToast(context.getString(R.string.select_users), context);
+            } else {
+                for (User u : selectedUsers) {
+                        BigDecimal paymentAmountForUser = payment.getAmount().divide(new BigDecimal(numberSelectedUsers), RoundingMode.HALF_UP);
 
-            for (User u : selectedUsers) {
-
-                //int amountSelected = listView.getCheckedItemCount();
-                BigDecimal paymentAmountForUser = payment.getAmount().divide(new BigDecimal(selectedUsers.size()), RoundingMode.HALF_UP);
-
-                // add users to requestData
-                requestData.getUserParticipations().put(u.getId(), paymentAmountForUser);
+                        // add users to requestData
+                        requestData.getUserParticipations().put(u.getId(), paymentAmountForUser);
+                }
+                paymentRepository.createPayment(requestData, context);
             }
-
-            paymentRepository.createPayment(requestData, context);
         }
     }
 
@@ -104,6 +103,8 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
                 ToastUtil.makeToast(context.getString(R.string._0_is_not_a_valid_expense_amount), context);
             } else if (reasonString.length() == 0) {
                 ToastUtil.makeToast(context.getString(R.string.enter_name_for_expense), context);
+            } else if (reasonString.length() > 15) {
+                ToastUtil.makeToast(context.getString(R.string.enter_shorter_reason), context);
             } else {
                 // add new payment to database
                 Payment payment = new Payment(expenseValue, reasonString);

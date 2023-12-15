@@ -99,6 +99,8 @@ public class FragmentGroceryListController extends Fragment {
                 if (text.length() == 0) {
                     // if no input
                     ToastUtil.makeToast(getString(R.string.enter_an_item_toast), context);
+                } else if(text.length() > 15) {
+                    ToastUtil.makeToast(getString(R.string.enter_shorter_name), context);
                 } else {
                     // if input exists, create new GroupGrocery with respective attributes
                     GroupGrocery grocery = new GroupGrocery(text);

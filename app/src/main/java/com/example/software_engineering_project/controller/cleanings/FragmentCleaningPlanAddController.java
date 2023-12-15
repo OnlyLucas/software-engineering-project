@@ -22,10 +22,9 @@ import com.example.software_engineering_project.viewmodel.CleaningTemplateReposi
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
-import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.TooManyListenersException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,23 +69,25 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
         String nameString = name.getText().toString();
         String descriptionString = description.getText().toString();
 
-        // in case user deletes date input
-        if(startDateSql == null || endDateSql == null){
-            ToastUtil.makeToast(context.getString(R.string.please_select_date_range), context);
-            return false;
-        }
-
         if (nameString.length() == 0) {
             ToastUtil.makeToast(context.getString(R.string.enter_name_for_cleaning_plan), context);
             return false;
+        } else if(nameString.length() > 15) {
+            ToastUtil.makeToast(context.getString(R.string.enter_shorter_name), context);
+            return false;
         } else if (descriptionString.length() == 0) {
-            ToastUtil.makeToast(context.getString(R.string.enter_name_for_cleaning_plan), context);
+            ToastUtil.makeToast(context.getString(R.string.enter_description_for_cleaning_plan), context);
+            return false;
+        } else if(nameString.length() > 30) {
+            ToastUtil.makeToast(context.getString(R.string.enter_shorter_description), context);
+            return false;
+        } else if(startDateSql == null || endDateSql == null) {
+            // in case user deletes date input
+            ToastUtil.makeToast(context.getString(R.string.please_select_valid_date_range), context);
             return false;
         } else {
             CleaningTemplate cleaningTemplate = new CleaningTemplate(nameString, descriptionString,
                     startDateSql, endDateSql, intervalSelection);
-
-            //TODO create Cleanings based on selected dates
 
             CleaningTemplateRepository cleaningTemplateRepository = new CleaningTemplateRepository();
             cleaningTemplateRepository.createCleaningTemplate(cleaningTemplate, context);
@@ -101,8 +102,7 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
         name.setText("");
         description.setText("");
         datePickerCleaningPlan.setTag(null);
-        //TODO Translation
-        datePickerCleaningPlan.setText("Select Date Range");
+        datePickerCleaningPlan.setText(context.getString(R.string.select_date_range));
         spinner.setSelection(0);
     }
 
@@ -169,15 +169,13 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
 
     private void implementSpinner() {
 
-        //TODO Translations
-
         //if changed, adoption in Listener required
         ArrayList<String> paths = new ArrayList<>();
-        paths.add("Weekly");
-        paths.add("Bi-Weekly");
-        paths.add("Monthly");
-        paths.add("Bi-Monthly");
-        paths.add("Half-Yearly");
+        paths.add(context.getString(R.string.weekly));
+        paths.add(context.getString(R.string.bi_weekly));
+        paths.add(context.getString(R.string.monthly));
+        paths.add(context.getString(R.string.bi_monthly));
+        paths.add(context.getString(R.string.half_yearly));
 
         ArrayAdapter<String> adapter = new AdapterSpinnerList(context, paths);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -199,6 +197,23 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
     private void saveDates(Long startDate, Long endDate) {
         startDateSql = convertLongToSqlDate(startDate);
         endDateSql = convertLongToSqlDate(endDate);
+
+        // get current date
+        Calendar currentDate = Calendar.getInstance();
+        Date today = currentDate.getTime();
+
+        // Convert java.sql.Date to java.util.Date
+        java.util.Date startDateUtil = new java.util.Date(startDateSql.getTime());
+        java.util.Date endDateUtil = new java.util.Date(endDateSql.getTime());
+
+        if(startDateUtil.before(today) || endDateUtil.before(today)) {
+            ToastUtil.makeToast(context.getString(R.string.no_past_date_allowed), context);
+            //TODO not shown
+            datePickerCleaningPlan.setTag(null);
+            datePickerCleaningPlan.setText(context.getString(R.string.select_date_range));
+            startDateSql = null;
+            endDateSql = null;
+        }
     }
 
     private void showDatePickerDialog() {
