@@ -82,12 +82,14 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
             Timestamp timestamp = currentPayment.getCreatedAt();
             Date date = new Date(timestamp.getTime());
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
-            SimpleDateFormat monthNameFormat = new SimpleDateFormat("MMMM");
+            SimpleDateFormat monthNameFormat = new SimpleDateFormat("MMM");
+            SimpleDateFormat yearFormat = new SimpleDateFormat("yy");
             String monthName = monthNameFormat.format(date);
             String formattedDate = dateFormat.format(date);
+            String yearName = yearFormat.format(date);
 
             // Set the formatted
-            expenseDate.setText(formattedDate + " " + monthName);
+            expenseDate.setText(formattedDate + " " + monthName + " " + yearName);
 
             addButtons(position);
 
