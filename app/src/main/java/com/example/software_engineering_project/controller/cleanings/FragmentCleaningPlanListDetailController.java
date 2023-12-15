@@ -91,6 +91,8 @@ public class FragmentCleaningPlanListDetailController extends Fragment {
             listView.setAdapter(adapter);
         });
 
+        description.setText(cleaningTemplate.getName() + ": " + cleaningTemplate.getDescription());
+
         return fragmentView;
 
     }
