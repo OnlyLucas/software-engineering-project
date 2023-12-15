@@ -19,6 +19,10 @@ public class User {
 
     private Boolean isActive;
 
+    public User(){
+        //default constructor
+    }
+
     public User(String firstName, String lastName, String eMail, String hashedPassword) {
         //TODO handle password
         this.firstName = firstName;
