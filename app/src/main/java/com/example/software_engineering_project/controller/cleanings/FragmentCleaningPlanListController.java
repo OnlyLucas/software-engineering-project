@@ -37,7 +37,7 @@ public class FragmentCleaningPlanListController extends Fragment {
     private static CleaningTemplateRepository cleaningTemplateRepository;
     private static Context context;
     private static ListView listView;
-    private static LiveData<List<CleaningTemplate>> currentCleaningTemplates;
+    private static LiveData<List<CleaningTemplate>> currentCleaningTemplatesLiveData;
     private View fragmentView;
 
 
@@ -50,8 +50,7 @@ public class FragmentCleaningPlanListController extends Fragment {
      */
     public static void removeItem(int i) {
         //TODO UI update when item deleted
-        //TODO ggf. Cleanings löschen
-        CleaningTemplate cleaningTemplate = currentCleaningTemplates.getValue().get(i);
+        CleaningTemplate cleaningTemplate = currentCleaningTemplatesLiveData.getValue().get(i);
         cleaningTemplateRepository.deleteCleaningTemplate(cleaningTemplate, context);
     }
 
@@ -70,9 +69,9 @@ public class FragmentCleaningPlanListController extends Fragment {
         cleaningTemplateRepository = new CleaningTemplateRepository();
 
         CleaningTemplateRepository cleaningTemplateRepository = new CleaningTemplateRepository();
-        currentCleaningTemplates = cleaningTemplateRepository.getCurrentCleaningTemplates();
+        currentCleaningTemplatesLiveData = cleaningTemplateRepository.getCurrentCleaningTemplates();
 
-        currentCleaningTemplates.observe(getViewLifecycleOwner(), currentCleaningTemplates -> {
+        currentCleaningTemplatesLiveData.observe(getViewLifecycleOwner(), currentCleaningTemplates -> {
             adapter = new AdapterCleaningPlanListView(getActivity(), currentCleaningTemplates);
             listView.setAdapter(adapter);
         });
@@ -88,7 +87,7 @@ public class FragmentCleaningPlanListController extends Fragment {
     private void addButtons() {
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            CleaningTemplate clicked = currentCleaningTemplates.getValue().get(position);
+            CleaningTemplate clicked = currentCleaningTemplatesLiveData.getValue().get(position);
             FragmentCleaningPlanListDetailController fragmentCleaningPlanListDetailController = new FragmentCleaningPlanListDetailController(clicked);
             callFragment(fragmentCleaningPlanListDetailController);
             FragmentCleaningPlanController.goBackCleaningPlan.setVisibility(View.VISIBLE);

@@ -17,7 +17,6 @@ import com.example.software_engineering_project.entity.Cleaning;
 import com.example.software_engineering_project.entity.CleaningTemplate;
 import com.example.software_engineering_project.viewmodel.CleaningRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,10 +29,10 @@ import java.util.List;
 public class FragmentCleaningPlanListDetailController extends Fragment {
 
     private static ArrayAdapter<Cleaning> adapter;
-    private static ArrayList<String> items = new ArrayList<>();
     private static CleaningRepository cleaningRepository;
     private static Context context;
     private static ListView listView;
+    private static LiveData<List<Cleaning>> uncompletedCleaningsLiveData;
     private CleaningTemplate cleaningTemplate;
     private View fragmentView;
 
@@ -57,6 +56,17 @@ public class FragmentCleaningPlanListDetailController extends Fragment {
 
     }
 
+    public static void removeItem(int position) {
+        Cleaning cleaning = uncompletedCleaningsLiveData.getValue().get(position);
+        cleaningRepository.deleteCleaning(cleaning, context);
+    }
+
+    public static void uncheckItem(int position) {
+        Cleaning cleaning = uncompletedCleaningsLiveData.getValue().get(position);
+        cleaning.setCompleted();
+        cleaningRepository.upadateCleaning(cleaning, context);
+    }
+
     /**
      * Called to create the view for this fragment.
      *
@@ -73,10 +83,8 @@ public class FragmentCleaningPlanListDetailController extends Fragment {
         loadScreenElements();
         cleaningRepository = new CleaningRepository();
 
-        //TODO Get next Cleanings for CleaningTemplate
-        LiveData<List<Cleaning>> cleaningsLiveData = cleaningRepository.getUncompletedCleanings(cleaningTemplate.getId());
-
-        cleaningsLiveData.observe(getViewLifecycleOwner(), cleaningList -> {
+        uncompletedCleaningsLiveData = cleaningRepository.getUncompletedCleanings(cleaningTemplate.getId());
+        uncompletedCleaningsLiveData.observe(getViewLifecycleOwner(), cleaningList -> {
             adapter = new AdapterCleaningPlanListDetailView(context, cleaningList);
             listView.setAdapter(adapter);
         });
