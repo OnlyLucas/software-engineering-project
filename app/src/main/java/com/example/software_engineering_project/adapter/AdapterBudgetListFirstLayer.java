@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.controller.budget.FragmentBudgetListController;
 import com.example.software_engineering_project.entity.Payment;
 
 import java.sql.Timestamp;
@@ -33,6 +35,7 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
 
     private Context context;
     private List<Payment> list;
+    private ImageView removeExpense;
     private TextView expenseAmount, expenseDate, expenseDescription, expensePayer;
 
     /**
@@ -86,9 +89,20 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
             // Set the formatted
             expenseDate.setText(formattedDate + " " + monthName);
 
+            addButtons(position);
+
         }
 
         return convertView;
+
+    }
+    private void addButtons(int position) {
+        removeExpense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentBudgetListController.removeItem(position);
+            }
+        });
 
     }
 
@@ -98,6 +112,7 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
         expenseDate = convertView.findViewById(R.id.expenseDate);
         expenseDescription = convertView.findViewById(R.id.expenseDescription);
         expensePayer = convertView.findViewById(R.id.expensePayer);
+        removeExpense = convertView.findViewById(R.id.removeExpense);
 
     }
 

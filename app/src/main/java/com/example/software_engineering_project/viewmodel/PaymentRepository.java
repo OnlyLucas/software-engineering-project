@@ -134,8 +134,6 @@ public class PaymentRepository {
                         System.out.println(response.code());
                         System.out.println("Failed to delete payment on the server");
 
-                        System.out.println(response.body().toString());
-
                         String errorMessage = "Failed to delete payment on the server";
                         ToastUtil.makeToast("Deletion failed", context);
                         // Handle the error message appropriately
