@@ -18,6 +18,13 @@ import com.example.software_engineering_project.entity.User;
 
 import java.util.List;
 
+/**
+ * Adapter for displaying a list of users in the context of adding a new expense.
+ * This adapter is designed to work with the AdapterBudgetNewExpense layout.
+ *
+ * The adapter provides functionality to display a checkbox for each user, allowing users to be selected or deselected.
+ * Additionally, it includes event listeners to handle changes in the checkbox state and update the user list accordingly.
+ */
 public class AdapterBudgetNewExpense extends ArrayAdapter<User> {
 
     private CheckBox checkBoxNewExpenseParticipants;
@@ -25,6 +32,12 @@ public class AdapterBudgetNewExpense extends ArrayAdapter<User> {
     private List<User> list;
 
 
+    /**
+     * Creates a new AdapterBudgetNewExpense.
+     *
+     * @param context The context in which the adapter is being used.
+     * @param items   The List containing users to be displayed for adding a new expense.
+     */
     public AdapterBudgetNewExpense(Context context, List<User> items) {
 
         super(context, R.layout.adapter_budget_new_expense, items);
@@ -33,6 +46,14 @@ public class AdapterBudgetNewExpense extends ArrayAdapter<User> {
 
     }
 
+    /**
+     * Get the view that displays the data at the specified position in the data set.
+     *
+     * @param position    The position of the item within the adapter's data set.
+     * @param convertView The old view to reuse, if possible.
+     * @param parent      The parent that this view will eventually be attached to.
+     * @return The view corresponding to the data at the specified position.
+     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @Nullable ViewGroup parent) {

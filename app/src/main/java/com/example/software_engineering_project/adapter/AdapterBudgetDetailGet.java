@@ -91,11 +91,6 @@ public class AdapterBudgetDetailGet extends ArrayAdapter<Object[]> {
 
     }
 
-    /**
-     * Load screen elements from the layout.
-     *
-     * @param convertView The base view for the layout.
-     */
     private void loadScreenElements(View convertView) {
 
         checkExpenseGet = convertView.findViewById(R.id.checkExpenseGet);
