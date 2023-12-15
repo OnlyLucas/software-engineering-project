@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.controller.cleanings.FragmentCleaningPlanListDetailController;
 import com.example.software_engineering_project.entity.Cleaning;
 
 import java.text.SimpleDateFormat;
@@ -83,16 +84,14 @@ public class AdapterCleaningPlanListDetailView extends ArrayAdapter<Cleaning> {
             // Format Date
             Date date = list.get(position).getDate();
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
-            SimpleDateFormat monthNameFormat = new SimpleDateFormat("MMMM");
-            SimpleDateFormat yearFormat = new SimpleDateFormat("yyyy");
+            SimpleDateFormat monthNameFormat = new SimpleDateFormat("MMM");
             String monthName = monthNameFormat.format(date);
             String formattedDate = dateFormat.format(date);
-            String yearName = yearFormat.format(date);
 
             String userName = list.get(position).getUser().getDisplayName();
 
             // Set the formatted
-            name.setText(userName + ", " +formattedDate + " " + monthName + " " + yearName);
+            name.setText(userName + ", " +formattedDate + " " + monthName);
 
             addButtons(position);
 
@@ -109,7 +108,14 @@ public class AdapterCleaningPlanListDetailView extends ArrayAdapter<Cleaning> {
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //FragmentCleaningPlanListDetailController.removeItem(position);
+                FragmentCleaningPlanListDetailController.removeItem(position);
+            }
+        });
+
+        done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentCleaningPlanListDetailController.uncheckItem(position);
             }
         });
 
