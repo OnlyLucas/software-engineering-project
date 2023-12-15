@@ -35,7 +35,7 @@ public class AdapterCleaningPlanListDetailView extends ArrayAdapter<Cleaning> {
     private Context context;
     private ImageView done, remove;
     private List<Cleaning> list;
-    private TextView name, number;
+    private TextView date, name, number;
 
 
     // The ListViewAdapter Constructor
@@ -123,6 +123,7 @@ public class AdapterCleaningPlanListDetailView extends ArrayAdapter<Cleaning> {
 
     private void loadScreenElements(View convertView) {
 
+        date = convertView.findViewById(R.id.cleaningDate);
         done = convertView.findViewById(R.id.doneCleaning);
         name = convertView.findViewById(R.id.nameCleaner);
         number = convertView.findViewById(R.id.numberCleaningPlan);
