@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.controller.FragmentBudgetDetailScreenController;
+import com.example.software_engineering_project.controller.budget.FragmentBudgetDetailScreenController;
 
 import java.util.LinkedHashMap;
 import java.util.List;
