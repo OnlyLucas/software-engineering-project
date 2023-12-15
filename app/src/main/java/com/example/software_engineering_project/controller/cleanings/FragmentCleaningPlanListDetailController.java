@@ -24,6 +24,8 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentCleaningPlanListDetailController #newInstance} factory method to
  * create an instance of this fragment.
+ *
+ * Fragment for displaying details of a cleaning plan, including the list of upcoming cleanings.
  */
 public class FragmentCleaningPlanListDetailController extends Fragment {
 
@@ -35,18 +37,34 @@ public class FragmentCleaningPlanListDetailController extends Fragment {
     private CleaningTemplate cleaningTemplate;
     private View fragmentView;
 
+    /**
+     * Default constructor for the FragmentCleaningPlanListDetailController.
+     */
     public FragmentCleaningPlanListDetailController(){
 
         //default constructor
 
     }
 
+    /**
+     * Constructor for the FragmentCleaningPlanListDetailController that accepts a CleaningTemplate.
+     *
+     * @param cleaningTemplate The cleaning template for which to display details.
+     */
     public FragmentCleaningPlanListDetailController(CleaningTemplate cleaningTemplate){
 
         this.cleaningTemplate = cleaningTemplate;
 
     }
 
+    /**
+     * Called to create the view for this fragment.
+     *
+     * @param inflater           The LayoutInflater object that can be used to inflate views.
+     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
+     * @return The View for the fragment's UI, or null.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
