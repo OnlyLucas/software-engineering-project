@@ -75,4 +75,7 @@
     <string name="select_date">Select Date</string>
     <string name="saved">Saved</string>
     <string name="please_login_with_your_created_credentials">Please login with your created credentials.</string>
+    <string name="please_select_date_range">Please select a date range</string>
+    <string name="done">done</string>
+    <string name="delete">delete</string>
 </resources>

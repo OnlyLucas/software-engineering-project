@@ -1,4 +1,4 @@
-package com.example.software_engineering_project.controller;
+package com.example.software_engineering_project.controller.cleanings;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -53,6 +53,7 @@ public class FragmentCleaningPlanListController extends Fragment {
 
         CleaningTemplateRepository cleaningTemplateRepository = new CleaningTemplateRepository();
         currentCleaningTemplates = cleaningTemplateRepository.getCurrentCleaningTemplates();
+
         currentCleaningTemplates.observe(getViewLifecycleOwner(), currentCleaningTemplates -> {
             adapter = new AdapterCleaningPlanListView(getActivity(), currentCleaningTemplates);
             listView.setAdapter(adapter);
@@ -64,7 +65,6 @@ public class FragmentCleaningPlanListController extends Fragment {
         context = requireActivity();
 
         return fragmentView;
-
     }
 
     private void addButtons() {

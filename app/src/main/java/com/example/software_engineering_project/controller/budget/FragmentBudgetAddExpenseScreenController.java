@@ -1,4 +1,4 @@
-package com.example.software_engineering_project.controller;
+package com.example.software_engineering_project.controller.budget;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -21,7 +21,6 @@ import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.viewmodel.PaymentParticipationRepository;
 import com.example.software_engineering_project.viewmodel.PaymentRepository;
 import com.example.software_engineering_project.viewmodel.UserRepository;
-import com.example.software_engineering_project.viewmodel.UserViewModel;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -79,6 +78,9 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
     private static Payment getPaymentFromInputs() {
         // get the inputs
         String expenseString = expense.getText().toString();
+        // Remove commas and replace with dot for machine readable format
+        expenseString = expenseString.replace(",", ".");
+
         try {
             BigDecimal expenseValue = new BigDecimal(expenseString);
             String reasonString = reason.getText().toString();

@@ -9,6 +9,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.controller.budget.FragmentBudgetMainController;
+import com.example.software_engineering_project.controller.cleanings.FragmentCleaningPlanController;
+import com.example.software_engineering_project.controller.groceries.FragmentGroceryListController;
 
 
 public class ActivityMainScreenController extends AppCompatActivity {

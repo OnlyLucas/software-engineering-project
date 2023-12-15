@@ -53,6 +53,7 @@
     <string name="select_date">Wähle ein Datum</string>
     <string name="saved">Gespeichert</string>
     <string name="please_login_with_your_created_credentials">Bitte melden Sie sich mit Ihren erstellten Anmeldedaten an.</string>
+    <string name="removed">Entfernt</string>
     <string name="added">Hinzugefügt</string>
     <string name="enter_an_item">Gebe ein Artikel ein.</string>
     <string name="grocerylist">Einkaufsliste</string>
@@ -64,4 +65,5 @@
     <string name="enter_name_for_expense">Gebe einen Namen für die Ausgabe ein</string>
     <string name="enter_number_for_expense">Gebe die Ausgabenhöhe ein</string>
     <string name="enter_name_for_cleaning_plan">Gebe einen Namen für den Putzplan ein</string>
+    <string name="please_select_date_range">Bitte Zeitraum auswählen</string>
 </resources>

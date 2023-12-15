@@ -11,7 +11,6 @@ import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.controller.ActivityMainScreenController;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -21,8 +20,7 @@ import org.junit.runner.RunWith;
 public class ActivityMainScreenControllerTest {
 
     @Rule
-    public IntentsTestRule<ActivityMainScreenController> mActivityRule =
-            new IntentsTestRule<>(ActivityMainScreenController.class);
+    public IntentsTestRule<ActivityMainScreenController> mActivityRule = new IntentsTestRule<>(ActivityMainScreenController.class);
 
 
     @Test

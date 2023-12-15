@@ -1,4 +1,4 @@
-package com.example.software_engineering_project.controller;
+package com.example.software_engineering_project.controller.budget;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -28,9 +28,13 @@ public class FragmentBudgetListController extends Fragment {
     private static Context context;
     private static ListView listView;
     private static PaymentRepository paymentRepository;
-    private LiveData<List<Payment>> currentPayments;
+    private static LiveData<List<Payment>> currentPayments;
     private View fragmentView;
 
+    public static void removeItem(int position) {
+        Payment payment = currentPayments.getValue().get(position);
+        paymentRepository.deletePayment(payment, context);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -1,4 +1,4 @@
-package com.example.software_engineering_project.controller;
+package com.example.software_engineering_project.controller.cleanings;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -22,8 +22,10 @@ import com.example.software_engineering_project.viewmodel.CleaningTemplateReposi
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.TooManyListenersException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,9 +39,11 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
     private static EditText description, name;
     private static MaterialButton datePickerCleaningPlan;
     private static java.sql.Date startDateSql, endDateSql;
-    private static int intervalSelection;
+    private static final Integer defaultWeeklyInterval = 7;
+    private static int intervalSelection = defaultWeeklyInterval;
     private View fragmentView;
     private ImageView saveCleaningPlan;
+
 
 
 
@@ -52,6 +56,12 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
         // get the inputs
         String nameString = name.getText().toString();
         String descriptionString = description.getText().toString();
+
+        // in case user deletes date input
+        if(startDateSql == null || endDateSql == null){
+            ToastUtil.makeToast(context.getString(R.string.please_select_date_range), context);
+            return false;
+        }
 
         if (nameString.length() == 0) {
             ToastUtil.makeToast(context.getString(R.string.enter_name_for_cleaning_plan), context);
@@ -92,7 +102,6 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
         addButtons();
         implementSpinner();
         return fragmentView;
-
     }
 
     @Override
@@ -101,14 +110,14 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
         String text = String.valueOf(spinner.getSelectedItem());
         AdapterSpinnerList.setText(text);
         if(position == 0){
-            intervalSelection = 7;
+            intervalSelection = defaultWeeklyInterval;
         } else if(position == 1) {
             intervalSelection = 14;
         } else if(position == 2){
             intervalSelection = 28;
         } else if(position == 3){
             intervalSelection = 28 * 2;
-        } else if(position == 3){
+        } else if(position == 4){
             intervalSelection = 28 * 6;
         }
 

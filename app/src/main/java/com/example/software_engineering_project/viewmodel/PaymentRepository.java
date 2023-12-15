@@ -113,4 +113,43 @@ public class PaymentRepository {
             }
         });
     }
+
+    public void deletePayment(Payment payment, Context context) {
+            // Perform the API call to delete the group grocery on the server
+            Call<Void> call = paymentService.deletePayment(payment.getId());
+            call.enqueue(new Callback<Void>() {
+
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        // Get updated Group Groceries from backend to show it in frontend
+                        fetchPayments();
+                        System.out.println("Deletion of Payment successful");
+                        ToastUtil.makeToast("Removed: " + payment.getName(), context);
+                    } else {
+                        // If the server-side deletion is not successful, handle accordingly
+                        // For example, show an error message
+                        fetchPayments();
+
+                        System.out.println(response.code());
+                        System.out.println("Failed to delete payment on the server");
+
+                        System.out.println(response.body().toString());
+
+                        String errorMessage = "Failed to delete payment on the server";
+                        ToastUtil.makeToast("Deletion failed", context);
+                        // Handle the error message appropriately
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    // Handle the failure of the API call (e.g., network issues)
+                    String errorMessage = "Failed to delete payment. Check your network connection.";
+                    ToastUtil.makeToast("Deletion failed", context);
+                    // Handle the error message appropriately
+                }
+
+            });
+        };
 }

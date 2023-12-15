@@ -14,6 +14,7 @@ import static org.junit.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.controller.groceries.FragmentGroceryListController;
 
 @RunWith(RobolectricTestRunner.class)
 public class ActivityMainScreenControllerTest {

@@ -1,4 +1,4 @@
-package com.example.software_engineering_project.controller;
+package com.example.software_engineering_project.controller.budget;
 
 import android.content.Context;
 import android.os.Bundle;
