@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
@@ -33,6 +34,7 @@ public class FragmentCleaningPlanListDetailController extends Fragment {
     private static Context context;
     private static ListView listView;
     private CleaningTemplate cleaningTemplate;
+    private TextView description;
     private View fragmentView;
 
     public FragmentCleaningPlanListDetailController(){
@@ -69,6 +71,7 @@ public class FragmentCleaningPlanListDetailController extends Fragment {
 
     private void loadScreenElements() {
 
+        description = fragmentView.findViewById(R.id.descriptionCleaningPlanListDetail);
         listView = fragmentView.findViewById(R.id.cleaningPlanListDetail);
 
     }
