@@ -98,7 +98,7 @@ public class FragmentBudgetDetailScreenController extends Fragment {
                 .observe((LifecycleOwner) context, affectedPaymentParticipations -> {
                     if (affectedPaymentParticipations != null) {
                         for (PaymentParticipation p : affectedPaymentParticipations) {
-                            p.setIsPaid(true);
+                            p.setPaid();
                             paymentParticipationRepository.update(p, context);
                         }
                         ToastUtil.makeToast("Paid " + name, context);
