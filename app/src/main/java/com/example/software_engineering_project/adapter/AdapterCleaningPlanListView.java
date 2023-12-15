@@ -2,6 +2,7 @@ package com.example.software_engineering_project.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.icu.text.SimpleDateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,9 @@ import androidx.lifecycle.LifecycleOwner;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.controller.cleanings.FragmentCleaningPlanListController;
+import com.example.software_engineering_project.entity.Cleaning;
 import com.example.software_engineering_project.entity.CleaningTemplate;
+import com.example.software_engineering_project.viewmodel.CleaningRepository;
 
 import java.util.List;
 

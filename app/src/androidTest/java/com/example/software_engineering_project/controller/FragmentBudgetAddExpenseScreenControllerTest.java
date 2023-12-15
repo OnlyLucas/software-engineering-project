@@ -11,6 +11,8 @@ import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.controller.budget.FragmentBudgetAddExpenseScreenController;
+import com.example.software_engineering_project.controller.budget.FragmentBudgetMainController;
 
 import org.junit.Before;
 import org.junit.Rule;
