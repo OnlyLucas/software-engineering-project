@@ -31,6 +31,11 @@ import java.util.TooManyListenersException;
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentCleaningPlanAddController #newInstance} factory method to
  * create an instance of this fragment.
+ *
+ * Fragment controller for adding cleaning plans.
+ * This fragment allows users to add new cleaning plans, providing details such as name, description,
+ * date range, and cleaning interval.
+ *
  */
 public class FragmentCleaningPlanAddController extends Fragment implements AdapterView.OnItemSelectedListener {
 
@@ -46,11 +51,19 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
 
 
 
-
+    /**
+     * Handles the save button click event.
+     * Calls the checkInputsAndSave method to validate inputs and save the cleaning plan.
+     */
     public static void handleSaveClicked() {
         checkInputsAndSave();
     }
 
+    /**
+     * Checks the input fields and saves the cleaning plan if inputs are valid.
+     *
+     * @return True if the cleaning plan is saved successfully, false otherwise.
+     */
     private static boolean checkInputsAndSave() {
 
         // get the inputs
@@ -93,6 +106,7 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
         spinner.setSelection(0);
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -104,6 +118,14 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
         return fragmentView;
     }
 
+    /**
+     * Called when an item in the spinner is selected.
+     *
+     * @param parent   The AdapterView where the selection happened.
+     * @param view     The view within the AdapterView that was clicked.
+     * @param position The position of the view in the adapter.
+     * @param id       The row id of the item that is selected.
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
@@ -123,6 +145,11 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
 
     }
 
+    /**
+     * Called when nothing is selected in the spinner.
+     *
+     * @param parent The AdapterView where the selection happened.
+     */
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
