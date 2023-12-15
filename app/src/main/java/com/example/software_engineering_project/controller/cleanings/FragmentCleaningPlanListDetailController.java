@@ -66,7 +66,7 @@ public class FragmentCleaningPlanListDetailController extends Fragment {
     public static void uncheckItem(int position) {
         Cleaning cleaning = uncompletedCleaningsLiveData.getValue().get(position);
         cleaning.setCompleted();
-        cleaningRepository.upadateCleaning(cleaning, context);
+        cleaningRepository.updateCleaning(cleaning, context);
     }
 
     /**

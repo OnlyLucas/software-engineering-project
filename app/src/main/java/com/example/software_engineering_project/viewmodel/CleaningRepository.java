@@ -93,7 +93,7 @@ public class CleaningRepository {
         });
     }
 
-    public void upadateCleaning(Cleaning cleaning, Context context) {
+    public void updateCleaning(Cleaning cleaning, Context context) {
         // Perform the API call to update group grocery asynchronously
         Call<Cleaning> call = cleaningService.updateCleaning(cleaning.getId(), cleaning);
         call.enqueue(new Callback<Cleaning>() {

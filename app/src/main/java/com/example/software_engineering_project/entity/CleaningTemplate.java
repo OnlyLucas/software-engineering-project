@@ -24,7 +24,7 @@ public class CleaningTemplate {
     private Set<Cleaning> cleanings;
 
     public CleaningTemplate() {
-        //defaul constructor
+        //default constructor
     }
 
     public CleaningTemplate(String name, String description, Date startDate, Date endDate,
@@ -34,7 +34,6 @@ public class CleaningTemplate {
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
-        //TODO Change DB keyword interval
         this.interval = interval;
         this.createdByUser = UserViewModel.getCurrentAppUser().getValue();
         this.createdAt = new Timestamp(System.currentTimeMillis());
