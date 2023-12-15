@@ -17,6 +17,10 @@ import com.example.software_engineering_project.R;
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentCleaningPlanController #newInstance} factory method to
  * create an instance of this fragment.
+ *
+ * Fragment controller for managing cleaning plans.
+ * This fragment allows users to view a list of existing cleaning plans,
+ * add new cleaning plans, and navigate between different cleaning plan views.
  */
 public class FragmentCleaningPlanController extends Fragment {
 
@@ -27,6 +31,14 @@ public class FragmentCleaningPlanController extends Fragment {
     private ImageView addCleaningPlan, saveCleaningPlan;
 
 
+    /**
+     * Called when the fragment is created.
+     *
+     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
+     * @return The root view of the fragment.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

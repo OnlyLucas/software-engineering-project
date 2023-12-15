@@ -22,6 +22,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Custom adapter for displaying the first layer of the budget list, where each item represents a payment.
+ * This adapter is designed to work with the AdapterBudgetListFirstLayer layout.
+ *
+ * The adapter provides functionality to display a list of payments in a specified format in the first layer.
+ *
+ * Additionally, the getView method is responsible for inflating the layout, populating it with payment details,
+ * and customizing the layout based on the Payment details such as name, payer, amount, and date.
+ */
 public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
 
     private Context context;
@@ -29,7 +38,12 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
     private ImageView removeExpense;
     private TextView expenseAmount, expenseDate, expenseDescription, expensePayer;
 
-
+    /**
+     * Creates a new AdapterBudgetListFirstLayer.
+     *
+     * @param context The context in which the adapter is being used.
+     * @param items   The List containing payments to be displayed in the first layer.
+     */
     public AdapterBudgetListFirstLayer(Context context, List<Payment> items) {
 
         super(context, R.layout.adapter_budget_list_view_first_layer, items);
@@ -38,6 +52,14 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
 
     }
 
+    /**
+     * Get the view that displays the data at the specified position in the data set.
+     *
+     * @param position    The position of the item within the adapter's data set.
+     * @param convertView The old view to reuse, if possible.
+     * @param parent      The parent that this view will eventually be attached to.
+     * @return The view corresponding to the data at the specified position.
+     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @Nullable ViewGroup parent) {
@@ -60,12 +82,14 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
             Timestamp timestamp = currentPayment.getCreatedAt();
             Date date = new Date(timestamp.getTime());
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
-            SimpleDateFormat monthNameFormat = new SimpleDateFormat("MMMM");
+            SimpleDateFormat monthNameFormat = new SimpleDateFormat("MMM");
+            SimpleDateFormat yearFormat = new SimpleDateFormat("yy");
             String monthName = monthNameFormat.format(date);
             String formattedDate = dateFormat.format(date);
+            String yearName = yearFormat.format(date);
 
             // Set the formatted
-            expenseDate.setText(formattedDate + " " + monthName);
+            expenseDate.setText(formattedDate + " " + monthName + " " + yearName);
 
             addButtons(position);
 

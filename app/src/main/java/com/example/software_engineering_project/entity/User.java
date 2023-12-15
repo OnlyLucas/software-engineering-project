@@ -13,10 +13,23 @@ public class User {
     private String username;
     private String firstName;
     private String lastName;
+    private String password;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
 
     private Boolean isActive;
+
+    public User(){
+        //default constructor
+    }
+
+    public User(String firstName, String lastName, String eMail, String hashedPassword) {
+        //TODO handle password
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = eMail;
+        this.password = hashedPassword;
+    }
 
     public UUID getId() {
         return id;

@@ -28,6 +28,14 @@ public class FragmentBudgetMainController extends Fragment {
     private View fragmentView;
 
 
+    /**
+     * Called to have the fragment instantiate its user interface view.
+     *
+     * @param inflater           The LayoutInflater object that can be used to inflate views.
+     * @param container          If non-null, this is the parent view that the fragment's UI will be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
+     * @return The root view for the fragment's UI.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

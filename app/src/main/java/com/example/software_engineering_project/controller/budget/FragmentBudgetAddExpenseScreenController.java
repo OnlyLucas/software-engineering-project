@@ -45,32 +45,45 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
     private View fragmentView, fragmentViewHeader;
 
 
+    /**
+     * Adds a user to the list of selected users for the expense.
+     *
+     * @param user The user to be added.
+     */
     public static void addUser(User user) {
         selectedUsers.add(user);
     }
 
+    /**
+     * Removes a user from the list of selected users for the expense.
+     *
+     * @param user The user to be removed.
+     */
     public static void deleteUser(User user) {
         selectedUsers.remove(user);
     }
 
+    /**
+     * Handles the save action by creating a new payment with the entered details.
+     * It calculates the payment amount for each selected user and creates the payment in the database.
+     */
     public static void handleSaveClicked() {
         Payment payment = getPaymentFromInputs();
         PaymentCreationData requestData = new PaymentCreationData(payment);
 
-        //TODO Auslagerung in Konstruktor; richtige Erfassung der ausgewählten Personen; Payment muss vor PaymentParticipation erstellt sein
         if (payment != null) {
-            System.out.println(selectedUsers.toString());
+            int numberSelectedUsers = selectedUsers.size();
+            if(numberSelectedUsers == 0){
+                ToastUtil.makeToast(context.getString(R.string.select_users), context);
+            } else {
+                for (User u : selectedUsers) {
+                        BigDecimal paymentAmountForUser = payment.getAmount().divide(new BigDecimal(numberSelectedUsers), RoundingMode.HALF_UP);
 
-            for (User u : selectedUsers) {
-
-                //int amountSelected = listView.getCheckedItemCount();
-                BigDecimal paymentAmountForUser = payment.getAmount().divide(new BigDecimal(selectedUsers.size()), RoundingMode.HALF_UP);
-
-                // add users to requestData
-                requestData.getUserParticipations().put(u.getId(), paymentAmountForUser);
+                        // add users to requestData
+                        requestData.getUserParticipations().put(u.getId(), paymentAmountForUser);
+                }
+                paymentRepository.createPayment(requestData, context);
             }
-
-            paymentRepository.createPayment(requestData, context);
         }
     }
 
@@ -90,6 +103,8 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
                 ToastUtil.makeToast(context.getString(R.string._0_is_not_a_valid_expense_amount), context);
             } else if (reasonString.length() == 0) {
                 ToastUtil.makeToast(context.getString(R.string.enter_name_for_expense), context);
+            } else if (reasonString.length() > 15) {
+                ToastUtil.makeToast(context.getString(R.string.enter_shorter_reason), context);
             } else {
                 // add new payment to database
                 Payment payment = new Payment(expenseValue, reasonString);
@@ -109,6 +124,14 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
         return null;
     }
 
+    /**
+     * Overrides the onCreateView method to inflate the layout and set up the UI elements.
+     *
+     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container          The parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState The Bundle containing the fragment's previously saved state.
+     * @return The inflated View for the fragment.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

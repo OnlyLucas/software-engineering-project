@@ -18,37 +18,65 @@ import com.example.software_engineering_project.entity.Cleaning;
 import com.example.software_engineering_project.entity.CleaningTemplate;
 import com.example.software_engineering_project.viewmodel.CleaningRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentCleaningPlanListDetailController #newInstance} factory method to
  * create an instance of this fragment.
+ *
+ * Fragment for displaying details of a cleaning plan, including the list of upcoming cleanings.
  */
 public class FragmentCleaningPlanListDetailController extends Fragment {
 
     private static ArrayAdapter<Cleaning> adapter;
-    private static ArrayList<String> items = new ArrayList<>();
     private static CleaningRepository cleaningRepository;
     private static Context context;
     private static ListView listView;
+    private static LiveData<List<Cleaning>> uncompletedCleaningsLiveData;
     private CleaningTemplate cleaningTemplate;
     private TextView description;
     private View fragmentView;
 
+    /**
+     * Default constructor for the FragmentCleaningPlanListDetailController.
+     */
     public FragmentCleaningPlanListDetailController(){
 
         //default constructor
 
     }
 
+    /**
+     * Constructor for the FragmentCleaningPlanListDetailController that accepts a CleaningTemplate.
+     *
+     * @param cleaningTemplate The cleaning template for which to display details.
+     */
     public FragmentCleaningPlanListDetailController(CleaningTemplate cleaningTemplate){
 
         this.cleaningTemplate = cleaningTemplate;
 
     }
 
+    public static void removeItem(int position) {
+        Cleaning cleaning = uncompletedCleaningsLiveData.getValue().get(position);
+        cleaningRepository.deleteCleaning(cleaning, context);
+    }
+
+    public static void uncheckItem(int position) {
+        Cleaning cleaning = uncompletedCleaningsLiveData.getValue().get(position);
+        cleaning.setCompleted();
+        cleaningRepository.upadateCleaning(cleaning, context);
+    }
+
+    /**
+     * Called to create the view for this fragment.
+     *
+     * @param inflater           The LayoutInflater object that can be used to inflate views.
+     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
+     * @return The View for the fragment's UI, or null.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -57,10 +85,8 @@ public class FragmentCleaningPlanListDetailController extends Fragment {
         loadScreenElements();
         cleaningRepository = new CleaningRepository();
 
-        //TODO Get next Cleanings for CleaningTemplate
-        LiveData<List<Cleaning>> cleaningsLiveData = cleaningRepository.getUncompletedCleanings(cleaningTemplate.getId());
-
-        cleaningsLiveData.observe(getViewLifecycleOwner(), cleaningList -> {
+        uncompletedCleaningsLiveData = cleaningRepository.getUncompletedCleanings(cleaningTemplate.getId());
+        uncompletedCleaningsLiveData.observe(getViewLifecycleOwner(), cleaningList -> {
             adapter = new AdapterCleaningPlanListDetailView(context, cleaningList);
             listView.setAdapter(adapter);
         });

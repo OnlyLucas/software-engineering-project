@@ -83,43 +83,38 @@ public class CleaningTemplateRepository {
     }
 
     public void deleteCleaningTemplate(CleaningTemplate cleaningTemplate, Context context) {
-        try {
-            // Perform the API call to delete the group grocery on the server
-            Call<Void> call = cleaningTemplateService.deleteCleaningTemplate(cleaningTemplate.getId());
-            call.enqueue(new Callback<Void>() {
+        // Perform the API call to delete the group grocery on the server
+        Call<Void> call = cleaningTemplateService.deleteCleaningTemplate(cleaningTemplate.getId());
+        call.enqueue(new Callback<Void>() {
 
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-                    if (response.isSuccessful()) {
-                        // Get updated Group Groceries from backend to show it in frontend
-                        fetchCleaningTemplates();
-                        System.out.println("Deletion of Cleaning Template successful");
-                        ToastUtil.makeToast("Removed: " + cleaningTemplate.getName(), context);
-                    } else {
-                        // If the server-side deletion is not successful, handle accordingly
-                        // For example, show an error message
-                        fetchCleaningTemplates();
-                        System.out.println(response.code());
-                        System.out.println("Failed to delete cleaning template on the server");
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    // Get updated Group Groceries from backend to show it in frontend
+                    fetchCleaningTemplates();
+                    System.out.println("Deletion of Cleaning Template successful");
+                    ToastUtil.makeToast("Removed: " + cleaningTemplate.getName(), context);
+                } else {
+                    // If the server-side deletion is not successful, handle accordingly
+                    // For example, show an error message
+                    System.out.println(response.code());
+                    System.out.println("Failed to delete cleaning template on the server");
 
-                        String errorMessage = "Failed to delete cleaning template on the server";
-                        ToastUtil.makeToast("Deletion failed", context);
-                        // Handle the error message appropriately
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-                    // Handle the failure of the API call (e.g., network issues)
-                    String errorMessage = "Failed to delete cleaning template. Check your network connection.";
+                    String errorMessage = "Failed to delete cleaning template on the server";
                     ToastUtil.makeToast("Deletion failed", context);
                     // Handle the error message appropriately
                 }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                // Handle the failure of the API call (e.g., network issues)
+                String errorMessage = "Failed to delete cleaning template. Check your network connection.";
+                ToastUtil.makeToast("Deletion failed", context);
+                // Handle the error message appropriately
+            }
 
 
-            });
-        } catch (NullPointerException e) {
-            // Handle the case where groupGroceries or groupGroceries.getValue() is null
-        }
+        });
     }
 }

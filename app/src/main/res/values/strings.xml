@@ -78,4 +78,16 @@
     <string name="please_select_date_range">Please select a date range</string>
     <string name="done">done</string>
     <string name="delete">delete</string>
+    <string name="enter_shorter_name">Please enter shorter name</string>
+    <string name="enter_shorter_reason">Please enter shorter reason</string>
+    <string name="select_users">Please select user(s)</string>
+    <string name="enter_description_for_cleaning_plan">Please enter a description</string>
+    <string name="enter_shorter_description">Please enter shorter description</string>
+    <string name="no_past_date_allowed">No past date(s) allowed</string>
+    <string name="weekly">Weekly</string>
+    <string name="bi_weekly">Bi-weekly</string>
+    <string name="monthly">Monthly</string>
+    <string name="bi_monthly">Bi-monthly</string>
+    <string name="half_yearly">Half-yearly</string>
+    <string name="please_select_valid_date_range">Please select a valid date range</string>
 </resources>
