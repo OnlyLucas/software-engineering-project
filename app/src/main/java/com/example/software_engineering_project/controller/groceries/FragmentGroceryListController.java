@@ -56,7 +56,6 @@ public class FragmentGroceryListController extends Fragment {
         groceryRepository = new GroceryRepository();
         uncompletedGroceryLiveData = groceryRepository.getUncompletedGroupGroceries();
 
-        // TODO maybe wont update, as list is altered, not exchanged
         uncompletedGroceryLiveData.observe(getViewLifecycleOwner(), groceryList -> {
             adapter = new AdapterGroceryListListView(getActivity(), groceryList);
             listView.setAdapter(adapter);

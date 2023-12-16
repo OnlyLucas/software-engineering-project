@@ -68,7 +68,6 @@ public class FragmentBudgetMainController extends Fragment {
             budgetHeadline.setText(R.string.add_new_expense);
         });
 
-        //TODO: Implement save method to button and create button here
         saveExpense.setOnClickListener(view -> FragmentBudgetAddExpenseScreenController.handleSaveClicked());
 
     }
