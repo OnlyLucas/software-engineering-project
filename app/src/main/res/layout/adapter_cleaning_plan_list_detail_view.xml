@@ -41,8 +41,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/nameCleaner"
-                android:layout_marginLeft="18sp"
+                android:layout_toLeftOf="@id/doneCleaning"
+                android:layout_marginRight="18sp"
                 android:textColor="@color/black"
                 android:textSize="17sp" />
 
