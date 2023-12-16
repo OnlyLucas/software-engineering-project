@@ -35,7 +35,7 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
     private Context context;
     private ImageView remove;
     private List<CleaningTemplate> list;
-    private TextView name, nextCleaningDate, number;
+    private TextView name, description, nextCleaningDate, number;
 
 
     // The ListViewAdapter Constructor
@@ -81,6 +81,7 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
 
             number.setText(position + 1 + ".");
             name.setText(cleaningTemplate.getName());
+            description.setText(cleaningTemplate.getDescription());
 
             CleaningRepository cleaningRepository = new CleaningRepository();
             cleaningRepository.getUncompletedCleanings(cleaningTemplate.getId()).observe((LifecycleOwner) context, cleanings -> {
@@ -115,9 +116,10 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
 
     private void loadScreenElements(View convertView) {
 
+        description = convertView.findViewById(R.id.descriptionCleaningPlan);
         name = convertView.findViewById(R.id.nameCleaningPlan);
-        number = convertView.findViewById(R.id.numberCleaningPlan);
         nextCleaningDate = convertView.findViewById(R.id.nextCleaningDate);
+        number = convertView.findViewById(R.id.numberCleaningPlan);
         remove = convertView.findViewById(R.id.removeCleaningPlan);
 
     }
