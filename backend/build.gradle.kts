@@ -30,6 +30,7 @@ dependencies {
 	// https://mvnrepository.com/artifact/com.mysql/mysql-connector-j
 	implementation("com.mysql:mysql-connector-j:8.2.0")
 	implementation("org.springframework.boot:spring-boot-starter-log4j2:3.1.5")
+	implementation("org.mindrot:jbcrypt:0.4")
 }
 
 tasks.withType<Test> {

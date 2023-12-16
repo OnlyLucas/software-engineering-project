@@ -1,7 +1,9 @@
 package com.flatfusion.backend.controllers;
 
+import com.flatfusion.backend.entities.UserCreateEntity;
 import com.flatfusion.backend.entities.UserEntity;
 import com.flatfusion.backend.repositories.UserEntityRepository;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,5 +50,40 @@ public class UserRESTController extends RESTController<UserEntity>{
     @GetMapping("/group/{groupId}")
     public List<UserEntity> getUsersByGroupId(@PathVariable("groupId") UUID groupId) {
         return repository.findByGroupId(groupId);
+    }
+
+    //TODO Add Post Mapping
+//    @Transactional
+//    @PostMapping
+//    public ResponseEntity<UserEntity> create(@RequestBody UserCreateEntity createUserDTO) {
+//
+//        // Convert the saved user entity to UserResponseDTO and return it in the response
+//        UserEntity userResponseDTO = convertCreateUserDTOToEntity(createUserDTO);
+//
+//        // Save the new user entity to the repository
+//        repository.save(userResponseDTO);
+//
+//        return new ResponseEntity<>(userResponseDTO, HttpStatus.CREATED);
+//    }
+
+    // Helper methods to convert DTOs to entities and vice versa
+    private UserEntity convertCreateUserDTOToEntity(UserCreateEntity createUser) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(UUID.randomUUID());
+        userEntity.setEmail(createUser.getEmail());
+        userEntity.setFirstName(createUser.getFirstName());
+        userEntity.setLastName(createUser.getLastName());
+        userEntity.setCreatedAt(createUser.getCreatedAt());
+
+        // Set the password securely using a strong hashing algorithm
+        String hashedPassword = hashPassword(createUser.getPassword());
+        userEntity.setPassword(hashedPassword);
+
+        return userEntity;
+    }
+
+    // Placeholder for password hashing logic
+    private String hashPassword(String plainTextPassword) {
+        return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
     }
 }
