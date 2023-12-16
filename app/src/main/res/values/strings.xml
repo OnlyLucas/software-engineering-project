@@ -90,4 +90,11 @@
     <string name="bi_monthly">Bi-monthly</string>
     <string name="half_yearly">Half-yearly</string>
     <string name="please_select_valid_date_range">Please select a valid date range</string>
+    <string name="enter_valid_first_name">Please enter valid first name</string>
+    <string name="enter_valid_last_name">Please enter valid last name\n</string>
+    <string name="enter_valid_mail">Please enter valid email</string>
+    <string name="enter_password">Please enter password</string>
+    <string name="enter_shorter_first_name">Please enter shorter first name</string>
+    <string name="enter_shorter_last_name">Please enter shorter last name</string>
+    <string name="enter_shorter_password">Please enter shorter password</string>
 </resources>

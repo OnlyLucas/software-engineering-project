@@ -3,6 +3,7 @@ package com.example.software_engineering_project.controller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,6 +12,7 @@ import com.example.software_engineering_project.R;
 public class ActivityLoginScreenController extends AppCompatActivity {
 
     private Button loginButton, registerButtonLogin;
+    private EditText loginEmail, loginPassword;
 
 
     @Override
@@ -27,6 +29,8 @@ public class ActivityLoginScreenController extends AppCompatActivity {
 
         loginButton = findViewById(R.id.loginButton);
         registerButtonLogin = findViewById(R.id.registerButtonLogin);
+        loginEmail = findViewById(R.id.loginMail);
+        loginPassword = findViewById(R.id.loginPassword);
 
     }
 
@@ -34,7 +38,10 @@ public class ActivityLoginScreenController extends AppCompatActivity {
 
         loginButton.setOnClickListener(view -> {
             Intent mainScreen = new Intent(ActivityLoginScreenController.this, ActivityMainScreenController.class);
-            startActivity(mainScreen);
+            boolean checkInputs = checkInputs();
+            if(checkInputs) {
+                startActivity(mainScreen);
+            }
         });
 
         registerButtonLogin.setOnClickListener(view -> {
@@ -42,6 +49,15 @@ public class ActivityLoginScreenController extends AppCompatActivity {
             startActivity(registerScreen);
         });
 
+    }
+
+    private boolean checkInputs() {
+        String mail = loginEmail.getText().toString();
+        String password = loginPassword.getText().toString();
+
+        //TODO Backend logic
+
+        return true;
     }
 
 }
