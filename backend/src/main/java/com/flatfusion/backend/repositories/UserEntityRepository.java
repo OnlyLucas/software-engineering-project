@@ -23,4 +23,6 @@ public interface UserEntityRepository extends JpaRepository<UserEntity, UUID> {
 
     @Query("SELECT u FROM UserEntity u JOIN GroupMembershipEntity gm ON u.id = gm.user.id WHERE gm.group.id = :groupId")
     List<UserEntity> findByGroupId(@Param("groupId") UUID groupId);
+
+    UserEntity findByEmail(String email);
 }

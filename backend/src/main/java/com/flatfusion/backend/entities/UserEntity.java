@@ -19,7 +19,7 @@ public class UserEntity implements EntityInterface{
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
     @Basic
-    @Column(name = "email", nullable = false, length = 255)
+    @Column(name = "email", nullable = false, length = 255, unique = true)
     private String email;
     @Basic
     @Column(name = "username", nullable = true, length = 255)
