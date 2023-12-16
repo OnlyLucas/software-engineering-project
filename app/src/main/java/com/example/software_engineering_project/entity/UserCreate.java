@@ -7,17 +7,31 @@ import java.util.Objects;
 import java.util.UUID;
 import java.sql.Timestamp;
 
-public class User {
+public class UserCreate {
     private UUID id;
     private String email;
     private String username;
     private String firstName;
     private String lastName;
+    private String password;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
-
     private Boolean isActive;
 
+    public UserCreate(){
+        //default constructor
+    }
+
+    public UserCreate(String firstName, String lastName, String eMail, String password) {
+        this.id = UUID.randomUUID();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = eMail;
+        this.password = password;
+        long currentTimeMillis = System.currentTimeMillis();
+        this.createdAt = new Timestamp(currentTimeMillis);
+        this.isActive = true;
+    }
 
     public UUID getId() {
         return id;
@@ -57,6 +71,14 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Timestamp getCreatedAt() {
@@ -101,23 +123,24 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(email, user.email) && Objects.equals(username, user.username) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(createdAt, user.createdAt) && Objects.equals(isActive, user.isActive);
+        UserCreate user = (UserCreate) o;
+        return Objects.equals(id, user.id) && Objects.equals(email, user.email) && Objects.equals(username, user.username) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(password, user.password) && Objects.equals(createdAt, user.createdAt) && Objects.equals(isActive, user.isActive);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, username, firstName, lastName, createdAt, isActive);
+        return Objects.hash(id, email, username, firstName, lastName, password, createdAt, isActive);
     }
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserCreate{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", password='" + password + '\'' +
                 ", createdAt=" + createdAt +
                 ", isActive=" + isActive +
                 '}';

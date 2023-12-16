@@ -7,10 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.entity.User;
-import com.example.software_engineering_project.util.PasswordHashUtil;
+import com.example.software_engineering_project.entity.UserCreate;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.viewmodel.UserRepository;
 
@@ -59,41 +57,53 @@ public class ActivityRegisterScreenController extends AppCompatActivity {
         String password = passwordRegister.getText().toString();
 
         // Check if firstName contains only letters
-        if (!isValidName(firstName)) {
-            ToastUtil.makeToast("Please enter valid first name", context);
-            return; // Stop further processing
+        if (!isValidName(firstName) || firstName.length() == 0) {
+            ToastUtil.makeToast(getString(R.string.enter_valid_first_name), context);
+            return;
+        }
+
+        if (firstName.length() > 20) {
+            ToastUtil.makeToast(getString(R.string.enter_shorter_first_name), context);
+            return;
         }
 
         // Check if lastName contains only letters
-        if (!isValidName(lastName)) {
-            ToastUtil.makeToast("Please enter valid last name", context);
-            return; // Stop further processing
+        if (!isValidName(lastName) || lastName.length() == 0) {
+            ToastUtil.makeToast(getString(R.string.enter_valid_last_name), context);
+            return;
+        }
+
+        if (lastName.length() > 20) {
+            ToastUtil.makeToast(getString(R.string.enter_shorter_last_name), context);
+            return;
         }
 
         // Check if eMail has a standard email format
-        if (!isValidEmail(eMail)) {
-            ToastUtil.makeToast("Please enter valid email", context);
-            return; // Stop further processing
+        if (!isValidEmail(eMail) || eMail.length() > 30) {
+            ToastUtil.makeToast(getString(R.string.enter_valid_mail), context);
+            return;
         }
 
-        // Hash the password
-        String hashedPassword = PasswordHashUtil.hashPassword(password);
-
-        // Check if hashing was successful
-        if (hashedPassword != null) {
-            // TODO create new User
-            User user = new User(firstName, lastName, eMail, hashedPassword);
-            addItem(user);
-
-            ToastUtil.makeToast(getString(R.string.please_login_with_your_created_credentials), context);
-        } else {
-            // Handle the case where hashing failed
-            ToastUtil.makeToast("Error hashing password. Please try again.", context);
+        if (password.length() == 0){
+            ToastUtil.makeToast(getString(R.string.enter_password), context);
+            return;
         }
+
+        if (password.length() > 25) {
+            ToastUtil.makeToast(getString(R.string.enter_shorter_password), context);
+            return;
+        }
+
+        // TODO create new User
+        UserCreate user = new UserCreate(firstName, lastName, eMail, password);
+        addItem(user);
+
+        ToastUtil.makeToast(getString(R.string.please_login_with_your_created_credentials), context);
+
 
     }
 
-    private void addItem(User user) {
+    private void addItem(UserCreate user) {
         userRepository.insertUser(user, context);
     }
 
