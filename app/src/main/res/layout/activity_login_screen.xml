@@ -82,6 +82,7 @@
                     android:textStyle="bold"/>
 
                 <EditText
+                    android:id="@+id/loginMail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
@@ -105,6 +106,7 @@
                     app:passwordToggleEnabled="true">
 
                     <EditText
+                        android:id="@+id/loginPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
