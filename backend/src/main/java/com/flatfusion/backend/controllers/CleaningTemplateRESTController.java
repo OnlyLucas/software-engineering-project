@@ -2,13 +2,11 @@ package com.flatfusion.backend.controllers;
 
 import com.flatfusion.backend.entities.*;
 import com.flatfusion.backend.repositories.*;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import java.math.BigDecimal;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.*;
@@ -99,7 +97,7 @@ public class CleaningTemplateRESTController extends RESTController<CleaningTempl
         }
 
         //create cleanings and save in dn
-        List<CleaningEntity> newCleanings = createCleaningEntities(groupUsers, group, cleaningTemplate, startDate, endDate, interval);
+        Set<CleaningEntity> newCleanings = createCleaningEntities(groupUsers, group, cleaningTemplate, startDate, endDate, interval);
 
         cleaningRepository.saveAll(newCleanings);
         logger.info("CleaningTemplate and cleanings created: " + cleaningTemplate);
@@ -108,16 +106,15 @@ public class CleaningTemplateRESTController extends RESTController<CleaningTempl
         return new ResponseEntity<>(cleaningTemplate, HttpStatus.CREATED);
     }
 
-    private List<CleaningEntity> createCleaningEntities(List<UserEntity> groupUsers, GroupEntity group, CleaningTemplateEntity cleaningTemplate, Date startDate, Date endDate, Integer interval){
+    private Set<CleaningEntity> createCleaningEntities(List<UserEntity> groupUsers, GroupEntity group, CleaningTemplateEntity cleaningTemplate, Date startDate, Date endDate, Integer interval){
         UserEntity cleaningUser;
-        List<CleaningEntity> newCleanings = new ArrayList<>();
+        Set<CleaningEntity> newCleanings = new HashSet<>();
         LocalDate localEndDate = endDate.toLocalDate();
         LocalDate localCleaningDate = startDate.toLocalDate();
 
         //make order of the users random
         Collections.shuffle(groupUsers);
         ListIterator<UserEntity> groupUsersIterator = groupUsers.listIterator();
-
 
         int i = 1;
 
