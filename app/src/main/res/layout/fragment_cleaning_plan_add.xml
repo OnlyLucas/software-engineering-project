@@ -31,6 +31,7 @@
         android:layout_below="@id/enterDescriptionCleaningPlan"
         android:layout_marginBottom="10dp"
         android:backgroundTint="@color/primary"
+        android:text="@string/select_date_range"
         android:textColor="@color/black"
         app:icon="@drawable/calender_icon"
         app:iconTint="@color/black"/>

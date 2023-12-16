@@ -20,6 +20,8 @@ import com.example.software_engineering_project.entity.CleaningTemplate;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.viewmodel.CleaningTemplateRepository;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.datepicker.CalendarConstraints;
+import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
 import java.util.ArrayList;
@@ -218,7 +220,9 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
 
     private void showDatePickerDialog() {
 
-        MaterialDatePicker<Pair<Long, Long>> materialDatePicker = MaterialDatePicker.Builder.dateRangePicker().setTitleText("Select Date").build();
+        CalendarConstraints.Builder calendarConstraints= new CalendarConstraints.Builder();
+        calendarConstraints.setValidator(DateValidatorPointForward.now());
+        MaterialDatePicker<Pair<Long, Long>> materialDatePicker = MaterialDatePicker.Builder.dateRangePicker().setTitleText(R.string.select_date_range).build();
         materialDatePicker.show(requireActivity().getSupportFragmentManager(), "TAG");
 
         materialDatePicker.addOnPositiveButtonClickListener(selection -> {
