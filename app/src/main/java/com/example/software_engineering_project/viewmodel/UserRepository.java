@@ -9,6 +9,7 @@ import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.dataservice.UserService;
 import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.entity.User;
+import com.example.software_engineering_project.entity.UserCreate;
 import com.example.software_engineering_project.util.ToastUtil;
 
 import java.util.List;
@@ -20,12 +21,12 @@ import retrofit2.Response;
 
 public class UserRepository {
 
-    private UserService service;
+    private UserService userService;
 
     private MutableLiveData<List<User>> currentUsers = new MutableLiveData<>();
 
     public UserRepository(){
-        service = RetrofitClient.getInstance().create(UserService.class);
+        userService = RetrofitClient.getInstance().create(UserService.class);
 
         getUsers();
     }
@@ -34,7 +35,7 @@ public class UserRepository {
         return currentUsers;
     }
     public void updateEmail(User user, Map<String, String> map, Context context){
-        Call<User> call = service.partialUpdateEntity(user.getId(), map);
+        Call<User> call = userService.partialUpdateEntity(user.getId(), map);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -59,7 +60,7 @@ public class UserRepository {
     public void getUsers() {
         // Perform the API call to get users asynchronously
         Group group = UserViewModel.getCurrentGroup().getValue();
-        Call<List<User>> call = service.getUsers(group.getId());
+        Call<List<User>> call = userService.getUsers(group.getId());
         call.enqueue(new Callback<List<User>>(){
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
@@ -82,7 +83,26 @@ public class UserRepository {
         });
     }
 
-    public void insertUser(User user, Context context) {
-        //TODO
+    public void insertUser(UserCreate user, Context context) {
+        // Perform the API call to insert a new group grocery
+        Call<User> call = userService.createUser(user);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response.isSuccessful()){
+                    // show toast of success
+                    ToastUtil.makeToast("Registered " + user.getFirstName(), context);
+                } else {
+                    ToastUtil.makeToast("Error while adding new user " + user.getFirstName(), context);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                ToastUtil.makeToast("Error while adding new user " + user.getFirstName(), context);
+                // Handle the failure if needed
+                // For example, show an error message
+            }
+        });
     }
 }
