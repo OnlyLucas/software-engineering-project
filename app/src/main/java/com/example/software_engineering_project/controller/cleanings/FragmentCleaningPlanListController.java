@@ -18,7 +18,6 @@ import com.example.software_engineering_project.adapter.AdapterCleaningPlanListV
 import com.example.software_engineering_project.entity.CleaningTemplate;
 import com.example.software_engineering_project.viewmodel.CleaningTemplateRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,7 +32,6 @@ import java.util.List;
 public class FragmentCleaningPlanListController extends Fragment {
 
     private static ArrayAdapter<CleaningTemplate> adapter;
-    private static ArrayList<String> items = new ArrayList<>();
     private static CleaningTemplateRepository cleaningTemplateRepository;
     private static Context context;
     private static ListView listView;
@@ -49,7 +47,6 @@ public class FragmentCleaningPlanListController extends Fragment {
      * @throws IndexOutOfBoundsException If the specified position is out of the range of the cleaning template list.
      */
     public static void removeItem(int i) {
-        //TODO UI update when item deleted
         CleaningTemplate cleaningTemplate = currentCleaningTemplatesLiveData.getValue().get(i);
         cleaningTemplateRepository.deleteCleaningTemplate(cleaningTemplate, context);
     }
@@ -68,7 +65,6 @@ public class FragmentCleaningPlanListController extends Fragment {
 
         cleaningTemplateRepository = new CleaningTemplateRepository();
 
-        CleaningTemplateRepository cleaningTemplateRepository = new CleaningTemplateRepository();
         currentCleaningTemplatesLiveData = cleaningTemplateRepository.getCurrentCleaningTemplates();
 
         currentCleaningTemplatesLiveData.observe(getViewLifecycleOwner(), currentCleaningTemplates -> {
