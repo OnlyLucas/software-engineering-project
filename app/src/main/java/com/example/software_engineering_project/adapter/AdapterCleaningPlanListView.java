@@ -32,15 +32,12 @@ import java.util.List;
  */
 public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> {
 
+    private static CleaningRepository cleaningRepository;
     private Context context;
     private ImageView remove;
     private List<CleaningTemplate> list;
     private TextView name, description, nextCleaningDate, number;
 
-
-    // The ListViewAdapter Constructor
-    // @param context: the Context from the MainActivity
-    // @param items: The list of items in our Grocery List
     /**
      * The constructor for the AdapterCleaningPlanListView.
      *
@@ -51,6 +48,7 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
 
         super(context, R.layout.adapter_cleaning_plan_list_view, items);
         this.context = context;
+        cleaningRepository = new CleaningRepository();
         list = items;
 
     }
@@ -83,7 +81,6 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
             name.setText(cleaningTemplate.getName());
             description.setText(cleaningTemplate.getDescription());
 
-            CleaningRepository cleaningRepository = new CleaningRepository();
             cleaningRepository.getUncompletedCleanings(cleaningTemplate.getId()).observe((LifecycleOwner) context, cleanings -> {
                 if (cleanings != null && !cleanings.isEmpty()) {
                     Cleaning nextCleaning = cleanings.get(0);
