@@ -83,8 +83,7 @@ public class FragmentCleaningPlanController extends Fragment {
 
     private void loadScreenElements() {
 
-        addCleaningPlan = fragmentView.findViewById(R.id.addCleaningPlan);
-        goBackCleaningPlan = fragmentView.findViewById(R.id.goBackCleaningPlan);
+        addCleaningPlan = fragmentView.findViewById(R.id.addCleaningPlan);goBackCleaningPlan = fragmentView.findViewById(R.id.goBackCleaningPlan);
         saveCleaningPlan = fragmentView.findViewById(R.id.saveCleaningPlan);
 
     }

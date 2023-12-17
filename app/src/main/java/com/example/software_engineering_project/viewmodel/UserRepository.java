@@ -129,7 +129,7 @@ public class UserRepository {
             public void onResponse(Call<User> call, Response<User> response) {
                 if(response.isSuccessful()){
                     Log.i(TAG, "User registration successful");
-                    ToastUtil.makeToast(context.getString(R.string.registered) + user.getFirstName(), context);
+                    ToastUtil.makeToast(context.getString(R.string.registered_) + user.getFirstName(), context);
                 } else {
                     Log.e(TAG, "Error while adding new user");
                     ToastUtil.makeToast(context.getString(R.string.error_while_adding) + user.getFirstName(), context);

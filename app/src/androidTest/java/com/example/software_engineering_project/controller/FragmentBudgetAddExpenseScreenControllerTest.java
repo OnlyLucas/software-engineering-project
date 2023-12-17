@@ -5,9 +5,11 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.assertion.ViewAssertions;
 import androidx.test.espresso.intent.Intents;
 import androidx.test.espresso.intent.matcher.IntentMatchers;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.software_engineering_project.R;
@@ -19,8 +21,16 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static androidx.core.content.MimeTypeFilter.matches;
+import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static org.hamcrest.CoreMatchers.allOf;
+
+import android.view.View;
+import android.widget.Button;
 
 @RunWith(AndroidJUnit4.class)
 public class FragmentBudgetAddExpenseScreenControllerTest {
@@ -53,7 +63,6 @@ public class FragmentBudgetAddExpenseScreenControllerTest {
 
     @Test
     public void testAddExpense() {
-
         // Enter some data into the expense and reason fields
         Espresso.onView(withId(R.id.enterNewExpenseAmount)).perform(ViewActions.typeText("50"));
         Espresso.onView(withId(R.id.enterNewExpenseReason)).perform(ViewActions.typeText("Test expense"));
@@ -66,13 +75,22 @@ public class FragmentBudgetAddExpenseScreenControllerTest {
 
         // Perform any actions related to selecting users (if applicable)
 
+        // Scroll to make the saveExpense button visible
+        //Espresso.onView(withId(R.id.scrollView)).perform(ViewActions.scrollTo());
+
+        // Wait for some time to ensure the saveExpense button is visible
+        try {
+            Thread.sleep(1000); // You can adjust the waiting time as needed
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         // Click on the save button
-        //Espresso.onView(withId(R.id.saveExpense)).perform(click());
+        Espresso.onView(withId(R.id.saveExpense)).perform(click());
 
         // Verify that the paymentRepository.createPayment method is called
         // Note: You can check if a specific intent is sent instead of mocking
         Intents.intended(IntentMatchers.hasComponent(ActivityMainScreenController.class.getName()));
-
     }
 
 }

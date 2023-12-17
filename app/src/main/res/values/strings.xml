@@ -31,7 +31,6 @@
     <string name="removed">"Removed: "</string>
     <string name="added">"Added "</string>
     <string name="enter_an_item">Enter an item.</string>
-    <string name="unchecked">Unchecked :</string>
     <string name="edit">Edit</string>
     <string name="enter_new_e_mail">Enter new e-mail</string>
     <string name="confirm_new_e_mail">Confirm new e-mail</string>
@@ -42,10 +41,10 @@
     <string name="enter_new_password">Enter new password</string>
     <string name="confirm_new_password">Confirm new password</string>
     <string name="grocerylist">Grocery List</string>
-    <string name="grocery_nlist">Grocery\nList</string>
-    <string name="budget_n">Budget\n</string>
-    <string name="cleaning_nplan">Cleaning\nPlan</string>
-    <string name="settings_n">Settings\n</string>
+    <string name="grocery_n_list">Grocery\nList</string>
+    <string name="budget_n_">Budget\n</string>
+    <string name="cleaning_n_plan">Cleaning\nPlan</string>
+    <string name="settings_n_">Settings\n</string>
     <string name="select_date_range">Select Date Range</string>
     <string name="enter_description_here">Enter Description here</string>
     <string name="name">Name</string>
@@ -54,14 +53,14 @@
     <string name="new_e_mail_saved">New e-mail saved</string>
     <string name="changes_discarded">Changes discarded</string>
     <string name="new_password_saved">New password saved</string>
-    <string name="removed_toast">"Removed: "</string>
-    <string name="unchecked_toast">"Unchecked: "</string>
+    <string name="removedColon_">"Removed: "</string>
+    <string name="uncheckedColon_">"Unchecked: "</string>
     <string name="enter_an_item_toast">Enter an item.</string>
-    <string name="added_toast">"Added "</string>
+    <string name="added_">"Added "</string>
     <string name="no_negative_amount_allowed">No negative amount allowed</string>
     <string name="_0_is_not_a_valid_expense_amount">0 is not a valid expense amount</string>
     <string name="enter_name_for_expense">Enter name for expense</string>
-    <string name="empty_input_fields" />
+    <string name="empty_input_fields">\u0000</string>
     <string name="enter_number_for_expense">Enter number for expense</string>
     <string name="details">Details</string>
     <string name="add_new_expense">Add new Expense</string>
@@ -104,7 +103,7 @@
     <string name="deletion_failed">Deletion failed</string>
     <string name="error_while_unchecking">Error while unchecking</string>
     <string name="error_while_adding">Error while adding</string>
-    <string name="registered">"Registered "</string>
+    <string name="registered_">"Registered "</string>
     <string name="changed_mail_successfully">Changed mail successfully</string>
     <string name="error_changing_mail">Error while changing mail</string>
 </resources>
