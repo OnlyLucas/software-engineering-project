@@ -9,6 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.software_engineering_project.R;
 
+/**
+ * ActivityLoginScreenController handles the user interface for the login screen.
+ * It provides functionality for user login and navigation to the registration screen.
+ */
 public class ActivityLoginScreenController extends AppCompatActivity {
 
     private Button loginButton, registerButtonLogin;
@@ -25,6 +29,9 @@ public class ActivityLoginScreenController extends AppCompatActivity {
 
     }
 
+    /**
+     * Loads elements from the XML layout file.
+     */
     private void loadScreenElements() {
 
         loginButton = findViewById(R.id.loginButton);

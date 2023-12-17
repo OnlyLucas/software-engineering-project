@@ -32,6 +32,11 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentManageFlatShareController #newInstance} factory method to
  * create an instance of this fragment.
+ *
+ * FragmentManageFlatShareController is a fragment that allows users to manage members in a flat share group in the FlatFusion app.
+ * Users can view, add, and remove members from the flat share group using this fragment.
+ * It interacts with the UserRepository and GroupMembershipRepository to handle user and group membership operations.
+ *
  */
 public class FragmentManageFlatShareController extends Fragment {
 
@@ -48,6 +53,11 @@ public class FragmentManageFlatShareController extends Fragment {
     private View fragmentView;
 
 
+    /**
+     * Adds an item with the specified name to the list of flat share members.
+     *
+     * @param item The name of the item to be added.
+     */
     // function to add an item given its name.
     public static void addItem(String item) {
 
@@ -56,6 +66,11 @@ public class FragmentManageFlatShareController extends Fragment {
 
     }
 
+    /**
+     * Removes a flat share member at the specified index from the list.
+     *
+     * @param i The index of the member to be removed.
+     */
     // function to remove an item given its index in the grocery list.
     public static void removeItem(int i) {
 
@@ -66,6 +81,14 @@ public class FragmentManageFlatShareController extends Fragment {
 
     }
 
+    /**
+     * Inflates the layout for this fragment, initializes the UI elements, and adds click listeners to buttons.
+     *
+     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state.
+     * @return The inflated view for this fragment.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

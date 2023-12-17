@@ -7,6 +7,9 @@ import java.util.Objects;
 import java.util.UUID;
 import java.sql.Timestamp;
 
+/**
+ * Represents a user in the system.
+ */
 public class User {
     private UUID id;
     private String email;

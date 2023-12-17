@@ -15,6 +15,11 @@ import com.example.software_engineering_project.viewmodel.UserRepository;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * ActivityRegisterScreenController handles the user registration screen in the FlatFusion app.
+ * It allows users to input their registration details, including first name, last name, email, and password.
+ * The class performs input validation and communicates with the UserRepository to store new user data.
+ */
 public class ActivityRegisterScreenController extends AppCompatActivity {
 
     private Button cancelButtonRegister, registerButtonRegister;
@@ -50,6 +55,10 @@ public class ActivityRegisterScreenController extends AppCompatActivity {
 
     }
 
+    /**
+     * Checks the user inputs for validity and creates a new user if the inputs are valid.
+     * Displays appropriate toast messages for invalid inputs.
+     */
     private void checkInputs() {
         String firstName = firstNameRegister.getText().toString();
         String lastName = surnameRegister.getText().toString();

@@ -75,8 +75,13 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
 
             // Customize the layout based on the Payment details
             expenseDescription.setText(currentPayment.getName());
-            expensePayer.setText(currentPayment.getCreatedByUser().getFirstName() + " paid");
-            expenseAmount.setText(String.format(Locale.getDefault(), "- %s", currentPayment.getAmount()));
+            expensePayer.setText(currentPayment.getCreatedByUser().getFirstName() + " " + context.getString(R.string.paid) );
+            String amount = String.format(Locale.getDefault(), "- %.2f", currentPayment.getAmount());
+            // So far we only support euro as currency, but in this place a differentiation would be needed
+            if(currentPayment.getCurrencyCode().equals("EUR")){
+                amount = amount + "€";
+            }
+            expenseAmount.setText(amount);
 
             // Convert Timestamp to other date format
             Timestamp timestamp = currentPayment.getCreatedAt();
