@@ -15,6 +15,10 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
 
+/**
+ * Controller for handling RESTful endpoints related to payments.
+ * Provides endpoints to retrieve payments by group, as well as create payments with participations.
+ */
 @RestController
 @RequestMapping("/v1/payments")
 public class PaymentRESTController extends RESTController<PaymentEntity>{
@@ -27,11 +31,22 @@ public class PaymentRESTController extends RESTController<PaymentEntity>{
     @Autowired
     private PaymentParticipationEntityRepository paymentParticipationRepository;
 
+    /**
+     * Constructs a new PaymentRESTController with the specified repository.
+     *
+     * @param paymentRepository The repository for payment entities.
+     */
     @Autowired
     public PaymentRESTController(PaymentEntityRepository paymentRepository){
         super(paymentRepository);
     }
 
+    /**
+     * Retrieves payments by the ID of the group.
+     *
+     * @param id The ID of the group.
+     * @return A list of payments, or HttpStatus.NOT_FOUND if no data is found.
+     */
     @GetMapping("/group/{id}")
     public ResponseEntity<List<PaymentEntity>> getPaymentsByGroupId(@PathVariable UUID id){
         logger.info("Get Payments by group id:  " + id);
@@ -44,6 +59,12 @@ public class PaymentRESTController extends RESTController<PaymentEntity>{
         return new ResponseEntity<>(entities.get(), HttpStatus.OK);
     }
 
+    /**
+     * Creates a new payment with participations based on the provided request.
+     *
+     * @param request The payment creation request containing payment details and participant user IDs.
+     * @return The created payment entity, or HttpStatus.UNPROCESSABLE_ENTITY if the request is missing attributes.
+     */
     // Overriding method from superclass
     @Transactional
     @PostMapping("/create-with-participations")

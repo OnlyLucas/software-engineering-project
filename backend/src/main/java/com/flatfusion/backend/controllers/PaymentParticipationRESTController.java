@@ -14,6 +14,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Controller for handling RESTful endpoints related to payment participations.
+ * Provides endpoints to retrieve payment information grouped by user, including
+ * get payments, owe payments, get payment participations, and owe payment participations.
+ */
 @RestController
 @RequestMapping("/v1/payment-participations")
 public class PaymentParticipationRESTController extends RESTController<PaymentParticipationEntity>{
@@ -21,11 +26,23 @@ public class PaymentParticipationRESTController extends RESTController<PaymentPa
     @Autowired
     private PaymentParticipationEntityRepository paymentParticipationEntityRepository;
 
+    /**
+     * Constructs a new PaymentParticipationRESTController with the specified repository.
+     *
+     * @param repository The repository for payment participation entities.
+     */
     @Autowired
     public PaymentParticipationRESTController(PaymentParticipationEntityRepository repository){
         super(repository);
     }
 
+    /**
+     * Retrieves payments where the specified user is the recipient (gets payments) in the given group.
+     *
+     * @param groupId The ID of the group.
+     * @param userId  The ID of the user.
+     * @return A list of payments grouped by user, or HttpStatus.NOT_FOUND if no data is found.
+     */
     @GetMapping("/group/{groupId}/user/{userId}/get")
     public ResponseEntity<List<Object[]>> getGetPaymentsGroupedByUser(@PathVariable UUID groupId, @PathVariable UUID userId){
         logger.info("Get Payments get by group id:  " + groupId + " and user id: " + userId);
@@ -38,6 +55,13 @@ public class PaymentParticipationRESTController extends RESTController<PaymentPa
         return new ResponseEntity<>(entities.get(), HttpStatus.OK);
     }
 
+    /**
+     * Retrieves payments where the specified user owes payments in the given group.
+     *
+     * @param groupId The ID of the group.
+     * @param userId  The ID of the user.
+     * @return A list of payments grouped by user, or HttpStatus.NOT_FOUND if no data is found.
+     */
     @GetMapping("/group/{groupId}/user/{userId}/owe")
     public ResponseEntity<List<Object[]>> getOwePaymentsGroupedByUser(@PathVariable UUID groupId, @PathVariable UUID userId){
         logger.info("Get Payments owe by group id:  " + groupId + " and user id: " + userId);
@@ -50,6 +74,14 @@ public class PaymentParticipationRESTController extends RESTController<PaymentPa
         return new ResponseEntity<>(entities.get(), HttpStatus.OK);
     }
 
+    /**
+     * Retrieves payment participations where one user owes and another user gets in the given group.
+     *
+     * @param groupId   The ID of the group.
+     * @param userIdOwe The ID of the user who owes.
+     * @param userIdGet The ID of the user who gets.
+     * @return A list of payment participations, or HttpStatus.NOT_FOUND if no data is found.
+     */
     @GetMapping("/group/{groupId}/userOwe/{userIdOwe}/userGet/{userIdGet}")
     public ResponseEntity<List<PaymentParticipationEntity>> getGetPaymentParticipationsByUserIds(
             @PathVariable UUID groupId,
@@ -69,6 +101,14 @@ public class PaymentParticipationRESTController extends RESTController<PaymentPa
         return new ResponseEntity<>(paymentParticipations.get(), HttpStatus.OK);
     }
 
+    /**
+     * Retrieves payment participations where one user gets and another user owes in the given group.
+     *
+     * @param groupId   The ID of the group.
+     * @param userIdGet The ID of the user who gets.
+     * @param userIdOwe The ID of the user who owes.
+     * @return A list of payment participations, or HttpStatus.NOT_FOUND if no data is found.
+     */
     @GetMapping("/group/{groupId}/userGet/{userIdGet}/userOwe/{userIdOwe}")
     public ResponseEntity<List<PaymentParticipationEntity>> getOwePaymentParticipationsByUserIds(
             @PathVariable UUID groupId,

@@ -15,17 +15,33 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * REST controller for managing user-related operations.
+ */
 @RestController
 @RequestMapping("/v1/users")
 public class UserRESTController extends RESTController<UserEntity>{
     @Autowired
     private UserEntityRepository repository;
 
+    /**
+     * Constructor for the UserRESTController class.
+     *
+     * @param repository The repository for handling user entities.
+     */
     @Autowired
     public UserRESTController(UserEntityRepository repository) {
         super(repository);
     }
 
+    /**
+     * Handles partial updates for a user entity.
+     *
+     * @param userId  The unique identifier of the user entity to be updated.
+     * @param updates A map containing the fields to be updated along with their new values.
+     * @return HTTP.OK and the updated user entity if the update is successful.
+     *         HTTP.NOT_FOUND if the user entity with the given ID is not found.
+     */
     @Transactional
     @PatchMapping("/{userId}")
     public ResponseEntity<UserEntity> partialUpdateUser(@PathVariable UUID userId, @RequestBody Map<String, ?> updates) {
@@ -47,11 +63,24 @@ public class UserRESTController extends RESTController<UserEntity>{
         }
     }
 
+    /**
+     * Retrieves a list of users belonging to a specific group.
+     *
+     * @param groupId The unique identifier of the group for which users are to be retrieved.
+     * @return A list of user entities belonging to the specified group.
+     */
     @GetMapping("/group/{groupId}")
     public List<UserEntity> getUsersByGroupId(@PathVariable("groupId") UUID groupId) {
         return repository.findByGroupId(groupId);
     }
 
+    /**
+     * Retrieves a user entity by email.
+     *
+     * @param mail The email address of the user.
+     * @return HTTP.OK and the user entity if found.
+     *         HTTP.NOT_FOUND if no user entity is found with the specified email address.
+     */
     @GetMapping("/mail/{mail}")
     public ResponseEntity<UserEntity> getUserByMail(@PathVariable("mail") String mail) {
         UserEntity user = repository.findByEmail(mail);

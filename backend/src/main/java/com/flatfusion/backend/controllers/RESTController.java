@@ -13,15 +13,38 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * Generic REST controller providing basic CRUD operations for entities.
+ *
+ * @param <T> The type of entity managed by this controller.
+ */
 public class RESTController<T extends EntityInterface> {
 
+    /**
+     * The repository used for database operations on entities.
+     */
     protected final JpaRepository<T, UUID> repository;
+
+    /**
+     * The logger instance for logging messages.
+     */
     protected final Logger logger = LoggerFactory.getLogger(RESTController.class);
 
+    /**
+     * Constructs a new RESTController with the specified repository.
+     *
+     * @param repository The repository for entities of type T.
+     */
     public RESTController(JpaRepository<T, UUID> repository) {
         this.repository = repository;
     }
 
+    /**
+     * Creates a new entity using the provided JSON representation.
+     *
+     * @param entity The JSON representation of the entity.
+     * @return HTTP.CREATED and the created entity if successful.
+     */
     @Transactional
     @PostMapping
     public ResponseEntity<T> create(@RequestBody T entity) {
@@ -31,7 +54,13 @@ public class RESTController<T extends EntityInterface> {
         return new ResponseEntity<>(createdEntity, HttpStatus.CREATED);
     }
 
-
+    /**
+     * Retrieves an entity by its unique identifier.
+     *
+     * @param id      The unique identifier of the entity.
+     * @param request The incoming web request.
+     * @return HTTP.OK and the retrieved entity if found, HTTP.NOT_FOUND otherwise.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<T> getById(@PathVariable UUID id, WebRequest request){
 
@@ -45,12 +74,12 @@ public class RESTController<T extends EntityInterface> {
         return new ResponseEntity<>(entity.get(), HttpStatus.OK);
     }
 
-    /***
-     * This http endpoint is for updating existing database entities.
-     * If the given entity to update does not exist in the database, an HTTP.NotFound status will be returned.
-     * @param id UUID for the Entity
-     * @param updatedEntity JSON Representation of the Entity to be updated. The JSON will be mapped to the JAVA Entity.
-     * @return OK and the updated entity if the operation was successful. NOT_FOUND if the given entity is not found in the database.
+    /**
+     * Updates an existing entity with the provided JSON representation.
+     *
+     * @param id            The unique identifier of the entity to update.
+     * @param updatedEntity The JSON representation of the updated entity.
+     * @return HTTP.OK and the updated entity if successful, HTTP.NOT_FOUND if the entity does not exist.
      */
     @Transactional
     @PutMapping("/{id}")
@@ -70,6 +99,12 @@ public class RESTController<T extends EntityInterface> {
         }
     }
 
+    /**
+     * Deletes an entity by its unique identifier.
+     *
+     * @param id The unique identifier of the entity to delete.
+     * @return HTTP.NO_CONTENT if the deletion was successful, HTTP.NOT_FOUND if the entity does not exist.
+     */
     @Transactional
     @DeleteMapping("/{id}")
     public ResponseEntity<T> delete(@PathVariable UUID id) {
