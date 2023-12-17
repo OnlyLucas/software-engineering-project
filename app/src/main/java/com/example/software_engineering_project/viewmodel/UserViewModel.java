@@ -9,6 +9,11 @@ import com.example.software_engineering_project.entity.User;
 
 import java.util.UUID;
 
+/**
+ * The UserViewModel class is a subclass of Android's ViewModel class, responsible for managing and
+ * providing data related to the current user and group within the application. It utilizes LiveData
+ * to observe changes in user and group data.
+ */
 public class UserViewModel extends ViewModel {
 
     private MutableLiveData<User> userLiveData = new MutableLiveData<>();
@@ -30,6 +35,11 @@ public class UserViewModel extends ViewModel {
         userLiveData.setValue(user);
     }
 
+    /**
+     * Returns a LiveData object containing information about the default application user.
+     *
+     * @return MutableLiveData<User> The LiveData object containing information about the default application user.
+     */
     public static MutableLiveData<User> getCurrentAppUser() {
         User defaultUser = new User();
         defaultUser.setId(UUID.fromString("00000000-0000-0000-0000-000000000000"));
@@ -40,6 +50,11 @@ public class UserViewModel extends ViewModel {
         return currentUserLiveData;
     }
 
+    /**
+     * Returns a LiveData object containing information about the current group.
+     *
+     * @return MutableLiveData<Group> The LiveData object containing information about the current group.
+     */
     // TODO get real currentGroup
     public static MutableLiveData<Group> getCurrentGroup() {
         Group group = new Group();
@@ -49,10 +64,21 @@ public class UserViewModel extends ViewModel {
         return currentGroup;
     }
 
+    /**
+     * Sets the LiveData object containing information about the current group.
+     *
+     * @param currentGroup The LiveData object containing information about the current group.
+     */
     public static void setCurrentGroup(MutableLiveData<Group> currentGroup) {
         UserViewModel.currentGroup = currentGroup;
     }
 
+    /**
+     * Sets the current application user and checks if the user is part of the current group.
+     * If not, sets a new or empty current group.
+     *
+     * @param currentAppUser The User object representing the current application user.
+     */
     public static void setAppUser(User currentAppUser) {
         currentUserLiveData.setValue(currentAppUser);
 
