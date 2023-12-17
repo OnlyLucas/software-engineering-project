@@ -95,4 +95,5 @@
     <string name="enter_shorter_first_name">Please enter shorter first name</string>
     <string name="enter_shorter_last_name">Please enter shorter last name</string>
     <string name="enter_shorter_password">Please enter shorter password</string>
+    <string name="grocery_history">Grocery History</string>
 </resources>

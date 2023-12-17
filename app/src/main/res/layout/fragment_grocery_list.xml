@@ -22,17 +22,38 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:text="@string/grocerylist"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
+                <RelativeLayout
+                    android:id="@+id/headerGrocery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:alpha="0.7"
+                        android:paddingBottom="5dp"
+                        android:text="@string/grocerylist"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/historyGroceryList"
+                        android:layout_width="40sp"
+                        android:layout_height="40sp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="7sp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/history_icon"
+                        app:tint="@color/primary" />
+
+                </RelativeLayout>
 
                 <LinearLayout
+                    android:id="@+id/enterZone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/headerGrocery"
                     android:layout_marginBottom="20dp"
                     android:background="@color/navBar"
                     android:gravity="center_horizontal">
@@ -58,6 +79,7 @@
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/enterZone"
                     android:minHeight="200dp"
                     android:paddingBottom="20dp">
 

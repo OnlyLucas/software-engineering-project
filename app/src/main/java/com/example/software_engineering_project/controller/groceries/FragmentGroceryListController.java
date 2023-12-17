@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LiveData;
 
 import com.example.software_engineering_project.R;
@@ -35,7 +37,8 @@ public class FragmentGroceryListController extends Fragment {
     private static ArrayAdapter<GroupGrocery> adapter;
     private static Context context;
     private EditText input;
-    private ImageView enter;
+    private FragmentGroceryListHistoryController fragmentGroceryListHistoryController = new FragmentGroceryListHistoryController();
+    private ImageView enter, history;
     private View fragmentView;
 
     // function to remove an item given its index in the grocery list.
@@ -113,6 +116,10 @@ public class FragmentGroceryListController extends Fragment {
 
         });
 
+        history.setOnClickListener(view -> {
+            callFragment(fragmentGroceryListHistoryController);
+        });
+
     }
 
     // function to add an item given its name.
@@ -120,10 +127,20 @@ public class FragmentGroceryListController extends Fragment {
         groceryRepository.insertGroupGrocery(item, context);
     }
 
+    private void callFragment(Fragment fragment) {
+
+        FragmentManager fm = requireActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.replace(R.id.contentFragmentMainScreen, fragment);
+        transaction.commit();
+
+    }
+
     private void loadScreenElements() {
 
         enter = fragmentView.findViewById(R.id.enter);
         input = fragmentView.findViewById(R.id.input);
+        history = fragmentView.findViewById(R.id.historyGroceryList);
         listView = fragmentView.findViewById(R.id.groceryList);
 
     }
