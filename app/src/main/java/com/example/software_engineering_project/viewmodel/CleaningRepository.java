@@ -17,14 +17,28 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * The CleaningRepository class is responsible for managing interactions between the app's data
+ * and the CleaningService, which communicates with the server to perform CRUD operations on Cleanings.
+ * It uses Retrofit for network communication and LiveData for observing changes in the list of uncompleted cleanings.
+ */
 public class CleaningRepository {
     private CleaningService cleaningService;
     private MutableLiveData<List<Cleaning>> uncompletedCleanings = new MutableLiveData<>();
 
+    /**
+     * Default constructor for CleaningRepository. Initializes the CleaningService using RetrofitClient.
+     */
     public CleaningRepository(){
         cleaningService = RetrofitClient.getInstance().create(CleaningService.class);
     }
 
+    /**
+     * Fetches the list of uncompleted cleanings from the server asynchronously using the provided cleaning template ID.
+     * Updates the LiveData with the retrieved list upon a successful API response.
+     *
+     * @param id The UUID of the cleaning template to fetch uncompleted cleanings for.
+     */
     public void fetchUncompletedCleanings(UUID id) {
         // Perform the API call to get users asynchronously
         Call<List<Cleaning>> call = cleaningService.getUncompletedCleaningsForCleaningTemplate(id);
@@ -51,11 +65,24 @@ public class CleaningRepository {
         });
     }
 
+    /**
+     * Retrieves the LiveData object containing the list of uncompleted cleanings.
+     * Initiates the fetching of uncompleted cleanings to update the LiveData.
+     *
+     * @param id The UUID of the cleaning template to fetch uncompleted cleanings for.
+     * @return LiveData<List<Cleaning>> The LiveData object containing the list of uncompleted cleanings.
+     */
     public LiveData<List<Cleaning>> getUncompletedCleanings(UUID id) {
         fetchUncompletedCleanings(id);
         return uncompletedCleanings;
     }
 
+    /**
+     * Deletes a cleaning from the server and updates the list of uncompleted cleanings upon a successful deletion.
+     *
+     * @param cleaning The Cleaning object to be deleted.
+     * @param context The application context for displaying toasts and handling UI updates.
+     */
     public void deleteCleaning(Cleaning cleaning, Context context) {
         // Perform the API call to delete the group grocery on the server
         Call<Void> call = cleaningService.deleteCleaning(cleaning.getId());
@@ -93,6 +120,12 @@ public class CleaningRepository {
         });
     }
 
+    /**
+     * Updates a cleaning on the server and refreshes the list of uncompleted cleanings upon a successful update.
+     *
+     * @param cleaning The Cleaning object to be updated.
+     * @param context The application context for displaying toasts and handling UI updates.
+     */
     public void updateCleaning(Cleaning cleaning, Context context) {
         // Perform the API call to update group grocery asynchronously
         Call<Cleaning> call = cleaningService.updateCleaning(cleaning.getId(), cleaning);
