@@ -1,10 +1,12 @@
 package com.example.software_engineering_project.viewmodel;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.dataservice.CleaningTemplateService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.CleaningTemplate;
@@ -23,6 +25,7 @@ import retrofit2.Response;
  * It uses Retrofit for network communication and LiveData for observing changes in the list of current cleaning templates.
  */
 public class CleaningTemplateRepository {
+    private static final String TAG = CleaningTemplateRepository.class.getSimpleName();
     private CleaningTemplateService cleaningTemplateService;
     private MutableLiveData<List<CleaningTemplate>> currentCleaningTemplates = new MutableLiveData<>();
 
@@ -31,7 +34,6 @@ public class CleaningTemplateRepository {
      * and fetches the current list of cleaning templates from the server.
      */
     public CleaningTemplateRepository() {
-        // Initialize Retrofit service
         cleaningTemplateService = RetrofitClient.getInstance().create(CleaningTemplateService.class);
         fetchCleaningTemplates();
     }
@@ -45,24 +47,22 @@ public class CleaningTemplateRepository {
     public void createCleaningTemplate(CleaningTemplate cleaningTemplate, Context context) {
         Call<CleaningTemplate> call = cleaningTemplateService.createCleaningTemplateWithCleanings(cleaningTemplate);
         call.enqueue(new Callback<CleaningTemplate>() {
-            // TODO Add internationalization
             @Override
             public void onResponse(Call<CleaningTemplate> call, Response<CleaningTemplate> response) {
                 if(response.isSuccessful()){
-                    // show toast of success
-                    ToastUtil.makeToast("Added " + cleaningTemplate.getName(), context);
+                    Log.i(TAG, "Cleaning template creation successful");
+                    ToastUtil.makeToast(context.getString(R.string.added) + cleaningTemplate.getName(), context);
                     fetchCleaningTemplates();
                 } else {
-                    ToastUtil.makeToast("Error while adding  " + cleaningTemplate.getName(), context);
-                    fetchCleaningTemplates();
+                    Log.i(TAG, "Error while cleaning template creation");
+                    ToastUtil.makeToast(context.getString(R.string.error_while_adding) + cleaningTemplate.getName(), context);
                 }
             }
 
             @Override
             public void onFailure(Call<CleaningTemplate> call, Throwable t) {
-                ToastUtil.makeToast("Error while adding  " + cleaningTemplate.getName(), context);
-                // Handle the failure if needed
-                // For example, show an error message
+                Log.i(TAG, "Network error while cleaning template creation");
+                ToastUtil.makeToast(context.getString(R.string.error_while_adding) + cleaningTemplate.getName(), context);
             }
         });
     }
@@ -75,25 +75,54 @@ public class CleaningTemplateRepository {
 
         UUID currentGroupId = UserViewModel.getCurrentGroup().getValue().getId();
 
-        // Perform the API call to get users asynchronously
         Call<List<CleaningTemplate>> call = cleaningTemplateService.getCleaningTemplates(currentGroupId);
         call.enqueue(new Callback<List<CleaningTemplate>>(){
             @Override
             public void onResponse(Call<List<CleaningTemplate>> call, Response<List<CleaningTemplate>> response) {
                 if (response.isSuccessful()) {
+                    Log.i(TAG, "Cleaning template fetching successful");
                     List<CleaningTemplate> cleaningTemplates = response.body();
                     currentCleaningTemplates.setValue(cleaningTemplates);
-                    System.out.println("Cleaning template fetching successful");
                 } else {
-                    System.out.println("Error while fetching cleaning templates");
+                    Log.e(TAG, "Error while fetching cleaning templates");
                 }
             }
 
             @Override
             public void onFailure(Call<List<CleaningTemplate>> call, Throwable t) {
-                // Handle network failure
-                System.out.println("Network error while fetching cleaning templates");
+                Log.e(TAG, "Network error while fetching cleaning templates");
             }
+        });
+    }
+
+    /**
+     * Deletes a cleaning template from the server and updates the list of current cleaning templates upon success.
+     *
+     * @param cleaningTemplate The CleaningTemplate object to be deleted.
+     * @param context          The application context for displaying toasts and handling UI updates.
+     */
+    public void deleteCleaningTemplate(CleaningTemplate cleaningTemplate, Context context) {
+        Call<Void> call = cleaningTemplateService.deleteCleaningTemplate(cleaningTemplate.getId());
+        call.enqueue(new Callback<Void>() {
+
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, "Deletion of Cleaning Template successful");
+                    fetchCleaningTemplates();
+                    ToastUtil.makeToast(context.getString(R.string.removed) + cleaningTemplate.getName(), context);
+                } else {
+                    Log.e(TAG, "Failed to delete cleaning template on the server");
+                    ToastUtil.makeToast(context.getString(R.string.deletion_failed), context);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e(TAG, "Network error while deleting cleaning template");
+                ToastUtil.makeToast(context.getString(R.string.deletion_failed), context);
+            }
+
         });
     }
 
@@ -104,47 +133,5 @@ public class CleaningTemplateRepository {
      */
     public LiveData<List<CleaningTemplate>> getCurrentCleaningTemplates() {
         return currentCleaningTemplates;
-    }
-
-    /**
-     * Deletes a cleaning template from the server and updates the list of current cleaning templates upon success.
-     *
-     * @param cleaningTemplate The CleaningTemplate object to be deleted.
-     * @param context          The application context for displaying toasts and handling UI updates.
-     */
-    public void deleteCleaningTemplate(CleaningTemplate cleaningTemplate, Context context) {
-        // Perform the API call to delete the group grocery on the server
-        Call<Void> call = cleaningTemplateService.deleteCleaningTemplate(cleaningTemplate.getId());
-        call.enqueue(new Callback<Void>() {
-
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
-                    // Get updated Group Groceries from backend to show it in frontend
-                    fetchCleaningTemplates();
-                    System.out.println("Deletion of Cleaning Template successful");
-                    ToastUtil.makeToast("Removed: " + cleaningTemplate.getName(), context);
-                } else {
-                    // If the server-side deletion is not successful, handle accordingly
-                    // For example, show an error message
-                    System.out.println(response.code());
-                    System.out.println("Failed to delete cleaning template on the server");
-
-                    String errorMessage = "Failed to delete cleaning template on the server";
-                    ToastUtil.makeToast("Deletion failed", context);
-                    // Handle the error message appropriately
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                // Handle the failure of the API call (e.g., network issues)
-                String errorMessage = "Failed to delete cleaning template. Check your network connection.";
-                ToastUtil.makeToast("Deletion failed", context);
-                // Handle the error message appropriately
-            }
-
-
-        });
     }
 }

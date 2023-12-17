@@ -101,4 +101,10 @@
     <string name="confirm_password">Confirm password</string>
     <string name="add_flat_share">Add flat share</string>
     <string name="description_of_flat">Description of flat</string>
+    <string name="deletion_failed">Deletion failed</string>
+    <string name="error_while_unchecking">Error while unchecking</string>
+    <string name="error_while_adding">Error while adding</string>
+    <string name="registered">"Registered "</string>
+    <string name="changed_mail_successfully">Changed mail successfully</string>
+    <string name="error_changing_mail">Error while changing mail</string>
 </resources>

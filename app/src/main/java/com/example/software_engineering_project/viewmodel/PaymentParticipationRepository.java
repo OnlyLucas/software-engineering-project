@@ -1,6 +1,7 @@
 package com.example.software_engineering_project.viewmodel;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -23,44 +24,16 @@ import retrofit2.Response;
  */
 public class PaymentParticipationRepository {
 
+    private static final String TAG = PaymentParticipationRepository.class.getSimpleName();
     private MutableLiveData<List<Object[]>> getPaymentParticipationLiveData = new MutableLiveData<>();
     private MutableLiveData<List<Object[]>> owePaymentParticipationLiveData = new MutableLiveData<>();
     private MutableLiveData<List<PaymentParticipation>> getPaymentParticipationsByUserIds = new MutableLiveData<>();
     private MutableLiveData<List<PaymentParticipation>> owePaymentParticipationsByUserIds = new MutableLiveData<>();
-
     private PaymentParticipationService paymentParticipationService;
 
 
     public PaymentParticipationRepository() {
-        // Initialize Retrofit service
         paymentParticipationService = RetrofitClient.getInstance().create(PaymentParticipationService.class);
-
-    }
-
-    /**
-     * Creates a new payment participation and sends the request to the server.
-     *
-     * @param paymentParticipation The payment participation to be created.
-     * @param context              The application context for displaying toasts.
-     */
-    public void createPaymentParticipation(PaymentParticipation paymentParticipation, Context context) {
-        Call<PaymentParticipation> call = paymentParticipationService.createPaymentParticipation(paymentParticipation);
-        call.enqueue(new Callback<PaymentParticipation>() {
-            @Override
-            public void onResponse(Call<PaymentParticipation> call, Response<PaymentParticipation> response) {
-                if(response.isSuccessful()){
-                    // show toast of success
-                    ToastUtil.makeToast("Success", context);
-                } else {
-                    ToastUtil.makeToast("Error while adding payment participation ", context);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<PaymentParticipation> call, Throwable t) {
-                ToastUtil.makeToast("Error while adding payment participation", context);
-            }
-        });
     }
 
     /**
@@ -76,18 +49,17 @@ public class PaymentParticipationRepository {
             @Override
             public void onResponse(Call<List<Object[]>> call, Response<List<Object[]>> response) {
                 if(response.isSuccessful()){
-                    // show toast of success
+                    Log.i(TAG, "Get Payments fetching successful");
                     List<Object[]> paymentParticipations = response.body();
                     getPaymentParticipationLiveData.setValue(paymentParticipations);
-                    System.out.println("Get Payments fetching successful");
                 } else {
-                    System.out.println("Error while fetching Get Payments");
+                    Log.e(TAG, "Error while fetching Get Payments");
                 }
             }
 
             @Override
             public void onFailure(Call<List<Object[]>> call, Throwable t) {
-                System.out.println("Network error while fetching Get Payments");
+                Log.e(TAG, "Network error while fetching Get Payments");
             }
         });
     }
@@ -105,18 +77,17 @@ public class PaymentParticipationRepository {
             @Override
             public void onResponse(Call<List<Object[]>> call, Response<List<Object[]>> response) {
                 if(response.isSuccessful()){
-                    // show toast of success
+                    Log.i(TAG, "Owe Payments fetching successful");
                     List<Object[]> paymentParticipations = response.body();
                     owePaymentParticipationLiveData.setValue(paymentParticipations);
-                    System.out.println("Owe Payments fetching successful");
                 } else {
-                    System.out.println("Error while fetching Owe Payments");
+                    Log.e(TAG, "Error while fetching Owe Payments");
                 }
             }
 
             @Override
             public void onFailure(Call<List<Object[]>> call, Throwable t) {
-                System.out.println("Network error while fetching Owe Payments");
+                Log.e(TAG, "Network error while fetching Owe Payments");
             }
         });
     }
@@ -126,18 +97,17 @@ public class PaymentParticipationRepository {
             @Override
             public void onResponse(Call<List<PaymentParticipation>> call, Response<List<PaymentParticipation>> response) {
                 if(response.isSuccessful()){
-                    // show toast of success
+                    Log.i(TAG, "Get Payment Participation fetching successful");
                     List<PaymentParticipation> paymentParticipations = response.body();
                     getPaymentParticipationsByUserIds.setValue(paymentParticipations);
-                    System.out.println("Get Payment Participation fetching successful");
                 } else {
-                    System.out.println("Error while fetching Get Payment Participations");
+                    Log.e(TAG, "Error while fetching Get Payment Participations");
                 }
             }
 
             @Override
             public void onFailure(Call<List<PaymentParticipation>> call, Throwable t) {
-                System.out.println("Network error while fetching Get Payment Participations" + t);
+                Log.e(TAG, "Network error while fetching Get Payment Participations");
             }
         });
     }
@@ -148,18 +118,17 @@ public class PaymentParticipationRepository {
             @Override
             public void onResponse(Call<List<PaymentParticipation>> call, Response<List<PaymentParticipation>> response) {
                 if(response.isSuccessful()){
-                    // show toast of success
+                    Log.i(TAG, "Owe Payment Participation fetching successful");
                     List<PaymentParticipation> paymentParticipations = response.body();
                     owePaymentParticipationsByUserIds.setValue(paymentParticipations);
-                    System.out.println("Owe Payment Participation fetching successful");
                 } else {
-                    System.out.println("Error while fetching Owe Payment Participations");
+                    Log.e(TAG, "Error while fetching Owe Payment Participations");
                 }
             }
 
             @Override
             public void onFailure(Call<List<PaymentParticipation>> call, Throwable t) {
-                System.out.println("Network error while fetching Owe Payment Participations");
+                Log.e(TAG, "Network error while fetching Owe Payment Participations");
             }
         });
     }
@@ -169,14 +138,14 @@ public class PaymentParticipationRepository {
         return getPaymentParticipationLiveData;
     }
 
-    public LiveData<List<Object[]>> getOwePaymentsGroupedByUser(UUID groupId, UUID userId) {
-        fetchOwePaymentsGroupedByUser(groupId, userId);
-        return owePaymentParticipationLiveData;
-    }
-
     public LiveData<List<PaymentParticipation>> getGetPaymentParticipationsByUserIds(UUID groupId, UUID userIdOwe, UUID userIdGet) {
         fetchGetPaymentParticipationsByUserIds(groupId, userIdOwe, userIdGet);
         return getPaymentParticipationsByUserIds;
+    }
+
+    public LiveData<List<Object[]>> getOwePaymentsGroupedByUser(UUID groupId, UUID userId) {
+        fetchOwePaymentsGroupedByUser(groupId, userId);
+        return owePaymentParticipationLiveData;
     }
 
     public LiveData<List<PaymentParticipation>> getOwePaymentParticipationsByUserIds(UUID groupId, UUID userIdGet, UUID userIdOwe) {
@@ -195,21 +164,23 @@ public class PaymentParticipationRepository {
             @Override
             public void onResponse(Call<PaymentParticipation> call, Response<PaymentParticipation> response) {
                 if(response.isSuccessful()){
+                    Log.i(TAG, "Paying payment participation successful");
                     UUID userId = UserViewModel.getCurrentAppUser().getValue().getId();
                     UUID groupId = UserViewModel.getCurrentGroup().getValue().getId();
                     fetchGetPaymentsGroupedByUser(groupId, userId);
                     fetchOwePaymentsGroupedByUser(groupId, userId);
-                    // show toast of success
+                    // no toast needed as user only needs to get informed when all participations are paid
                 } else {
+                    Log.e(TAG, "Error while paying payment participation");
                     ToastUtil.makeToast("Error while paying  " + p.getUser().getFirstName(), context);
                 }
             }
 
             @Override
             public void onFailure(Call<PaymentParticipation> call, Throwable t) {
+                Log.e(TAG, "Network error while paying payment participation");
                 ToastUtil.makeToast("Error while paying  " + p.getUser().getFirstName(), context);
-                // Handle the failure if needed
-                // For example, show an error message
+
             }
         });
     }

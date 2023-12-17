@@ -1,10 +1,12 @@
 package com.example.software_engineering_project.viewmodel;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.dataservice.UserService;
 import com.example.software_engineering_project.entity.Group;
@@ -25,7 +27,7 @@ import retrofit2.Response;
  * It uses Retrofit for network communication and LiveData for observing changes in the list of current users.
  */
 public class UserRepository {
-
+    private static final String TAG = UserRepository.class.getSimpleName();
     private UserService userService;
     private MutableLiveData<List<User>> currentUsers = new MutableLiveData<>();
     private MutableLiveData<User> userByMail = new MutableLiveData<>();
@@ -36,104 +38,31 @@ public class UserRepository {
      */
     public UserRepository(){
         userService = RetrofitClient.getInstance().create(UserService.class);
-
-        getUsers();
-    }
-
-    /**
-     * Retrieves the LiveData object containing the list of current users.
-     *
-     * @return LiveData<List<User>> The LiveData object containing the list of current users.
-     */
-    public LiveData<List<User>> getCurrentUsers() {
-        return currentUsers;
-    }
-
-    /**
-     * Updates the email of a user on the server and shows a toast upon success or failure.
-     *
-     * @param user    The User object whose email needs to be updated.
-     * @param map     The map containing the new email.
-     * @param context The application context for displaying toasts and handling UI updates.
-     */
-    public void updateEmail(User user, Map<String, String> map, Context context){
-        Call<User> call = userService.partialUpdateEntity(user.getId(), map);
-        call.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if(response.isSuccessful()){
-                    System.out.println("Changed mail successfully");
-                    // show toast of success
-                    ToastUtil.makeToast("Changed mail successfully", context);
-                } else {
-                    ToastUtil.makeToast("Error while changing mail", context);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                ToastUtil.makeToast("Error while changing mail", context);
-                // Handle the failure if needed
-                // For example, show an error message
-            }
-        });
+        fetchUsers();
     }
 
     /**
      * Fetches the list of users from the server asynchronously.
      * Updates the LiveData with the retrieved list upon a successful API response.
      */
-    public void getUsers() {
-        // Perform the API call to get users asynchronously
+    public void fetchUsers() {
         Group group = UserViewModel.getCurrentGroup().getValue();
         Call<List<User>> call = userService.getUsers(group.getId());
         call.enqueue(new Callback<List<User>>(){
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
                 if (response.isSuccessful()) {
+                    Log.i(TAG, "User fetching successful");
                     List<User> users = response.body();
                     currentUsers.setValue(users);
-                    System.out.println("User fetching successful");
-                    // Handle the received users, e.g., update UI or store in a local database
                 } else {
-                    // Handle API error
-                    System.out.println("Error while fetching users");
+                    Log.e(TAG, "Error while fetching users");
                 }
             }
 
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
-                // Handle network failure
-                System.out.println("Network error while fetching users");
-            }
-        });
-    }
-
-    /**
-     * Inserts a new user on the server and shows a toast upon success or failure.
-     *
-     * @param user    The UserCreate object containing user information.
-     * @param context The application context for displaying toasts and handling UI updates.
-     */
-    public void insertUser(UserCreate user, Context context) {
-        // Perform the API call to insert a new group grocery
-        Call<User> call = userService.createUser(user);
-        call.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if(response.isSuccessful()){
-                    // show toast of success
-                    ToastUtil.makeToast("Registered " + user.getFirstName(), context);
-                } else {
-                    ToastUtil.makeToast("Error while adding new user " + user.getFirstName(), context);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                ToastUtil.makeToast("Error while adding new user " + user.getFirstName(), context);
-                // Handle the failure if needed
-                // For example, show an error message
+                Log.e(TAG, "Network error while fetching users");
             }
         });
     }
@@ -150,24 +79,30 @@ public class UserRepository {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
+                    Log.i(TAG, "User fetching by mail successful");
                     User user = response.body();
                     userByMail.setValue(user);
-                    getUsers();
-                    System.out.println("User fetching by mail successful");
-                    // Handle the received users, e.g., update UI or store in a local database
+                    fetchUsers();
                 } else {
-                    // Handle API error
-                    System.out.println("Error while fetching user by mail");
+                    Log.e(TAG,"Error while fetching user by mail");
                     userByMail.setValue(null);
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                // Handle network failure
-                System.out.println("Network error while fetching user by mail");
+                Log.e(TAG, "Network error while fetching user by mail");
             }
         });
+    }
+
+    /**
+     * Retrieves the LiveData object containing the list of current users.
+     *
+     * @return LiveData<List<User>> The LiveData object containing the list of current users.
+     */
+    public LiveData<List<User>> getCurrentUsers() {
+        return currentUsers;
     }
 
     /**
@@ -179,5 +114,62 @@ public class UserRepository {
     public LiveData<User> getUserByMail(String mail) {
         fetchUserByMail(mail);
         return userByMail;
+    }
+
+    /**
+     * Inserts a new user on the server and shows a toast upon success or failure.
+     *
+     * @param user    The UserCreate object containing user information.
+     * @param context The application context for displaying toasts and handling UI updates.
+     */
+    public void insertUser(UserCreate user, Context context) {
+        Call<User> call = userService.createUser(user);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response.isSuccessful()){
+                    Log.i(TAG, "User registration successful");
+                    ToastUtil.makeToast(context.getString(R.string.registered) + user.getFirstName(), context);
+                } else {
+                    Log.e(TAG, "Error while adding new user");
+                    ToastUtil.makeToast(context.getString(R.string.error_while_adding) + user.getFirstName(), context);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.e(TAG, "Network error while adding new user");
+                ToastUtil.makeToast(context.getString(R.string.error_while_adding) + user.getFirstName(), context);
+            }
+        });
+    }
+
+    /**
+     * Updates the email of a user on the server and shows a toast upon success or failure.
+     *
+     * @param user    The User object whose email needs to be updated.
+     * @param map     The map containing the new email.
+     * @param context The application context for displaying toasts and handling UI updates.
+     */
+    public void updateEmail(User user, Map<String, String> map, Context context){
+        Call<User> call = userService.partialUpdateEntity(user.getId(), map);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response.isSuccessful()){
+                    Log.i(TAG, "Changed mail successfully");
+                    ToastUtil.makeToast(context.getString(R.string.changed_mail_successfully), context);
+                } else {
+                    Log.e(TAG, "Error while changing mail");
+                    ToastUtil.makeToast(context.getString(R.string.error_changing_mail), context);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.e(TAG, "Network error while changing mail");
+                ToastUtil.makeToast(context.getString(R.string.error_changing_mail), context);
+            }
+        });
     }
 }

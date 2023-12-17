@@ -1,10 +1,12 @@
 package com.example.software_engineering_project.viewmodel;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.dataservice.GroupGroceryService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.GroupGrocery;
@@ -24,6 +26,7 @@ import retrofit2.Response;
  */
 public class GroceryRepository {
 
+    private static final String TAG = GroceryRepository.class.getSimpleName();
     private GroupGroceryService groceryService;
     private MutableLiveData<List<GroupGrocery>> uncompletedGroupGroceries = new MutableLiveData<>();
     private MutableLiveData<List<GroupGrocery>> completedGroupGroceries = new MutableLiveData<>();
@@ -33,10 +36,76 @@ public class GroceryRepository {
      * and fetches the group groceries immediately upon repository creation.
      */
     public GroceryRepository() {
-        // Initialize Retrofit service
         groceryService = RetrofitClient.getInstance().create(GroupGroceryService.class);
-        // Fetch group groceries immediately upon repository creation
         fetchGroupGroceries();
+    }
+
+    /**
+     * Performs the API call to insert a new group grocery on the server and updates the list of uncompleted group groceries upon success.
+     *
+     * @param groupGrocery The GroupGrocery object to be inserted.
+     * @param context      The application context for displaying toasts and handling UI updates.
+     */
+    public void insertGroupGrocery(GroupGrocery groupGrocery, Context context) {
+        Call<GroupGrocery> call = groceryService.createGroupGrocery(groupGrocery);
+        call.enqueue(new Callback<GroupGrocery>() {
+            @Override
+            public void onResponse(Call<GroupGrocery> call, Response<GroupGrocery> response) {
+                if(response.isSuccessful()){
+                    Log.i(TAG, "Group grocery creation successful");
+                    uncompletedGroupGroceries.getValue().add(groupGrocery);
+                    fetchUncompletedGroupGroceries();
+                    ToastUtil.makeToast(context.getString(R.string.added) + groupGrocery.getName(), context);
+                } else {
+                    Log.e(TAG, "Error while group grocery creation");
+                    ToastUtil.makeToast(context.getString(R.string.error_while_adding) + groupGrocery.getName(), context);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GroupGrocery> call, Throwable t) {
+                Log.e(TAG, "Network error while group grocery creation");
+                ToastUtil.makeToast(context.getString(R.string.error_while_adding) + groupGrocery.getName(), context);
+            }
+        });
+    }
+
+    /**
+     * Performs the API call to delete a group grocery on the server and updates the list of uncompleted group groceries upon success.
+     *
+     * @param groupGrocery The GroupGrocery object to be deleted.
+     * @param context      The application context for displaying toasts and handling UI updates.
+     */
+    public void deleteGroupGrocery(GroupGrocery groupGrocery, Context context) {
+        Call<Void> call = groceryService.deleteGroupGrocery(groupGrocery.getId());
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, "Deletion of Group Grocery successful");
+                    fetchGroupGroceries();
+                    ToastUtil.makeToast(context.getString(R.string.removed) + groupGrocery.getName(), context);
+                } else {
+                    Log.e(TAG,"Failed to delete group grocery on the server");
+                    ToastUtil.makeToast(context.getString(R.string.deletion_failed), context);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e(TAG,"Network error while deleting group grocery");
+                ToastUtil.makeToast(context.getString(R.string.deletion_failed), context);
+            }
+
+        });
+    }
+
+    /**
+     * Fetches both uncompleted and completed group groceries from the server.
+     */
+    public void fetchGroupGroceries(){
+        fetchUncompletedGroupGroceries();
+        fetchCompletedGroupGroceries();
     }
 
     /**
@@ -58,171 +127,79 @@ public class GroceryRepository {
     }
 
     /**
-     * Performs the API call to insert a new group grocery on the server and updates the list of uncompleted group groceries upon success.
-     *
-     * @param groupGrocery The GroupGrocery object to be inserted.
-     * @param context      The application context for displaying toasts and handling UI updates.
-     */
-    public void insertGroupGrocery(GroupGrocery groupGrocery, Context context) {
-        // Perform the API call to insert a new group grocery
-        Call<GroupGrocery> call = groceryService.createGroupGrocery(groupGrocery);
-        call.enqueue(new Callback<GroupGrocery>() {
-            @Override
-            public void onResponse(Call<GroupGrocery> call, Response<GroupGrocery> response) {
-                if(response.isSuccessful()){
-                    uncompletedGroupGroceries.getValue().add(groupGrocery);
-                    fetchUncompletedGroupGroceries();
-                    // show toast of success
-                    ToastUtil.makeToast("Added " + groupGrocery.getName(), context);
-                } else {
-                    ToastUtil.makeToast("Error while adding  " + groupGrocery.getName(), context);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<GroupGrocery> call, Throwable t) {
-                ToastUtil.makeToast("Error while adding  " + groupGrocery.getName(), context);
-                // Handle the failure if needed
-                // For example, show an error message
-            }
-        });
-    }
-
-    /**
-     * Performs the API call to delete a group grocery on the server and updates the list of uncompleted group groceries upon success.
-     *
-     * @param groupGrocery The GroupGrocery object to be deleted.
-     * @param context      The application context for displaying toasts and handling UI updates.
-     */
-    public void deleteGroupGrocery(GroupGrocery groupGrocery, Context context) {
-        try {
-            // Perform the API call to delete the group grocery on the server
-            Call<Void> call = groceryService.deleteGroupGrocery(groupGrocery.getId());
-            call.enqueue(new Callback<Void>() {
-
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-                    if (response.isSuccessful()) {
-                        // Get updated Group Groceries from backend to show it in frontend
-                        fetchGroupGroceries();
-                        System.out.println("Deletion of Group Grocery successful");
-                        ToastUtil.makeToast("Removed: " + groupGrocery.getName(), context);
-                    } else {
-                        // If the server-side deletion is not successful, handle accordingly
-                        // For example, show an error message
-                        System.out.println(response.code());
-                        System.out.println("Failed to delete group grocery on the server");
-
-                        System.out.println(response.body().toString());
-
-                        String errorMessage = "Failed to delete group grocery on the server";
-                        ToastUtil.makeToast("Deletion failed", context);
-                        // Handle the error message appropriately
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-                    // Handle the failure of the API call (e.g., network issues)
-                    String errorMessage = "Failed to delete group grocery. Check your network connection.";
-                    ToastUtil.makeToast("Deletion failed", context);
-                    // Handle the error message appropriately
-                }
-
-
-            });
-        } catch (NullPointerException e) {
-            // Handle the case where groupGroceries or groupGroceries.getValue() is null
-        }
-    }
-
-    /**
      * Performs the API call to update a group grocery on the server and refreshes the list of group groceries upon success.
      *
      * @param grocery The GroupGrocery object to be updated.
      * @param context The application context for displaying toasts and handling UI updates.
      */
     public void updateGroupGrocery(GroupGrocery grocery, Context context) {
-        // Perform the API call to update group grocery asynchronously
         Call<GroupGrocery> call = groceryService.updateGroupGrocery(grocery.getId(), grocery);
         call.enqueue(new Callback<GroupGrocery>() {
             @Override
             public void onResponse(Call<GroupGrocery> call, Response<GroupGrocery> response) {
                 if(response.isSuccessful()){
+                    Log.i(TAG, "Unchecking group grocery successful");
                     fetchGroupGroceries();
-                    // show toast of success
-                    ToastUtil.makeToast("Unchecked " + grocery.getName(), context);
+                    ToastUtil.makeToast(context.getString(R.string.unchecked) + grocery.getName(), context);
                 } else {
-                    ToastUtil.makeToast("Error while unchecking  " + grocery.getName(), context);
+                    Log.e(TAG, "Error while unchecking group grocery");
+                    ToastUtil.makeToast(context.getString(R.string.error_while_unchecking) + grocery.getName(), context);
                 }
             }
 
             @Override
             public void onFailure(Call<GroupGrocery> call, Throwable t) {
-                ToastUtil.makeToast("Error while unchecking  " + grocery.getName(), context);
-                // Handle the failure if needed
-                // For example, show an error message
+                Log.e(TAG, "Network error while unchecking group grocery");
+                ToastUtil.makeToast(context.getString(R.string.error_while_unchecking) + grocery.getName(), context);
             }
         });
     }
 
     private void fetchUncompletedGroupGroceries() {
-        // Get current group id
         UUID currentGroupId = UserViewModel.getCurrentGroup().getValue().getId();
 
-        // Perform the API call to fetch group groceries asynchronously
         Call<List<GroupGrocery>> call = groceryService.getUncompletedGroupGroceries(currentGroupId);
         call.enqueue(new Callback<List<GroupGrocery>>() {
             @Override
             public void onResponse(Call<List<GroupGrocery>> call, Response<List<GroupGrocery>> response) {
                 if (response.isSuccessful()) {
+                    Log.i(TAG, "Uncompleted group groceries fetching successful");
                     List<GroupGrocery> groceries = response.body();
                     uncompletedGroupGroceries.setValue(groceries);
-                    System.out.println("Uncompleted group groceries fetching successful");
                 } else {
-                System.out.println("Error while fetching uncompleted group groceries");
-            }
-            }
-
-            @Override
-            public void onFailure(Call<List<GroupGrocery>> call, Throwable t) {
-                // Handle the failure if needed
-                // For example, show an error message
-                System.out.println("Failure while fetching uncompleted group groceries" + t);
-            }
-        });
-    }
-
-    private void fetchCompletedGroupGroceries() {
-        // Get current group id
-        UUID currentGroupId = UserViewModel.getCurrentGroup().getValue().getId();
-
-        // Perform the API call to fetch group groceries asynchronously
-        Call<List<GroupGrocery>> call = groceryService.getCompletedGroupGroceries(currentGroupId);
-        call.enqueue(new Callback<List<GroupGrocery>>() {
-            @Override
-            public void onResponse(Call<List<GroupGrocery>> call, Response<List<GroupGrocery>> response) {
-                if (response.isSuccessful()) {
-                    List<GroupGrocery> groceries = response.body();
-                    completedGroupGroceries.setValue(groceries);
-                    System.out.println("Group Grocery fetching successful");
+                    Log.e(TAG,"Error while fetching uncompleted group groceries");
                 }
             }
 
             @Override
             public void onFailure(Call<List<GroupGrocery>> call, Throwable t) {
-                // Handle the failure if needed
-                // For example, show an error message
-                System.out.println("Failure while fetching completed group groceries" + t);
+                Log.e(TAG,"Network error while fetching uncompleted group groceries");
+
             }
         });
     }
 
-    /**
-     * Fetches both uncompleted and completed group groceries from the server.
-     */
-    public void fetchGroupGroceries(){
-        fetchUncompletedGroupGroceries();
-        fetchCompletedGroupGroceries();
+    private void fetchCompletedGroupGroceries() {
+        UUID currentGroupId = UserViewModel.getCurrentGroup().getValue().getId();
+
+        Call<List<GroupGrocery>> call = groceryService.getCompletedGroupGroceries(currentGroupId);
+        call.enqueue(new Callback<List<GroupGrocery>>() {
+            @Override
+            public void onResponse(Call<List<GroupGrocery>> call, Response<List<GroupGrocery>> response) {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, "Completed group groceries fetching successful");
+                    List<GroupGrocery> groceries = response.body();
+                    completedGroupGroceries.setValue(groceries);
+                } else {
+                    Log.e(TAG,"Error while fetching completed group groceries");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<GroupGrocery>> call, Throwable t) {
+                Log.e(TAG,"Network error while fetching completed group groceries");
+            }
+        });
     }
+
 }

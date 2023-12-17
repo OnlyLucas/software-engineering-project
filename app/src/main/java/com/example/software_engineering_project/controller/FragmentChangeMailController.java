@@ -2,6 +2,7 @@ package com.example.software_engineering_project.controller;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ import java.util.Map;
  */
 public class FragmentChangeMailController extends Fragment {
 
+    private static final String TAG = FragmentChangeMailController.class.getSimpleName();
     static Context context;
     static UserRepository userRepository;
     private Button cancelChangeMail, saveChangeMail;
@@ -98,20 +100,16 @@ public class FragmentChangeMailController extends Fragment {
         User user = UserViewModel.getCurrentAppUser().getValue();
 
         if (user.getEmail().equals(currentMailString)) {
-
-            System.out.println(getString(R.string.correct_current_mail));
-
             if (newMailString.equals(confirmMailString)) {
-                System.out.println(getString(R.string.ready_to_persist_new_mail) + newMailString);
+                Log.i(TAG, getString(R.string.ready_to_persist_new_mail) + newMailString);
                 Map<String, String> map = new HashMap<>();
                 map.put(getString(R.string.email), newMailString);
                 userRepository.updateEmail(user, map, context);
-                ;
             } else {
-                System.out.println(getString(R.string.new_mails_not_matching));
+                ToastUtil.makeToast(getString(R.string.new_mails_not_matching), context);
             }
         } else {
-            System.out.println(getString(R.string.wrong_current_mail));
+            ToastUtil.makeToast(getString(R.string.wrong_current_mail), context);
         }
 
     }

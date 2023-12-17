@@ -3,6 +3,7 @@ package com.example.software_engineering_project.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.icu.text.SimpleDateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,7 @@ import java.util.List;
  * The getView method is overridden to inflate the layout, load screen elements, and set the content based on the CleaningTemplate object at the specified position in the data set. Additionally, it adds a listener for the remove button.
  */
 public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> {
-
+    private static final String TAG = AdapterCleaningPlanListView.class.getSimpleName();
     private static CleaningRepository cleaningRepository;
     private Context context;
     private ImageView remove;
@@ -88,7 +89,7 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
                     String formattedDate = dateFormat.format(nextCleaning.getDate());
                     nextCleaningDate.setText(formattedDate);
                 } else {
-                    System.out.println("Error to get date of next cleaning.");
+                    Log.e(TAG, "Error to get date of next cleaning.");
                 }
             });
 
