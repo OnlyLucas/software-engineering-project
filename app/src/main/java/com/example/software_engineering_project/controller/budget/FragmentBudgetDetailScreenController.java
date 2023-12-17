@@ -24,6 +24,7 @@ import com.example.software_engineering_project.viewmodel.UserViewModel;
 
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -151,12 +152,15 @@ public class FragmentBudgetDetailScreenController extends Fragment {
 
     private void getTotalGetOrOwe(Double getPayments, Double owePayments) {
         Double difference = getPayments - owePayments;
+        // So far we only support euro as currency, but in this place a differentiation would be needed
+        String differenceString = String.format(Locale.getDefault(), "%.2f", difference) + "€";
+
         if(difference == 0){
             totalCalculatedExpenses.setText("In total you do not owe or get any money.");
         } else if(difference > 0){
-            totalCalculatedExpenses.setText("You get back in total: " + difference);
+            totalCalculatedExpenses.setText("You get back in total: " + differenceString);
         } else{
-            totalCalculatedExpenses.setText("You owe in total: " + difference);
+            totalCalculatedExpenses.setText("You owe in total: " + differenceString);
         }
     }
 
@@ -170,7 +174,9 @@ public class FragmentBudgetDetailScreenController extends Fragment {
                         totalAmountGet = totalAmountGet + paymentAmount;
                     }
                 }
-                totalGetExpenses.setText("You get: " + totalAmountGet);
+                // So far we only support euro as currency, but in this place a differentiation would be needed
+                String totalAmountGetString = String.format(Locale.getDefault(), "%.2f", totalAmountGet) + "€";
+                totalGetExpenses.setText("You get: " + totalAmountGetString);
                 return  totalAmountGet;
             }
             return null;
@@ -179,6 +185,8 @@ public class FragmentBudgetDetailScreenController extends Fragment {
     private Double getTotalOwePayments(List<Object[]> list) {
         if (list != null) {
             Double totalAmountOwe = new Double(0);
+            // So far we only support euro as currency, but in this place a differentiation would be needed
+            String totalAmountOweString = String.format(Locale.getDefault(), "- %.2f", totalAmountOwe) + "€";
 
             for (Object[] object : list) {
                 if (object.length > 1 && object[1] instanceof Double) {
@@ -186,7 +194,7 @@ public class FragmentBudgetDetailScreenController extends Fragment {
                     totalAmountOwe = totalAmountOwe + paymentAmount;
                 }
             }
-            totalOweExpenses.setText("You owe: " + totalAmountOwe);
+            totalOweExpenses.setText("You owe: " + totalAmountOweString);
             return totalAmountOwe;
         }
         return null;

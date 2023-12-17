@@ -17,6 +17,7 @@ import com.example.software_engineering_project.controller.budget.FragmentBudget
 
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class AdapterBudgetDetailOwe extends ArrayAdapter<Object[]> {
 
@@ -51,7 +52,9 @@ public class AdapterBudgetDetailOwe extends ArrayAdapter<Object[]> {
             String name = (String) userMap.get("firstName");
 
             nameOfCreditor.setText(name);
-            amountOfCredit.setText(totalAmount.toString());
+            // So far we only support euro as currency, but in this place a differentiation would be needed
+            String amount = String.format(Locale.getDefault(), "- %.2f", totalAmount) + "€";
+            amountOfCredit.setText(amount);
             checkExpenseOwe.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
