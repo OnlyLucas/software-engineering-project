@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public interface GroupGroceryEntityRepository extends JpaRepository<GroupGroceryEntity, UUID> {
     @Query("SELECT g FROM GroupGroceryEntity g WHERE g.group.id = :groupId" +
-            " AND g.isCompleted = true ORDER BY g.createdAt DESC")
+            " AND g.isCompleted = true ORDER BY g.completedAt DESC")
     Optional<List<GroupGroceryEntity>> findCompletedByGroupId(@Param("groupId") UUID groupId);
 
     @Query("SELECT g FROM GroupGroceryEntity g WHERE g.group.id = :groupId" +
