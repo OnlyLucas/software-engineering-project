@@ -33,7 +33,7 @@
                 android:textColor="@color/black" />
 
             <Button
-                android:id="@+id/createFlatShareButton"
+                android:id="@+id/manageFlatShareButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/manage_flat_share"

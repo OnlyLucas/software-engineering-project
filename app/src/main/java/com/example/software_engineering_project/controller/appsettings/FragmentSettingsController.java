@@ -85,7 +85,7 @@ public class FragmentSettingsController extends Fragment {
 
         changeMailButton = fragmentView.findViewById(R.id.changeMailButton);
         changePasswordButton = fragmentView.findViewById(R.id.changePasswordButton);
-        createFlatShareButton = fragmentView.findViewById(R.id.createFlatShareButton);
+        createFlatShareButton = fragmentView.findViewById(R.id.manageFlatShareButton);
         logOutButton = fragmentView.findViewById(R.id.logOutButton);
 
     }

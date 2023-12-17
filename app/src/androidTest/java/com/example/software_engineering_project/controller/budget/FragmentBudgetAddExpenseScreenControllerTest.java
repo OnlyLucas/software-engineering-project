@@ -1,4 +1,4 @@
-package com.example.software_engineering_project.controller;
+package com.example.software_engineering_project.controller.budget;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -13,6 +13,7 @@ import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.controller.ActivityMainScreenController;
 import com.example.software_engineering_project.controller.budget.FragmentBudgetAddExpenseScreenController;
 import com.example.software_engineering_project.controller.budget.FragmentBudgetMainController;
 
