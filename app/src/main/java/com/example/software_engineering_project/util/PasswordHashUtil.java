@@ -12,10 +12,19 @@ import java.security.PrivateKey;
 import java.security.Signature;
 
 
+/**
+ * Utility class for hashing passwords using Android Keystore for key management.
+ */
 public class PasswordHashUtil {
     private static final String TAG = "PasswordHashUtil";
     private static final String KEYSTORE_ALIAS = "password_hash_key";
 
+    /**
+     * Hashes the given password using the Android Keystore for key management.
+     *
+     * @param password The password to be hashed.
+     * @return The hashed password as a Base64-encoded string, or null if an error occurs.
+     */
     public static String hashPassword(String password) {
         try {
             // Generate a key pair for signing
@@ -34,6 +43,12 @@ public class PasswordHashUtil {
         }
     }
 
+    /**
+     * Generates a key pair for signing using Android Keystore.
+     *
+     * @return The generated KeyPair.
+     * @throws Exception If an error occurs during key pair generation.
+     */
     private static KeyPair generateKeyPair() throws Exception {
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(
                 KeyProperties.KEY_ALGORITHM_EC, "AndroidKeyStore");
