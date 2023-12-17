@@ -14,7 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.adapter.AdapterManageFlatShareListView;
+import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
+import com.example.software_engineering_project.viewmodel.GroupMembershipRepository;
+import com.example.software_engineering_project.viewmodel.UserRepository;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +27,7 @@ import com.example.software_engineering_project.util.ToastUtil;
  */
 public class FragmentAddFlatShareController extends Fragment {
 
+    private static GroupRepository groupRepository;
     private Button cancelAddFlatShare, saveAddFlatShare;
     private Context context;
     private EditText descriptionAddFlatShare, nameAddFlatShare;
@@ -32,7 +37,8 @@ public class FragmentAddFlatShareController extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        //Load Frontend
+        groupRepository = new GroupRepository();
+
         fragmentView = inflater.inflate(R.layout.fragment_add_flat_share, container, false);
         context = requireActivity();
         loadScreenElements();
@@ -52,9 +58,38 @@ public class FragmentAddFlatShareController extends Fragment {
 
         saveAddFlatShare.setOnClickListener(view -> {
             FragmentManageFlatShareController fragment = new FragmentManageFlatShareController();
+            checkInputs();
             ToastUtil.makeToast(getString(R.string.saved), context);
             callFragment(fragment);
         });
+
+    }
+
+    private void checkInputs() {
+        String name = nameAddFlatShare.getText().toString();
+        String description = descriptionAddFlatShare.getText().toString();
+
+        if(name.length() == 0){
+            ToastUtil.makeToast(getString(R.string.enter_flat_share_name), context);
+            return;
+        }
+
+        if(name.length() > 20){
+            ToastUtil.makeToast(getString(R.string.enter_shorter_name), context);
+            return;
+        }
+        if(description.length() == 0){
+            ToastUtil.makeToast(getString(R.string.enter_description), context);
+            return;
+        }
+
+        if(description.length() > 20){
+            ToastUtil.makeToast(getString(R.string.enter_shorter_description), context);
+            return;
+        }
+
+        Group group = new Group(name, description);
+        groupRepository.insertGroup(group, context);
 
     }
 

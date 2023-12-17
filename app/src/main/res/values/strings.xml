@@ -109,4 +109,8 @@
     <string name="enter_shorter_username">Enter shorter username</string>
     <string name="passwords_not_matching">Passwords not machting</string>
     <string name="error_while_adding_">Error while adding\u0020</string>
+    <string name="enter_valid_username">Please enter valid username</string>
+    <string name="enter_description">Please enter a description</string>
+    <string name="created">"Created: "</string>
+    <string name="error_while_creating">"Error while creating "</string>
 </resources>

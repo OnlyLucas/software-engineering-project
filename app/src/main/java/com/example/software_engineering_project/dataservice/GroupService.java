@@ -14,5 +14,5 @@ public interface GroupService {
     Call<Group> getEntity(@Path("id") UUID groupId);
 
     @POST("groups")
-    Call<Group> createEntity(@Body Group group);
+    Call<Group> createGroup(@Body Group group);
 }
