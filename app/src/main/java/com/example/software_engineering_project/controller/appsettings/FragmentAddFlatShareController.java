@@ -1,4 +1,4 @@
-package com.example.software_engineering_project.controller;
+package com.example.software_engineering_project.controller.appsettings;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,11 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.adapter.AdapterManageFlatShareListView;
-import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
-import com.example.software_engineering_project.viewmodel.GroupMembershipRepository;
-import com.example.software_engineering_project.viewmodel.UserRepository;
 
 /**
  * A simple {@link Fragment} subclass.

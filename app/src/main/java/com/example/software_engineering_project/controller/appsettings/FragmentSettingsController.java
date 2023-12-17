@@ -1,4 +1,4 @@
-package com.example.software_engineering_project.controller;
+package com.example.software_engineering_project.controller.appsettings;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.controller.ActivityLoginScreenController;
 
 /**
  * A simple {@link Fragment} subclass.

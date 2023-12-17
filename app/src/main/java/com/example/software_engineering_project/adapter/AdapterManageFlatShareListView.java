@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.controller.FragmentManageFlatShareController;
+import com.example.software_engineering_project.controller.appsettings.FragmentManageFlatShareController;
 import com.example.software_engineering_project.entity.User;
 
 import java.util.List;
