@@ -72,12 +72,9 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
         PaymentCreationData requestData = new PaymentCreationData(payment);
 
         if (payment != null) {
-            int numberSelectedUsers = selectedUsers.size();
-            if(numberSelectedUsers == 0){
-                ToastUtil.makeToast(context.getString(R.string.select_users), context);
-            } else {
+            if(selectedUsers.size() != 0){
                 for (User u : selectedUsers) {
-                        BigDecimal paymentAmountForUser = payment.getAmount().divide(new BigDecimal(numberSelectedUsers), RoundingMode.HALF_UP);
+                        BigDecimal paymentAmountForUser = payment.getAmount().divide(new BigDecimal(selectedUsers.size()), RoundingMode.HALF_UP);
 
                         // add users to requestData
                         requestData.getUserParticipations().put(u.getId(), paymentAmountForUser);
@@ -93,6 +90,7 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
         String expenseString = expense.getText().toString();
         // Remove commas and replace with dot for machine readable format
         expenseString = expenseString.replace(",", ".");
+        int numberSelectedUsers = selectedUsers.size();
 
         try {
             BigDecimal expenseValue = new BigDecimal(expenseString);
@@ -105,6 +103,8 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
                 ToastUtil.makeToast(context.getString(R.string.enter_name_for_expense), context);
             } else if (reasonString.length() > 15) {
                 ToastUtil.makeToast(context.getString(R.string.enter_shorter_reason), context);
+            } else if(numberSelectedUsers == 0){
+                    ToastUtil.makeToast(context.getString(R.string.select_users), context);
             } else {
                 // add new payment to database
                 Payment payment = new Payment(expenseValue, reasonString);
