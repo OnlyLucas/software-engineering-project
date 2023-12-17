@@ -17,6 +17,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 /**
  * This ExceptionHandler handles exceptions that occur during the handling of http requests.
+ *
+ * Global exception handler for REST controllers. This class extends Spring's ResponseEntityExceptionHandler
+ * to provide custom exception handling for specific scenarios in the application.
  */
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @ControllerAdvice
@@ -24,6 +27,16 @@ public class RESTControllerExceptionHandler extends ResponseEntityExceptionHandl
 
     private final Logger logger = LoggerFactory.getLogger(RESTControllerExceptionHandler.class);
 
+    /**
+     * Handles asynchronous request timeout exceptions. Logs relevant information and delegates to the
+     * superclass for default handling.
+     *
+     * @param ex      The exception that occurred.
+     * @param headers The headers to be written to the response.
+     * @param status  The HTTP status of the response.
+     * @param request The current request.
+     * @return A ResponseEntity representing the error response.
+     */
     @Override
     protected ResponseEntity<Object> handleAsyncRequestTimeoutException(AsyncRequestTimeoutException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         logger.info("Timeout for Async Request. " + ex.toString(), request);
@@ -42,7 +55,19 @@ public class RESTControllerExceptionHandler extends ResponseEntityExceptionHandl
         return super.handleExceptionInternal(ex, "Invalid Argument.", new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
-
+    /**
+     * Temporary method for debugging purposes. Handles HttpMessageNotReadableException, indicating
+     * that the HTTP message is not readable. Logs relevant information and returns a ResponseEntity
+     * with a BAD_REQUEST status.
+     *
+     * <p>This method can be deleted after debugging.
+     *
+     * @param ex      The exception that occurred.
+     * @param headers The headers to be written to the response.
+     * @param status  The HTTP status of the response.
+     * @param request The current request.
+     * @return A ResponseEntity representing the error response.
+     */
     // TODO delete after debugging
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
