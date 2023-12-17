@@ -49,7 +49,7 @@
     <string name="no_negative_amount_allowed">Negative Ausgaben sind nicht erlaubt</string>
     <string name="_0_is_not_a_valid_expense_amount">0 ist keine erlaubte Ausgabenhöhe</string>
     <string name="details">Details</string>
-    <string name="add_new_expense">Neue Ausgabe hinzufügen</string>
+    <string name="add_new_expense">Neue Ausgabe</string>
     <string name="select_date">Wähle ein Datum</string>
     <string name="saved">Gespeichert</string>
     <string name="please_login_with_your_created_credentials">Bitte melden Sie sich mit Ihren erstellten Anmeldedaten an.</string>
@@ -111,4 +111,8 @@
     <string name="enter_description">Gebe eine Beschreibung ein</string>
     <string name="createdColon_">"Erstellt: "</string>
     <string name="error_while_creating">Fehler beim erstellen</string>
+    <string name="grocery_history">Einkaufshistorie</string>
+    <string name="expense">Betrag</string>
+    <string name="reason">Grund</string>
+    <string name="persons_involved">Beteiligte Personen</string>
 </resources>

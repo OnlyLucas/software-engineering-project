@@ -115,4 +115,7 @@
     <string name="do_you_really_want_to_leave_the_flat_share_">Do you really want to leave the flat share?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="expense">Ammount</string>
+    <string name="reason">Reason</string>
+    <string name="persons_involved">Persons involved</string>
 </resources>
