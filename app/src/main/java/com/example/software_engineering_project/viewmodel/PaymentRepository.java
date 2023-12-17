@@ -20,11 +20,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * The PaymentRepository class is responsible for managing interactions between the app's data
+ * and the PaymentService, which communicates with the server to perform CRUD operations on Payments.
+ * It uses Retrofit for network communication and LiveData for observing changes in the list of current payments.
+ */
 public class PaymentRepository {
 
     private PaymentService paymentService;
     private MutableLiveData<List<Payment>> currentPayments = new MutableLiveData<>();
 
+    /**
+     * Default constructor for PaymentRepository. Initializes the PaymentService using RetrofitClient
+     * and fetches the current list of payments immediately upon repository creation.
+     */
     public PaymentRepository() {
         // Initialize Retrofit service
         paymentService = RetrofitClient.getInstance().create(PaymentService.class);
@@ -32,6 +41,10 @@ public class PaymentRepository {
         getPayments();
     }
 
+    /**
+     * Fetches the list of payments from the server asynchronously.
+     * Updates the LiveData with the retrieved list upon a successful API response.
+     */
     private void getPayments() {
         // Perform the API call to get users asynchronously
         Group group = UserViewModel.getCurrentGroup().getValue();
@@ -58,6 +71,12 @@ public class PaymentRepository {
         });
     }
 
+    /**
+     * Creates a new payment on the server and updates the list of payments upon success.
+     *
+     * @param paymentData The PaymentCreationData object containing payment information.
+     * @param context     The application context for displaying toasts and handling UI updates.
+     */
     public void createPayment(PaymentCreationData paymentData , Context context) {
         Call<Payment> call = paymentService.createPayment(paymentData);
         System.out.println("Request body for payment: " + call.request().body().toString());
@@ -85,10 +104,19 @@ public class PaymentRepository {
         });
     }
 
+    /**
+     * Retrieves the LiveData object containing the list of current payments.
+     *
+     * @return LiveData<List<Payment>> The LiveData object containing the list of current payments.
+     */
     public LiveData<List<Payment>> getCurrentPayments() {
         return currentPayments;
     }
 
+    /**
+     * Fetches the list of payments from the server asynchronously.
+     * Updates the LiveData with the retrieved list upon a successful API response.
+     */
     public void fetchPayments(){
         // Get current group id
         UUID currentGroupId = UserViewModel.getCurrentGroup().getValue().getId();
@@ -114,6 +142,12 @@ public class PaymentRepository {
         });
     }
 
+    /**
+     * Deletes a payment from the server and updates the list of payments upon success.
+     *
+     * @param payment The Payment object to be deleted.
+     * @param context The application context for displaying toasts and handling UI updates.
+     */
     public void deletePayment(Payment payment, Context context) {
             // Perform the API call to delete the group grocery on the server
             Call<Void> call = paymentService.deletePayment(payment.getId());

@@ -17,6 +17,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Repository class for handling interactions with the server related to payment participations.
+ * This class uses Retrofit to perform asynchronous network requests.
+ */
 public class PaymentParticipationRepository {
 
     private MutableLiveData<List<Object[]>> getPaymentParticipationLiveData = new MutableLiveData<>();
@@ -33,6 +37,12 @@ public class PaymentParticipationRepository {
 
     }
 
+    /**
+     * Creates a new payment participation and sends the request to the server.
+     *
+     * @param paymentParticipation The payment participation to be created.
+     * @param context              The application context for displaying toasts.
+     */
     public void createPaymentParticipation(PaymentParticipation paymentParticipation, Context context) {
         Call<PaymentParticipation> call = paymentParticipationService.createPaymentParticipation(paymentParticipation);
         call.enqueue(new Callback<PaymentParticipation>() {
@@ -53,6 +63,13 @@ public class PaymentParticipationRepository {
         });
     }
 
+    /**
+     * Fetches payments where the current user is marked as the receiver (owed payments),
+     * grouped by the user who owes the payment.
+     *
+     * @param groupId The ID of the current group.
+     * @param userId  The ID of the current user.
+     */
     public void fetchGetPaymentsGroupedByUser(UUID groupId, UUID userId) {
         Call<List<Object[]>> call = paymentParticipationService.getGetPaymentsGroupedByUser(groupId, userId);
         call.enqueue(new Callback<List<Object[]>>() {
@@ -75,6 +92,13 @@ public class PaymentParticipationRepository {
         });
     }
 
+    /**
+     * Fetches payments where the current user is marked as the payer (owing payments),
+     * grouped by the user who is owed the payment.
+     *
+     * @param groupId The ID of the current group.
+     * @param userId  The ID of the current user.
+     */
     public void fetchOwePaymentsGroupedByUser(UUID groupId, UUID userId) {
         Call<List<Object[]>> call = paymentParticipationService.getOwePaymentsGroupedByUser(groupId, userId);
         call.enqueue(new Callback<List<Object[]>>() {
@@ -160,6 +184,11 @@ public class PaymentParticipationRepository {
         return owePaymentParticipationsByUserIds;
     }
 
+    /**
+     * Updates a payment participation and fetches the latest owed and owing payments.
+     *
+     * @param context              The application context for displaying toasts.
+     */
     public void update(PaymentParticipation p, Context context) {
         Call<PaymentParticipation> call = paymentParticipationService.updatePaymentParticipation(p.getId(), p);
         call.enqueue(new Callback<PaymentParticipation>() {

@@ -13,37 +13,43 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LiveData;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.adapter.AdapterGroceryListHistory;
 import com.example.software_engineering_project.entity.GroupGrocery;
+import com.example.software_engineering_project.util.ToastUtil;
+import com.example.software_engineering_project.viewmodel.GroceryRepository;
+
+import java.util.List;
 
 public class FragmentGroceryListHistoryController extends Fragment {
 
     private static ListView listView;
-    //private static GroceryRepository groceryRepository;
-    //private static LiveData<List<GroupGrocery>> uncompletedGroceryLiveData;
+    private static GroceryRepository groceryRepository;
+    private static LiveData<List<GroupGrocery>> completedGroceryLiveData;
     private static ArrayAdapter<GroupGrocery> adapter;
     private static Context context;
     private ImageView goBack;
     private View fragmentView;
 
     // function to remove an item given its index in the grocery list.
-    //public static void removeItem(int item) {
-    //    GroupGrocery grocery = uncompletedGroceryLiveData.getValue().get(item);
-    //    groceryRepository.deleteGroupGrocery(grocery, context);
-    //}
+    public static void removeItem(int item) {
+        GroupGrocery grocery = completedGroceryLiveData.getValue().get(item);
+        groceryRepository.deleteGroupGrocery(grocery, context);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         context = requireActivity();
-        //groceryRepository = new GroceryRepository();
-        //uncompletedGroceryLiveData = groceryRepository.getUncompletedGroupGroceries();
+        groceryRepository = new GroceryRepository();
+        completedGroceryLiveData = groceryRepository.getCompletedGroupGroceries();
 
-        //uncompletedGroceryLiveData.observe(getViewLifecycleOwner(), groceryList -> {
-        //    adapter = new AdapterGroceryListHistory(context, groceryList);
-        //    listView.setAdapter(adapter);
-        //});
+        completedGroceryLiveData.observe(getViewLifecycleOwner(), groceryList -> {
+            adapter = new AdapterGroceryListHistory(context, groceryList);
+            listView.setAdapter(adapter);
+        });
 
         fragmentView = inflater.inflate(R.layout.fragment_grocery_list_history, container, false);
         loadScreenElements();
@@ -59,8 +65,8 @@ public class FragmentGroceryListHistoryController extends Fragment {
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
             // Show name of the clicked item
-            //GroupGrocery grocery = uncompletedGroceryLiveData.getValue().get(position);
-            //ToastUtil.makeToast(grocery.getName(), context);
+            GroupGrocery grocery = completedGroceryLiveData.getValue().get(position);
+            ToastUtil.makeToast(grocery.getName(), context);
         });
 
         // Remove an item when its row is long pressed

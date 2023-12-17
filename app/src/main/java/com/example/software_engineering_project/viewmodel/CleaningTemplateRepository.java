@@ -17,16 +17,31 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * The CleaningTemplateRepository class is responsible for managing interactions between the app's data
+ * and the CleaningTemplateService, which communicates with the server to perform CRUD operations on Cleaning Templates.
+ * It uses Retrofit for network communication and LiveData for observing changes in the list of current cleaning templates.
+ */
 public class CleaningTemplateRepository {
     private CleaningTemplateService cleaningTemplateService;
     private MutableLiveData<List<CleaningTemplate>> currentCleaningTemplates = new MutableLiveData<>();
 
+    /**
+     * Default constructor for CleaningTemplateRepository. Initializes the CleaningTemplateService using RetrofitClient
+     * and fetches the current list of cleaning templates from the server.
+     */
     public CleaningTemplateRepository() {
         // Initialize Retrofit service
         cleaningTemplateService = RetrofitClient.getInstance().create(CleaningTemplateService.class);
         fetchCleaningTemplates();
     }
 
+    /**
+     * Creates a new cleaning template on the server and updates the list of current cleaning templates upon success.
+     *
+     * @param cleaningTemplate The CleaningTemplate object to be created.
+     * @param context          The application context for displaying toasts and handling UI updates.
+     */
     public void createCleaningTemplate(CleaningTemplate cleaningTemplate, Context context) {
         Call<CleaningTemplate> call = cleaningTemplateService.createCleaningTemplateWithCleanings(cleaningTemplate);
         call.enqueue(new Callback<CleaningTemplate>() {
@@ -52,6 +67,10 @@ public class CleaningTemplateRepository {
         });
     }
 
+    /**
+     * Fetches the list of current cleaning templates from the server asynchronously.
+     * Updates the LiveData with the retrieved list upon a successful API response.
+     */
     public void fetchCleaningTemplates() {
 
         UUID currentGroupId = UserViewModel.getCurrentGroup().getValue().getId();
@@ -78,10 +97,21 @@ public class CleaningTemplateRepository {
         });
     }
 
+    /**
+     * Retrieves the LiveData object containing the list of current cleaning templates.
+     *
+     * @return LiveData<List<CleaningTemplate>> The LiveData object containing the list of current cleaning templates.
+     */
     public LiveData<List<CleaningTemplate>> getCurrentCleaningTemplates() {
         return currentCleaningTemplates;
     }
 
+    /**
+     * Deletes a cleaning template from the server and updates the list of current cleaning templates upon success.
+     *
+     * @param cleaningTemplate The CleaningTemplate object to be deleted.
+     * @param context          The application context for displaying toasts and handling UI updates.
+     */
     public void deleteCleaningTemplate(CleaningTemplate cleaningTemplate, Context context) {
         // Perform the API call to delete the group grocery on the server
         Call<Void> call = cleaningTemplateService.deleteCleaningTemplate(cleaningTemplate.getId());
