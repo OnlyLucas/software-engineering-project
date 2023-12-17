@@ -17,6 +17,7 @@ import com.example.software_engineering_project.controller.budget.FragmentBudget
 
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Custom adapter for displaying budget details related to received amounts.
@@ -76,7 +77,10 @@ public class AdapterBudgetDetailGet extends ArrayAdapter<Object[]> {
             String name = (String) userMap.get("firstName");
 
             nameOfDebtor.setText(name);
-            amountOfDebt.setText(totalAmount.toString());
+
+            // So far we only support euro as currency, but in this place a differentiation would be needed
+            String amount = String.format(Locale.getDefault(), "- %.2f", totalAmount) + "€";
+            amountOfDebt.setText(amount);
 
             checkExpenseGet.setOnClickListener(new View.OnClickListener() {
                 @Override
