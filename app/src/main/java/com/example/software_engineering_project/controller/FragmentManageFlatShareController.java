@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -49,8 +50,9 @@ public class FragmentManageFlatShareController extends Fragment {
     private static LiveData<List<User>> currentUsers;
     private static UserRepository userRepository;
     private Button cancelManageFlatShare, saveManageFlatShare;
-    private EditText inputName, inputMail;
-    private ImageView enter;
+    private EditText inputMail;
+    private ImageView addFlatShare, enter;
+    private TextView descriptionManageFlatShare, nameManageFlatShare;
     private View fragmentView;
 
 
@@ -163,6 +165,11 @@ public class FragmentManageFlatShareController extends Fragment {
             }
         });
 
+        addFlatShare.setOnClickListener (view -> {
+            FragmentAddFlatShareController fragment = new FragmentAddFlatShareController();
+            callFragment(fragment);
+        });
+
     }
 
     private void callFragment(Fragment fragment) {
@@ -176,11 +183,13 @@ public class FragmentManageFlatShareController extends Fragment {
 
     private void loadScreenElements() {
 
+        addFlatShare = fragmentView.findViewById(R.id.addFlatShare);
         cancelManageFlatShare = fragmentView.findViewById(R.id.cancelManageFlatShare);
+        descriptionManageFlatShare = fragmentView.findViewById(R.id.descriptionManageFlatShare);
         enter = fragmentView.findViewById(R.id.addFlatShareMember);
-        inputMail = fragmentView.findViewById(R.id.input_mail);
-        inputName = fragmentView.findViewById(R.id.input_name);
+        inputMail = fragmentView.findViewById(R.id.inputMailManageFlatShare);
         listView = fragmentView.findViewById(R.id.flatShareMemberList);
+        nameManageFlatShare = fragmentView.findViewById(R.id.nameManageFlatShare);
         saveManageFlatShare = fragmentView.findViewById(R.id.saveManageFlatShare);
 
     }

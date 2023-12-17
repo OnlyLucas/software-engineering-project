@@ -99,4 +99,6 @@
     <string name="grocery_history">Grocery History</string>
     <string name="username">Username</string>
     <string name="confirm_password">Confirm password</string>
+    <string name="add_flat_share">Add flat share</string>
+    <string name="description_of_flat">Description of flat</string>
 </resources>
