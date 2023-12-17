@@ -13,14 +13,29 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * The GroupMembershipRepository class is responsible for managing interactions between the app's data
+ * and the GroupMembershipService, which communicates with the server to perform operations related to
+ * group memberships. It uses Retrofit for network communication and interacts with the UserRepository
+ * to update user information upon successful operations.
+ */
 public class GroupMembershipRepository {
     private GroupMembershipService service;
 
-
+    /**
+     * Default constructor for GroupMembershipRepository. Initializes the GroupMembershipService using RetrofitClient.
+     */
     public GroupMembershipRepository() {
         service = RetrofitClient.getInstance().create(GroupMembershipService.class);
     }
 
+    /**
+     * Deletes a user's group membership on the server and updates the list of users upon success.
+     *
+     * @param user           The User object whose group membership needs to be deleted.
+     * @param userRepository The UserRepository to update the list of users.
+     * @param context        The application context for displaying toasts and handling UI updates.
+     */
     public void deleteGroupMembership(User user, UserRepository userRepository, Context context) {
         Group group = UserViewModel.getCurrentGroup().getValue();
         Call<Void> call = service.deleteGroupMembership(user.getId(), group.getId());
@@ -54,6 +69,13 @@ public class GroupMembershipRepository {
         });
     }
 
+    /**
+     * Inserts a new group membership on the server and updates the list of users upon success.
+     *
+     * @param groupMembership The GroupMembership object to be inserted.
+     * @param userRepository   The UserRepository to update the list of users.
+     * @param context          The application context for displaying toasts and handling UI updates.
+     */
     public void insertGroupMembership(GroupMembership groupMembership, UserRepository userRepository, Context context) {
         Call<GroupMembership> call = service.createGroupMembership(groupMembership);
         call.enqueue(new Callback<GroupMembership>() {
