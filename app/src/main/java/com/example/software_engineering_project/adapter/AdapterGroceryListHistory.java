@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.controller.groceries.FragmentGroceryListController;
+import com.example.software_engineering_project.controller.groceries.FragmentGroceryListHistoryController;
 import com.example.software_engineering_project.entity.GroupGrocery;
 
 import java.util.List;
@@ -66,7 +66,7 @@ public class AdapterGroceryListHistory extends ArrayAdapter<GroupGrocery> {
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentGroceryListController.removeItem(position);
+                FragmentGroceryListHistoryController.removeItem(position);
             }
         });
 
