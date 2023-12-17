@@ -7,6 +7,10 @@ import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Represents a grocery item within a group with information such as name, creator, creation timestamp,
+ * completion status, and completion details.
+ */
 public class GroupGrocery {
     private UUID id;
     private Group group;
@@ -19,6 +23,12 @@ public class GroupGrocery {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp completedAt;
 
+    /**
+     * Constructs a new GroupGrocery with the given name. The group, creator, and creation timestamp
+     * are automatically set based on the current user and group.
+     *
+     * @param name The name of the grocery item.
+     */
     public GroupGrocery(String name){
         this.id = UUID.randomUUID();
         this.group = UserViewModel.getCurrentGroup().getValue();
@@ -28,6 +38,9 @@ public class GroupGrocery {
         this.createdAt  = new Timestamp(currentTimeMillis);
     }
 
+    /**
+     * Default constructor for GroupGrocery.
+     */
     public GroupGrocery() {
         // Default constructor
     }
@@ -94,6 +107,9 @@ public class GroupGrocery {
         this.completedAt = completedAt;
     }
 
+    /**
+     * Mark the grocery item as completed. Updates completion status, user, and completion timestamp.
+     */
     public void setCompleted() {
         this.isCompleted = true;
         this.completedByUser = UserViewModel.getCurrentAppUser().getValue();
@@ -101,6 +117,12 @@ public class GroupGrocery {
         this.completedAt = new Timestamp(currentTimeMillis);
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param o The reference object with which to compare.
+     * @return {@code true} if this object is the same as the obj argument; {@code false} otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

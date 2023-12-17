@@ -5,6 +5,9 @@ import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Represents a group entity with information such as group name, description, creator, and creation timestamp.
+ */
 public class Group {
     private UUID id;
     private String name;
@@ -53,6 +56,12 @@ public class Group {
         this.createdAt = createdAt;
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param o The reference object with which to compare.
+     * @return {@code true} if this object is the same as the obj argument; {@code false} otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -61,6 +70,11 @@ public class Group {
         return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(createdBy, that.createdBy) && Objects.equals(createdAt, that.createdAt);
     }
 
+    /**
+     * Returns a hash code value for the object.
+     *
+     * @return A hash code value for this object.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id, name, description, createdBy, createdAt);
