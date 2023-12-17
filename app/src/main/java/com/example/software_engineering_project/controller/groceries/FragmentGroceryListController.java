@@ -26,6 +26,10 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentGroceryListController #newInstance} factory method to
  * create an instance of this fragment.
+ *
+ *
+ * FragmentGroceryListController displays a list of uncompleted group groceries
+ * and provides functionality to add, remove, and mark items as completed.
  */
 public class FragmentGroceryListController extends Fragment {
 
@@ -38,12 +42,22 @@ public class FragmentGroceryListController extends Fragment {
     private ImageView enter;
     private View fragmentView;
 
+    /**
+     * Removes the selected item from the list.
+     *
+     * @param item The index of the item to be removed.
+     */
     // function to remove an item given its index in the grocery list.
     public static void removeItem(int item) {
         GroupGrocery grocery = uncompletedGroceryLiveData.getValue().get(item);
         groceryRepository.deleteGroupGrocery(grocery, context);
     }
 
+    /**
+     * Marks the selected item as completed.
+     *
+     * @param i The index of the item to be marked as completed.
+     */
     public static void uncheckItem(int i) {
         GroupGrocery grocery = uncompletedGroceryLiveData.getValue().get(i);
         grocery.setCompleted();

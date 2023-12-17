@@ -14,6 +14,11 @@ import com.example.software_engineering_project.controller.cleanings.FragmentCle
 import com.example.software_engineering_project.controller.groceries.FragmentGroceryListController;
 
 
+/**
+ * ActivityMainScreenController is the main screen controller for the FlatFusion app.
+ * It provides buttons for navigating to different features, such as budget, cleaning plan,
+ * grocery list, and settings.
+ */
 public class ActivityMainScreenController extends AppCompatActivity {
 
     private Button budgetButton, cleaningPlanButton, goSettingsButton, groceryListButton;
@@ -29,6 +34,9 @@ public class ActivityMainScreenController extends AppCompatActivity {
 
     }
 
+    /**
+     * Adds click listeners to the buttons for navigating to different features.
+     */
     private void addButtons() {
 
         groceryListButton.setOnClickListener(view -> {
@@ -74,6 +82,12 @@ public class ActivityMainScreenController extends AppCompatActivity {
 
     }
 
+    /**
+     * Calls the specified fragment with the given tag for fragment management.
+     *
+     * @param fragment The fragment to be displayed.
+     * @param tag      The tag for the fragment.
+     */
     public void callFragment(Fragment fragment, String tag) {
 
         FragmentManager fm = getSupportFragmentManager();

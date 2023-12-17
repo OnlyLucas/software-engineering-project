@@ -17,6 +17,11 @@ import com.example.software_engineering_project.R;
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentSettingsController #newInstance} factory method to
  * create an instance of this fragment.
+ *
+ * FragmentSettingsController is a fragment that provides various settings options for the user in the FlatFusion app.
+ * Users can change their email, password, manage flat share members, and log out using this fragment.
+ * It contains buttons to navigate to other settings-related fragments.
+ *
  */
 public class FragmentSettingsController extends Fragment {
 
@@ -27,6 +32,14 @@ public class FragmentSettingsController extends Fragment {
     private View fragmentView;
 
 
+    /**
+     * Inflates the layout for this fragment, initializes the UI elements, and adds click listeners to buttons.
+     *
+     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state.
+     * @return The inflated view for this fragment.
+     */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         fragmentView = inflater.inflate(R.layout.fragment_setting_screen, container, false);
