@@ -40,6 +40,15 @@ public class GroceryRepository {
     }
 
     /**
+     * Retrieves the LiveData object containing the list of completed group groceries.
+     *
+     * @return LiveData<List<GroupGrocery>> The LiveData object containing the list of completed group groceries.
+     */
+    public LiveData<List<GroupGrocery>> getCompletedGroupGroceries() {
+        return completedGroupGroceries;
+    }
+
+    /**
      * Retrieves the LiveData object containing the list of uncompleted group groceries.
      *
      * @return LiveData<List<GroupGrocery>> The LiveData object containing the list of uncompleted group groceries.
@@ -95,14 +104,12 @@ public class GroceryRepository {
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
                         // Get updated Group Groceries from backend to show it in frontend
-                        fetchUncompletedGroupGroceries();
+                        fetchGroupGroceries();
                         System.out.println("Deletion of Group Grocery successful");
                         ToastUtil.makeToast("Removed: " + groupGrocery.getName(), context);
                     } else {
                         // If the server-side deletion is not successful, handle accordingly
                         // For example, show an error message
-                        fetchUncompletedGroupGroceries();
-
                         System.out.println(response.code());
                         System.out.println("Failed to delete group grocery on the server");
 
