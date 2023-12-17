@@ -174,10 +174,14 @@ public class FragmentBudgetDetailScreenController extends Fragment {
                         totalAmountGet = totalAmountGet + paymentAmount;
                     }
                 }
-                // So far we only support euro as currency, but in this place a differentiation would be needed
-                String totalAmountGetString = String.format(Locale.getDefault(), "%.2f", totalAmountGet) + "€";
-                totalGetExpenses.setText("You get: " + totalAmountGetString);
-                return  totalAmountGet;
+                if(totalAmountGet == 0.00){
+                    totalGetExpenses.setText("You do not get any money back.");
+                } else {
+                    // So far we only support euro as currency, but in this place a differentiation would be needed
+                    String totalAmountGetString = String.format(Locale.getDefault(), "%.2f", totalAmountGet) + "€";
+                    totalGetExpenses.setText("You get: " + totalAmountGetString);
+                }
+                return totalAmountGet;
             }
             return null;
     }
@@ -194,7 +198,11 @@ public class FragmentBudgetDetailScreenController extends Fragment {
                     totalAmountOwe = totalAmountOwe + paymentAmount;
                 }
             }
-            totalOweExpenses.setText("You owe: " + totalAmountOweString);
+            if(totalAmountOwe == 0.00) {
+                totalOweExpenses.setText("You do not owe any money.");
+            } else {
+                totalOweExpenses.setText("You owe: " + totalAmountOweString);
+            }
             return totalAmountOwe;
         }
         return null;

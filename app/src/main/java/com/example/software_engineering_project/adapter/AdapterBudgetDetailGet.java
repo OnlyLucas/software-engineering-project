@@ -79,7 +79,7 @@ public class AdapterBudgetDetailGet extends ArrayAdapter<Object[]> {
             nameOfDebtor.setText(name);
 
             // So far we only support euro as currency, but in this place a differentiation would be needed
-            String amount = String.format(Locale.getDefault(), "- %.2f", totalAmount) + "€";
+            String amount = String.format(Locale.getDefault(), "%.2f", totalAmount) + "€";
             amountOfDebt.setText(amount);
 
             checkExpenseGet.setOnClickListener(new View.OnClickListener() {
