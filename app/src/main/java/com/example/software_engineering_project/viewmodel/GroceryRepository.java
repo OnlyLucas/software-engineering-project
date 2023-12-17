@@ -17,21 +17,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * The GroceryRepository class is responsible for managing interactions between the app's data
- * and the GroupGroceryService, which communicates with the server to perform CRUD operations on Group Groceries.
- * It uses Retrofit for network communication and LiveData for observing changes in the list of group groceries.
- */
 public class GroceryRepository {
 
     private GroupGroceryService groceryService;
     private MutableLiveData<List<GroupGrocery>> uncompletedGroupGroceries = new MutableLiveData<>();
     private MutableLiveData<List<GroupGrocery>> completedGroupGroceries = new MutableLiveData<>();
 
-    /**
-     * Default constructor for GroceryRepository. Initializes the GroupGroceryService using RetrofitClient
-     * and fetches the group groceries immediately upon repository creation.
-     */
     public GroceryRepository() {
         // Initialize Retrofit service
         groceryService = RetrofitClient.getInstance().create(GroupGroceryService.class);
@@ -39,21 +30,10 @@ public class GroceryRepository {
         fetchGroupGroceries();
     }
 
-    /**
-     * Retrieves the LiveData object containing the list of uncompleted group groceries.
-     *
-     * @return LiveData<List<GroupGrocery>> The LiveData object containing the list of uncompleted group groceries.
-     */
     public LiveData<List<GroupGrocery>> getUncompletedGroupGroceries() {
         return uncompletedGroupGroceries;
     }
 
-    /**
-     * Performs the API call to insert a new group grocery on the server and updates the list of uncompleted group groceries upon success.
-     *
-     * @param groupGrocery The GroupGrocery object to be inserted.
-     * @param context      The application context for displaying toasts and handling UI updates.
-     */
     public void insertGroupGrocery(GroupGrocery groupGrocery, Context context) {
         // Perform the API call to insert a new group grocery
         Call<GroupGrocery> call = groceryService.createGroupGrocery(groupGrocery);
@@ -79,12 +59,7 @@ public class GroceryRepository {
         });
     }
 
-    /**
-     * Performs the API call to delete a group grocery on the server and updates the list of uncompleted group groceries upon success.
-     *
-     * @param groupGrocery The GroupGrocery object to be deleted.
-     * @param context      The application context for displaying toasts and handling UI updates.
-     */
+
     public void deleteGroupGrocery(GroupGrocery groupGrocery, Context context) {
         try {
             // Perform the API call to delete the group grocery on the server
@@ -129,12 +104,6 @@ public class GroceryRepository {
         }
     }
 
-    /**
-     * Performs the API call to update a group grocery on the server and refreshes the list of group groceries upon success.
-     *
-     * @param grocery The GroupGrocery object to be updated.
-     * @param context The application context for displaying toasts and handling UI updates.
-     */
     public void updateGroupGrocery(GroupGrocery grocery, Context context) {
         // Perform the API call to update group grocery asynchronously
         Call<GroupGrocery> call = groceryService.updateGroupGrocery(grocery.getId(), grocery);
@@ -211,9 +180,6 @@ public class GroceryRepository {
         });
     }
 
-    /**
-     * Fetches both uncompleted and completed group groceries from the server.
-     */
     public void fetchGroupGroceries(){
         fetchUncompletedGroupGroceries();
         fetchCompletedGroupGroceries();
