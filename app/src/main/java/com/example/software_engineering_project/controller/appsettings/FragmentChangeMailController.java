@@ -103,7 +103,7 @@ public class FragmentChangeMailController extends Fragment {
             if (newMailString.equals(confirmMailString)) {
                 Log.i(TAG, getString(R.string.ready_to_persist_new_mail) + newMailString);
                 Map<String, String> map = new HashMap<>();
-                map.put(getString(R.string.email), newMailString);
+                map.put(getString(R.string.emailJson), newMailString);
                 userRepository.updateEmail(user, map, context);
             } else {
                 ToastUtil.makeToast(getString(R.string.new_mails_not_matching), context);

@@ -119,4 +119,5 @@
     <string name="reason">Reason</string>
     <string name="persons_involved">Persons involved</string>
     <string name="already_member_of_group">You are already a member of a group</string>
+    <string name="emailJson">email</string>
 </resources>
