@@ -1,4 +1,5 @@
 package com.example.software_engineering_project.entity;
+import com.example.software_engineering_project.viewmodel.UserViewModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.sql.Timestamp;
@@ -15,6 +16,18 @@ public class GroupMembership {
     private User user;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
+
+    public GroupMembership(){
+        // default constructor
+    }
+
+    public GroupMembership(User user){
+        this.id = UUID.randomUUID();
+        this.user = user;
+        this.group = UserViewModel.getCurrentGroup().getValue();
+        long currentTimeMillis = System.currentTimeMillis();
+        this.createdAt  = new Timestamp(currentTimeMillis);
+    }
 
     public UUID getId() {
         return id;

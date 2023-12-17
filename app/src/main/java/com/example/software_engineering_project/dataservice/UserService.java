@@ -27,4 +27,6 @@ public interface UserService{
     @PATCH("users/{id}")
     Call<User> partialUpdateEntity(@Path("id") UUID userId, @Body Map<String, String> updates);
 
+    @GET("users/mail/{mail}")
+    Call<User> getUserByMail(@Path("mail") String mail);
 }

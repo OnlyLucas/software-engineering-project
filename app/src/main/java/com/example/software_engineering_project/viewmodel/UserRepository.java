@@ -22,8 +22,8 @@ import retrofit2.Response;
 public class UserRepository {
 
     private UserService userService;
-
     private MutableLiveData<List<User>> currentUsers = new MutableLiveData<>();
+    private MutableLiveData<User> userByMail = new MutableLiveData<>();
 
     public UserRepository(){
         userService = RetrofitClient.getInstance().create(UserService.class);
@@ -104,5 +104,36 @@ public class UserRepository {
                 // For example, show an error message
             }
         });
+    }
+
+    public void fetchUserByMail(String mail) {
+        Call<User> call = userService.getUserByMail(mail);
+        call.enqueue(new Callback<User>(){
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()) {
+                    User user = response.body();
+                    userByMail.setValue(user);
+                    getUsers();
+                    System.out.println("User fetching by mail successful");
+                    // Handle the received users, e.g., update UI or store in a local database
+                } else {
+                    // Handle API error
+                    System.out.println("Error while fetching user by mail");
+                    userByMail.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                // Handle network failure
+                System.out.println("Network error while fetching user by mail");
+            }
+        });
+    }
+
+    public LiveData<User> getUserByMail(String mail) {
+        fetchUserByMail(mail);
+        return userByMail;
     }
 }

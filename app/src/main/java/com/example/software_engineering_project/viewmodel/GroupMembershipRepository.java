@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.software_engineering_project.dataservice.GroupMembershipService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.Group;
+import com.example.software_engineering_project.entity.GroupMembership;
 import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
 
@@ -16,32 +17,26 @@ public class GroupMembershipRepository {
     private GroupMembershipService service;
 
 
-    public GroupMembershipRepository(){
+    public GroupMembershipRepository() {
         service = RetrofitClient.getInstance().create(GroupMembershipService.class);
-
     }
 
-    public void deleteGroupMembership(User user, Group group, Context context) {
-        // Perform the API call to delete the group grocery on the server
+    public void deleteGroupMembership(User user, UserRepository userRepository, Context context) {
+        Group group = UserViewModel.getCurrentGroup().getValue();
         Call<Void> call = service.deleteGroupMembership(user.getId(), group.getId());
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                UserRepository userRepository = new UserRepository();
                 if (response.isSuccessful()) {
-                    // Get updated Group Groceries from backend to show it in frontend
                     userRepository.getUsers();
                     System.out.println("Deletion of Group Membership successful");
                     ToastUtil.makeToast("Removed: " + user.getFirstName(), context);
                 } else {
                     // If the server-side deletion is not successful, handle accordingly
                     // For example, show an error message
-                    userRepository.getUsers();
 
                     System.out.println(response.code());
                     System.out.println("Failed to delete group membership on the server");
-
-                    System.out.println(response.body().toString());
 
                     String errorMessage = "Failed to delete group membership on the server";
                     ToastUtil.makeToast("Deletion failed", context);
@@ -58,4 +53,29 @@ public class GroupMembershipRepository {
             }
         });
     }
+
+    public void insertGroupMembership(GroupMembership groupMembership, UserRepository userRepository, Context context) {
+        Call<GroupMembership> call = service.createGroupMembership(groupMembership);
+        call.enqueue(new Callback<GroupMembership>() {
+            @Override
+            public void onResponse(Call<GroupMembership> call, Response<GroupMembership> response) {
+                if(response.isSuccessful()){
+                    userRepository.getUsers();
+                    // show toast of success
+                    ToastUtil.makeToast("Added " + groupMembership.getUser().getFirstName(), context);
+                } else {
+                    ToastUtil.makeToast("Error while adding  " + groupMembership.getUser().getFirstName(), context);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GroupMembership> call, Throwable t) {
+                ToastUtil.makeToast("Network Error while adding  " + groupMembership.getUser().getFirstName(), context);
+                // Handle the failure if needed
+                // For example, show an error message
+            }
+        });
+    }
 }
+
+

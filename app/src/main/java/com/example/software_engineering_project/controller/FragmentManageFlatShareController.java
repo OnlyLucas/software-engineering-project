@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,11 +13,13 @@ import android.widget.ListView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.AdapterManageFlatShareListView;
 import com.example.software_engineering_project.entity.Group;
+import com.example.software_engineering_project.entity.GroupMembership;
 import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.viewmodel.GroupMembershipRepository;
@@ -56,14 +57,18 @@ public class FragmentManageFlatShareController extends Fragment {
     /**
      * Adds an item with the specified name to the list of flat share members.
      *
-     * @param item The name of the item to be added.
+     * @param mail The mail of the member to be added.
      */
     // function to add an item given its name.
-    public static void addItem(String item) {
-
-        items.add(item);
-        listView.setAdapter(adapter);
-
+    public static void addItem(String mail) {
+        userRepository.getUserByMail(mail).observe((LifecycleOwner) context, newUser -> {
+            if (newUser != null) {
+                GroupMembership groupMembership = new GroupMembership(newUser);
+                groupMembershipRepository.insertGroupMembership(groupMembership, userRepository, context);
+            } else {
+                ToastUtil.makeToast(context.getString(R.string.enter_valid_mail), context);
+            }
+        });
     }
 
     /**
@@ -76,8 +81,7 @@ public class FragmentManageFlatShareController extends Fragment {
 
         User user = currentUsers.getValue().get(i);
         Group group = UserViewModel.getCurrentGroup().getValue();
-        groupMembershipRepository.deleteGroupMembership(user, group, context);
-        listView.setAdapter(adapter);
+        groupMembershipRepository.deleteGroupMembership(user, userRepository, context);
 
     }
 
@@ -102,7 +106,6 @@ public class FragmentManageFlatShareController extends Fragment {
         context = requireActivity();
         loadScreenElements();
         addButtons();
-
 
         currentUsers.observe(getViewLifecycleOwner(), currentUsers -> {
             adapter = new AdapterManageFlatShareListView(getActivity(), currentUsers);
@@ -140,15 +143,23 @@ public class FragmentManageFlatShareController extends Fragment {
             callFragment(fragment);
         });
 
-        //TODO enter mail -> find user by mail -> add userMembership to current group
         enter.setOnClickListener(view -> {
             String text = inputMail.getText().toString();
             if (text.length() == 0) {
                 ToastUtil.makeToast(getString(R.string.enter_mail_here), context);
             } else {
-                addItem(text);
-                inputMail.setText(getString(R.string.empty_input_fields));
-                ToastUtil.makeToast(getString(R.string.added) + text, context);
+                boolean userExists = false;
+                for (User u: currentUsers.getValue()) {
+                    if(u.getEmail().equals(text)){
+                        userExists = true;
+                        ToastUtil.makeToast("User already added", context);
+                        break;
+                    }
+                }
+                if(!userExists) {
+                    addItem(text);
+                    inputMail.setText(getString(R.string.empty_input_fields));
+                }
             }
         });
 
