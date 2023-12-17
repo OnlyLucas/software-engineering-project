@@ -11,6 +11,11 @@ import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Represents a user entity with attributes such as email, username, password, first name,
+ * last name, and the timestamp of creation. This class is annotated for JPA to map it to
+ * the "users" table in the "flatfusion" schema.
+ */
 @Entity
 @Table(name = "users", schema = "flatfusion")
 public class UserEntity implements EntityInterface{

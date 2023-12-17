@@ -4,6 +4,10 @@ import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Represents a user entity used for user creation, containing information such as email,
+ * username, password, first name, last name, and the timestamp of creation.
+ */
 public class UserCreateEntity implements EntityInterface {
     private UUID id;
     private String email;

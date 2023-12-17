@@ -10,6 +10,10 @@ import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Represents a change in a financial payment within a group, capturing details such as the modified amount,
+ * currency code, and the users involved in the change.
+ */
 @Entity
 @Table(name = "payments_changes", schema = "flatfusion")
 public class PaymentsChangeEntity implements EntityInterface{

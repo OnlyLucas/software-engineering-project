@@ -11,6 +11,10 @@ import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Represents a user's participation in a financial payment within a group, capturing details such as the
+ * participation amount, currency, and payment status.
+ */
 @Entity
 @jakarta.persistence.Table(name = "payment_participations", schema = "flatfusion")
 public class PaymentParticipationEntity implements EntityInterface {
@@ -59,9 +63,20 @@ public class PaymentParticipationEntity implements EntityInterface {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp paidAt;
 
+    /**
+     * Default constructor for the PaymentParticipationEntity.
+     */
     public PaymentParticipationEntity() {
     }
 
+    /**
+     * Parameterized constructor for creating a PaymentParticipationEntity.
+     *
+     * @param payment             The payment to which the participation belongs.
+     * @param group               The group associated with the payment participation.
+     * @param user                The user participating in the payment.
+     * @param participationAmount The monetary amount of the user's participation.
+     */
     public PaymentParticipationEntity(PaymentEntity payment, GroupEntity group, UserEntity user, BigDecimal participationAmount) {
         this.id = UUID.randomUUID();
         this.payment = payment;

@@ -12,6 +12,9 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Represents a financial payment within a group, capturing details such as the amount, currency, and participants.
+ */
 @Entity
 @Table(name = "payments", schema = "flatfusion")
 public class PaymentEntity implements EntityInterface{
@@ -59,10 +62,22 @@ public class PaymentEntity implements EntityInterface{
     @Column(name = "payment_name", nullable = false, length = 255)
     private String name;
 
+    /**
+     * Default constructor for the PaymentEntity.
+     */
     public PaymentEntity() {
         //default constructor
     }
 
+    /**
+     * Parameterized constructor for creating a PaymentEntity.
+     *
+     * @param group        The group to which the payment belongs.
+     * @param amount       The monetary amount of the payment.
+     * @param paidByUser   The user who made the payment.
+     * @param createdByUser The user who created the payment.
+     * @param name         The name or description of the payment.
+     */
     public PaymentEntity(GroupEntity group, BigDecimal amount, UserEntity paidByUser, UserEntity createdByUser, String name) {
         this.id = UUID.randomUUID();
         this.group = group;
