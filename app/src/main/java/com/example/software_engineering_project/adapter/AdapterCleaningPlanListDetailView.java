@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Custom adapter for displaying details of cleaning plans in a ListView.
+ * Custom adapter for displaying details of cleaning plans as a List.
  *
  * This adapter extends ArrayAdapter<Cleaning> and is designed to work with the layout 'adapter_cleaning_plan_list_detail_view'.
  * It provides a customized view for each item in the ListView, including a number, formatted date, user name, and buttons for

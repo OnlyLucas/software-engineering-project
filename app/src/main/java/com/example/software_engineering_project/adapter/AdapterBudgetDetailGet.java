@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * Custom adapter for displaying budget details related to received amounts.
+ * Custom adapter for displaying budget details as a list related to received amounts.
  * This adapter is designed to work with the AdapterBudgetDetailGet layout.
  *
  * The adapter provides functionality to display a list of users with associated debt amounts
