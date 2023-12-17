@@ -7,6 +7,9 @@ import java.util.Objects;
 import java.util.UUID;
 import java.sql.Timestamp;
 
+/**
+ * Represents a data transfer object for creating a new user.
+ */
 public class UserCreate {
     private UUID id;
     private String email;
@@ -22,6 +25,14 @@ public class UserCreate {
         //default constructor
     }
 
+    /**
+     * Constructor for creating a new user with specified attributes.
+     *
+     * @param firstName The first name of the user.
+     * @param lastName  The last name of the user.
+     * @param email     The email address of the user.
+     * @param password  The password of the user.
+     */
     public UserCreate(String firstName, String lastName, String eMail, String password) {
         this.id = UUID.randomUUID();
         this.firstName = firstName;
