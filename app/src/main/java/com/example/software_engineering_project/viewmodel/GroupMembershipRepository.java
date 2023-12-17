@@ -81,14 +81,14 @@ public class GroupMembershipRepository {
                     ToastUtil.makeToast(context.getString(R.string.added) + groupMembership.getUser().getFirstName(), context);
                 } else {
                     Log.e(TAG, "Error while group membership creation");
-                    ToastUtil.makeToast(context.getString(R.string.error_while_adding) + groupMembership.getUser().getFirstName(), context);
+                    ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + groupMembership.getUser().getFirstName(), context);
                 }
             }
 
             @Override
             public void onFailure(Call<GroupMembership> call, Throwable t) {
                 Log.e(TAG, "Network error while group membership creation");
-                ToastUtil.makeToast(context.getString(R.string.error_while_adding) + groupMembership.getUser().getFirstName(), context);
+                ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + groupMembership.getUser().getFirstName(), context);
             }
         });
     }

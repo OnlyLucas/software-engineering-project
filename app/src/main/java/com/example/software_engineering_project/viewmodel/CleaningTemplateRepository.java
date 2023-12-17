@@ -55,14 +55,14 @@ public class CleaningTemplateRepository {
                     fetchCleaningTemplates();
                 } else {
                     Log.i(TAG, "Error while cleaning template creation");
-                    ToastUtil.makeToast(context.getString(R.string.error_while_adding) + cleaningTemplate.getName(), context);
+                    ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + cleaningTemplate.getName(), context);
                 }
             }
 
             @Override
             public void onFailure(Call<CleaningTemplate> call, Throwable t) {
                 Log.i(TAG, "Network error while cleaning template creation");
-                ToastUtil.makeToast(context.getString(R.string.error_while_adding) + cleaningTemplate.getName(), context);
+                ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + cleaningTemplate.getName(), context);
             }
         });
     }

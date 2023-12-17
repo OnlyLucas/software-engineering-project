@@ -18,7 +18,7 @@
     <string name="leave_flat_share">WG verlassen</string>
     <string name="manage_flat_share">WG bearbeiten</string>
     <string name="create_flat_share">WG erstellen</string>
-    <string name="please_login_with_your_credentials">Bitte melden Sie sich an!</string>
+    <string name="please_login_with_your_credentialsDot">Bitte melden Sie sich an!</string>
     <string name="shopping_list">Einkaufsliste</string>
     <string name="budget">Haushaltsbuch</string>
     <string name="cleaning_plan">Putzplan</string>
@@ -55,7 +55,7 @@
     <string name="please_login_with_your_created_credentials">Bitte melden Sie sich mit Ihren erstellten Anmeldedaten an.</string>
     <string name="removed">Entfernt</string>
     <string name="added">Hinzugefügt</string>
-    <string name="enter_an_item">Gebe ein Artikel ein.</string>
+    <string name="enter_an_itemDot">Gebe ein Artikel ein.</string>
     <string name="grocerylist">Einkaufsliste</string>
     <string name="select_date_range">Wähle einen Zeitraum</string>
     <string name="enter_description_here">Gib eine Beschreibung ein</string>
@@ -93,7 +93,7 @@
     <string name="enter_shorter_password">Bitte ein kürzeres Passwort eingeben</string>
     <string name="hello_blank_fragment">Hallo leeres Fragment</string>
     <string name="uncheckedColon_">"Abgehakt: "</string>
-    <string name="empty_input_fields">\\u0000</string>
+    <string name="empty_input_fields">\u0000</string>
     <string name="paid">bezahlt</string>
     <string name="username">Benutzername</string>
     <string name="confirm_password">Passwort bestätigen</string>
@@ -101,8 +101,11 @@
     <string name="description_of_flat">Beschreibung der WG</string>
     <string name="deletion_failed">Löschung fehlgeschlagen</string>
     <string name="error_while_unchecking">Fehler beim Abhaken</string>
-    <string name="error_while_adding">Fehler beim Hinzufügen</string>
+    <string name="error_while_adding_">Fehler beim Hinzufügen\u0020</string>
     <string name="registered_">"Registriert "</string>
     <string name="changed_mail_successfully">Mail erfolgreich geändert</string>
     <string name="error_changing_mail">Fehler beim Ändern der E-Mail</string>
+    <string name="enter_valid_username">Gültigen Benutzername eingeben</string>
+    <string name="enter_shorter_username">Kürzeren Benutzername eingeben</string>
+    <string name="passwords_not_matching">Passwörter stimmen nicht überein</string>
 </resources>

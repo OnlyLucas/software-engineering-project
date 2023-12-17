@@ -57,14 +57,14 @@ public class PaymentRepository {
                     ToastUtil.makeToast("Added " + paymentData.getPayment().getName(), context);
                 } else {
                     Log.e(TAG, "Error while creating payment");
-                    ToastUtil.makeToast(context.getString(R.string.error_while_adding) + paymentData.getPayment().getName(), context);
+                    ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + paymentData.getPayment().getName(), context);
                 }
             }
 
             @Override
             public void onFailure(Call<Payment> call, Throwable t) {
                 Log.e(TAG, "Network error while creating payment");
-                ToastUtil.makeToast(context.getString(R.string.error_while_adding) + paymentData.getPayment().getName(), context);
+                ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + paymentData.getPayment().getName(), context);
             }
         });
     }

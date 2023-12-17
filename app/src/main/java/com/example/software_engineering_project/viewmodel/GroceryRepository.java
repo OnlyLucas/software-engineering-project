@@ -58,14 +58,14 @@ public class GroceryRepository {
                     ToastUtil.makeToast(context.getString(R.string.added) + groupGrocery.getName(), context);
                 } else {
                     Log.e(TAG, "Error while group grocery creation");
-                    ToastUtil.makeToast(context.getString(R.string.error_while_adding) + groupGrocery.getName(), context);
+                    ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + groupGrocery.getName(), context);
                 }
             }
 
             @Override
             public void onFailure(Call<GroupGrocery> call, Throwable t) {
                 Log.e(TAG, "Network error while group grocery creation");
-                ToastUtil.makeToast(context.getString(R.string.error_while_adding) + groupGrocery.getName(), context);
+                ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + groupGrocery.getName(), context);
             }
         });
     }
@@ -140,7 +140,7 @@ public class GroceryRepository {
                 if(response.isSuccessful()){
                     Log.i(TAG, "Unchecking group grocery successful");
                     fetchGroupGroceries();
-                    ToastUtil.makeToast(context.getString(R.string.unchecked) + grocery.getName(), context);
+                    ToastUtil.makeToast(context.getString(R.string.uncheckedColon_) + grocery.getName(), context);
                 } else {
                     Log.e(TAG, "Error while unchecking group grocery");
                     ToastUtil.makeToast(context.getString(R.string.error_while_unchecking) + grocery.getName(), context);

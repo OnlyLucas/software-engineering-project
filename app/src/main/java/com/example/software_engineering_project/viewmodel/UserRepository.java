@@ -132,14 +132,14 @@ public class UserRepository {
                     ToastUtil.makeToast(context.getString(R.string.registered_) + user.getFirstName(), context);
                 } else {
                     Log.e(TAG, "Error while adding new user");
-                    ToastUtil.makeToast(context.getString(R.string.error_while_adding) + user.getFirstName(), context);
+                    ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + user.getFirstName(), context);
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Log.e(TAG, "Network error while adding new user");
-                ToastUtil.makeToast(context.getString(R.string.error_while_adding) + user.getFirstName(), context);
+                ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + user.getFirstName(), context);
             }
         });
     }

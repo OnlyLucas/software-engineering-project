@@ -18,7 +18,7 @@
     <string name="leave_flat_share">Leave flat share</string>
     <string name="manage_flat_share">Manage flat share</string>
     <string name="create_flat_share">Create flat share</string>
-    <string name="please_login_with_your_credentials">Please login with your credentials.</string>
+    <string name="please_login_with_your_credentialsDot">Please login with your credentials.</string>
     <string name="shopping_list">Shopping List</string>
     <string name="budget">Budget</string>
     <string name="cleaning_plan">Cleaning Plan</string>
@@ -30,7 +30,7 @@
     <string name="enter_flat_share_name">Enter flat share name</string>
     <string name="removed">"Removed: "</string>
     <string name="added">"Added "</string>
-    <string name="enter_an_item">Enter an item.</string>
+    <string name="enter_an_itemDot">Enter an item.</string>
     <string name="edit">Edit</string>
     <string name="enter_new_e_mail">Enter new e-mail</string>
     <string name="confirm_new_e_mail">Confirm new e-mail</string>
@@ -102,8 +102,11 @@
     <string name="description_of_flat">Description of flat</string>
     <string name="deletion_failed">Deletion failed</string>
     <string name="error_while_unchecking">Error while unchecking</string>
-    <string name="error_while_adding">Error while adding</string>
     <string name="registered_">"Registered "</string>
     <string name="changed_mail_successfully">Changed mail successfully</string>
     <string name="error_changing_mail">Error while changing mail</string>
+    <string name="enter_valid_username">Enter valid username</string>
+    <string name="enter_shorter_username">Enter shorter username</string>
+    <string name="passwords_not_matching">Passwords not machting</string>
+    <string name="error_while_adding_">Error while adding\u0020</string>
 </resources>

@@ -121,7 +121,7 @@ public class CleaningRepository {
                 if(response.isSuccessful()){
                     Log.i(TAG, "Unchecking cleaning successful");
                     fetchUncompletedCleanings(cleaning.getCleaningTemplate().getId());
-                    ToastUtil.makeToast(context.getString(R.string.unchecked) + cleaning.getDate(), context);
+                    ToastUtil.makeToast(context.getString(R.string.uncheckedColon_) + cleaning.getDate(), context);
                 } else {
                     Log.e(TAG, "Error while unchecking cleaning");
                     ToastUtil.makeToast(context.getString(R.string.error_while_unchecking) + cleaning.getDate(), context);
