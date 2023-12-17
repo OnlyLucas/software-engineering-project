@@ -38,7 +38,7 @@ public class GroupRepository{
             public void onResponse(Call<Group> call, Response<Group> response) {
                 if(response.isSuccessful()){
                     Log.i(TAG, "Group creation successful");
-                    ToastUtil.makeToast(context.getString(R.string.created) + group.getName(), context);
+                    ToastUtil.makeToast(context.getString(R.string.createdColon_) + group.getName(), context);
                 } else {
                     Log.e(TAG, "Error while group creation");
                     ToastUtil.makeToast(context.getString(R.string.error_while_creating) + group.getName(), context);

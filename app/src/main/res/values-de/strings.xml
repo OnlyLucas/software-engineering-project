@@ -108,4 +108,7 @@
     <string name="enter_valid_username">Gültigen Benutzername eingeben</string>
     <string name="enter_shorter_username">Kürzeren Benutzername eingeben</string>
     <string name="passwords_not_matching">Passwörter stimmen nicht überein</string>
+    <string name="enter_description">Gebe eine Beschreibung ein</string>
+    <string name="createdColon_">"Erstellt: "</string>
+    <string name="error_while_creating">Fehler beim erstellen</string>
 </resources>
