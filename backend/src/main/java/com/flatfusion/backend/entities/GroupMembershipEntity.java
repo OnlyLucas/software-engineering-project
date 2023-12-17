@@ -9,6 +9,9 @@ import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Represents a group membership entity with a unique identifier, associated group, associated user, and creation timestamp.
+ */
 @Entity
 @jakarta.persistence.Table(name = "group_memberships", schema = "flatfusion")
 public class GroupMembershipEntity implements EntityInterface {
@@ -68,6 +71,12 @@ public class GroupMembershipEntity implements EntityInterface {
         this.createdAt = createdAt;
     }
 
+    /**
+     * Checks whether this group membership entity is equal to another object.
+     *
+     * @param o The object to compare with.
+     * @return {@code true} if the objects are equal; {@code false} otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -76,11 +85,21 @@ public class GroupMembershipEntity implements EntityInterface {
         return Objects.equals(group, that.group) && Objects.equals(user, that.user) && Objects.equals(createdAt, that.createdAt);
     }
 
+    /**
+     * Generates a hash code for this group membership entity.
+     *
+     * @return The hash code.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(group, user, createdAt);
     }
 
+    /**
+     * Provides a string representation of this group membership entity.
+     *
+     * @return The string representation.
+     */
     @Override
     public String toString() {
         return "GroupMembershipEntity{" +

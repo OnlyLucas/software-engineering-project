@@ -12,6 +12,9 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Represents a cleaning template used for scheduling cleaning activities within a group.
+ */
 @Entity
 @Table(name = "cleaning_template", schema = "flatfusion")
 public class CleaningTemplateEntity implements EntityInterface{
@@ -59,10 +62,24 @@ public class CleaningTemplateEntity implements EntityInterface{
     @OneToMany(mappedBy = "cleaningTemplate", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<CleaningEntity> cleanings;
 
+    /**
+     * Default constructor for Spring.
+     */
     public CleaningTemplateEntity(){
         // default constructor for Spring
     }
 
+    /**
+     * Constructor for creating a CleaningTemplateEntity with specified parameters.
+     *
+     * @param group         The group associated with the cleaning template.
+     * @param name          The name of the cleaning template.
+     * @param description   The description of the cleaning template.
+     * @param startDate     The start date for scheduling cleaning activities.
+     * @param endDate       The end date for scheduling cleaning activities.
+     * @param interval      The interval between consecutive cleaning activities.
+     * @param createdByUser The user who created the cleaning template.
+     */
     public CleaningTemplateEntity(GroupEntity group, String name, String description, Date startDate,
                                   Date endDate, Integer interval, UserEntity createdByUser){
         this.id = UUID.randomUUID();
@@ -158,6 +175,12 @@ public class CleaningTemplateEntity implements EntityInterface{
         this.cleanings = cleanings;
     }
 
+    /**
+     * Indicates whether some other object is "equal to" this one.
+     *
+     * @param o The reference object with which to compare.
+     * @return {@code true} if this object is the same as the obj argument; {@code false} otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -166,11 +189,21 @@ public class CleaningTemplateEntity implements EntityInterface{
         return Objects.equals(id, that.id) && Objects.equals(group, that.group) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(startDate, that.startDate) && Objects.equals(endDate, that.endDate) && Objects.equals(interval, that.interval) && Objects.equals(createdByUser, that.createdByUser) && Objects.equals(createdAt, that.createdAt) && Objects.equals(cleanings, that.cleanings);
     }
 
+    /**
+     * Returns a hash code value for the object.
+     *
+     * @return A hash code value for this object.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id, group, name, description, startDate, endDate, interval, createdByUser, createdAt, cleanings);
     }
 
+    /**
+     * Returns a string representation of the object.
+     *
+     * @return A string representation of the object.
+     */
     @Override
     public String toString() {
         return "CleaningTemplateEntity{" +

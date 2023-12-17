@@ -10,6 +10,10 @@ import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Represents a group grocery entity with a unique identifier, group association, name, creator, creation timestamp,
+ * completion status, completion timestamp, and user who completed the grocery item.
+ */
 @Entity
 @Table(name = "group_groceries", schema = "flatfusion")
 public class GroupGroceryEntity implements EntityInterface{
@@ -119,6 +123,12 @@ public class GroupGroceryEntity implements EntityInterface{
         this.completedAt = completedAt;
     }
 
+    /**
+     * Checks whether this group grocery entity is equal to another object.
+     *
+     * @param o The object to compare with.
+     * @return {@code true} if the objects are equal; {@code false} otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -127,11 +137,21 @@ public class GroupGroceryEntity implements EntityInterface{
         return Objects.equals(id, that.id) && Objects.equals(group, that.group) && Objects.equals(name, that.name) && Objects.equals(createdByUser, that.createdByUser) && Objects.equals(createdAt, that.createdAt) && Objects.equals(isCompleted, that.isCompleted) && Objects.equals(completedByUser, that.completedByUser) && Objects.equals(completedAt, that.completedAt);
     }
 
+    /**
+     * Generates a hash code for this group grocery entity.
+     *
+     * @return The hash code.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id, group, name, createdByUser, createdAt, isCompleted, completedByUser, completedAt);
     }
 
+    /**
+     * Provides a string representation of this group grocery entity.
+     *
+     * @return The string representation.
+     */
     @Override
     public String toString() {
         return "GroupGroceryEntity{" +

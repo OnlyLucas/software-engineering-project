@@ -9,6 +9,9 @@ import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Represents a group entity with a unique identifier, name, description, creator, and creation timestamp.
+ */
 // TODO Group members included?
 @Entity
 @Table(name = "living_groups", schema = "flatfusion")
@@ -95,6 +98,12 @@ public class GroupEntity implements EntityInterface{
 //        this.groupMembers = groupMembers;
 //    }
 
+    /**
+     * Checks whether this group entity is equal to another object.
+     *
+     * @param o The object to compare with.
+     * @return {@code true} if the objects are equal; {@code false} otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -103,11 +112,21 @@ public class GroupEntity implements EntityInterface{
         return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(createdByUser, that.createdByUser) && Objects.equals(createdAt, that.createdAt);
     }
 
+    /**
+     * Generates a hash code for this group entity.
+     *
+     * @return The hash code.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id, name, description, createdByUser, createdAt);
     }
 
+    /**
+     * Provides a string representation of this group entity.
+     *
+     * @return The string representation.
+     */
     @Override
     public String toString() {
         return "GroupEntity{" +

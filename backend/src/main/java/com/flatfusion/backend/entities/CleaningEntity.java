@@ -12,6 +12,9 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Entity class representing a cleaning activity within a group.
+ */
 @Entity
 @Table(name = "cleanings", schema = "flatfusion")
 public class CleaningEntity implements EntityInterface{
@@ -49,10 +52,21 @@ public class CleaningEntity implements EntityInterface{
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp completedAt;
 
+    /**
+     * Default constructor for CleaningEntity.
+     */
     public CleaningEntity(){
         //default constructor
     }
 
+    /**
+     * Parameterized constructor for creating a CleaningEntity.
+     *
+     * @param group            The group to which the cleaning activity belongs.
+     * @param user             The user responsible for the cleaning activity.
+     * @param date             The date on which the cleaning activity is scheduled.
+     * @param cleaningTemplate The cleaning template associated with the cleaning activity.
+     */
     public CleaningEntity(GroupEntity group, UserEntity user, Date date, CleaningTemplateEntity cleaningTemplate){
         this.id = UUID.randomUUID();
         this.group = group;
@@ -62,10 +76,20 @@ public class CleaningEntity implements EntityInterface{
         this.cleaningTemplate = cleaningTemplate;
     }
 
+    /**
+     * Getter for the unique identifier of the cleaning entity.
+     *
+     * @return The unique identifier of the cleaning entity.
+     */
     public UUID getId() {
         return id;
     }
 
+    /**
+     * Setter for the unique identifier of the cleaning entity.
+     *
+     * @param id The unique identifier to set.
+     */
     @Override
     public void setId(UUID id) {
         this.id = id;
