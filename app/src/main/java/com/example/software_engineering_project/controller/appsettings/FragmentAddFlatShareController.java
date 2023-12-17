@@ -17,6 +17,7 @@ import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.viewmodel.GroupRepository;
+import com.example.software_engineering_project.viewmodel.UserViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,10 +56,15 @@ public class FragmentAddFlatShareController extends Fragment {
         });
 
         saveAddFlatShare.setOnClickListener(view -> {
-            FragmentManageFlatShareController fragment = new FragmentManageFlatShareController();
-            checkInputs();
-            ToastUtil.makeToast(getString(R.string.saved), context);
-            callFragment(fragment);
+            Group group = UserViewModel.getCurrentGroup().getValue();
+            if(group == null){
+                FragmentManageFlatShareController fragment = new FragmentManageFlatShareController();
+                checkInputs();
+                callFragment(fragment);
+            } else {
+                ToastUtil.makeToast(getString(R.string.already_member_of_group), context);
+            }
+
         });
 
     }

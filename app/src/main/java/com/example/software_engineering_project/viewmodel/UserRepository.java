@@ -47,24 +47,26 @@ public class UserRepository {
      */
     public void fetchUsers() {
         Group group = UserViewModel.getCurrentGroup().getValue();
-        Call<List<User>> call = userService.getUsers(group.getId());
-        call.enqueue(new Callback<List<User>>(){
-            @Override
-            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                if (response.isSuccessful()) {
-                    Log.i(TAG, "User fetching successful");
-                    List<User> users = response.body();
-                    currentUsers.setValue(users);
-                } else {
-                    Log.e(TAG, "Error while fetching users");
+        if(group != null) {
+            Call<List<User>> call = userService.getUsers(group.getId());
+            call.enqueue(new Callback<List<User>>() {
+                @Override
+                public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                    if (response.isSuccessful()) {
+                        Log.i(TAG, "User fetching successful");
+                        List<User> users = response.body();
+                        currentUsers.setValue(users);
+                    } else {
+                        Log.e(TAG, "Error while fetching users");
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<List<User>> call, Throwable t) {
-                Log.e(TAG, "Network error while fetching users");
-            }
-        });
+                @Override
+                public void onFailure(Call<List<User>> call, Throwable t) {
+                    Log.e(TAG, "Network error while fetching users");
+                }
+            });
+        }
     }
 
     /**

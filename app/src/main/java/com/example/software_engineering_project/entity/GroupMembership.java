@@ -28,6 +28,13 @@ public class GroupMembership {
         long currentTimeMillis = System.currentTimeMillis();
         this.createdAt  = new Timestamp(currentTimeMillis);
     }
+    public GroupMembership(User user, Group group){
+        this.id = UUID.randomUUID();
+        this.user = user;
+        this.group = group;
+        long currentTimeMillis = System.currentTimeMillis();
+        this.createdAt  = new Timestamp(currentTimeMillis);
+    }
 
     public UUID getId() {
         return id;
