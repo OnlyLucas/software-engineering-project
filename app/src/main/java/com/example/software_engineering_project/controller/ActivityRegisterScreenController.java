@@ -24,7 +24,7 @@ public class ActivityRegisterScreenController extends AppCompatActivity {
 
     private Button cancelButtonRegister, registerButtonRegister;
     private Context context;
-    private EditText emailRegister, firstNameRegister, passwordRegister, surnameRegister;
+    private EditText confirmPasswordRegister, emailRegister, firstNameRegister, passwordRegister, usernameRegister, surnameRegister;
     private static UserRepository userRepository;
 
 
@@ -137,10 +137,12 @@ public class ActivityRegisterScreenController extends AppCompatActivity {
     private void loadScreenElements() {
 
         cancelButtonRegister = findViewById(R.id.cancelButtonRegister);
+        confirmPasswordRegister = findViewById(R.id.confirmPasswordRegister);
         emailRegister = findViewById(R.id.emailRegister);
         firstNameRegister = findViewById(R.id.firstNameRegister);
         passwordRegister = findViewById(R.id.passwordRegister);
         registerButtonRegister = findViewById(R.id.registerButtonRegister);
+        usernameRegister = findViewById(R.id.usernameRegister);
         surnameRegister = findViewById(R.id.surnameRegister);
 
     }

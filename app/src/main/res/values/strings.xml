@@ -97,4 +97,6 @@
     <string name="enter_shorter_password">Please enter shorter password</string>
     <string name="paid">paid</string>
     <string name="grocery_history">Grocery History</string>
+    <string name="username">Username</string>
+    <string name="confirm_password">Confirm password</string>
 </resources>
