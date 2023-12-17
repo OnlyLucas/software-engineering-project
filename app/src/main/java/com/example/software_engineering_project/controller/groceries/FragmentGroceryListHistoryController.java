@@ -73,7 +73,7 @@ public class FragmentGroceryListHistoryController extends Fragment {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //removeItem(i);
+                removeItem(i);
                 return false;
             }
         });

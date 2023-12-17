@@ -44,7 +44,7 @@ public class FragmentChangeMailScreenControllerTest {
 
         //Klicke auf das Eingabefeld aktuelle E-Mail Adresse
         Espresso.onView(withId(R.id.currentMail))
-                .perform(ViewActions.typeText("abc"), ViewActions.closeSoftKeyboard());
+                .perform(ViewActions.typeText("john.doe@example.com"), ViewActions.closeSoftKeyboard());
 
         //Kicke auf das Eingabefeld neue E-Mail Adresse
         Espresso.onView(withId(R.id.newMail))
@@ -58,18 +58,20 @@ public class FragmentChangeMailScreenControllerTest {
         Espresso.onView(withId(R.id.saveChangeMail))
                         .perform(ViewActions.click());
 
+        launchFragment();
+
         //Überprüfen ob wechsel geklappt hat.
         //Klicke auf das Eingabefeld aktuelle E-Mail Adresse
         Espresso.onView(withId(R.id.currentMail))
-                .perform(ViewActions.typeText("test2@test.de"), ViewActions.closeSoftKeyboard());
+                .perform(ViewActions.typeText("john.doe@example.com"), ViewActions.closeSoftKeyboard());
 
         //Kicke auf das Eingabefeld neue E-Mail Adresse
         Espresso.onView(withId(R.id.newMail))
-                .perform(ViewActions.typeText("test@test.de"), ViewActions.closeSoftKeyboard());
+                .perform(ViewActions.typeText("john.doe@example.com"), ViewActions.closeSoftKeyboard());
 
         //Kicke auf das Eingabefeld neue E-Mail Adresse bestätigen
         Espresso.onView(withId(R.id.confirmNewMail))
-                .perform(ViewActions.typeText("abc"), ViewActions.closeSoftKeyboard());
+                .perform(ViewActions.typeText("john.doe@example.com"), ViewActions.closeSoftKeyboard());
 
         //Änderungen in Datenbank speichern
         Espresso.onView(withId(R.id.saveChangeMail))
