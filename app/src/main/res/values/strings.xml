@@ -31,7 +31,7 @@
     <string name="removed">"Removed: "</string>
     <string name="added">"Added "</string>
     <string name="enter_an_item">Enter an item.</string>
-    <string name="unchecked">Unchecked :</string>
+    <string name="unchecked">Unchecked: </string>
     <string name="edit">Edit</string>
     <string name="enter_new_e_mail">Enter new e-mail</string>
     <string name="confirm_new_e_mail">Confirm new e-mail</string>
@@ -54,8 +54,6 @@
     <string name="new_e_mail_saved">New e-mail saved</string>
     <string name="changes_discarded">Changes discarded</string>
     <string name="new_password_saved">New password saved</string>
-    <string name="removed_toast">"Removed: "</string>
-    <string name="unchecked_toast">"Unchecked: "</string>
     <string name="enter_an_item_toast">Enter an item.</string>
     <string name="added_toast">"Added "</string>
     <string name="no_negative_amount_allowed">No negative amount allowed</string>
@@ -107,4 +105,7 @@
     <string name="registered">"Registered "</string>
     <string name="changed_mail_successfully">Changed mail successfully</string>
     <string name="error_changing_mail">Error while changing mail</string>
+    <string name="enter_valid_username">Please enter valid username</string>
+    <string name="enter_shorter_username">Please enter shorter username</string>
+    <string name="passwords_not_matching">Passwords are not matching</string>
 </resources>
