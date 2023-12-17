@@ -52,6 +52,16 @@ public class UserRESTController extends RESTController<UserEntity>{
         return repository.findByGroupId(groupId);
     }
 
+    @GetMapping("/mail/{mail}")
+    public ResponseEntity<UserEntity> getUserByMail(@PathVariable("mail") String mail) {
+        UserEntity user = repository.findByEmail(mail);
+        if (user != null) {
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     //TODO Add Post Mapping
 //    @Transactional
 //    @PostMapping
