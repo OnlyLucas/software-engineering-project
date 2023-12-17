@@ -75,9 +75,6 @@ public class FragmentBudgetAddExpenseScreenControllerTest {
 
         // Perform any actions related to selecting users (if applicable)
 
-        // Scroll to make the saveExpense button visible
-        //Espresso.onView(withId(R.id.scrollView)).perform(ViewActions.scrollTo());
-
         // Wait for some time to ensure the saveExpense button is visible
         try {
             Thread.sleep(1000); // You can adjust the waiting time as needed

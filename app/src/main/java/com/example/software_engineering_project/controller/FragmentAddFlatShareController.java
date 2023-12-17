@@ -12,18 +12,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.adapter.AdapterManageFlatShareListView;
-import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
-import com.example.software_engineering_project.viewmodel.GroupMembershipRepository;
-import com.example.software_engineering_project.viewmodel.UserRepository;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FragmentAddFlatShareController#newInstance} factory method to
+ * Use the {@link FragmentAddFlatShareController #newInstance} factory method to
  * create an instance of this fragment.
  */
 public class FragmentAddFlatShareController extends Fragment {

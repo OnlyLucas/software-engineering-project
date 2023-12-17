@@ -220,9 +220,12 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
 
     private void showDatePickerDialog() {
 
-        CalendarConstraints.Builder calendarConstraints= new CalendarConstraints.Builder();
+        CalendarConstraints.Builder calendarConstraints = new CalendarConstraints.Builder();
         calendarConstraints.setValidator(DateValidatorPointForward.now());
-        MaterialDatePicker<Pair<Long, Long>> materialDatePicker = MaterialDatePicker.Builder.dateRangePicker().setTitleText(R.string.select_date_range).build();
+        MaterialDatePicker<Pair<Long, Long>> materialDatePicker = MaterialDatePicker.Builder.dateRangePicker()
+                .setTitleText(R.string.select_date_range)
+                .setCalendarConstraints(calendarConstraints.build())
+                .build();
         materialDatePicker.show(requireActivity().getSupportFragmentManager(), "TAG");
 
         materialDatePicker.addOnPositiveButtonClickListener(selection -> {
