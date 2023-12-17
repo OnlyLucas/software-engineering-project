@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.entity.UserCreate;
 import com.example.software_engineering_project.util.ToastUtil;
@@ -64,6 +65,8 @@ public class ActivityRegisterScreenController extends AppCompatActivity {
         String lastName = surnameRegister.getText().toString();
         String eMail = emailRegister.getText().toString();
         String password = passwordRegister.getText().toString();
+        String confirmPassword = confirmPasswordRegister.getText().toString();
+        String username = usernameRegister.getText().toString();
 
         // Check if firstName contains only letters
         if (!isValidName(firstName) || firstName.length() == 0) {
@@ -87,28 +90,42 @@ public class ActivityRegisterScreenController extends AppCompatActivity {
             return;
         }
 
+        if (username.length() == 0) {
+            ToastUtil.makeToast(getString(R.string.enter_valid_username), context);
+            return;
+        }
+
+        if (username.length() > 15) {
+            ToastUtil.makeToast(getString(R.string.enter_shorter_username), context);
+            return;
+        }
+
         // Check if eMail has a standard email format
         if (!isValidEmail(eMail) || eMail.length() > 30) {
             ToastUtil.makeToast(getString(R.string.enter_valid_mail), context);
             return;
         }
 
-        if (password.length() == 0){
+        if (!password.equals(confirmPassword)) {
+            ToastUtil.makeToast(getString(R.string.passwords_not_matching), context);
+            return;
+        }
+
+        if (password.length() == 0 || confirmPassword.length() == 0) {
             ToastUtil.makeToast(getString(R.string.enter_password), context);
             return;
         }
 
-        if (password.length() > 25) {
+        if (password.length() > 25 || confirmPassword.length() > 25) {
             ToastUtil.makeToast(getString(R.string.enter_shorter_password), context);
             return;
         }
 
         // TODO create new User
-        UserCreate user = new UserCreate(firstName, lastName, eMail, password);
+        UserCreate user = new UserCreate(firstName, lastName, username, eMail, password);
         addItem(user);
 
         ToastUtil.makeToast(getString(R.string.please_login_with_your_created_credentials), context);
-
 
     }
 

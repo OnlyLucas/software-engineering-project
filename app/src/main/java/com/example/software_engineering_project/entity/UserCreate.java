@@ -30,13 +30,15 @@ public class UserCreate {
      *
      * @param firstName The first name of the user.
      * @param lastName  The last name of the user.
-     * @param email     The email address of the user.
+     * @param username  The username of the user.
+     * @param eMail     The email address of the user.
      * @param password  The password of the user.
      */
-    public UserCreate(String firstName, String lastName, String eMail, String password) {
+    public UserCreate(String firstName, String lastName, String username, String eMail, String password) {
         this.id = UUID.randomUUID();
         this.firstName = firstName;
         this.lastName = lastName;
+        this.username = username;
         this.email = eMail;
         this.password = password;
         long currentTimeMillis = System.currentTimeMillis();
