@@ -41,7 +41,7 @@
                 android:backgroundTint="@color/listViewTint"/>
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/leaveFlatShare"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/leave_flat_share"

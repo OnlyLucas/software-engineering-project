@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.controller.ActivityLoginScreenController;
+import com.example.software_engineering_project.controller.FragmentDialogLeaveFlatShare;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,7 +30,7 @@ public class FragmentSettingsController extends Fragment {
     private static FragmentChangePasswordController fragmentChangePasswordController = new FragmentChangePasswordController();
     private static FragmentChangeMailController fragmentChangeMailController = new FragmentChangeMailController();
     private static FragmentManageFlatShareController fragmentManageFlatShareController = new FragmentManageFlatShareController();
-    private Button changeMailButton, changePasswordButton, createFlatShareButton, logOutButton;
+    private Button changeMailButton, changePasswordButton, createFlatShareButton, leaveFlatShareButton, logOutButton;
     private View fragmentView;
 
 
@@ -65,6 +66,11 @@ public class FragmentSettingsController extends Fragment {
             callFragment(fragmentManageFlatShareController);
         });
 
+        leaveFlatShareButton.setOnClickListener(view -> {
+            FragmentDialogLeaveFlatShare dialog = new FragmentDialogLeaveFlatShare();
+            dialog.show(getChildFragmentManager(), "LeaveFlatShare");
+        });
+
         logOutButton.setOnClickListener(view -> {
             Intent loginScreen = new Intent(requireActivity(), ActivityLoginScreenController.class);
             startActivity(loginScreen);
@@ -86,6 +92,7 @@ public class FragmentSettingsController extends Fragment {
         changeMailButton = fragmentView.findViewById(R.id.changeMailButton);
         changePasswordButton = fragmentView.findViewById(R.id.changePasswordButton);
         createFlatShareButton = fragmentView.findViewById(R.id.createFlatShareButton);
+        leaveFlatShareButton = fragmentView.findViewById(R.id.leaveFlatShare);
         logOutButton = fragmentView.findViewById(R.id.logOutButton);
 
     }
