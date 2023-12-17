@@ -47,16 +47,11 @@ public class UserRESTController extends RESTController<UserEntity>{
     public ResponseEntity<UserEntity> partialUpdateUser(@PathVariable UUID userId, @RequestBody Map<String, ?> updates) {
         Optional<UserEntity> oldEntity = repository.findById(userId);
 
-
         if (oldEntity.isPresent()) {
-            UserEntity updatedEntity = oldEntity.get();
-            System.out.println("Old user mail: " + updatedEntity.getEmail());
-
             repository.partialUpdate(userId, updates);
             Optional<UserEntity> updatedEntityOptional = repository.findById(userId);
-            updatedEntity = updatedEntityOptional.get();
-            System.out.println("New user mail: " + updatedEntity.getEmail());
-
+            UserEntity updatedEntity = updatedEntityOptional.get();
+            logger.info("Update user mail of user with id " + userId + "with new mail " + updatedEntity.getEmail());
             return new ResponseEntity<>(updatedEntity, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -85,6 +80,7 @@ public class UserRESTController extends RESTController<UserEntity>{
     public ResponseEntity<UserEntity> getUserByMail(@PathVariable("mail") String mail) {
         UserEntity user = repository.findByEmail(mail);
         if (user != null) {
+            logger.info("Get user by mail: " + mail);
             return new ResponseEntity<>(user, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

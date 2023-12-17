@@ -42,7 +42,7 @@ public class GroupGroceryRESTController extends RESTController<GroupGroceryEntit
      */
     @GetMapping("/group/{id}/uncompleted")
     public ResponseEntity<List<GroupGroceryEntity>> getGroupGroceriesByGroupIdUncompleted(@PathVariable UUID id){
-        logger.info("Get GroupGroceries by group id:  " + id);
+        logger.info("Get uncompleted GroupGroceries by group id:  " + id);
         Optional<List<GroupGroceryEntity>> entities = repository.findUncompletedByGroupId(id);
 
         if(entities.isEmpty()){
@@ -61,7 +61,7 @@ public class GroupGroceryRESTController extends RESTController<GroupGroceryEntit
      */
     @GetMapping("/group/{id}/completed")
     public ResponseEntity<List<GroupGroceryEntity>> getGroupGroceriesByGroupIdCompleted(@PathVariable UUID id){
-        logger.info("Get GroupGroceries by group id:  " + id);
+        logger.info("Get completed GroupGroceries by group id:  " + id);
         Optional<List<GroupGroceryEntity>> entities = repository.findCompletedByGroupId(id);
 
         if(entities.isEmpty()){

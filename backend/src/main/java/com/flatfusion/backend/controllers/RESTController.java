@@ -64,7 +64,7 @@ public class RESTController<T extends EntityInterface> {
     @GetMapping("/{id}")
     public ResponseEntity<T> getById(@PathVariable UUID id, WebRequest request){
 
-        logger.info("This is the request id for the controller: " + id);
+        logger.info("Get entity by id: " + id);
         Optional<T> entity = repository.findById(id);
 
         if(entity.isEmpty()){
@@ -84,12 +84,12 @@ public class RESTController<T extends EntityInterface> {
     @Transactional
     @PutMapping("/{id}")
     public ResponseEntity<T> update(@PathVariable UUID id, @RequestBody T updatedEntity) {
-
         Optional<T> existingEntity = repository.findById(id);
 
         if (existingEntity.isPresent()) {
             try {
                 repository.save(updatedEntity);
+                logger.info("Update entity by id: " + id);
             } catch (PropertyValueException e) {
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }

@@ -48,6 +48,7 @@ public class GroupMembershipRESTController extends RESTController<GroupMembershi
             @PathVariable("groupId") UUID groupId) {
         GroupMembershipEntity groupMembership = repository.findByGroupIdAndUserId(groupId, userId);
         if (groupMembership != null) {
+            logger.info("Deleted GroupMembership by user id: " + userId + " and group id:  " + groupId);
             repository.delete(groupMembership);
             return new ResponseEntity<>(HttpStatus.OK);
         }
