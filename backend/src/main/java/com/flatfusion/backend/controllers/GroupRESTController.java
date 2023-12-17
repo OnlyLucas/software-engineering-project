@@ -14,6 +14,12 @@ import org.springframework.web.context.request.WebRequest;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * REST Controller for managing {@link GroupEntity} instances, including operations related to groups.
+ * Extends {@link RESTController} for generic CRUD operations.
+ *
+ * Base URL path: "/api/groups"
+ */
 @RestController
 @RequestMapping("/v1/groups")
 public class GroupRESTController extends RESTController<GroupEntity>{
@@ -21,11 +27,24 @@ public class GroupRESTController extends RESTController<GroupEntity>{
     @Autowired
     GroupEntityRepository groupRepository;
 
+    /**
+     * Constructor with autowired {@link GroupEntityRepository}.
+     *
+     * @param repository The autowired repository for {@link GroupEntity}.
+     */
     @Autowired
     public GroupRESTController(GroupEntityRepository repository) {
         super(repository);
     }
 
+
+    /**
+     * Get a group by ID excluding sensitive information (e.g., createdByUser password).
+     *
+     * @param id The ID of the group to retrieve.
+     * @param request The web request.
+     * @return {@link ResponseEntity} with the retrieved {@link GroupEntity} and HTTP status.
+     */
     @Override
     @GetMapping("/{id}")
     public ResponseEntity<GroupEntity> getById(@PathVariable UUID id, WebRequest request){

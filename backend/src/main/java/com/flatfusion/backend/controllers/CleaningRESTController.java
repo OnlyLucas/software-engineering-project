@@ -14,17 +14,35 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/**
+ * REST Controller for managing {@link CleaningEntity} instances, particularly focusing on cleaning templates.
+ * Extends {@link RESTController} for generic CRUD operations.
+ *
+ * Base URL path: "/api/cleanings"
+ */
 @RestController
 @RequestMapping("/v1/cleanings")
 public class CleaningRESTController extends RESTController<CleaningEntity>{
     @Autowired
     CleaningEntityRepository repository;
 
+    /**
+     * Constructor with autowired {@link CleaningEntityRepository}.
+     *
+     * @param repository The autowired repository for {@link CleaningEntity}.
+     */
     @Autowired
     public CleaningRESTController(CleaningEntityRepository repository) {
         super(repository);
     }
 
+    /**
+     * Get uncompleted cleanings for a specific cleaning template.
+     *
+     * @param templateId The ID of the cleaning template.
+     * @return {@link ResponseEntity} containing a list of uncompleted cleanings with HTTP status.
+     *         If found, returns 200 OK; if not found, returns 404 NOT FOUND.
+     */
     @GetMapping("/cleaning-template/{templateId}/uncompleted")
     public ResponseEntity<List<CleaningEntity>> getUncompletedCleaningsForCleaningTemplate(@PathVariable UUID templateId) {
         logger.info("Get uncompleted Cleanings by CleaningTemplate id:  " + templateId);

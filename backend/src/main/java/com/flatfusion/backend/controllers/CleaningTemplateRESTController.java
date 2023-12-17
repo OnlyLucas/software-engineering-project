@@ -12,6 +12,12 @@ import java.time.LocalDate;
 import java.util.*;
 import java.sql.Date;
 
+/**
+ * REST Controller for managing {@link CleaningTemplateEntity} instances, including operations related to cleaning templates
+ * and associated cleanings. Extends {@link RESTController} for generic CRUD operations.
+ *
+ * Base URL path: "/api/cleanings/templates"
+ */
 @RestController
 @RequestMapping("/v1/cleaning-templates")
 public class CleaningTemplateRESTController extends RESTController<CleaningTemplateEntity>{
@@ -24,13 +30,23 @@ public class CleaningTemplateRESTController extends RESTController<CleaningTempl
     @Autowired
     private GroupEntityRepository groupRepository;
 
-
+    /**
+     * Constructor with autowired {@link CleaningTemplateEntityRepository}.
+     *
+     * @param cleaningTemplateRepository The autowired repository for {@link CleaningTemplateEntity}.
+     */
     @Autowired
     public CleaningTemplateRESTController(CleaningTemplateEntityRepository cleaningTemplateRepository) {
         super(cleaningTemplateRepository);
     }
 
-
+    /**
+     * Get cleaning templates by group ID.
+     *
+     * @param id The ID of the group.
+     * @return {@link ResponseEntity} containing a list of cleaning templates with HTTP status.
+     *         If found, returns 200 OK; if not found, returns 404 NOT FOUND.
+     */
     @GetMapping("/group/{id}")
     public ResponseEntity<List<CleaningTemplateEntity>> getCleaningTemplatesByGroupId(@PathVariable UUID id){
         logger.info("Get Cleaning Templates by group id:  " + id);
@@ -43,7 +59,13 @@ public class CleaningTemplateRESTController extends RESTController<CleaningTempl
         return new ResponseEntity<>(entities.get(), HttpStatus.OK);
     }
 
-
+    /**
+     * Create a cleaning template with associated cleanings.
+     *
+     * @param request The request body containing data for the new cleaning template.
+     * @return {@link ResponseEntity} containing the created cleaning template with HTTP status.
+     *         If created, returns 201 CREATED; if invalid or missing attributes, returns 422 UNPROCESSABLE ENTITY.
+     */
     @Transactional
     @PostMapping("/create-with-cleanings")
     public ResponseEntity<CleaningTemplateEntity> createWithCleanings(@RequestBody CleaningTemplateEntity request) {
@@ -106,6 +128,17 @@ public class CleaningTemplateRESTController extends RESTController<CleaningTempl
         return new ResponseEntity<>(cleaningTemplate, HttpStatus.CREATED);
     }
 
+    /**
+     * Helper method to create cleaning entities based on the cleaning template and associated data.
+     *
+     * @param groupUsers       The list of users in the group.
+     * @param group            The group entity.
+     * @param cleaningTemplate The cleaning template entity.
+     * @param startDate        The start date for creating cleanings.
+     * @param endDate          The end date for creating cleanings.
+     * @param interval         The interval between cleanings.
+     * @return A set of created cleaning entities.
+     */
     private Set<CleaningEntity> createCleaningEntities(List<UserEntity> groupUsers, GroupEntity group, CleaningTemplateEntity cleaningTemplate, Date startDate, Date endDate, Integer interval){
         UserEntity cleaningUser;
         Set<CleaningEntity> newCleanings = new HashSet<>();

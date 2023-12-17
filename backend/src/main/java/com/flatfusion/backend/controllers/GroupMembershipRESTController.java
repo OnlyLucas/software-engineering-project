@@ -12,17 +12,36 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 
+/**
+ * REST Controller for managing {@link GroupMembershipEntity} instances, including operations related to group memberships.
+ * Extends {@link RESTController} for generic CRUD operations.
+ *
+ * Base URL path: "/api/group-memberships"
+ */
 @RestController
 @RequestMapping("/v1/group-memberships")
 public class GroupMembershipRESTController extends RESTController<GroupMembershipEntity>{
 
     @Autowired
     private GroupMembershipEntityRepository repository;
+
+    /**
+     * Constructor with autowired {@link GroupMembershipEntityRepository}.
+     *
+     * @param repository The autowired repository for {@link GroupMembershipEntity}.
+     */
     @Autowired
     public GroupMembershipRESTController(GroupMembershipEntityRepository repository) {
         super(repository);
     }
 
+    /**
+     * Delete a group membership by user ID and group ID.
+     *
+     * @param userId The ID of the user.
+     * @param groupId The ID of the group.
+     * @return {@link ResponseEntity} with HTTP status indicating success (200 OK) or not found (404 NOT FOUND).
+     */
     @DeleteMapping("/{userId}/{groupId}")
     public ResponseEntity<Void> deleteGroupMembership(
             @PathVariable("userId") UUID userId,
