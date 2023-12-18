@@ -1,7 +1,8 @@
-package com.flatfusion.backend.entities;
+package com.flatfusion.backend.requests;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.flatfusion.backend.entities.PaymentEntity;
 
 import java.math.BigDecimal;
 import java.util.Map;

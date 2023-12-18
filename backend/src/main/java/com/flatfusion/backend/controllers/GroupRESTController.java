@@ -30,8 +30,7 @@ public class GroupRESTController extends RESTController<GroupEntity>{
     @GetMapping("/{id}")
     public ResponseEntity<GroupEntity> getById(@PathVariable UUID id, WebRequest request){
 
-        System.out.println("This is the request id for the generic controller: " + id);
-        logger.info("This is the request id for the controller: " + id);
+        logger.info("This is the request id for the GroupRestController: " + id);
         Optional<GroupEntity> entity = groupRepository.findGroupByIdExcludingCreatedByUserPassword(id);
 
         if(entity.isEmpty()){

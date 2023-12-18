@@ -5,6 +5,7 @@ import com.flatfusion.backend.repositories.GroupEntityRepository;
 import com.flatfusion.backend.repositories.PaymentEntityRepository;
 import com.flatfusion.backend.repositories.PaymentParticipationEntityRepository;
 import com.flatfusion.backend.repositories.UserEntityRepository;
+import com.flatfusion.backend.requests.PaymentCreationRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
