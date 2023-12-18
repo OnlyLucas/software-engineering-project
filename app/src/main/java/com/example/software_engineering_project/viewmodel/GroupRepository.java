@@ -61,7 +61,7 @@ public class GroupRepository{
 
             @Override
             public void onFailure(Call<Group> call, Throwable t) {
-                Log.e(TAG, "Network error while group creation");
+                Log.e(TAG, "Network error while group creation: " + t);
                 ToastUtil.makeToast(context.getString(R.string.error_while_creating) + group.getName(), context);
             }
         });

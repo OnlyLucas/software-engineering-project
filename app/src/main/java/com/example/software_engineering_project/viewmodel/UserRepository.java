@@ -63,7 +63,7 @@ public class UserRepository {
 
                 @Override
                 public void onFailure(Call<List<User>> call, Throwable t) {
-                    Log.e(TAG, "Network error while fetching users");
+                    Log.e(TAG, "Network error while fetching users: " + t);
                 }
             });
         }
@@ -93,7 +93,7 @@ public class UserRepository {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Log.e(TAG, "Network error while fetching user by mail");
+                Log.e(TAG, "Network error while fetching user by mail: " + t);
             }
         });
     }
@@ -140,7 +140,7 @@ public class UserRepository {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Log.e(TAG, "Network error while adding new user");
+                Log.e(TAG, "Network error while adding new user: " + t);
                 ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + user.getFirstName(), context);
             }
         });
@@ -169,7 +169,7 @@ public class UserRepository {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Log.e(TAG, "Network error while changing mail");
+                Log.e(TAG, "Network error while changing mail: " + t);
                 ToastUtil.makeToast(context.getString(R.string.error_changing_mail), context);
             }
         });

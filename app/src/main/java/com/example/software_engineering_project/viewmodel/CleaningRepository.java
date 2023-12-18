@@ -58,7 +58,7 @@ public class CleaningRepository {
 
             @Override
             public void onFailure(Call<List<Cleaning>> call, Throwable t) {
-                Log.e(TAG, "Network error while fetching cleanings");
+                Log.e(TAG, "Network error while fetching cleanings: " + t);
             }
         });
     }
@@ -88,7 +88,7 @@ public class CleaningRepository {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Log.e(TAG,"Network error while deleting cleaning");
+                Log.e(TAG,"Network error while deleting cleaning: " + t);
                 ToastUtil.makeToast(context.getString(R.string.deletion_failed), context);
             }
 
@@ -130,7 +130,7 @@ public class CleaningRepository {
 
             @Override
             public void onFailure(Call<Cleaning> call, Throwable t) {
-                Log.e(TAG, "Network error while unchecking cleaning");
+                Log.e(TAG, "Network error while unchecking cleaning: " + t);
                 ToastUtil.makeToast(context.getString(R.string.error_while_unchecking) + cleaning.getDate(), context);
             }
         });

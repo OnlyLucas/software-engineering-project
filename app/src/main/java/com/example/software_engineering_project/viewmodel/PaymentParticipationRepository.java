@@ -59,7 +59,7 @@ public class PaymentParticipationRepository {
 
             @Override
             public void onFailure(Call<List<Object[]>> call, Throwable t) {
-                Log.e(TAG, "Network error while fetching Get Payments");
+                Log.e(TAG, "Network error while fetching Get Payments: " + t);
             }
         });
     }
@@ -87,7 +87,7 @@ public class PaymentParticipationRepository {
 
             @Override
             public void onFailure(Call<List<Object[]>> call, Throwable t) {
-                Log.e(TAG, "Network error while fetching Owe Payments");
+                Log.e(TAG, "Network error while fetching Owe Payments: " + t);
             }
         });
     }
@@ -107,7 +107,7 @@ public class PaymentParticipationRepository {
 
             @Override
             public void onFailure(Call<List<PaymentParticipation>> call, Throwable t) {
-                Log.e(TAG, "Network error while fetching Get Payment Participations");
+                Log.e(TAG, "Network error while fetching Get Payment Participations: " + t);
             }
         });
     }
@@ -128,7 +128,7 @@ public class PaymentParticipationRepository {
 
             @Override
             public void onFailure(Call<List<PaymentParticipation>> call, Throwable t) {
-                Log.e(TAG, "Network error while fetching Owe Payment Participations");
+                Log.e(TAG, "Network error while fetching Owe Payment Participations: " + t);
             }
         });
     }
@@ -178,7 +178,7 @@ public class PaymentParticipationRepository {
 
             @Override
             public void onFailure(Call<PaymentParticipation> call, Throwable t) {
-                Log.e(TAG, "Network error while paying payment participation");
+                Log.e(TAG, "Network error while paying payment participation: " + t);
                 ToastUtil.makeToast("Error while paying  " + p.getUser().getFirstName(), context);
 
             }

@@ -63,7 +63,7 @@ public class PaymentRepository {
 
             @Override
             public void onFailure(Call<Payment> call, Throwable t) {
-                Log.e(TAG, "Network error while creating payment");
+                Log.e(TAG, "Network error while creating payment: " + t);
                 ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + paymentData.getPayment().getName(), context);
             }
         });
@@ -92,7 +92,7 @@ public class PaymentRepository {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Log.e(TAG, "Network error while deleting payment");
+                Log.e(TAG, "Network error while deleting payment: " + t);
                 ToastUtil.makeToast(context.getString(R.string.deletion_failed), context);
             }
 
@@ -121,7 +121,7 @@ public class PaymentRepository {
 
             @Override
             public void onFailure(Call<List<Payment>> call, Throwable t) {
-                Log.e(TAG, "Network error while fetching payments");
+                Log.e(TAG, "Network error while fetching payments: " + t);
             }
         });
     }

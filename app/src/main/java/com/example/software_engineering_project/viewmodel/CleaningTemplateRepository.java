@@ -61,7 +61,7 @@ public class CleaningTemplateRepository {
 
             @Override
             public void onFailure(Call<CleaningTemplate> call, Throwable t) {
-                Log.i(TAG, "Network error while cleaning template creation");
+                Log.i(TAG, "Network error while cleaning template creation: " + t);
                 ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + cleaningTemplate.getName(), context);
             }
         });
@@ -90,7 +90,7 @@ public class CleaningTemplateRepository {
 
             @Override
             public void onFailure(Call<List<CleaningTemplate>> call, Throwable t) {
-                Log.e(TAG, "Network error while fetching cleaning templates");
+                Log.e(TAG, "Network error while fetching cleaning templates: " + t);
             }
         });
     }
@@ -119,7 +119,7 @@ public class CleaningTemplateRepository {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Log.e(TAG, "Network error while deleting cleaning template");
+                Log.e(TAG, "Network error while deleting cleaning template: " + t);
                 ToastUtil.makeToast(context.getString(R.string.deletion_failed), context);
             }
 

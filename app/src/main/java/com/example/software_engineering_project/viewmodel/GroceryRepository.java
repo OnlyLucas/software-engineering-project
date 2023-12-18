@@ -64,7 +64,7 @@ public class GroceryRepository {
 
             @Override
             public void onFailure(Call<GroupGrocery> call, Throwable t) {
-                Log.e(TAG, "Network error while group grocery creation");
+                Log.e(TAG, "Network error while group grocery creation: " + t);
                 ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + groupGrocery.getName(), context);
             }
         });
@@ -93,7 +93,7 @@ public class GroceryRepository {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Log.e(TAG,"Network error while deleting group grocery");
+                Log.e(TAG,"Network error while deleting group grocery: " + t);
                 ToastUtil.makeToast(context.getString(R.string.deletion_failed), context);
             }
 
@@ -149,7 +149,7 @@ public class GroceryRepository {
 
             @Override
             public void onFailure(Call<GroupGrocery> call, Throwable t) {
-                Log.e(TAG, "Network error while unchecking group grocery");
+                Log.e(TAG, "Network error while unchecking group grocery: " + t);
                 ToastUtil.makeToast(context.getString(R.string.error_while_unchecking) + grocery.getName(), context);
             }
         });
@@ -173,7 +173,7 @@ public class GroceryRepository {
 
             @Override
             public void onFailure(Call<List<GroupGrocery>> call, Throwable t) {
-                Log.e(TAG,"Network error while fetching uncompleted group groceries");
+                Log.e(TAG,"Network error while fetching uncompleted group groceries: " + t);
 
             }
         });
@@ -197,7 +197,7 @@ public class GroceryRepository {
 
             @Override
             public void onFailure(Call<List<GroupGrocery>> call, Throwable t) {
-                Log.e(TAG,"Network error while fetching completed group groceries");
+                Log.e(TAG,"Network error while fetching completed group groceries: " + t);
             }
         });
     }

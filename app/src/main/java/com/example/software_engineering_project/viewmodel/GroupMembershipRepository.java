@@ -57,7 +57,7 @@ public class GroupMembershipRepository {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Log.e(TAG, "Network error while deleting group membership");
+                Log.e(TAG, "Network error while deleting group membership: " + t);
                 ToastUtil.makeToast(context.getString(R.string.deletion_failed), context);
             }
         });
@@ -87,7 +87,7 @@ public class GroupMembershipRepository {
 
             @Override
             public void onFailure(Call<GroupMembership> call, Throwable t) {
-                Log.e(TAG, "Network error while group membership creation");
+                Log.e(TAG, "Network error while group membership creation: " + t);
                 ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + groupMembership.getUser().getFirstName(), context);
             }
         });
