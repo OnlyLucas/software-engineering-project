@@ -36,13 +36,12 @@ public class FragmentBudgetListController extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        context = requireActivity();
         paymentRepository = new PaymentRepository();
         currentPayments = paymentRepository.getCurrentPayments();
 
         fragmentView = inflater.inflate(R.layout.fragment_budget_list, container, false);
         loadScreenElements();
-        context = requireActivity();
 
         //TODO richtige Liste
         items.clear();

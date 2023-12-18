@@ -9,6 +9,7 @@ import com.example.software_engineering_project.dataservice.PaymentParticipation
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.PaymentParticipation;
 import com.example.software_engineering_project.util.ToastUtil;
+import com.example.software_engineering_project.util.UILoaderUtil;
 
 import java.util.List;
 import java.util.UUID;
@@ -23,7 +24,7 @@ public class PaymentParticipationRepository {
     private PaymentParticipationService paymentParticipationService;
 
 
-    public PaymentParticipationRepository() {
+    public PaymentParticipationRepository(){
         // Initialize Retrofit service
         paymentParticipationService = RetrofitClient.getInstance().create(PaymentParticipationService.class);
 
@@ -38,6 +39,13 @@ public class PaymentParticipationRepository {
                     // show toast of success
                     ToastUtil.makeToast("Success", context);
                 } else {
+                    // If unauthorized/bad credentials return to login screen
+                    if(response.code() == 401){
+                        System.out.println("Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
+                        UILoaderUtil.startLoginActivity(context);
+                        return;
+                    }
                     ToastUtil.makeToast("Error while adding payment participation ", context);
                 }
             }
@@ -62,6 +70,13 @@ public class PaymentParticipationRepository {
                     getPaymentParticipationLiveData.setValue(paymentParticipations);
                     System.out.println("Payment Participation fetching successful");
                 } else {
+                    // If unauthorized/bad credentials return to login screen
+//                    if(response.code() == 401){
+//                        System.out.println("Bad credentials. Rerouting to login activity.");
+//                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
+//                        UILoaderUtil.startLoginActivity(context);
+//                        return;
+//                    }
                     System.out.println("Error while fetching payment participations");
                 }
             }

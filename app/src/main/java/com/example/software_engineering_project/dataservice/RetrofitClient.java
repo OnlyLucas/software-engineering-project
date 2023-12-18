@@ -1,5 +1,8 @@
 package com.example.software_engineering_project.dataservice;
 
+import com.example.software_engineering_project.interceptor.AuthInterceptor;
+
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -16,11 +19,16 @@ public class RetrofitClient{
     public static synchronized Retrofit getInstance() {
         if (retrofit == null) {
 
+            OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+
+            // Logging
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
             logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-            OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
             httpClient.addInterceptor(logging);
+
+            // Authorization
+            Interceptor authInterceptor = new AuthInterceptor();
+            httpClient.addInterceptor(authInterceptor);
 
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)

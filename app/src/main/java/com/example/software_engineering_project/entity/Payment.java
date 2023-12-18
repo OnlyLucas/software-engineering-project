@@ -1,6 +1,6 @@
 package com.example.software_engineering_project.entity;
 
-import com.example.software_engineering_project.viewmodel.UserViewModel;
+import com.example.software_engineering_project.viewmodel.AppStateRepository;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.math.BigDecimal;
@@ -30,10 +30,10 @@ public class Payment {
     }
     public Payment(BigDecimal amount, String name){
         this.id = UUID.randomUUID();
-        this.group = UserViewModel.getCurrentGroup().getValue();
+        this.group = AppStateRepository.getCurrentGroupLiveData().getValue();
         this.amount = amount;
         this.currencyCode = "EUR";
-        User currentUser = UserViewModel.getCurrentAppUser().getValue();
+        User currentUser = AppStateRepository.getCurrentAppUserLiveData().getValue();
         this.paidByUser = currentUser;
         this.createdByUser = currentUser;
         long currentTimeMillis = System.currentTimeMillis();

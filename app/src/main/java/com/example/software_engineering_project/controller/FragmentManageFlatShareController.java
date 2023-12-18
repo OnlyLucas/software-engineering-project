@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,7 +22,7 @@ import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.viewmodel.GroupMembershipRepository;
 import com.example.software_engineering_project.viewmodel.UserRepository;
-import com.example.software_engineering_project.viewmodel.UserViewModel;
+import com.example.software_engineering_project.viewmodel.AppStateRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +59,7 @@ public class FragmentManageFlatShareController extends Fragment {
     public static void removeItem(int i) {
 
         User user = currentUsers.getValue().get(i);
-        Group group = UserViewModel.getCurrentGroup().getValue();
+        Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
         groupMembershipRepository.deleteGroupMembership(user, group, context);
         listView.setAdapter(adapter);
 
@@ -68,7 +67,7 @@ public class FragmentManageFlatShareController extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        context = requireActivity();
         //Load Backend
         userRepository = new UserRepository();
         groupMembershipRepository = new GroupMembershipRepository();
@@ -76,7 +75,6 @@ public class FragmentManageFlatShareController extends Fragment {
 
         //Load Frontend
         fragmentView = inflater.inflate(R.layout.fragment_manage_flat_share, container, false);
-        context = requireActivity();
         loadScreenElements();
         addButtons();
 

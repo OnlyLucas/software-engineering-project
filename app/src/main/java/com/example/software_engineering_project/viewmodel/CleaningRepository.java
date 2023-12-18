@@ -1,15 +1,20 @@
 package com.example.software_engineering_project.viewmodel;
 
+import android.content.Context;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.software_engineering_project.dataservice.CleaningService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.Cleaning;
+import com.example.software_engineering_project.util.ToastUtil;
+import com.example.software_engineering_project.util.UILoaderUtil;
 
 import java.util.List;
 import java.util.UUID;
 
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,6 +39,12 @@ public class CleaningRepository {
                     System.out.println("Cleaning fetching successful");
                     // Handle the received users, e.g., update UI or store in a local database
                 } else {
+                    // If unauthorized/bad credentials return to login screen
+//                    if(response.code() == 401){
+//                        System.out.println("Bad credentials. Rerouting to login activity.");
+//                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
+//                        UILoaderUtil.startLoginActivity(context);
+//                    }
                     // Handle API error
                     System.out.println("Error while fetching cleanings");
                 }

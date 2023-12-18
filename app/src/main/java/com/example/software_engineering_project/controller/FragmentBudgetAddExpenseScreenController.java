@@ -21,7 +21,6 @@ import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.viewmodel.PaymentParticipationRepository;
 import com.example.software_engineering_project.viewmodel.PaymentRepository;
 import com.example.software_engineering_project.viewmodel.UserRepository;
-import com.example.software_engineering_project.viewmodel.UserViewModel;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -109,7 +108,7 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        context = requireActivity();
         userRepository = new UserRepository();
         currentUsers = userRepository.getCurrentUsers();
 
@@ -118,7 +117,6 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
 
         fragmentView = inflater.inflate(R.layout.fragment_budget_add_expense_screen, container, false);
         fragmentViewHeader = inflater.inflate(R.layout.fragment_budget_main, container, false);
-        context = requireActivity();
         loadScreenElements();
 
         currentUsers.observe(getViewLifecycleOwner(), currentUsers -> {

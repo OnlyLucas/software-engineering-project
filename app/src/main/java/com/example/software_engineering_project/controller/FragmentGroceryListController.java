@@ -52,16 +52,16 @@ public class FragmentGroceryListController extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        context = requireActivity();
 
         groceryRepository = new GroceryRepository();
         uncompletedGroceryLiveData = groceryRepository.getUncompletedGroupGroceries();
 
-        // TODO maybe wont update, as list is altered, not exchanged
         uncompletedGroceryLiveData.observe(getViewLifecycleOwner(), groceryList -> {
             adapter = new AdapterGroceryListListView(getActivity(), groceryList);
             listView.setAdapter(adapter);
         });
-        context = requireActivity();
+
         fragmentView = inflater.inflate(R.layout.fragment_grocery_list, container, false);
         loadScreenElements();
         addButtons();
@@ -69,7 +69,6 @@ public class FragmentGroceryListController extends Fragment {
         listView.setAdapter(adapter);
 
         return fragmentView;
-
     }
 
     private void addButtons() {

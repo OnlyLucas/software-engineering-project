@@ -49,14 +49,12 @@ public class FragmentCleaningPlanListController extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        cleaningTemplateRepository = new CleaningTemplateRepository();
-
         fragmentView = inflater.inflate(R.layout.fragment_cleaning_plan_list, container, false);
         loadScreenElements();
         addButtons();
         context = requireActivity();
 
-        CleaningTemplateRepository cleaningTemplateRepository = new CleaningTemplateRepository();
+        cleaningTemplateRepository = new CleaningTemplateRepository();
         currentCleaningTemplates = cleaningTemplateRepository.getCurrentCleaningTemplates();
         currentCleaningTemplates.observe(getViewLifecycleOwner(), currentCleaningTemplates -> {
             adapter = new AdapterCleaningPlanListView(getActivity(), currentCleaningTemplates);

@@ -11,6 +11,7 @@ import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.entity.Payment;
 import com.example.software_engineering_project.entity.PaymentCreationData;
 import com.example.software_engineering_project.util.ToastUtil;
+import com.example.software_engineering_project.util.UILoaderUtil;
 
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class PaymentRepository {
     private PaymentService paymentService;
     private MutableLiveData<List<Payment>> currentPayments = new MutableLiveData<>();
 
-    public PaymentRepository() {
+    public PaymentRepository(){
         // Initialize Retrofit service
         paymentService = RetrofitClient.getInstance().create(PaymentService.class);
 
@@ -34,7 +35,8 @@ public class PaymentRepository {
 
     private void getPayments() {
         // Perform the API call to get users asynchronously
-        Group group = UserViewModel.getCurrentGroup().getValue();
+        // TODO nullcheck for group --> if no group, then make toast: "Join a group/Not in a group"
+        Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
         Call<List<Payment>> call = paymentService.getPayments(group.getId());
         call.enqueue(new Callback<List<Payment>>(){
             @Override
@@ -45,6 +47,14 @@ public class PaymentRepository {
                     System.out.println("Payment fetching successful");
                     // Handle the received users, e.g., update UI or store in a local database
                 } else {
+                    // If unauthorized/bad credentials return to login screen
+//                    if(response.code() == 401){
+//                        System.out.println("Bad credentials. Rerouting to login activity.");
+//                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
+//                        UILoaderUtil.startLoginActivity(context);
+//                        return;
+//                    }
+
                     // Handle API error
                     System.out.println("Error while fetching payments");
                 }
@@ -69,6 +79,13 @@ public class PaymentRepository {
                     ToastUtil.makeToast("Added " + paymentData.getPayment().getName(), context);
                     fetchPayments();
                 } else {
+                    // If unauthorized/bad credentials return to login screen
+                    if(response.code() == 401){
+                        System.out.println("Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
+                        UILoaderUtil.startLoginActivity(context);
+                        return;
+                    }
                     ToastUtil.makeToast("Error while adding payment " + paymentData.getPayment().getName(), context);
                     System.out.println(response.code());
                     System.out.println(call);
@@ -91,7 +108,7 @@ public class PaymentRepository {
 
     public void fetchPayments(){
         // Get current group id
-        UUID currentGroupId = UserViewModel.getCurrentGroup().getValue().getId();
+        UUID currentGroupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
 
         // Perform the API call to fetch group groceries asynchronously
         Call<List<Payment>> call = paymentService.getPayments(currentGroupId);
@@ -102,6 +119,14 @@ public class PaymentRepository {
                     List<Payment> payments = response.body();
                     currentPayments.setValue(payments);
                     System.out.println("Payment fetching successful");
+                } else {
+                    // If unauthorized/bad credentials return to login screen
+//                    if(response.code() == 401){
+//                        System.out.println("Bad credentials. Rerouting to login activity.");
+//                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
+//                        UILoaderUtil.startLoginActivity(context);
+//                        return;
+//                    }
                 }
             }
 

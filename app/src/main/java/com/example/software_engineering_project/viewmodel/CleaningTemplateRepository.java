@@ -10,6 +10,7 @@ import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.CleaningTemplate;
 import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.util.ToastUtil;
+import com.example.software_engineering_project.util.UILoaderUtil;
 
 import java.util.List;
 
@@ -21,7 +22,9 @@ public class CleaningTemplateRepository {
     private CleaningTemplateService cleaningTemplateService;
     private MutableLiveData<List<CleaningTemplate>> currentCleaningTemplates = new MutableLiveData<>();
 
-    public CleaningTemplateRepository() {
+    Context context;
+
+    public CleaningTemplateRepository(){
         // Initialize Retrofit service
         cleaningTemplateService = RetrofitClient.getInstance().create(CleaningTemplateService.class);
         getCleaningTemplates();
@@ -36,6 +39,13 @@ public class CleaningTemplateRepository {
                     // show toast of success
                     ToastUtil.makeToast("Added " + cleaningTemplate.getName(), context);
                 } else {
+                    // If unauthorized/bad credentials return to login screen
+                    if(response.code() == 401){
+                        System.out.println("Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
+                        UILoaderUtil.startLoginActivity(context);
+                    }
+
                     ToastUtil.makeToast("Error while adding  " + cleaningTemplate.getName(), context);
                 }
             }
@@ -51,7 +61,7 @@ public class CleaningTemplateRepository {
 
     public void getCleaningTemplates() {
         // Perform the API call to get users asynchronously
-        Group group = UserViewModel.getCurrentGroup().getValue();
+        Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
         Call<List<CleaningTemplate>> call = cleaningTemplateService.getCleaningTemplates(group.getId());
         call.enqueue(new Callback<List<CleaningTemplate>>(){
             @Override
@@ -62,6 +72,13 @@ public class CleaningTemplateRepository {
                     System.out.println("Cleaning template fetching successful");
                     // Handle the received users, e.g., update UI or store in a local database
                 } else {
+                    // If unauthorized/bad credentials return to login screen
+                    if(response.code() == 401){
+                        System.out.println("Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
+                        UILoaderUtil.startLoginActivity(context);
+                    }
+
                     // Handle API error
                     System.out.println("Error while fetching cleaning templates");
                 }
@@ -93,6 +110,13 @@ public class CleaningTemplateRepository {
                         System.out.println("Deletion of Cleaning Template successful");
                         ToastUtil.makeToast("Removed: " + cleaningTemplate.getName(), context);
                     } else {
+                        // If unauthorized/bad credentials return to login screen
+                        if(response.code() == 401){
+                            System.out.println("Bad credentials. Rerouting to login activity.");
+                            ToastUtil.makeToast("Error with authentication. You need to login again.", context);
+                            UILoaderUtil.startLoginActivity(context);
+                        }
+
                         // If the server-side deletion is not successful, handle accordingly
                         // For example, show an error message
                         System.out.println(response.code());

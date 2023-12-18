@@ -7,6 +7,7 @@ import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
+import com.example.software_engineering_project.util.UILoaderUtil;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -15,10 +16,8 @@ import retrofit2.Response;
 public class GroupMembershipRepository {
     private GroupMembershipService service;
 
-
     public GroupMembershipRepository(){
         service = RetrofitClient.getInstance().create(GroupMembershipService.class);
-
     }
 
     public void deleteGroupMembership(User user, Group group, Context context) {
@@ -30,13 +29,20 @@ public class GroupMembershipRepository {
                 UserRepository userRepository = new UserRepository();
                 if (response.isSuccessful()) {
                     // Get updated Group Groceries from backend to show it in frontend
-                    userRepository.getUsers();
+                    userRepository.fetchUsers();
                     System.out.println("Deletion of Group Membership successful");
                     ToastUtil.makeToast("Removed: " + user.getFirstName(), context);
                 } else {
+                    // If unauthorized/bad credentials return to login screen
+                    if(response.code() == 401){
+                        System.out.println("Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
+                        UILoaderUtil.startLoginActivity(context);
+                        return;
+                    }
                     // If the server-side deletion is not successful, handle accordingly
                     // For example, show an error message
-                    userRepository.getUsers();
+                    userRepository.fetchUsers();
 
                     System.out.println(response.code());
                     System.out.println("Failed to delete group membership on the server");

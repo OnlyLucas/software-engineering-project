@@ -16,7 +16,7 @@ import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.viewmodel.UserRepository;
-import com.example.software_engineering_project.viewmodel.UserViewModel;
+import com.example.software_engineering_project.viewmodel.AppStateRepository;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,10 +36,10 @@ public class FragmentChangeMailController extends Fragment {
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        context = requireActivity();
         userRepository = new UserRepository();
         fragmentView = inflater.inflate(R.layout.fragment_change_mail, container, false);
-        context = requireActivity();
+
         loadScreenElements();
         addButtons();
 
@@ -79,7 +79,7 @@ public class FragmentChangeMailController extends Fragment {
         String newMailString = newMail.getText().toString();
         String confirmMailString = confirmNewMail.getText().toString();
 
-        User user = UserViewModel.getCurrentAppUser().getValue();
+        User user = AppStateRepository.getCurrentUserLiveData().getValue();
 
         if (user.getEmail().equals(currentMailString)) {
 

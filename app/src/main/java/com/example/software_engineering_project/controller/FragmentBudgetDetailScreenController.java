@@ -14,12 +14,8 @@ import androidx.lifecycle.LiveData;
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.AdapterBudgetDetailGet;
 import com.example.software_engineering_project.adapter.AdapterBudgetDetailOwe;
-import com.example.software_engineering_project.entity.PaymentParticipation;
-import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.viewmodel.PaymentParticipationRepository;
-import com.example.software_engineering_project.viewmodel.UserViewModel;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
