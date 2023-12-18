@@ -7,19 +7,40 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 /**
- * Test REST controller providing a simple endpoint to return a string.
+ * Test REST controller providing a simple endpoint to return a great, tasty Easter Egg =)
  */
 @RestController
-@RequestMapping("/api/test")
+@RequestMapping("/test")
 public class TestRESTController {
 
-    /**
-     * Handles HTTP GET requests to retrieve a string response.
-     *
-     * @return HTTP.ACCEPTED and the string "Hi" if the request is successful.
-     */
+    String body = """
+                 .-.            .-.
+                /   \\          /   \\
+               |   _ \\        / _   |
+               ;  | \\ \\      / / |  ;
+                \\  \\ \\ \\_.._/ / /  /
+                 '. '.;'    ';,' .'
+                   './ _    _ \\.'
+                   .'  a __ a  '.
+              '--./ _,   \\/   ,_ \\.--'
+             ----|   \\   /\\   /   |----
+              .--'\\   '-'  '-'    /'--.
+                  _>.__  -- _.-  `;
+                .' _     __/     _/
+               /    '.,:".-\\    /:,
+               |      \\.'   `""`'.\\\\
+                '-,.__/  _   .-.  ;|_
+                /` `|| _/ `\\/_  \\_|| `\\
+               |    ||/ \\-./` \\ / ||   |
+              \\ || I <3 Easter Eggs! | /
+            jgs .'  \\ =  _= _ = _= /`\\
+               /     `-;----=--;--'   \\
+               \\    _.-'        '.    /
+                `""`              `""`
+            """;
+
     @GetMapping
     ResponseEntity<String> getString(){
-        return new ResponseEntity<>("Hi", HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(body, HttpStatus.ACCEPTED);
     }
 }

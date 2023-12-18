@@ -18,7 +18,7 @@ import java.util.UUID;
  * REST Controller for managing {@link GroupEntity} instances, including operations related to groups.
  * Extends {@link RESTController} for generic CRUD operations.
  *
- * Base URL path: "/api/groups"
+ * Base URL path: "/v1/groups"
  */
 @RestController
 @RequestMapping("/v1/groups")
@@ -48,6 +48,7 @@ public class GroupRESTController extends RESTController<GroupEntity>{
     @Override
     @GetMapping("/{id}")
     public ResponseEntity<GroupEntity> getById(@PathVariable UUID id, WebRequest request){
+
         logger.info("Get group without password by group id:  " + id);
         Optional<GroupEntity> entity = groupRepository.findGroupByIdExcludingCreatedByUserPassword(id);
 

@@ -2,7 +2,6 @@ package com.flatfusion.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Profile;
 
 /**
  * The main class for the FlatFusion backend application.

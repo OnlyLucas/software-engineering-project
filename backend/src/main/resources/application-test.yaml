@@ -4,3 +4,8 @@ spring:
     username: ${db_user_name}
     password: ${db_password}
     url: ${db_url}
+
+application:
+  security:
+    jwt:
+      secret-key: NdSuswjFG6RvJ8kN+FZjPtV9xs6BgioTx+UVlamnoNNvzjPIhMP8hN41HKZR2464

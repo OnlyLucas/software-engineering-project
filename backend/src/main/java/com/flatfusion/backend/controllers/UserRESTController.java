@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +34,9 @@ public class UserRESTController extends RESTController<UserEntity>{
     public UserRESTController(UserEntityRepository repository) {
         super(repository);
     }
+
+    @Autowired
+    PasswordEncoder encoder;
 
     /**
      * Handles partial updates for a user entity.
@@ -120,5 +124,24 @@ public class UserRESTController extends RESTController<UserEntity>{
     // Placeholder for password hashing logic
     private String hashPassword(String plainTextPassword) {
         return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
+    }
+
+    /***
+     *  This method creates a UserEntity from the entity given in the https request body.
+     *  The password of the user is encrypted with a @{@link PasswordEncoder} before being saved to the db.
+     * @param entity {@link UserEntity} from the http body.
+     * @return The created UserEntity as a http response.
+     */
+    @Override
+    @PostMapping
+    public ResponseEntity<UserEntity> create(@RequestBody UserEntity entity) {
+
+        String password = entity.getPassword();
+        String encryptedPassword = encoder.encode(password);
+        entity.setPassword(encryptedPassword);
+
+        UserEntity createdEntity = repository.save(entity);
+        logger.info("User created: " + createdEntity.getEmail());
+        return new ResponseEntity<>(createdEntity, HttpStatus.CREATED);
     }
 }
