@@ -7,6 +7,9 @@ import java.util.Objects;
 import java.util.UUID;
 import java.sql.Timestamp;
 
+/**
+ * Represents a user in the system.
+ */
 public class User {
     private UUID id;
     private String email;
@@ -21,6 +24,7 @@ public class User {
     private Timestamp createdAt;
 
     private Boolean isActive;
+
 
     public UUID getId() {
         return id;
@@ -84,6 +88,28 @@ public class User {
 
     public void setActive(Boolean active) {
         isActive = active;
+    }
+
+
+    // TODO check if we should just make Username mandatory
+    /***
+     * This method returns the most suited name of the user to display for the ui.
+     * It checks for null values in the attributes that are suited for display.
+     * If the combination is not displayable because of null values, the next not-null combination will be given out
+     *
+     * Order: Username --> First name + Last name --> First name
+     * @return Name of the user to display in the UI
+     */
+    @JsonIgnore
+    public String getDisplayName(){
+        if (this.username != null){
+            return this.username;
+        } else if (this.lastName != null){
+            // example: "Jane D."
+            return this.firstName + " " + this.lastName.charAt(0) + ".";
+        } else{
+            return this.firstName;
+        }
     }
 
     @Override

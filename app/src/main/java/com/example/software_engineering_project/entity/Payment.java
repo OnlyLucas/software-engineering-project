@@ -9,8 +9,11 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
-import jakarta.persistence.OneToMany;
-
+/**
+ * Represents a payment within a group, including details such as the amount, currency, participants,
+ * and the user who initiated the payment. Also, includes information about the creation timestamp,
+ * name, and associated payment participations.
+ */
 public class Payment {
     private UUID id;
     private Group group;
@@ -18,16 +21,25 @@ public class Payment {
     private String currencyCode;
     private User paidByUser;
     private User createdByUser;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
     private String name;
 
-    @OneToMany(mappedBy = "payment")
     private Set<PaymentParticipation> paymentParticipations;
 
     public Payment() {
         // Default constructor
     }
+
+    /**
+     * Constructs a new Payment object with the specified amount and name. Automatically generates
+     * a unique identifier, sets the group, currency code, user who paid, user who created the payment,
+     * creation timestamp, amount, and name.
+     *
+     * @param amount The amount of the payment.
+     * @param name   The name associated with the payment.
+     */
     public Payment(BigDecimal amount, String name){
         this.id = UUID.randomUUID();
         this.group = AppStateRepository.getCurrentGroupLiveData().getValue();

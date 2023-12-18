@@ -1,49 +1,69 @@
 package com.example.software_engineering_project.viewmodel;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.dataservice.CleaningTemplateService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.CleaningTemplate;
-import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.util.UILoaderUtil;
 
 import java.util.List;
+import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * The CleaningTemplateRepository class is responsible for managing interactions between the app's data
+ * and the CleaningTemplateService, which communicates with the server to perform CRUD operations on Cleaning Templates.
+ * It uses Retrofit for network communication and LiveData for observing changes in the list of current cleaning templates.
+ */
 public class CleaningTemplateRepository {
+    private static final String TAG = CleaningTemplateRepository.class.getSimpleName();
     private CleaningTemplateService cleaningTemplateService;
     private MutableLiveData<List<CleaningTemplate>> currentCleaningTemplates = new MutableLiveData<>();
 
-    Context context;
-
-    public CleaningTemplateRepository(){
-        // Initialize Retrofit service
+    /**
+     * Default constructor for CleaningTemplateRepository. Initializes the CleaningTemplateService using RetrofitClient
+     * and fetches the current list of cleaning templates from the server.
+     */
+    public CleaningTemplateRepository() {
         cleaningTemplateService = RetrofitClient.getInstance().create(CleaningTemplateService.class);
-        getCleaningTemplates();
+        fetchCleaningTemplates();
     }
 
+    /**
+     * Creates a new cleaning template on the server and updates the list of current cleaning templates upon success.
+     *
+     * @param cleaningTemplate The CleaningTemplate object to be created.
+     * @param context          The application context for displaying toasts and handling UI updates.
+     */
     public void createCleaningTemplate(CleaningTemplate cleaningTemplate, Context context) {
-        Call<CleaningTemplate> call = cleaningTemplateService.createCleaningTemplate(cleaningTemplate);
+        Call<CleaningTemplate> call = cleaningTemplateService.createCleaningTemplateWithCleanings(cleaningTemplate);
         call.enqueue(new Callback<CleaningTemplate>() {
             @Override
             public void onResponse(Call<CleaningTemplate> call, Response<CleaningTemplate> response) {
                 if(response.isSuccessful()){
-                    // show toast of success
-                    ToastUtil.makeToast("Added " + cleaningTemplate.getName(), context);
+                    Log.i(TAG, "Cleaning template creation successful");
+                    ToastUtil.makeToast(context.getString(R.string.added) + cleaningTemplate.getName(), context);
+                    fetchCleaningTemplates();
                 } else {
+                    Log.i(TAG, "Error while cleaning template creation");
+                    ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + cleaningTemplate.getName(), context);
+
                     // If unauthorized/bad credentials return to login screen
                     if(response.code() == 401){
                         System.out.println("Bad credentials. Rerouting to login activity.");
                         ToastUtil.makeToast("Error with authentication. You need to login again.", context);
                         UILoaderUtil.startLoginActivity(context);
+                        return;
                     }
 
                     ToastUtil.makeToast("Error while adding  " + cleaningTemplate.getName(), context);
@@ -52,96 +72,97 @@ public class CleaningTemplateRepository {
 
             @Override
             public void onFailure(Call<CleaningTemplate> call, Throwable t) {
-                ToastUtil.makeToast("Error while adding  " + cleaningTemplate.getName(), context);
-                // Handle the failure if needed
-                // For example, show an error message
+                Log.i(TAG, "Network error while cleaning template creation: " + t);
+                ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + cleaningTemplate.getName(), context);
             }
         });
     }
 
-    public void getCleaningTemplates() {
-        // Perform the API call to get users asynchronously
-        Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
-        Call<List<CleaningTemplate>> call = cleaningTemplateService.getCleaningTemplates(group.getId());
+    /**
+     * Fetches the list of current cleaning templates from the server asynchronously.
+     * Updates the LiveData with the retrieved list upon a successful API response.
+     */
+    public void fetchCleaningTemplates() {
+
+        UUID currentGroupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
+
+        Call<List<CleaningTemplate>> call = cleaningTemplateService.getCleaningTemplates(currentGroupId);
         call.enqueue(new Callback<List<CleaningTemplate>>(){
             @Override
             public void onResponse(Call<List<CleaningTemplate>> call, Response<List<CleaningTemplate>> response) {
                 if (response.isSuccessful()) {
+                    Log.i(TAG, "Cleaning template fetching successful");
                     List<CleaningTemplate> cleaningTemplates = response.body();
                     currentCleaningTemplates.setValue(cleaningTemplates);
-                    System.out.println("Cleaning template fetching successful");
-                    // Handle the received users, e.g., update UI or store in a local database
                 } else {
+
                     // If unauthorized/bad credentials return to login screen
                     if(response.code() == 401){
                         System.out.println("Bad credentials. Rerouting to login activity.");
                         ToastUtil.makeToast("Error with authentication. You need to login again.", context);
                         UILoaderUtil.startLoginActivity(context);
+                        return;
                     }
 
                     // Handle API error
-                    System.out.println("Error while fetching cleaning templates");
-                }
+                    Log.e(TAG, "Error while fetching cleaning templates");
             }
 
             @Override
             public void onFailure(Call<List<CleaningTemplate>> call, Throwable t) {
-                // Handle network failure
-                System.out.println("Network error while fetching cleaning templates");
+                Log.e(TAG, "Network error while fetching cleaning templates: " + t);
             }
         });
     }
 
-    public LiveData<List<CleaningTemplate>> getCurrentCleaningTemplates() {
-        return currentCleaningTemplates;
-    }
-
+    /**
+     * Deletes a cleaning template from the server and updates the list of current cleaning templates upon success.
+     *
+     * @param cleaningTemplate The CleaningTemplate object to be deleted.
+     * @param context          The application context for displaying toasts and handling UI updates.
+     */
     public void deleteCleaningTemplate(CleaningTemplate cleaningTemplate, Context context) {
         try {
-            // Perform the API call to delete the group grocery on the server
             Call<Void> call = cleaningTemplateService.deleteCleaningTemplate(cleaningTemplate.getId());
             call.enqueue(new Callback<Void>() {
 
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
-                        // Get updated Group Groceries from backend to show it in frontend
-                        getCleaningTemplates();
-                        System.out.println("Deletion of Cleaning Template successful");
-                        ToastUtil.makeToast("Removed: " + cleaningTemplate.getName(), context);
+                        Log.i(TAG, "Deletion of Cleaning Template successful");
+                        fetchCleaningTemplates();
+                        ToastUtil.makeToast(context.getString(R.string.removed) + cleaningTemplate.getName(), context);
                     } else {
-                        // If unauthorized/bad credentials return to login screen
                         if(response.code() == 401){
                             System.out.println("Bad credentials. Rerouting to login activity.");
                             ToastUtil.makeToast("Error with authentication. You need to login again.", context);
                             UILoaderUtil.startLoginActivity(context);
+                            return;
                         }
 
-                        // If the server-side deletion is not successful, handle accordingly
-                        // For example, show an error message
-                        System.out.println(response.code());
-                        System.out.println("Failed to delete cleaning template on the server");
-
-                        System.out.println(response.body().toString());
-
-                        String errorMessage = "Failed to delete cleaning template on the server";
-                        ToastUtil.makeToast("Deletion failed", context);
-                        // Handle the error message appropriately
+                        Log.e(TAG, "Failed to delete cleaning template on the server");
+                        ToastUtil.makeToast(context.getString(R.string.deletion_failed), context);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
-                    // Handle the failure of the API call (e.g., network issues)
-                    String errorMessage = "Failed to delete cleaning template. Check your network connection.";
-                    ToastUtil.makeToast("Deletion failed", context);
-                    // Handle the error message appropriately
+                    Log.e(TAG, "Network error while deleting cleaning template: " + t);
+                    ToastUtil.makeToast(context.getString(R.string.deletion_failed), context);
                 }
-
 
             });
         } catch (NullPointerException e) {
             // Handle the case where groupGroceries or groupGroceries.getValue() is null
         }
+    }
+
+    /**
+     * Retrieves the LiveData object containing the list of current cleaning templates.
+     *
+     * @return LiveData<List<CleaningTemplate>> The LiveData object containing the list of current cleaning templates.
+     */
+    public LiveData<List<CleaningTemplate>> getCurrentCleaningTemplates() {
+        return currentCleaningTemplates;
     }
 }

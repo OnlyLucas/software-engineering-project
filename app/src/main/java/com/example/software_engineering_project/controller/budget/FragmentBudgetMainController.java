@@ -1,10 +1,10 @@
-package com.example.software_engineering_project.controller;
+package com.example.software_engineering_project.controller.budget;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,6 +29,14 @@ public class FragmentBudgetMainController extends Fragment {
     private View fragmentView;
 
 
+    /**
+     * Called to have the fragment instantiate its user interface view.
+     *
+     * @param inflater           The LayoutInflater object that can be used to inflate views.
+     * @param container          If non-null, this is the parent view that the fragment's UI will be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
+     * @return The root view for the fragment's UI.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -61,7 +69,6 @@ public class FragmentBudgetMainController extends Fragment {
             budgetHeadline.setText(R.string.add_new_expense);
         });
 
-        //TODO: Implement save method to button and create button here
         saveExpense.setOnClickListener(view -> FragmentBudgetAddExpenseScreenController.handleSaveClicked());
 
     }

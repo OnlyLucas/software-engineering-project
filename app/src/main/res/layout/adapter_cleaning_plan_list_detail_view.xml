@@ -20,7 +20,7 @@
                 android:id="@+id/numberCleaningPlan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/nameCleaningPlan"
+                android:layout_alignBaseline="@id/nameCleaner"
                 android:layout_marginStart="10sp"
                 android:layout_centerVertical="true"
                 android:textColor="@color/black"
@@ -28,22 +28,43 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/nameCleaningPlan"
+                android:id="@+id/nameCleaner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="28sp"
-                android:textColor="#000"
+                android:textColor="@color/black"
                 android:textSize="20sp" />
 
+            <TextView
+                android:id="@+id/cleaningDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/doneCleaning"
+                android:layout_marginRight="18sp"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
 
             <ImageView
-                android:id="@+id/removeCleaningPlan"
+                android:id="@+id/doneCleaning"
+                android:layout_width="22sp"
+                android:layout_height="22sp"
+                android:layout_toLeftOf="@id/removeCleaning"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="18sp"
+                app:tint="@color/black"
+                android:tooltipText="@string/done"
+                android:src="@drawable/done_icon" />
+
+            <ImageView
+                android:id="@+id/removeCleaning"
                 android:layout_width="22sp"
                 android:layout_height="22sp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="18sp"
+                android:tooltipText="@string/delete"
                 android:src="@drawable/remove" />
         </RelativeLayout>
 

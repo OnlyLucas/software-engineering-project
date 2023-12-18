@@ -6,8 +6,8 @@
     android:padding="5dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:cardCornerRadius="12dp"
         android:background="@color/navBar">
 
@@ -31,11 +31,35 @@
                 android:id="@+id/nameCleaningPlan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="28sp"
-                android:textColor="#000"
-                android:textSize="20sp" />
+                android:layout_marginStart="30sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/descriptionCleaningPlan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nameCleaningPlan"
+                android:layout_toLeftOf="@id/nextCleaningDate"
+                android:layout_marginStart="30sp"
+                android:layout_marginEnd="15sp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/black"
+                android:textSize="17sp"/>
+
+            <TextView
+                android:id="@+id/nextCleaningDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/nameCleaningPlan"
+                android:layout_centerVertical="true"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:layout_marginRight="15sp"
+                android:layout_toLeftOf="@id/removeCleaningPlan"/>
 
             <ImageView
                 android:id="@+id/removeCleaningPlan"

@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.FragmentBudgetListController">
+    android:tag="fragment_budget_list"
+    tools:context=".controller.budget.FragmentBudgetListController">
 
     <ListView
         android:id="@+id/budgetListFirstLayer"

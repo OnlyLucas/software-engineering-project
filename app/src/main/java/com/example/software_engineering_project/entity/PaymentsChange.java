@@ -7,6 +7,9 @@ import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Represents a change in payment details within a group.
+ */
 public class PaymentsChange {
     private UUID id;
     private Payment payment;

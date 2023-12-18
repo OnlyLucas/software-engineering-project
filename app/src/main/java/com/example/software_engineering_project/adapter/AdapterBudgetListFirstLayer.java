@@ -6,41 +6,60 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.LiveData;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.controller.budget.FragmentBudgetListController;
 import com.example.software_engineering_project.entity.Payment;
-import com.example.software_engineering_project.viewmodel.PaymentRepository;
 
-import java.util.ArrayList;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
-public class AdapterBudgetListFirstLayer extends ArrayAdapter<String> {
+/**
+ * Custom adapter for displaying the first layer of the budget list, where each item represents a payment.
+ * This adapter is designed to work with the AdapterBudgetListFirstLayer layout.
+ *
+ * The adapter provides functionality to display a list of payments in a specified format in the first layer.
+ *
+ * Additionally, the getView method is responsible for inflating the layout, populating it with payment details,
+ * and customizing the layout based on the Payment details such as name, payer, amount, and date.
+ */
+public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
 
-    private static AdapterBudgetListSecondLayer adapter;
-    private static ArrayList<String> items = new ArrayList<>();
-    private static PaymentRepository paymentRepository;
     private Context context;
-    private List<String> list;
-    private ListView budgetListSecondLayer;
-    private LiveData<List<Payment>> currentPayments;
-    private TextView showMonth;
+    private List<Payment> list;
+    private ImageView removeExpense;
+    private TextView expenseAmount, expenseDate, expenseDescription, expensePayer;
 
-
-    public AdapterBudgetListFirstLayer(Context context, List<String> items, LiveData<List<Payment>> currentPayments) {
+    /**
+     * Creates a new AdapterBudgetListFirstLayer.
+     *
+     * @param context The context in which the adapter is being used.
+     * @param items   The List containing payments to be displayed in the first layer.
+     */
+    public AdapterBudgetListFirstLayer(Context context, List<Payment> items) {
 
         super(context, R.layout.adapter_budget_list_view_first_layer, items);
         this.context = context;
-        this.list = items;
-        this.currentPayments = currentPayments;
+        list = items;
 
     }
 
+    /**
+     * Get the view that displays the data at the specified position in the data set.
+     *
+     * @param position    The position of the item within the adapter's data set.
+     * @param convertView The old view to reuse, if possible.
+     * @param parent      The parent that this view will eventually be attached to.
+     * @return The view corresponding to the data at the specified position.
+     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @Nullable ViewGroup parent) {
@@ -52,24 +71,57 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<String> {
 
             loadScreenElements(convertView);
 
-            showMonth.setText(list.get(position));
+            Payment currentPayment = list.get(position);
 
-            List<Payment> payments = currentPayments.getValue();
-            adapter = new AdapterBudgetListSecondLayer(context, payments);
+            // Customize the layout based on the Payment details
+            expenseDescription.setText(currentPayment.getName());
+            expensePayer.setText(currentPayment.getCreatedByUser().getFirstName() + " " + context.getString(R.string.paid) );
+            String amount = String.format(Locale.getDefault(), "- %.2f", currentPayment.getAmount());
+            // So far we only support euro as currency, but in this place a differentiation would be needed
+            if(currentPayment.getCurrencyCode().equals("EUR")){
+                amount = amount + "€";
+            }
+            expenseAmount.setText(amount);
 
-            budgetListSecondLayer.setAdapter(adapter);
+            // Convert Timestamp to other date format
+            Timestamp timestamp = currentPayment.getCreatedAt();
+            Date date = new Date(timestamp.getTime());
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
+            SimpleDateFormat monthNameFormat = new SimpleDateFormat("MMM");
+            SimpleDateFormat yearFormat = new SimpleDateFormat("yy");
+            String monthName = monthNameFormat.format(date);
+            String formattedDate = dateFormat.format(date);
+            String yearName = yearFormat.format(date);
+
+            // Set the formatted
+            expenseDate.setText(formattedDate + " " + monthName + " " + yearName);
+
+            addButtons(position);
 
         }
 
         return convertView;
 
     }
+    private void addButtons(int position) {
+        removeExpense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentBudgetListController.removeItem(position);
+            }
+        });
+
+    }
 
     private void loadScreenElements(View convertView) {
 
-        budgetListSecondLayer = convertView.findViewById(R.id.budgetListSecondLayer);
-        showMonth = convertView.findViewById(R.id.showMonth);
+        expenseAmount = convertView.findViewById(R.id.expenseAmount);
+        expenseDate = convertView.findViewById(R.id.expenseDate);
+        expenseDescription = convertView.findViewById(R.id.expenseDescription);
+        expensePayer = convertView.findViewById(R.id.expensePayer);
+        removeExpense = convertView.findViewById(R.id.removeExpense);
 
     }
 
 }
+

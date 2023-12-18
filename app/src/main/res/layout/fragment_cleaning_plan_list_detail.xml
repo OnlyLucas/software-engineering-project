@@ -3,12 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.FragmentCleaningPlanListDetailController">
+    tools:context=".controller.cleanings.FragmentCleaningPlanListDetailController">
+
+    <TextView
+        android:id="@+id/descriptionCleaningPlanListDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginBottom="10dp"/>
 
     <ListView
         android:id="@+id/cleaningPlanListDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/descriptionCleaningPlanListDetail"
         android:divider="@null"/>
 
 </RelativeLayout>

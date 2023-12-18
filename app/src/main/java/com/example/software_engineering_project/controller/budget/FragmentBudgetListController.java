@@ -1,4 +1,4 @@
-package com.example.software_engineering_project.controller;
+package com.example.software_engineering_project.controller.budget;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,7 +15,6 @@ import com.example.software_engineering_project.adapter.AdapterBudgetListFirstLa
 import com.example.software_engineering_project.entity.Payment;
 import com.example.software_engineering_project.viewmodel.PaymentRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,14 +25,30 @@ import java.util.List;
 public class FragmentBudgetListController extends Fragment {
 
     private static AdapterBudgetListFirstLayer adapter;
-    private static ArrayList<String> items = new ArrayList<>();
     private static Context context;
     private static ListView listView;
     private static PaymentRepository paymentRepository;
-    private LiveData<List<Payment>> currentPayments;
+    private static LiveData<List<Payment>> currentPayments;
     private View fragmentView;
 
+    /**
+     * Removes a payment item from the budget list at the specified position.
+     *
+     * @param position The position of the payment item to be removed.
+     */
+    public static void removeItem(int position) {
+        Payment payment = currentPayments.getValue().get(position);
+        paymentRepository.deletePayment(payment, context);
+    }
 
+    /**
+     * Called to have the fragment instantiate its user interface view.
+     *
+     * @param inflater           The LayoutInflater object that can be used to inflate views.
+     * @param container          If non-null, this is the parent view that the fragment's UI will be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
+     * @return The root view for the fragment's UI.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = requireActivity();
@@ -43,19 +58,8 @@ public class FragmentBudgetListController extends Fragment {
         fragmentView = inflater.inflate(R.layout.fragment_budget_list, container, false);
         loadScreenElements();
 
-        //TODO richtige Liste
-        items.clear();
-        items.add("January");
-        items.add("February");
-        items.add("March");
-        items.add("April");
-        items.add("May");
-        items.add("June");
-        items.add("July");
-        items.add("August");
-
         currentPayments.observe(getViewLifecycleOwner(), currentPayments -> {
-            adapter = new AdapterBudgetListFirstLayer(context, items, paymentRepository.getCurrentPayments());
+            adapter = new AdapterBudgetListFirstLayer(context, paymentRepository.getCurrentPayments().getValue());
             listView.setAdapter(adapter);
         });
 

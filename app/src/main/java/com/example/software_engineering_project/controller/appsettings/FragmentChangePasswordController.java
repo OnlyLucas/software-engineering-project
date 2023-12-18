@@ -1,4 +1,4 @@
-package com.example.software_engineering_project.controller;
+package com.example.software_engineering_project.controller.appsettings;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -19,6 +19,11 @@ import com.example.software_engineering_project.util.ToastUtil;
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentChangePasswordController #newInstance} factory method to
  * create an instance of this fragment.
+ *
+ * FragmentChangePasswordController is a fragment that handles the change of the user's password in the FlatFusion app.
+ * It provides UI elements for users to input their current password, new password, and confirm the new password.
+ * The class interacts with the UserRepository to validate and update the user's password.
+ *
  */
 public class FragmentChangePasswordController extends Fragment {
 
@@ -28,6 +33,14 @@ public class FragmentChangePasswordController extends Fragment {
     private View fragmentView;
 
 
+    /**
+     * Inflates the layout for this fragment, initializes the UI elements, and adds click listeners to buttons.
+     *
+     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state.
+     * @return The inflated view for this fragment.
+     */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         fragmentView = inflater.inflate(R.layout.fragment_change_password, container, false);

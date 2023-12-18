@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.FragmentManageFlatShareController">
+    android:tag="fragment_manage_flat_share"
+    tools:context=".controller.appsettings.FragmentManageFlatShareController">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -21,34 +22,57 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alpha="0.7"
-                android:paddingBottom="20dp"
-                android:text="@string/manage_flat_share"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+            <RelativeLayout
+                android:id="@+id/headerManageFlatShare"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:alpha="0.7"
+                    android:text="@string/manage_flat_share"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/addFlatShare"
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="7sp"
+                    android:layout_marginEnd="10dp"
+                    android:src="@drawable/add_symbol_blue"
+                    app:tint="@color/primary" />
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:id="@+id/header1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/background2"
-                android:gravity="center_horizontal">
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:paddingBottom="10dp">
 
-                <EditText
-                    android:id="@+id/input_name"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/nameManageFlatShare"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:ems="10"
-                    android:hint="@string/enter_flat_share_name" />
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"/>
 
-                <View
-                    android:layout_width="40sp"
-                    android:layout_height="40sp"
-                    android:layout_marginLeft="7sp" />
+                <TextView
+                    android:id="@+id/descriptionManageFlatShare"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"/>
 
             </LinearLayout>
 
@@ -58,10 +82,11 @@
                 android:layout_height="wrap_content"
                 android:background="@color/background2"
                 android:gravity="center_horizontal"
+                android:layout_marginTop="10dp"
                 android:paddingBottom="10dp">
 
                 <EditText
-                    android:id="@+id/input_mail"
+                    android:id="@+id/inputMailManageFlatShare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -74,7 +99,7 @@
                     android:layout_height="40sp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="7sp"
-                    android:layout_toRightOf="@+id/input_mail"
+                    android:layout_toRightOf="@+id/inputMailManageFlatShare"
                     android:src="@drawable/add_symbol_gray" />
 
             </LinearLayout>

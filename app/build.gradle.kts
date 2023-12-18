@@ -31,6 +31,13 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
+    testOptions {
+        unitTests {
+            testOptions.unitTests.isIncludeAndroidResources = true
+        }
+    }
+
 }
 
 dependencies {
@@ -48,9 +55,13 @@ dependencies {
     // OkHttp
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
-    // Greenrobot Event Architceture Implementation
+    implementation("androidx.test.espresso:espresso-intents:3.5.1")
+    implementation("androidx.test.espresso:espresso-contrib:3.5.1")
+    implementation("androidx.test.uiautomator:uiautomator:2.2.0")
+    / Greenrobot Event Architceture Implementation
     implementation("org.greenrobot:eventbus:3.2.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation("org.robolectric:robolectric:4.11.1")
 }

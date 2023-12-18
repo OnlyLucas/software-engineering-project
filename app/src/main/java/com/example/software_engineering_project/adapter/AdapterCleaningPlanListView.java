@@ -2,6 +2,8 @@ package com.example.software_engineering_project.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.icu.text.SimpleDateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,38 +13,65 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.controller.FragmentCleaningPlanListController;
+import com.example.software_engineering_project.controller.cleanings.FragmentCleaningPlanListController;
+import com.example.software_engineering_project.entity.Cleaning;
 import com.example.software_engineering_project.entity.CleaningTemplate;
+import com.example.software_engineering_project.viewmodel.CleaningRepository;
 
 import java.util.List;
 
+/**
+ * Custom adapter for displaying a list of cleaning plans in a ListView.
+ *
+ * This adapter extends ArrayAdapter<CleaningTemplate> and is designed to work with the layout 'adapter_cleaning_plan_list_view'.
+ * It provides a customized view for each item in the ListView, including a number, cleaning template name, next cleaning date, and a button to remove the cleaning plan.
+ *
+ * The getView method is overridden to inflate the layout, load screen elements, and set the content based on the CleaningTemplate object at the specified position in the data set. Additionally, it adds a listener for the remove button.
+ */
 public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> {
-
+    private static final String TAG = AdapterCleaningPlanListView.class.getSimpleName();
+    private static CleaningRepository cleaningRepository;
     private Context context;
     private ImageView remove;
     private List<CleaningTemplate> list;
-    private TextView name, number;
+    private TextView name, description, nextCleaningDate, number;
 
-
-    // The ListViewAdapter Constructor
-    // @param context: the Context from the MainActivity
-    // @param items: The list of items in our Grocery List
+    /**
+     * The constructor for the AdapterCleaningPlanListView.
+     *
+     * @param context The context in which the adapter is being used.
+     * @param items   The List of CleaningTemplate objects to be displayed in the adapter.
+     */
     public AdapterCleaningPlanListView(Context context, List<CleaningTemplate> items) {
 
         super(context, R.layout.adapter_cleaning_plan_list_view, items);
         this.context = context;
+        cleaningRepository = new CleaningRepository();
         list = items;
 
     }
 
     // The method we override to provide our own layout for each View (row) in the ListView
+    /**
+     * Get the view that displays the data at the specified position in the data set.
+     *
+     * This method creates or reuses a view to represent an item in the adapter's data set. It inflates the layout
+     * 'adapter_cleaning_plan_list_view' if the provided convertView is null, and then loads screen elements using the loadScreenElements method. It sets the text of the number, cleaning template name, and next cleaning date TextViews, and adds a listener for the remove button.
+     *
+     * @param position    The position of the item within the adapter's data set.
+     * @param convertView The old view to reuse, if possible.
+     * @param parent      The parent that this view will eventually be attached to.
+     * @return The view corresponding to the data at the specified position.
+     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         if (convertView == null) {
+            CleaningTemplate cleaningTemplate = list.get(position);
 
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.adapter_cleaning_plan_list_view, null);
@@ -50,7 +79,19 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
             loadScreenElements(convertView);
 
             number.setText(position + 1 + ".");
-            name.setText(list.get(position).getName());
+            name.setText(cleaningTemplate.getName());
+            description.setText(cleaningTemplate.getDescription());
+
+            cleaningRepository.getUncompletedCleanings(cleaningTemplate.getId()).observe((LifecycleOwner) context, cleanings -> {
+                if (cleanings != null && !cleanings.isEmpty()) {
+                    Cleaning nextCleaning = cleanings.get(0);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM");
+                    String formattedDate = dateFormat.format(nextCleaning.getDate());
+                    nextCleaningDate.setText(formattedDate);
+                } else {
+                    Log.e(TAG, "Error to get date of next cleaning.");
+                }
+            });
 
             addButtons(position);
 
@@ -73,7 +114,9 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
 
     private void loadScreenElements(View convertView) {
 
+        description = convertView.findViewById(R.id.descriptionCleaningPlan);
         name = convertView.findViewById(R.id.nameCleaningPlan);
+        nextCleaningDate = convertView.findViewById(R.id.nextCleaningDate);
         number = convertView.findViewById(R.id.numberCleaningPlan);
         remove = convertView.findViewById(R.id.removeCleaningPlan);
 

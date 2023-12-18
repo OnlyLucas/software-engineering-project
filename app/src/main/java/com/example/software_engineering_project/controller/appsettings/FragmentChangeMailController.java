@@ -1,7 +1,8 @@
-package com.example.software_engineering_project.controller;
+package com.example.software_engineering_project.controller.appsettings;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
-import com.example.software_engineering_project.viewmodel.UserRepository;
 import com.example.software_engineering_project.viewmodel.AppStateRepository;
+import com.example.software_engineering_project.viewmodel.UserRepository;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,9 +26,15 @@ import java.util.Map;
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentChangeMailController #newInstance} factory method to
  * create an instance of this fragment.
+ *
+ * FragmentChangeMailController is a fragment that handles the change of email address in the FlatFusion app.
+ * It provides UI elements for users to input their current email, new email, and confirm the new email.
+ * The class interacts with the UserRepository to validate and update the user's email address.
+ *
  */
 public class FragmentChangeMailController extends Fragment {
 
+    private static final String TAG = FragmentChangeMailController.class.getSimpleName();
     static Context context;
     static UserRepository userRepository;
     private Button cancelChangeMail, saveChangeMail;
@@ -35,16 +42,22 @@ public class FragmentChangeMailController extends Fragment {
     private View fragmentView;
 
 
+    /**
+     * Inflates the layout for this fragment, initializes the UI elements, and adds click listeners to buttons.
+     *
+     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state.
+     * @return The inflated view for this fragment.
+     */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = requireActivity();
         userRepository = new UserRepository();
         fragmentView = inflater.inflate(R.layout.fragment_change_mail, container, false);
-
         loadScreenElements();
         addButtons();
 
         return fragmentView;
-
     }
 
     private void addButtons() {
@@ -73,6 +86,9 @@ public class FragmentChangeMailController extends Fragment {
 
     }
 
+    /**
+     * Checks the validity of the email change and updates the user's email if conditions are met.
+     */
     private void checkMailChange() {
 
         String currentMailString = currentMail.getText().toString();
@@ -82,20 +98,16 @@ public class FragmentChangeMailController extends Fragment {
         User user = AppStateRepository.getCurrentUserLiveData().getValue();
 
         if (user.getEmail().equals(currentMailString)) {
-
-            System.out.println(getString(R.string.correct_current_mail));
-
             if (newMailString.equals(confirmMailString)) {
-                System.out.println(getString(R.string.ready_to_persist_new_mail) + newMailString);
+                Log.i(TAG, getString(R.string.ready_to_persist_new_mail) + newMailString);
                 Map<String, String> map = new HashMap<>();
-                map.put(getString(R.string.email), newMailString);
+                map.put(getString(R.string.emailJson), newMailString);
                 userRepository.updateEmail(user, map, context);
-                ;
             } else {
-                System.out.println(getString(R.string.new_mails_not_matching));
+                ToastUtil.makeToast(getString(R.string.new_mails_not_matching), context);
             }
         } else {
-            System.out.println(getString(R.string.wrong_current_mail));
+            ToastUtil.makeToast(getString(R.string.wrong_current_mail), context);
         }
 
     }

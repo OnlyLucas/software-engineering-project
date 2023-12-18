@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".controller.FragmentCleaningPlanAddController">
+    tools:context=".controller.cleanings.FragmentCleaningPlanAddController"
+    android:tag="fragment_cleaning_plan_add">
 
     <EditText
         android:id="@+id/enterNameAddCleaningPlan"
@@ -31,8 +32,8 @@
         android:layout_below="@id/enterDescriptionCleaningPlan"
         android:layout_marginBottom="10dp"
         android:backgroundTint="@color/primary"
-        android:textColor="@color/black"
         android:text="@string/select_date_range"
+        android:textColor="@color/black"
         app:icon="@drawable/calender_icon"
         app:iconTint="@color/black"/>
 

@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".controller.FragmentSettingsController">
+    android:tag="fragment_setting_screen"
+    tools:context=".controller.appsettings.FragmentSettingsController">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -32,7 +33,7 @@
                 android:textColor="@color/black" />
 
             <Button
-                android:id="@+id/createFlatShareButton"
+                android:id="@+id/manageFlatShareButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/manage_flat_share"
@@ -40,7 +41,7 @@
                 android:backgroundTint="@color/listViewTint"/>
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/leaveFlatShare"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/leave_flat_share"

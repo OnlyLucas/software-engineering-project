@@ -1,6 +1,7 @@
 package com.example.software_engineering_project.dataservice;
 
 import com.example.software_engineering_project.entity.User;
+import com.example.software_engineering_project.entity.UserCreate;
 
 import java.util.List;
 import java.util.Map;
@@ -23,9 +24,12 @@ public interface UserService{
     @POST("users")
     Call<User> createEntity(@Body User user);
 
+    @POST("users")
+    Call<User> createUser(@Body UserCreate user);
+
     @PATCH("users/{id}")
     Call<User> partialUpdateEntity(@Path("id") UUID userId, @Body Map<String, String> updates);
 
-    @GET("users/mail/{email}")
-    Call<User> getUserByEmail(@Path("mail") String email);
+    @GET("users/mail/{mail}")
+    Call<User> getUserByMail(@Path("mail") String mail);
 }

@@ -73,7 +73,7 @@
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"/>
+                    android:layout_height="20dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -91,7 +91,7 @@
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"/>
+                    android:layout_height="15dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -109,7 +109,25 @@
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"/>
+                    android:layout_height="15dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/username"
+                    android:alpha="0.7"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:id="@+id/usernameRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName|textCapWords"
+                    android:drawableEnd="@drawable/done_icon"/>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -127,7 +145,7 @@
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"/>
+                    android:layout_height="15dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -138,7 +156,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:textColorHint="#B9B8B8"
                     app:passwordToggleEnabled="true">
 
@@ -153,7 +171,33 @@
 
                 <View
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"/>
+                    android:layout_height="15dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/confirm_password"
+                    android:textStyle="bold"
+                    android:alpha="0.7"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#B9B8B8"
+                    app:passwordToggleEnabled="true">
+
+                    <EditText
+                        android:id="@+id/confirmPasswordRegister"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword"
+                        android:drawableEnd="@drawable/password_icon"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -201,7 +245,5 @@
         </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
-
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

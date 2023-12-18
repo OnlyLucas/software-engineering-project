@@ -51,10 +51,20 @@ public class AppStateRepository extends ViewModel {
         currentUserLiveData.postValue(currentUser);
     }
 
+    /**
+     * Returns a LiveData object containing information about the current group.
+     *
+     * @return MutableLiveData<Group> The LiveData object containing information about the current group.
+     */
     public static MutableLiveData<Group> getCurrentGroupLiveData() {
         return currentGroupLiveData;
     }
 
+    /**
+     * Sets the LiveData object containing information about the current group.
+     *
+     * @param currentGroup The LiveData object containing information about the current group.
+     */
     public static void setCurrentGroup(Group currentGroup) {
         currentGroupLiveData.setValue(currentGroup);
     }

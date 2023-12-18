@@ -7,6 +7,9 @@ import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Represents a user's participation in a payment within a group.
+ */
 public class PaymentParticipation {
     private UUID id;
     private Payment payment;
@@ -50,10 +53,20 @@ public class PaymentParticipation {
         this.user = user;
     }
 
+    /**
+     * Gets the amount the user contributes to the payment.
+     *
+     * @return The participation amount.
+     */
     public BigDecimal getParticipationAmount() {
         return participationAmount;
     }
 
+    /**
+     * Sets the amount the user contributes to the payment.
+     *
+     * @param participationAmount The participation amount to be set.
+     */
     public void setParticipationAmount(BigDecimal participationAmount) {
         this.participationAmount = participationAmount;
     }
@@ -107,5 +120,11 @@ public class PaymentParticipation {
                 ", isPaid=" + isPaid +
                 ", paidAt=" + paidAt +
                 '}';
+    }
+
+    public void setPaid() {
+        this.isPaid = true;
+        long currentTimeMillis = System.currentTimeMillis();
+        this.paidAt = new Timestamp(currentTimeMillis);
     }
 }

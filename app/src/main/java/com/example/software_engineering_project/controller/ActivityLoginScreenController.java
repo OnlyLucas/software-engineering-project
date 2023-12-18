@@ -22,16 +22,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * ActivityLoginScreenController handles the user interface for the login screen.
+ * It provides functionality for user login and navigation to the registration screen.
+ */
 public class ActivityLoginScreenController extends AppCompatActivity {
 
     private Button loginButton, registerButtonLogin;
-    private Context context;
     private static EditText emailInput, passwordInput;
-
     private LoginService loginService;
-
     private UserRepository userRepository;
-
+    private Context context;
     private String password;
 
     @Override
@@ -47,22 +48,23 @@ public class ActivityLoginScreenController extends AppCompatActivity {
 
     }
 
+    /**
+     * Loads elements from the XML layout file.
+     */
     private void loadScreenElements() {
 
         loginButton = findViewById(R.id.loginButton);
         registerButtonLogin = findViewById(R.id.registerButtonLogin);
-
+        emailInput = findViewById(R.id.enterLoginEmail);
+        passwordInput = findViewById(R.id.enterLoginPassword);
     }
 
     private void addButtons() {
 
         loginButton.setOnClickListener(this::onClickLoginButton);
         registerButtonLogin.setOnClickListener(this::startRegisterActivity);
-        emailInput = findViewById(R.id.enterLoginEmail);
-        passwordInput = findViewById(R.id.enterLoginPassword);
-
     }
-    
+
     private void startRegisterActivity(View view){
         Intent registerScreen = new Intent(ActivityLoginScreenController.this, ActivityRegisterScreenController.class);
         startActivity(registerScreen);
@@ -137,7 +139,6 @@ public class ActivityLoginScreenController extends AppCompatActivity {
                 // Handle the failure if needed
                 // For example, show an error message
             }
-        });
     }
 
     private boolean checkLoginInputs() {
