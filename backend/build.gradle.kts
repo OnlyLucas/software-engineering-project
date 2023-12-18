@@ -36,8 +36,6 @@ dependencies {
 	implementation("io.jsonwebtoken:jjwt-api:0.12.3")
 	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl
 	runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.3")
-	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-jwt
-	implementation("org.springframework.security:spring-security-jwt:1.1.4.RELEASE")
 	implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
 	// https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2
 	implementation("org.springframework.security.oauth:spring-security-oauth2:2.5.2.RELEASE")

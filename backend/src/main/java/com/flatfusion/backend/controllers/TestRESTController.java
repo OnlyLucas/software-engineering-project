@@ -31,7 +31,7 @@ public class TestRESTController {
                 '-,.__/  _   .-.  ;|_
                 /` `|| _/ `\\/_  \\_|| `\\
                |    ||/ \\-./` \\ / ||   |
-              \\ ||I love Easter Eggs!_| /
+              \\ || I <3 Easter Eggs! | /
             jgs .'  \\ =  _= _ = _= /`\\
                /     `-;----=--;--'   \\
                \\    _.-'        '.    /
