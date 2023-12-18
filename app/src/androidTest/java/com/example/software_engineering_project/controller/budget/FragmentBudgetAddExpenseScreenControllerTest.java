@@ -17,6 +17,7 @@ import com.example.software_engineering_project.controller.ActivityMainScreenCon
 import com.example.software_engineering_project.controller.budget.FragmentBudgetAddExpenseScreenController;
 import com.example.software_engineering_project.controller.budget.FragmentBudgetMainController;
 
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -32,6 +33,7 @@ import static org.hamcrest.CoreMatchers.allOf;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 @RunWith(AndroidJUnit4.class)
 public class FragmentBudgetAddExpenseScreenControllerTest {
@@ -53,12 +55,7 @@ public class FragmentBudgetAddExpenseScreenControllerTest {
             transaction.commit();
         });
 
-        scenario.onActivity(activity -> {
-            Fragment fragment = new FragmentBudgetAddExpenseScreenController();
-            FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.contentFragmentBudgetMain, fragment); // replace with your fragment container ID
-            transaction.commit();
-        });
+        Espresso.onView(withId(R.id.addExpense)).perform(ViewActions.click());
 
     }
 
@@ -83,8 +80,10 @@ public class FragmentBudgetAddExpenseScreenControllerTest {
             e.printStackTrace();
         }
 
-        // Click on the save button
-        Espresso.onView(withId(R.id.saveExpense)).perform(click());
+        // Click on the save button and check if the save button is visible
+        Espresso.onView(ViewMatchers.withId(R.id.saveExpense))
+                .perform(ViewActions.click())
+                .check(ViewAssertions.matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
 
         // Verify that the paymentRepository.createPayment method is called
         // Note: You can check if a specific intent is sent instead of mocking

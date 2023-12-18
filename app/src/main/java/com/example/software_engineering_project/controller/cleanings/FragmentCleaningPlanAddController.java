@@ -1,7 +1,9 @@
 package com.example.software_engineering_project.controller.cleanings;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -220,13 +222,15 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
 
     private void showDatePickerDialog() {
 
+
+
         CalendarConstraints.Builder calendarConstraints = new CalendarConstraints.Builder();
         calendarConstraints.setValidator(DateValidatorPointForward.now());
         MaterialDatePicker<Pair<Long, Long>> materialDatePicker = MaterialDatePicker.Builder.dateRangePicker()
                 .setTitleText(R.string.select_date_range)
                 .setCalendarConstraints(calendarConstraints.build())
                 .build();
-        materialDatePicker.show(requireActivity().getSupportFragmentManager(), "TAG");
+        materialDatePicker.show(requireActivity().getSupportFragmentManager(), "material_date_picker");
 
         materialDatePicker.addOnPositiveButtonClickListener(selection -> {
 
