@@ -165,8 +165,8 @@ public class PaymentParticipationRepository {
             public void onResponse(Call<PaymentParticipation> call, Response<PaymentParticipation> response) {
                 if(response.isSuccessful()){
                     Log.i(TAG, "Paying payment participation successful");
-                    UUID userId = UserViewModel.getCurrentAppUser().getValue().getId();
-                    UUID groupId = UserViewModel.getCurrentGroup().getValue().getId();
+                    UUID userId = AppStateRepository.getCurrentAppUser().getValue().getId();
+                    UUID groupId = AppStateRepository.getCurrentGroup().getValue().getId();
                     fetchGetPaymentsGroupedByUser(groupId, userId);
                     fetchOwePaymentsGroupedByUser(groupId, userId);
                     // no toast needed as user only needs to get informed when all participations are paid

@@ -1,6 +1,6 @@
 package com.example.software_engineering_project.entity;
 
-import com.example.software_engineering_project.viewmodel.UserViewModel;
+import com.example.software_engineering_project.viewmodel.AppStateRepository;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.sql.Timestamp;
@@ -31,8 +31,8 @@ public class GroupGrocery {
      */
     public GroupGrocery(String name){
         this.id = UUID.randomUUID();
-        this.group = UserViewModel.getCurrentGroup().getValue();
-        this.createdByUser = UserViewModel.getCurrentAppUser().getValue();
+        this.group = AppStateRepository.getCurrentGroup().getValue();
+        this.createdByUser = AppStateRepository.getCurrentAppUser().getValue();
         this.name = name;
         long currentTimeMillis = System.currentTimeMillis();
         this.createdAt  = new Timestamp(currentTimeMillis);
@@ -112,7 +112,7 @@ public class GroupGrocery {
      */
     public void setCompleted() {
         this.isCompleted = true;
-        this.completedByUser = UserViewModel.getCurrentAppUser().getValue();
+        this.completedByUser = AppStateRepository.getCurrentAppUser().getValue();
         long currentTimeMillis = System.currentTimeMillis();
         this.completedAt = new Timestamp(currentTimeMillis);
     }

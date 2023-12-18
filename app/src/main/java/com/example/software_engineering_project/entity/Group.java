@@ -1,5 +1,5 @@
 package com.example.software_engineering_project.entity;
-import com.example.software_engineering_project.viewmodel.UserViewModel;
+import com.example.software_engineering_project.viewmodel.AppStateRepository;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.sql.Timestamp;
@@ -24,7 +24,7 @@ public class Group {
         this.id = UUID.randomUUID();
         this.name = name;
         this.description = description;
-        this.createdBy = UserViewModel.getCurrentAppUser().getValue();
+        this.createdBy = AppStateRepository.getCurrentAppUser().getValue();
         long currentTimeMillis = System.currentTimeMillis();
         this.createdAt  = new Timestamp(currentTimeMillis);
     }

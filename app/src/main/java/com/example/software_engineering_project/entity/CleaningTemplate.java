@@ -1,6 +1,6 @@
 package com.example.software_engineering_project.entity;
 
-import com.example.software_engineering_project.viewmodel.UserViewModel;
+import com.example.software_engineering_project.viewmodel.AppStateRepository;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.sql.Date;
@@ -41,13 +41,13 @@ public class CleaningTemplate {
      */
     public CleaningTemplate(String name, String description, Date startDate, Date endDate,
                             int interval) {
-        this.group = UserViewModel.getCurrentGroup().getValue();
+        this.group = AppStateRepository.getCurrentGroup().getValue();
         this.name = name;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
         this.interval = interval;
-        this.createdByUser = UserViewModel.getCurrentAppUser().getValue();
+        this.createdByUser = AppStateRepository.getCurrentAppUser().getValue();
         this.createdAt = new Timestamp(System.currentTimeMillis());
 
     }

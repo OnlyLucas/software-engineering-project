@@ -73,7 +73,7 @@ public class CleaningTemplateRepository {
      */
     public void fetchCleaningTemplates() {
 
-        UUID currentGroupId = UserViewModel.getCurrentGroup().getValue().getId();
+        UUID currentGroupId = AppStateRepository.getCurrentGroup().getValue().getId();
 
         Call<List<CleaningTemplate>> call = cleaningTemplateService.getCleaningTemplates(currentGroupId);
         call.enqueue(new Callback<List<CleaningTemplate>>(){

@@ -16,8 +16,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
+import com.example.software_engineering_project.viewmodel.AppStateRepository;
 import com.example.software_engineering_project.viewmodel.UserRepository;
-import com.example.software_engineering_project.viewmodel.UserViewModel;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -97,7 +97,7 @@ public class FragmentChangeMailController extends Fragment {
         String newMailString = newMail.getText().toString();
         String confirmMailString = confirmNewMail.getText().toString();
 
-        User user = UserViewModel.getCurrentAppUser().getValue();
+        User user = AppStateRepository.getCurrentAppUser().getValue();
 
         if (user.getEmail().equals(currentMailString)) {
             if (newMailString.equals(confirmMailString)) {

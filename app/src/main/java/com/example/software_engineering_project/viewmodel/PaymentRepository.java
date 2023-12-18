@@ -104,7 +104,7 @@ public class PaymentRepository {
      * Updates the LiveData with the retrieved list upon a successful API response.
      */
     public void fetchPayments(){
-        UUID currentGroupId = UserViewModel.getCurrentGroup().getValue().getId();
+        UUID currentGroupId = AppStateRepository.getCurrentGroup().getValue().getId();
 
         Call<List<Payment>> call = paymentService.getPayments(currentGroupId);
         call.enqueue(new Callback<List<Payment>>() {

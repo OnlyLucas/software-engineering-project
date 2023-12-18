@@ -156,7 +156,7 @@ public class GroceryRepository {
     }
 
     private void fetchUncompletedGroupGroceries() {
-        UUID currentGroupId = UserViewModel.getCurrentGroup().getValue().getId();
+        UUID currentGroupId = AppStateRepository.getCurrentGroup().getValue().getId();
 
         Call<List<GroupGrocery>> call = groceryService.getUncompletedGroupGroceries(currentGroupId);
         call.enqueue(new Callback<List<GroupGrocery>>() {
@@ -180,7 +180,7 @@ public class GroceryRepository {
     }
 
     private void fetchCompletedGroupGroceries() {
-        UUID currentGroupId = UserViewModel.getCurrentGroup().getValue().getId();
+        UUID currentGroupId = AppStateRepository.getCurrentGroup().getValue().getId();
 
         Call<List<GroupGrocery>> call = groceryService.getCompletedGroupGroceries(currentGroupId);
         call.enqueue(new Callback<List<GroupGrocery>>() {

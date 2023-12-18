@@ -46,7 +46,7 @@ public class UserRepository {
      * Updates the LiveData with the retrieved list upon a successful API response.
      */
     public void fetchUsers() {
-        Group group = UserViewModel.getCurrentGroup().getValue();
+        Group group = AppStateRepository.getCurrentGroup().getValue();
         if(group != null) {
             Call<List<User>> call = userService.getUsers(group.getId());
             call.enqueue(new Callback<List<User>>() {

@@ -40,7 +40,7 @@ public class GroupMembershipRepository {
      * @param context        The application context for displaying toasts and handling UI updates.
      */
     public void deleteGroupMembership(User user, UserRepository userRepository, Context context) {
-        Group group = UserViewModel.getCurrentGroup().getValue();
+        Group group = AppStateRepository.getCurrentGroup().getValue();
         Call<Void> call = service.deleteGroupMembership(user.getId(), group.getId());
         call.enqueue(new Callback<Void>() {
             @Override

@@ -25,7 +25,7 @@ import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.viewmodel.GroupMembershipRepository;
 import com.example.software_engineering_project.viewmodel.UserRepository;
-import com.example.software_engineering_project.viewmodel.UserViewModel;
+import com.example.software_engineering_project.viewmodel.AppStateRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +82,7 @@ public class FragmentManageFlatShareController extends Fragment {
     public static void removeItem(int i) {
 
         User user = currentUsers.getValue().get(i);
-        Group group = UserViewModel.getCurrentGroup().getValue();
+        Group group = AppStateRepository.getCurrentGroup().getValue();
         groupMembershipRepository.deleteGroupMembership(user, userRepository, context);
 
     }

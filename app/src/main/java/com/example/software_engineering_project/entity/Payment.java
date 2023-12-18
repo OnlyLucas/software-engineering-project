@@ -1,6 +1,6 @@
 package com.example.software_engineering_project.entity;
 
-import com.example.software_engineering_project.viewmodel.UserViewModel;
+import com.example.software_engineering_project.viewmodel.AppStateRepository;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.math.BigDecimal;
@@ -8,8 +8,6 @@ import java.sql.Timestamp;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-
-import jakarta.persistence.OneToMany;
 
 /**
  * Represents a payment within a group, including details such as the amount, currency, participants,
@@ -43,10 +41,10 @@ public class Payment {
      */
     public Payment(BigDecimal amount, String name){
         this.id = UUID.randomUUID();
-        this.group = UserViewModel.getCurrentGroup().getValue();
+        this.group = AppStateRepository.getCurrentGroup().getValue();
         this.amount = amount;
         this.currencyCode = "EUR";
-        User currentUser = UserViewModel.getCurrentAppUser().getValue();
+        User currentUser = AppStateRepository.getCurrentAppUser().getValue();
         this.paidByUser = currentUser;
         this.createdByUser = currentUser;
         long currentTimeMillis = System.currentTimeMillis();

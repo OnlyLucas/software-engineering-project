@@ -19,8 +19,8 @@ import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.entity.PaymentParticipation;
 import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
+import com.example.software_engineering_project.viewmodel.AppStateRepository;
 import com.example.software_engineering_project.viewmodel.PaymentParticipationRepository;
-import com.example.software_engineering_project.viewmodel.UserViewModel;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -60,8 +60,8 @@ public class FragmentBudgetDetailScreenController extends Fragment {
         String userIdOweString = (String) userMap.get("id");
         String name = (String) userMap.get("firstName");
         UUID userIdOwe = UUID.fromString(userIdOweString);
-        UUID userIdGet = UserViewModel.getCurrentAppUser().getValue().getId();
-        UUID groupId = UserViewModel.getCurrentGroup().getValue().getId();
+        UUID userIdGet = AppStateRepository.getCurrentAppUser().getValue().getId();
+        UUID groupId = AppStateRepository.getCurrentGroup().getValue().getId();
 
         paymentParticipationRepository.getGetPaymentParticipationsByUserIds(groupId, userIdOwe, userIdGet)
                 .observe((LifecycleOwner) context, affectedPaymentParticipations -> {
@@ -92,8 +92,8 @@ public class FragmentBudgetDetailScreenController extends Fragment {
         String userIdOweString = (String) userMap.get("id");
         String name = (String) userMap.get("firstName");
         UUID userIdGet = UUID.fromString(userIdOweString);
-        UUID userIdOwe = UserViewModel.getCurrentAppUser().getValue().getId();
-        UUID groupId = UserViewModel.getCurrentGroup().getValue().getId();
+        UUID userIdOwe = AppStateRepository.getCurrentAppUser().getValue().getId();
+        UUID groupId = AppStateRepository.getCurrentGroup().getValue().getId();
 
         paymentParticipationRepository.getOwePaymentParticipationsByUserIds(groupId, userIdGet, userIdOwe)
                 .observe((LifecycleOwner) context, affectedPaymentParticipations -> {
@@ -124,8 +124,8 @@ public class FragmentBudgetDetailScreenController extends Fragment {
         loadScreenElements();
 
         // get current group and user
-        Group group = UserViewModel.getCurrentGroup().getValue();
-        User user = UserViewModel.getCurrentAppUser().getValue();
+        Group group = AppStateRepository.getCurrentGroup().getValue();
+        User user = AppStateRepository.getCurrentAppUser().getValue();
 
         // get current get and owe payments
         paymentParticipationRepository = new PaymentParticipationRepository();

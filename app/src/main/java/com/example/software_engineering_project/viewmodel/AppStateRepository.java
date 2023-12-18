@@ -10,11 +10,11 @@ import com.example.software_engineering_project.entity.User;
 import java.util.UUID;
 
 /**
- * The UserViewModel class is a subclass of Android's ViewModel class, responsible for managing and
+ * The AppStateRepository class is a subclass of Android's ViewModel class, responsible for managing and
  * providing data related to the current user and group within the application. It utilizes LiveData
  * to observe changes in user and group data.
  */
-public class UserViewModel extends ViewModel {
+public class AppStateRepository extends ViewModel {
 
     private MutableLiveData<User> userLiveData = new MutableLiveData<>();
 
@@ -59,7 +59,7 @@ public class UserViewModel extends ViewModel {
     public static MutableLiveData<Group> getCurrentGroup() {
         Group group = new Group();
         group.setId(UUID.fromString("00000000-0000-0000-0000-000000000000"));
-        group.setCreatedBy(UserViewModel.getCurrentAppUser().getValue());
+        group.setCreatedBy(AppStateRepository.getCurrentAppUser().getValue());
         currentGroup.setValue(group);
         return currentGroup;
     }
@@ -70,7 +70,7 @@ public class UserViewModel extends ViewModel {
      * @param currentGroup The LiveData object containing information about the current group.
      */
     public static void setCurrentGroup(MutableLiveData<Group> currentGroup) {
-        UserViewModel.currentGroup = currentGroup;
+        AppStateRepository.currentGroup = currentGroup;
     }
 
     /**

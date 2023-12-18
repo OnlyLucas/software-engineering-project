@@ -17,7 +17,7 @@ import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.viewmodel.GroupRepository;
-import com.example.software_engineering_project.viewmodel.UserViewModel;
+import com.example.software_engineering_project.viewmodel.AppStateRepository;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -56,7 +56,7 @@ public class FragmentAddFlatShareController extends Fragment {
         });
 
         saveAddFlatShare.setOnClickListener(view -> {
-            Group group = UserViewModel.getCurrentGroup().getValue();
+            Group group = AppStateRepository.getCurrentGroup().getValue();
             if(group == null){
                 FragmentManageFlatShareController fragment = new FragmentManageFlatShareController();
                 checkInputs();
