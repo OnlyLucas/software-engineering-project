@@ -7,12 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.codec.Utf8;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import java.util.Base64;
-import java.util.Map;
-
 
 
 @RestController
@@ -29,7 +26,7 @@ public class LoginController {
 
     /**
      * This is the endpoint
-     * @param headers Empty request with an 'Authorization' header contain username and password credentials, encoded in Base64.
+     * @param authHeader Empty request with an 'Authorization' header contain username and password credentials, encoded in Base64.
      * @return If credentials valid: ResponseEntity with User matching credentials. If invalid: null.
      */
     @GetMapping

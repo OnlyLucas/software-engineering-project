@@ -1,7 +1,6 @@
 package com.flatfusion.backend.config;
 
 import com.flatfusion.backend.entities.UserEntity;
-import com.flatfusion.backend.services.CustomUserDetailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;

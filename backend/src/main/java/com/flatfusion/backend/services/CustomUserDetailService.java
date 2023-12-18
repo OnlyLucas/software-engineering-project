@@ -1,13 +1,11 @@
 package com.flatfusion.backend.services;
 
 import com.flatfusion.backend.config.CustomUserPrincipal;
-import com.flatfusion.backend.controllers.RESTController;
 import com.flatfusion.backend.entities.UserEntity;
 import com.flatfusion.backend.repositories.UserEntityRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

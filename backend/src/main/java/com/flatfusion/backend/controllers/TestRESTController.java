@@ -1,8 +1,5 @@
 package com.flatfusion.backend.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Role;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,10 +12,35 @@ import org.springframework.http.ResponseEntity;
 @RequestMapping("/test")
 public class TestRESTController {
 
+    String body = """
+                 .-.            .-.
+                /   \\          /   \\
+               |   _ \\        / _   |
+               ;  | \\ \\      / / |  ;
+                \\  \\ \\ \\_.._/ / /  /
+                 '. '.;'    ';,' .'
+                   './ _    _ \\.'
+                   .'  a __ a  '.
+              '--./ _,   \\/   ,_ \\.--'
+             ----|   \\   /\\   /   |----
+              .--'\\   '-'  '-'    /'--.
+                  _>.__  -- _.-  `;
+                .' _     __/     _/
+               /    '.,:".-\\    /:,
+               |      \\.'   `""`'.\\\\
+                '-,.__/  _   .-.  ;|_
+                /` `|| _/ `\\/_  \\_|| `\\
+               |    ||/ \\-./` \\ / ||   |
+              \\ ||I love Easter Eggs!_| /
+            jgs .'  \\ =  _= _ = _= /`\\
+               /     `-;----=--;--'   \\
+               \\    _.-'        '.    /
+                `""`              `""`
+            """;
+
     @GetMapping
     ResponseEntity<String> getString(){
-        return new ResponseEntity<>("Hi", HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(body, HttpStatus.ACCEPTED);
     }
-
 
 }
