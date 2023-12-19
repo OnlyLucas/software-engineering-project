@@ -26,16 +26,6 @@ public class AppStateRepository extends ViewModel {
      * @return MutableLiveData<User> The LiveData object containing information about the default application user.
      */
     public static MutableLiveData<User> getCurrentAppUserLiveData() {
-        User defaultUser = new User();
-        defaultUser.setId(UUID.fromString("00000000-0000-0000-0000-000000000000"));
-        defaultUser.setEmail("john.doe@example.com");
-        defaultUser.setFirstName("John");
-        currentUserLiveData.setValue(defaultUser);
-
-        return currentUserLiveData;
-    }
-
-    public static MutableLiveData<User> getCurrentUserLiveData() {
         return currentUserLiveData;
     }
 

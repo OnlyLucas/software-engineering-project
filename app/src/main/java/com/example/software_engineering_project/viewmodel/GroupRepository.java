@@ -51,7 +51,7 @@ public class GroupRepository{
                     // TODO do we need this?
                     //AppStateRepository.setCurrentGroup(groupMutableLiveData);
 
-                    User user = AppStateRepository.getCurrentUserLiveData().getValue();
+                    User user = AppStateRepository.getCurrentAppUserLiveData().getValue();
                     GroupMembership groupMembership = new GroupMembership(user, group);
                     GroupMembershipRepository groupMembershipRepository = new GroupMembershipRepository();
                     UserRepository userRepository = new UserRepository();

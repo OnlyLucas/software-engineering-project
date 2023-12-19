@@ -95,7 +95,7 @@ public class FragmentChangeMailController extends Fragment {
         String newMailString = newMail.getText().toString();
         String confirmMailString = confirmNewMail.getText().toString();
 
-        User user = AppStateRepository.getCurrentUserLiveData().getValue();
+        User user = AppStateRepository.getCurrentAppUserLiveData().getValue();
 
         if (user.getEmail().equals(currentMailString)) {
             if (newMailString.equals(confirmMailString)) {

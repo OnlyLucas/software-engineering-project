@@ -8,8 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.MutableLiveData;
-
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.dataservice.LoginService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
@@ -110,9 +108,6 @@ public class ActivityLoginScreenController extends AppCompatActivity {
 
                     // TODO set current group
                     // TODO move currentGroup from UserRepository to AppStateRepository
-
-                    System.out.println("Login successful");
-                    ToastUtil.makeToast("Login successful.", context);
 
                     // Route to MainActivity
                     Intent mainScreen = new Intent(ActivityLoginScreenController.this, ActivityMainScreenController.class);

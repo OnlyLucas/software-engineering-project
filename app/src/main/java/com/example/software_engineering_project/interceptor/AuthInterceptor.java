@@ -1,12 +1,9 @@
 package com.example.software_engineering_project.interceptor;
 
-import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.software_engineering_project.controller.ActivityLoginScreenController;
 import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.viewmodel.AppStateRepository;
 
@@ -29,7 +26,7 @@ public class AuthInterceptor implements Interceptor {
     public Response intercept(@NonNull Chain chain) throws IOException {
         Request originalRequest = chain.request();
 
-        User user = AppStateRepository.getCurrentUserLiveData().getValue();
+        User user = AppStateRepository.getCurrentAppUserLiveData().getValue();
 
         if (user == null){
             System.out.println("AppUser is null. Continue with request.");
