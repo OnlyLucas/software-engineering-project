@@ -2,6 +2,7 @@ plugins {
 	java
 	id("org.springframework.boot") version "3.2.0-RC2"
 	id("io.spring.dependency-management") version "1.1.3"
+	id("org.springdoc.openapi-gradle-plugin") version "1.8.0"
 }
 
 group = "com.flatfusion"
@@ -40,8 +41,13 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
 	// https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2
 	implementation("org.springframework.security.oauth:spring-security-oauth2:2.5.2.RELEASE")
+	implementation("org.springdoc:springdoc-openapi-ui:1.7.0")
+	implementation("org.springdoc:springdoc-openapi-webmvc-core:1.7.0")
+
+
 	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.3")
+	implementation(kotlin("script-runtime"))
 
 }
 
