@@ -5,7 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.software_engineering_project.entity.User;
-import com.example.software_engineering_project.viewmodel.AppStateRepository;
+import com.example.software_engineering_project.repository.AppStateRepository;
 
 import java.io.IOException;
 

@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.entity.UserCreate;
 import com.example.software_engineering_project.util.ToastUtil;
-import com.example.software_engineering_project.viewmodel.UserRepository;
+import com.example.software_engineering_project.repository.UserRepository;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

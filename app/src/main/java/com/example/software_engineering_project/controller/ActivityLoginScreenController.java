@@ -16,9 +16,9 @@ import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.util.UILoaderUtil;
-import com.example.software_engineering_project.viewmodel.AppStateRepository;
-import com.example.software_engineering_project.viewmodel.GroupMembershipRepository;
-import com.example.software_engineering_project.viewmodel.UserRepository;
+import com.example.software_engineering_project.repository.AppStateRepository;
+import com.example.software_engineering_project.repository.GroupMembershipRepository;
+import com.example.software_engineering_project.repository.UserRepository;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -109,7 +109,7 @@ public class ActivityLoginScreenController extends AppCompatActivity {
 
                     // Now set the user with all their attributes
                     AppStateRepository.setCurrentUser(authenticatedUser);
-                    groupMembershipRepository.setGroupByUserId(authenticatedUser.getId(), context);
+                    groupMembershipRepository.getGroupByUserId(authenticatedUser.getId(), context);
                     // TODO move currentGroup from UserRepository to AppStateRepository
 
                     // Route to MainActivity

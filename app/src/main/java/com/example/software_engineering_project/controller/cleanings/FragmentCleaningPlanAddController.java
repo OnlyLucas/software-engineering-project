@@ -18,7 +18,7 @@ import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.AdapterSpinnerList;
 import com.example.software_engineering_project.entity.CleaningTemplate;
 import com.example.software_engineering_project.util.ToastUtil;
-import com.example.software_engineering_project.viewmodel.CleaningTemplateRepository;
+import com.example.software_engineering_project.repository.CleaningTemplateRepository;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;

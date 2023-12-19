@@ -21,8 +21,8 @@ import com.example.software_engineering_project.adapter.AdapterGroceryListListVi
 import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.entity.GroupGrocery;
 import com.example.software_engineering_project.util.ToastUtil;
-import com.example.software_engineering_project.viewmodel.AppStateRepository;
-import com.example.software_engineering_project.viewmodel.GroceryRepository;
+import com.example.software_engineering_project.repository.AppStateRepository;
+import com.example.software_engineering_project.repository.GroceryRepository;
 
 import java.util.List;
 

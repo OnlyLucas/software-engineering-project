@@ -23,9 +23,9 @@ import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.entity.GroupMembership;
 import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
-import com.example.software_engineering_project.viewmodel.GroupMembershipRepository;
-import com.example.software_engineering_project.viewmodel.UserRepository;
-import com.example.software_engineering_project.viewmodel.AppStateRepository;
+import com.example.software_engineering_project.repository.GroupMembershipRepository;
+import com.example.software_engineering_project.repository.UserRepository;
+import com.example.software_engineering_project.repository.AppStateRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,8 +64,15 @@ public class FragmentManageFlatShareController extends Fragment {
     public static void addItem(String mail) {
         userRepository.getUserByMail(mail, context).observe((LifecycleOwner) context, newUser -> {
             if (newUser != null) {
-                GroupMembership groupMembership = new GroupMembership(newUser);
-                groupMembershipRepository.insertGroupMembership(groupMembership, userRepository, context);
+                groupMembershipRepository.getGroupByUserId(newUser.getId(), context).observe((LifecycleOwner) context, group -> {
+                    if (group != null) {
+                        ToastUtil.makeToast(context.getString(R.string.user_already_added_to_other_group), context);
+                    } else {
+                        GroupMembership groupMembership = new GroupMembership(newUser);
+                        groupMembershipRepository.insertGroupMembership(groupMembership, userRepository, context);
+                    }
+                });
+
             } else {
                 ToastUtil.makeToast(context.getString(R.string.enter_valid_mail), context);
             }

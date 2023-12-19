@@ -20,7 +20,7 @@ import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.controller.cleanings.FragmentCleaningPlanListController;
 import com.example.software_engineering_project.entity.Cleaning;
 import com.example.software_engineering_project.entity.CleaningTemplate;
-import com.example.software_engineering_project.viewmodel.CleaningRepository;
+import com.example.software_engineering_project.repository.CleaningRepository;
 
 import java.util.List;
 

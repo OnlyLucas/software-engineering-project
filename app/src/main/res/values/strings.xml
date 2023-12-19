@@ -129,6 +129,7 @@
     <string name="join_a_group">Join a group!</string>
     <string name="join_a_group_first">Join a group first!</string>
     <string name="user_already_added">User already added</string>
+    <string name="user_already_added_to_other_group">User is already added to another group</string>
     <string name="delete_flat_share_member">Delete flat share member</string>
     <string name="do_you_really_want_to_delete_this_flat_share_member_">Do you really want to delete this flat share member?</string>
 </resources>

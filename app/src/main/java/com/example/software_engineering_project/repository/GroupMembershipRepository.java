@@ -1,4 +1,4 @@
-package com.example.software_engineering_project.viewmodel;
+package com.example.software_engineering_project.repository;
 
 import android.content.Context;
 import android.util.Log;
@@ -29,7 +29,6 @@ import retrofit2.Response;
 public class GroupMembershipRepository {
     private static final String TAG = GroupMembershipRepository.class.getSimpleName();
     private MutableLiveData<Group> groupByUserId = new MutableLiveData<>();
-
     private GroupMembershipService service;
 
     /**
@@ -125,7 +124,7 @@ public class GroupMembershipRepository {
      * @param userId   The ID of the user for whom to fetch the group.
      * @param context
      */
-    public void setGroupByUserId(UUID userId, Context context) {
+    public void fetchGroupByUserId(UUID userId, Context context) {
         Call<Group> call = service.getGroupByUserId(userId);
         call.enqueue(new Callback<Group>(){
             @Override
@@ -133,8 +132,11 @@ public class GroupMembershipRepository {
                 if (response.isSuccessful()) {
                     Log.i(TAG, "Group fetching by userId successful");
                     Group group = response.body();
-                    AppStateRepository.setCurrentGroup(group);
-                    groupByUserId.setValue(group);
+                    if (AppStateRepository.getCurrentAppUserLiveData().getValue().getId().equals(userId)) {
+                        AppStateRepository.setCurrentGroup(group);
+                    } else {
+                        groupByUserId.setValue(group);
+                    }
                 } else {
                     // If unauthorized/bad credentials return to login screen
                     if(response.code() == 401){
@@ -155,6 +157,11 @@ public class GroupMembershipRepository {
             }
         });
     }
+    public MutableLiveData<Group> getGroupByUserId(UUID userId, Context context) {
+        fetchGroupByUserId(userId, context);
+        return groupByUserId;
+    }
+
 }
 
 

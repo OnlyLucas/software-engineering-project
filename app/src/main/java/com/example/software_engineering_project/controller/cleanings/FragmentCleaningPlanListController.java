@@ -16,8 +16,8 @@ import androidx.lifecycle.LiveData;
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.AdapterCleaningPlanListView;
 import com.example.software_engineering_project.entity.CleaningTemplate;
-import com.example.software_engineering_project.viewmodel.CleaningRepository;
-import com.example.software_engineering_project.viewmodel.CleaningTemplateRepository;
+import com.example.software_engineering_project.repository.CleaningRepository;
+import com.example.software_engineering_project.repository.CleaningTemplateRepository;
 
 import java.util.List;
 

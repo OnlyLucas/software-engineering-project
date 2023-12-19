@@ -1,4 +1,4 @@
-package com.example.software_engineering_project.viewmodel;
+package com.example.software_engineering_project.repository;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

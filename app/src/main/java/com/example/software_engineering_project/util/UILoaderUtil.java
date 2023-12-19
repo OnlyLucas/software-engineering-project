@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.example.software_engineering_project.controller.ActivityLoginScreenController;
+import com.example.software_engineering_project.repository.AppStateRepository;
 
 public class UILoaderUtil {
     private static final String TAG = UILoaderUtil.class.getSimpleName();
@@ -13,6 +14,10 @@ public class UILoaderUtil {
         if (context != null) {
             Intent intent = new Intent(context, ActivityLoginScreenController.class);
             context.startActivity(intent);
+
+            // logout user
+            AppStateRepository.setCurrentUser(null);
+            AppStateRepository.setCurrentGroup(null);
         } else {
             Log.e(TAG, "Context for startLoginActivity() is null");
         }

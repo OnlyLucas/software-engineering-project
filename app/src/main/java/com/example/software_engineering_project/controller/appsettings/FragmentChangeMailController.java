@@ -16,8 +16,8 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
-import com.example.software_engineering_project.viewmodel.AppStateRepository;
-import com.example.software_engineering_project.viewmodel.UserRepository;
+import com.example.software_engineering_project.repository.AppStateRepository;
+import com.example.software_engineering_project.repository.UserRepository;
 
 import java.util.HashMap;
 import java.util.Map;

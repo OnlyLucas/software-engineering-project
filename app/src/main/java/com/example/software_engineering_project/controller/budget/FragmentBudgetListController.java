@@ -13,7 +13,7 @@ import androidx.lifecycle.LiveData;
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.AdapterBudgetListFirstLayer;
 import com.example.software_engineering_project.entity.Payment;
-import com.example.software_engineering_project.viewmodel.PaymentRepository;
+import com.example.software_engineering_project.repository.PaymentRepository;
 
 import java.util.List;
 

@@ -19,8 +19,8 @@ import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.entity.PaymentParticipation;
 import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
-import com.example.software_engineering_project.viewmodel.AppStateRepository;
-import com.example.software_engineering_project.viewmodel.PaymentParticipationRepository;
+import com.example.software_engineering_project.repository.AppStateRepository;
+import com.example.software_engineering_project.repository.PaymentParticipationRepository;
 
 import java.util.LinkedHashMap;
 import java.util.List;

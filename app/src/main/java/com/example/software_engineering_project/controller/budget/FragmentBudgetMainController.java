@@ -15,7 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.util.ToastUtil;
-import com.example.software_engineering_project.viewmodel.AppStateRepository;
+import com.example.software_engineering_project.repository.AppStateRepository;
 
 /**
  * A simple {@link Fragment} subclass.
