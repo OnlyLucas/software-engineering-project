@@ -2,6 +2,7 @@ package com.example.software_engineering_project.interceptor;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -20,11 +21,8 @@ import okhttp3.Response;
  * This interceptor tries to add authorization with a Basic header to each http request made.
  */
 public class AuthInterceptor implements Interceptor {
-    private Context context;
 
-//    public AuthInterceptor(Context context) {
-//        this.context = context;
-//    }
+    private final String TAG = "authorization_interceptor";
 
     @NonNull
     @Override
@@ -38,31 +36,23 @@ public class AuthInterceptor implements Interceptor {
             return chain.proceed(originalRequest);
         }
 
-        String username = user.getEmail();
-        String password = user.getPassword();
-        String credentials = Credentials.basic(username, password);
+        try{
+            String username = user.getEmail();
+            String password = user.getPassword();
+            String credentials = Credentials.basic(username, password);
 
-        System.out.println("Authorization header: '" + credentials + "'" );
+            System.out.println("Authorization header: '" + credentials + "'" );
 
-        Request newRequest = originalRequest.newBuilder()
-                .header("Authorization", credentials)
-                .build();
-
-        //make http call
-        Response response = chain.proceed(newRequest);
-
-        System.out.println("Authorization Interceptor called");
-
-        // If user is unauthorized (user credentials can't be found in backend) go back to Login Screen and re-login.
-        if(response.code() == 401) { // Unauthorized
-            // Log user out
-            AppStateRepository.setCurrentUser(null);
-
-            Intent i = new Intent(context.getApplicationContext(), ActivityLoginScreenController.class);
-            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(i);
+            Request newRequest = originalRequest.newBuilder()
+                    .header("Authorization", credentials)
+                    .build();
+            return chain.proceed(newRequest);
+        } catch (NullPointerException e) {
+            Log.d(TAG, "User credentials for authorization not available.", e);
+            // Go on with the call
+            // If auth not required for call, it will still be successful
         }
 
-        return response;
+        return chain.proceed(originalRequest);
     }
 }

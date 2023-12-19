@@ -47,8 +47,11 @@ public class GroupRepository{
                     ToastUtil.makeToast(context.getString(R.string.createdColon_) + group.getName(), context);
                     // TODO set currentGroup and create groupMembership (not working yet)
                     groupMutableLiveData.setValue(group);
-                    AppStateRepository.setCurrentGroup(groupMutableLiveData);
-                    User user = AppStateRepository.getCurrentAppUser().getValue();
+
+                    // TODO do we need this?
+                    //AppStateRepository.setCurrentGroup(groupMutableLiveData);
+
+                    User user = AppStateRepository.getCurrentUserLiveData().getValue();
                     GroupMembership groupMembership = new GroupMembership(user, group);
                     GroupMembershipRepository groupMembershipRepository = new GroupMembershipRepository();
                     UserRepository userRepository = new UserRepository();

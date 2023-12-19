@@ -60,8 +60,8 @@ public class FragmentBudgetDetailScreenController extends Fragment {
         String userIdOweString = (String) userMap.get("id");
         String name = (String) userMap.get("firstName");
         UUID userIdOwe = UUID.fromString(userIdOweString);
-        UUID userIdGet = AppStateRepository.getCurrentAppUser().getValue().getId();
-        UUID groupId = AppStateRepository.getCurrentGroup().getValue().getId();
+        UUID userIdGet = AppStateRepository.getCurrentAppUserLiveData().getValue().getId();
+        UUID groupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
 
         paymentParticipationRepository.getGetPaymentParticipationsByUserIds(groupId, userIdOwe, userIdGet)
                 .observe((LifecycleOwner) context, affectedPaymentParticipations -> {
@@ -92,8 +92,8 @@ public class FragmentBudgetDetailScreenController extends Fragment {
         String userIdOweString = (String) userMap.get("id");
         String name = (String) userMap.get("firstName");
         UUID userIdGet = UUID.fromString(userIdOweString);
-        UUID userIdOwe = AppStateRepository.getCurrentAppUser().getValue().getId();
-        UUID groupId = AppStateRepository.getCurrentGroup().getValue().getId();
+        UUID userIdOwe = AppStateRepository.getCurrentAppUserLiveData().getValue().getId();
+        UUID groupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
 
         paymentParticipationRepository.getOwePaymentParticipationsByUserIds(groupId, userIdGet, userIdOwe)
                 .observe((LifecycleOwner) context, affectedPaymentParticipations -> {
@@ -124,8 +124,8 @@ public class FragmentBudgetDetailScreenController extends Fragment {
         loadScreenElements();
 
         // get current group and user
-        Group group = AppStateRepository.getCurrentGroup().getValue();
-        User user = AppStateRepository.getCurrentAppUser().getValue();
+        Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
+        User user = AppStateRepository.getCurrentAppUserLiveData().getValue();
 
         // get current get and owe payments
         paymentParticipationRepository = new PaymentParticipationRepository();

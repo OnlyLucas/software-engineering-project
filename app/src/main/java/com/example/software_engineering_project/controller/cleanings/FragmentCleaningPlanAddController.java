@@ -59,7 +59,7 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
      * Calls the checkInputsAndSave method to validate inputs and save the cleaning plan.
      */
     public static void handleSaveClicked() {
-        checkInputsAndSave();
+        checkInputs();
     }
 
     private static boolean checkInputs() {

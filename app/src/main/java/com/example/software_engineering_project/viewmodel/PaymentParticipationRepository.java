@@ -55,12 +55,12 @@ public class PaymentParticipationRepository {
                     getPaymentParticipationLiveData.setValue(paymentParticipations);
                 } else {
                     // If unauthorized/bad credentials return to login screen
-                    if(response.code() == 401){
-                        System.out.println("Bad credentials. Rerouting to login activity.");
-                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
-                        UILoaderUtil.startLoginActivity(context);
-                        return;
-                    }
+//                    if(response.code() == 401){
+//                        System.out.println("Bad credentials. Rerouting to login activity.");
+//                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
+//                        UILoaderUtil.startLoginActivity(context);
+//                        return;
+//                    }
 
                     Log.e(TAG, "Error while fetching Get Payments");
                 }
@@ -182,8 +182,8 @@ public class PaymentParticipationRepository {
             public void onResponse(Call<PaymentParticipation> call, Response<PaymentParticipation> response) {
                 if(response.isSuccessful()){
                     Log.i(TAG, "Paying payment participation successful");
-                    UUID userId = AppStateRepository.getCurrentAppUser().getValue().getId();
-                    UUID groupId = AppStateRepository.getCurrentGroup().getValue().getId();
+                    UUID userId = AppStateRepository.getCurrentAppUserLiveData().getValue().getId();
+                    UUID groupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
                     fetchGetPaymentsGroupedByUser(groupId, userId);
                     fetchOwePaymentsGroupedByUser(groupId, userId);
                     // no toast needed as user only needs to get informed when all participations are paid

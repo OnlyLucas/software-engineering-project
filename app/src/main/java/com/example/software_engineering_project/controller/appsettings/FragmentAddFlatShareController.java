@@ -56,7 +56,7 @@ public class FragmentAddFlatShareController extends Fragment {
         });
 
         saveAddFlatShare.setOnClickListener(view -> {
-            Group group = AppStateRepository.getCurrentGroup().getValue();
+            Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
             if(group == null){
                 FragmentManageFlatShareController fragment = new FragmentManageFlatShareController();
                 checkInputs();

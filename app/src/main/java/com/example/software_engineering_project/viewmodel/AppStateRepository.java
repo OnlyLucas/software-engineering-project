@@ -57,6 +57,12 @@ public class AppStateRepository extends ViewModel {
      * @return MutableLiveData<Group> The LiveData object containing information about the current group.
      */
     public static MutableLiveData<Group> getCurrentGroupLiveData() {
+        Group group = new Group();
+        group.setId(UUID.fromString("00000000-0000-0000-0000-000000000000"));
+        group.setCreatedBy(AppStateRepository.getCurrentAppUserLiveData().getValue());
+        currentGroupLiveData.setValue(group);
+
+        // TODO implement properly
         return currentGroupLiveData;
     }
 

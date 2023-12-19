@@ -1,8 +1,7 @@
 package com.example.software_engineering_project.entity;
 
-import com.example.software_engineering_project.viewmodel.UserViewModel;
+import com.example.software_engineering_project.viewmodel.AppStateRepository;
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Objects;

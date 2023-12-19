@@ -82,7 +82,7 @@ public class FragmentManageFlatShareController extends Fragment {
 
         User user = currentUsers.getValue().get(i);
         Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
-        groupMembershipRepository.deleteGroupMembership(user, group, context);
+        groupMembershipRepository.deleteGroupMembership(user, userRepository, context);
         listView.setAdapter(adapter);
 
     }

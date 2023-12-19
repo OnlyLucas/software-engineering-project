@@ -30,10 +30,10 @@ public class ActivityLoginScreenController extends AppCompatActivity {
 
     private Button loginButton, registerButtonLogin;
     private static EditText emailInput, passwordInput;
-    private LoginService loginService;
+
     private UserRepository userRepository;
     private Context context;
-    private String password;
+    private String email, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,6 @@ public class ActivityLoginScreenController extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         context = getApplicationContext();
 
-        loginService = RetrofitClient.getInstance().create(LoginService.class);
         setContentView(R.layout.activity_login_screen);
         loadScreenElements();
         addButtons();
@@ -76,6 +75,8 @@ public class ActivityLoginScreenController extends AppCompatActivity {
             return;
         }
 
+        LoginService loginService = RetrofitClient.getLoginInstance(email, password)
+                                        .create(LoginService.class);
         Call<User> call = loginService.login();
         call.enqueue(new Callback<User>() {
             @Override
@@ -139,12 +140,13 @@ public class ActivityLoginScreenController extends AppCompatActivity {
                 // Handle the failure if needed
                 // For example, show an error message
             }
+        });
     }
 
     private boolean checkLoginInputs() {
 
         // get the inputs
-        String email = emailInput.getText().toString();
+        email = emailInput.getText().toString();
         password = passwordInput.getText().toString();
 
         //TODO outsource string
@@ -159,16 +161,9 @@ public class ActivityLoginScreenController extends AppCompatActivity {
             // Create Dummy User for Authentication that the AuthInterceptor uses
             User authUser = new User();
             authUser.setEmail(email);
+            System.out.println("Set password to current user: " + password);
             authUser.setPassword(password);
-            AppStateRepository.postCurrentUser(authUser);
-
-            try{
-                wait(1000);
-            } catch (Exception e){
-
-            }
-
-            // Request: Authorization Header: Basic username:password
+            AppStateRepository.setCurrentUser(authUser);
 
             return true;
         }

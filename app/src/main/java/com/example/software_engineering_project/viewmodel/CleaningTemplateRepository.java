@@ -97,15 +97,16 @@ public class CleaningTemplateRepository {
                 } else {
 
                     // If unauthorized/bad credentials return to login screen
-                    if(response.code() == 401){
-                        System.out.println("Bad credentials. Rerouting to login activity.");
-                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
-                        UILoaderUtil.startLoginActivity(context);
-                        return;
-                    }
+//                    if (response.code() == 401) {
+//                        System.out.println("Bad credentials. Rerouting to login activity.");
+//                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
+//                        UILoaderUtil.startLoginActivity(context);
+//                        return;
+//                    }
 
                     // Handle API error
                     Log.e(TAG, "Error while fetching cleaning templates");
+                }
             }
 
             @Override

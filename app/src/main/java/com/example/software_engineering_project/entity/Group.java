@@ -24,7 +24,7 @@ public class Group {
         this.id = UUID.randomUUID();
         this.name = name;
         this.description = description;
-        this.createdBy = AppStateRepository.getCurrentAppUser().getValue();
+        this.createdBy = AppStateRepository.getCurrentAppUserLiveData().getValue();
         long currentTimeMillis = System.currentTimeMillis();
         this.createdAt  = new Timestamp(currentTimeMillis);
     }

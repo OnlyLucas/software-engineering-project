@@ -24,7 +24,7 @@ public class GroupMembership {
     public GroupMembership(User user){
         this.id = UUID.randomUUID();
         this.user = user;
-        this.group = AppStateRepository.getCurrentGroup().getValue();
+        this.group = AppStateRepository.getCurrentGroupLiveData().getValue();
         long currentTimeMillis = System.currentTimeMillis();
         this.createdAt  = new Timestamp(currentTimeMillis);
     }
