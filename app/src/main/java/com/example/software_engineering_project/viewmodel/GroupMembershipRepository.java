@@ -56,6 +56,10 @@ public class GroupMembershipRepository {
                 if (response.isSuccessful()) {
                     Log.i(TAG, "Deletion of group membership successful");
                     userRepository.fetchUsers(context);
+                    User currentAppUser = AppStateRepository.getCurrentAppUserLiveData().getValue();
+                    if(currentAppUser.getId().equals(user.getId())){
+                        AppStateRepository.setCurrentGroup(null);
+                    }
                     ToastUtil.makeToast(context.getString(R.string.removed) + user.getFirstName(), context);
                 } else {
                     if(response.code() == 401){
