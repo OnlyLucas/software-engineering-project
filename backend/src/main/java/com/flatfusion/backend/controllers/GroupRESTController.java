@@ -49,7 +49,7 @@ public class GroupRESTController extends RESTController<GroupEntity>{
     @GetMapping("/{id}")
     public ResponseEntity<GroupEntity> getById(@PathVariable UUID id, WebRequest request){
 
-        logger.info("Get group without password by group id:  " + id);
+        logger.info("Get group by group id:  " + id);
         Optional<GroupEntity> entity = groupRepository.findGroupByIdExcludingCreatedByUserPassword(id);
 
         if(entity.isEmpty()){

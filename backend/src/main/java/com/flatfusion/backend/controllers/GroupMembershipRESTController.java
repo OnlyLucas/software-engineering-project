@@ -1,15 +1,14 @@
 package com.flatfusion.backend.controllers;
 
+import com.flatfusion.backend.entities.GroupEntity;
 import com.flatfusion.backend.entities.GroupMembershipEntity;
 import com.flatfusion.backend.repositories.GroupMembershipEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -54,5 +53,16 @@ public class GroupMembershipRESTController extends RESTController<GroupMembershi
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+    @GetMapping("/by-user/{userId}")
+    public ResponseEntity<GroupEntity> getGroupByUserId(@PathVariable UUID userId) {
+        Optional<GroupEntity> group = repository.findGroupByUserId(userId);
+        logger.info("Get group by user id: " + userId );
+
+        if (group != null) {
+            return new ResponseEntity<>(group.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
 
 }
