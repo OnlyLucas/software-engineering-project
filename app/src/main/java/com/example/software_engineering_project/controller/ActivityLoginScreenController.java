@@ -129,15 +129,14 @@ public class ActivityLoginScreenController extends AppCompatActivity {
 
                     // Clear current app user
                     AppStateRepository.setCurrentUser(null);
+                    AppStateRepository.setCurrentGroup(null);
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                System.out.println("Network error during login: " + t);
+                Log.e(TAG, "Network error during login: " + t);
                 ToastUtil.makeToast(context.getString(R.string.error_during_login), context);
-                // Handle the failure if needed
-                // For example, show an error message
             }
         });
     }

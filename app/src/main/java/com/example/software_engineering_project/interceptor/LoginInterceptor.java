@@ -26,7 +26,7 @@ public class LoginInterceptor implements Interceptor {
 
         String credentials = Credentials.basic(username, password);
 
-        //TODO log or delete
+        //TODO remove or log
         System.out.println("Authorization header: '" + credentials + "'" );
 
         Request newRequest = originalRequest.newBuilder()

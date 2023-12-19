@@ -29,6 +29,7 @@ public class AuthInterceptor implements Interceptor {
         User user = AppStateRepository.getCurrentAppUserLiveData().getValue();
 
         if (user == null){
+            //TODO remove or log
             System.out.println("AppUser is null. Continue with request.");
             return chain.proceed(originalRequest);
         }
@@ -37,7 +38,7 @@ public class AuthInterceptor implements Interceptor {
             String username = user.getEmail();
             String password = user.getPassword();
             String credentials = Credentials.basic(username, password);
-
+            //TODO remove or log
             System.out.println("Authorization header: '" + credentials + "'" );
 
             Request newRequest = originalRequest.newBuilder()
