@@ -1,5 +1,6 @@
 package com.example.software_engineering_project.dataservice;
 
+import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.entity.GroupMembership;
 
 import retrofit2.Call;
@@ -21,4 +22,7 @@ public interface GroupMembershipService {
 
     @DELETE("group-memberships/{userId}/{groupId}")
     Call<Void> deleteGroupMembership(@Path("userId") UUID userId, @Path("groupId") UUID groupId);
+
+    @GET("group-memberships/by-user/{userId}")
+    Call<Group> getGroupByUserId(@Path("userId") UUID userId);
 }

@@ -3,17 +3,21 @@ package com.example.software_engineering_project.controller;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.dataservice.LoginService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
+import com.example.software_engineering_project.util.UILoaderUtil;
 import com.example.software_engineering_project.viewmodel.AppStateRepository;
+import com.example.software_engineering_project.viewmodel.GroupMembershipRepository;
 import com.example.software_engineering_project.viewmodel.UserRepository;
 
 import retrofit2.Call;
@@ -25,17 +29,17 @@ import retrofit2.Response;
  * It provides functionality for user login and navigation to the registration screen.
  */
 public class ActivityLoginScreenController extends AppCompatActivity {
-
+    private static final String TAG = ActivityLoginScreenController.class.getSimpleName();
     private Button loginButton, registerButtonLogin;
     private static EditText emailInput, passwordInput;
-
     private UserRepository userRepository;
     private Context context;
     private String email, password;
+    private GroupMembershipRepository groupMembershipRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        groupMembershipRepository = new GroupMembershipRepository();
         super.onCreate(savedInstanceState);
         context = getApplicationContext();
 
@@ -87,26 +91,25 @@ public class ActivityLoginScreenController extends AppCompatActivity {
                     if(authenticatedUser == null){
                         // Clear credentials
                         AppStateRepository.setCurrentUser(null);
+                        AppStateRepository.setCurrentGroup(null);
 
-                        System.out.println("Login not successful");
+                        Log.e(TAG, "Login not successful");
                         // show toast of login failure
-                        ToastUtil.makeToast("Login not successful", context);
+                        ToastUtil.makeToast(context.getString(R.string.login_not_successful), context);
 
                         return;
                     }
 
-                    // TODO add text outsourcing
-                    System.out.println("Login successful");
+                    Log.i(TAG, "Login successful");
                     // show toast of success
-                    ToastUtil.makeToast("Login successful", context);
+                    ToastUtil.makeToast(context.getString(R.string.login_successful), context);
 
                     // set password as it is not transmitted by the backend and not yet in the user entity.
                     authenticatedUser.setPassword(password);
 
                     // Now set the user with all their attributes
                     AppStateRepository.setCurrentUser(authenticatedUser);
-
-                    // TODO set current group
+                    groupMembershipRepository.setGroupByUserId(authenticatedUser.getId(), context);
                     // TODO move currentGroup from UserRepository to AppStateRepository
 
                     // Route to MainActivity
@@ -115,13 +118,14 @@ public class ActivityLoginScreenController extends AppCompatActivity {
                 } else {
                     // Reset current user
                     if(response.code() == 401){
-                        System.out.println("Bad credentials used for login");
-                        ToastUtil.makeToast("Username or password not correct", context);
+                        Log.e(TAG, "Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
+                        UILoaderUtil.startLoginActivity(context);
                         return;
                     }
 
-                    System.out.println("Error during login");
-                    ToastUtil.makeToast("Error during login", context);
+                    Log.e(TAG, "Error during login");
+                    ToastUtil.makeToast(context.getString(R.string.error_during_login), context);
 
                     // Clear current app user
                     AppStateRepository.setCurrentUser(null);
@@ -130,8 +134,8 @@ public class ActivityLoginScreenController extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                System.out.println("Error during login: " + t);
-                ToastUtil.makeToast("Error during login. Try again", context);
+                System.out.println("Network error during login: " + t);
+                ToastUtil.makeToast(context.getString(R.string.error_during_login), context);
                 // Handle the failure if needed
                 // For example, show an error message
             }
@@ -144,18 +148,18 @@ public class ActivityLoginScreenController extends AppCompatActivity {
         email = emailInput.getText().toString();
         password = passwordInput.getText().toString();
 
-        //TODO outsource string
         if (email.length() == 0) {
-            ToastUtil.makeToast("Enter email", context);
+            ToastUtil.makeToast(context.getString(R.string.enter_email), context);
             return false;
         } else if (password.length() == 0) {
-            ToastUtil.makeToast("Enter password", context);
+            ToastUtil.makeToast(context.getString(R.string.enter_password), context);
             return false;
         } else {
 
             // Create Dummy User for Authentication that the AuthInterceptor uses
             User authUser = new User();
             authUser.setEmail(email);
+            //TODO remove or delete
             System.out.println("Set password to current user: " + password);
             authUser.setPassword(password);
             AppStateRepository.setCurrentUser(authUser);

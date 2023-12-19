@@ -31,7 +31,7 @@ public class ActivityRegisterScreenController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        userRepository = new UserRepository();
+        userRepository = new UserRepository(context);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_screen);
         context = getApplicationContext();

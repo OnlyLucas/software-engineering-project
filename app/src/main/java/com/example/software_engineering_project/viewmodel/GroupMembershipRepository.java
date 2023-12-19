@@ -3,6 +3,8 @@ package com.example.software_engineering_project.viewmodel;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.dataservice.GroupMembershipService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
@@ -11,6 +13,8 @@ import com.example.software_engineering_project.entity.GroupMembership;
 import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.util.UILoaderUtil;
+
+import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,6 +28,8 @@ import retrofit2.Response;
  */
 public class GroupMembershipRepository {
     private static final String TAG = GroupMembershipRepository.class.getSimpleName();
+    private MutableLiveData<Group> groupByUserId = new MutableLiveData<>();
+
     private GroupMembershipService service;
 
     /**
@@ -105,6 +111,43 @@ public class GroupMembershipRepository {
             public void onFailure(Call<GroupMembership> call, Throwable t) {
                 Log.e(TAG, "Network error while group membership creation: " + t);
                 ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + groupMembership.getUser().getFirstName(), context);
+            }
+        });
+    }
+
+    /**
+     * Fetches the group for a given user from the server.
+     *
+     * @param userId   The ID of the user for whom to fetch the group.
+     * @param context
+     */
+    public void setGroupByUserId(UUID userId, Context context) {
+        Call<Group> call = service.getGroupByUserId(userId);
+        call.enqueue(new Callback<Group>(){
+            @Override
+            public void onResponse(Call<Group> call, Response<Group> response) {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, "Group fetching by userId successful");
+                    Group group = response.body();
+                    AppStateRepository.setCurrentGroup(group);
+                    groupByUserId.setValue(group);
+                } else {
+                    // If unauthorized/bad credentials return to login screen
+                    if(response.code() == 401){
+                        Log.e(TAG, "Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
+                        UILoaderUtil.startLoginActivity(context);
+                        return;
+                    }
+
+                    Log.e(TAG,"Error while fetching group by userId");
+                    groupByUserId.setValue(null);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Group> call, Throwable t) {
+                Log.e(TAG, "Network error while fetching group by userId: " + t);
             }
         });
     }

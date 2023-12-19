@@ -1,11 +1,6 @@
 package com.example.software_engineering_project.interceptor;
 
-import android.content.Context;
-
 import androidx.annotation.NonNull;
-
-import com.example.software_engineering_project.entity.User;
-import com.example.software_engineering_project.viewmodel.AppStateRepository;
 
 import java.io.IOException;
 
@@ -31,6 +26,7 @@ public class LoginInterceptor implements Interceptor {
 
         String credentials = Credentials.basic(username, password);
 
+        //TODO log or delete
         System.out.println("Authorization header: '" + credentials + "'" );
 
         Request newRequest = originalRequest.newBuilder()

@@ -121,4 +121,9 @@
     <string name="already_member_of_group">You are already a member of a group</string>
     <string name="emailJson">email</string>
     <string name="error_with_authentication_login_again">Error with authentication. You need to login again.</string>
+    <string name="login_not_successful">Login not successful</string>
+    <string name="login_successful">Login successful</string>
+    <string name="username_or_password_not_correct">Username or password not correct</string>
+    <string name="error_during_login">Error during login</string>
+    <string name="enter_email">Enter email</string>
 </resources>
