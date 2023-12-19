@@ -109,7 +109,7 @@ public class ActivityLoginScreenController extends AppCompatActivity {
 
                     // Now set the user with all their attributes
                     AppStateRepository.setCurrentUser(authenticatedUser);
-                    groupMembershipRepository.setGroupByUserId(authenticatedUser.getId(), context);
+                    groupMembershipRepository.getGroupByUserId(authenticatedUser.getId(), context);
                     // TODO move currentGroup from UserRepository to AppStateRepository
 
                     // Route to MainActivity
