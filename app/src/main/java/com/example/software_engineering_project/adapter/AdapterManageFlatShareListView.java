@@ -11,10 +11,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.controller.FragmentDialogDeleteFlatShareMember;
-import com.example.software_engineering_project.controller.appsettings.FragmentManageFlatShareController;
 import com.example.software_engineering_project.entity.User;
 
 import java.util.List;
@@ -93,10 +93,8 @@ public class AdapterManageFlatShareListView extends ArrayAdapter<User> {
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentDialogDeleteFlatShareMember dialog = new FragmentDialogDeleteFlatShareMember();
-                dialog.show(dialog.getChildFragmentManager(), "DeleteFlatShareMember");
-                //Todo Auslagerung remove zum Dialog
-                FragmentManageFlatShareController.removeItem(position);
+                FragmentDialogDeleteFlatShareMember dialog = new FragmentDialogDeleteFlatShareMember(position);
+                dialog.show(((FragmentActivity) context).getSupportFragmentManager(), "DeleteFlatShareMember");
             }
         });
 
