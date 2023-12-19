@@ -36,9 +36,9 @@ public class PaymentRepository {
      * Default constructor for PaymentRepository. Initializes the PaymentService using RetrofitClient
      * and fetches the current list of payments immediately upon repository creation.
      */
-    public PaymentRepository() {
+    public PaymentRepository(Context context) {
         paymentService = RetrofitClient.getInstance().create(PaymentService.class);
-        fetchPayments();
+        fetchPayments(context);
     }
 
     /**
@@ -54,16 +54,16 @@ public class PaymentRepository {
             public void onResponse(Call<Payment> call, Response<Payment> response) {
                 if(response.isSuccessful()){
                     Log.i(TAG, "Payment creation successful");
-                    fetchPayments();
+                    fetchPayments(context);
                     ToastUtil.makeToast("Added " + paymentData.getPayment().getName(), context);
                 } else {
                     // If unauthorized/bad credentials return to login screen
-//                    if(response.code() == 401){
-//                        System.out.println("Bad credentials. Rerouting to login activity.");
-//                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
-//                        UILoaderUtil.startLoginActivity(context);
-//                        return;
-//                    }
+                    if(response.code() == 401){
+                        Log.e(TAG, "Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
+                        UILoaderUtil.startLoginActivity(context);
+                        return;
+                    }
 
                     Log.e(TAG, "Error while creating payment");
                     ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + paymentData.getPayment().getName(), context);
@@ -91,13 +91,13 @@ public class PaymentRepository {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Log.i(TAG, "Deletion of Payment successful");
-                    fetchPayments();
+                    fetchPayments(context);
                     ToastUtil.makeToast(context.getString(R.string.removed) + payment.getName(), context);
                 } else {
                     // If unauthorized/bad credentials return to login screen
                     if(response.code() == 401){
-                        System.out.println("Bad credentials. Rerouting to login activity.");
-                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
+                        Log.e(TAG, "Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
                         return;
                     }
@@ -120,7 +120,7 @@ public class PaymentRepository {
      * Fetches the list of payments from the server asynchronously.
      * Updates the LiveData with the retrieved list upon a successful API response.
      */
-    public void fetchPayments(){
+    public void fetchPayments(Context context){
         UUID currentGroupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
 
         Call<List<Payment>> call = paymentService.getPayments(currentGroupId);
@@ -133,12 +133,12 @@ public class PaymentRepository {
                     currentPayments.setValue(payments);
                 } else {
                     // If unauthorized/bad credentials return to login screen
-//                    if(response.code() == 401){
-//                        System.out.println("Bad credentials. Rerouting to login activity.");
-//                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
-//                        UILoaderUtil.startLoginActivity(context);
-//                        return;
-//                    }
+                    if(response.code() == 401){
+                        Log.e(TAG, "Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
+                        UILoaderUtil.startLoginActivity(context);
+                        return;
+                    }
 
                     Log.e(TAG, "Error while fetching payments");
                 }

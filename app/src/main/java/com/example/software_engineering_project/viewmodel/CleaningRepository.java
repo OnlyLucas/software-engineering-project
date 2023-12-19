@@ -11,6 +11,7 @@ import com.example.software_engineering_project.dataservice.CleaningService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.Cleaning;
 import com.example.software_engineering_project.util.ToastUtil;
+import com.example.software_engineering_project.util.UILoaderUtil;
 
 import java.util.List;
 import java.util.UUID;
@@ -43,7 +44,7 @@ public class CleaningRepository {
      *
      * @param id The UUID of the cleaning template to fetch uncompleted cleanings for.
      */
-    public void fetchUncompletedCleanings(UUID id) {
+    public void fetchUncompletedCleanings(UUID id, Context context) {
         Call<List<Cleaning>> call = cleaningService.getUncompletedCleaningsForCleaningTemplate(id);
         call.enqueue(new Callback<List<Cleaning>>(){
             @Override
@@ -55,13 +56,12 @@ public class CleaningRepository {
                 } else {
                     Log.e(TAG, "Error while fetching cleanings");
                     // If unauthorized/bad credentials return to login screen
-//                    if(response.code() == 401){
-//                        System.out.println("Bad credentials. Rerouting to login activity.");
-//                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
-//                        UILoaderUtil.startLoginActivity(context);
-//                    }
-                    // Handle API error
-                    System.out.println("Error while fetching cleanings");
+                    if(response.code() == 401){
+                        Log.e(TAG, "Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
+                        UILoaderUtil.startLoginActivity(context);
+                        return;
+                    }
                 }
             }
 
@@ -105,13 +105,11 @@ public class CleaningRepository {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    fetchUncompletedCleanings(cleaning.getCleaningTemplate().getId());
+                    fetchUncompletedCleanings(cleaning.getCleaningTemplate().getId(), context);
                     Log.i(TAG, "Deletion of Cleaning successful");
                     ToastUtil.makeToast(context.getString(R.string.removed) + cleaning.getDate(), context);
                 } else {
-                    System.out.println(response.code());
                     Log.e(TAG, "Failed to delete cleaning on the server");
-                    System.out.println(response.body().toString());
                     ToastUtil.makeToast(context.getString(R.string.deletion_failed), context);
                 }
             }
@@ -132,8 +130,8 @@ public class CleaningRepository {
      * @param id The UUID of the cleaning template to fetch uncompleted cleanings for.
      * @return LiveData<List<Cleaning>> The LiveData object containing the list of uncompleted cleanings.
      */
-    public LiveData<List<Cleaning>> getUncompletedCleanings(UUID id) {
-        fetchUncompletedCleanings(id);
+    public LiveData<List<Cleaning>> getUncompletedCleanings(UUID id, Context context) {
+        fetchUncompletedCleanings(id, context);
         return uncompletedCleanings;
     }
 
@@ -155,7 +153,7 @@ public class CleaningRepository {
             public void onResponse(Call<Cleaning> call, Response<Cleaning> response) {
                 if(response.isSuccessful()){
                     Log.i(TAG, "Unchecking cleaning successful");
-                    fetchUncompletedCleanings(cleaning.getCleaningTemplate().getId());
+                    fetchUncompletedCleanings(cleaning.getCleaningTemplate().getId(), context);
                     ToastUtil.makeToast(context.getString(R.string.uncheckedColon_) + cleaning.getDate(), context);
                 } else {
                     Log.e(TAG, "Error while unchecking cleaning");

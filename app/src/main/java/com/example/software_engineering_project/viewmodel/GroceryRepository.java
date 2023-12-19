@@ -36,9 +36,9 @@ public class GroceryRepository {
      * Default constructor for GroceryRepository. Initializes the GroupGroceryService using RetrofitClient
      * and fetches the group groceries immediately upon repository creation.
      */
-    public GroceryRepository() {
+    public GroceryRepository(Context context) {
         groceryService = RetrofitClient.getInstance().create(GroupGroceryService.class);
-        fetchGroupGroceries();
+        fetchGroupGroceries(context);
     }
 
     /**
@@ -55,14 +55,14 @@ public class GroceryRepository {
                 if(response.isSuccessful()){
                     Log.i(TAG, "Group grocery creation successful");
                     uncompletedGroupGroceries.getValue().add(groupGrocery);
-                    fetchUncompletedGroupGroceries();
+                    fetchUncompletedGroupGroceries(context);
                     ToastUtil.makeToast(context.getString(R.string.added) + groupGrocery.getName(), context);
                 } else {
 
                     // If unauthorized/bad credentials return to login screen
                     if(response.code() == 401){
-                        System.out.println("Bad credentials. Rerouting to login activity.");
-                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
+                        Log.e(TAG, "Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
                         return;
                     }
@@ -94,13 +94,13 @@ public class GroceryRepository {
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
                         Log.i(TAG, "Deletion of Group Grocery successful");
-                        fetchGroupGroceries();
+                        fetchGroupGroceries(context);
                         ToastUtil.makeToast(context.getString(R.string.removed) + groupGrocery.getName(), context);
                     } else {
                         // If unauthorized/bad credentials return to login screen
-                        if (response.code() == 401) {
-                            System.out.println("Bad credentials. Rerouting to login activity.");
-                            ToastUtil.makeToast("Error with authentication. You need to login again.", context);
+                        if(response.code() == 401){
+                            Log.e(TAG, "Bad credentials. Rerouting to login activity.");
+                            ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                             UILoaderUtil.startLoginActivity(context);
                             return;
                         }
@@ -124,9 +124,9 @@ public class GroceryRepository {
     /**
      * Fetches both uncompleted and completed group groceries from the server.
      */
-    public void fetchGroupGroceries(){
-        fetchUncompletedGroupGroceries();
-        fetchCompletedGroupGroceries();
+    public void fetchGroupGroceries(Context context){
+        fetchUncompletedGroupGroceries(context);
+        fetchCompletedGroupGroceries(context);
     }
 
     /**
@@ -160,13 +160,13 @@ public class GroceryRepository {
             public void onResponse(Call<GroupGrocery> call, Response<GroupGrocery> response) {
                 if(response.isSuccessful()){
                     Log.i(TAG, "Unchecking group grocery successful");
-                    fetchGroupGroceries();
+                    fetchGroupGroceries(context);
                     ToastUtil.makeToast(context.getString(R.string.uncheckedColon_) + grocery.getName(), context);
                 } else {
                     // If unauthorized/bad credentials return to login screen
                     if(response.code() == 401){
-                        System.out.println("Bad credentials. Rerouting to login activity.");
-                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
+                        Log.e(TAG, "Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
                         return;
                     }
@@ -184,7 +184,7 @@ public class GroceryRepository {
         });
     }
 
-    private void fetchUncompletedGroupGroceries() {
+    private void fetchUncompletedGroupGroceries(Context context) {
         // Get current group id
         UUID currentGroupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
 
@@ -198,12 +198,12 @@ public class GroceryRepository {
                     uncompletedGroupGroceries.setValue(groceries);
                 } else {
                     // If unauthorized/bad credentials return to login screen
-//                    if(response.code() == 401){
-//                        System.out.println("Bad credentials. Rerouting to login activity.");
-//                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
-//                        UILoaderUtil.startLoginActivity(context);
-//                        return;
-//                    }
+                    if(response.code() == 401){
+                        Log.e(TAG, "Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
+                        UILoaderUtil.startLoginActivity(context);
+                        return;
+                    }
 
                     Log.e(TAG,"Error while fetching uncompleted group groceries");
                 }
@@ -217,7 +217,7 @@ public class GroceryRepository {
         });
     }
 
-    private void fetchCompletedGroupGroceries() {
+    private void fetchCompletedGroupGroceries(Context context) {
         UUID currentGroupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
 
         Call<List<GroupGrocery>> call = groceryService.getCompletedGroupGroceries(currentGroupId);
@@ -230,12 +230,12 @@ public class GroceryRepository {
                     completedGroupGroceries.setValue(groceries);
                 } else {
                     // If unauthorized/bad credentials return to login screen
-//                    if(response.code() == 401){
-//                        System.out.println("Bad credentials. Rerouting to login activity.");
-//                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
-//                        UILoaderUtil.startLoginActivity(context);
-//                        return;
-//                    }
+                    if(response.code() == 401){
+                        Log.e(TAG, "Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
+                        UILoaderUtil.startLoginActivity(context);
+                        return;
+                    }
 
                     Log.e(TAG,"Error while fetching completed group groceries");
                 }

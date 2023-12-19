@@ -135,10 +135,10 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = requireActivity();
-        userRepository = new UserRepository();
+        userRepository = new UserRepository(context);
         currentUsers = userRepository.getCurrentUsers();
 
-        paymentRepository = new PaymentRepository();
+        paymentRepository = new PaymentRepository(context);
         paymentParticipationRepository = new PaymentParticipationRepository();
 
         fragmentView = inflater.inflate(R.layout.fragment_budget_add_expense_screen, container, false);

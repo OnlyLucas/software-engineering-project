@@ -85,7 +85,7 @@ public class FragmentCleaningPlanListDetailController extends Fragment {
         loadScreenElements();
         cleaningRepository = new CleaningRepository();
 
-        uncompletedCleaningsLiveData = cleaningRepository.getUncompletedCleanings(cleaningTemplate.getId());
+        uncompletedCleaningsLiveData = cleaningRepository.getUncompletedCleanings(cleaningTemplate.getId(), context);
         uncompletedCleaningsLiveData.observe(getViewLifecycleOwner(), cleaningList -> {
             adapter = new AdapterCleaningPlanListDetailView(context, cleaningList);
             listView.setAdapter(adapter);

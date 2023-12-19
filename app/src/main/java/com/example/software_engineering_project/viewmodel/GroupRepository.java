@@ -54,7 +54,7 @@ public class GroupRepository{
                     User user = AppStateRepository.getCurrentAppUserLiveData().getValue();
                     GroupMembership groupMembership = new GroupMembership(user, group);
                     GroupMembershipRepository groupMembershipRepository = new GroupMembershipRepository();
-                    UserRepository userRepository = new UserRepository();
+                    UserRepository userRepository = new UserRepository(context);
                     groupMembershipRepository.insertGroupMembership(groupMembership, userRepository, context);
                 } else {
                     Log.e(TAG, "Error while group creation");

@@ -49,12 +49,12 @@ public class GroupMembershipRepository {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Log.i(TAG, "Deletion of group membership successful");
-                    userRepository.fetchUsers();
+                    userRepository.fetchUsers(context);
                     ToastUtil.makeToast(context.getString(R.string.removed) + user.getFirstName(), context);
                 } else {
                     if(response.code() == 401){
-                        System.out.println("Bad credentials. Rerouting to login activity.");
-                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
+                        Log.e(TAG, "Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
                         return;
                     }
@@ -86,12 +86,12 @@ public class GroupMembershipRepository {
             public void onResponse(Call<GroupMembership> call, Response<GroupMembership> response) {
                 if(response.isSuccessful()){
                     Log.i(TAG, "Group membership creation successful");
-                    userRepository.fetchUsers();
+                    userRepository.fetchUsers(context);
                     ToastUtil.makeToast(context.getString(R.string.added) + groupMembership.getUser().getFirstName(), context);
                 } else {
                     if(response.code() == 401){
-                        System.out.println("Bad credentials. Rerouting to login activity.");
-                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
+                        Log.e(TAG, "Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
                         return;
                     }

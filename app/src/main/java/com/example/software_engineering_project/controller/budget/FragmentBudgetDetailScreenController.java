@@ -130,7 +130,7 @@ public class FragmentBudgetDetailScreenController extends Fragment {
         // get current get and owe payments
         paymentParticipationRepository = new PaymentParticipationRepository();
 
-        getPaymentsGroupedByUserLiveData = paymentParticipationRepository.getGetPaymentsGroupedByUser(group.getId(), user.getId());
+        getPaymentsGroupedByUserLiveData = paymentParticipationRepository.getGetPaymentsGroupedByUser(group.getId(), user.getId(), context);
         getPaymentsGroupedByUserLiveData.observe(getViewLifecycleOwner(), getPaymentsGroupedByUser -> {
             adapterBudgetDetailGet = new AdapterBudgetDetailGet(context, getPaymentsGroupedByUser);
             listGetExpenses.setAdapter(adapterBudgetDetailGet);
@@ -138,7 +138,7 @@ public class FragmentBudgetDetailScreenController extends Fragment {
             getTotalGetOrOwe(getDouble, oweDouble);
         });
 
-        owePaymentsGroupedByUserLiveData = paymentParticipationRepository.getOwePaymentsGroupedByUser(group.getId(), user.getId());
+        owePaymentsGroupedByUserLiveData = paymentParticipationRepository.getOwePaymentsGroupedByUser(group.getId(), user.getId(), context);
         owePaymentsGroupedByUserLiveData.observe(getViewLifecycleOwner(), owePaymentsGroupedByUser -> {
             adapterBudgetDetailOwe = new AdapterBudgetDetailOwe(context, owePaymentsGroupedByUserLiveData.getValue());
             listOweExpenses.setAdapter(adapterBudgetDetailOwe);

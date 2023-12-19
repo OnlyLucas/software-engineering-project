@@ -65,7 +65,7 @@ public class FragmentCleaningPlanListController extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        cleaningTemplateRepository = new CleaningTemplateRepository();
+        cleaningTemplateRepository = new CleaningTemplateRepository(context);
         cleaningRepository = new CleaningRepository();
 
         currentCleaningTemplatesLiveData = cleaningTemplateRepository.getCurrentCleaningTemplates();

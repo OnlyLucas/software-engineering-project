@@ -34,9 +34,9 @@ public class CleaningTemplateRepository {
      * Default constructor for CleaningTemplateRepository. Initializes the CleaningTemplateService using RetrofitClient
      * and fetches the current list of cleaning templates from the server.
      */
-    public CleaningTemplateRepository() {
+    public CleaningTemplateRepository(Context context) {
         cleaningTemplateService = RetrofitClient.getInstance().create(CleaningTemplateService.class);
-        fetchCleaningTemplates();
+        fetchCleaningTemplates(context);
     }
 
     /**
@@ -53,15 +53,15 @@ public class CleaningTemplateRepository {
                 if(response.isSuccessful()){
                     Log.i(TAG, "Cleaning template creation successful");
                     ToastUtil.makeToast(context.getString(R.string.added) + cleaningTemplate.getName(), context);
-                    fetchCleaningTemplates();
+                    fetchCleaningTemplates(context);
                 } else {
                     Log.i(TAG, "Error while cleaning template creation");
                     ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + cleaningTemplate.getName(), context);
 
                     // If unauthorized/bad credentials return to login screen
                     if(response.code() == 401){
-                        System.out.println("Bad credentials. Rerouting to login activity.");
-                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
+                        Log.e(TAG, "Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
                         return;
                     }
@@ -82,7 +82,7 @@ public class CleaningTemplateRepository {
      * Fetches the list of current cleaning templates from the server asynchronously.
      * Updates the LiveData with the retrieved list upon a successful API response.
      */
-    public void fetchCleaningTemplates() {
+    public void fetchCleaningTemplates(Context context) {
 
         UUID currentGroupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
 
@@ -97,12 +97,12 @@ public class CleaningTemplateRepository {
                 } else {
 
                     // If unauthorized/bad credentials return to login screen
-//                    if (response.code() == 401) {
-//                        System.out.println("Bad credentials. Rerouting to login activity.");
-//                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
-//                        UILoaderUtil.startLoginActivity(context);
-//                        return;
-//                    }
+                    if(response.code() == 401){
+                        Log.e(TAG, "Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
+                        UILoaderUtil.startLoginActivity(context);
+                        return;
+                    }
 
                     // Handle API error
                     Log.e(TAG, "Error while fetching cleaning templates");
@@ -131,12 +131,12 @@ public class CleaningTemplateRepository {
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
                         Log.i(TAG, "Deletion of Cleaning Template successful");
-                        fetchCleaningTemplates();
+                        fetchCleaningTemplates(context);
                         ToastUtil.makeToast(context.getString(R.string.removed) + cleaningTemplate.getName(), context);
                     } else {
                         if(response.code() == 401){
-                            System.out.println("Bad credentials. Rerouting to login activity.");
-                            ToastUtil.makeToast("Error with authentication. You need to login again.", context);
+                            Log.e(TAG, "Bad credentials. Rerouting to login activity.");
+                            ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                             UILoaderUtil.startLoginActivity(context);
                             return;
                         }

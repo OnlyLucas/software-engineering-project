@@ -120,4 +120,5 @@
     <string name="persons_involved">Persons involved</string>
     <string name="already_member_of_group">You are already a member of a group</string>
     <string name="emailJson">email</string>
+    <string name="error_with_authentication_login_again">Error with authentication. You need to login again.</string>
 </resources>

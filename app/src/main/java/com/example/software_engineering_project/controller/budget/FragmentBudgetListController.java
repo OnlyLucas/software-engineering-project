@@ -52,7 +52,7 @@ public class FragmentBudgetListController extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = requireActivity();
-        paymentRepository = new PaymentRepository();
+        paymentRepository = new PaymentRepository(context);
         currentPayments = paymentRepository.getCurrentPayments();
 
         fragmentView = inflater.inflate(R.layout.fragment_budget_list, container, false);

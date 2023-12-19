@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.dataservice.PaymentParticipationService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.PaymentParticipation;
@@ -44,7 +45,7 @@ public class PaymentParticipationRepository {
      * @param groupId The ID of the current group.
      * @param userId  The ID of the current user.
      */
-    public void fetchGetPaymentsGroupedByUser(UUID groupId, UUID userId) {
+    public void fetchGetPaymentsGroupedByUser(UUID groupId, UUID userId, Context context) {
         Call<List<Object[]>> call = paymentParticipationService.getGetPaymentsGroupedByUser(groupId, userId);
         call.enqueue(new Callback<List<Object[]>>() {
             @Override
@@ -55,12 +56,12 @@ public class PaymentParticipationRepository {
                     getPaymentParticipationLiveData.setValue(paymentParticipations);
                 } else {
                     // If unauthorized/bad credentials return to login screen
-//                    if(response.code() == 401){
-//                        System.out.println("Bad credentials. Rerouting to login activity.");
-//                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
-//                        UILoaderUtil.startLoginActivity(context);
-//                        return;
-//                    }
+                    if(response.code() == 401){
+                        Log.e(TAG, "Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
+                        UILoaderUtil.startLoginActivity(context);
+                        return;
+                    }
 
                     Log.e(TAG, "Error while fetching Get Payments");
                 }
@@ -80,7 +81,7 @@ public class PaymentParticipationRepository {
      * @param groupId The ID of the current group.
      * @param userId  The ID of the current user.
      */
-    public void fetchOwePaymentsGroupedByUser(UUID groupId, UUID userId) {
+    public void fetchOwePaymentsGroupedByUser(UUID groupId, UUID userId, Context context) {
         Call<List<Object[]>> call = paymentParticipationService.getOwePaymentsGroupedByUser(groupId, userId);
         call.enqueue(new Callback<List<Object[]>>() {
             @Override
@@ -91,12 +92,12 @@ public class PaymentParticipationRepository {
                     owePaymentParticipationLiveData.setValue(paymentParticipations);
                 } else {
                     // If unauthorized/bad credentials return to login screen
-//                    if(response.code() == 401){
-//                        System.out.println("Bad credentials. Rerouting to login activity.");
-//                        ToastUtil.makeToast("Error with authentication. You need to login again.", context);
-//                        UILoaderUtil.startLoginActivity(context);
-//                        return;
-//                    }
+                    if(response.code() == 401){
+                        Log.e(TAG, "Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
+                        UILoaderUtil.startLoginActivity(context);
+                        return;
+                    }
 
                     Log.e(TAG, "Error while fetching Owe Payments");
                 }
@@ -150,8 +151,8 @@ public class PaymentParticipationRepository {
         });
     }
 
-    public LiveData<List<Object[]>> getGetPaymentsGroupedByUser(UUID groupId, UUID userId) {
-        fetchGetPaymentsGroupedByUser(groupId, userId);
+    public LiveData<List<Object[]>> getGetPaymentsGroupedByUser(UUID groupId, UUID userId, Context context) {
+        fetchGetPaymentsGroupedByUser(groupId, userId, context);
         return getPaymentParticipationLiveData;
     }
 
@@ -160,8 +161,8 @@ public class PaymentParticipationRepository {
         return getPaymentParticipationsByUserIds;
     }
 
-    public LiveData<List<Object[]>> getOwePaymentsGroupedByUser(UUID groupId, UUID userId) {
-        fetchOwePaymentsGroupedByUser(groupId, userId);
+    public LiveData<List<Object[]>> getOwePaymentsGroupedByUser(UUID groupId, UUID userId, Context context) {
+        fetchOwePaymentsGroupedByUser(groupId, userId, context);
         return owePaymentParticipationLiveData;
     }
 
@@ -184,8 +185,8 @@ public class PaymentParticipationRepository {
                     Log.i(TAG, "Paying payment participation successful");
                     UUID userId = AppStateRepository.getCurrentAppUserLiveData().getValue().getId();
                     UUID groupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
-                    fetchGetPaymentsGroupedByUser(groupId, userId);
-                    fetchOwePaymentsGroupedByUser(groupId, userId);
+                    fetchGetPaymentsGroupedByUser(groupId, userId, context);
+                    fetchOwePaymentsGroupedByUser(groupId, userId, context);
                     // no toast needed as user only needs to get informed when all participations are paid
                 } else {
                     Log.e(TAG, "Error while paying payment participation");

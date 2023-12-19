@@ -52,7 +52,7 @@ public class FragmentChangeMailController extends Fragment {
      */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = requireActivity();
-        userRepository = new UserRepository();
+        userRepository = new UserRepository(context);
         fragmentView = inflater.inflate(R.layout.fragment_change_mail, container, false);
         loadScreenElements();
         addButtons();

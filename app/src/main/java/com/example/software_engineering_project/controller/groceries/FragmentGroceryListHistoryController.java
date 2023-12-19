@@ -43,7 +43,7 @@ public class FragmentGroceryListHistoryController extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         context = requireActivity();
-        groceryRepository = new GroceryRepository();
+        groceryRepository = new GroceryRepository(context);
         completedGroceryLiveData = groceryRepository.getCompletedGroupGroceries();
 
         completedGroceryLiveData.observe(getViewLifecycleOwner(), groceryList -> {

@@ -1,9 +1,7 @@
 package com.example.software_engineering_project.controller.cleanings;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,7 +86,7 @@ public class FragmentCleaningPlanAddController extends Fragment implements Adapt
             CleaningTemplate cleaningTemplate = new CleaningTemplate(nameString, descriptionString,
                     startDateSql, endDateSql, intervalSelection);
 
-            CleaningTemplateRepository cleaningTemplateRepository = new CleaningTemplateRepository();
+            CleaningTemplateRepository cleaningTemplateRepository = new CleaningTemplateRepository(context);
             cleaningTemplateRepository.createCleaningTemplate(cleaningTemplate, context);
 
             resetPickers();

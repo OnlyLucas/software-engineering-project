@@ -62,7 +62,7 @@ public class FragmentManageFlatShareController extends Fragment {
      * @param mail The mail of the member to be added.
      */
     public static void addItem(String mail) {
-        userRepository.getUserByMail(mail).observe((LifecycleOwner) context, newUser -> {
+        userRepository.getUserByMail(mail, context).observe((LifecycleOwner) context, newUser -> {
             if (newUser != null) {
                 GroupMembership groupMembership = new GroupMembership(newUser);
                 groupMembershipRepository.insertGroupMembership(groupMembership, userRepository, context);
@@ -99,7 +99,7 @@ public class FragmentManageFlatShareController extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = requireActivity();
         //Load Backend
-        userRepository = new UserRepository();
+        userRepository = new UserRepository(context);
         groupMembershipRepository = new GroupMembershipRepository();
         currentUsers = userRepository.getCurrentUsers();
 
