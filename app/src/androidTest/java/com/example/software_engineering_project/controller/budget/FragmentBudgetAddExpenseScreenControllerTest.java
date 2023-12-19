@@ -78,11 +78,8 @@ public class FragmentBudgetAddExpenseScreenControllerTest {
     public void testAddExpense() {
 
         // Enter some data into the expense and reason fields
-        Espresso.onView(withId(R.id.enterNewExpenseAmount)).perform(ViewActions.typeText("50"));
-        Espresso.onView(withId(R.id.enterNewExpenseReason)).perform(ViewActions.typeText("Test expense"));
-
-        // Close the soft keyboard
-        Espresso.closeSoftKeyboard();
+        Espresso.onView(withId(R.id.enterNewExpenseAmount)).perform(ViewActions.typeText("50"), ViewActions.closeSoftKeyboard());
+        Espresso.onView(withId(R.id.enterNewExpenseReason)).perform(ViewActions.typeText("Test expense"), ViewActions.closeSoftKeyboard());
 
         // Click on the involved persons list item
         Espresso.onView(withId(R.id.enterNewExpenseInvolvedPersons)).perform(click());
@@ -105,7 +102,6 @@ public class FragmentBudgetAddExpenseScreenControllerTest {
 
         // Verify that the paymentRepository.createPayment method is called
         // Note: You can check if a specific intent is sent instead of mocking
-        //TODO Intents.intended(IntentMatchers.hasComponent(ActivityMainScreenController.class.getName()));
 
         // Überprüfe, ob die ActivityLoginScreenController gestartet wird
         Intents.intending(IntentMatchers.hasComponent(ActivityMainScreenController.class.getName()));
