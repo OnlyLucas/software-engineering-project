@@ -153,13 +153,16 @@ public class FragmentBudgetDetailScreenController extends Fragment {
     private void getTotalGetOrOwe(Double getPayments, Double owePayments) {
         Double difference = getPayments - owePayments;
         // So far we only support euro as currency, but in this place a differentiation would be needed
-        String differenceString = String.format(Locale.getDefault(), "%.2f", difference) + "€";
+        String differenceString;
 
         if(difference == 0){
             totalCalculatedExpenses.setText("In total you do not owe or get any money.");
         } else if(difference > 0){
+            differenceString = String.format(Locale.getDefault(), "%.2f", difference) + "€";
             totalCalculatedExpenses.setText("You get back in total: " + differenceString);
         } else{
+            difference = difference * (-1);
+            differenceString = String.format(Locale.getDefault(), "%.2f", difference) + "€";
             totalCalculatedExpenses.setText("You owe in total: " + differenceString);
         }
     }
@@ -201,7 +204,7 @@ public class FragmentBudgetDetailScreenController extends Fragment {
             if(totalAmountOwe == 0.00) {
                 totalOweExpenses.setText("You do not owe any money.");
             } else {
-                totalOweExpenses.setText("You owe: " + totalAmountOweString);
+                totalOweExpenses.setText("You owe: " + totalAmountOwe);
             }
             return totalAmountOwe;
         }
