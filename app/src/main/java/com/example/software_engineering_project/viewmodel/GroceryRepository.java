@@ -187,6 +187,10 @@ public class GroceryRepository {
     private void fetchUncompletedGroupGroceries(Context context) {
         // Get current group id
         UUID currentGroupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
+        if(currentGroupId == null){
+            ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
+            return;
+        }
 
         Call<List<GroupGrocery>> call = groceryService.getUncompletedGroupGroceries(currentGroupId);
         call.enqueue(new Callback<List<GroupGrocery>>() {
@@ -219,6 +223,10 @@ public class GroceryRepository {
 
     private void fetchCompletedGroupGroceries(Context context) {
         UUID currentGroupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
+        if(currentGroupId == null){
+            ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
+            return;
+        }
 
         Call<List<GroupGrocery>> call = groceryService.getCompletedGroupGroceries(currentGroupId);
         call.enqueue(new Callback<List<GroupGrocery>>() {

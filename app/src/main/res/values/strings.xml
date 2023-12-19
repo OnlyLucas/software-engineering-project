@@ -126,4 +126,5 @@
     <string name="username_or_password_not_correct">Username or password not correct</string>
     <string name="error_during_login">Error during login</string>
     <string name="enter_email">Enter email</string>
+    <string name="join_a_group">Join a group!</string>
 </resources>

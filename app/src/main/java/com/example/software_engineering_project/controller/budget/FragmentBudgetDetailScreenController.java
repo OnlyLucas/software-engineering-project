@@ -62,6 +62,10 @@ public class FragmentBudgetDetailScreenController extends Fragment {
         UUID userIdOwe = UUID.fromString(userIdOweString);
         UUID userIdGet = AppStateRepository.getCurrentAppUserLiveData().getValue().getId();
         UUID groupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
+        if(groupId == null){
+            ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
+            return;
+        }
 
         paymentParticipationRepository.getGetPaymentParticipationsByUserIds(groupId, userIdOwe, userIdGet)
                 .observe((LifecycleOwner) context, affectedPaymentParticipations -> {
@@ -94,6 +98,10 @@ public class FragmentBudgetDetailScreenController extends Fragment {
         UUID userIdGet = UUID.fromString(userIdOweString);
         UUID userIdOwe = AppStateRepository.getCurrentAppUserLiveData().getValue().getId();
         UUID groupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
+        if(groupId == null){
+            ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
+            return;
+        }
 
         paymentParticipationRepository.getOwePaymentParticipationsByUserIds(groupId, userIdGet, userIdOwe)
                 .observe((LifecycleOwner) context, affectedPaymentParticipations -> {
@@ -127,24 +135,28 @@ public class FragmentBudgetDetailScreenController extends Fragment {
         Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
         User user = AppStateRepository.getCurrentAppUserLiveData().getValue();
 
-        // get current get and owe payments
-        paymentParticipationRepository = new PaymentParticipationRepository();
+        if(group != null){
+            // get current get and owe payments
+            paymentParticipationRepository = new PaymentParticipationRepository();
 
-        getPaymentsGroupedByUserLiveData = paymentParticipationRepository.getGetPaymentsGroupedByUser(group.getId(), user.getId(), context);
-        getPaymentsGroupedByUserLiveData.observe(getViewLifecycleOwner(), getPaymentsGroupedByUser -> {
-            adapterBudgetDetailGet = new AdapterBudgetDetailGet(context, getPaymentsGroupedByUser);
-            listGetExpenses.setAdapter(adapterBudgetDetailGet);
-            getDouble = getTotalGetPayments(getPaymentsGroupedByUser);
-            getTotalGetOrOwe(getDouble, oweDouble);
-        });
+            getPaymentsGroupedByUserLiveData = paymentParticipationRepository.getGetPaymentsGroupedByUser(group.getId(), user.getId(), context);
+            getPaymentsGroupedByUserLiveData.observe(getViewLifecycleOwner(), getPaymentsGroupedByUser -> {
+                adapterBudgetDetailGet = new AdapterBudgetDetailGet(context, getPaymentsGroupedByUser);
+                listGetExpenses.setAdapter(adapterBudgetDetailGet);
+                getDouble = getTotalGetPayments(getPaymentsGroupedByUser);
+                getTotalGetOrOwe(getDouble, oweDouble);
+            });
 
-        owePaymentsGroupedByUserLiveData = paymentParticipationRepository.getOwePaymentsGroupedByUser(group.getId(), user.getId(), context);
-        owePaymentsGroupedByUserLiveData.observe(getViewLifecycleOwner(), owePaymentsGroupedByUser -> {
-            adapterBudgetDetailOwe = new AdapterBudgetDetailOwe(context, owePaymentsGroupedByUserLiveData.getValue());
-            listOweExpenses.setAdapter(adapterBudgetDetailOwe);
-            oweDouble = getTotalOwePayments(owePaymentsGroupedByUser);
-            getTotalGetOrOwe(getDouble, oweDouble);
-        });
+            owePaymentsGroupedByUserLiveData = paymentParticipationRepository.getOwePaymentsGroupedByUser(group.getId(), user.getId(), context);
+            owePaymentsGroupedByUserLiveData.observe(getViewLifecycleOwner(), owePaymentsGroupedByUser -> {
+                adapterBudgetDetailOwe = new AdapterBudgetDetailOwe(context, owePaymentsGroupedByUserLiveData.getValue());
+                listOweExpenses.setAdapter(adapterBudgetDetailOwe);
+                oweDouble = getTotalOwePayments(owePaymentsGroupedByUser);
+                getTotalGetOrOwe(getDouble, oweDouble);
+            });
+        } else {
+            ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
+        }
 
         return fragmentView;
 

@@ -77,6 +77,8 @@ public class UserRepository {
                     Log.e(TAG, "Network error while fetching users: " + t);
                 }
             });
+        } else {
+            ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
         }
     }
 

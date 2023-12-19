@@ -122,6 +122,10 @@ public class PaymentRepository {
      */
     public void fetchPayments(Context context){
         UUID currentGroupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
+        if(currentGroupId == null){
+            ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
+            return;
+        }
 
         Call<List<Payment>> call = paymentService.getPayments(currentGroupId);
         call.enqueue(new Callback<List<Payment>>() {

@@ -85,6 +85,10 @@ public class CleaningTemplateRepository {
     public void fetchCleaningTemplates(Context context) {
 
         UUID currentGroupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
+        if(currentGroupId == null){
+            ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
+            return;
+        }
 
         Call<List<CleaningTemplate>> call = cleaningTemplateService.getCleaningTemplates(currentGroupId);
         call.enqueue(new Callback<List<CleaningTemplate>>(){
