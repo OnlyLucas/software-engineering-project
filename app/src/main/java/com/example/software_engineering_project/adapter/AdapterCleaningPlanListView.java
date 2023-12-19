@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.controller.cleanings.FragmentCleaningPlanListController;
@@ -45,16 +46,15 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
      * @param context The context in which the adapter is being used.
      * @param items   The List of CleaningTemplate objects to be displayed in the adapter.
      */
-    public AdapterCleaningPlanListView(Context context, List<CleaningTemplate> items) {
+    public AdapterCleaningPlanListView(Context context, List<CleaningTemplate> items, CleaningRepository cleaningRepository) {
 
         super(context, R.layout.adapter_cleaning_plan_list_view, items);
         this.context = context;
-        cleaningRepository = new CleaningRepository();
+        this.cleaningRepository = cleaningRepository;
         list = items;
 
     }
 
-    // The method we override to provide our own layout for each View (row) in the ListView
     /**
      * Get the view that displays the data at the specified position in the data set.
      *
@@ -69,57 +69,68 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        ViewHolder holder;
 
         if (convertView == null) {
+            holder = new ViewHolder();
             CleaningTemplate cleaningTemplate = list.get(position);
 
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.adapter_cleaning_plan_list_view, null);
 
-            loadScreenElements(convertView);
+            holder.loadScreenElements(convertView);
 
-            number.setText(position + 1 + ".");
-            name.setText(cleaningTemplate.getName());
-            description.setText(cleaningTemplate.getDescription());
+            holder.number.setText(position + 1 + ".");
+            holder.name.setText(cleaningTemplate.getName());
+            holder.description.setText(cleaningTemplate.getDescription());
 
-            cleaningRepository.getUncompletedCleanings(cleaningTemplate.getId()).observe((LifecycleOwner) context, cleanings -> {
-                if (cleanings != null && !cleanings.isEmpty()) {
-                    Cleaning nextCleaning = cleanings.get(0);
+            holder.smallestCleaningLiveData = cleaningRepository.getUncompletedCleaningWithSmallestDate(cleaningTemplate.getId());
+            holder.smallestCleaningLiveData.observe((LifecycleOwner) context, cleaning -> {
+                if (cleaning != null) {
+                    Log.d(TAG, "Next Cleaning Date for " + position + " and " + cleaningTemplate.getName() + ": " + cleaning.getDate());
                     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM");
-                    String formattedDate = dateFormat.format(nextCleaning.getDate());
-                    nextCleaningDate.setText(formattedDate);
+                    String formattedDate = dateFormat.format(cleaning.getDate());
+                    holder.nextCleaningDate.setText(formattedDate);
                 } else {
                     Log.e(TAG, "Error to get date of next cleaning.");
                 }
             });
 
-            addButtons(position);
+            holder.addButtons(position);
 
+            convertView.setTag(holder);
         }
 
         return convertView;
-
     }
 
-    private void addButtons(int position) {
 
-        remove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentCleaningPlanListController.removeItem(position);
-            }
-        });
+    class ViewHolder {
+        // Add your UI elements here
+        TextView number;
+        TextView name;
+        TextView description;
+        TextView nextCleaningDate;
+        ImageView remove;
 
-    }
+        private static LiveData<Cleaning> smallestCleaningLiveData;
 
-    private void loadScreenElements(View convertView) {
+        void loadScreenElements(View convertView) {
+            description = convertView.findViewById(R.id.descriptionCleaningPlan);
+            name = convertView.findViewById(R.id.nameCleaningPlan);
+            nextCleaningDate = convertView.findViewById(R.id.nextCleaningDate);
+            number = convertView.findViewById(R.id.numberCleaningPlan);
+            remove = convertView.findViewById(R.id.removeCleaningPlan);
+        }
 
-        description = convertView.findViewById(R.id.descriptionCleaningPlan);
-        name = convertView.findViewById(R.id.nameCleaningPlan);
-        nextCleaningDate = convertView.findViewById(R.id.nextCleaningDate);
-        number = convertView.findViewById(R.id.numberCleaningPlan);
-        remove = convertView.findViewById(R.id.removeCleaningPlan);
-
+        void addButtons(int position) {
+            remove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FragmentCleaningPlanListController.removeItem(position);
+                }
+            });
+        }
     }
 
 }

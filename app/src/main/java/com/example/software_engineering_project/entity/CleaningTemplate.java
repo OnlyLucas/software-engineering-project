@@ -22,7 +22,6 @@ public class CleaningTemplate {
     private User createdByUser;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
-
     private Set<Cleaning> cleanings;
 
     public CleaningTemplate() {

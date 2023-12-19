@@ -16,6 +16,7 @@ import androidx.lifecycle.LiveData;
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.AdapterCleaningPlanListView;
 import com.example.software_engineering_project.entity.CleaningTemplate;
+import com.example.software_engineering_project.viewmodel.CleaningRepository;
 import com.example.software_engineering_project.viewmodel.CleaningTemplateRepository;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class FragmentCleaningPlanListController extends Fragment {
 
     private static ArrayAdapter<CleaningTemplate> adapter;
     private static CleaningTemplateRepository cleaningTemplateRepository;
+    private static CleaningRepository cleaningRepository;
     private static Context context;
     private static ListView listView;
     private static LiveData<List<CleaningTemplate>> currentCleaningTemplatesLiveData;
@@ -64,11 +66,12 @@ public class FragmentCleaningPlanListController extends Fragment {
                              Bundle savedInstanceState) {
 
         cleaningTemplateRepository = new CleaningTemplateRepository();
+        cleaningRepository = new CleaningRepository();
 
         currentCleaningTemplatesLiveData = cleaningTemplateRepository.getCurrentCleaningTemplates();
 
         currentCleaningTemplatesLiveData.observe(getViewLifecycleOwner(), currentCleaningTemplates -> {
-            adapter = new AdapterCleaningPlanListView(getActivity(), currentCleaningTemplates);
+            adapter = new AdapterCleaningPlanListView(getActivity(), currentCleaningTemplates, cleaningRepository);
             listView.setAdapter(adapter);
         });
 

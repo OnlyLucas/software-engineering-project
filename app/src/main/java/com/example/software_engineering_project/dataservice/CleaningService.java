@@ -29,4 +29,7 @@ public interface CleaningService {
 
     @PUT("cleanings/{id}")
     Call<Cleaning> updateCleaning(@Path("id") UUID id, @Body Cleaning cleaning);
+
+    @GET("cleanings/cleaning-template/{templateId}/uncompletedSmallestDate")
+    Call<Cleaning> getUncompletedCleaningWithSmallestDateForCleaningTemplate(@Path("templateId") UUID id);
 }

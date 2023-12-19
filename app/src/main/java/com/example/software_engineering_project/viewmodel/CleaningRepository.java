@@ -11,12 +11,10 @@ import com.example.software_engineering_project.dataservice.CleaningService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.Cleaning;
 import com.example.software_engineering_project.util.ToastUtil;
-import com.example.software_engineering_project.util.UILoaderUtil;
 
 import java.util.List;
 import java.util.UUID;
 
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,6 +28,7 @@ public class CleaningRepository {
     private static final String TAG = CleaningRepository.class.getSimpleName();
     private CleaningService cleaningService;
     private MutableLiveData<List<Cleaning>> uncompletedCleanings = new MutableLiveData<>();
+    private MutableLiveData<Cleaning> uncompletedCleaningWithSmallestDate = new MutableLiveData<>();
 
     /**
      * Default constructor for CleaningRepository. Initializes the CleaningService using RetrofitClient.
@@ -73,6 +72,27 @@ public class CleaningRepository {
         });
     }
 
+    public void fetchUncompletedCleaningWithSmallestDate(UUID id) {
+        Call<Cleaning> call = cleaningService.getUncompletedCleaningWithSmallestDateForCleaningTemplate(id);
+        call.enqueue(new Callback<Cleaning>(){
+            @Override
+            public void onResponse(Call<Cleaning> call, Response<Cleaning> response) {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, "Cleaning fetching successful");
+                    Cleaning cleaning = response.body();
+                    uncompletedCleaningWithSmallestDate.setValue(cleaning);
+                } else {
+                    Log.e(TAG, "Error while fetching cleanings");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Cleaning> call, Throwable t) {
+                Log.e(TAG, "Network error while fetching cleanings: " + t);
+            }
+        });
+    }
+
     /**
      * Deletes a cleaning from the server and updates the list of uncompleted cleanings upon a successful deletion.
      *
@@ -101,6 +121,7 @@ public class CleaningRepository {
                 Log.e(TAG,"Network error while deleting cleaning: " + t);
                 ToastUtil.makeToast(context.getString(R.string.deletion_failed), context);
             }
+
         });
     }
 
@@ -114,6 +135,11 @@ public class CleaningRepository {
     public LiveData<List<Cleaning>> getUncompletedCleanings(UUID id) {
         fetchUncompletedCleanings(id);
         return uncompletedCleanings;
+    }
+
+    public LiveData<Cleaning> getUncompletedCleaningWithSmallestDate(UUID id) {
+        fetchUncompletedCleaningWithSmallestDate(id);
+        return uncompletedCleaningWithSmallestDate;
     }
 
     /**
