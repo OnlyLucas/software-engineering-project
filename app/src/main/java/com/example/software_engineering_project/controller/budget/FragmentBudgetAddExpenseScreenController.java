@@ -18,9 +18,9 @@ import com.example.software_engineering_project.entity.Payment;
 import com.example.software_engineering_project.entity.PaymentCreationData;
 import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
-import com.example.software_engineering_project.viewmodel.PaymentParticipationRepository;
-import com.example.software_engineering_project.viewmodel.PaymentRepository;
-import com.example.software_engineering_project.viewmodel.UserRepository;
+import com.example.software_engineering_project.repository.PaymentParticipationRepository;
+import com.example.software_engineering_project.repository.PaymentRepository;
+import com.example.software_engineering_project.repository.UserRepository;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

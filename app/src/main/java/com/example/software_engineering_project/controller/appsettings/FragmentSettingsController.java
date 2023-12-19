@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.controller.ActivityLoginScreenController;
 import com.example.software_engineering_project.controller.FragmentDialogLeaveFlatShare;
+import com.example.software_engineering_project.util.UILoaderUtil;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,8 +73,7 @@ public class FragmentSettingsController extends Fragment {
         });
 
         logOutButton.setOnClickListener(view -> {
-            Intent loginScreen = new Intent(requireActivity(), ActivityLoginScreenController.class);
-            startActivity(loginScreen);
+            UILoaderUtil.startLoginActivity(getContext());
         });
 
     }

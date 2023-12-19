@@ -11,9 +11,9 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.entity.User;
-import com.example.software_engineering_project.viewmodel.AppStateRepository;
-import com.example.software_engineering_project.viewmodel.GroupMembershipRepository;
-import com.example.software_engineering_project.viewmodel.UserRepository;
+import com.example.software_engineering_project.repository.AppStateRepository;
+import com.example.software_engineering_project.repository.GroupMembershipRepository;
+import com.example.software_engineering_project.repository.UserRepository;
 
 public class FragmentDialogLeaveFlatShare extends DialogFragment {
     private static GroupMembershipRepository groupMembershipRepository;
