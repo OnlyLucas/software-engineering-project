@@ -3,6 +3,9 @@ package com.flatfusion.backend.controllers;
 import com.flatfusion.backend.entities.CleaningEntity;
 import com.flatfusion.backend.repositories.CleaningEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,6 +55,19 @@ public class CleaningRESTController extends RESTController<CleaningEntity>{
         }
 
         return new ResponseEntity<>(uncompletedCleanings.get(), HttpStatus.OK);
+    }
+
+    @GetMapping("/cleaning-template/{templateId}/uncompletedSmallestDate")
+    public ResponseEntity<CleaningEntity> getUncompletedCleaningWithSmallestDate(@PathVariable UUID templateId) {
+        logger.info("Get uncompleted Cleaning with smallest date by CleaningTemplate id:  " + templateId);
+        Pageable pageable = PageRequest.of(0, 1); // Limit the result to 1 item
+        Page<CleaningEntity> cleaningPage = repository.getUncompletedCleaningWithSmallestDate(templateId, pageable);
+        //Optional<CleaningEntity> uncompletedCleaning = repository.getUncompletedCleaningWithSmallestDate(templateId);
+        if(cleaningPage.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(cleaningPage.getContent().get(0), HttpStatus.OK);
     }
 
 }
