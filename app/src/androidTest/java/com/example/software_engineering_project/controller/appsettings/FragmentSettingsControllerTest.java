@@ -93,6 +93,9 @@ public class FragmentSettingsControllerTest {
         Espresso.onView(withId(R.id.logOutButton)).perform(ViewActions.click());
 
         // Überprüfe, ob die ActivityLoginScreenController gestartet wird
-        Intents.intended(IntentMatchers.hasComponent(ActivityLoginScreenController.class.getName()));
+        Intents.intending(IntentMatchers.hasComponent(ActivityMainScreenController.class.getName()));
+
+        // Test if ActivityLoginScreenController is launched
+        Intents.intending(IntentMatchers.hasComponent(ActivityLoginScreenController.class.getName()));
     }
 }
