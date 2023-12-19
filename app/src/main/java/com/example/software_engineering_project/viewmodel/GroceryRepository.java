@@ -9,12 +9,12 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.dataservice.GroupGroceryService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
+import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.entity.GroupGrocery;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.util.UILoaderUtil;
 
 import java.util.List;
-import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -186,13 +186,13 @@ public class GroceryRepository {
 
     private void fetchUncompletedGroupGroceries(Context context) {
         // Get current group id
-        UUID currentGroupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
-        if(currentGroupId == null){
+        Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
+        if(group == null){
             ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
             return;
         }
 
-        Call<List<GroupGrocery>> call = groceryService.getUncompletedGroupGroceries(currentGroupId);
+        Call<List<GroupGrocery>> call = groceryService.getUncompletedGroupGroceries(group.getId());
         call.enqueue(new Callback<List<GroupGrocery>>() {
             @Override
             public void onResponse(Call<List<GroupGrocery>> call, Response<List<GroupGrocery>> response) {
@@ -222,13 +222,13 @@ public class GroceryRepository {
     }
 
     private void fetchCompletedGroupGroceries(Context context) {
-        UUID currentGroupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
-        if(currentGroupId == null){
+        Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
+        if(group == null){
             ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
             return;
         }
 
-        Call<List<GroupGrocery>> call = groceryService.getCompletedGroupGroceries(currentGroupId);
+        Call<List<GroupGrocery>> call = groceryService.getCompletedGroupGroceries(group.getId());
         call.enqueue(new Callback<List<GroupGrocery>>() {
             @Override
             public void onResponse(Call<List<GroupGrocery>> call, Response<List<GroupGrocery>> response) {

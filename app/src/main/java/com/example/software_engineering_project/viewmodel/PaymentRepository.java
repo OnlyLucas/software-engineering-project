@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.dataservice.PaymentService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
+import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.entity.Payment;
 import com.example.software_engineering_project.entity.PaymentCreationData;
 import com.example.software_engineering_project.util.ToastUtil;
@@ -16,7 +17,6 @@ import com.example.software_engineering_project.util.UILoaderUtil;
 
 
 import java.util.List;
-import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -121,13 +121,13 @@ public class PaymentRepository {
      * Updates the LiveData with the retrieved list upon a successful API response.
      */
     public void fetchPayments(Context context){
-        UUID currentGroupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
-        if(currentGroupId == null){
+        Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
+        if(group == null){
             ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
             return;
         }
 
-        Call<List<Payment>> call = paymentService.getPayments(currentGroupId);
+        Call<List<Payment>> call = paymentService.getPayments(group.getId());
         call.enqueue(new Callback<List<Payment>>() {
             @Override
             public void onResponse(Call<List<Payment>> call, Response<List<Payment>> response) {

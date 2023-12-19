@@ -64,6 +64,7 @@ public class FragmentCleaningPlanListController extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        context = requireActivity();
 
         cleaningTemplateRepository = new CleaningTemplateRepository(context);
         cleaningRepository = new CleaningRepository();
@@ -78,7 +79,6 @@ public class FragmentCleaningPlanListController extends Fragment {
         fragmentView = inflater.inflate(R.layout.fragment_cleaning_plan_list, container, false);
         loadScreenElements();
         addButtons();
-        context = requireActivity();
 
         return fragmentView;
     }

@@ -61,13 +61,15 @@ public class FragmentBudgetDetailScreenController extends Fragment {
         String name = (String) userMap.get("firstName");
         UUID userIdOwe = UUID.fromString(userIdOweString);
         UUID userIdGet = AppStateRepository.getCurrentAppUserLiveData().getValue().getId();
-        UUID groupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
-        if(groupId == null){
+        Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
+        if(group == null){
             ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
             return;
         }
 
-        paymentParticipationRepository.getGetPaymentParticipationsByUserIds(groupId, userIdOwe, userIdGet)
+
+
+        paymentParticipationRepository.getGetPaymentParticipationsByUserIds(group.getId(), userIdOwe, userIdGet, context)
                 .observe((LifecycleOwner) context, affectedPaymentParticipations -> {
                     if (affectedPaymentParticipations != null) {
 
@@ -97,13 +99,13 @@ public class FragmentBudgetDetailScreenController extends Fragment {
         String name = (String) userMap.get("firstName");
         UUID userIdGet = UUID.fromString(userIdOweString);
         UUID userIdOwe = AppStateRepository.getCurrentAppUserLiveData().getValue().getId();
-        UUID groupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
-        if(groupId == null){
+        Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
+        if(group == null){
             ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
             return;
         }
 
-        paymentParticipationRepository.getOwePaymentParticipationsByUserIds(groupId, userIdGet, userIdOwe)
+        paymentParticipationRepository.getOwePaymentParticipationsByUserIds(group.getId(), userIdGet, userIdOwe, context)
                 .observe((LifecycleOwner) context, affectedPaymentParticipations -> {
                     if (affectedPaymentParticipations != null) {
                         for (PaymentParticipation p : affectedPaymentParticipations) {

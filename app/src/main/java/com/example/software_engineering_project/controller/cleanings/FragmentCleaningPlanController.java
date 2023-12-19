@@ -1,5 +1,6 @@
 package com.example.software_engineering_project.controller.cleanings;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.entity.Group;
+import com.example.software_engineering_project.util.ToastUtil;
+import com.example.software_engineering_project.viewmodel.AppStateRepository;
 
 
 /**
@@ -29,6 +33,7 @@ public class FragmentCleaningPlanController extends Fragment {
     private FragmentCleaningPlanListController fragmentCleaningPlanListController = new FragmentCleaningPlanListController();
     private FragmentCleaningPlanAddController fragmentCleaningPlanAddController = new FragmentCleaningPlanAddController();
     private ImageView addCleaningPlan, saveCleaningPlan;
+    private Context context;
 
 
     /**
@@ -42,6 +47,7 @@ public class FragmentCleaningPlanController extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        context = getActivity();
         fragmentView = inflater.inflate(R.layout.fragment_cleaning_plan, container, false);
         FragmentCleaningPlanListController fragmentCleaningPlanListController = new FragmentCleaningPlanListController();
         loadScreenElements();
@@ -53,12 +59,17 @@ public class FragmentCleaningPlanController extends Fragment {
     }
 
     private void addButtons() {
+        Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
 
         addCleaningPlan.setOnClickListener(v -> {
-            callFragment(fragmentCleaningPlanAddController);
-            goBackCleaningPlan.setVisibility(View.VISIBLE);
-            saveCleaningPlan.setVisibility(View.VISIBLE);
-            addCleaningPlan.setVisibility(View.INVISIBLE);
+            if(group == null) {
+                ToastUtil.makeToast(context.getString(R.string.join_a_group_first), context);
+            } else {
+                callFragment(fragmentCleaningPlanAddController);
+                goBackCleaningPlan.setVisibility(View.VISIBLE);
+                saveCleaningPlan.setVisibility(View.VISIBLE);
+                addCleaningPlan.setVisibility(View.INVISIBLE);
+            }
         });
 
         goBackCleaningPlan.setOnClickListener(v -> {

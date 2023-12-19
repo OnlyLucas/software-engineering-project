@@ -1,7 +1,7 @@
 package com.example.software_engineering_project.controller.budget;
 
+import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +13,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.entity.Group;
+import com.example.software_engineering_project.util.ToastUtil;
+import com.example.software_engineering_project.viewmodel.AppStateRepository;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +30,7 @@ public class FragmentBudgetMainController extends Fragment {
     private ImageView addExpense, goBackBudgetMain, saveExpense, showBudgetDetail;
     private TextView budgetHeadline;
     private View fragmentView;
+    private Context context;
 
 
     /**
@@ -40,6 +44,7 @@ public class FragmentBudgetMainController extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        context = getActivity();
         fragmentView = inflater.inflate(R.layout.fragment_budget_main, container, false);
         loadScreenElements();
         callFragment(fragmentBudgetListController);
@@ -49,6 +54,7 @@ public class FragmentBudgetMainController extends Fragment {
     }
 
     private void addButtons() {
+        Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
 
         showBudgetDetail.setOnClickListener(view -> {
             callFragment(fragmentBudgetDetailScreenController);
@@ -64,9 +70,13 @@ public class FragmentBudgetMainController extends Fragment {
         });
 
         addExpense.setOnClickListener(view -> {
-            callFragment(fragmentBudgetAddExpenseScreenController);
-            replaceButtons(showBudgetDetail, goBackBudgetMain, addExpense, saveExpense);
-            budgetHeadline.setText(R.string.add_new_expense);
+            if(group == null) {
+                ToastUtil.makeToast(context.getString(R.string.join_a_group_first), context);
+            } else {
+                callFragment(fragmentBudgetAddExpenseScreenController);
+                replaceButtons(showBudgetDetail, goBackBudgetMain, addExpense, saveExpense);
+                budgetHeadline.setText(R.string.add_new_expense);
+            }
         });
 
         saveExpense.setOnClickListener(view -> FragmentBudgetAddExpenseScreenController.handleSaveClicked());

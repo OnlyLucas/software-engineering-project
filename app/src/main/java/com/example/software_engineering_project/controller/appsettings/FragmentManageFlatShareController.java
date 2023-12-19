@@ -81,7 +81,6 @@ public class FragmentManageFlatShareController extends Fragment {
     public static void removeItem(int i) {
 
         User user = currentUsers.getValue().get(i);
-        Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
         groupMembershipRepository.deleteGroupMembership(user, userRepository, context);
         listView.setAdapter(adapter);
 
@@ -145,21 +144,26 @@ public class FragmentManageFlatShareController extends Fragment {
         });
 
         enter.setOnClickListener(view -> {
-            String text = inputMail.getText().toString();
-            if (text.length() == 0) {
-                ToastUtil.makeToast(getString(R.string.enter_mail_here), context);
+            Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
+            if(group == null) {
+                ToastUtil.makeToast(context.getString(R.string.join_a_group_first), context);
             } else {
-                boolean userExists = false;
-                for (User u: currentUsers.getValue()) {
-                    if(u.getEmail().equals(text)){
-                        userExists = true;
-                        ToastUtil.makeToast("User already added", context);
-                        break;
+                String text = inputMail.getText().toString();
+                if (text.length() == 0) {
+                    ToastUtil.makeToast(getString(R.string.enter_mail_here), context);
+                } else {
+                    boolean userExists = false;
+                    for (User u : currentUsers.getValue()) {
+                        if (u.getEmail().equals(text)) {
+                            userExists = true;
+                            ToastUtil.makeToast(getString(R.string.user_already_added), context);
+                            break;
+                        }
                     }
-                }
-                if(!userExists) {
-                    addItem(text);
-                    inputMail.setText(getString(R.string.empty_input_fields));
+                    if (!userExists) {
+                        addItem(text);
+                        inputMail.setText(getString(R.string.empty_input_fields));
+                    }
                 }
             }
         });

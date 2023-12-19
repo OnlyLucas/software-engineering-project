@@ -127,4 +127,6 @@
     <string name="error_during_login">Error during login</string>
     <string name="enter_email">Enter email</string>
     <string name="join_a_group">Join a group!</string>
+    <string name="join_a_group_first">Join a group first!</string>
+    <string name="user_already_added">User already added</string>
 </resources>

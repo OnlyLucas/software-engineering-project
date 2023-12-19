@@ -18,8 +18,10 @@ import androidx.lifecycle.LiveData;
 
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.AdapterGroceryListListView;
+import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.entity.GroupGrocery;
 import com.example.software_engineering_project.util.ToastUtil;
+import com.example.software_engineering_project.viewmodel.AppStateRepository;
 import com.example.software_engineering_project.viewmodel.GroceryRepository;
 
 import java.util.List;
@@ -109,23 +111,27 @@ public class FragmentGroceryListController extends Fragment {
         enter.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // get the input
-                String text = input.getText().toString();
-
-                if (text.length() == 0) {
-                    // if no input
-                    ToastUtil.makeToast(getString(R.string.enter_an_itemDot), context);
-                } else if(text.length() > 32) {
-                    ToastUtil.makeToast(getString(R.string.enter_shorter_name), context);
+                Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
+                if(group == null) {
+                    ToastUtil.makeToast(context.getString(R.string.join_a_group_first), context);
                 } else {
-                    // if input exists, create new GroupGrocery with respective attributes
-                    GroupGrocery grocery = new GroupGrocery(text);
-                    // add new item to database
-                    addItem(grocery);
-                    // empty input field
-                    input.setText(R.string.empty_input_fields);
-                }
+                    // get the input
+                    String text = input.getText().toString();
 
+                    if (text.length() == 0) {
+                        // if no input
+                        ToastUtil.makeToast(getString(R.string.enter_an_itemDot), context);
+                    } else if (text.length() > 32) {
+                        ToastUtil.makeToast(getString(R.string.enter_shorter_name), context);
+                    } else {
+                        // if input exists, create new GroupGrocery with respective attributes
+                        GroupGrocery grocery = new GroupGrocery(text);
+                        // add new item to database
+                        addItem(grocery);
+                        // empty input field
+                        input.setText(R.string.empty_input_fields);
+                    }
+                }
             }
 
         });

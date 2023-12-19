@@ -10,11 +10,11 @@ import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.dataservice.CleaningTemplateService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.CleaningTemplate;
+import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.util.UILoaderUtil;
 
 import java.util.List;
-import java.util.UUID;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -83,14 +83,13 @@ public class CleaningTemplateRepository {
      * Updates the LiveData with the retrieved list upon a successful API response.
      */
     public void fetchCleaningTemplates(Context context) {
-
-        UUID currentGroupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();
-        if(currentGroupId == null){
+        Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
+        if(group == null){
             ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
             return;
         }
 
-        Call<List<CleaningTemplate>> call = cleaningTemplateService.getCleaningTemplates(currentGroupId);
+        Call<List<CleaningTemplate>> call = cleaningTemplateService.getCleaningTemplates(group.getId());
         call.enqueue(new Callback<List<CleaningTemplate>>(){
             @Override
             public void onResponse(Call<List<CleaningTemplate>> call, Response<List<CleaningTemplate>> response) {

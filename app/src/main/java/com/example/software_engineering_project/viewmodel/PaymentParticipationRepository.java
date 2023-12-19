@@ -46,6 +46,10 @@ public class PaymentParticipationRepository {
      * @param userId  The ID of the current user.
      */
     public void fetchGetPaymentsGroupedByUser(UUID groupId, UUID userId, Context context) {
+        if(groupId == null){
+            ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
+            return;
+        }
         Call<List<Object[]>> call = paymentParticipationService.getGetPaymentsGroupedByUser(groupId, userId);
         call.enqueue(new Callback<List<Object[]>>() {
             @Override
@@ -82,6 +86,10 @@ public class PaymentParticipationRepository {
      * @param userId  The ID of the current user.
      */
     public void fetchOwePaymentsGroupedByUser(UUID groupId, UUID userId, Context context) {
+        if(groupId == null){
+            ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
+            return;
+        }
         Call<List<Object[]>> call = paymentParticipationService.getOwePaymentsGroupedByUser(groupId, userId);
         call.enqueue(new Callback<List<Object[]>>() {
             @Override
@@ -109,7 +117,11 @@ public class PaymentParticipationRepository {
             }
         });
     }
-    private void fetchGetPaymentParticipationsByUserIds(UUID groupId, UUID userIdOwe, UUID userIdGet) {
+    private void fetchGetPaymentParticipationsByUserIds(UUID groupId, UUID userIdOwe, UUID userIdGet, Context context) {
+        if(groupId == null){
+            ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
+            return;
+        }
         Call<List<PaymentParticipation>> call = paymentParticipationService.getGetPaymentParticipationsByUserIds(groupId, userIdOwe, userIdGet);
         call.enqueue(new Callback<List<PaymentParticipation>>() {
             @Override
@@ -130,7 +142,11 @@ public class PaymentParticipationRepository {
         });
     }
 
-    private void fetchOwePaymentParticipationsByUserIds(UUID groupId, UUID userIdGet, UUID userIdOwe) {
+    private void fetchOwePaymentParticipationsByUserIds(UUID groupId, UUID userIdGet, UUID userIdOwe, Context context) {
+        if(groupId == null){
+            ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
+            return;
+        }
         Call<List<PaymentParticipation>> call = paymentParticipationService.getOwePaymentParticipationsByUserIds(groupId, userIdGet, userIdOwe);
         call.enqueue(new Callback<List<PaymentParticipation>>() {
             @Override
@@ -156,8 +172,8 @@ public class PaymentParticipationRepository {
         return getPaymentParticipationLiveData;
     }
 
-    public LiveData<List<PaymentParticipation>> getGetPaymentParticipationsByUserIds(UUID groupId, UUID userIdOwe, UUID userIdGet) {
-        fetchGetPaymentParticipationsByUserIds(groupId, userIdOwe, userIdGet);
+    public LiveData<List<PaymentParticipation>> getGetPaymentParticipationsByUserIds(UUID groupId, UUID userIdOwe, UUID userIdGet, Context context) {
+        fetchGetPaymentParticipationsByUserIds(groupId, userIdOwe, userIdGet, context);
         return getPaymentParticipationsByUserIds;
     }
 
@@ -166,8 +182,8 @@ public class PaymentParticipationRepository {
         return owePaymentParticipationLiveData;
     }
 
-    public LiveData<List<PaymentParticipation>> getOwePaymentParticipationsByUserIds(UUID groupId, UUID userIdGet, UUID userIdOwe) {
-        fetchOwePaymentParticipationsByUserIds(groupId, userIdGet, userIdOwe);
+    public LiveData<List<PaymentParticipation>> getOwePaymentParticipationsByUserIds(UUID groupId, UUID userIdGet, UUID userIdOwe, Context context) {
+        fetchOwePaymentParticipationsByUserIds(groupId, userIdGet, userIdOwe, context);
         return owePaymentParticipationsByUserIds;
     }
 
