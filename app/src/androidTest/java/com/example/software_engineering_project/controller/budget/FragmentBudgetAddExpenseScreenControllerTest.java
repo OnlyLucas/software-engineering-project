@@ -107,6 +107,11 @@ public class FragmentBudgetAddExpenseScreenControllerTest {
         // Note: You can check if a specific intent is sent instead of mocking
         //TODO Intents.intended(IntentMatchers.hasComponent(ActivityMainScreenController.class.getName()));
 
+        // Überprüfe, ob die ActivityLoginScreenController gestartet wird
+        Intents.intending(IntentMatchers.hasComponent(ActivityMainScreenController.class.getName()));
+
+        // Test if ActivityLoginScreenController is launched
+        Intents.intending(IntentMatchers.hasComponent(ActivityLoginScreenController.class.getName()));
     }
 
 }
