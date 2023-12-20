@@ -53,7 +53,7 @@ public class AdapterGroceryListHistory extends ArrayAdapter<GroupGrocery> {
      *                    initially or when the previous view cannot be reused.
      * @param parent      The parent ViewGroup that this view will eventually be attached to.
      * @return The View corresponding to the data at the specified position.
-     *         This view will be displayed as an item in the grocery list history.
+     * This view will be displayed as an item in the grocery list history.
      */
     @NonNull
     @Override

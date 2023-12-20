@@ -18,10 +18,10 @@ import java.util.ArrayList;
 
 /**
  * Custom adapter for displaying a list of items in a Spinner view.
- *
+ * <p>
  * This adapter extends ArrayAdapter<String> and is designed to work with the layout 'adapter_spinner_list_view'.
  * It provides a customized view for each item in the Spinner, including the name of the interval.
- *
+ * <p>
  * The getView method is overridden to inflate the layout, load screen elements, and set the content based on the String item at the specified position in the data set.
  * The adapter also implements the AdapterView.OnItemSelectedListener interface to handle item selection events.
  */
