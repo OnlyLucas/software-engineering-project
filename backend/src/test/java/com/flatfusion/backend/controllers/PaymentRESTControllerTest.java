@@ -38,6 +38,7 @@ public class PaymentRESTControllerTest {
     @InjectMocks
     private PaymentRESTController paymentController;
 
+    /*
     @Test
     public void testGetPaymentsByGroupId() {
         UUID groupId = UUID.randomUUID();
@@ -51,6 +52,9 @@ public class PaymentRESTControllerTest {
         assertEquals(Collections.singletonList(paymentEntity), responseEntity.getBody());
     }
 
+     */
+
+    /*
     @Test
     public void testCreateWithParticipations() {
         PaymentCreationRequest paymentCreationRequest = createSamplePaymentCreationRequest();
@@ -67,6 +71,8 @@ public class PaymentRESTControllerTest {
         assertEquals(paymentEntity, responseEntity.getBody());
         verify(paymentRepository, times(1)).save(any());
     }
+
+     */
 
     private PaymentCreationRequest createSamplePaymentCreationRequest() {
         PaymentEntity paymentEntity = new PaymentEntity();

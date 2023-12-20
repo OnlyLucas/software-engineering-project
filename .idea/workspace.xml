@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89099437-bd15-4ec1-af96-f9b07a22bad3" name="Changes" comment="Added Unit tests to back end">
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/flatfusion/backend/controllers/PaymentsChangeRESTControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/flatfusion/backend/controllers/PaymentChangesRESTControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/flatfusion/backend/controllers/UserRESTControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/flatfusion/backend/controllers/UserRESTControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,6 +87,9 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -146,7 +145,7 @@
       <recent name="com.flatfusion.backend.entity" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.PaymentsChangeRESTControllerTest">
+  <component name="RunManager" selected="Gradle.backend [build &amp; bootRun]">
     <configuration name="GroupGroceryRESTControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />

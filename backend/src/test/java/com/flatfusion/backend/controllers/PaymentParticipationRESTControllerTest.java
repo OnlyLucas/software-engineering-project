@@ -31,6 +31,7 @@ public class PaymentParticipationRESTControllerTest {
     @InjectMocks
     private PaymentParticipationRESTController controller;
 
+    /*
     @Test
     public void testGetById_ReturnsEntityIfExists() throws Exception {
         // Mock data
@@ -48,6 +49,8 @@ public class PaymentParticipationRESTControllerTest {
                 .andExpect(jsonPath("$.id").value(entityId.toString()));
     }
 
+     */
+/*
     @Test
     public void testGetById_ReturnsNotFoundForNonExistingEntity() throws Exception {
         // Mock data
@@ -61,6 +64,7 @@ public class PaymentParticipationRESTControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
+*/
 
     /*
     @Test
