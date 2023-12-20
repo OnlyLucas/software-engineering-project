@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89099437-bd15-4ec1-af96-f9b07a22bad3" name="Changes" comment="Added Unit tests to back end" />
+    <list default="true" id="89099437-bd15-4ec1-af96-f9b07a22bad3" name="Changes" comment="Added Unit tests to back end">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/flatfusion/backend/controllers/PaymentParticipationRESTControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/flatfusion/backend/controllers/PaymentParticipationRESTControllerTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -373,7 +376,14 @@
       <option name="project" value="LOCAL" />
       <updated>1703073510886</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added Unit tests to back end">
+      <created>1703088690612</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1703088690612</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -1,6 +1,5 @@
 package com.flatfusion.backend.controllers;
 
-import com.flatfusion.backend.controllers.GroupGroceryRESTController;
 import com.flatfusion.backend.entities.GroupGroceryEntity;
 import com.flatfusion.backend.repositories.GroupGroceryEntityRepository;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,6 +1,5 @@
 package com.flatfusion.backend.controllers;
 
-import com.flatfusion.backend.controllers.CleaningTemplateRESTController;
 import com.flatfusion.backend.entities.CleaningTemplateEntity;
 import com.flatfusion.backend.repositories.CleaningTemplateEntityRepository;
 import org.junit.jupiter.api.BeforeEach;

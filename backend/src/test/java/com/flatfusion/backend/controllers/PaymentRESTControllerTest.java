@@ -1,24 +1,18 @@
 package com.flatfusion.backend.controllers;
 
-import com.flatfusion.backend.entities.GroupEntity;
 import com.flatfusion.backend.entities.PaymentEntity;
-import com.flatfusion.backend.entities.UserEntity;
 import com.flatfusion.backend.repositories.GroupEntityRepository;
 import com.flatfusion.backend.repositories.PaymentEntityRepository;
 import com.flatfusion.backend.repositories.UserEntityRepository;
 import com.flatfusion.backend.requests.PaymentCreationRequest;
-import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 
 import java.math.BigDecimal;
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class PaymentRESTControllerTest {
