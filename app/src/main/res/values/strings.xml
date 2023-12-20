@@ -132,4 +132,5 @@
     <string name="user_already_added_to_other_group">User is already added to another group</string>
     <string name="delete_flat_share_member">Delete flat share member</string>
     <string name="do_you_really_want_to_delete_this_flat_share_member_">Do you really want to delete this flat share member?</string>
+    <string name="paid_space">"Paid "</string>
 </resources>

@@ -77,7 +77,7 @@ public class FragmentBudgetDetailScreenController extends Fragment {
                             p.setPaid();
                             paymentParticipationRepository.update(p, context);
                         }
-                        ToastUtil.makeToast("Paid " + name, context);
+                        ToastUtil.makeToast(context.getString(R.string.paid_space) + name, context);
                     }
                 });
     }
@@ -112,7 +112,7 @@ public class FragmentBudgetDetailScreenController extends Fragment {
                             p.setPaid();
                             paymentParticipationRepository.update(p, context);
                         }
-                        ToastUtil.makeToast("Paid " + name, context);
+                        ToastUtil.makeToast(context.getString(R.string.paid_space) + name, context);
                     }
                 });
     }
