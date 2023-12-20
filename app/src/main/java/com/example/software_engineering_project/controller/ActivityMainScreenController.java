@@ -24,7 +24,6 @@ public class ActivityMainScreenController extends AppCompatActivity {
 
     private Button budgetButton, cleaningPlanButton, goSettingsButton, groceryListButton;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -41,8 +40,6 @@ public class ActivityMainScreenController extends AppCompatActivity {
     private void addButtons() {
 
         groceryListButton.setOnClickListener(view -> {
-            // TODO
-            // FragmentGroceryListController.groceryLiveData.getValue().clear();
             FragmentGroceryListController fragmentGroceryListController = new FragmentGroceryListController();
             String tag = "fragment_grocery_list";
             callFragment(fragmentGroceryListController, tag);
@@ -93,7 +90,7 @@ public class ActivityMainScreenController extends AppCompatActivity {
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(R.id.contentFragmentMainScreen, fragment,tag);
+        transaction.replace(R.id.contentFragmentMainScreen, fragment, tag);
         transaction.commit();
 
     }

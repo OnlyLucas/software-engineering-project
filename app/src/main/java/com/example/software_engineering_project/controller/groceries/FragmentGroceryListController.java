@@ -30,8 +30,8 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentGroceryListController #newInstance} factory method to
  * create an instance of this fragment.
- *
- *
+ * <p>
+ * <p>
  * FragmentGroceryListController displays a list of uncompleted group groceries
  * and provides functionality to add, remove, and mark items as completed.
  */
@@ -52,10 +52,11 @@ public class FragmentGroceryListController extends Fragment {
      *
      * @param item The index of the item to be removed.
      */
-    // function to remove an item given its index in the grocery list.
     public static void removeItem(int item) {
+
         GroupGrocery grocery = uncompletedGroceryLiveData.getValue().get(item);
         groceryRepository.deleteGroupGrocery(grocery, context);
+
     }
 
     /**
@@ -64,13 +65,16 @@ public class FragmentGroceryListController extends Fragment {
      * @param i The index of the item to be marked as completed.
      */
     public static void uncheckItem(int i) {
+
         GroupGrocery grocery = uncompletedGroceryLiveData.getValue().get(i);
         grocery.setCompleted();
         groceryRepository.updateGroupGrocery(grocery, context);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         context = requireActivity();
 
         groceryRepository = new GroceryRepository(context);
@@ -86,6 +90,7 @@ public class FragmentGroceryListController extends Fragment {
         addButtons();
 
         return fragmentView;
+
     }
 
     private void addButtons() {
@@ -112,7 +117,7 @@ public class FragmentGroceryListController extends Fragment {
             @Override
             public void onClick(View view) {
                 Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
-                if(group == null) {
+                if (group == null) {
                     ToastUtil.makeToast(context.getString(R.string.join_a_group_first), context);
                 } else {
                     // get the input
@@ -142,7 +147,6 @@ public class FragmentGroceryListController extends Fragment {
 
     }
 
-    // function to add an item given its name.
     private void addItem(GroupGrocery item) {
         groceryRepository.insertGroupGrocery(item, context);
     }

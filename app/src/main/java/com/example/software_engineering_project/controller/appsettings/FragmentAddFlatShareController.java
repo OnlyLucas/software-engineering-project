@@ -69,7 +69,7 @@ public class FragmentAddFlatShareController extends Fragment {
 
         saveAddFlatShare.setOnClickListener(view -> {
             Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
-            if(group == null){
+            if (group == null) {
                 FragmentManageFlatShareController fragment = new FragmentManageFlatShareController();
                 checkInputs();
                 callFragment(fragment);
@@ -87,24 +87,25 @@ public class FragmentAddFlatShareController extends Fragment {
      * - Displays toast messages for invalid input or performs the insertion of a new group if inputs are valid.
      */
     private void checkInputs() {
+
         String name = nameAddFlatShare.getText().toString();
         String description = descriptionAddFlatShare.getText().toString();
 
-        if(name.length() == 0){
+        if (name.length() == 0) {
             ToastUtil.makeToast(getString(R.string.enter_flat_share_name), context);
             return;
         }
 
-        if(name.length() > 20){
+        if (name.length() > 20) {
             ToastUtil.makeToast(getString(R.string.enter_shorter_name), context);
             return;
         }
-        if(description.length() == 0){
+        if (description.length() == 0) {
             ToastUtil.makeToast(getString(R.string.enter_description), context);
             return;
         }
 
-        if(description.length() > 20){
+        if (description.length() > 20) {
             ToastUtil.makeToast(getString(R.string.enter_shorter_description), context);
             return;
         }

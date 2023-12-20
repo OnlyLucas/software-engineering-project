@@ -21,7 +21,7 @@ import com.example.software_engineering_project.repository.AppStateRepository;
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentCleaningPlanController #newInstance} factory method to
  * create an instance of this fragment.
- *
+ * <p>
  * Fragment controller for managing cleaning plans.
  * This fragment allows users to view a list of existing cleaning plans,
  * add new cleaning plans, and navigate between different cleaning plan views.
@@ -59,10 +59,11 @@ public class FragmentCleaningPlanController extends Fragment {
     }
 
     private void addButtons() {
+
         Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
 
         addCleaningPlan.setOnClickListener(v -> {
-            if(group == null) {
+            if (group == null) {
                 ToastUtil.makeToast(context.getString(R.string.join_a_group_first), context);
             } else {
                 callFragment(fragmentCleaningPlanAddController);
@@ -94,7 +95,8 @@ public class FragmentCleaningPlanController extends Fragment {
 
     private void loadScreenElements() {
 
-        addCleaningPlan = fragmentView.findViewById(R.id.addCleaningPlan);goBackCleaningPlan = fragmentView.findViewById(R.id.goBackCleaningPlan);
+        addCleaningPlan = fragmentView.findViewById(R.id.addCleaningPlan);
+        goBackCleaningPlan = fragmentView.findViewById(R.id.goBackCleaningPlan);
         saveCleaningPlan = fragmentView.findViewById(R.id.saveCleaningPlan);
 
     }

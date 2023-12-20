@@ -35,8 +35,10 @@ public class FragmentGroceryListHistoryController extends Fragment {
 
     // function to remove an item given its index in the grocery list.
     public static void removeItem(int item) {
+
         GroupGrocery grocery = completedGroceryLiveData.getValue().get(item);
         groceryRepository.deleteGroupGrocery(grocery, context);
+
     }
 
     @Override

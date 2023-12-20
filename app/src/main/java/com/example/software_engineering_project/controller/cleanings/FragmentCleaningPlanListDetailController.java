@@ -24,7 +24,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentCleaningPlanListDetailController #newInstance} factory method to
  * create an instance of this fragment.
- *
+ * <p>
  * Fragment for displaying details of a cleaning plan, including the list of upcoming cleanings.
  */
 public class FragmentCleaningPlanListDetailController extends Fragment {
@@ -41,7 +41,7 @@ public class FragmentCleaningPlanListDetailController extends Fragment {
     /**
      * Default constructor for the FragmentCleaningPlanListDetailController.
      */
-    public FragmentCleaningPlanListDetailController(){
+    public FragmentCleaningPlanListDetailController() {
 
         //default constructor
 
@@ -52,21 +52,25 @@ public class FragmentCleaningPlanListDetailController extends Fragment {
      *
      * @param cleaningTemplate The cleaning template for which to display details.
      */
-    public FragmentCleaningPlanListDetailController(CleaningTemplate cleaningTemplate){
+    public FragmentCleaningPlanListDetailController(CleaningTemplate cleaningTemplate) {
 
         this.cleaningTemplate = cleaningTemplate;
 
     }
 
     public static void removeItem(int position) {
+
         Cleaning cleaning = uncompletedCleaningsLiveData.getValue().get(position);
         cleaningRepository.deleteCleaning(cleaning, context);
+
     }
 
     public static void uncheckItem(int position) {
+
         Cleaning cleaning = uncompletedCleaningsLiveData.getValue().get(position);
         cleaning.setCompleted();
         cleaningRepository.updateCleaning(cleaning, context);
+
     }
 
     /**

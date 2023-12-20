@@ -38,6 +38,7 @@ public class ActivityLoginScreenController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         groupMembershipRepository = new GroupMembershipRepository();
         super.onCreate(savedInstanceState);
         context = getApplicationContext();
@@ -63,31 +64,35 @@ public class ActivityLoginScreenController extends AppCompatActivity {
 
         loginButton.setOnClickListener(this::onClickLoginButton);
         registerButtonLogin.setOnClickListener(this::startRegisterActivity);
+
     }
 
-    private void startRegisterActivity(View view){
+    private void startRegisterActivity(View view) {
+
         Intent registerScreen = new Intent(ActivityLoginScreenController.this, ActivityRegisterScreenController.class);
         startActivity(registerScreen);
+
     }
 
-    private void onClickLoginButton(View view){
-        if(!checkLoginInputs()){
+    private void onClickLoginButton(View view) {
+
+        if (!checkLoginInputs()) {
             // if inputs are faulty
             return;
         }
 
         LoginService loginService = RetrofitClient.getInstanceWithCredentials(email, password)
-                                        .create(LoginService.class);
+                .create(LoginService.class);
         Call<User> call = loginService.login();
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
 
                     User authenticatedUser = response.body();
 
                     // Error in authentication, clear currentAppUSer
-                    if(authenticatedUser == null){
+                    if (authenticatedUser == null) {
                         // Clear credentials
                         AppStateRepository.setCurrentUser(null);
                         AppStateRepository.setCurrentGroup(null);
@@ -116,7 +121,7 @@ public class ActivityLoginScreenController extends AppCompatActivity {
                     startActivity(mainScreen);
                 } else {
                     // Reset current user
-                    if(response.code() == 401){
+                    if (response.code() == 401) {
                         Log.e(TAG, "Bad credentials for login");
                         ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         return;
@@ -141,7 +146,6 @@ public class ActivityLoginScreenController extends AppCompatActivity {
 
     private boolean checkLoginInputs() {
 
-        // get the inputs
         email = emailInput.getText().toString();
         password = passwordInput.getText().toString();
 

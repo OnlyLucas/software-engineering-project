@@ -12,6 +12,7 @@ import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.entity.User;
 
 import request.UserWithPasswordRequest;
+
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.repository.UserRepository;
 
@@ -30,15 +31,16 @@ public class ActivityRegisterScreenController extends AppCompatActivity {
     private EditText confirmPasswordRegister, emailRegister, firstNameRegister, passwordRegister, usernameRegister, surnameRegister;
     private static UserRepository userRepository;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         context = getApplicationContext();
         userRepository = new UserRepository(context);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_screen);
         loadScreenElements();
         addButtons();
+
     }
 
     private void addButtons() {
@@ -50,7 +52,7 @@ public class ActivityRegisterScreenController extends AppCompatActivity {
 
         //Todo save new user data
         registerButtonRegister.setOnClickListener(view -> {
-            if(checkInputsAndRegister()){
+            if (checkInputsAndRegister()) {
                 Intent loginScreen = new Intent(ActivityRegisterScreenController.this, ActivityLoginScreenController.class);
                 startActivity(loginScreen);
             }
@@ -63,6 +65,7 @@ public class ActivityRegisterScreenController extends AppCompatActivity {
      * Displays appropriate toast messages for invalid inputs.
      */
     private boolean checkInputsAndRegister() {
+
         String firstName = firstNameRegister.getText().toString();
         String lastName = surnameRegister.getText().toString();
         String email = emailRegister.getText().toString();
@@ -128,7 +131,6 @@ public class ActivityRegisterScreenController extends AppCompatActivity {
             return false;
         }
 
-
         User newUser = new User(email, username, firstName, lastName);
         newUser.setPassword(password);
 
@@ -139,25 +141,31 @@ public class ActivityRegisterScreenController extends AppCompatActivity {
     }
 
     private void addItem(UserWithPasswordRequest user) {
+
         userRepository.insertUser(user, context);
+
     }
 
     // Helper method to check if a name contains only letters
     private boolean isValidName(String name) {
+
         // Use regex to check if the name contains only letters
         String regex = "^[a-zA-Z]+$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(name);
         return matcher.matches();
+
     }
 
     // Helper method to check if an email has a standard format
     private boolean isValidEmail(String email) {
+
         // Use a simple regex for basic email format validation
         String regex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
+
     }
 
     private void loadScreenElements() {

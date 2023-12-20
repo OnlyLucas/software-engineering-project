@@ -25,7 +25,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentCleaningPlanListController #newInstance} factory method to
  * create an instance of this fragment.
- *
+ * <p>
  * Fragment controller for managing a list of cleaning plans.
  * This fragment allows users to view a list of existing cleaning plans,
  * select a specific cleaning plan to view its details, and delete cleaning plans.
@@ -41,7 +41,6 @@ public class FragmentCleaningPlanListController extends Fragment {
     private View fragmentView;
 
 
-
     /**
      * Removes a cleaning plan at the specified position from the list.
      *
@@ -49,8 +48,10 @@ public class FragmentCleaningPlanListController extends Fragment {
      * @throws IndexOutOfBoundsException If the specified position is out of the range of the cleaning template list.
      */
     public static void removeItem(int i) {
+
         CleaningTemplate cleaningTemplate = currentCleaningTemplatesLiveData.getValue().get(i);
         cleaningTemplateRepository.deleteCleaningTemplate(cleaningTemplate, context);
+
     }
 
     /**
@@ -64,6 +65,7 @@ public class FragmentCleaningPlanListController extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         context = requireActivity();
 
         cleaningTemplateRepository = new CleaningTemplateRepository(context);
@@ -81,6 +83,7 @@ public class FragmentCleaningPlanListController extends Fragment {
         addButtons();
 
         return fragmentView;
+
     }
 
     private void addButtons() {
@@ -90,7 +93,6 @@ public class FragmentCleaningPlanListController extends Fragment {
             FragmentCleaningPlanListDetailController fragmentCleaningPlanListDetailController = new FragmentCleaningPlanListDetailController(clicked);
             callFragment(fragmentCleaningPlanListDetailController);
             FragmentCleaningPlanController.goBackCleaningPlan.setVisibility(View.VISIBLE);
-
         });
 
     }
