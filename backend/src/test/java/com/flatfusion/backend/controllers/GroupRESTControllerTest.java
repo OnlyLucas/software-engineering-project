@@ -32,6 +32,7 @@ class GroupRESTControllerTest {
 
     @Test
     void testGetGroupById_ExistingGroup_ReturnsOK() {
+
         UUID groupId = UUID.randomUUID();
         GroupEntity groupEntity = new GroupEntity();
         groupEntity.setId(groupId);
@@ -42,10 +43,12 @@ class GroupRESTControllerTest {
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(groupEntity, response.getBody());
+
     }
 
     @Test
     void testGetGroupById_NonExistingGroup_ReturnsNotFound() {
+
         UUID groupId = UUID.randomUUID();
 
         when(groupRepository.findGroupByIdExcludingCreatedByUserPassword(groupId)).thenReturn(Optional.empty());
@@ -53,7 +56,7 @@ class GroupRESTControllerTest {
         ResponseEntity<GroupEntity> response = groupRESTController.getById(groupId, mock(WebRequest.class));
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+
     }
 
-    // Weitere Tests für andere Controller-Methoden (create, update, delete) können hier hinzugefügt werden
 }

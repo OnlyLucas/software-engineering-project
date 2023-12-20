@@ -34,6 +34,7 @@ class GroupGroceryRESTControllerTest {
 
     @Test
     void getGroupGroceriesByGroupIdUncompleted_ExistingId_ReturnsListOfUncompletedGroceries() {
+
         UUID groupId = UUID.randomUUID();
         GroupGroceryEntity groupGroceryEntity = new GroupGroceryEntity();
         List<GroupGroceryEntity> groupGroceries = new ArrayList<>();
@@ -45,10 +46,12 @@ class GroupGroceryRESTControllerTest {
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(groupGroceries, responseEntity.getBody());
+
     }
 
     @Test
     void getGroupGroceriesByGroupIdCompleted_ExistingId_ReturnsListOfCompletedGroceries() {
+
         UUID groupId = UUID.randomUUID();
         GroupGroceryEntity groupGroceryEntity = new GroupGroceryEntity();
         List<GroupGroceryEntity> groupGroceries = new ArrayList<>();
@@ -60,5 +63,7 @@ class GroupGroceryRESTControllerTest {
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(groupGroceries, responseEntity.getBody());
+
     }
+
 }

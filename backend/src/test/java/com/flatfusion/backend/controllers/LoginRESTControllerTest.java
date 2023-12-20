@@ -22,10 +22,13 @@ public class LoginRESTControllerTest {
 
     @Test
     void getByEmail_ReturnsUnauthorized() throws Exception{
+
         mockMvc.perform(MockMvcRequestBuilders.get(loginUrl)
                         // Set Authorization header with any dummy value, for example:
-                        //Encoded in Basic64 jane.doe@example.com:wrongpassword
+                        // Encoded in Basic64 jane.doe@example.com:wrongpassword
                         .header("Authorization", "Basic amFuZS5kb2VAZXhhbXBsZS5jb206d3JvbmdwYXNzd29yZA===="))
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized());
+
     }
+
 }

@@ -32,6 +32,7 @@ class GroupMembershipRESTControllerTest {
 
     @Test
     void deleteGroupMembership_ExistingMembership_ReturnsOk() {
+
         UUID userId = UUID.randomUUID();
         UUID groupId = UUID.randomUUID();
         GroupMembershipEntity groupMembershipEntity = new GroupMembershipEntity(); // Create a GroupMembershipEntity instance
@@ -44,10 +45,12 @@ class GroupMembershipRESTControllerTest {
 
         // Assert the response
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+
     }
 
     @Test
     void deleteGroupMembership_NonExistingMembership_ReturnsNotFound() {
+
         UUID userId = UUID.randomUUID();
         UUID groupId = UUID.randomUUID();
 
@@ -59,10 +62,12 @@ class GroupMembershipRESTControllerTest {
 
         // Assert the response
         assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
+
     }
 
     @Test
     void getGroupByUserId_ExistingGroup_ReturnsOk() {
+
         UUID userId = UUID.randomUUID();
         GroupEntity groupEntity = new GroupEntity(); // Create a GroupEntity instance
 
@@ -74,10 +79,12 @@ class GroupMembershipRESTControllerTest {
 
         // Assert the response
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+
     }
 
     @Test
     void getGroupByUserId_NonExistingGroup_ReturnsNotFound() {
+
         UUID userId = UUID.randomUUID();
 
         // Mock the behavior of the repository method returning empty optional for non-existing group
@@ -88,6 +95,7 @@ class GroupMembershipRESTControllerTest {
 
         // Assert the response
         assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
-    }
-}
 
+    }
+
+}

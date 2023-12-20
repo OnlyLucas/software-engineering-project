@@ -26,12 +26,15 @@ class CleaningTemplateRESTControllerTest {
 
     @BeforeEach
     void setUp() {
+
         MockitoAnnotations.initMocks(this);
         cleaningTemplateController = new CleaningTemplateRESTController(cleaningTemplateRepository);
+
     }
 
     @Test
     void create_ValidEntity_ReturnsCreatedEntity() {
+
         // Given
         CleaningTemplateEntity mockEntity = new CleaningTemplateEntity(); // Create a mock entity
         when(cleaningTemplateRepository.save(any())).thenReturn(mockEntity);
@@ -42,12 +45,14 @@ class CleaningTemplateRESTControllerTest {
         // Then
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(mockEntity, response.getBody());
+
     }
 
     // Add tests for other methods like getById, update, and delete
 
     @Test
     void getById_ExistingId_ReturnsEntity() {
+
         // Given
         UUID entityId = UUID.randomUUID();
         CleaningTemplateEntity mockEntity = new CleaningTemplateEntity(); // Create a mock entity
@@ -59,9 +64,7 @@ class CleaningTemplateRESTControllerTest {
         // Then
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(mockEntity, response.getBody());
+
     }
 
-    // Add tests for other inherited methods...
-
-    // Add tests for methods specific to CleaningTemplateRESTController
 }

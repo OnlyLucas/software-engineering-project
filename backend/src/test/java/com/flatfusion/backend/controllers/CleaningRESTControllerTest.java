@@ -31,6 +31,7 @@ class CleaningRESTControllerTest {
 
     @Test
     void testGetById_ValidId_ReturnsEntity() {
+
         UUID validId = UUID.randomUUID();
         CleaningEntity entity = new CleaningEntity(); // Create a CleaningEntity object for testing
 
@@ -41,10 +42,12 @@ class CleaningRESTControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(entity, response.getBody());
         verify(repository, times(1)).findById(validId);
+
     }
 
     @Test
     void testGetById_InvalidId_ReturnsNotFound() {
+
         UUID invalidId = UUID.randomUUID();
 
         when(repository.findById(invalidId)).thenReturn(Optional.empty());
@@ -53,6 +56,7 @@ class CleaningRESTControllerTest {
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         verify(repository, times(1)).findById(invalidId);
+
     }
 
 }

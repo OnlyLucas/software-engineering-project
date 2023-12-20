@@ -26,6 +26,7 @@ public class UserRESTControllerTest {
 
     @Test
     public void testGetById_UserExists_ReturnsUser() {
+
         UUID userId = UUID.randomUUID();
         UserEntity userEntity = new UserEntity();
         userEntity.setId(userId);
@@ -36,10 +37,12 @@ public class UserRESTControllerTest {
 
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
         assertEquals(userEntity, responseEntity.getBody());
+
     }
 
     @Test
     public void testGetById_UserDoesNotExist_ReturnsNotFound() {
+
         UUID userId = UUID.randomUUID();
 
         when(userRepository.findById(userId)).thenReturn(Optional.empty());
@@ -48,7 +51,7 @@ public class UserRESTControllerTest {
 
         assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
         assertEquals(null, responseEntity.getBody());
+
     }
 
-    // Weitere Tests für andere Methoden des UserRESTController
 }
