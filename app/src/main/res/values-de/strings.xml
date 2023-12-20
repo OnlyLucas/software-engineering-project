@@ -91,6 +91,8 @@
     <string name="enter_shorter_first_name">Bitte einen kürzeren Vornamen eingeben</string>
     <string name="enter_shorter_last_name">Bitte einen kürzeren Nachnamen eingeben</string>
     <string name="enter_shorter_password">Bitte ein kürzeres Passwort eingeben</string>
+    <string name="enter_longer_password">Bitte ein Passwort mit mindestens </string>
+    <string name="old_new_passwords_equal">Neues Passwort und altes Passwort sind gleich. Bitte gib ein neues Passwort ein.</string>
     <string name="hello_blank_fragment">Hallo leeres Fragment</string>
     <string name="uncheckedColon_">"Abgehakt: "</string>
     <string name="empty_input_fields">\u0000</string>
@@ -115,4 +117,7 @@
     <string name="expense">Betrag</string>
     <string name="reason">Grund</string>
     <string name="persons_involved">Beteiligte Personen</string>
+    <string name="password_successfully_changed">Passwort erfolgreich geändert</string>
+    <string name="password_not_changed">Password konnte nicht geändert werden</string>
+    <string name="wrong_current_password">Falsches aktuelles Passwort</string>
 </resources>

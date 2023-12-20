@@ -22,14 +22,16 @@ public interface UserService{
     @GET("users/group/{groupId}")
     Call<List<User>> getUsers(@Path("groupId") UUID groupId);
 
-    @POST("users")
-    Call<User> createEntity(@Body User user);
-
     @POST("users/create-with-password")
     Call<User> createUser(@Body UserWithPasswordRequest user);
 
+    @PATCH("users/change-password")
+    Call<User> updatePassword(@Body UserWithPasswordRequest user);
+
     @PATCH("users/{id}")
     Call<User> partialUpdateEntity(@Path("id") UUID userId, @Body Map<String, String> updates);
+
+
 
     @GET("users/mail/{mail}")
     Call<User> getUserByMail(@Path("mail") String mail);

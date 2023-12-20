@@ -123,6 +123,11 @@ public class ActivityRegisterScreenController extends AppCompatActivity {
             return false;
         }
 
+        if (password.length() < 9 || confirmPassword.length() < 9) {
+            ToastUtil.makeToast(getString(R.string.enter_longer_password), context);
+            return false;
+        }
+
 
         User newUser = new User(email, username, firstName, lastName);
         newUser.setPassword(password);

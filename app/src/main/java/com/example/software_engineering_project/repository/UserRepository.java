@@ -3,10 +3,12 @@ package com.example.software_engineering_project.repository;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.controller.appsettings.FragmentSettingsController;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.dataservice.UserService;
 import com.example.software_engineering_project.entity.Group;
@@ -214,6 +216,36 @@ public class UserRepository {
             public void onFailure(Call<User> call, Throwable t) {
                 Log.e(TAG, "Network error while changing mail: " + t);
                 ToastUtil.makeToast(context.getString(R.string.error_changing_mail), context);
+            }
+        });
+    }
+
+    public void updatePassword(UserWithPasswordRequest request, Context context){
+        Call<User> call = userService.updatePassword(request);
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response.isSuccessful()){
+                    Log.i(TAG, "Changed password successfully");
+                    ToastUtil.makeToast(context.getString(R.string.new_password_saved), context);
+                } else {
+                    // If unauthorized/bad credentials return to login screen
+                    if(response.code() == 401){
+                        Log.e(TAG, "Bad credentials. Rerouting to login activity.");
+                        ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
+                        UILoaderUtil.startLoginActivity(context);
+                        return;
+                    }
+
+                    Log.e(TAG, "Error while changing mail");
+                    ToastUtil.makeToast(context.getString(R.string.password_not_changed), context);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.e(TAG, "Network error while changing mail: " + t);
+                ToastUtil.makeToast(context.getString(R.string.password_not_changed), context);
             }
         });
     }
