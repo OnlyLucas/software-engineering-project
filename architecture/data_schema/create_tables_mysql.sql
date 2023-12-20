@@ -40,7 +40,7 @@ CREATE TABLE `cleanings` (
   `id` varchar(36) PRIMARY KEY,
   `group_id` varchar(36) NOT NULL,
   `user_id` varchar(36),
-  `cleaning_template` varchar(36),
+  `cleaning_template_id` varchar(36),
   `date` date NOT NULL,
   `is_completed` boolean,
   `completed_at` timestamp
@@ -105,7 +105,7 @@ ALTER TABLE `cleanings` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `cleanings` ADD FOREIGN KEY (`group_id`) REFERENCES `living_groups` (`id`);
 
-ALTER TABLE `cleanings` ADD FOREIGN KEY (`cleaning_template`) REFERENCES `cleaning_template` (`id`);
+ALTER TABLE `cleanings` ADD FOREIGN KEY (`cleaning_template_id`) REFERENCES `cleaning_template` (`id`);
 
 ALTER TABLE `group_groceries` ADD FOREIGN KEY (`group_id`) REFERENCES `living_groups` (`id`);
 
