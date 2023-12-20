@@ -13,6 +13,8 @@ public class UILoaderUtil {
     public static void startLoginActivity(Context context){
         if (context != null) {
             Intent intent = new Intent(context, ActivityLoginScreenController.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
             context.startActivity(intent);
 
             // logout user

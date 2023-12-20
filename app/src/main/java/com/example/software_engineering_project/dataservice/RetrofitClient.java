@@ -56,6 +56,24 @@ public class RetrofitClient{
         return retrofit;
     }
 
+    public static Retrofit getInstanceWithoutAuth(){
+        OkHttpClient.Builder httpClient = getAllSslTrustingOkHttpBuilder();
+
+        // Logging
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        httpClient.addInterceptor(logging);
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(JacksonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+                .client(httpClient.build())
+                .build();
+
+        return retrofit;
+    }
+
     public static synchronized Retrofit getInstance() {
         if (retrofit == null) {
 

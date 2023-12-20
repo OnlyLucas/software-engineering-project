@@ -30,7 +30,7 @@ public class AuthInterceptor implements Interceptor {
 
         if (user == null){
             //TODO remove or log
-            System.out.println("AppUser is null. Continue with request.");
+            Log.d(TAG, "AppUser is null. Continue with request.");
             return chain.proceed(originalRequest);
         }
 
@@ -38,9 +38,8 @@ public class AuthInterceptor implements Interceptor {
             String username = user.getEmail();
             String password = user.getPassword();
             String credentials = Credentials.basic(username, password);
-            //TODO remove or log
-            System.out.println("Authorization header: '" + credentials + "'" );
 
+            Log.d(TAG, "Authorization Header created for request: " + chain.request());
             Request newRequest = originalRequest.newBuilder()
                     .header("Authorization", credentials)
                     .build();

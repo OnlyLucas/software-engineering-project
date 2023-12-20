@@ -153,7 +153,7 @@ public class UserRepository {
         String password = user.getPassword();
 
         // Use instant does does not use
-        UserService userService = RetrofitClient.getInstanceWithCredentials(email, password).create(UserService.class);
+        UserService userService = RetrofitClient.getInstanceWithoutAuth().create(UserService.class);
         Call<User> call = userService.createUser(user);
         call.enqueue(new Callback<User>() {
             @Override
@@ -162,14 +162,6 @@ public class UserRepository {
                     Log.i(TAG, "User registration successful");
                     ToastUtil.makeToast(context.getString(R.string.registered_) + user.getUser().getEmail(), context);
                 } else {
-                    // If unauthorized/bad credentials return to login screen
-                    if(response.code() == 401){
-                        Log.e(TAG, "Bad credentials. Rerouting to login activity.");
-                        ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
-                        UILoaderUtil.startLoginActivity(context);
-                        return;
-                    }
-
                     Log.e(TAG, "Error while adding new user");
                     ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + user.getUser().getEmail(), context);
                 }

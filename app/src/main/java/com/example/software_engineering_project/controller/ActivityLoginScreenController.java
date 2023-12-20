@@ -156,6 +156,7 @@ public class ActivityLoginScreenController extends AppCompatActivity {
             // Create Dummy User for Authentication that the AuthInterceptor uses
             User authUser = new User();
             authUser.setEmail(email);
+
             //TODO remove or delete
             System.out.println("Set password to current user: " + password);
             authUser.setPassword(password);
