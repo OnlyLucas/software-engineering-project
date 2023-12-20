@@ -35,7 +35,7 @@ public class FragmentBudgetMainController extends Fragment {
 
     /**
      * Called to create the view hierarchy associated with this fragment.
-     *
+     * <p>
      * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
      * @param container          The parent view that this fragment's UI should be attached to.
      * @param savedInstanceState A Bundle object containing the activity's previously saved state.

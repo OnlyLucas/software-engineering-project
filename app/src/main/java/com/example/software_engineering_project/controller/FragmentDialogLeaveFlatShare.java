@@ -19,6 +19,16 @@ public class FragmentDialogLeaveFlatShare extends DialogFragment {
     private static GroupMembershipRepository groupMembershipRepository;
     private Context context;
 
+    /**
+     * Creates a dialog instance to confirm leaving a flat share.
+     *
+     * @param savedInstanceState A Bundle containing data provided by the system to reconstruct the dialog
+     *                            if it's being re-initialized after previously being shut down.
+     * @return Dialog Returns an AlertDialog to confirm leaving the flat share.
+     *         - Constructs an AlertDialog with a title, message, and positive/negative buttons.
+     *         - Positive button triggers the removal of the user from the flat share and resets the current group.
+     *         - Negative button dismisses the dialog.
+     */
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
