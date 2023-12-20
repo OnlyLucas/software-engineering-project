@@ -14,13 +14,47 @@ import com.example.software_engineering_project.controller.ActivityLoginScreenCo
 import com.example.software_engineering_project.controller.ActivityMainScreenController;
 import com.example.software_engineering_project.controller.cleanings.FragmentCleaningPlanController;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Espresso test class designed to validate and verify the functionality of the email change feature
+ * within {@link FragmentChangeMailController}.
+ *
+ * This test suite comprises test cases to confirm the proper execution and functionality of email address changes.
+ */
 public class FragmentChangeMailScreenControllerTest {
 
+    /**
+     * Prepares the test environment by initiating app login and launching specified fragments within the main activity.
+     *
+     * Actions performed:
+     * - Initiates application login using {@link TestUtils#appLogin()}.
+     * - Launches {@link FragmentSettingsController} and {@link FragmentChangeMailController} within
+     *   {@link ActivityMainScreenController}.
+     * - Each fragment is added to the fragment container identified by {@code R.id.contentFragmentMainScreen}.
+     *
+     * Preconditions: Application should require login.
+     * {@link FragmentSettingsController} and {@link FragmentChangeMailController} must be set up for testing.
+     *
+     * Example usage:
+     * {@code
+     * \@Before
+     * public void setUp() {
+     *     // Invoke the setup method
+     *     setUp();
+     * }
+     * }
+     *
+     * @see FragmentSettingsController
+     * @see FragmentChangeMailController
+     * @see ActivityMainScreenController
+     * @see TestUtils#appLogin()
+     * @see TestUtils#launchFragment(Class, Fragment, int)
+     */
     @Before
-    public void launchFragment() {
+    public void setUp() {
 
         // Launch the activity
         TestUtils.appLogin();
@@ -33,10 +67,26 @@ public class FragmentChangeMailScreenControllerTest {
 
     }
 
+
+    /**
+     * Validates the functionality of changing the email address.
+     *
+     * Test steps:
+     *     Enters new email data into the respective input fields for email change.
+     *     Triggers the process to save the modified email data into the database.
+     *     Resets the testing environment to its initial state for further testing.
+     *     Reverts the email address back to its original value and saves the changes.
+     *     Verifies whether the email reversion process was successful.
+     *
+     * Preconditions: The application must be in a state where the user can change their email address.
+     * The test assumes the availability of UI elements with the IDs {@code R.id.currentMail},
+     * {@code R.id.newMail}, {@code R.id.confirmNewMail}, and {@code R.id.saveChangeMail}.
+     *
+     * This test method aims to verify the email change process, including both successful email updates
+     * and proper handling of reverting to the original email address after modification.
+     */
     @Test
     public void testChangeMail() {
-
-        //E-Mail Adresse ändern um zu checken ob wir sie zurück ändern können
 
         //Klicke auf das Eingabefeld aktuelle E-Mail Adresse
         Espresso.onView(withId(R.id.currentMail))
@@ -54,7 +104,7 @@ public class FragmentChangeMailScreenControllerTest {
         Espresso.onView(withId(R.id.saveChangeMail))
                         .perform(ViewActions.click());
 
-        launchFragment();
+        setUp();
 
         //Überprüfen ob wechsel geklappt hat.
         //Klicke auf das Eingabefeld aktuelle E-Mail Adresse
@@ -74,6 +124,5 @@ public class FragmentChangeMailScreenControllerTest {
                 .perform(ViewActions.click());
 
     }
-
 
 }
