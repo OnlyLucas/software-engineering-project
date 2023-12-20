@@ -64,13 +64,13 @@ public class LoginController {
 
             if (user != null) {
                 if (passwordEncoder.matches(password, user.getPassword())) {
-                    logger.debug(username + " -------- authentication successful");
+                    logger.debug(username + "Authentication successful for user: " + user);
                     return new ResponseEntity<>(user, HttpStatus.OK);
                 }
             }
         }
 
-        logger.debug("---------Authentication failed");
+        logger.debug("Authentication failed");
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     }
 }

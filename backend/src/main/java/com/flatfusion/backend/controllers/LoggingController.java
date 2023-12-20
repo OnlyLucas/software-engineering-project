@@ -2,6 +2,7 @@ package com.flatfusion.backend.controllers;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +23,7 @@ public class LoggingController {
      *
      * @return A greeting message and a prompt to check the logs for output.
      */
-    @RequestMapping("/")
+    @GetMapping("/")
     public String index() {
         logger.trace("A TRACE Message");
         logger.debug("A DEBUG Message");
