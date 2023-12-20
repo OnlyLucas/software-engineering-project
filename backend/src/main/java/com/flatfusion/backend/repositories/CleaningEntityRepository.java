@@ -27,6 +27,14 @@ public interface CleaningEntityRepository extends JpaRepository<CleaningEntity, 
     @Query("SELECT c FROM CleaningEntity c WHERE c.cleaningTemplate.id = :templateId AND c.isCompleted = false ORDER BY c.date ASC")
     Optional<List<CleaningEntity>> getUncompletedCleaningsForTemplate(@Param("templateId") UUID templateId);
 
+    /**
+     * Retrieves a page of uncompleted cleaning entities associated with a specified cleaning template ID,
+     * ordered by date in ascending order.
+     *
+     * @param templateId The ID of the cleaning template.
+     * @param pageable   The pageable information for pagination.
+     * @return A page containing uncompleted cleaning entities, or an empty page if none are found.
+     */
     @Query("SELECT c FROM CleaningEntity c WHERE c.cleaningTemplate.id = :templateId AND c.isCompleted = false ORDER BY c.date ASC")
     Page<CleaningEntity> getUncompletedCleaningWithSmallestDate(@Param("templateId") UUID templateId, Pageable pageable);
 }

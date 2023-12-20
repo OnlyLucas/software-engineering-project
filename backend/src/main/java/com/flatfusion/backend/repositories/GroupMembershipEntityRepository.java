@@ -35,6 +35,12 @@ public interface GroupMembershipEntityRepository extends JpaRepository<GroupMemb
     @Query("DELETE FROM GroupMembershipEntity gm WHERE gm.user.id = :userId AND gm.group.id = :groupId")
     void deleteGroupMembership(@Param("userId") UUID userId, @Param("groupId") UUID groupId);
 
+    /**
+     * Retrieves the group associated with a given user ID.
+     *
+     * @param userId The ID of the user.
+     * @return An optional containing the group entity if found, or an empty optional otherwise.
+     */
     @Query("SELECT gm.group FROM GroupMembershipEntity gm WHERE gm.user.id = :userId")
     Optional<GroupEntity> findGroupByUserId(@Param("userId") UUID userId);
 }
