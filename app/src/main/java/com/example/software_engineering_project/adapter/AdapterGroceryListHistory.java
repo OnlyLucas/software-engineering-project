@@ -43,7 +43,6 @@ public class AdapterGroceryListHistory extends ArrayAdapter<GroupGrocery> {
 
     }
 
-    // The method we override to provide our own layout for each View (row) in the ListView
     /**
      * Get a View that displays the data at the specified position in the data set.
      * This method is responsible for creating and populating the views for each item
@@ -54,7 +53,7 @@ public class AdapterGroceryListHistory extends ArrayAdapter<GroupGrocery> {
      *                    initially or when the previous view cannot be reused.
      * @param parent      The parent ViewGroup that this view will eventually be attached to.
      * @return The View corresponding to the data at the specified position.
-     *         This view will be displayed as an item in the grocery list history.
+     * This view will be displayed as an item in the grocery list history.
      */
     @NonNull
     @Override
@@ -88,9 +87,6 @@ public class AdapterGroceryListHistory extends ArrayAdapter<GroupGrocery> {
      *                 It determines which item's remove button is clicked.
      */
     private void addButtons(int position) {
-
-        // Listeners for duplicating and removing an item.
-        // They use the static removeItem and addItem methods created in MainActivity.
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -34,11 +34,10 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentManageFlatShareController #newInstance} factory method to
  * create an instance of this fragment.
- *
+ * <p>
  * FragmentManageFlatShareController is a fragment that allows users to manage members in a flat share group in the FlatFusion app.
  * Users can view, add, and remove members from the flat share group using this fragment.
  * It interacts with the UserRepository and GroupMembershipRepository to handle user and group membership operations.
- *
  */
 public class FragmentManageFlatShareController extends Fragment {
 
@@ -60,14 +59,15 @@ public class FragmentManageFlatShareController extends Fragment {
      * Adds a user to a group within the application.
      * Retrieves the user by their email from the user repository and observes changes.
      * If the user exists:
-     *     - Checks if the user is already part of another group.
-     *     - If not in any group, creates a new group membership and inserts it into the group membership repository.
-     *     - If already in another group, displays a notification to the user.
+     * - Checks if the user is already part of another group.
+     * - If not in any group, creates a new group membership and inserts it into the group membership repository.
+     * - If already in another group, displays a notification to the user.
      * If the user doesn't exist, displays a message prompting to enter a valid email.
      *
      * @param mail The email address of the user to be added to the group.
      */
     public static void addItem(String mail) {
+
         userRepository.getUserByMail(mail, context).observe((LifecycleOwner) context, newUser -> {
             if (newUser != null) {
                 groupMembershipRepository.getGroupByUserId(newUser.getId(), context).observe((LifecycleOwner) context, group -> {
@@ -113,6 +113,7 @@ public class FragmentManageFlatShareController extends Fragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         context = requireActivity();
         //Load Backend
         userRepository = new UserRepository(context);
@@ -132,7 +133,7 @@ public class FragmentManageFlatShareController extends Fragment {
         listView.setAdapter(adapter);
 
         Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
-        if(group != null){
+        if (group != null) {
             nameManageFlatShare.setText(group.getName());
             descriptionManageFlatShare.setText(group.getDescription());
         }
@@ -173,7 +174,7 @@ public class FragmentManageFlatShareController extends Fragment {
 
         enter.setOnClickListener(view -> {
             Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
-            if(group == null) {
+            if (group == null) {
                 ToastUtil.makeToast(context.getString(R.string.join_a_group_first), context);
             } else {
                 String text = inputMail.getText().toString();
@@ -196,7 +197,7 @@ public class FragmentManageFlatShareController extends Fragment {
             }
         });
 
-        addFlatShare.setOnClickListener (view -> {
+        addFlatShare.setOnClickListener(view -> {
             FragmentAddFlatShareController fragment = new FragmentAddFlatShareController();
             callFragment(fragment);
         });

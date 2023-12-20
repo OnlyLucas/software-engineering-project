@@ -15,7 +15,7 @@ import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
-public interface UserService{
+public interface UserService {
     @GET("users/{id}")
     Call<User> getEntity(@Path("id") UUID userId);
 
@@ -30,7 +30,6 @@ public interface UserService{
 
     @PATCH("users/{id}")
     Call<User> partialUpdateEntity(@Path("id") UUID userId, @Body Map<String, String> updates);
-
 
 
     @GET("users/mail/{mail}")

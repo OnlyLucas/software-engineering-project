@@ -37,8 +37,10 @@ public class GroceryRepository {
      * and fetches the group groceries immediately upon repository creation.
      */
     public GroceryRepository(Context context) {
+
         groceryService = RetrofitClient.getInstance().create(GroupGroceryService.class);
         fetchGroupGroceries(context);
+
     }
 
     /**
@@ -48,11 +50,12 @@ public class GroceryRepository {
      * @param context      The application context for displaying toasts and handling UI updates.
      */
     public void insertGroupGrocery(GroupGrocery groupGrocery, Context context) {
+
         Call<GroupGrocery> call = groceryService.createGroupGrocery(groupGrocery);
         call.enqueue(new Callback<GroupGrocery>() {
             @Override
             public void onResponse(Call<GroupGrocery> call, Response<GroupGrocery> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Log.i(TAG, "Group grocery creation successful");
                     uncompletedGroupGroceries.getValue().add(groupGrocery);
                     fetchUncompletedGroupGroceries(context);
@@ -60,7 +63,7 @@ public class GroceryRepository {
                 } else {
 
                     // If unauthorized/bad credentials return to login screen
-                    if(response.code() == 401){
+                    if (response.code() == 401) {
                         Log.e(TAG, "Bad credentials. Rerouting to login activity.");
                         ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
@@ -87,6 +90,7 @@ public class GroceryRepository {
      * @param context      The application context for displaying toasts and handling UI updates.
      */
     public void deleteGroupGrocery(GroupGrocery groupGrocery, Context context) {
+
         try {
             Call<Void> call = groceryService.deleteGroupGrocery(groupGrocery.getId());
             call.enqueue(new Callback<Void>() {
@@ -98,7 +102,7 @@ public class GroceryRepository {
                         ToastUtil.makeToast(context.getString(R.string.removed) + groupGrocery.getName(), context);
                     } else {
                         // If unauthorized/bad credentials return to login screen
-                        if(response.code() == 401){
+                        if (response.code() == 401) {
                             Log.e(TAG, "Bad credentials. Rerouting to login activity.");
                             ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                             UILoaderUtil.startLoginActivity(context);
@@ -117,34 +121,40 @@ public class GroceryRepository {
                 }
             });
         } catch (NullPointerException e) {
-            // Handle the case where groupGroceries or groupGroceries.getValue() is null
+
         }
     }
 
     /**
      * Fetches both uncompleted and completed group groceries from the server.
      */
-    public void fetchGroupGroceries(Context context){
+    public void fetchGroupGroceries(Context context) {
+
         fetchUncompletedGroupGroceries(context);
         fetchCompletedGroupGroceries(context);
+
     }
 
     /**
      * Retrieves the LiveData object containing the list of completed group groceries.
      *
-     * @return LiveData<List<GroupGrocery>> The LiveData object containing the list of completed group groceries.
+     * @return LiveData<List < GroupGrocery>> The LiveData object containing the list of completed group groceries.
      */
     public LiveData<List<GroupGrocery>> getCompletedGroupGroceries() {
+
         return completedGroupGroceries;
+
     }
 
     /**
      * Retrieves the LiveData object containing the list of uncompleted group groceries.
      *
-     * @return LiveData<List<GroupGrocery>> The LiveData object containing the list of uncompleted group groceries.
+     * @return LiveData<List < GroupGrocery>> The LiveData object containing the list of uncompleted group groceries.
      */
     public LiveData<List<GroupGrocery>> getUncompletedGroupGroceries() {
+
         return uncompletedGroupGroceries;
+
     }
 
     /**
@@ -154,17 +164,18 @@ public class GroceryRepository {
      * @param context The application context for displaying toasts and handling UI updates.
      */
     public void updateGroupGrocery(GroupGrocery grocery, Context context) {
+
         Call<GroupGrocery> call = groceryService.updateGroupGrocery(grocery.getId(), grocery);
         call.enqueue(new Callback<GroupGrocery>() {
             @Override
             public void onResponse(Call<GroupGrocery> call, Response<GroupGrocery> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Log.i(TAG, "Unchecking group grocery successful");
                     fetchGroupGroceries(context);
                     ToastUtil.makeToast(context.getString(R.string.uncheckedColon_) + grocery.getName(), context);
                 } else {
                     // If unauthorized/bad credentials return to login screen
-                    if(response.code() == 401){
+                    if (response.code() == 401) {
                         Log.e(TAG, "Bad credentials. Rerouting to login activity.");
                         ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
@@ -185,9 +196,9 @@ public class GroceryRepository {
     }
 
     private void fetchUncompletedGroupGroceries(Context context) {
-        // Get current group id
+
         Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
-        if(group == null){
+        if (group == null) {
             ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
             return;
         }
@@ -202,28 +213,29 @@ public class GroceryRepository {
                     uncompletedGroupGroceries.setValue(groceries);
                 } else {
                     // If unauthorized/bad credentials return to login screen
-                    if(response.code() == 401){
+                    if (response.code() == 401) {
                         Log.e(TAG, "Bad credentials. Rerouting to login activity.");
                         ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
                         return;
                     }
 
-                    Log.e(TAG,"Error while fetching uncompleted group groceries");
+                    Log.e(TAG, "Error while fetching uncompleted group groceries");
                 }
             }
 
             @Override
             public void onFailure(Call<List<GroupGrocery>> call, Throwable t) {
-                Log.e(TAG,"Network error while fetching uncompleted group groceries: " + t);
+                Log.e(TAG, "Network error while fetching uncompleted group groceries: " + t);
 
             }
         });
     }
 
     private void fetchCompletedGroupGroceries(Context context) {
+
         Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
-        if(group == null){
+        if (group == null) {
             ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
             return;
         }
@@ -238,20 +250,20 @@ public class GroceryRepository {
                     completedGroupGroceries.setValue(groceries);
                 } else {
                     // If unauthorized/bad credentials return to login screen
-                    if(response.code() == 401){
+                    if (response.code() == 401) {
                         Log.e(TAG, "Bad credentials. Rerouting to login activity.");
                         ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
                         return;
                     }
 
-                    Log.e(TAG,"Error while fetching completed group groceries");
+                    Log.e(TAG, "Error while fetching completed group groceries");
                 }
             }
 
             @Override
             public void onFailure(Call<List<GroupGrocery>> call, Throwable t) {
-                Log.e(TAG,"Network error while fetching completed group groceries: " + t);
+                Log.e(TAG, "Network error while fetching completed group groceries: " + t);
             }
         });
     }

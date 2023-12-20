@@ -35,11 +35,11 @@ public class FragmentBudgetMainController extends Fragment {
 
     /**
      * Called to create the view hierarchy associated with this fragment.
-     *
+     * <p>
      * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
      * @param container          The parent view that this fragment's UI should be attached to.
      * @param savedInstanceState A Bundle object containing the activity's previously saved state.
-     * @return                   The root View of the fragment's layout.
+     * @return The root View of the fragment's layout.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +59,7 @@ public class FragmentBudgetMainController extends Fragment {
      * Adjusts UI elements such as buttons and headlines accordingly.
      */
     private void addButtons() {
+
         Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
 
         showBudgetDetail.setOnClickListener(view -> {
@@ -75,7 +76,7 @@ public class FragmentBudgetMainController extends Fragment {
         });
 
         addExpense.setOnClickListener(view -> {
-            if(group == null) {
+            if (group == null) {
                 ToastUtil.makeToast(context.getString(R.string.join_a_group_first), context);
             } else {
                 callFragment(fragmentBudgetAddExpenseScreenController);
@@ -116,9 +117,9 @@ public class FragmentBudgetMainController extends Fragment {
 
     }
 
-    //Todo rename params
     /**
      * Replaces the visibility and clickability of multiple ImageView buttons.
+     *
      * @param view1 The first ImageView to be set as invisible and not clickable
      * @param view2 The second ImageView to be set as visible and clickable
      * @param view3 The third ImageView to be set as invisible and not clickable

@@ -35,7 +35,9 @@ public class GroupMembershipRepository {
      * Default constructor for GroupMembershipRepository. Initializes the GroupMembershipService using RetrofitClient.
      */
     public GroupMembershipRepository() {
+
         service = RetrofitClient.getInstance().create(GroupMembershipService.class);
+
     }
 
     /**
@@ -46,6 +48,7 @@ public class GroupMembershipRepository {
      * @param context        The application context for displaying toasts and handling UI updates.
      */
     public void deleteGroupMembership(User user, UserRepository userRepository, Context context) {
+
         Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
 
         Call<Void> call = service.deleteGroupMembership(user.getId(), group.getId());
@@ -56,12 +59,12 @@ public class GroupMembershipRepository {
                     Log.i(TAG, "Deletion of group membership successful");
                     userRepository.fetchUsers(context);
                     User currentAppUser = AppStateRepository.getCurrentAppUserLiveData().getValue();
-                    if(currentAppUser.getId().equals(user.getId())){
+                    if (currentAppUser.getId().equals(user.getId())) {
                         AppStateRepository.setCurrentGroup(null);
                     }
                     ToastUtil.makeToast(context.getString(R.string.removed) + user.getFirstName(), context);
                 } else {
-                    if(response.code() == 401){
+                    if (response.code() == 401) {
                         Log.e(TAG, "Bad credentials. Rerouting to login activity.");
                         ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
@@ -85,20 +88,21 @@ public class GroupMembershipRepository {
      * Inserts a new group membership on the server and updates the list of users upon success.
      *
      * @param groupMembership The GroupMembership object to be inserted.
-     * @param userRepository   The UserRepository to update the list of users.
-     * @param context          The application context for displaying toasts and handling UI updates.
+     * @param userRepository  The UserRepository to update the list of users.
+     * @param context         The application context for displaying toasts and handling UI updates.
      */
     public void insertGroupMembership(GroupMembership groupMembership, UserRepository userRepository, Context context) {
+
         Call<GroupMembership> call = service.createGroupMembership(groupMembership);
         call.enqueue(new Callback<GroupMembership>() {
             @Override
             public void onResponse(Call<GroupMembership> call, Response<GroupMembership> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Log.i(TAG, "Group membership creation successful");
                     userRepository.fetchUsers(context);
                     ToastUtil.makeToast(context.getString(R.string.added) + groupMembership.getUser().getFirstName(), context);
                 } else {
-                    if(response.code() == 401){
+                    if (response.code() == 401) {
                         Log.e(TAG, "Bad credentials. Rerouting to login activity.");
                         ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
@@ -121,12 +125,13 @@ public class GroupMembershipRepository {
     /**
      * Fetches the group for a given user from the server.
      *
-     * @param userId   The ID of the user for whom to fetch the group.
+     * @param userId  The ID of the user for whom to fetch the group.
      * @param context
      */
     public void fetchGroupByUserId(UUID userId, Context context) {
+
         Call<Group> call = service.getGroupByUserId(userId);
-        call.enqueue(new Callback<Group>(){
+        call.enqueue(new Callback<Group>() {
             @Override
             public void onResponse(Call<Group> call, Response<Group> response) {
                 if (response.isSuccessful()) {
@@ -139,14 +144,14 @@ public class GroupMembershipRepository {
                     }
                 } else {
                     // If unauthorized/bad credentials return to login screen
-                    if(response.code() == 401){
+                    if (response.code() == 401) {
                         Log.e(TAG, "Bad credentials. Rerouting to login activity.");
                         ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
                         return;
                     }
 
-                    Log.e(TAG,"Error while fetching group by userId");
+                    Log.e(TAG, "Error while fetching group by userId");
                     groupByUserId.setValue(null);
                 }
             }
@@ -157,9 +162,12 @@ public class GroupMembershipRepository {
             }
         });
     }
+
     public MutableLiveData<Group> getGroupByUserId(UUID userId, Context context) {
+
         fetchGroupByUserId(userId, context);
         return groupByUserId;
+
     }
 
 }

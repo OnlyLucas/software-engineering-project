@@ -25,7 +25,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentCleaningPlanListController #newInstance} factory method to
  * create an instance of this fragment.
- *
+ * <p>
  * Fragment controller for managing a list of cleaning plans.
  * This fragment allows users to view a list of existing cleaning plans,
  * select a specific cleaning plan to view its details, and delete cleaning plans.
@@ -41,29 +41,32 @@ public class FragmentCleaningPlanListController extends Fragment {
     private View fragmentView;
 
 
-
     /**
-     * Removes a cleaning plan at the specified position from the list.
+     * Removes a specific item from the list of cleaning templates and deletes it from the repository.
      *
-     * @param i The position of the cleaning plan to be removed in the list.
-     * @throws IndexOutOfBoundsException If the specified position is out of the range of the cleaning template list.
+     * @param i The index of the item to be removed from the list of cleaning templates.
      */
     public static void removeItem(int i) {
+
         CleaningTemplate cleaningTemplate = currentCleaningTemplatesLiveData.getValue().get(i);
         cleaningTemplateRepository.deleteCleaningTemplate(cleaningTemplate, context);
+
     }
 
     /**
-     * Called when the fragment is created.
+     * Creates and returns the view hierarchy associated with the fragment.
+     * Initializes necessary repositories, observes LiveData, and sets up the list view with an adapter.
      *
-     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param inflater           The LayoutInflater object that can inflate any views in the fragment.
      * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
-     * @return The root view of the fragment.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state.
+     *                           This value may be null.
+     * @return The View for the fragment's UI, or null if the fragment does not provide a UI.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         context = requireActivity();
 
         cleaningTemplateRepository = new CleaningTemplateRepository(context);
@@ -81,8 +84,13 @@ public class FragmentCleaningPlanListController extends Fragment {
         addButtons();
 
         return fragmentView;
+
     }
 
+    /**
+     * Sets up functionality for handling item clicks in the ListView within the fragment.
+     * Opens a detailed view of a clicked CleaningTemplate from the ListView.
+     */
     private void addButtons() {
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
@@ -90,7 +98,6 @@ public class FragmentCleaningPlanListController extends Fragment {
             FragmentCleaningPlanListDetailController fragmentCleaningPlanListDetailController = new FragmentCleaningPlanListDetailController(clicked);
             callFragment(fragmentCleaningPlanListDetailController);
             FragmentCleaningPlanController.goBackCleaningPlan.setVisibility(View.VISIBLE);
-
         });
 
     }

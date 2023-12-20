@@ -21,10 +21,10 @@ import java.util.List;
 
 /**
  * Custom adapter for displaying a list of users in a ListView for managing a flat share.
- *
+ * <p>
  * This adapter extends ArrayAdapter<User> and is designed to work with the layout 'adapter_manage_flat_share_list_view'.
  * It provides a customized view for each item in the ListView, including a number, user name, and a button for removing the user.
- *
+ * <p>
  * The getView method is overridden to inflate the layout, load screen elements, and set the content based on the User object at the specified position in the data set. Additionally, it adds a listener for the remove button.
  */
 public class AdapterManageFlatShareListView extends ArrayAdapter<User> {
@@ -37,7 +37,7 @@ public class AdapterManageFlatShareListView extends ArrayAdapter<User> {
 
     /**
      * Custom adapter for managing the flat share user list view.
-     *
+     * <p>
      * This adapter handles the population of a user list within the context of managing a flat share.
      * It inflates a specific layout for each item in the list and binds the corresponding data to the views.
      *
@@ -52,10 +52,9 @@ public class AdapterManageFlatShareListView extends ArrayAdapter<User> {
 
     }
 
-    // The method we override to provide our own layout for each View (row) in the ListView
     /**
      * Get a View that displays the data at the specified position in the data set.
-     *
+     * <p>
      * This method is responsible for generating a View to represent an item in the ListView at a specific position.
      * It inflates the layout defined for managing the flat share user list and binds data to its views.
      *
@@ -94,8 +93,6 @@ public class AdapterManageFlatShareListView extends ArrayAdapter<User> {
      */
     private void addButtons(int position) {
 
-        // Listeners for duplicating and removing an item.
-        // They use the static removeItem and addItem methods created in MainActivity.
         remove.setOnClickListener(view -> {
             FragmentDialogDeleteFlatShareMember dialog = new FragmentDialogDeleteFlatShareMember(position);
             dialog.show(((FragmentActivity) context).getSupportFragmentManager(), "DeleteFlatShareMember");

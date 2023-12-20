@@ -10,7 +10,7 @@ import com.example.software_engineering_project.repository.AppStateRepository;
 public class UILoaderUtil {
     private static final String TAG = UILoaderUtil.class.getSimpleName();
 
-    public static void startLoginActivity(Context context){
+    public static void startLoginActivity(Context context) {
         if (context != null) {
             Intent intent = new Intent(context, ActivityLoginScreenController.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -9,7 +9,7 @@ import java.util.UUID;
 
 /**
  * Represents a cleaning task associated with a user, group, and cleaning template.
- *
+ * <p>
  * Each cleaning task includes information such as the ID, associated group, user performing
  * the cleaning, cleaning template, date scheduled, completion status, and completion timestamp.
  */
@@ -52,7 +52,9 @@ public class Cleaning {
     }
 
     public void setCleaningTemplate(CleaningTemplate cleaningTemplate) {
+
         this.cleaningTemplate = cleaningTemplate;
+
     }
 
     public Date getDate() {
@@ -81,13 +83,13 @@ public class Cleaning {
 
     /**
      * Indicates whether some other object is "equal to" this one.
-     *
+     * <p>
      * Two cleaning tasks are considered equal if they have the same ID, associated group, user,
      * cleaning template, date, completion status, and completion timestamp.
      *
      * @param o The reference object with which to compare.
      * @return {@code true} if this object is equal to the specified object;
-     *         {@code false} otherwise.
+     * {@code false} otherwise.
      */
     @Override
     public boolean equals(Object o) {
@@ -117,7 +119,7 @@ public class Cleaning {
 
     /**
      * Marks the cleaning as completed and sets the completion timestamp.
-     *
+     * <p>
      * This method updates the completion status to true and records the current
      * timestamp as the completion time.
      */

@@ -22,11 +22,11 @@ import java.util.List;
 
 /**
  * Custom adapter for displaying details of cleaning plans as a List.
- *
+ * <p>
  * This adapter extends ArrayAdapter<Cleaning> and is designed to work with the layout 'adapter_cleaning_plan_list_detail_view'.
  * It provides a customized view for each item in the ListView, including a number, formatted date, user name, and buttons for
  * marking the cleaning as done or removing it.
- *
+ * <p>
  * The getView method is overridden to inflate the layout, load screen elements, and set the content based on the Cleaning object
  * at the specified position in the data set. Additionally, it adds listeners for the done and remove buttons.
  */
@@ -36,11 +36,6 @@ public class AdapterCleaningPlanListDetailView extends ArrayAdapter<Cleaning> {
     private ImageView done, remove;
     private List<Cleaning> list;
     private TextView date, name, number;
-
-
-    // The ListViewAdapter Constructor
-    // @param context: the Context from the MainActivity
-    // @param items: The list of items in our Grocery List
 
     /**
      * Constructs an Adapter for a Cleaning Plan List Detail View.
@@ -54,10 +49,9 @@ public class AdapterCleaningPlanListDetailView extends ArrayAdapter<Cleaning> {
         list = items;
     }
 
-    // The method we override to provide our own layout for each View (row) in the ListView
     /**
      * Get the view that displays the data at the specified position in the data set.
-     *
+     * <p>
      * This method creates or reuses a view to represent an item in the adapter's data set. It inflates the layout
      * 'adapter_cleaning_plan_list_detail_view' if the provided convertView is null, and then loads screen elements
      * using the loadScreenElements method. It sets the text of the number TextView, formatted date, and user name,
@@ -88,7 +82,7 @@ public class AdapterCleaningPlanListDetailView extends ArrayAdapter<Cleaning> {
             String monthName = monthNameFormat.format(dateInput);
             String formattedDate = dateFormat.format(dateInput);
 
-            String userName = list.get(position).getUser().getDisplayName();
+            String userName = list.get(position).getUser().getFirstName();
 
             // Set the formatted
             name.setText(userName);
@@ -103,9 +97,6 @@ public class AdapterCleaningPlanListDetailView extends ArrayAdapter<Cleaning> {
     }
 
     private void addButtons(int position) {
-
-        // Listeners for duplicating and removing an item.
-        // They use the static removeItem and addItem methods created in MainActivity.
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

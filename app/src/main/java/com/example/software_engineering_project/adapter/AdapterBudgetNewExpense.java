@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * Adapter for displaying a list of users in the context of adding a new expense.
  * This adapter is designed to work with the AdapterBudgetNewExpense layout.
- *
+ * <p>
  * The adapter provides functionality to display a checkbox for each user, allowing users to be selected or deselected.
  * Additionally, it includes event listeners to handle changes in the checkbox state and update the user list accordingly.
  */

@@ -2,6 +2,7 @@ package com.example.software_engineering_project.entity;
 
 import com.example.software_engineering_project.repository.AppStateRepository;
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -39,6 +40,7 @@ public class CleaningTemplate {
      */
     public CleaningTemplate(String name, String description, Date startDate, Date endDate,
                             int interval) {
+
         this.group = AppStateRepository.getCurrentGroupLiveData().getValue();
         this.name = name;
         this.description = description;

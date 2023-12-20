@@ -37,6 +37,7 @@ public class AdapterBudgetDetailOwe extends ArrayAdapter<Object[]> {
      * This constructor initializes the AdapterBudgetDetailOwe class with the provided context and list of items.
      * It sets up the adapter to manage the display of owed budget details in a specific layout structure.
      * <p>
+     *
      * @param context The context of the application or activity.
      * @param items   The list of items to be displayed in the adapter.
      */
@@ -54,6 +55,7 @@ public class AdapterBudgetDetailOwe extends ArrayAdapter<Object[]> {
      * This method is called when each row (item) in the ListView or AdapterView needs to be displayed.
      * It inflates the layout for displaying owed budget details and sets the appropriate data.
      * <p>
+     *
      * @param position    The position of the item within the adapter's data set.
      * @param convertView The old view to reuse, if possible.
      * @param parent      The parent that this view will eventually be attached to.

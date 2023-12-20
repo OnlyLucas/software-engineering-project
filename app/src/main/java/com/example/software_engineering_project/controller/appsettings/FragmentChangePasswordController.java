@@ -24,11 +24,10 @@ import request.UserWithPasswordRequest;
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentChangePasswordController #newInstance} factory method to
  * create an instance of this fragment.
- *
+ * <p>
  * FragmentChangePasswordController is a fragment that handles the change of the user's password in the FlatFusion app.
  * It provides UI elements for users to input their current password, new password, and confirm the new password.
  * The class interacts with the UserRepository to validate and update the user's password.
- *
  */
 public class FragmentChangePasswordController extends Fragment {
 
@@ -47,7 +46,7 @@ public class FragmentChangePasswordController extends Fragment {
      * @param container          The ViewGroup container where the fragment UI should be attached, if not null.
      * @param savedInstanceState A Bundle object containing the fragment's previously saved state, if any.
      * @return The root View of the inflated layout file for this fragment ('fragment_change_password.xml').
-     *         This View represents the fragment's UI and will be displayed as part of the parent activity's layout.
+     * This View represents the fragment's UI and will be displayed as part of the parent activity's layout.
      */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -82,13 +81,14 @@ public class FragmentChangePasswordController extends Fragment {
             newPassword = newPasswordText.getText().toString();
             confirmNewPassword = confirmNewPasswordText.getText().toString();
 
-            if(!checkInputs(currentPassword, newPassword, confirmNewPassword)){
+            if (!checkInputs(currentPassword, newPassword, confirmNewPassword)) {
                 return;
             }
 
             User currentUser = AppStateRepository.getCurrentAppUserLiveData().getValue();
             UserWithPasswordRequest request = new UserWithPasswordRequest(currentUser, newPassword);
             userRepository.updatePassword(request, context);
+
         });
 
     }
@@ -126,11 +126,11 @@ public class FragmentChangePasswordController extends Fragment {
 
     }
 
-    private boolean checkInputs(String currentPassword, String newPassword, String confirmNewPassword){
+    private boolean checkInputs(String currentPassword, String newPassword, String confirmNewPassword) {
         String actualOldPassword = AppStateRepository.getCurrentAppUserLiveData().getValue().getPassword();
 
         // Check if old password is entered correctly
-        if (!currentPassword.equals(actualOldPassword)){
+        if (!currentPassword.equals(actualOldPassword)) {
             ToastUtil.makeToast(getString(R.string.wrong_current_password), context);
             return false;
         }
@@ -156,7 +156,7 @@ public class FragmentChangePasswordController extends Fragment {
         }
 
         // Check if new password is the same as the old password
-        if (newPassword.equals(actualOldPassword)){
+        if (newPassword.equals(actualOldPassword)) {
             ToastUtil.makeToast(getString(R.string.old_new_passwords_equal), context);
             return false;
         }

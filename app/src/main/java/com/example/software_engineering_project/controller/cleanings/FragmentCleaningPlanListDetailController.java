@@ -24,7 +24,7 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentCleaningPlanListDetailController #newInstance} factory method to
  * create an instance of this fragment.
- *
+ * <p>
  * Fragment for displaying details of a cleaning plan, including the list of upcoming cleanings.
  */
 public class FragmentCleaningPlanListDetailController extends Fragment {
@@ -41,41 +41,59 @@ public class FragmentCleaningPlanListDetailController extends Fragment {
     /**
      * Default constructor for the FragmentCleaningPlanListDetailController.
      */
-    public FragmentCleaningPlanListDetailController(){
+    public FragmentCleaningPlanListDetailController() {
 
         //default constructor
 
     }
 
     /**
-     * Constructor for the FragmentCleaningPlanListDetailController that accepts a CleaningTemplate.
+     * Constructs a FragmentCleaningPlanListDetailController with a provided CleaningTemplate object.
      *
-     * @param cleaningTemplate The cleaning template for which to display details.
+     * @param cleaningTemplate The CleaningTemplate object used for initializing this controller.
+     *                         It represents the data associated with a specific cleaning plan.
      */
-    public FragmentCleaningPlanListDetailController(CleaningTemplate cleaningTemplate){
+    public FragmentCleaningPlanListDetailController(CleaningTemplate cleaningTemplate) {
 
         this.cleaningTemplate = cleaningTemplate;
 
     }
 
+    /**
+     * Removes a specific item (Cleaning) from the list of uncompleted cleanings and deletes it from the repository.
+     *
+     * @param position The index position of the item to be removed from the list of uncompleted cleanings.
+     */
     public static void removeItem(int position) {
+
         Cleaning cleaning = uncompletedCleaningsLiveData.getValue().get(position);
         cleaningRepository.deleteCleaning(cleaning, context);
-    }
 
-    public static void uncheckItem(int position) {
-        Cleaning cleaning = uncompletedCleaningsLiveData.getValue().get(position);
-        cleaning.setCompleted();
-        cleaningRepository.updateCleaning(cleaning, context);
     }
 
     /**
-     * Called to create the view for this fragment.
+     * Marks a specific item (Cleaning) from the list of uncompleted cleanings as incomplete and updates it in the repository.
      *
-     * @param inflater           The LayoutInflater object that can be used to inflate views.
+     * @param position The index position of the item to be marked as incomplete in the list of uncompleted cleanings.
+     */
+    public static void uncheckItem(int position) {
+
+        Cleaning cleaning = uncompletedCleaningsLiveData.getValue().get(position);
+        cleaning.setCompleted();
+        cleaningRepository.updateCleaning(cleaning, context);
+
+    }
+
+    /**
+     * Creates and returns the view hierarchy associated with the fragment for displaying cleaning plan details.
+     * Initializes necessary elements, observes LiveData for uncompleted cleanings, and sets up the list view with an adapter.
+     * Displays the description of the cleaning plan.
+     *
+     * @param inflater           The LayoutInflater object that can inflate any views in the fragment.
      * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
-     * @return The View for the fragment's UI, or null.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state.
+     *                           This value may be null.
+     * @return The View for the fragment's UI, or null if the fragment does not provide a UI.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -97,6 +115,11 @@ public class FragmentCleaningPlanListDetailController extends Fragment {
 
     }
 
+    /**
+     * Retrieves and initializes specific UI elements from the fragment's layout for displaying cleaning plan details.
+     * This method finds and assigns the necessary views, such as description and list view,
+     * required for displaying details of a cleaning plan in the fragment.
+     */
     private void loadScreenElements() {
 
         description = fragmentView.findViewById(R.id.descriptionCleaningPlanListDetail);

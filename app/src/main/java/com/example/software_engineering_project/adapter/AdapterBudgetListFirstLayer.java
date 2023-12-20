@@ -25,9 +25,9 @@ import java.util.Locale;
 /**
  * Custom adapter for displaying the first layer of the budget list, where each item represents a payment.
  * This adapter is designed to work with the AdapterBudgetListFirstLayer layout.
- *
+ * <p>
  * The adapter provides functionality to display a list of payments in a specified format in the first layer.
- *
+ * <p>
  * Additionally, the getView method is responsible for inflating the layout, populating it with payment details,
  * and customizing the layout based on the Payment details such as name, payer, amount, and date.
  */
@@ -40,7 +40,7 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
 
     /**
      * Adapter for managing the first layer of the budget list view.
-     *
+     * <p>
      * This adapter handles the initial layer of the budget list view by binding Payment items to the view.
      *
      * @param context The context in which the adapter is used.
@@ -77,10 +77,10 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
 
             // Customize the layout based on the Payment details
             expenseDescription.setText(currentPayment.getName());
-            expensePayer.setText(currentPayment.getCreatedByUser().getFirstName() + " " + context.getString(R.string.paid) );
+            expensePayer.setText(currentPayment.getCreatedByUser().getFirstName() + " " + context.getString(R.string.paid));
             String amount = String.format(Locale.getDefault(), "- %.2f", currentPayment.getAmount());
             // So far we only support euro as currency, but in this place a differentiation would be needed
-            if(currentPayment.getCurrencyCode().equals("EUR")){
+            if (currentPayment.getCurrencyCode().equals("EUR")) {
                 amount = amount + "€";
             }
             expenseAmount.setText(amount);
@@ -95,7 +95,7 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
             String formattedDate = dateFormat.format(date);
             String yearName = yearFormat.format(date);
 
-            // Set the formatted
+            // Set the formatted date
             expenseDate.setText(formattedDate + " " + monthName + " " + yearName);
 
             addButtons(position);

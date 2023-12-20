@@ -15,13 +15,16 @@ public class LoginInterceptor implements Interceptor {
     private String password;
 
     public LoginInterceptor(String username, String password) {
+
         this.username = username;
         this.password = password;
+
     }
 
     @NonNull
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
+
         Request originalRequest = chain.request();
 
         String credentials = Credentials.basic(username, password);

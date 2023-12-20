@@ -1,4 +1,5 @@
 package com.example.software_engineering_project.entity;
+
 import com.example.software_engineering_project.repository.AppStateRepository;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -17,16 +18,19 @@ public class Group {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
 
-    public Group(){
+    public Group() {
         // default constructor
     }
+
     public Group(String name, String description) {
+
         this.id = UUID.randomUUID();
         this.name = name;
         this.description = description;
         this.createdBy = AppStateRepository.getCurrentAppUserLiveData().getValue();
         long currentTimeMillis = System.currentTimeMillis();
-        this.createdAt  = new Timestamp(currentTimeMillis);
+        this.createdAt = new Timestamp(currentTimeMillis);
+
     }
 
     public UUID getId() {

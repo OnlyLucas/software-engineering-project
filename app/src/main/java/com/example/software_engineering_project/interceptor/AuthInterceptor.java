@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+
 import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.repository.AppStateRepository;
 
 import java.io.IOException;
+
 import okhttp3.Credentials;
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -24,11 +26,12 @@ public class AuthInterceptor implements Interceptor {
     @NonNull
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
+
         Request originalRequest = chain.request();
 
         User user = AppStateRepository.getCurrentAppUserLiveData().getValue();
 
-        if (user == null){
+        if (user == null) {
             //TODO remove or log
             Log.d(TAG, "AppUser is null. Continue with request.");
             return chain.proceed(originalRequest);

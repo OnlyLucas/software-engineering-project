@@ -1,6 +1,5 @@
 package com.example.software_engineering_project.controller.appsettings;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.controller.ActivityLoginScreenController;
 import com.example.software_engineering_project.controller.FragmentDialogLeaveFlatShare;
 import com.example.software_engineering_project.util.UILoaderUtil;
 
@@ -20,11 +18,10 @@ import com.example.software_engineering_project.util.UILoaderUtil;
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentSettingsController #newInstance} factory method to
  * create an instance of this fragment.
- *
+ * <p>
  * FragmentSettingsController is a fragment that provides various settings options for the user in the FlatFusion app.
  * Users can change their email, password, manage flat share members, and log out using this fragment.
  * It contains buttons to navigate to other settings-related fragments.
- *
  */
 public class FragmentSettingsController extends Fragment {
 
