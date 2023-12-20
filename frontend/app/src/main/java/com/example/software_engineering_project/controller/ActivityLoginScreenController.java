@@ -1,4 +1,4 @@
-package com.example.software_engineering_project.controller;
+package app.src.main.java.com.example.software_engineering_project.controller;
 
 import android.content.Context;
 import android.content.Intent;
