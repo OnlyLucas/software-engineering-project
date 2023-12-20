@@ -28,6 +28,7 @@ INSERT INTO `cleanings` (`id`, `group_id`, `user_id`, `cleaning_template`, `date
 INSERT INTO `group_groceries` (`id`, `group_id`, `grocery_name`, `created_by`, `is_completed`, `completed_by`, `completed_at`) VALUES ('00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000', '10 Eggs', '00000000-0000-0000-0000-000000000000', false, null, null);
 INSERT INTO `group_groceries` (`id`, `group_id`, `grocery_name`, `created_by`, `is_completed`, `completed_by`, `completed_at`) VALUES ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000000', '2 Breads', '00000000-0000-0000-0000-000000000001', false, null, null);
 INSERT INTO `group_groceries` (`id`, `group_id`, `grocery_name`, `created_by`, `is_completed`, `completed_by`, `completed_at`) VALUES ('00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000000', '3 Milk', '00000000-0000-0000-0000-000000000000', false, null, null);
+INSERT INTO `group_groceries` (`id`, `group_id`, `grocery_name`, `created_by`, `is_completed`, `completed_by`, `completed_at`) VALUES ('00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000000', 'Cheese', '00000000-0000-0000-0000-000000000000', true, null, null);
 
 -- Payments
 INSERT INTO `payments` (`id`, `group_id`, `payment_name`, `amount`, `currency_code`, `paid_by`, `created_by`) VALUES ('00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000', 'Rent', '1000.00', 'EUR', '00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000');
