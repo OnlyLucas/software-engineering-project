@@ -18,6 +18,16 @@ public class FragmentDialogDeleteFlatShareMember extends DialogFragment {
         this.position = position;
     }
 
+    /**
+     * Creates a dialog instance for confirming the deletion of a flat share member.
+     *
+     * @param savedInstanceState A Bundle containing the data provided by the system to reconstruct the dialog
+     *                            if it is being re-initialized after previously being shut down.
+     * @return Dialog Returns an AlertDialog to confirm the deletion of a flat share member.
+     *         - Constructs an AlertDialog with a title, message, and positive/negative buttons.
+     *         - Positive button triggers the removal of the flat share member via FragmentManageFlatShareController.
+     *         - Negative button dismisses the dialog.
+     */
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

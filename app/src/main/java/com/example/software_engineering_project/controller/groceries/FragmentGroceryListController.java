@@ -30,8 +30,8 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentGroceryListController #newInstance} factory method to
  * create an instance of this fragment.
- *
- *
+ * <p>
+ * <p>
  * FragmentGroceryListController displays a list of uncompleted group groceries
  * and provides functionality to add, remove, and mark items as completed.
  */
@@ -48,29 +48,43 @@ public class FragmentGroceryListController extends Fragment {
     private View fragmentView;
 
     /**
-     * Removes the selected item from the list.
+     * Removes a specific item (GroupGrocery) from the list of uncompleted groceries and deletes it from the repository.
      *
-     * @param item The index of the item to be removed.
+     * @param item The index of the item to be removed from the list of uncompleted groceries.
      */
-    // function to remove an item given its index in the grocery list.
     public static void removeItem(int item) {
+
         GroupGrocery grocery = uncompletedGroceryLiveData.getValue().get(item);
         groceryRepository.deleteGroupGrocery(grocery, context);
+
     }
 
     /**
-     * Marks the selected item as completed.
+     * Marks a specific item (GroupGrocery) from the list of uncompleted groceries as incomplete and updates it in the repository.
      *
-     * @param i The index of the item to be marked as completed.
+     * @param i The index of the item to be marked as incomplete in the list of uncompleted groceries.
      */
     public static void uncheckItem(int i) {
+
         GroupGrocery grocery = uncompletedGroceryLiveData.getValue().get(i);
         grocery.setCompleted();
         groceryRepository.updateGroupGrocery(grocery, context);
+
     }
 
+    /**
+     * Creates and returns the view hierarchy associated with the fragment for displaying the grocery list.
+     * Initializes necessary elements, observes LiveData for uncompleted group groceries, and sets up the list view with an adapter.
+     *
+     * @param inflater           The LayoutInflater object that can inflate any views in the fragment.
+     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state.
+     *                           This value may be null.
+     * @return The View for the fragment's UI, or null if the fragment does not provide a UI.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         context = requireActivity();
 
         groceryRepository = new GroceryRepository(context);
@@ -86,8 +100,15 @@ public class FragmentGroceryListController extends Fragment {
         addButtons();
 
         return fragmentView;
+
     }
 
+    /**
+     * Configures functionality for different buttons and interactions within the grocery list fragment.
+     * - Sets up click listeners to display the name of the clicked item in a toast.
+     * - Enables removing an item when its row is long-pressed in the list view.
+     * - Handles adding new grocery items and navigating to the grocery list history.
+     */
     private void addButtons() {
 
         listView.setLongClickable(true);
@@ -112,7 +133,7 @@ public class FragmentGroceryListController extends Fragment {
             @Override
             public void onClick(View view) {
                 Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
-                if(group == null) {
+                if (group == null) {
                     ToastUtil.makeToast(context.getString(R.string.join_a_group_first), context);
                 } else {
                     // get the input
@@ -142,11 +163,20 @@ public class FragmentGroceryListController extends Fragment {
 
     }
 
-    // function to add an item given its name.
+    /**
+     * Inserts a new GroupGrocery item into the repository.
+     *
+     * @param item The GroupGrocery item to be inserted into the repository.
+     */
     private void addItem(GroupGrocery item) {
         groceryRepository.insertGroupGrocery(item, context);
     }
 
+    /**
+     * Replaces the current fragment with the specified fragment in the main content view.
+     *
+     * @param fragment The Fragment instance to be displayed by replacing the current fragment.
+     */
     private void callFragment(Fragment fragment) {
 
         FragmentManager fm = requireActivity().getSupportFragmentManager();
@@ -156,6 +186,11 @@ public class FragmentGroceryListController extends Fragment {
 
     }
 
+    /**
+     * Retrieves and initializes specific UI elements from the fragment's layout for managing grocery lists.
+     * This method finds and assigns the necessary views, such as buttons, input fields, and a list view,
+     * required for managing and displaying grocery items in the fragment.
+     */
     private void loadScreenElements() {
 
         enter = fragmentView.findViewById(R.id.enter);

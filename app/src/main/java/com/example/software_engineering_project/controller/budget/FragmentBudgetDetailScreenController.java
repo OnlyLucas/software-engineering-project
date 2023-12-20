@@ -65,12 +65,10 @@ public class FragmentBudgetDetailScreenController extends Fragment {
         UUID userIdOwe = UUID.fromString(userIdOweString);
         UUID userIdGet = AppStateRepository.getCurrentAppUserLiveData().getValue().getId();
         Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
-        if(group == null){
+        if (group == null) {
             ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
             return;
         }
-
-
 
         paymentParticipationRepository.getGetPaymentParticipationsByUserIds(group.getId(), userIdOwe, userIdGet, context)
                 .observe((LifecycleOwner) context, affectedPaymentParticipations -> {
@@ -106,7 +104,7 @@ public class FragmentBudgetDetailScreenController extends Fragment {
         UUID userIdGet = UUID.fromString(userIdOweString);
         UUID userIdOwe = AppStateRepository.getCurrentAppUserLiveData().getValue().getId();
         Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
-        if(group == null){
+        if (group == null) {
             ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
             return;
         }
@@ -146,7 +144,7 @@ public class FragmentBudgetDetailScreenController extends Fragment {
         Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
         User user = AppStateRepository.getCurrentAppUserLiveData().getValue();
 
-        if(group != null){
+        if (group != null) {
             // get current get and owe payments
             paymentParticipationRepository = new PaymentParticipationRepository();
 
@@ -182,16 +180,17 @@ public class FragmentBudgetDetailScreenController extends Fragment {
      * @param owePayments The total 'owe' payments the user needs to pay.
      */
     private void getTotalGetOrOwe(Double getPayments, Double owePayments) {
+
         Double difference = getPayments - owePayments;
         // So far we only support euro as currency, but in this place a differentiation would be needed
         String differenceString;
 
-        if(difference == 0){
+        if (difference == 0) {
             totalCalculatedExpenses.setText(R.string.in_total_you_do_not_owe_or_get_any_money);
-        } else if(difference > 0){
+        } else if (difference > 0) {
             differenceString = String.format(Locale.getDefault(), "%.2f", difference) + "€";
             totalCalculatedExpenses.setText(getString(R.string.you_get_back_in_total) + differenceString);
-        } else{
+        } else {
             difference = difference * (-1);
             differenceString = String.format(Locale.getDefault(), "%.2f", difference) + "€";
             totalCalculatedExpenses.setText(getString(R.string.you_owe_in_total) + differenceString);
@@ -206,25 +205,28 @@ public class FragmentBudgetDetailScreenController extends Fragment {
      * @return The total 'get' payments received by the user, in Double format, or null if the list is null.
      */
     private Double getTotalGetPayments(List<Object[]> list) {
-            if (list != null) {
-                Double totalAmountGet = new Double(0);
 
-                for (Object[] object : list) {
-                    if (object.length > 1 && object[1] instanceof Double) {
-                        Double paymentAmount = (Double) object[1];
-                        totalAmountGet = totalAmountGet + paymentAmount;
-                    }
+        if (list != null) {
+            Double totalAmountGet = new Double(0);
+
+            for (Object[] object : list) {
+                if (object.length > 1 && object[1] instanceof Double) {
+                    Double paymentAmount = (Double) object[1];
+                    totalAmountGet = totalAmountGet + paymentAmount;
                 }
-                if(totalAmountGet == 0.00){
-                    totalGetExpenses.setText(R.string.you_do_not_get_any_money_back);
-                } else {
-                    // So far we only support euro as currency, but in this place a differentiation would be needed
-                    String totalAmountGetString = String.format(Locale.getDefault(), "%.2f", totalAmountGet) + "€";
-                    totalGetExpenses.setText(getString(R.string.you_get) + totalAmountGetString);
-                }
-                return totalAmountGet;
             }
-            return null;
+
+            if (totalAmountGet == 0.00) {
+                totalGetExpenses.setText(R.string.you_do_not_get_any_money_back);
+            } else {
+                // So far we only support euro as currency, but in this place a differentiation would be needed
+                String totalAmountGetString = String.format(Locale.getDefault(), "%.2f", totalAmountGet) + "€";
+                totalGetExpenses.setText(getString(R.string.you_get) + totalAmountGetString);
+            }
+
+            return totalAmountGet;
+        }
+        return null;
     }
 
     /**
@@ -235,6 +237,7 @@ public class FragmentBudgetDetailScreenController extends Fragment {
      * @return The total 'owe' payments to be made by the user in Double format, or null if the list is null.
      */
     private Double getTotalOwePayments(List<Object[]> list) {
+
         if (list != null) {
             Double totalAmountOwe = new Double(0);
             // So far we only support euro as currency, but in this place a differentiation would be needed
@@ -246,11 +249,13 @@ public class FragmentBudgetDetailScreenController extends Fragment {
                     totalAmountOwe = totalAmountOwe + paymentAmount;
                 }
             }
-            if(totalAmountOwe == 0.00) {
+
+            if (totalAmountOwe == 0.00) {
                 totalOweExpenses.setText(R.string.you_do_not_owe_any_money);
             } else {
                 totalOweExpenses.setText(getString(R.string.you_owe) + totalAmountOwe);
             }
+
             return totalAmountOwe;
         }
         return null;

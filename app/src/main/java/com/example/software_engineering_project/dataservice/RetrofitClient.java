@@ -19,22 +19,23 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
-public class RetrofitClient{
+public class RetrofitClient {
     private static Retrofit retrofit = null;
-
     private static final String BASE_URL = "https://10.0.2.2:1337/v1/";
 
-    private RetrofitClient() {}
-
+    private RetrofitClient() {
+    }
 
     /**
      * This retrofit instance is for the login.
      * A different way of obtaining the credentials is used (direct insertion of username and password).
+     *
      * @param username
      * @param password
      * @return
      */
-    public static Retrofit getInstanceWithCredentials(String username, String password){
+    public static Retrofit getInstanceWithCredentials(String username, String password) {
+
         OkHttpClient.Builder httpClient = getAllSslTrustingOkHttpBuilder();
 
         // Logging
@@ -57,6 +58,7 @@ public class RetrofitClient{
     }
 
     public static synchronized Retrofit getInstance() {
+
         if (retrofit == null) {
 
             OkHttpClient.Builder httpClient = getAllSslTrustingOkHttpBuilder();
@@ -84,9 +86,9 @@ public class RetrofitClient{
     /**
      * !!!USE ONLY FOR DEVELOPMENT/TESTING!!!
      * This method returns a http builder that trusts all SSL certificates, also self-signed ones.
-     *
+     * <p>
      * As our backend server runs only locally, we need to use a self-signed certificate for it. That is why we need to allow the use here.
-     *
+     * <p>
      * For production: Just use a proper ssl certificate in the backend and use the default OkHttpBuilder
      *
      * @return All-trusting OkHttpBuilder

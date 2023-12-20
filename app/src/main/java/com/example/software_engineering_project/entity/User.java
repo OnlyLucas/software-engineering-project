@@ -3,7 +3,6 @@ package com.example.software_engineering_project.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 import java.sql.Timestamp;
@@ -17,15 +16,27 @@ public class User {
     private String username;
     private String firstName;
     private String lastName;
-
     @JsonIgnore
     private String password;
-
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
-
     private Boolean isActive;
 
+    public User() {
+        // used for jackson
+    }
+
+    public User(String email, String username, String firstName, String lastName) {
+
+        this.id = UUID.randomUUID();
+        this.email = email;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        long currentTimeMillis = System.currentTimeMillis();
+        this.createdAt = new Timestamp(currentTimeMillis);
+
+    }
 
     public UUID getId() {
         return id;
@@ -91,22 +102,6 @@ public class User {
         isActive = active;
     }
 
-    public User(){
-        // used for jackson
-    }
-
-    public User(String email, String username, String firstName, String lastName){
-        this.id = UUID.randomUUID();
-        this.email = email;
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        long currentTimeMillis = System.currentTimeMillis();
-        this.createdAt  = new Timestamp(currentTimeMillis);
-    }
-
-
-    // TODO check if we should just make Username mandatory
     /***
      * This method returns the most suited name of the user to display for the ui.
      * It checks for null values in the attributes that are suited for display.
@@ -116,13 +111,13 @@ public class User {
      * @return Name of the user to display in the UI
      */
     @JsonIgnore
-    public String getDisplayName(){
-        if (this.username != null){
+    public String getDisplayName() {
+        if (this.username != null) {
             return this.username;
-        } else if (this.lastName != null){
+        } else if (this.lastName != null) {
             // example: "Jane D."
             return this.firstName + " " + this.lastName.charAt(0) + ".";
-        } else{
+        } else {
             return this.firstName;
         }
     }

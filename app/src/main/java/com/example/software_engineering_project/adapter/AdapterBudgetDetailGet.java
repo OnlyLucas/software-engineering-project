@@ -22,13 +22,12 @@ import java.util.Locale;
 /**
  * Custom adapter for displaying budget details as a list related to received amounts.
  * This adapter is designed to work with the AdapterBudgetDetailGet layout.
- *
+ * <p>
  * The adapter provides functionality to display a list of users with associated debt amounts
  * and allows users to be marked as "checked" via the checkExpenseGet ImageView.
- *
+ * <p>
  * Additionally, when the checkExpenseGet ImageView is clicked, it triggers an onClick event
  * to uncheck the corresponding item through FragmentBudgetDetailScreenController.
- *
  */
 public class AdapterBudgetDetailGet extends ArrayAdapter<Object[]> {
 
@@ -65,7 +64,7 @@ public class AdapterBudgetDetailGet extends ArrayAdapter<Object[]> {
      * @param position    The position of the item within the adapter's data set.
      * @param convertView The old view to reuse, if possible.
      * @param parent      The parent that this view will eventually be attached to.
-     * @return            A View corresponding to the data at the specified position.
+     * @return A View corresponding to the data at the specified position.
      */
     @NonNull
     @Override

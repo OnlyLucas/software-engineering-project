@@ -17,32 +17,32 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class GroupRepository{
+public class GroupRepository {
     private static final String TAG = GroupRepository.class.getSimpleName();
-    private static MutableLiveData<Group> groupMutableLiveData = new MutableLiveData<>();
-
     private GroupService groupService;
-
 
     /**
      * Default constructor for GroupRepository. Initializes the GroupService using RetrofitClient
      */
     public GroupRepository() {
+
         groupService = RetrofitClient.getInstance().create(GroupService.class);
+
     }
 
     /**
      * Performs the API call to insert a new group  on the server.
      *
-     * @param group        The Group object to be inserted.
-     * @param context      The application context for displaying toasts and handling UI updates.
+     * @param group   The Group object to be inserted.
+     * @param context The application context for displaying toasts and handling UI updates.
      */
     public void insertGroup(Group group, Context context) {
+
         Call<Group> call = groupService.createGroup(group);
         call.enqueue(new Callback<Group>() {
             @Override
             public void onResponse(Call<Group> call, Response<Group> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Log.i(TAG, "Group creation successful");
                     ToastUtil.makeToast(context.getString(R.string.createdColon_) + group.getName(), context);
 

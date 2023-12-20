@@ -14,7 +14,6 @@ import com.example.software_engineering_project.entity.User;
 public class AppStateRepository extends ViewModel {
 
     private static MutableLiveData<User> currentUserLiveData = new MutableLiveData<>();
-
     private static MutableLiveData<Group> currentGroupLiveData = new MutableLiveData<>();
 
 
@@ -28,15 +27,20 @@ public class AppStateRepository extends ViewModel {
     }
 
     public static void setCurrentUser(User currentUser) {
+
         currentUserLiveData.setValue(currentUser);
+
     }
 
     /**
      * Used for async update in background threads
+     *
      * @param currentUser User that should be set
      */
     public static void postCurrentUser(User currentUser) {
+
         currentUserLiveData.postValue(currentUser);
+
     }
 
     /**
@@ -54,15 +58,20 @@ public class AppStateRepository extends ViewModel {
      * @param currentGroup The LiveData object containing information about the current group.
      */
     public static void setCurrentGroup(Group currentGroup) {
+
         currentGroupLiveData.setValue(currentGroup);
+
     }
 
     /**
      * Used for async update in background threads
+     *
      * @param currentGroup group that should be set
-      */
+     */
     public static void postCurrentGroup(Group currentGroup) {
+
         currentGroupLiveData.postValue(currentGroup);
+
     }
 
     // TODO implement method

@@ -3,18 +3,17 @@ package com.example.software_engineering_project.repository;
 import android.content.Context;
 import android.util.Log;
 
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.controller.appsettings.FragmentSettingsController;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.dataservice.UserService;
 import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.entity.User;
 
 import request.UserWithPasswordRequest;
+
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.util.UILoaderUtil;
 
@@ -42,9 +41,11 @@ public class UserRepository {
      * Default constructor for UserRepository. Initializes the UserService using RetrofitClient
      * and fetches the current list of users immediately upon repository creation.
      */
-    public UserRepository(Context context){
+    public UserRepository(Context context) {
+
         userService = RetrofitClient.getInstance().create(UserService.class);
         fetchUsers(context);
+
     }
 
     /**
@@ -52,8 +53,10 @@ public class UserRepository {
      * Updates the LiveData with the retrieved list upon a successful API response.
      */
     public void fetchUsers(Context context) {
+
         Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
-        if(group != null) {
+
+        if (group != null) {
             Call<List<User>> call = userService.getUsers(group.getId());
             call.enqueue(new Callback<List<User>>() {
                 @Override
@@ -64,7 +67,7 @@ public class UserRepository {
                         currentUsers.setValue(users);
                     } else {
                         // If unauthorized/bad credentials return to login screen
-                        if(response.code() == 401){
+                        if (response.code() == 401) {
                             Log.e(TAG, "Bad credentials. Rerouting to login activity.");
                             ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                             UILoaderUtil.startLoginActivity(context);
@@ -92,8 +95,9 @@ public class UserRepository {
      * @param mail The email of the user to be fetched.
      */
     public void fetchUserByMail(String mail, Context context) {
+
         Call<User> call = userService.getUserByMail(mail);
-        call.enqueue(new Callback<User>(){
+        call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
@@ -103,14 +107,14 @@ public class UserRepository {
                     fetchUsers(context);
                 } else {
                     // If unauthorized/bad credentials return to login screen
-                    if(response.code() == 401){
+                    if (response.code() == 401) {
                         Log.e(TAG, "Bad credentials. Rerouting to login activity.");
                         ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
                         return;
                     }
 
-                    Log.e(TAG,"Error while fetching user by mail");
+                    Log.e(TAG, "Error while fetching user by mail");
                     userByMail.setValue(null);
                 }
             }
@@ -125,7 +129,7 @@ public class UserRepository {
     /**
      * Retrieves the LiveData object containing the list of current users.
      *
-     * @return LiveData<List<User>> The LiveData object containing the list of current users.
+     * @return LiveData<List < User>> The LiveData object containing the list of current users.
      */
     public LiveData<List<User>> getCurrentUsers() {
         return currentUsers;
@@ -138,8 +142,10 @@ public class UserRepository {
      * @return LiveData<User> The LiveData object containing the user fetched by email.
      */
     public LiveData<User> getUserByMail(String mail, Context context) {
+
         fetchUserByMail(mail, context);
         return userByMail;
+
     }
 
     /**
@@ -149,21 +155,21 @@ public class UserRepository {
      * @param context The application context for displaying toasts and handling UI updates.
      */
     public void insertUser(UserWithPasswordRequest user, Context context) {
+
         String email = user.getUser().getEmail();
         String password = user.getPassword();
 
-        // Use instant does does not use
         UserService userService = RetrofitClient.getInstanceWithCredentials(email, password).create(UserService.class);
         Call<User> call = userService.createUser(user);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Log.i(TAG, "User registration successful");
                     ToastUtil.makeToast(context.getString(R.string.registered_) + user.getUser().getEmail(), context);
                 } else {
                     // If unauthorized/bad credentials return to login screen
-                    if(response.code() == 401){
+                    if (response.code() == 401) {
                         Log.e(TAG, "Bad credentials. Rerouting to login activity.");
                         ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
@@ -190,17 +196,18 @@ public class UserRepository {
      * @param map     The map containing the new email.
      * @param context The application context for displaying toasts and handling UI updates.
      */
-    public void updateEmail(User user, Map<String, String> map, Context context){
+    public void updateEmail(User user, Map<String, String> map, Context context) {
+
         Call<User> call = userService.partialUpdateEntity(user.getId(), map);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Log.i(TAG, "Changed mail successfully");
                     ToastUtil.makeToast(context.getString(R.string.changed_mail_successfully), context);
                 } else {
                     // If unauthorized/bad credentials return to login screen
-                    if(response.code() == 401){
+                    if (response.code() == 401) {
                         Log.e(TAG, "Bad credentials. Rerouting to login activity.");
                         ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
@@ -220,17 +227,18 @@ public class UserRepository {
         });
     }
 
-    public void updatePassword(UserWithPasswordRequest request, Context context){
+    public void updatePassword(UserWithPasswordRequest request, Context context) {
+
         Call<User> call = userService.updatePassword(request);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Log.i(TAG, "Changed password successfully");
                     ToastUtil.makeToast(context.getString(R.string.new_password_saved), context);
                 } else {
                     // If unauthorized/bad credentials return to login screen
-                    if(response.code() == 401){
+                    if (response.code() == 401) {
                         Log.e(TAG, "Bad credentials. Rerouting to login activity.");
                         ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);

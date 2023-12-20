@@ -26,11 +26,10 @@ import java.util.Map;
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentChangeMailController #newInstance} factory method to
  * create an instance of this fragment.
- *
+ * <p>
  * FragmentChangeMailController is a fragment that handles the change of email address in the FlatFusion app.
  * It provides UI elements for users to input their current email, new email, and confirm the new email.
  * The class interacts with the UserRepository to validate and update the user's email address.
- *
  */
 public class FragmentChangeMailController extends Fragment {
 
@@ -52,6 +51,7 @@ public class FragmentChangeMailController extends Fragment {
      * @return The root View of the fragment layout.
      */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         context = requireActivity();
         userRepository = new UserRepository(context);
         fragmentView = inflater.inflate(R.layout.fragment_change_mail, container, false);
@@ -59,6 +59,7 @@ public class FragmentChangeMailController extends Fragment {
         addButtons();
 
         return fragmentView;
+
     }
 
     /**

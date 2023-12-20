@@ -21,7 +21,7 @@ public class UserCreate {
     private Timestamp createdAt;
     private Boolean isActive;
 
-    public UserCreate(){
+    public UserCreate() {
         //default constructor
     }
 
@@ -35,6 +35,7 @@ public class UserCreate {
      * @param password  The password of the user.
      */
     public UserCreate(String firstName, String lastName, String username, String eMail, String password) {
+
         this.id = UUID.randomUUID();
         this.firstName = firstName;
         this.lastName = lastName;
@@ -44,6 +45,7 @@ public class UserCreate {
         long currentTimeMillis = System.currentTimeMillis();
         this.createdAt = new Timestamp(currentTimeMillis);
         this.isActive = true;
+        
     }
 
     public UUID getId() {
@@ -112,6 +114,7 @@ public class UserCreate {
 
 
     // TODO check if we should just make Username mandatory
+
     /***
      * This method returns the most suited name of the user to display for the ui.
      * It checks for null values in the attributes that are suited for display.
@@ -121,13 +124,13 @@ public class UserCreate {
      * @return Name of the user to display in the UI
      */
     @JsonIgnore
-    public String getDisplayName(){
-        if (this.username != null){
+    public String getDisplayName() {
+        if (this.username != null) {
             return this.username;
-        } else if (this.lastName != null){
+        } else if (this.lastName != null) {
             // example: "Jane D."
             return this.firstName + " " + this.lastName.charAt(0) + ".";
-        } else{
+        } else {
             return this.firstName;
         }
     }

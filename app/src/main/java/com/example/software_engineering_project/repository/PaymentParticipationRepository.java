@@ -35,7 +35,9 @@ public class PaymentParticipationRepository {
 
 
     public PaymentParticipationRepository() {
+
         paymentParticipationService = RetrofitClient.getInstance().create(PaymentParticipationService.class);
+
     }
 
     /**
@@ -46,21 +48,23 @@ public class PaymentParticipationRepository {
      * @param userId  The ID of the current user.
      */
     public void fetchGetPaymentsGroupedByUser(UUID groupId, UUID userId, Context context) {
-        if(groupId == null){
+
+        if (groupId == null) {
             ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
             return;
         }
+
         Call<List<Object[]>> call = paymentParticipationService.getGetPaymentsGroupedByUser(groupId, userId);
         call.enqueue(new Callback<List<Object[]>>() {
             @Override
             public void onResponse(Call<List<Object[]>> call, Response<List<Object[]>> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Log.i(TAG, "Get Payments fetching successful");
                     List<Object[]> paymentParticipations = response.body();
                     getPaymentParticipationLiveData.setValue(paymentParticipations);
                 } else {
                     // If unauthorized/bad credentials return to login screen
-                    if(response.code() == 401){
+                    if (response.code() == 401) {
                         Log.e(TAG, "Bad credentials. Rerouting to login activity.");
                         ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
@@ -86,21 +90,23 @@ public class PaymentParticipationRepository {
      * @param userId  The ID of the current user.
      */
     public void fetchOwePaymentsGroupedByUser(UUID groupId, UUID userId, Context context) {
-        if(groupId == null){
+
+        if (groupId == null) {
             ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
             return;
         }
+
         Call<List<Object[]>> call = paymentParticipationService.getOwePaymentsGroupedByUser(groupId, userId);
         call.enqueue(new Callback<List<Object[]>>() {
             @Override
             public void onResponse(Call<List<Object[]>> call, Response<List<Object[]>> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Log.i(TAG, "Owe Payments fetching successful");
                     List<Object[]> paymentParticipations = response.body();
                     owePaymentParticipationLiveData.setValue(paymentParticipations);
                 } else {
                     // If unauthorized/bad credentials return to login screen
-                    if(response.code() == 401){
+                    if (response.code() == 401) {
                         Log.e(TAG, "Bad credentials. Rerouting to login activity.");
                         ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
@@ -117,16 +123,19 @@ public class PaymentParticipationRepository {
             }
         });
     }
+
     private void fetchGetPaymentParticipationsByUserIds(UUID groupId, UUID userIdOwe, UUID userIdGet, Context context) {
-        if(groupId == null){
+
+        if (groupId == null) {
             ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
             return;
         }
+
         Call<List<PaymentParticipation>> call = paymentParticipationService.getGetPaymentParticipationsByUserIds(groupId, userIdOwe, userIdGet);
         call.enqueue(new Callback<List<PaymentParticipation>>() {
             @Override
             public void onResponse(Call<List<PaymentParticipation>> call, Response<List<PaymentParticipation>> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Log.i(TAG, "Get Payment Participation fetching successful");
                     List<PaymentParticipation> paymentParticipations = response.body();
                     getPaymentParticipationsByUserIds.setValue(paymentParticipations);
@@ -143,15 +152,17 @@ public class PaymentParticipationRepository {
     }
 
     private void fetchOwePaymentParticipationsByUserIds(UUID groupId, UUID userIdGet, UUID userIdOwe, Context context) {
-        if(groupId == null){
+
+        if (groupId == null) {
             ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
             return;
         }
+
         Call<List<PaymentParticipation>> call = paymentParticipationService.getOwePaymentParticipationsByUserIds(groupId, userIdGet, userIdOwe);
         call.enqueue(new Callback<List<PaymentParticipation>>() {
             @Override
             public void onResponse(Call<List<PaymentParticipation>> call, Response<List<PaymentParticipation>> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Log.i(TAG, "Owe Payment Participation fetching successful");
                     List<PaymentParticipation> paymentParticipations = response.body();
                     owePaymentParticipationsByUserIds.setValue(paymentParticipations);
@@ -168,36 +179,45 @@ public class PaymentParticipationRepository {
     }
 
     public LiveData<List<Object[]>> getGetPaymentsGroupedByUser(UUID groupId, UUID userId, Context context) {
+
         fetchGetPaymentsGroupedByUser(groupId, userId, context);
         return getPaymentParticipationLiveData;
+
     }
 
     public LiveData<List<PaymentParticipation>> getGetPaymentParticipationsByUserIds(UUID groupId, UUID userIdOwe, UUID userIdGet, Context context) {
+
         fetchGetPaymentParticipationsByUserIds(groupId, userIdOwe, userIdGet, context);
         return getPaymentParticipationsByUserIds;
+
     }
 
     public LiveData<List<Object[]>> getOwePaymentsGroupedByUser(UUID groupId, UUID userId, Context context) {
+
         fetchOwePaymentsGroupedByUser(groupId, userId, context);
         return owePaymentParticipationLiveData;
+
     }
 
     public LiveData<List<PaymentParticipation>> getOwePaymentParticipationsByUserIds(UUID groupId, UUID userIdGet, UUID userIdOwe, Context context) {
+
         fetchOwePaymentParticipationsByUserIds(groupId, userIdGet, userIdOwe, context);
         return owePaymentParticipationsByUserIds;
+
     }
 
     /**
      * Updates a payment participation and fetches the latest owed and owing payments.
      *
-     * @param context              The application context for displaying toasts.
+     * @param context The application context for displaying toasts.
      */
     public void update(PaymentParticipation p, Context context) {
+
         Call<PaymentParticipation> call = paymentParticipationService.updatePaymentParticipation(p.getId(), p);
         call.enqueue(new Callback<PaymentParticipation>() {
             @Override
             public void onResponse(Call<PaymentParticipation> call, Response<PaymentParticipation> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Log.i(TAG, "Paying payment participation successful");
                     UUID userId = AppStateRepository.getCurrentAppUserLiveData().getValue().getId();
                     UUID groupId = AppStateRepository.getCurrentGroupLiveData().getValue().getId();

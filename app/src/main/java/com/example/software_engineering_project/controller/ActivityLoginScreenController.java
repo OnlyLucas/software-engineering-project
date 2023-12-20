@@ -36,8 +36,19 @@ public class ActivityLoginScreenController extends AppCompatActivity {
     private String email, password;
     private GroupMembershipRepository groupMembershipRepository;
 
+    /**
+     * Initializes the activity and sets up the login screen.
+     * - Creates an instance of GroupMembershipRepository for managing group memberships.
+     * - Retrieves the application context.
+     * - Sets the content view to the login screen layout.
+     * - Loads and initializes UI elements required for the login screen.
+     * - Assigns click listeners to buttons for login and registration functionalities.
+     *
+     * @param savedInstanceState A Bundle object containing the activity's previously saved state, if available.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         groupMembershipRepository = new GroupMembershipRepository();
         super.onCreate(savedInstanceState);
         context = getApplicationContext();
@@ -49,7 +60,9 @@ public class ActivityLoginScreenController extends AppCompatActivity {
     }
 
     /**
-     * Loads elements from the XML layout file.
+     * Loads and initializes UI elements from the login screen layout.
+     * - Retrieves and assigns the login button, register button, email input field, and password input field
+     *   required for user authentication and navigation to the registration screen.
      */
     private void loadScreenElements() {
 
@@ -59,35 +72,62 @@ public class ActivityLoginScreenController extends AppCompatActivity {
         passwordInput = findViewById(R.id.enterLoginPassword);
     }
 
+    /**
+     * Assigns click listeners to the login and register buttons within the login screen.
+     * - Sets a click listener for the login button to handle login attempts.
+     * - Sets a click listener for the register button to initiate the registration process.
+     * The click listeners are associated with their respective onClick methods.
+     */
     private void addButtons() {
 
         loginButton.setOnClickListener(this::onClickLoginButton);
         registerButtonLogin.setOnClickListener(this::startRegisterActivity);
+
     }
 
-    private void startRegisterActivity(View view){
+    /**
+     * Initiates the registration screen by navigating from the login screen to the registration screen.
+     * Starts the ActivityRegisterScreenController upon clicking the registration button.
+     *
+     * @param view The View object representing the clicked registration button.
+     */
+    private void startRegisterActivity(View view) {
+
         Intent registerScreen = new Intent(ActivityLoginScreenController.this, ActivityRegisterScreenController.class);
         startActivity(registerScreen);
+
     }
 
-    private void onClickLoginButton(View view){
-        if(!checkLoginInputs()){
+    /**
+     * Handles the click event of the login button by performing the following actions:
+     * - Checks login inputs for email and password validity.
+     * - Initiates a login service using Retrofit with provided credentials.
+     * - Enqueues a login call to the server and handles its response.
+     * - Processes the login response:
+     *   - If successful, sets the authenticated user in the AppStateRepository and navigates to the MainActivity.
+     *   - If authentication fails, displays appropriate error messages and clears the current user.
+     *
+     * @param view The View object representing the clicked login button.
+     */
+    private void onClickLoginButton(View view) {
+
+        if (!checkLoginInputs()) {
             // if inputs are faulty
             return;
         }
 
         LoginService loginService = RetrofitClient.getInstanceWithCredentials(email, password)
-                                        .create(LoginService.class);
+                .create(LoginService.class);
         Call<User> call = loginService.login();
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
 
                     User authenticatedUser = response.body();
 
                     // Error in authentication, clear currentAppUSer
-                    if(authenticatedUser == null){
+                    if (authenticatedUser == null) {
                         // Clear credentials
                         AppStateRepository.setCurrentUser(null);
                         AppStateRepository.setCurrentGroup(null);
@@ -116,7 +156,7 @@ public class ActivityLoginScreenController extends AppCompatActivity {
                     startActivity(mainScreen);
                 } else {
                     // Reset current user
-                    if(response.code() == 401){
+                    if (response.code() == 401) {
                         Log.e(TAG, "Bad credentials for login");
                         ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         return;
@@ -139,9 +179,17 @@ public class ActivityLoginScreenController extends AppCompatActivity {
         });
     }
 
+    /**
+     * Checks and validates the user login inputs for email and password fields.
+     * - Retrieves email and password from respective input fields.
+     * - Validates if the email and password fields are empty.
+     * - Sets up a dummy user for authentication that the AuthInterceptor uses.
+     * - Sets the current user in the AppStateRepository.
+     *
+     * @return Returns true if both email and password fields are non-empty, otherwise displays respective error messages and returns false.
+     */
     private boolean checkLoginInputs() {
 
-        // get the inputs
         email = emailInput.getText().toString();
         password = passwordInput.getText().toString();
 

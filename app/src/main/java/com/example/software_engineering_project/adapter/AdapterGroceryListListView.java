@@ -20,10 +20,10 @@ import java.util.List;
 
 /**
  * Custom adapter for displaying a list of grocery groups in a ListView.
- *
+ * <p>
  * This adapter extends ArrayAdapter<GroupGrocery> and is designed to work with the layout 'adapter_grocery_list_list_view'.
  * It provides a customized view for each item in the ListView, including a number, group name, and buttons for removing and unchecking the group.
- *
+ * <p>
  * The getView method is overridden to inflate the layout, load screen elements, and set the content based on the GroupGrocery object at the specified position in the data set. Additionally, it adds listeners for the remove and unchecked buttons.
  */
 public class AdapterGroceryListListView extends ArrayAdapter<GroupGrocery> {
@@ -52,7 +52,6 @@ public class AdapterGroceryListListView extends ArrayAdapter<GroupGrocery> {
 
     }
 
-    // The method we override to provide our own layout for each View (row) in the ListView
     /**
      * This method is responsible for rendering the view for each item in the grocery list list view.
      * It populates the ListView with the required data by binding it to the specified layout.
@@ -94,10 +93,7 @@ public class AdapterGroceryListListView extends ArrayAdapter<GroupGrocery> {
      */
     private void addButtons(int position) {
 
-        // Listeners for duplicating and removing an item.
-        // They use the static removeItem and addItem methods created in MainActivity.
         remove.setOnClickListener(view -> FragmentGroceryListController.removeItem(position));
-
         unchecked.setOnClickListener(view -> FragmentGroceryListController.uncheckItem(position));
 
     }

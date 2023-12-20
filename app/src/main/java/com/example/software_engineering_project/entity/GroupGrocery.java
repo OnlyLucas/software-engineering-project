@@ -29,13 +29,15 @@ public class GroupGrocery {
      *
      * @param name The name of the grocery item.
      */
-    public GroupGrocery(String name){
+    public GroupGrocery(String name) {
+
         this.id = UUID.randomUUID();
         this.group = AppStateRepository.getCurrentGroupLiveData().getValue();
         this.createdByUser = AppStateRepository.getCurrentAppUserLiveData().getValue();
         this.name = name;
         long currentTimeMillis = System.currentTimeMillis();
-        this.createdAt  = new Timestamp(currentTimeMillis);
+        this.createdAt = new Timestamp(currentTimeMillis);
+
     }
 
     /**
@@ -89,7 +91,9 @@ public class GroupGrocery {
         return isCompleted;
     }
 
-    public void setIsCompleted(Boolean isCompleted) { this.isCompleted = isCompleted; }
+    public void setIsCompleted(Boolean isCompleted) {
+        this.isCompleted = isCompleted;
+    }
 
     public User getCompletedByUser() {
         return completedByUser;
