@@ -28,7 +28,7 @@ import org.junit.runners.MethodSorters;
 public class FragmentGroceryListHistoryControllerTest {
 
     @Before
-    public void launchFragment() {
+    public void setUp() {
 
         // Launch the activity
         TestUtils.appLogin();

@@ -26,7 +26,7 @@ import org.junit.runner.RunWith;
 public class FragmentBudgetMainControllerTest {
 
     @Before
-    public void launchFragment() {
+    public void setUp() {
 
         // Launch the activity
         TestUtils.appLogin();
