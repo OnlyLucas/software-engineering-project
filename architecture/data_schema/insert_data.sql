@@ -23,6 +23,9 @@ INSERT INTO `cleaning_template` (`id`, `group_id`, `task_name`, `template_descri
 -- Cleanings
 INSERT INTO `cleanings` (`id`, `group_id`, `user_id`, `cleaning_template`, `date`, `is_completed`, `completed_at`) VALUES ('00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000', '2023-11-24', true, null);
 INSERT INTO `cleanings` (`id`, `group_id`, `user_id`, `cleaning_template`, `date`, `is_completed`, `completed_at`) VALUES ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000', '2023-12-24', false, null);
+INSERT INTO `cleanings` (`id`, `group_id`, `user_id`, `cleaning_template`, `date`, `is_completed`, `completed_at`) VALUES ('00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000000', '2023-12-31', false, null);
+INSERT INTO `cleanings` (`id`, `group_id`, `user_id`, `cleaning_template`, `date`, `is_completed`, `completed_at`) VALUES ('00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000002', '00000000-0000-0000-0000-000000000000', '2024-01-07', false, null);
+INSERT INTO `cleanings` (`id`, `group_id`, `user_id`, `cleaning_template`, `date`, `is_completed`, `completed_at`) VALUES ('00000000-0000-0000-0000-000000000004', '00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000000', '2024-01-14', false, null);
 
 -- Group Groceries
 INSERT INTO `group_groceries` (`id`, `group_id`, `grocery_name`, `created_by`, `is_completed`, `completed_by`, `completed_at`) VALUES ('00000000-0000-0000-0000-000000000000', '00000000-0000-0000-0000-000000000000', '10 Eggs', '00000000-0000-0000-0000-000000000000', false, null, null);
