@@ -15,7 +15,6 @@ import com.example.software_engineering_project.dataservice.LoginService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
-import com.example.software_engineering_project.util.UILoaderUtil;
 import com.example.software_engineering_project.repository.AppStateRepository;
 import com.example.software_engineering_project.repository.GroupMembershipRepository;
 import com.example.software_engineering_project.repository.UserRepository;
@@ -77,7 +76,7 @@ public class ActivityLoginScreenController extends AppCompatActivity {
             return;
         }
 
-        LoginService loginService = RetrofitClient.getLoginInstance(email, password)
+        LoginService loginService = RetrofitClient.getInstanceWithCredentials(email, password)
                                         .create(LoginService.class);
         Call<User> call = loginService.login();
         call.enqueue(new Callback<User>() {
@@ -118,9 +117,8 @@ public class ActivityLoginScreenController extends AppCompatActivity {
                 } else {
                     // Reset current user
                     if(response.code() == 401){
-                        Log.e(TAG, "Bad credentials. Rerouting to login activity.");
+                        Log.e(TAG, "Bad credentials for login");
                         ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
-                        UILoaderUtil.startLoginActivity(context);
                         return;
                     }
 

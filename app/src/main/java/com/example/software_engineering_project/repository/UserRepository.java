@@ -11,7 +11,8 @@ import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.dataservice.UserService;
 import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.entity.User;
-import com.example.software_engineering_project.entity.UserCreate;
+
+import request.UserWithPasswordRequest;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.util.UILoaderUtil;
 
@@ -145,14 +146,19 @@ public class UserRepository {
      * @param user    The UserCreate object containing user information.
      * @param context The application context for displaying toasts and handling UI updates.
      */
-    public void insertUser(UserCreate user, Context context) {
+    public void insertUser(UserWithPasswordRequest user, Context context) {
+        String email = user.getUser().getEmail();
+        String password = user.getPassword();
+
+        // Use instant does does not use
+        UserService userService = RetrofitClient.getInstanceWithCredentials(email, password).create(UserService.class);
         Call<User> call = userService.createUser(user);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if(response.isSuccessful()){
                     Log.i(TAG, "User registration successful");
-                    ToastUtil.makeToast(context.getString(R.string.registered_) + user.getFirstName(), context);
+                    ToastUtil.makeToast(context.getString(R.string.registered_) + user.getUser().getEmail(), context);
                 } else {
                     // If unauthorized/bad credentials return to login screen
                     if(response.code() == 401){
@@ -163,14 +169,14 @@ public class UserRepository {
                     }
 
                     Log.e(TAG, "Error while adding new user");
-                    ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + user.getFirstName(), context);
+                    ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + user.getUser().getEmail(), context);
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Log.e(TAG, "Network error while adding new user: " + t);
-                ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + user.getFirstName(), context);
+                ToastUtil.makeToast(context.getString(R.string.error_while_adding_) + user.getUser().getEmail(), context);
             }
         });
     }

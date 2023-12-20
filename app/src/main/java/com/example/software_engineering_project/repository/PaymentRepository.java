@@ -11,7 +11,7 @@ import com.example.software_engineering_project.dataservice.PaymentService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.entity.Payment;
-import com.example.software_engineering_project.entity.PaymentCreationData;
+import request.PaymentCreationRequest;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.util.UILoaderUtil;
 
@@ -47,7 +47,7 @@ public class PaymentRepository {
      * @param paymentData The PaymentCreationData object containing payment information.
      * @param context     The application context for displaying toasts and handling UI updates.
      */
-    public void createPayment(PaymentCreationData paymentData , Context context) {
+    public void createPayment(PaymentCreationRequest paymentData , Context context) {
         Call<Payment> call = paymentService.createPayment(paymentData);
         call.enqueue(new Callback<Payment>() {
             @Override

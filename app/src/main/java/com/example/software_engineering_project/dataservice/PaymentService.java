@@ -1,7 +1,7 @@
 package com.example.software_engineering_project.dataservice;
 
 import com.example.software_engineering_project.entity.Payment;
-import com.example.software_engineering_project.entity.PaymentCreationData;
+import request.PaymentCreationRequest;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -19,7 +19,7 @@ public interface PaymentService {
     Call<Payment> getPayment(@Path("id") UUID paymentId);
 
     @POST("payments/create-with-participations")
-    Call<Payment> createPayment(@Body PaymentCreationData payment);
+    Call<Payment> createPayment(@Body PaymentCreationRequest payment);
 
     @GET("payments/group/{group-id}")
     Call<List<Payment>> getPayments(@Path("group-id") UUID groupGroceryId);

@@ -34,7 +34,7 @@ public class RetrofitClient{
      * @param password
      * @return
      */
-    public static Retrofit getLoginInstance(String username, String password){
+    public static Retrofit getInstanceWithCredentials(String username, String password){
         OkHttpClient.Builder httpClient = getAllSslTrustingOkHttpBuilder();
 
         // Logging

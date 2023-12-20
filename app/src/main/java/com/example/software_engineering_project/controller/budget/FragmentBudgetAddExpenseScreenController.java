@@ -15,7 +15,7 @@ import androidx.lifecycle.LiveData;
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.adapter.AdapterBudgetNewExpense;
 import com.example.software_engineering_project.entity.Payment;
-import com.example.software_engineering_project.entity.PaymentCreationData;
+import request.PaymentCreationRequest;
 import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.repository.PaymentParticipationRepository;
@@ -69,7 +69,7 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
      */
     public static void handleSaveClicked() {
         Payment payment = getPaymentFromInputs();
-        PaymentCreationData requestData = new PaymentCreationData(payment);
+        PaymentCreationRequest requestData = new PaymentCreationRequest(payment);
 
         if (payment != null) {
             if(selectedUsers.size() != 0){

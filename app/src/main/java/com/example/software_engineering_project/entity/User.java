@@ -3,6 +3,7 @@ package com.example.software_engineering_project.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 import java.sql.Timestamp;
@@ -88,6 +89,20 @@ public class User {
 
     public void setActive(Boolean active) {
         isActive = active;
+    }
+
+    public User(){
+        // used for jackson
+    }
+
+    public User(String email, String username, String firstName, String lastName){
+        this.id = UUID.randomUUID();
+        this.email = email;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        long currentTimeMillis = System.currentTimeMillis();
+        this.createdAt  = new Timestamp(currentTimeMillis);
     }
 
 

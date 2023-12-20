@@ -1,7 +1,8 @@
 package com.example.software_engineering_project.dataservice;
 
 import com.example.software_engineering_project.entity.User;
-import com.example.software_engineering_project.entity.UserCreate;
+
+import request.UserWithPasswordRequest;
 
 import java.util.List;
 import java.util.Map;
@@ -24,8 +25,8 @@ public interface UserService{
     @POST("users")
     Call<User> createEntity(@Body User user);
 
-    @POST("users")
-    Call<User> createUser(@Body UserCreate user);
+    @POST("users/create-with-password")
+    Call<User> createUser(@Body UserWithPasswordRequest user);
 
     @PATCH("users/{id}")
     Call<User> partialUpdateEntity(@Path("id") UUID userId, @Body Map<String, String> updates);

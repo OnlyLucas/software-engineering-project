@@ -102,7 +102,7 @@
     <string name="deletion_failed">Löschung fehlgeschlagen</string>
     <string name="error_while_unchecking">Fehler beim Abhaken</string>
     <string name="error_while_adding_">Fehler beim Hinzufügen\u0020</string>
-    <string name="registered_">"Registriert "</string>
+    <string name="registered_">"Registrierung erfolgreich für User  "</string>
     <string name="changed_mail_successfully">Mail erfolgreich geändert</string>
     <string name="error_changing_mail">Fehler beim Ändern der E-Mail</string>
     <string name="enter_valid_username">Gültigen Benutzername eingeben</string>
