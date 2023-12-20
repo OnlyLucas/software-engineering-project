@@ -40,12 +40,14 @@ public class FragmentChangePasswordController extends Fragment {
 
 
     /**
-     * Inflates the layout for this fragment, initializes the UI elements, and adds click listeners to buttons.
+     * Called when the fragment needs to create its associated view hierarchy.
+     * Inflates the layout defined in 'fragment_change_password.xml' to create the UI for this fragment.
      *
-     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
-     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state.
-     * @return The inflated view for this fragment.
+     * @param inflater           The LayoutInflater object that is used to inflate any views in the fragment.
+     * @param container          The ViewGroup container where the fragment UI should be attached, if not null.
+     * @param savedInstanceState A Bundle object containing the fragment's previously saved state, if any.
+     * @return The root View of the inflated layout file for this fragment ('fragment_change_password.xml').
+     *         This View represents the fragment's UI and will be displayed as part of the parent activity's layout.
      */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -58,6 +60,12 @@ public class FragmentChangePasswordController extends Fragment {
 
     }
 
+    /**
+     * Adds event listeners to the 'Cancel' and 'Save' buttons within the 'Change Password' fragment UI.
+     * Defines actions to perform when these buttons are clicked.
+     * 'Cancel' button discards changes and navigates back to the settings fragment.
+     * 'Save' button triggers the process to save a new password (yet to be implemented).
+     */
     private void addButtons() {
 
         cancelChangePassword.setOnClickListener(view -> {
@@ -85,6 +93,14 @@ public class FragmentChangePasswordController extends Fragment {
 
     }
 
+    /**
+     * Replaces the current fragment with the specified fragment.
+     * Uses the FragmentManager to begin a transaction, replacing the current content
+     * (identified by R.id.contentFragmentMainScreen) with the provided fragment.
+     * Commits the transaction to apply the fragment replacement.
+     *
+     * @param fragment The fragment to be displayed in place of the current fragment.
+     */
     private void callFragment(Fragment fragment) {
 
         FragmentManager fm = requireActivity().getSupportFragmentManager();
@@ -94,6 +110,12 @@ public class FragmentChangePasswordController extends Fragment {
 
     }
 
+    /**
+     * Loads and initializes UI elements from the layout associated with the change password fragment.
+     * Retrieves references to the cancel button, confirm new password field, current password field,
+     * new password field, and save button.
+     * Sets up these UI elements to be used for further interactions and actions.
+     */
     private void loadScreenElements() {
 
         cancelChangePassword = fragmentView.findViewById(R.id.cancelChangePassword);

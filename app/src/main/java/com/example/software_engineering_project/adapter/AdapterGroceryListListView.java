@@ -35,10 +35,14 @@ public class AdapterGroceryListListView extends ArrayAdapter<GroupGrocery> {
 
 
     /**
-     * The constructor for the AdapterGroceryListListView.
+     * Constructs an AdapterGroceryListListView object.
+     * This adapter binds a List of GroupGrocery items to a ListView in the application's UI.
+     * It helps display these items within the specified layout for the grocery list list view.
      *
-     * @param context The context in which the adapter is being used.
-     * @param items   The List of GroupGrocery objects to be displayed in the adapter.
+     * @param context The context in which the adapter is being used, usually an Activity context.
+     *                It's used to access resources and system information.
+     * @param items   A List of GroupGrocery items to be displayed in the grocery list list view.
+     *                It contains the data to be adapted and shown in the ListView.
      */
     public AdapterGroceryListListView(Context context, List<GroupGrocery> items) {
 
@@ -50,15 +54,14 @@ public class AdapterGroceryListListView extends ArrayAdapter<GroupGrocery> {
 
     // The method we override to provide our own layout for each View (row) in the ListView
     /**
-     * Get the view that displays the data at the specified position in the data set.
-     *
-     * This method creates or reuses a view to represent an item in the adapter's data set. It inflates the layout
-     * 'adapter_grocery_list_list_view' if the provided convertView is null, and then loads screen elements using the loadScreenElements method. It sets the text of the number, group name TextViews, and adds listeners for the remove and unchecked buttons.
+     * This method is responsible for rendering the view for each item in the grocery list list view.
+     * It populates the ListView with the required data by binding it to the specified layout.
+     * If the convertView (a recycled view) is null, a new view is inflated and data is loaded.
      *
      * @param position    The position of the item within the adapter's data set.
-     * @param convertView The old view to reuse, if possible.
-     * @param parent      The parent that this view will eventually be attached to.
-     * @return The view corresponding to the data at the specified position.
+     * @param convertView The view representing an item in the ListView.
+     * @param parent      The parent view that this view will eventually be attached to.
+     * @return The view for the ListView item at the specified position.
      */
     @NonNull
     @Override
@@ -83,26 +86,27 @@ public class AdapterGroceryListListView extends ArrayAdapter<GroupGrocery> {
 
     }
 
+    /**
+     * Attaches click listeners to the remove and unchecked buttons for a specific item in the grocery list.
+     * The remove button removes the item from the list, and the unchecked button unchecks the item if it was previously checked.
+     *
+     * @param position The position of the item within the adapter's data set.
+     */
     private void addButtons(int position) {
 
         // Listeners for duplicating and removing an item.
         // They use the static removeItem and addItem methods created in MainActivity.
-        remove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentGroceryListController.removeItem(position);
-            }
-        });
+        remove.setOnClickListener(view -> FragmentGroceryListController.removeItem(position));
 
-        unchecked.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentGroceryListController.uncheckItem(position);
-            }
-        });
+        unchecked.setOnClickListener(view -> FragmentGroceryListController.uncheckItem(position));
 
     }
 
+    /**
+     * Finds and assigns views for various elements present in the grocery list item layout.
+     *
+     * @param convertView The view representing a single item in the grocery list.
+     */
     private void loadScreenElements(View convertView) {
 
         name = convertView.findViewById(R.id.nameGroceryList);

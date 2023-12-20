@@ -32,9 +32,11 @@ public class FragmentBudgetListController extends Fragment {
     private View fragmentView;
 
     /**
-     * Removes a payment item from the budget list at the specified position.
+     * Removes a specific payment item from the list and deletes it from the repository.
+     * The method identifies the payment at the provided position in the list of current payments
+     * and deletes it from the payment repository using the associated context.
      *
-     * @param position The position of the payment item to be removed.
+     * @param position The position of the payment item to be removed from the list.
      */
     public static void removeItem(int position) {
         Payment payment = currentPayments.getValue().get(position);
@@ -42,12 +44,14 @@ public class FragmentBudgetListController extends Fragment {
     }
 
     /**
-     * Called to have the fragment instantiate its user interface view.
+     * Called to create the view hierarchy associated with the fragment.
+     * This method initializes the UI elements and populates the list of payments.
+     * It observes changes in the current payments and updates the list accordingly.
      *
-     * @param inflater           The LayoutInflater object that can be used to inflate views.
-     * @param container          If non-null, this is the parent view that the fragment's UI will be attached to.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
-     * @return The root view for the fragment's UI.
+     * @param inflater           The LayoutInflater object that can inflate views in the fragment.
+     * @param container          The parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState A Bundle containing the saved state of the fragment (null if not available).
+     * @return The inflated view hierarchy representing the fragment UI.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,6 +71,11 @@ public class FragmentBudgetListController extends Fragment {
 
     }
 
+    /**
+     * Initializes the screen elements by finding and assigning the ListView component
+     * from the associated layout resource to the respective variable in the fragment.
+     * This method retrieves the ListView used to display budget items in the first layer.
+     */
     private void loadScreenElements() {
 
         listView = fragmentView.findViewById(R.id.budgetListFirstLayer);

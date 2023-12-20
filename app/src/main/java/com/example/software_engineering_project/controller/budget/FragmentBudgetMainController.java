@@ -34,12 +34,12 @@ public class FragmentBudgetMainController extends Fragment {
 
 
     /**
-     * Called to have the fragment instantiate its user interface view.
+     * Called to create the view hierarchy associated with this fragment.
      *
-     * @param inflater           The LayoutInflater object that can be used to inflate views.
-     * @param container          If non-null, this is the parent view that the fragment's UI will be attached to.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
-     * @return The root view for the fragment's UI.
+     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container          The parent view that this fragment's UI should be attached to.
+     * @param savedInstanceState A Bundle object containing the activity's previously saved state.
+     * @return                   The root View of the fragment's layout.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,6 +53,11 @@ public class FragmentBudgetMainController extends Fragment {
 
     }
 
+    /**
+     * Configures and assigns click listeners to buttons in the budget fragment.
+     * Determines actions to perform based on button clicks.
+     * Adjusts UI elements such as buttons and headlines accordingly.
+     */
     private void addButtons() {
         Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
 
@@ -83,14 +88,24 @@ public class FragmentBudgetMainController extends Fragment {
 
     }
 
+    /**
+     * Replaces the current fragment in the budget main content container with a new fragment.
+     *
+     * @param fragment The fragment to be replaced
+     */
     private void callFragment(Fragment fragment) {
 
         FragmentManager fm = requireActivity().getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.replace(R.id.contentFragmentBudgetMain, fragment);
         transaction.commit();
+
     }
 
+    /**
+     * Initializes and assigns view elements from the layout to their respective variables.
+     * This method should be called to load UI elements.
+     */
     private void loadScreenElements() {
 
         addExpense = fragmentView.findViewById(R.id.addExpense);
@@ -102,6 +117,13 @@ public class FragmentBudgetMainController extends Fragment {
     }
 
     //Todo rename params
+    /**
+     * Replaces the visibility and clickability of multiple ImageView buttons.
+     * @param view1 The first ImageView to be set as invisible and not clickable
+     * @param view2 The second ImageView to be set as visible and clickable
+     * @param view3 The third ImageView to be set as invisible and not clickable
+     * @param view4 The fourth ImageView to be set as visible and clickable
+     */
     private void replaceButtons(ImageView view1, ImageView view2, ImageView view3, ImageView view4) {
 
         view1.setVisibility(View.INVISIBLE);

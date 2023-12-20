@@ -43,10 +43,10 @@ public class AdapterCleaningPlanListDetailView extends ArrayAdapter<Cleaning> {
     // @param items: The list of items in our Grocery List
 
     /**
-     * The constructor for the AdapterCleaningPlanListDetailView.
+     * Constructs an Adapter for a Cleaning Plan List Detail View.
      *
-     * @param context The context in which the adapter is being used.
-     * @param items   The List of Cleaning objects to be displayed in the adapter.
+     * @param context The context of the application.
+     * @param items   The list of Cleaning objects to be displayed in the adapter.
      */
     public AdapterCleaningPlanListDetailView(Context context, List<Cleaning> items) {
         super(context, R.layout.adapter_cleaning_plan_list_detail_view, items);
@@ -122,6 +122,11 @@ public class AdapterCleaningPlanListDetailView extends ArrayAdapter<Cleaning> {
 
     }
 
+    /**
+     * Initializes the UI elements within the provided view for displaying cleaning plan details.
+     *
+     * @param convertView The view in which the UI elements are to be initialized.
+     */
     private void loadScreenElements(View convertView) {
 
         date = convertView.findViewById(R.id.cleaningDate);

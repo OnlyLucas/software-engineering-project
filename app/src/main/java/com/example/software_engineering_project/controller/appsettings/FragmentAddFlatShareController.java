@@ -32,7 +32,14 @@ public class FragmentAddFlatShareController extends Fragment {
     private EditText descriptionAddFlatShare, nameAddFlatShare;
     private View fragmentView;
 
-
+    /**
+     * Called to create the view hierarchy associated with the fragment.
+     *
+     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container          The parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state.
+     * @return The View for the fragment's UI, or null if the fragment does not provide a UI.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -47,6 +54,11 @@ public class FragmentAddFlatShareController extends Fragment {
 
     }
 
+    /**
+     * Sets up button click listeners for the cancel and save actions in the Add Flat Share screen.
+     * - The cancel button discards changes and navigates back to the Manage Flat Share screen.
+     * - The save button checks for existing group membership and navigates accordingly.
+     */
     private void addButtons() {
 
         cancelAddFlatShare.setOnClickListener(view -> {
@@ -69,6 +81,11 @@ public class FragmentAddFlatShareController extends Fragment {
 
     }
 
+    /**
+     * Validates the input fields for adding a new flat share.
+     * - Checks the length and content of the name and description fields.
+     * - Displays toast messages for invalid input or performs the insertion of a new group if inputs are valid.
+     */
     private void checkInputs() {
         String name = nameAddFlatShare.getText().toString();
         String description = descriptionAddFlatShare.getText().toString();
@@ -97,6 +114,11 @@ public class FragmentAddFlatShareController extends Fragment {
 
     }
 
+    /**
+     * Replaces the current fragment with the provided fragment in the Main Screen container.
+     *
+     * @param fragment The fragment to be displayed in the Main Screen container.
+     */
     private void callFragment(Fragment fragment) {
 
         FragmentManager fm = requireActivity().getSupportFragmentManager();
@@ -106,6 +128,10 @@ public class FragmentAddFlatShareController extends Fragment {
 
     }
 
+    /**
+     * Initializes UI elements by finding and assigning views from the inflated layout.
+     * Specifically, it initializes cancel, description, name, and save buttons for adding a flat share.
+     */
     private void loadScreenElements() {
 
         cancelAddFlatShare = fragmentView.findViewById(R.id.cancelAddFlatShare);

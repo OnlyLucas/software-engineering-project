@@ -35,14 +35,14 @@ public class AdapterManageFlatShareListView extends ArrayAdapter<User> {
     private TextView name, number;
 
 
-    // The ListViewAdapter Constructor
-    // @param context: the Context from the MainActivity
-    // @param items: The list of items in our Grocery List
     /**
-     * The constructor for the AdapterManageFlatShareListView.
+     * Custom adapter for managing the flat share user list view.
      *
-     * @param context The context in which the adapter is being used.
-     * @param items   The List of User objects to be displayed in the adapter.
+     * This adapter handles the population of a user list within the context of managing a flat share.
+     * It inflates a specific layout for each item in the list and binds the corresponding data to the views.
+     *
+     * @param context The context from which the adapter is created.
+     * @param items   The list of users to be displayed in the adapter.
      */
     public AdapterManageFlatShareListView(Context context, List<User> items) {
 
@@ -54,15 +54,15 @@ public class AdapterManageFlatShareListView extends ArrayAdapter<User> {
 
     // The method we override to provide our own layout for each View (row) in the ListView
     /**
-     * Get the view that displays the data at the specified position in the data set.
+     * Get a View that displays the data at the specified position in the data set.
      *
-     * This method creates or reuses a view to represent an item in the adapter's data set. It inflates the layout
-     * 'adapter_manage_flat_share_list_view' if the provided convertView is null, and then loads screen elements using the loadScreenElements method. It sets the text of the number, user name TextViews, and adds a listener for the remove button.
+     * This method is responsible for generating a View to represent an item in the ListView at a specific position.
+     * It inflates the layout defined for managing the flat share user list and binds data to its views.
      *
      * @param position    The position of the item within the adapter's data set.
      * @param convertView The old view to reuse, if possible.
-     * @param parent      The parent that this view will eventually be attached to.
-     * @return The view corresponding to the data at the specified position.
+     * @param parent      The parent ViewGroup that this view will eventually be attached to.
+     * @return The View corresponding to the data at the specified position.
      */
     @NonNull
     @Override
@@ -86,20 +86,29 @@ public class AdapterManageFlatShareListView extends ArrayAdapter<User> {
 
     }
 
+    /**
+     * Sets click listeners for various buttons in the item view associated with the adapter.
+     * The buttons enable actions like removing or duplicating an item.
+     *
+     * @param position The position of the item within the adapter's data set.
+     */
     private void addButtons(int position) {
 
         // Listeners for duplicating and removing an item.
         // They use the static removeItem and addItem methods created in MainActivity.
-        remove.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentDialogDeleteFlatShareMember dialog = new FragmentDialogDeleteFlatShareMember(position);
-                dialog.show(((FragmentActivity) context).getSupportFragmentManager(), "DeleteFlatShareMember");
-            }
+        remove.setOnClickListener(view -> {
+            FragmentDialogDeleteFlatShareMember dialog = new FragmentDialogDeleteFlatShareMember(position);
+            dialog.show(((FragmentActivity) context).getSupportFragmentManager(), "DeleteFlatShareMember");
         });
 
     }
 
+    /**
+     * Loads and initializes UI elements from the item view associated with the adapter.
+     * Finds and assigns references to the name, number, and remove button views.
+     *
+     * @param convertView The view corresponding to a single item within the adapter's data set.
+     */
     private void loadScreenElements(View convertView) {
 
         name = convertView.findViewById(R.id.nameManageFlatShare);

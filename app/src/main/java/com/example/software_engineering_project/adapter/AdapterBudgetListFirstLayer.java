@@ -39,10 +39,12 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
     private TextView expenseAmount, expenseDate, expenseDescription, expensePayer;
 
     /**
-     * Creates a new AdapterBudgetListFirstLayer.
+     * Adapter for managing the first layer of the budget list view.
      *
-     * @param context The context in which the adapter is being used.
-     * @param items   The List containing payments to be displayed in the first layer.
+     * This adapter handles the initial layer of the budget list view by binding Payment items to the view.
+     *
+     * @param context The context in which the adapter is used.
+     * @param items   List of Payment items to be displayed in the adapter.
      */
     public AdapterBudgetListFirstLayer(Context context, List<Payment> items) {
 
@@ -53,12 +55,12 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
     }
 
     /**
-     * Get the view that displays the data at the specified position in the data set.
+     * Get a View that displays the data at the specified position in the data set.
      *
      * @param position    The position of the item within the adapter's data set.
      * @param convertView The old view to reuse, if possible.
      * @param parent      The parent that this view will eventually be attached to.
-     * @return The view corresponding to the data at the specified position.
+     * @return A View corresponding to the data at the specified position.
      */
     @NonNull
     @Override
@@ -103,6 +105,12 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
         return convertView;
 
     }
+
+    /**
+     * Adds functionality to buttons in the view.
+     *
+     * @param position The position of the item.
+     */
     private void addButtons(int position) {
         removeExpense.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,6 +121,11 @@ public class AdapterBudgetListFirstLayer extends ArrayAdapter<Payment> {
 
     }
 
+    /**
+     * Loads various screen elements from the given view.
+     *
+     * @param convertView The view containing the screen elements.
+     */
     private void loadScreenElements(View convertView) {
 
         expenseAmount = convertView.findViewById(R.id.expenseAmount);

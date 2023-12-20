@@ -43,12 +43,13 @@ public class FragmentChangeMailController extends Fragment {
 
 
     /**
-     * Inflates the layout for this fragment, initializes the UI elements, and adds click listeners to buttons.
+     * Creates and inflates the view hierarchy associated with the Change Mail fragment.
+     * Initializes UI elements, such as buttons and text fields, and sets up their respective listeners.
      *
-     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
-     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state.
-     * @return The inflated view for this fragment.
+     * @param inflater           The LayoutInflater object that can inflate any views in the fragment.
+     * @param container          The parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState A Bundle object containing the fragment's previously saved state, if any.
+     * @return The root View of the fragment layout.
      */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = requireActivity();
@@ -60,6 +61,11 @@ public class FragmentChangeMailController extends Fragment {
         return fragmentView;
     }
 
+    /**
+     * Sets up listeners for the cancel and save buttons in the Change Mail fragment.
+     * Performs actions when the buttons are clicked, such as discarding changes or saving a new email.
+     * Calls appropriate methods based on button clicks and displays toast messages accordingly.
+     */
     private void addButtons() {
 
         cancelChangeMail.setOnClickListener(view -> {
@@ -77,6 +83,11 @@ public class FragmentChangeMailController extends Fragment {
 
     }
 
+    /**
+     * Replaces the current fragment with the provided fragment in the activity's fragment container.
+     *
+     * @param fragment The fragment to be displayed in place of the current fragment.
+     */
     private void callFragment(Fragment fragment) {
 
         FragmentManager fm = requireActivity().getSupportFragmentManager();
@@ -87,7 +98,9 @@ public class FragmentChangeMailController extends Fragment {
     }
 
     /**
-     * Checks the validity of the email change and updates the user's email if conditions are met.
+     * Checks and updates the user's email address based on the provided input.
+     * Verifies if the current email matches the user's email and if the new email matches the confirmation.
+     * Updates the user's email if the conditions are met.
      */
     private void checkMailChange() {
 
@@ -112,6 +125,10 @@ public class FragmentChangeMailController extends Fragment {
 
     }
 
+    /**
+     * Initializes and loads the screen elements for changing the email.
+     * Finds and assigns views by their IDs from the layout resource file.
+     */
     private void loadScreenElements() {
 
         cancelChangeMail = fragmentView.findViewById(R.id.cancelChangeMail);
