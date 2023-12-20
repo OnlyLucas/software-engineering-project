@@ -14,6 +14,7 @@ import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.action.ViewActions;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.TestUtils;
 import com.example.software_engineering_project.controller.ActivityLoginScreenController;
 import com.example.software_engineering_project.controller.ActivityMainScreenController;
 
@@ -28,29 +29,13 @@ public class FragmentGroceryListHistoryControllerTest {
 
     @Before
     public void launchFragment() {
+
         // Launch the activity
-        ActivityScenario<ActivityLoginScreenController> scenarioLogin = ActivityScenario.launch(ActivityLoginScreenController.class);
+        TestUtils.appLogin();
 
-        Espresso.onView(withId(R.id.enterLoginEmail)).perform(ViewActions.typeText("jane.doe@example.com"), ViewActions.closeSoftKeyboard());
-        Espresso.onView(withId(R.id.enterLoginPassword)).perform(ViewActions.typeText("password2"), ViewActions.closeSoftKeyboard());
-
-        Espresso.onView(withId(R.id.loginButton)).perform(ViewActions.click());
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        ActivityScenario<ActivityMainScreenController> scenario = ActivityScenario.launch(ActivityMainScreenController.class);
-
-        scenario.onActivity(activity -> {
-            Fragment fragment = new FragmentGroceryListController();
-            FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.contentFragmentMainScreen, fragment); // replace with your fragment container ID
-            transaction.commit();
-        });
-
+        //Start the fragment
+        FragmentGroceryListController fragmentGroceryListController = new FragmentGroceryListController();
+        TestUtils.launchFragment(ActivityMainScreenController.class, fragmentGroceryListController, R.id.contentFragmentMainScreen);
 
     }
 

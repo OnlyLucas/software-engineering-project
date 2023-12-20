@@ -1,20 +1,14 @@
-package com.example.software_engineering_project.controller;
+package com.example.software_engineering_project.controller.cleanings;
 
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static androidx.test.espresso.matcher.ViewMatchers.withTagValue;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
-
-import static java.util.EnumSet.allOf;
-
-import android.view.View;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -22,27 +16,21 @@ import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
-import androidx.test.espresso.contrib.PickerActions;
-import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.espresso.matcher.RootMatchers;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.controller.cleanings.FragmentCleaningPlanAddController;
-import com.example.software_engineering_project.controller.cleanings.FragmentCleaningPlanController;
-import com.google.android.material.datepicker.MaterialDatePicker;
+import com.example.software_engineering_project.TestUtils;
+import com.example.software_engineering_project.controller.ActivityLoginScreenController;
+import com.example.software_engineering_project.controller.ActivityMainScreenController;
 
 import org.hamcrest.CoreMatchers;
-import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-
-import java.util.Calendar;
-import java.util.Date;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(AndroidJUnit4.class)
@@ -50,45 +38,25 @@ public class FragmentCleaningPlanAddControllerTest {
 
 
     @Before
-    public void launchFragment() {
+    public void setUp() {
 
         // Launch the activity
-        ActivityScenario<ActivityLoginScreenController> scenarioLogin = ActivityScenario.launch(ActivityLoginScreenController.class);
+        TestUtils.appLogin();
 
-        Espresso.onView(withId(R.id.enterLoginEmail)).perform(ViewActions.typeText("jane.doe@example.com"), ViewActions.closeSoftKeyboard());
-        Espresso.onView(withId(R.id.enterLoginPassword)).perform(ViewActions.typeText("password2"), ViewActions.closeSoftKeyboard());
+        //Start the fragment
+        FragmentCleaningPlanController fragment = new FragmentCleaningPlanController();
+        TestUtils.launchFragment(ActivityMainScreenController.class, fragment, R.id.contentFragmentMainScreen);
 
-        Espresso.onView(withId(R.id.loginButton)).perform(ViewActions.click());
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        ActivityScenario<ActivityMainScreenController> scenario = ActivityScenario.launch(ActivityMainScreenController.class);
-
-        // Use FragmentManager to add your fragment
-        scenario.onActivity(activity -> {
-            Fragment fragment = new FragmentCleaningPlanController();
-            FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-            transaction.add(R.id.contentFragmentMainScreen, fragment); // replace with your fragment container ID
-            transaction.commit();
-        });
-        // Use FragmentManager to add your fragment
         Espresso.onView(withId(R.id.addCleaningPlan)).perform(ViewActions.click());
 
     }
+
 
     @Test
     public void testAFragmentLaunch() {
 
         // Wait for some time to ensure the saveExpense button is visible
-        try {
-            Thread.sleep(2000); // You can adjust the waiting time as needed
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        TestUtils.waitingTime();
 
         // Check if the fragment is displayed
         Espresso.onView(ViewMatchers.withId(R.id.contentFragmentCleaningPlan)).check(ViewAssertions.matches(hasDescendant(withTagValue(org.hamcrest.Matchers.is("fragment_cleaning_plan_add")))));
@@ -102,12 +70,8 @@ public class FragmentCleaningPlanAddControllerTest {
         // Klicke auf die Schaltfläche zum Öffnen des DateRangePickers
         Espresso.onView(ViewMatchers.withId(R.id.datePickerCleaningPlan)).perform(ViewActions.click());
 
-        // Warte, bis der DateRangePicker angezeigt wird (hier kannst du eine angemessene Wartezeit festlegen)
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        // Warte, bis der DateRangePicker angezeigt wird
+        TestUtils.waitingTime();
 
         // Klicke auf das Datum im Material DateRangePicker anhand seines Texts
         // Hier klicken wir auf das Datum "7. Februar 2024" als Beispiel
@@ -152,11 +116,7 @@ public class FragmentCleaningPlanAddControllerTest {
         testCSpinnerSelection();
 
         // Wait for some time to ensure the saveExpense button is visible
-        try {
-            Thread.sleep(1000); // You can adjust the waiting time as needed
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        TestUtils.waitingTime();
 
         // Überprüft, ob der "Save CleaningPlan" Button sichtbar und klickbar ist
         Espresso.onView(withId(R.id.saveCleaningPlan)).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));

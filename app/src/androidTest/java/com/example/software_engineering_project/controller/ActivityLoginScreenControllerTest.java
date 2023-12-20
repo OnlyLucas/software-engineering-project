@@ -12,6 +12,7 @@ import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.TestUtils;
 
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
@@ -37,11 +38,7 @@ public class ActivityLoginScreenControllerTest {
         // Klick auf den Login-Button
         Espresso.onView(withId(R.id.loginButton)).perform(ViewActions.click());
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        TestUtils.waitingTime();
 
         //ActivityScenario<ActivityLoginScreenController> scenarioLogin = ActivityScenario.launch(ActivityLoginScreenController.class);
 

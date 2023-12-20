@@ -13,8 +13,10 @@ import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.TestUtils;
 import com.example.software_engineering_project.controller.ActivityLoginScreenController;
 import com.example.software_engineering_project.controller.ActivityMainScreenController;
+import com.example.software_engineering_project.controller.cleanings.FragmentCleaningPlanController;
 
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -29,29 +31,14 @@ public class FragmentGroceryListControllerTest {
 
     @Before
     public void launchFragment() {
+
         // Launch the activity
-        ActivityScenario<ActivityLoginScreenController> scenarioLogin = ActivityScenario.launch(ActivityLoginScreenController.class);
+        TestUtils.appLogin();
 
-        Espresso.onView(withId(R.id.enterLoginEmail)).perform(ViewActions.typeText("jane.doe@example.com"), ViewActions.closeSoftKeyboard());
-        Espresso.onView(withId(R.id.enterLoginPassword)).perform(ViewActions.typeText("password2"), ViewActions.closeSoftKeyboard());
+        //Start the fragment
+        FragmentGroceryListController fragmentGroceryListController = new FragmentGroceryListController();
+        TestUtils.launchFragment(ActivityMainScreenController.class, fragmentGroceryListController, R.id.contentFragmentMainScreen);
 
-        Espresso.onView(withId(R.id.loginButton)).perform(ViewActions.click());
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        ActivityScenario<ActivityMainScreenController> scenario = ActivityScenario.launch(ActivityMainScreenController.class);
-
-        // Use FragmentManager to add your fragment
-        scenario.onActivity(activity -> {
-            Fragment fragment = new FragmentGroceryListController();
-            FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.contentFragmentMainScreen, fragment); // replace with your fragment container ID
-            transaction.commit();
-        });
     }
 
     @Test
@@ -61,11 +48,7 @@ public class FragmentGroceryListControllerTest {
                 .perform(ViewActions.typeText("TestItem"), ViewActions.closeSoftKeyboard());
         Espresso.onView(withId(R.id.enter)).perform(ViewActions.click());
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        TestUtils.waitingTime();
 
         // Warte auf die Anzeige des hinzugefügten Elements in der Liste
         Espresso.onView(withText("TestItem")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
@@ -76,11 +59,7 @@ public class FragmentGroceryListControllerTest {
     public void testRemoveItemFromGroceryList() {
         // Voraussetzung: Es gibt mindestens ein Element in der Liste
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        TestUtils.waitingTime();
 
         // Klicke lange auf das erste Element der Liste, um es zu entfernen
         Espresso.onData(Matchers.anything()).inAdapterView(withId(R.id.groceryList)).atPosition(0)
@@ -94,11 +73,7 @@ public class FragmentGroceryListControllerTest {
     public void testClickOnGroceryListItem() {
         // Voraussetzung: Es gibt mindestens ein Element in der Liste
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        TestUtils.waitingTime();
 
         // Klicke auf das erste Element der Liste
         Espresso.onData(Matchers.anything()).inAdapterView(withId(R.id.groceryList)).atPosition(0)
@@ -106,7 +81,7 @@ public class FragmentGroceryListControllerTest {
 
         // Überprüfe, ob der korrekte Artikelname in einem Toast angezeigt wird
         // (Ersetze "expectedName" durch den erwarteten Namen)
-        //Espresso.onView(withText("expectedName")).inRoot(withDecorView(not(is(getActivity().getWindow().getDecorView()))))
+        //TODO Espresso.onView(withText("expectedName")).inRoot(withDecorView(not(is(getActivity().getWindow().getDecorView()))))
         //      .check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
     }
 }

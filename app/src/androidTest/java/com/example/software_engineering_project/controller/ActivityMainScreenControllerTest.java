@@ -16,6 +16,7 @@ import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.TestUtils;
 import com.example.software_engineering_project.controller.groceries.FragmentGroceryListController;
 
 import org.junit.Before;
@@ -32,28 +33,10 @@ public class ActivityMainScreenControllerTest {
     public IntentsTestRule<ActivityMainScreenController> mActivityRule = new IntentsTestRule<>(ActivityMainScreenController.class);
 
     @Before
-    public void launchFragment() {
-        ActivityScenario<ActivityLoginScreenController> scenarioLogin = ActivityScenario.launch(ActivityLoginScreenController.class);
-        Espresso.onView(withId(R.id.enterLoginEmail)).perform(ViewActions.typeText("jane.doe@example.com"), ViewActions.closeSoftKeyboard());
-        Espresso.onView(withId(R.id.enterLoginPassword)).perform(ViewActions.typeText("password2"), ViewActions.closeSoftKeyboard());
+    public void setUp() {
 
-        Espresso.onView(withId(R.id.loginButton)).perform(ViewActions.click());
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        ActivityScenario<ActivityMainScreenController> scenario = ActivityScenario.launch(ActivityMainScreenController.class);
-
-        // Use FragmentManager to add your fragment
-        scenario.onActivity(activity -> {
-            Fragment fragment = new FragmentGroceryListController();
-            FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.contentFragmentMainScreen, fragment); // replace with your fragment container ID
-            transaction.commit();
-        });
+        // Launch the activity
+        TestUtils.appLogin();
 
     }
 
@@ -105,5 +88,4 @@ public class ActivityMainScreenControllerTest {
 
     }
 
-    // Weitere Tests und Assertions können hier hinzugefügt werden, je nach den Anforderungen der Anwendung
 }

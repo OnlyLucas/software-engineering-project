@@ -13,8 +13,10 @@ import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.software_engineering_project.R;
+import com.example.software_engineering_project.TestUtils;
 import com.example.software_engineering_project.controller.ActivityLoginScreenController;
 import com.example.software_engineering_project.controller.ActivityMainScreenController;
+import com.example.software_engineering_project.controller.appsettings.FragmentSettingsController;
 import com.example.software_engineering_project.controller.budget.FragmentBudgetAddExpenseScreenController;
 import com.example.software_engineering_project.controller.budget.FragmentBudgetMainController;
 
@@ -46,29 +48,11 @@ public class FragmentBudgetAddExpenseScreenControllerTest {
     public void launchFragment() {
 
         // Launch the activity
-        ActivityScenario<ActivityLoginScreenController> scenarioLogin = ActivityScenario.launch(ActivityLoginScreenController.class);
+        TestUtils.appLogin();
 
-        Espresso.onView(withId(R.id.enterLoginEmail)).perform(ViewActions.typeText("jane.doe@example.com"), ViewActions.closeSoftKeyboard());
-        Espresso.onView(withId(R.id.enterLoginPassword)).perform(ViewActions.typeText("password2"), ViewActions.closeSoftKeyboard());
-
-        Espresso.onView(withId(R.id.loginButton)).perform(ViewActions.click());
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-
-        ActivityScenario<ActivityMainScreenController> scenario = ActivityScenario.launch(ActivityMainScreenController.class);
-
-        // Use FragmentManager to add your fragment
-        scenario.onActivity(activity -> {
-            Fragment fragment = new FragmentBudgetMainController();
-            FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.contentFragmentMainScreen, fragment); // replace with your fragment container ID
-            transaction.commit();
-        });
+        //Start the fragment
+        FragmentBudgetMainController fragmentBudgetMainController = new FragmentBudgetMainController();
+        TestUtils.launchFragment(ActivityMainScreenController.class, fragmentBudgetMainController, R.id.contentFragmentMainScreen);
 
         Espresso.onView(withId(R.id.addExpense)).perform(ViewActions.click());
 
@@ -87,21 +71,12 @@ public class FragmentBudgetAddExpenseScreenControllerTest {
         // Perform any actions related to selecting users (if applicable)
 
         // Wait for some time to ensure the saveExpense button is visible
-
-        try {
-            Thread.sleep(1000); // You can adjust the waiting time as needed
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        TestUtils.waitingTime();
 
         // Click on the save button and check if the save button is visible
         Espresso.onView(ViewMatchers.withId(R.id.saveExpense))
                 .perform(ViewActions.click())
                 .check(ViewAssertions.matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
-
-
-        // Verify that the paymentRepository.createPayment method is called
-        // Note: You can check if a specific intent is sent instead of mocking
 
         // Überprüfe, ob die ActivityLoginScreenController gestartet wird
         Intents.intending(IntentMatchers.hasComponent(ActivityMainScreenController.class.getName()));
