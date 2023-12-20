@@ -9,7 +9,9 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.software_engineering_project.R;
-import com.example.software_engineering_project.entity.UserCreate;
+import com.example.software_engineering_project.entity.User;
+
+import request.UserWithPasswordRequest;
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.repository.UserRepository;
 
@@ -31,13 +33,12 @@ public class ActivityRegisterScreenController extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        context = getApplicationContext();
         userRepository = new UserRepository(context);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_screen);
-        context = getApplicationContext();
         loadScreenElements();
         addButtons();
-
     }
 
     private void addButtons() {
@@ -49,9 +50,10 @@ public class ActivityRegisterScreenController extends AppCompatActivity {
 
         //Todo save new user data
         registerButtonRegister.setOnClickListener(view -> {
-            Intent loginScreen = new Intent(ActivityRegisterScreenController.this, ActivityLoginScreenController.class);
-            startActivity(loginScreen);
-            checkInputs();
+            if(checkInputsAndRegister()){
+                Intent loginScreen = new Intent(ActivityRegisterScreenController.this, ActivityLoginScreenController.class);
+                startActivity(loginScreen);
+            }
         });
 
     }
@@ -60,10 +62,10 @@ public class ActivityRegisterScreenController extends AppCompatActivity {
      * Checks the user inputs for validity and creates a new user if the inputs are valid.
      * Displays appropriate toast messages for invalid inputs.
      */
-    private void checkInputs() {
+    private boolean checkInputsAndRegister() {
         String firstName = firstNameRegister.getText().toString();
         String lastName = surnameRegister.getText().toString();
-        String eMail = emailRegister.getText().toString();
+        String email = emailRegister.getText().toString();
         String password = passwordRegister.getText().toString();
         String confirmPassword = confirmPasswordRegister.getText().toString();
         String username = usernameRegister.getText().toString();
@@ -71,65 +73,67 @@ public class ActivityRegisterScreenController extends AppCompatActivity {
         // Check if firstName contains only letters
         if (!isValidName(firstName) || firstName.length() == 0) {
             ToastUtil.makeToast(getString(R.string.enter_valid_first_name), context);
-            return;
+            return false;
         }
 
         if (firstName.length() > 20) {
             ToastUtil.makeToast(getString(R.string.enter_shorter_first_name), context);
-            return;
+            return false;
         }
 
         // Check if lastName contains only letters
         if (!isValidName(lastName) || lastName.length() == 0) {
             ToastUtil.makeToast(getString(R.string.enter_valid_last_name), context);
-            return;
+            return false;
         }
 
         if (lastName.length() > 20) {
             ToastUtil.makeToast(getString(R.string.enter_shorter_last_name), context);
-            return;
+            return false;
         }
 
         if (username.length() == 0) {
             ToastUtil.makeToast(getString(R.string.enter_valid_username), context);
-            return;
+            return false;
         }
 
         if (username.length() > 15) {
             ToastUtil.makeToast(getString(R.string.enter_shorter_username), context);
-            return;
+            return false;
         }
 
         // Check if eMail has a standard email format
-        if (!isValidEmail(eMail) || eMail.length() > 30) {
+        if (!isValidEmail(email) || email.length() > 30) {
             ToastUtil.makeToast(getString(R.string.enter_valid_mail), context);
-            return;
+            return false;
         }
 
         if (!password.equals(confirmPassword)) {
             ToastUtil.makeToast(getString(R.string.passwords_not_matching), context);
-            return;
+            return false;
         }
 
         if (password.length() == 0 || confirmPassword.length() == 0) {
             ToastUtil.makeToast(getString(R.string.enter_password), context);
-            return;
+            return false;
         }
 
         if (password.length() > 25 || confirmPassword.length() > 25) {
             ToastUtil.makeToast(getString(R.string.enter_shorter_password), context);
-            return;
+            return false;
         }
 
-        // TODO create new User
-        UserCreate user = new UserCreate(firstName, lastName, username, eMail, password);
+
+        User newUser = new User(email, username, firstName, lastName);
+        newUser.setPassword(password);
+
+        UserWithPasswordRequest user = new UserWithPasswordRequest(newUser, password);
         addItem(user);
 
-        ToastUtil.makeToast(getString(R.string.please_login_with_your_created_credentials), context);
-
+        return true;
     }
 
-    private void addItem(UserCreate user) {
+    private void addItem(UserWithPasswordRequest user) {
         userRepository.insertUser(user, context);
     }
 

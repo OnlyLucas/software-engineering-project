@@ -1,14 +1,14 @@
 package com.example.software_engineering_project.interceptor;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-
 import com.example.software_engineering_project.entity.User;
 import com.example.software_engineering_project.repository.AppStateRepository;
 
 import java.io.IOException;
-
 import okhttp3.Credentials;
 import okhttp3.Interceptor;
 import okhttp3.Request;

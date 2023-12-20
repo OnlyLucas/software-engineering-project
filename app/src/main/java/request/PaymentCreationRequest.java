@@ -1,5 +1,6 @@
-package com.example.software_engineering_project.entity;
+package request;
 
+import com.example.software_engineering_project.entity.Payment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.math.BigDecimal;
@@ -11,7 +12,7 @@ import java.util.UUID;
 /**
  * A data class representing the information required for creating a new payment.
  */
-public class PaymentCreationData {
+public class PaymentCreationRequest {
     private Payment payment;
     private Map<UUID, BigDecimal> userParticipations;
 
@@ -21,7 +22,7 @@ public class PaymentCreationData {
      *
      * @param payment The payment associated with this creation data.
      */
-    public PaymentCreationData(Payment payment){
+    public PaymentCreationRequest(Payment payment){
         this.payment = payment;
         userParticipations = new HashMap();
     }
