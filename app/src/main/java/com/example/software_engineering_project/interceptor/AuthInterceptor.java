@@ -23,6 +23,13 @@ public class AuthInterceptor implements Interceptor {
 
     private final String TAG = "authorization_interceptor";
 
+    /**
+     * Intercepts the outgoing request and adds Authorization header based on the user credentials.
+     *
+     * @param chain The interceptor chain.
+     * @return The response after processing the intercepted request.
+     * @throws IOException If an I/O error occurs during the processing of the request.
+     */
     @NonNull
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {

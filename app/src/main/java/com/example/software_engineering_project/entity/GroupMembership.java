@@ -22,6 +22,11 @@ public class GroupMembership {
         // default constructor
     }
 
+    /**
+     * Parameterized constructor for creating a GroupMembership instance with a specified user.
+     *
+     * @param user The user associated with the group membership.
+     */
     public GroupMembership(User user) {
 
         this.id = UUID.randomUUID();
@@ -32,6 +37,12 @@ public class GroupMembership {
 
     }
 
+    /**
+     * Parameterized constructor for creating a GroupMembership instance with specified user and group.
+     *
+     * @param user  The user associated with the group membership.
+     * @param group The group associated with the membership.
+     */
     public GroupMembership(User user, Group group) {
         this.id = UUID.randomUUID();
         this.user = user;

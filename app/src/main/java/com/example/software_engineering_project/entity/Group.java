@@ -8,7 +8,15 @@ import java.util.Objects;
 import java.util.UUID;
 
 /**
- * Represents a group entity with information such as group name, description, creator, and creation timestamp.
+ * The Group class represents a group entity with properties such as ID, name, description,
+ * creator, and creation timestamp.
+ *
+ * Responsibilities:
+ * - Model a group entity.
+ * - Provide methods for accessing and modifying group properties.
+ * - Implement equals, hashCode, and toString methods for object comparison and representation.
+ *
+ * Note: The class includes annotations for JSON formatting.
  */
 public class Group {
     private UUID id;
@@ -18,10 +26,19 @@ public class Group {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private Timestamp createdAt;
 
+    /**
+     * Default constructor for the Group class.
+     */
     public Group() {
         // default constructor
     }
 
+    /**
+     * Parameterized constructor for creating a Group instance with specified name and description.
+     *
+     * @param name        The name of the group.
+     * @param description The description of the group.
+     */
     public Group(String name, String description) {
 
         this.id = UUID.randomUUID();

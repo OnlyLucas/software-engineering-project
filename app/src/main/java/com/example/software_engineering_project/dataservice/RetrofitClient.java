@@ -19,6 +19,21 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
+/**
+ * The RetrofitClient class provides static methods to obtain instances of the Retrofit library
+ * for making HTTP requests to the Flat Fusion backend. It includes methods for creating instances
+ * with and without authentication, as well as a special instance for login with direct credentials.
+ * Additionally, it contains a method for obtaining an OkHttpClient.Builder that trusts all SSL certificates
+ * for development and testing purposes.
+ *
+ * Responsibilities:
+ * - Create a Retrofit instance for various use cases.
+ * - Configure OkHttpClient for handling HTTP requests.
+ * - Allow trusting all SSL certificates for development/testing.
+ *
+ * Note: The use of trusting all SSL certificates is recommended only for development and testing,
+ * and it should be replaced with proper SSL certificates in a production environment.
+ */
 public class RetrofitClient {
     private static Retrofit retrofit = null;
     private static final String BASE_URL = "https://10.0.2.2:1337/v1/";
@@ -57,6 +72,11 @@ public class RetrofitClient {
         return retrofit;
     }
 
+    /**
+     * Returns a Retrofit instance configured without authentication.
+     *
+     * @return Retrofit An instance of Retrofit configured without authentication.
+     */
     public static Retrofit getInstanceWithoutAuth(){
         OkHttpClient.Builder httpClient = getAllSslTrustingOkHttpBuilder();
 
@@ -75,6 +95,11 @@ public class RetrofitClient {
         return retrofit;
     }
 
+    /**
+     * Returns a singleton Retrofit instance configured with authentication.
+     *
+     * @return Retrofit A singleton instance of Retrofit configured with authentication.
+     */
     public static synchronized Retrofit getInstance() {
 
         if (retrofit == null) {
