@@ -93,48 +93,12 @@ public class UserRESTController extends RESTController<UserEntity>{
         }
     }
 
-    //TODO Add Post Mapping
-//    @Transactional
-//    @PostMapping
-//    public ResponseEntity<UserEntity> create(@RequestBody UserCreateEntity createUserDTO) {
-//
-//        // Convert the saved user entity to UserResponseDTO and return it in the response
-//        UserEntity userResponseDTO = convertCreateUserDTOToEntity(createUserDTO);
-//
-//        // Save the new user entity to the repository
-//        repository.save(userResponseDTO);
-//
-//        return new ResponseEntity<>(userResponseDTO, HttpStatus.CREATED);
-//    }
-
-    // Helper methods to convert DTOs to entities and vice versa
-    private UserEntity convertCreateUserDTOToEntity(UserCreateEntity createUser) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setId(UUID.randomUUID());
-        userEntity.setEmail(createUser.getEmail());
-        userEntity.setFirstName(createUser.getFirstName());
-        userEntity.setLastName(createUser.getLastName());
-        userEntity.setCreatedAt(createUser.getCreatedAt());
-
-        // Set the password securely using a strong hashing algorithm
-        String hashedPassword = hashPassword(createUser.getPassword());
-        userEntity.setPassword(hashedPassword);
-
-        return userEntity;
-    }
-
-    // Placeholder for password hashing logic
-    private String hashPassword(String plainTextPassword) {
-        return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
-    }
-
     /***
      *  This method creates a UserEntity from the entity given in the https request body.
      *  The password of the user is encrypted with a @{@link PasswordEncoder} before being saved to the db.
      * @param entity {@link UserWithPasswordRequest} from the http body.
      * @return The created UserEntity as a http response.
      */
-
     @PostMapping("/create-with-password")
     public ResponseEntity<UserEntity> createWithPassword(@RequestBody UserWithPasswordRequest entity) {
 
@@ -166,7 +130,6 @@ public class UserRESTController extends RESTController<UserEntity>{
 
         return new ResponseEntity<>(createdEntity, HttpStatus.CREATED);
     }
-
 
     /**
      *  // This default endpoint should not be used in this class and is therefore overridden.
