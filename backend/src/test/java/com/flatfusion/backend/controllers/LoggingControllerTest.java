@@ -21,10 +21,12 @@ class LoggingControllerTest {
 
     @Test
     public void testIndexEndpoint_LoggingLevels() throws Exception {
+
         mockMvc.perform(MockMvcRequestBuilders.get("/")
                         // Set Authorization header with any dummy value, for example:
                         //Encoded in Basic64 jane.doe@example.com:password2
                         .header("Authorization", "Basic amFuZS5kb2VAZXhhbXBsZS5jb206cGFzc3dvcmQy"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
+
     }
 }

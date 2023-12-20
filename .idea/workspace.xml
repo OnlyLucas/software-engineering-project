@@ -4,19 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89099437-bd15-4ec1-af96-f9b07a22bad3" name="Changes" comment="#31 Fix payment creation and deletion. Fix cleaning template deletion (cascading deletion of cleanings).">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/flatfusion/backend/controllers/CleaningRESTControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/flatfusion/backend/controllers/CleaningTemplateRESTControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/flatfusion/backend/controllers/GroupGroceryRESTControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/flatfusion/backend/controllers/GroupMembershipRESTControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/flatfusion/backend/controllers/GroupRESTControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/flatfusion/backend/controllers/LoggingControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/controllers/GroupGroceryRESTController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/controllers/GroupGroceryRESTController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/controllers/GroupMembershipRESTController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/controllers/GroupMembershipRESTController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/controllers/GroupRESTController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/flatfusion/backend/controllers/GroupRESTController.java" afterDir="false" />
-    </list>
+    <list default="true" id="89099437-bd15-4ec1-af96-f9b07a22bad3" name="Changes" comment="Added Unit tests to back end" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -368,7 +356,21 @@
       <option name="project" value="LOCAL" />
       <updated>1702572717179</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added Unit tests to back end">
+      <created>1703073299958</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1703073299958</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added Unit tests to back end">
+      <created>1703073510886</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1703073510886</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -390,6 +392,7 @@
     <MESSAGE value="Adds findByGroupId endpoint to GroupGroceryRESTController" />
     <MESSAGE value="Add is_active attribute to User. Changes interval to cleaning_interval for CleaningTemplate." />
     <MESSAGE value="#31 Fix payment creation and deletion. Fix cleaning template deletion (cascading deletion of cleanings)." />
-    <option name="LAST_COMMIT_MESSAGE" value="#31 Fix payment creation and deletion. Fix cleaning template deletion (cascading deletion of cleanings)." />
+    <MESSAGE value="Added Unit tests to back end" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Unit tests to back end" />
   </component>
 </project>
