@@ -105,7 +105,7 @@ ALTER TABLE `cleanings` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `cleanings` ADD FOREIGN KEY (`group_id`) REFERENCES `living_groups` (`id`);
 
-ALTER TABLE `cleanings` ADD FOREIGN KEY (`cleaning_template_id`) REFERENCES `cleaning_template` (`id`);
+ALTER TABLE `cleanings` ADD FOREIGN KEY (`cleaning_template_id`) REFERENCES `cleaning_template` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `group_groceries` ADD FOREIGN KEY (`group_id`) REFERENCES `living_groups` (`id`);
 
@@ -127,7 +127,7 @@ ALTER TABLE `payments_changes` ADD FOREIGN KEY (`paid_by`) REFERENCES `users` (`
 
 ALTER TABLE `payments_changes` ADD FOREIGN KEY (`changed_by`) REFERENCES `users` (`id`);
 
-ALTER TABLE `payment_participations` ADD FOREIGN KEY (`payment_id`) REFERENCES `payments` (`id`);
+ALTER TABLE `payment_participations` ADD FOREIGN KEY (`payment_id`) REFERENCES `payments` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `payment_participations` ADD FOREIGN KEY (`group_id`) REFERENCES `living_groups` (`id`);
 
