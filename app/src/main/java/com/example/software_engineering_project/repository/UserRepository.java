@@ -222,6 +222,12 @@ public class UserRepository {
         });
     }
 
+    /**
+     * Updates the password of a user on the server and shows a toast upon success or failure.
+     *
+     * @param request The UserWithPasswordRequest object containing user information and new password.
+     * @param context The application context for displaying toasts and handling UI updates.
+     */
     public void updatePassword(UserWithPasswordRequest request, Context context) {
 
         Call<User> call = userService.updatePassword(request);

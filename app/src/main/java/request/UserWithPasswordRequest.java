@@ -11,10 +11,19 @@ public class UserWithPasswordRequest {
     User user;
     String password;
 
+    /**
+     * Default constructor (used for Jackson).
+     */
     public UserWithPasswordRequest(){
         // (used for jackson)
     }
 
+    /**
+     * Constructs a UserWithPasswordRequest with the specified user and password.
+     *
+     * @param user     The User object containing user information.
+     * @param password The password associated with the user.
+     */
     public UserWithPasswordRequest(User user, String password){
         this.user = user;
         this.password = password;

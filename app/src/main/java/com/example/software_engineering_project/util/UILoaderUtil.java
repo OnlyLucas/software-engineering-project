@@ -7,9 +7,18 @@ import android.util.Log;
 import com.example.software_engineering_project.controller.ActivityLoginScreenController;
 import com.example.software_engineering_project.repository.AppStateRepository;
 
-public class UILoaderUtil {
+/**
+ * Utility class for handling UI-related operations, such as starting activities.
+ * This class provides methods to start the login activity and perform related actions.
+ */
+ public class UILoaderUtil {
     private static final String TAG = UILoaderUtil.class.getSimpleName();
 
+    /**
+     * Starts the login activity and logs out the current user.
+     *
+     * @param context The application context for starting the login activity.
+     */
     public static void startLoginActivity(Context context) {
         if (context != null) {
             Intent intent = new Intent(context, ActivityLoginScreenController.class);
