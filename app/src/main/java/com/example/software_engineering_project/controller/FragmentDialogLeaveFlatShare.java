@@ -15,6 +15,16 @@ import com.example.software_engineering_project.repository.AppStateRepository;
 import com.example.software_engineering_project.repository.GroupMembershipRepository;
 import com.example.software_engineering_project.repository.UserRepository;
 
+/**
+ * The FragmentDialogLeaveFlatShare class represents a dialog fragment in the Flat Fusion app
+ * that confirms the user's intention to leave a flat share. It provides a dialog with options
+ * to either confirm or cancel the action.
+ *
+ * Responsibilities:
+ * - Creates a dialog instance with appropriate title, message, and button actions.
+ * - Positive button triggers the removal of the user from the flat share and resets the current group.
+ * - Negative button dismisses the dialog.
+ */
 public class FragmentDialogLeaveFlatShare extends DialogFragment {
     private static GroupMembershipRepository groupMembershipRepository;
     private Context context;

@@ -11,9 +11,24 @@ import androidx.fragment.app.DialogFragment;
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.controller.appsettings.FragmentManageFlatShareController;
 
+/**
+ * The FragmentDialogDeleteFlatShareMember class represents a dialog fragment in the Flat Fusion app
+ * that confirms the user's intention to delete a flat share member. It provides a dialog with options
+ * to either confirm or cancel the action.
+ *
+ * Responsibilities:
+ * - Creates a dialog instance with appropriate title, message, and button actions.
+ * - Positive button triggers the removal of the flat share member via FragmentManageFlatShareController.
+ * - Negative button dismisses the dialog.
+ */
 public class FragmentDialogDeleteFlatShareMember extends DialogFragment {
     private int position;
 
+    /**
+     * Constructs a FragmentDialogDeleteFlatShareMember with the specified position of the flat share member.
+     *
+     * @param position The position of the flat share member in the list to be deleted.
+     */
     public FragmentDialogDeleteFlatShareMember(int position) {
         this.position = position;
     }

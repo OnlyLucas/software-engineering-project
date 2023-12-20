@@ -23,6 +23,13 @@ import com.example.software_engineering_project.repository.GroceryRepository;
 
 import java.util.List;
 
+/**
+ * The FragmentGroceryListHistoryController class represents a fragment in the Flat Fusion app
+ * responsible for displaying the history of completed group groceries. It provides functionalities
+ * to remove specific items from the history and navigate back to the main grocery list.
+ * This class utilizes LiveData for observing completed group groceries, sets up the UI elements,
+ * and configures interactions with buttons and the list view.
+ */
 public class FragmentGroceryListHistoryController extends Fragment {
 
     private static ListView listView;
