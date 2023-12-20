@@ -31,10 +31,6 @@ public class AdapterSpinnerList extends ArrayAdapter<String> implements AdapterV
     private ArrayList<String> list;
     private Context context;
 
-
-    // The ListViewAdapter Constructor
-    // @param context: the Context from the MainActivity
-    // @param items: The list of items in our Grocery List
     /**
      * Custom adapter for populating a Spinner widget with a list of strings.
      *
@@ -49,7 +45,6 @@ public class AdapterSpinnerList extends ArrayAdapter<String> implements AdapterV
 
     }
 
-    // The method we override to provide our own layout for each View (row) in the ListView
     /**
      * Get a View that displays the data at the specified position in the adapter.
      * This method is responsible for creating or recycling item views for the Spinner items.

@@ -26,10 +26,10 @@ import java.util.List;
 
 /**
  * Custom adapter for displaying a list of cleaning plans in a ListView.
- *
+ * <p>
  * This adapter extends ArrayAdapter<CleaningTemplate> and is designed to work with the layout 'adapter_cleaning_plan_list_view'.
  * It provides a customized view for each item in the ListView, including a number, cleaning template name, next cleaning date, and a button to remove the cleaning plan.
- *
+ * <p>
  * The getView method is overridden to inflate the layout, load screen elements, and set the content based on the CleaningTemplate object at the specified position in the data set. Additionally, it adds a listener for the remove button.
  */
 public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> {
@@ -43,9 +43,9 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
     /**
      * Constructs an Adapter for the Cleaning Plan List View.
      *
-     * @param context             The context of the application.
-     * @param items               The list of Cleaning Templates to be displayed.
-     * @param cleaningRepository  The repository for handling cleaning data.
+     * @param context            The context of the application.
+     * @param items              The list of Cleaning Templates to be displayed.
+     * @param cleaningRepository The repository for handling cleaning data.
      */
     public AdapterCleaningPlanListView(Context context, List<CleaningTemplate> items, CleaningRepository cleaningRepository) {
 
@@ -58,7 +58,7 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
 
     /**
      * Get the view that displays the data at the specified position in the data set.
-     *
+     * <p>
      * This method creates or reuses a view to represent an item in the adapter's data set. It inflates the layout
      * 'adapter_cleaning_plan_list_view' if the provided convertView is null, and then loads screen elements using the loadScreenElements method. It sets the text of the number, cleaning template name, and next cleaning date TextViews, and adds a listener for the remove button.
      *
@@ -110,7 +110,6 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
      * Contains references to UI elements for each item in the ListView.
      */
     class ViewHolder {
-        // Add your UI elements here
         TextView number;
         TextView name;
         TextView description;

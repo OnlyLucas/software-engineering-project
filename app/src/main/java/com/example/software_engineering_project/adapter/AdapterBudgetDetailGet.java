@@ -22,13 +22,12 @@ import java.util.Locale;
 /**
  * Custom adapter for displaying budget details as a list related to received amounts.
  * This adapter is designed to work with the AdapterBudgetDetailGet layout.
- *
+ * <p>
  * The adapter provides functionality to display a list of users with associated debt amounts
  * and allows users to be marked as "checked" via the checkExpenseGet ImageView.
- *
+ * <p>
  * Additionally, when the checkExpenseGet ImageView is clicked, it triggers an onClick event
  * to uncheck the corresponding item through FragmentBudgetDetailScreenController.
- *
  */
 public class AdapterBudgetDetailGet extends ArrayAdapter<Object[]> {
 
@@ -45,6 +44,7 @@ public class AdapterBudgetDetailGet extends ArrayAdapter<Object[]> {
      * Example usage:
      * {@code AdapterBudgetDetailGet adapter = new AdapterBudgetDetailGet(context, itemsList);}
      * <p>
+     *
      * @param context The context in which the adapter will be used.
      * @param items   The list of items to be displayed in the adapter.
      */
@@ -62,10 +62,11 @@ public class AdapterBudgetDetailGet extends ArrayAdapter<Object[]> {
      * This method creates and returns a View displaying the data located at the specified position
      * in the adapter's data set. If a convertView is available, it is reused; otherwise, a new View is inflated.
      * <p>
+     *
      * @param position    The position of the item within the adapter's data set.
      * @param convertView The old view to reuse, if possible.
      * @param parent      The parent that this view will eventually be attached to.
-     * @return            A View corresponding to the data at the specified position.
+     * @return A View corresponding to the data at the specified position.
      */
     @NonNull
     @Override
@@ -104,6 +105,7 @@ public class AdapterBudgetDetailGet extends ArrayAdapter<Object[]> {
      * such as buttons, text views, or any other UI components used within the layout.
      * These elements are then assigned to their respective class variables for future use.
      * <p>
+     *
      * @param convertView The view containing the UI elements to be initialized.
      */
     private void loadScreenElements(View convertView) {

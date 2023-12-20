@@ -52,7 +52,6 @@ public class AdapterManageFlatShareListView extends ArrayAdapter<User> {
 
     }
 
-    // The method we override to provide our own layout for each View (row) in the ListView
     /**
      * Get a View that displays the data at the specified position in the data set.
      *
@@ -94,8 +93,6 @@ public class AdapterManageFlatShareListView extends ArrayAdapter<User> {
      */
     private void addButtons(int position) {
 
-        // Listeners for duplicating and removing an item.
-        // They use the static removeItem and addItem methods created in MainActivity.
         remove.setOnClickListener(view -> {
             FragmentDialogDeleteFlatShareMember dialog = new FragmentDialogDeleteFlatShareMember(position);
             dialog.show(((FragmentActivity) context).getSupportFragmentManager(), "DeleteFlatShareMember");
