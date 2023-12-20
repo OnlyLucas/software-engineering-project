@@ -8,7 +8,6 @@ import org.hibernate.type.SqlTypes;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -38,7 +37,7 @@ public class CleaningEntity implements EntityInterface{
 
     @ManyToOne
     @JoinColumn(
-            name = "cleaning_template"
+            name = "cleaning_template_id"
     )
     private CleaningTemplateEntity cleaningTemplate;
 
