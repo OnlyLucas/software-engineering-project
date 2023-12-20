@@ -40,7 +40,8 @@ public class Payment {
      * @param amount The amount of the payment.
      * @param name   The name associated with the payment.
      */
-    public Payment(BigDecimal amount, String name){
+    public Payment(BigDecimal amount, String name) {
+
         this.id = UUID.randomUUID();
         this.group = AppStateRepository.getCurrentGroupLiveData().getValue();
         this.amount = amount;
@@ -49,8 +50,9 @@ public class Payment {
         this.paidByUser = currentUser;
         this.createdByUser = currentUser;
         long currentTimeMillis = System.currentTimeMillis();
-        this.createdAt  = new Timestamp(currentTimeMillis);
+        this.createdAt = new Timestamp(currentTimeMillis);
         this.name = name;
+
     }
 
     public UUID getId() {

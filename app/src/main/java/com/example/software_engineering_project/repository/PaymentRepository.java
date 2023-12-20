@@ -11,7 +11,9 @@ import com.example.software_engineering_project.dataservice.PaymentService;
 import com.example.software_engineering_project.dataservice.RetrofitClient;
 import com.example.software_engineering_project.entity.Group;
 import com.example.software_engineering_project.entity.Payment;
+
 import request.PaymentCreationRequest;
+
 import com.example.software_engineering_project.util.ToastUtil;
 import com.example.software_engineering_project.util.UILoaderUtil;
 
@@ -37,8 +39,10 @@ public class PaymentRepository {
      * and fetches the current list of payments immediately upon repository creation.
      */
     public PaymentRepository(Context context) {
+
         paymentService = RetrofitClient.getInstance().create(PaymentService.class);
         fetchPayments(context);
+
     }
 
     /**
@@ -47,18 +51,19 @@ public class PaymentRepository {
      * @param paymentData The PaymentCreationData object containing payment information.
      * @param context     The application context for displaying toasts and handling UI updates.
      */
-    public void createPayment(PaymentCreationRequest paymentData , Context context) {
+    public void createPayment(PaymentCreationRequest paymentData, Context context) {
+
         Call<Payment> call = paymentService.createPayment(paymentData);
         call.enqueue(new Callback<Payment>() {
             @Override
             public void onResponse(Call<Payment> call, Response<Payment> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Log.i(TAG, "Payment creation successful");
                     fetchPayments(context);
                     ToastUtil.makeToast("Added " + paymentData.getPayment().getName(), context);
                 } else {
                     // If unauthorized/bad credentials return to login screen
-                    if(response.code() == 401){
+                    if (response.code() == 401) {
                         Log.e(TAG, "Bad credentials. Rerouting to login activity.");
                         ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
@@ -85,6 +90,7 @@ public class PaymentRepository {
      * @param context The application context for displaying toasts and handling UI updates.
      */
     public void deletePayment(Payment payment, Context context) {
+
         Call<Void> call = paymentService.deletePayment(payment.getId());
         call.enqueue(new Callback<Void>() {
             @Override
@@ -95,7 +101,7 @@ public class PaymentRepository {
                     ToastUtil.makeToast(context.getString(R.string.removed) + payment.getName(), context);
                 } else {
                     // If unauthorized/bad credentials return to login screen
-                    if(response.code() == 401){
+                    if (response.code() == 401) {
                         Log.e(TAG, "Bad credentials. Rerouting to login activity.");
                         ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
@@ -114,15 +120,19 @@ public class PaymentRepository {
             }
 
         });
-    };
+    }
+
+    ;
 
     /**
      * Fetches the list of payments from the server asynchronously.
      * Updates the LiveData with the retrieved list upon a successful API response.
      */
-    public void fetchPayments(Context context){
+    public void fetchPayments(Context context) {
+
         Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
-        if(group == null){
+
+        if (group == null) {
             ToastUtil.makeToast(context.getString(R.string.join_a_group), context);
             return;
         }
@@ -137,7 +147,7 @@ public class PaymentRepository {
                     currentPayments.setValue(payments);
                 } else {
                     // If unauthorized/bad credentials return to login screen
-                    if(response.code() == 401){
+                    if (response.code() == 401) {
                         Log.e(TAG, "Bad credentials. Rerouting to login activity.");
                         ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
@@ -158,7 +168,7 @@ public class PaymentRepository {
     /**
      * Retrieves the LiveData object containing the list of current payments.
      *
-     * @return LiveData<List<Payment>> The LiveData object containing the list of current payments.
+     * @return LiveData<List < Payment>> The LiveData object containing the list of current payments.
      */
     public LiveData<List<Payment>> getCurrentPayments() {
         return currentPayments;

@@ -34,8 +34,10 @@ public class CleaningRepository {
     /**
      * Default constructor for CleaningRepository. Initializes the CleaningService using RetrofitClient.
      */
-    public CleaningRepository(){
+    public CleaningRepository() {
+
         cleaningService = RetrofitClient.getInstance().create(CleaningService.class);
+
     }
 
     /**
@@ -45,8 +47,9 @@ public class CleaningRepository {
      * @param id The UUID of the cleaning template to fetch uncompleted cleanings for.
      */
     public void fetchUncompletedCleanings(UUID id, Context context) {
+
         Call<List<Cleaning>> call = cleaningService.getUncompletedCleaningsForCleaningTemplate(id);
-        call.enqueue(new Callback<List<Cleaning>>(){
+        call.enqueue(new Callback<List<Cleaning>>() {
             @Override
             public void onResponse(Call<List<Cleaning>> call, Response<List<Cleaning>> response) {
                 if (response.isSuccessful()) {
@@ -56,7 +59,7 @@ public class CleaningRepository {
                 } else {
                     Log.e(TAG, "Error while fetching cleanings");
                     // If unauthorized/bad credentials return to login screen
-                    if(response.code() == 401){
+                    if (response.code() == 401) {
                         Log.e(TAG, "Bad credentials. Rerouting to login activity.");
                         ToastUtil.makeToast(context.getString(R.string.error_with_authentication_login_again), context);
                         UILoaderUtil.startLoginActivity(context);
@@ -73,8 +76,9 @@ public class CleaningRepository {
     }
 
     public void fetchUncompletedCleaningWithSmallestDate(UUID id) {
+
         Call<Cleaning> call = cleaningService.getUncompletedCleaningWithSmallestDateForCleaningTemplate(id);
-        call.enqueue(new Callback<Cleaning>(){
+        call.enqueue(new Callback<Cleaning>() {
             @Override
             public void onResponse(Call<Cleaning> call, Response<Cleaning> response) {
                 if (response.isSuccessful()) {
@@ -97,9 +101,10 @@ public class CleaningRepository {
      * Deletes a cleaning from the server and updates the list of uncompleted cleanings upon a successful deletion.
      *
      * @param cleaning The Cleaning object to be deleted.
-     * @param context The application context for displaying toasts and handling UI updates.
+     * @param context  The application context for displaying toasts and handling UI updates.
      */
     public void deleteCleaning(Cleaning cleaning, Context context) {
+
         Call<Void> call = cleaningService.deleteCleaning(cleaning.getId());
         call.enqueue(new Callback<Void>() {
             @Override
@@ -116,7 +121,7 @@ public class CleaningRepository {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Log.e(TAG,"Network error while deleting cleaning: " + t);
+                Log.e(TAG, "Network error while deleting cleaning: " + t);
                 ToastUtil.makeToast(context.getString(R.string.deletion_failed), context);
             }
 
@@ -128,30 +133,35 @@ public class CleaningRepository {
      * Initiates the fetching of uncompleted cleanings to update the LiveData.
      *
      * @param id The UUID of the cleaning template to fetch uncompleted cleanings for.
-     * @return LiveData<List<Cleaning>> The LiveData object containing the list of uncompleted cleanings.
+     * @return LiveData<List < Cleaning>> The LiveData object containing the list of uncompleted cleanings.
      */
     public LiveData<List<Cleaning>> getUncompletedCleanings(UUID id, Context context) {
+
         fetchUncompletedCleanings(id, context);
         return uncompletedCleanings;
+
     }
 
     public LiveData<Cleaning> getUncompletedCleaningWithSmallestDate(UUID id) {
+
         fetchUncompletedCleaningWithSmallestDate(id);
         return uncompletedCleaningWithSmallestDate;
+
     }
 
     /**
      * Updates a cleaning on the server and refreshes the list of uncompleted cleanings upon a successful update.
      *
      * @param cleaning The Cleaning object to be updated.
-     * @param context The application context for displaying toasts and handling UI updates.
+     * @param context  The application context for displaying toasts and handling UI updates.
      */
     public void updateCleaning(Cleaning cleaning, Context context) {
+
         Call<Cleaning> call = cleaningService.updateCleaning(cleaning.getId(), cleaning);
         call.enqueue(new Callback<Cleaning>() {
             @Override
             public void onResponse(Call<Cleaning> call, Response<Cleaning> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Log.i(TAG, "Unchecking cleaning successful");
                     fetchUncompletedCleanings(cleaning.getCleaningTemplate().getId(), context);
                     ToastUtil.makeToast(context.getString(R.string.uncheckedColon_) + cleaning.getDate(), context);
