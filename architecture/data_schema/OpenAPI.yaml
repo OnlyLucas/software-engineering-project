@@ -1,0 +1,1506 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: '1'
+servers:
+- url: https://localhost:1337
+  description: Generated server url
+paths:
+  /v1/users/{id}:
+    get:
+      tags:
+      - user-rest-controller
+      operationId: getById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not found
+    
+    put:
+      tags:
+      - user-rest-controller
+      operationId: update
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserEntity'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+    delete:
+      tags:
+      - user-rest-controller
+      operationId: delete
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+  /v1/payments/{id}:
+    get:
+      tags:
+      - payment-rest-controller
+      operationId: getById_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PaymentEntity'
+    put:
+      tags:
+      - payment-rest-controller
+      operationId: update_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentEntity'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PaymentEntity'
+    delete:
+      tags:
+      - payment-rest-controller
+      operationId: delete_1
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PaymentEntity'
+  /v1/payments-changes/{id}:
+    get:
+      tags:
+      - payments-change-rest-controller
+      operationId: getById_2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PaymentsChangeEntity'
+    put:
+      tags:
+      - payments-change-rest-controller
+      operationId: update_2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentsChangeEntity'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PaymentsChangeEntity'
+    delete:
+      tags:
+      - payments-change-rest-controller
+      operationId: delete_2
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PaymentsChangeEntity'
+  /v1/payment-participations/{id}:
+    get:
+      tags:
+      - payment-participation-rest-controller
+      operationId: getById_3
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PaymentParticipationEntity'
+    put:
+      tags:
+      - payment-participation-rest-controller
+      operationId: update_3
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentParticipationEntity'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PaymentParticipationEntity'
+    delete:
+      tags:
+      - payment-participation-rest-controller
+      operationId: delete_3
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PaymentParticipationEntity'
+  /v1/groups/{id}:
+    get:
+      tags:
+      - group-rest-controller
+      operationId: getById_4
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GroupEntity'
+    put:
+      tags:
+      - group-rest-controller
+      operationId: update_4
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupEntity'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GroupEntity'
+    delete:
+      tags:
+      - group-rest-controller
+      operationId: delete_4
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GroupEntity'
+  /v1/group-memberships/{id}:
+    get:
+      tags:
+      - group-membership-rest-controller
+      operationId: getById_5
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GroupMembershipEntity'
+    put:
+      tags:
+      - group-membership-rest-controller
+      operationId: update_5
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupMembershipEntity'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GroupMembershipEntity'
+    delete:
+      tags:
+      - group-membership-rest-controller
+      operationId: delete_5
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GroupMembershipEntity'
+  /v1/group-groceries/{id}:
+    get:
+      tags:
+      - group-grocery-rest-controller
+      operationId: getById_6
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GroupGroceryEntity'
+    put:
+      tags:
+      - group-grocery-rest-controller
+      operationId: update_6
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupGroceryEntity'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GroupGroceryEntity'
+    delete:
+      tags:
+      - group-grocery-rest-controller
+      operationId: delete_6
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GroupGroceryEntity'
+  /v1/cleanings/{id}:
+    get:
+      tags:
+      - cleaning-rest-controller
+      operationId: getById_7
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CleaningEntity'
+    put:
+      tags:
+      - cleaning-rest-controller
+      operationId: update_7
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CleaningEntity'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CleaningEntity'
+    delete:
+      tags:
+      - cleaning-rest-controller
+      operationId: delete_7
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CleaningEntity'
+  /v1/cleaning-templates/{id}:
+    get:
+      tags:
+      - cleaning-template-rest-controller
+      operationId: getById_8
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CleaningTemplateEntity'
+    put:
+      tags:
+      - cleaning-template-rest-controller
+      operationId: update_8
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CleaningTemplateEntity'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CleaningTemplateEntity'
+    delete:
+      tags:
+      - cleaning-template-rest-controller
+      operationId: delete_8
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CleaningTemplateEntity'
+  /v1/users:
+    post:
+      tags:
+      - user-rest-controller
+      operationId: create
+      parameters:
+      - name: entity
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserEntity'
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+  /v1/users/create-with-password:
+    post:
+      tags:
+      - user-rest-controller
+      operationId: createWithPassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserWithPasswordRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+  /v1/payments:
+    post:
+      tags:
+      - payment-rest-controller
+      operationId: create_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentEntity'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PaymentEntity'
+  /v1/payments/create-with-participations:
+    post:
+      tags:
+      - payment-rest-controller
+      operationId: createWithParticipations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentCreationRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PaymentEntity'
+  /v1/payments-changes:
+    post:
+      tags:
+      - payments-change-rest-controller
+      operationId: create_2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentsChangeEntity'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PaymentsChangeEntity'
+  /v1/payment-participations:
+    post:
+      tags:
+      - payment-participation-rest-controller
+      operationId: create_3
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentParticipationEntity'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PaymentParticipationEntity'
+  /v1/groups:
+    post:
+      tags:
+      - group-rest-controller
+      operationId: create_4
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupEntity'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GroupEntity'
+  /v1/group-memberships:
+    post:
+      tags:
+      - group-membership-rest-controller
+      operationId: create_5
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupMembershipEntity'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GroupMembershipEntity'
+  /v1/group-groceries:
+    post:
+      tags:
+      - group-grocery-rest-controller
+      operationId: create_6
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupGroceryEntity'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GroupGroceryEntity'
+  /v1/cleanings:
+    post:
+      tags:
+      - cleaning-rest-controller
+      operationId: create_7
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CleaningEntity'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CleaningEntity'
+  /v1/cleaning-templates:
+    post:
+      tags:
+      - cleaning-template-rest-controller
+      operationId: create_8
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CleaningTemplateEntity'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CleaningTemplateEntity'
+  /v1/cleaning-templates/create-with-cleanings:
+    post:
+      tags:
+      - cleaning-template-rest-controller
+      operationId: createWithCleanings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CleaningTemplateEntity'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CleaningTemplateEntity'
+  /v1/users/{userId}:
+    patch:
+      tags:
+      - user-rest-controller
+      operationId: partialUpdateUser
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: object
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+  /v1/users/change-password:
+    patch:
+      tags:
+      - user-rest-controller
+      operationId: updateUserPassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserWithPasswordRequest'
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+  /v1/users/mail/{mail}:
+    get:
+      tags:
+      - user-rest-controller
+      operationId: getUserByMail
+      parameters:
+      - name: mail
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+  /v1/users/group/{groupId}:
+    get:
+      tags:
+      - user-rest-controller
+      operationId: getUsersByGroupId
+      parameters:
+      - name: groupId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserEntity'
+  /v1/payments/group/{id}:
+    get:
+      tags:
+      - payment-rest-controller
+      operationId: getPaymentsByGroupId
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PaymentEntity'
+  /v1/payment-participations/group/{groupId}/userOwe/{userIdOwe}/userGet/{userIdGet}:
+    get:
+      tags:
+      - payment-participation-rest-controller
+      operationId: getGetPaymentParticipationsByUserIds
+      parameters:
+      - name: groupId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: userIdOwe
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: userIdGet
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PaymentParticipationEntity'
+  /v1/payment-participations/group/{groupId}/userGet/{userIdGet}/userOwe/{userIdOwe}:
+    get:
+      tags:
+      - payment-participation-rest-controller
+      operationId: getOwePaymentParticipationsByUserIds
+      parameters:
+      - name: groupId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: userIdGet
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: userIdOwe
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PaymentParticipationEntity'
+  /v1/payment-participations/group/{groupId}/user/{userId}/owe:
+    get:
+      tags:
+      - payment-participation-rest-controller
+      operationId: getOwePaymentsGroupedByUser
+      parameters:
+      - name: groupId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: array
+                  items:
+                    type: object
+  /v1/payment-participations/group/{groupId}/user/{userId}/get:
+    get:
+      tags:
+      - payment-participation-rest-controller
+      operationId: getGetPaymentsGroupedByUser
+      parameters:
+      - name: groupId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  type: array
+                  items:
+                    type: object
+  /v1/login:
+    get:
+      tags:
+      - login-controller
+      operationId: getByEmail
+      parameters:
+      - name: Authorization
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/UserEntity'
+  /v1/group-memberships/by-user/{userId}:
+    get:
+      tags:
+      - group-membership-rest-controller
+      operationId: getGroupByUserId
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GroupEntity'
+  /v1/group-groceries/group/{id}/uncompleted:
+    get:
+      tags:
+      - group-grocery-rest-controller
+      operationId: getGroupGroceriesByGroupIdUncompleted
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupGroceryEntity'
+  /v1/group-groceries/group/{id}/completed:
+    get:
+      tags:
+      - group-grocery-rest-controller
+      operationId: getGroupGroceriesByGroupIdCompleted
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupGroceryEntity'
+  /v1/cleanings/cleaning-template/{templateId}/uncompleted:
+    get:
+      tags:
+      - cleaning-rest-controller
+      operationId: getUncompletedCleaningsForCleaningTemplate
+      parameters:
+      - name: templateId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CleaningEntity'
+  /v1/cleanings/cleaning-template/{templateId}/uncompletedSmallestDate:
+    get:
+      tags:
+      - cleaning-rest-controller
+      operationId: getUncompletedCleaningWithSmallestDate
+      parameters:
+      - name: templateId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CleaningEntity'
+  /v1/cleaning-templates/group/{id}:
+    get:
+      tags:
+      - cleaning-template-rest-controller
+      operationId: getCleaningTemplatesByGroupId
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CleaningTemplateEntity'
+  /test:
+    get:
+      tags:
+      - test-rest-controller
+      operationId: getString
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /v1/group-memberships/{userId}/{groupId}:
+    delete:
+      tags:
+      - group-membership-rest-controller
+      operationId: deleteGroupMembership
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: groupId
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        "200":
+          description: OK
+  /:
+    get:
+      tags:
+      - logging-controller
+      operationId: index
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+    put:
+      tags:
+      - logging-controller
+      operationId: index_3
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+    post:
+      tags:
+      - logging-controller
+      operationId: index_2
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+    delete:
+      tags:
+      - logging-controller
+      operationId: index_5
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+    options:
+      tags:
+      - logging-controller
+      operationId: index_6
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+    head:
+      tags:
+      - logging-controller
+      operationId: index_1
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+    patch:
+      tags:
+      - logging-controller
+      operationId: index_4
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+components:
+  schemas:
+    UserEntity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000000"
+        email:
+          type: string
+          example: "john.doe@example.com"
+        username:
+          type: string
+          example: "johndoe"
+        firstName:
+          type: string
+          example: "John"
+        lastName:
+          type: string
+          example: "Doe"
+        createdAt:
+          type: string
+          format: date-time
+          example: "2023-12-20T11:03:48"
+    GroupEntity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000000"
+        name:
+          type: string
+          example: "Group 1"
+        description:
+          type: string
+          example: "Group description 1"
+        createdAt:
+          type: string
+          format: date-time
+          example: "2023-12-20T11:03:48"
+        createdBy:
+          $ref: '#/components/schemas/UserEntity'
+    PaymentEntity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000000"
+        group:
+          $ref: '#/components/schemas/GroupEntity'
+        amount:
+          type: number
+          example: 1000.00
+        currencyCode:
+          type: string
+          example: "EUR"
+        paidByUser:
+          $ref: '#/components/schemas/UserEntity'
+        createdByUser:
+          $ref: '#/components/schemas/UserEntity'
+        paymentParticipations:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentParticipationEntity'
+        createdAt:
+          type: string
+          format: date-time
+          example: "2023-12-20T11:03:49"
+        name:
+          type: string
+          example: "Rent"
+    PaymentParticipationEntity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000000"
+        payment:
+          $ref: '#/components/schemas/PaymentEntity'
+        group:
+          $ref: '#/components/schemas/GroupEntity'
+        user:
+          $ref: '#/components/schemas/UserEntity'
+        participationAmount:
+          type: number
+          example: 250.00
+        currencyCode:
+          type: string
+          example: "EUR"
+        isPaid:
+          type: boolean
+          example: false
+        paidAt:
+          type: string
+          format: date-time
+          example: "2023-12-20T12:00:00"
+    PaymentsChangeEntity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        payment:
+          $ref: '#/components/schemas/PaymentEntity'
+        group:
+          $ref: '#/components/schemas/GroupEntity'
+        amount:
+          type: number
+        currencyCode:
+          type: string
+        paidByUser:
+          $ref: '#/components/schemas/UserEntity'
+        changedByUser:
+          $ref: '#/components/schemas/UserEntity'
+        changedAt:
+          type: string
+          format: date-time
+        name:
+          type: string
+    GroupMembershipEntity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000000"
+        group:
+          $ref: '#/components/schemas/GroupEntity'
+        user:
+          $ref: '#/components/schemas/UserEntity'
+        createdAt:
+          type: string
+          format: date-time
+          example: "2023-12-20T11:03:48"
+    GroupGroceryEntity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000000"
+        group:
+          $ref: '#/components/schemas/GroupEntity'
+        name:
+          type: string
+          example: "10 Eggs"
+        createdByUser:
+          $ref: '#/components/schemas/UserEntity'
+        createdAt:
+          type: string
+          format: date-time
+          example: "2023-12-20T11:03:49"
+        isCompleted:
+          type: boolean
+          example: false
+        completedByUser:
+          $ref: '#/components/schemas/UserEntity'
+        completedAt:
+          type: string
+          format: date-time
+    CleaningEntity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000001"
+        group:
+          $ref: '#/components/schemas/GroupEntity'
+        user:
+          $ref: '#/components/schemas/UserEntity'
+        cleaningTemplate:
+          $ref: '#/components/schemas/CleaningTemplateEntity'
+        date:
+          type: string
+          format: date-time
+          example: "2023-12-24T00:00:00"
+        isCompleted:
+          type: boolean
+          example: false
+        completedAt:
+          type: string
+          format: date-time
+    CleaningTemplateEntity:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "00000000-0000-0000-0000-000000000002"
+        group:
+          $ref: '#/components/schemas/GroupEntity'
+        name:
+          type: string
+          example: "Weekly Cleaning"
+        description:
+          type: string
+          example: "Routine cleaning tasks"
+        startDate:
+          type: string
+          format: date-time
+          example: "2023-12-25T00:00:00"
+        endDate:
+          type: string
+          format: date-time
+          example: "2024-01-01T00:00:00"
+        interval:
+          type: integer
+          format: int32
+          example: 7
+        createdByUser:
+          $ref: '#/components/schemas/UserEntity'
+        createdAt:
+          type: string
+          format: date-time
+          example: "2023-12-20T11:03:50"
+        cleanings:
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/CleaningEntity'
+    UserWithPasswordRequest:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/UserEntity'
+        password:
+          type: string
+    PaymentCreationRequest:
+      type: object
+      properties:
+        payment:
+          $ref: '#/components/schemas/PaymentEntity'
+        userParticipations:
+          type: object
+          additionalProperties:
+            type: number
+        participantUserIds:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            format: uuid
