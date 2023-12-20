@@ -5,7 +5,8 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `first_name` varchar(255),
   `last_name` varchar(255),
-  `created_at` timestamp DEFAULT (CURRENT_TIMESTAMP())
+  `created_at` timestamp DEFAULT (CURRENT_TIMESTAMP()),
+  `is_active`boolean
 );
 
 CREATE TABLE `living_groups` (
