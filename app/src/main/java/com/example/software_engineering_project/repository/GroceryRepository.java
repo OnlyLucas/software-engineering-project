@@ -195,6 +195,11 @@ public class GroceryRepository {
         });
     }
 
+    /**
+     * Fetches uncompleted group groceries and updates the corresponding LiveData.
+     *
+     * @param context The context for displaying toasts and starting activities.
+     */
     private void fetchUncompletedGroupGroceries(Context context) {
 
         Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
@@ -232,6 +237,11 @@ public class GroceryRepository {
         });
     }
 
+    /**
+     * Fetches completed group groceries and updates the corresponding LiveData.
+     *
+     * @param context The context for displaying toasts and starting activities.
+     */
     private void fetchCompletedGroupGroceries(Context context) {
 
         Group group = AppStateRepository.getCurrentGroupLiveData().getValue();

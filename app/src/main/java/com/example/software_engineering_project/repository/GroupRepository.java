@@ -17,6 +17,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Repository class for handling group-related operations, such as creating a new group.
+ * This class interacts with the server through the GroupService and handles the API responses.
+ */
 public class GroupRepository {
     private static final String TAG = GroupRepository.class.getSimpleName();
     private GroupService groupService;
