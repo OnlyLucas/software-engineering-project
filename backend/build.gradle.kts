@@ -41,8 +41,10 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
 	// https://mvnrepository.com/artifact/org.springframework.security.oauth/spring-security-oauth2
 	implementation("org.springframework.security.oauth:spring-security-oauth2:2.5.2.RELEASE")
-	implementation("org.springdoc:springdoc-openapi-ui:1.7.0")
-	implementation("org.springdoc:springdoc-openapi-webmvc-core:1.7.0")
+	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
+	//implementation("javax.servlet:javax.servlet-api:4.0.1")
+
 
 	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.3")
