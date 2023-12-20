@@ -82,7 +82,7 @@ public class AdapterCleaningPlanListDetailView extends ArrayAdapter<Cleaning> {
             String monthName = monthNameFormat.format(dateInput);
             String formattedDate = dateFormat.format(dateInput);
 
-            String userName = list.get(position).getUser().getDisplayName();
+            String userName = list.get(position).getUser().getFirstName();
 
             // Set the formatted
             name.setText(userName);
