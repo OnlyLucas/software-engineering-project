@@ -31,6 +31,7 @@ public class GroupGroceryRESTController extends RESTController<GroupGroceryEntit
     @Autowired
     public GroupGroceryRESTController(GroupGroceryEntityRepository repository) {
         super(repository);
+        this.repository = repository;
     }
 
     /**
