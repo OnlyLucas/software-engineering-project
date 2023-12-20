@@ -64,6 +64,29 @@ public class UserRESTController extends RESTController<UserEntity>{
         }
     }
 
+    @Transactional
+    @PatchMapping("/change-password")
+    public ResponseEntity<UserEntity> updateUserPassword(@RequestBody UserWithPasswordRequest entity){
+        UserEntity user = entity.getUser();
+        String newPassword = entity.getPassword();
+
+        Optional<UserEntity> updatedUserOptional = repository.findById(user.getId());
+
+
+        if (updatedUserOptional.isPresent()) {
+            UserEntity updatedUser = updatedUserOptional.get();
+
+            String encryptedPassword = encoder.encode(newPassword);
+            updatedUser.setPassword(encryptedPassword);
+            repository.save(updatedUser);
+
+            logger.info("Update password of user with id " + updatedUser.getId());
+            return new ResponseEntity<>(updatedUser, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     /**
      * Retrieves a list of users belonging to a specific group.
      *

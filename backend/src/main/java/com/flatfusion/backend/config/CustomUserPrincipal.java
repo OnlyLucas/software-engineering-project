@@ -35,7 +35,6 @@ public class CustomUserPrincipal implements UserDetails {
 
     @Override
     public String getPassword() {
-        log.debug("Password of request user: " + user.getPassword());
         return user.getPassword();
     }
 

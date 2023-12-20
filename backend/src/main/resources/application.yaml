@@ -15,15 +15,11 @@ server:
     key-store-password: password
     key-alias: myapp
 
+    enabled: true
+
 logging:
   level:
     web: debug
     org:
       springframework:
         security: debug
-    root: debug
-
-rsa:
-  private-key: classpath:certs/private-key.pem
-  public-key: classpath:certs/public-key.pem
-

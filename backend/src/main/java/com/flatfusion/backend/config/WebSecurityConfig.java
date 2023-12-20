@@ -36,15 +36,19 @@ class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
+                // Always redirect to https
+                .requiresChannel(channel ->
+                        channel.anyRequest().requiresSecure())
                 .authorizeHttpRequests((authorize) -> authorize
                         // Specifies access rules for the endpoints
 
-                        // Login and user registration allow all, as users do not a an account with credentials yet
-                        .requestMatchers("/v1/auth/login").permitAll()
+                        // Login url requires manual auth
+                        .requestMatchers("/v1/login").permitAll()
+                        // User registration allow all, as users do not have an account with credentials yet
                         .requestMatchers("/v1/users/create-with-password").permitAll()
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/test").permitAll()
-                        .requestMatchers("/*").authenticated()
+                        .requestMatchers("/**").authenticated()
                 )
                 .authenticationProvider(authProvider())
                 .httpBasic(Customizer.withDefaults());
