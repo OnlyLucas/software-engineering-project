@@ -1,6 +1,5 @@
-package com.flatfusion.backend;
+package com.flatfusion.backend.controllers;
 
-import com.flatfusion.backend.controllers.LoggingController;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
