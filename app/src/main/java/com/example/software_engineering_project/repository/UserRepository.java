@@ -31,7 +31,6 @@ import retrofit2.Response;
  */
 public class UserRepository {
 
-    private UserService service;
     private static final String TAG = UserRepository.class.getSimpleName();
     private UserService userService;
     private MutableLiveData<List<User>> currentUsers = new MutableLiveData<>();
