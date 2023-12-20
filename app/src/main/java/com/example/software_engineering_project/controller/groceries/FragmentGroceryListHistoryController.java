@@ -33,7 +33,11 @@ public class FragmentGroceryListHistoryController extends Fragment {
     private ImageView goBack;
     private View fragmentView;
 
-    // function to remove an item given its index in the grocery list.
+    /**
+     * Removes a specific item (GroupGrocery) from the list of completed groceries and deletes it from the repository.
+     *
+     * @param item The index of the item to be removed from the list of completed groceries.
+     */
     public static void removeItem(int item) {
 
         GroupGrocery grocery = completedGroceryLiveData.getValue().get(item);
@@ -41,6 +45,16 @@ public class FragmentGroceryListHistoryController extends Fragment {
 
     }
 
+    /**
+     * Creates and returns the view hierarchy associated with the fragment for displaying the grocery list history.
+     * Initializes necessary elements, observes LiveData for completed group groceries, and sets up the list view with an adapter.
+     *
+     * @param inflater           The LayoutInflater object that can inflate any views in the fragment.
+     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state.
+     *                           This value may be null.
+     * @return The View for the fragment's UI, or null if the fragment does not provide a UI.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -61,6 +75,13 @@ public class FragmentGroceryListHistoryController extends Fragment {
 
     }
 
+    /**
+     * Configures functionality for different buttons and interactions within the grocery list history fragment.
+     * - Enables long-click interactions on the list view.
+     * - Displays the name of the clicked item in a toast.
+     * - Removes an item when its row is long-pressed in the list view.
+     * - Navigates back to the grocery list by clicking the 'Go Back' button.
+     */
     private void addButtons() {
 
         listView.setLongClickable(true);
@@ -87,6 +108,11 @@ public class FragmentGroceryListHistoryController extends Fragment {
 
     }
 
+    /**
+     * Replaces the current fragment in the main content view with the specified fragment.
+     *
+     * @param fragment The Fragment instance to be displayed by replacing the current fragment.
+     */
     private void callFragment(Fragment fragment) {
 
         FragmentManager fm = requireActivity().getSupportFragmentManager();
@@ -96,6 +122,11 @@ public class FragmentGroceryListHistoryController extends Fragment {
 
     }
 
+    /**
+     * Retrieves and initializes specific UI elements from the fragment's layout for managing grocery list history.
+     * This method finds and assigns the necessary views, such as a 'Go Back' button and a list view,
+     * required for managing and displaying the history of grocery items in the fragment.
+     */
     private void loadScreenElements() {
 
         goBack = fragmentView.findViewById(R.id.goBackGroceryHistory);
