@@ -38,11 +38,15 @@ public class AdapterBudgetDetailGet extends ArrayAdapter<Object[]> {
     private TextView amountOfDebt, nameOfDebtor;
 
     /**
-     * Creates a new AdapterBudgetDetailGet.
-     *
-     * @param context The context in which the adapter is being used.
-     * @param items   The List containing Object[] pairs where the first element is a LinkedHashMap representing a user,
-     *                and the second element is the total amount of debt associated with that user.
+     * Constructs an AdapterBudgetDetailGet instance.
+     * <p>
+     * This constructor initializes the AdapterBudgetDetailGet with the provided context and a list of items.
+     * <p>
+     * Example usage:
+     * {@code AdapterBudgetDetailGet adapter = new AdapterBudgetDetailGet(context, itemsList);}
+     * <p>
+     * @param context The context in which the adapter will be used.
+     * @param items   The list of items to be displayed in the adapter.
      */
     public AdapterBudgetDetailGet(Context context, List<Object[]> items) {
 
@@ -53,12 +57,15 @@ public class AdapterBudgetDetailGet extends ArrayAdapter<Object[]> {
     }
 
     /**
-     * Get the view that displays the data at the specified position in the data set.
-     *
+     * Get a View that displays the data at the specified position in the data set.
+     * <p>
+     * This method creates and returns a View displaying the data located at the specified position
+     * in the adapter's data set. If a convertView is available, it is reused; otherwise, a new View is inflated.
+     * <p>
      * @param position    The position of the item within the adapter's data set.
      * @param convertView The old view to reuse, if possible.
      * @param parent      The parent that this view will eventually be attached to.
-     * @return The view corresponding to the data at the specified position.
+     * @return            A View corresponding to the data at the specified position.
      */
     @NonNull
     @Override
@@ -82,12 +89,7 @@ public class AdapterBudgetDetailGet extends ArrayAdapter<Object[]> {
             String amount = String.format(Locale.getDefault(), "%.2f", totalAmount) + "€";
             amountOfDebt.setText(amount);
 
-            checkExpenseGet.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    FragmentBudgetDetailScreenController.uncheckItemGet(position, context);
-                }
-            });
+            checkExpenseGet.setOnClickListener(view -> FragmentBudgetDetailScreenController.uncheckItemGet(position, context));
 
         }
 
@@ -95,6 +97,15 @@ public class AdapterBudgetDetailGet extends ArrayAdapter<Object[]> {
 
     }
 
+    /**
+     * Loads and initializes screen elements for the specified view.
+     * <p>
+     * This method initializes specific UI elements present in the provided view,
+     * such as buttons, text views, or any other UI components used within the layout.
+     * These elements are then assigned to their respective class variables for future use.
+     * <p>
+     * @param convertView The view containing the UI elements to be initialized.
+     */
     private void loadScreenElements(View convertView) {
 
         checkExpenseGet = convertView.findViewById(R.id.checkExpenseGet);

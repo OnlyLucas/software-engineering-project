@@ -32,10 +32,13 @@ public class AdapterBudgetDetailOwe extends ArrayAdapter<Object[]> {
 
 
     /**
-     * Constructs the adapter with the specified context and list of items.
-     *
-     * @param context The context.
-     * @param items   The list of items to display.
+     * Constructs an Adapter for displaying owed budget details.
+     * <p>
+     * This constructor initializes the AdapterBudgetDetailOwe class with the provided context and list of items.
+     * It sets up the adapter to manage the display of owed budget details in a specific layout structure.
+     * <p>
+     * @param context The context of the application or activity.
+     * @param items   The list of items to be displayed in the adapter.
      */
     public AdapterBudgetDetailOwe(Context context, List<Object[]> items) {
 
@@ -46,15 +49,15 @@ public class AdapterBudgetDetailOwe extends ArrayAdapter<Object[]> {
     }
 
     /**
-     * This method is responsible for creating or recycling a view for an item in the Adapter.
-     * If the convertView is null, a new view is inflated using the specified layout resource.
-     * The data for the item at the given position is then set to the view elements.
-     * Finally, a click listener is attached to the checkExpenseOwe ImageView for user interaction.
-     *
+     * Get a View that displays the data at the specified position in the data set.
+     * <p>
+     * This method is called when each row (item) in the ListView or AdapterView needs to be displayed.
+     * It inflates the layout for displaying owed budget details and sets the appropriate data.
+     * <p>
      * @param position    The position of the item within the adapter's data set.
      * @param convertView The old view to reuse, if possible.
      * @param parent      The parent that this view will eventually be attached to.
-     * @return The view corresponding to the data at the specified position.
+     * @return The View corresponding to the data at the specified position.
      */
     @NonNull
     @Override
@@ -89,6 +92,11 @@ public class AdapterBudgetDetailOwe extends ArrayAdapter<Object[]> {
 
     }
 
+    /**
+     * Initializes view elements for displaying owed budget details.
+     *
+     * @param convertView The view for displaying owed budget details.
+     */
     private void loadScreenElements(View convertView) {
 
         amountOfCredit = convertView.findViewById(R.id.amountOfCredit);

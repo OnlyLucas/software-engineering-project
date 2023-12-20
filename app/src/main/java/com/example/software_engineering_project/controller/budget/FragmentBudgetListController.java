@@ -32,9 +32,11 @@ public class FragmentBudgetListController extends Fragment {
     private View fragmentView;
 
     /**
-     * Removes a payment item from the budget list at the specified position.
+     * Removes a specific payment item from the list and deletes it from the repository.
+     * The method identifies the payment at the provided position in the list of current payments
+     * and deletes it from the payment repository using the associated context.
      *
-     * @param position The position of the payment item to be removed.
+     * @param position The position of the payment item to be removed from the list.
      */
     public static void removeItem(int position) {
         Payment payment = currentPayments.getValue().get(position);

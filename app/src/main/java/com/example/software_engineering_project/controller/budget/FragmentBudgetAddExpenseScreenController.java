@@ -46,26 +46,32 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
 
 
     /**
-     * Adds a user to the list of selected users for the expense.
+     * Adds a user to the selected users list.
      *
-     * @param user The user to be added.
+     * @param user The user to be added to the selected users list.
+     *             This method appends the provided user to the list of selected users.
      */
     public static void addUser(User user) {
         selectedUsers.add(user);
     }
 
     /**
-     * Removes a user from the list of selected users for the expense.
+     * Removes a user from the selected users list.
      *
-     * @param user The user to be removed.
+     * @param user The user to be removed from the selected users list.
+     *             This method removes the provided user from the list of selected users if present.
      */
     public static void deleteUser(User user) {
         selectedUsers.remove(user);
     }
 
     /**
-     * Handles the save action by creating a new payment with the entered details.
-     * It calculates the payment amount for each selected user and creates the payment in the database.
+     * Handles the save action for creating a payment using the provided inputs and selected users.
+     * Retrieves payment details from inputs, creates a PaymentCreationRequest, and sends the payment creation request
+     * to the repository for each selected user.
+     *
+     * If payment details and selected users are available, it divides the payment amount equally among selected users
+     * and creates a payment request for each user.
      */
     public static void handleSaveClicked() {
         Payment payment = getPaymentFromInputs();
@@ -84,7 +90,13 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
         }
     }
 
-
+    /**
+     * Retrieves payment details from user inputs and validates the input fields.
+     * Parses the expense and reason fields to create a Payment object if the input is valid.
+     * Shows appropriate toast messages for validation errors.
+     *
+     * @return A Payment object if the input is valid, or null if input validation fails.
+     */
     private static Payment getPaymentFromInputs() {
         // get the inputs
         String expenseString = expense.getText().toString();
@@ -125,12 +137,13 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
     }
 
     /**
-     * Overrides the onCreateView method to inflate the layout and set up the UI elements.
+     * Inflates the layout for the Budget Add Expense screen, initializes necessary repositories and adapters,
+     * loads UI elements, observes changes in the user list, and sets up the ListView adapter.
      *
      * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
      * @param container          The parent view that the fragment's UI should be attached to.
-     * @param savedInstanceState The Bundle containing the fragment's previously saved state.
-     * @return The inflated View for the fragment.
+     * @param savedInstanceState A Bundle containing the previous state of the fragment, or null if it's a fresh start.
+     * @return The View for the Budget Add Expense screen after inflation and setup.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -155,6 +168,11 @@ public class FragmentBudgetAddExpenseScreenController extends Fragment {
         return fragmentView;
     }
 
+    /**
+     * Initializes and assigns UI elements for the Budget Add Expense screen.
+     * Finds and assigns specific UI components from the fragment's layout file to their respective variables.
+     * The components include expense amount, involved persons list, and reason for the expense.
+     */
     private void loadScreenElements() {
         expense = fragmentView.findViewById(R.id.enterNewExpenseAmount);
         listView = fragmentView.findViewById(R.id.enterNewExpenseInvolvedPersons);

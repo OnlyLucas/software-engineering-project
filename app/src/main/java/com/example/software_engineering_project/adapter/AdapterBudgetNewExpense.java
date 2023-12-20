@@ -33,10 +33,10 @@ public class AdapterBudgetNewExpense extends ArrayAdapter<User> {
 
 
     /**
-     * Creates a new AdapterBudgetNewExpense.
+     * Adapter for managing a list of users for the budget new expense feature.
      *
-     * @param context The context in which the adapter is being used.
-     * @param items   The List containing users to be displayed for adding a new expense.
+     * @param context The context of the calling activity or application.
+     * @param items   The list of users to be displayed in the adapter.
      */
     public AdapterBudgetNewExpense(Context context, List<User> items) {
 
@@ -47,12 +47,12 @@ public class AdapterBudgetNewExpense extends ArrayAdapter<User> {
     }
 
     /**
-     * Get the view that displays the data at the specified position in the data set.
+     * Get a View that displays the data at the specified position in the data set.
      *
      * @param position    The position of the item within the adapter's data set.
      * @param convertView The old view to reuse, if possible.
      * @param parent      The parent that this view will eventually be attached to.
-     * @return The view corresponding to the data at the specified position.
+     * @return The View corresponding to the data at the specified position.
      */
     @NonNull
     @Override
@@ -104,6 +104,12 @@ public class AdapterBudgetNewExpense extends ArrayAdapter<User> {
 
     }
 
+    /**
+     * Initializes the CheckBox UI element named checkBoxNewExpenseParticipants
+     * by finding the corresponding view from the provided convertView.
+     *
+     * @param convertView The View object representing the inflated layout used in the adapter.
+     */
     private void loadScreenElements(View convertView) {
 
         checkBoxNewExpenseParticipants = convertView.findViewById(R.id.checkBoxNewExpenseParticipants);

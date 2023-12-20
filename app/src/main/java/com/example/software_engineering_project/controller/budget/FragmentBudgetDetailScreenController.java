@@ -46,10 +46,13 @@ public class FragmentBudgetDetailScreenController extends Fragment {
     private Double oweDouble = new Double(0);
 
     /**
-     * Unchecks an item in the get category when the user marks a payment as paid.
+     * Marks the payments as 'paid' for a specific user in the context of 'getting' payments,
+     * updating the associated payment participations accordingly.
+     * This method retrieves the necessary payment participations by user IDs
+     * and marks them as 'paid', updating the database.
      *
-     * @param position The position of the item in the get category.
-     * @param context  The context used for operations.
+     * @param position The position of the user whose payments need to be marked as 'paid'.
+     * @param context  The Context reference used for displaying toasts and accessing resources.
      */
     public static void uncheckItemGet(int position, Context context) {
 
@@ -84,10 +87,13 @@ public class FragmentBudgetDetailScreenController extends Fragment {
 
 
     /**
-     * Unchecks an item in the owe category when the user marks a payment as paid.
+     * Marks the payments as 'paid' for a specific user in the context of 'owing' payments,
+     * updating the associated payment participations accordingly.
+     * This method retrieves the necessary payment participations by user IDs
+     * and marks them as 'paid', updating the database.
      *
-     * @param position The position of the item in the owe category.
-     * @param context  The context used for operations.
+     * @param position The position of the user whose payments need to be marked as 'paid'.
+     * @param context  The Context reference used for displaying toasts and accessing resources.
      */
     public static void uncheckItemOwe(int position, Context context) {
 
@@ -119,12 +125,15 @@ public class FragmentBudgetDetailScreenController extends Fragment {
 
 
     /**
-     * Overrides the onCreateView method to inflate the layout and set up the UI elements.
+     * Initializes and populates the budget detail screen's view.
+     * Retrieves the necessary data for displaying 'get' and 'owe' payments
+     * for the current group and user. Observes the LiveData for 'get' and 'owe' payments
+     * and updates the corresponding adapters and views accordingly.
      *
-     * @param inflater           The LayoutInflater object that can be used to inflate views in the fragment.
+     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
      * @param container          The parent view that the fragment's UI should be attached to.
-     * @param savedInstanceState The Bundle containing the fragment's previously saved state.
-     * @return The inflated View for the fragment.
+     * @param savedInstanceState A Bundle containing the saved state of the fragment.
+     * @return The inflated view for the budget detail screen.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -164,23 +173,38 @@ public class FragmentBudgetDetailScreenController extends Fragment {
 
     }
 
+    /**
+     * Calculates and displays the total difference between 'get' and 'owe' payments.
+     * Updates the UI to reflect the total amount to get back or owe after considering
+     * 'get' and 'owe' payments. Displays the total amount in Euro currency format.
+     *
+     * @param getPayments The total 'get' payments received by the user.
+     * @param owePayments The total 'owe' payments the user needs to pay.
+     */
     private void getTotalGetOrOwe(Double getPayments, Double owePayments) {
         Double difference = getPayments - owePayments;
         // So far we only support euro as currency, but in this place a differentiation would be needed
         String differenceString;
 
         if(difference == 0){
-            totalCalculatedExpenses.setText("In total you do not owe or get any money.");
+            totalCalculatedExpenses.setText(R.string.in_total_you_do_not_owe_or_get_any_money);
         } else if(difference > 0){
             differenceString = String.format(Locale.getDefault(), "%.2f", difference) + "€";
-            totalCalculatedExpenses.setText("You get back in total: " + differenceString);
+            totalCalculatedExpenses.setText(getString(R.string.you_get_back_in_total) + differenceString);
         } else{
             difference = difference * (-1);
             differenceString = String.format(Locale.getDefault(), "%.2f", difference) + "€";
-            totalCalculatedExpenses.setText("You owe in total: " + differenceString);
+            totalCalculatedExpenses.setText(getString(R.string.you_owe_in_total) + differenceString);
         }
     }
 
+    /**
+     * Calculates the total 'get' payments received by the user from the provided list.
+     * Updates the UI to display the total 'get' payments in Euro currency format.
+     *
+     * @param list A list of Object arrays containing payment information, including payment amount.
+     * @return The total 'get' payments received by the user, in Double format, or null if the list is null.
+     */
     private Double getTotalGetPayments(List<Object[]> list) {
             if (list != null) {
                 Double totalAmountGet = new Double(0);
@@ -192,17 +216,24 @@ public class FragmentBudgetDetailScreenController extends Fragment {
                     }
                 }
                 if(totalAmountGet == 0.00){
-                    totalGetExpenses.setText("You do not get any money back.");
+                    totalGetExpenses.setText(R.string.you_do_not_get_any_money_back);
                 } else {
                     // So far we only support euro as currency, but in this place a differentiation would be needed
                     String totalAmountGetString = String.format(Locale.getDefault(), "%.2f", totalAmountGet) + "€";
-                    totalGetExpenses.setText("You get: " + totalAmountGetString);
+                    totalGetExpenses.setText(getString(R.string.you_get) + totalAmountGetString);
                 }
                 return totalAmountGet;
             }
             return null;
     }
 
+    /**
+     * Calculates the total 'owe' payments the user needs to make based on the provided list.
+     * Updates the UI to display the total 'owe' payments in Euro currency format or a message if no money is owed.
+     *
+     * @param list A list of Object arrays containing payment information, including payment amount.
+     * @return The total 'owe' payments to be made by the user in Double format, or null if the list is null.
+     */
     private Double getTotalOwePayments(List<Object[]> list) {
         if (list != null) {
             Double totalAmountOwe = new Double(0);
@@ -216,15 +247,21 @@ public class FragmentBudgetDetailScreenController extends Fragment {
                 }
             }
             if(totalAmountOwe == 0.00) {
-                totalOweExpenses.setText("You do not owe any money.");
+                totalOweExpenses.setText(R.string.you_do_not_owe_any_money);
             } else {
-                totalOweExpenses.setText("You owe: " + totalAmountOwe);
+                totalOweExpenses.setText(getString(R.string.you_owe) + totalAmountOwe);
             }
             return totalAmountOwe;
         }
         return null;
     }
 
+    /**
+     * Initializes UI elements by assigning them from the corresponding XML layout elements in the fragment.
+     * Retrieves references for displaying 'get' and 'owe' expenses lists, total calculated expenses,
+     * total 'get' expenses, and total 'owe' expenses TextViews.
+     * These elements are used to populate and display information on the UI.
+     */
     private void loadScreenElements() {
 
         listGetExpenses = fragmentView.findViewById(R.id.listGetExpenses);

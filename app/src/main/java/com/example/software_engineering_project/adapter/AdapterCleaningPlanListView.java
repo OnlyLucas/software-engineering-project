@@ -41,10 +41,11 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
     private TextView name, description, nextCleaningDate, number;
 
     /**
-     * The constructor for the AdapterCleaningPlanListView.
+     * Constructs an Adapter for the Cleaning Plan List View.
      *
-     * @param context The context in which the adapter is being used.
-     * @param items   The List of CleaningTemplate objects to be displayed in the adapter.
+     * @param context             The context of the application.
+     * @param items               The list of Cleaning Templates to be displayed.
+     * @param cleaningRepository  The repository for handling cleaning data.
      */
     public AdapterCleaningPlanListView(Context context, List<CleaningTemplate> items, CleaningRepository cleaningRepository) {
 
@@ -104,7 +105,10 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
         return convertView;
     }
 
-
+    /**
+     * ViewHolder pattern for efficient list item view recycling.
+     * Contains references to UI elements for each item in the ListView.
+     */
     class ViewHolder {
         // Add your UI elements here
         TextView number;
@@ -115,6 +119,11 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
 
         private static LiveData<Cleaning> smallestCleaningLiveData;
 
+        /**
+         * Load UI elements from the convertView.
+         *
+         * @param convertView The view that contains the UI elements.
+         */
         void loadScreenElements(View convertView) {
             description = convertView.findViewById(R.id.descriptionCleaningPlan);
             name = convertView.findViewById(R.id.nameCleaningPlan);
@@ -123,6 +132,11 @@ public class AdapterCleaningPlanListView extends ArrayAdapter<CleaningTemplate> 
             remove = convertView.findViewById(R.id.removeCleaningPlan);
         }
 
+        /**
+         * Set listeners or behaviors for buttons and actions in the layout.
+         *
+         * @param position The position of the item in the list.
+         */
         void addButtons(int position) {
             remove.setOnClickListener(new View.OnClickListener() {
                 @Override

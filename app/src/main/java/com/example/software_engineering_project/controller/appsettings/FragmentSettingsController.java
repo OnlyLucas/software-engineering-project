@@ -36,12 +36,15 @@ public class FragmentSettingsController extends Fragment {
 
 
     /**
-     * Inflates the layout for this fragment, initializes the UI elements, and adds click listeners to buttons.
+     * Called to create and return the view hierarchy associated with the fragment.
+     * This method inflates the fragment's layout defined in the XML file to create its UI components.
+     * It initializes and sets up the UI elements when the fragment is being created or recreated.
      *
      * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
-     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state.
-     * @return The inflated view for this fragment.
+     * @param container          The parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState A Bundle containing the previous state of the fragment (if available).
+     *                           It is null if the fragment is being created for the first time.
+     * @return The root view of the fragment's layout.
      */
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -53,6 +56,15 @@ public class FragmentSettingsController extends Fragment {
 
     }
 
+    /**
+     * Initializes and sets up click listeners for various buttons present in the fragment's layout.
+     * This method associates specific actions or fragments with each button click.
+     * - The 'changePasswordButton' triggers the transition to the change password screen.
+     * - The 'changeMailButton' triggers the transition to the change mail screen.
+     * - The 'createFlatShareButton' triggers the transition to the manage flat share screen.
+     * - The 'leaveFlatShareButton' triggers the display of a dialog for leaving the flat share.
+     * - The 'logOutButton' logs out the current user and redirects to the login screen.
+     */
     private void addButtons() {
 
         changePasswordButton.setOnClickListener(view -> {
@@ -78,6 +90,16 @@ public class FragmentSettingsController extends Fragment {
 
     }
 
+    /**
+     * Replaces the current fragment with the provided fragment in the content frame.
+     *
+     * @param fragment The fragment to be displayed.
+     *                 Replaces the existing fragment in the content frame identified by R.id.contentFragmentMainScreen.
+     *                 Utilizes the FragmentManager to handle transactions for fragment replacement.
+     *                 This method commits the transaction and sets the provided fragment as the active fragment.
+     *                 This action replaces the current UI in the content frame with the UI of the provided fragment.
+     *                 Uses the support version of FragmentManager.
+     */
     private void callFragment(Fragment fragment) {
 
         FragmentManager fm = requireActivity().getSupportFragmentManager();
@@ -87,6 +109,11 @@ public class FragmentSettingsController extends Fragment {
 
     }
 
+    /**
+     * Loads and initializes the UI elements from the associated layout file.
+     * Retrieves references to UI elements in the fragment's layout file for further interaction.
+     * These UI elements include buttons related to user actions.
+     */
     private void loadScreenElements() {
 
         changeMailButton = fragmentView.findViewById(R.id.changeMailButton);

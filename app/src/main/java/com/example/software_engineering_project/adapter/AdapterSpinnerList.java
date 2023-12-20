@@ -36,10 +36,10 @@ public class AdapterSpinnerList extends ArrayAdapter<String> implements AdapterV
     // @param context: the Context from the MainActivity
     // @param items: The list of items in our Grocery List
     /**
-     * The constructor for the AdapterSpinnerList.
+     * Custom adapter for populating a Spinner widget with a list of strings.
      *
      * @param context The context in which the adapter is being used.
-     * @param items   The ArrayList of String items to be displayed in the Spinner.
+     * @param items   The list of strings to be displayed in the Spinner.
      */
     public AdapterSpinnerList(Context context, ArrayList<String> items) {
 
@@ -51,15 +51,13 @@ public class AdapterSpinnerList extends ArrayAdapter<String> implements AdapterV
 
     // The method we override to provide our own layout for each View (row) in the ListView
     /**
-     * Get the view that displays the data at the specified position in the data set.
-     *
-     * This method creates or reuses a view to represent an item in the adapter's data set. It inflates the layout
-     * 'adapter_spinner_list_view' if the provided convertView is null, and then loads screen elements using the loadScreenElements method. It sets the text of the nameOfInterval TextView based on the String item at the specified position.
+     * Get a View that displays the data at the specified position in the adapter.
+     * This method is responsible for creating or recycling item views for the Spinner items.
      *
      * @param position    The position of the item within the adapter's data set.
-     * @param convertView The old view to reuse, if possible.
+     * @param convertView The old view to reuse, if possible. Note: this may be null initially.
      * @param parent      The parent that this view will eventually be attached to.
-     * @return The view corresponding to the data at the specified position.
+     * @return The View corresponding to the data at the specified position.
      */
     @NonNull
     @Override
@@ -78,6 +76,11 @@ public class AdapterSpinnerList extends ArrayAdapter<String> implements AdapterV
 
     }
 
+    /**
+     * Loads and initializes screen elements for the View being processed.
+     *
+     * @param convertView The View in which elements are to be initialized.
+     */
     private void loadScreenElements(View convertView) {
 
         nameOfInterval = convertView.findViewById(R.id.nameOfInterval);
@@ -85,7 +88,7 @@ public class AdapterSpinnerList extends ArrayAdapter<String> implements AdapterV
     }
 
     /**
-     * Callback method to be invoked when an item in this AdapterView has been selected.
+     * Callback method to be invoked when an item in the AdapterView has been selected.
      *
      * @param parent   The AdapterView where the selection happened.
      * @param view     The view within the AdapterView that was clicked.
@@ -98,7 +101,7 @@ public class AdapterSpinnerList extends ArrayAdapter<String> implements AdapterV
     }
 
     /**
-     * Callback method to be invoked when the selection disappears from this AdapterView.
+     * Callback method to be invoked when the selection disappears from this view.
      *
      * @param parent The AdapterView that now contains no selected item.
      */
@@ -108,11 +111,9 @@ public class AdapterSpinnerList extends ArrayAdapter<String> implements AdapterV
     }
 
     /**
-     * Set the text of the nameOfInterval TextView.
+     * Sets the text of the nameOfInterval TextView with the provided itemSelected String.
      *
-     * This method allows external classes to set the text of the nameOfInterval TextView.
-     *
-     * @param itemSelected The String item selected in the Spinner.
+     * @param itemSelected The String to be set as the text for the nameOfInterval TextView.
      */
     public static void setText(String itemSelected) {
         nameOfInterval.setText(itemSelected);

@@ -57,9 +57,15 @@ public class FragmentManageFlatShareController extends Fragment {
 
 
     /**
-     * Adds an item with the specified name to the list of flat share members.
+     * Adds a user to a group within the application.
+     * Retrieves the user by their email from the user repository and observes changes.
+     * If the user exists:
+     *     - Checks if the user is already part of another group.
+     *     - If not in any group, creates a new group membership and inserts it into the group membership repository.
+     *     - If already in another group, displays a notification to the user.
+     * If the user doesn't exist, displays a message prompting to enter a valid email.
      *
-     * @param mail The mail of the member to be added.
+     * @param mail The email address of the user to be added to the group.
      */
     public static void addItem(String mail) {
         userRepository.getUserByMail(mail, context).observe((LifecycleOwner) context, newUser -> {
@@ -80,11 +86,13 @@ public class FragmentManageFlatShareController extends Fragment {
     }
 
     /**
-     * Removes a flat share member at the specified index from the list.
+     * Removes a user from a group within the application.
+     * Retrieves the user from the list of current users using the given index.
+     * Deletes the group membership associated with the user using the groupMembershipRepository.
+     * Sets the adapter for the listView after the removal operation.
      *
-     * @param i The index of the member to be removed.
+     * @param i The index of the user to be removed from the list of current users.
      */
-
     public static void removeItem(int i) {
 
         User user = currentUsers.getValue().get(i);
@@ -94,12 +102,14 @@ public class FragmentManageFlatShareController extends Fragment {
     }
 
     /**
-     * Inflates the layout for this fragment, initializes the UI elements, and adds click listeners to buttons.
+     * Called to create and return the view hierarchy associated with the fragment.
      *
-     * @param inflater           The LayoutInflater object that can be used to inflate any views in the fragment.
-     * @param container          If non-null, this is the parent view that the fragment's UI should be attached to.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state.
-     * @return The inflated view for this fragment.
+     * @param inflater           The LayoutInflater object that can be used to inflate
+     *                           any views in the fragment.
+     * @param container          The parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState This fragment is being re-constructed from a previous saved state
+     *                           as given here. This value may be null.
+     * @return The inflated view for the fragment.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -125,6 +135,11 @@ public class FragmentManageFlatShareController extends Fragment {
 
     }
 
+    /**
+     * Sets up various buttons and their associated click listeners within the Manage Flat Share fragment's user interface.
+     * Handles interactions with the list view, cancellation, saving changes, adding a new member, and navigating to
+     * other fragments.
+     */
     private void addButtons() {
 
         listView.setLongClickable(true);
@@ -182,6 +197,12 @@ public class FragmentManageFlatShareController extends Fragment {
 
     }
 
+    /**
+     * Navigates to the specified Fragment by replacing the current fragment in the activity's container with
+     * the provided Fragment instance.
+     *
+     * @param fragment The Fragment to be displayed.
+     */
     private void callFragment(Fragment fragment) {
 
         FragmentManager fm = requireActivity().getSupportFragmentManager();
@@ -191,6 +212,13 @@ public class FragmentManageFlatShareController extends Fragment {
 
     }
 
+    /**
+     * Initializes and assigns XML layout elements to corresponding variables in the fragment's view.
+     * This method should be called to set up references to UI elements when the fragment's view is created.
+     * It associates XML layout elements with their respective variables for later use in the fragment.
+     * It is typically called during the setup phase of the fragment.
+     * Ensure the IDs specified in the method correspond to the correct layout elements in the XML layout file.
+     */
     private void loadScreenElements() {
 
         addFlatShare = fragmentView.findViewById(R.id.addFlatShare);
