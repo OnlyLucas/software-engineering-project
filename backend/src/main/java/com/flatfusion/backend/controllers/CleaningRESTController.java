@@ -57,6 +57,13 @@ public class CleaningRESTController extends RESTController<CleaningEntity>{
         return new ResponseEntity<>(uncompletedCleanings.get(), HttpStatus.OK);
     }
 
+    /**
+     * Get uncompleted cleaning with the smallest date for a specific cleaning template.
+     *
+     * @param templateId The ID of the cleaning template.
+     * @return {@link ResponseEntity} containing the uncompleted cleaning with the smallest date with HTTP status.
+     * If found, returns 200 OK; if not found, returns 404 NOT FOUND.
+     */
     @GetMapping("/cleaning-template/{templateId}/uncompletedSmallestDate")
     public ResponseEntity<CleaningEntity> getUncompletedCleaningWithSmallestDate(@PathVariable UUID templateId) {
         logger.info("Get uncompleted Cleaning with smallest date by CleaningTemplate id:  " + templateId);

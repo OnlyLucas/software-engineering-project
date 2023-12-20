@@ -10,11 +10,21 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/**
+ * Custom implementation of the Spring Security UserDetails interface for user authentication.
+ * This class represents the principal (currently authenticated user) and provides
+ * information required by the security framework.
+ */
 public class CustomUserPrincipal implements UserDetails {
     private UserEntity user;
 
     private final Logger log = LoggerFactory.getLogger(CustomUserPrincipal.class);
 
+    /**
+     * Constructs a CustomUserPrincipal with the specified UserEntity.
+     *
+     * @param user The UserEntity representing the currently authenticated user.
+     */
     public CustomUserPrincipal(UserEntity user) {
         this.user = user;
     }

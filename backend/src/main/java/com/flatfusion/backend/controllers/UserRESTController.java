@@ -18,6 +18,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 /**
+ *
+ *Controller handling CRUD operations for user entities.
+ *Provides methods for retrieving, updating, and creating user entities.
+ *
  * REST controller for managing user-related operations.
  */
 @RestController
@@ -64,6 +68,13 @@ public class UserRESTController extends RESTController<UserEntity>{
         }
     }
 
+    /**
+     * Handles updating a user's password.
+     *
+     * @param entity The request body containing the user entity and the new password.
+     * @return HTTP.OK and the updated user entity if the update is successful.
+     * HTTP.NOT_FOUND if the user entity with the given ID is not found.
+     */
     @Transactional
     @PatchMapping("/change-password")
     public ResponseEntity<UserEntity> updateUserPassword(@RequestBody UserWithPasswordRequest entity){

@@ -54,6 +54,14 @@ public class GroupMembershipRESTController extends RESTController<GroupMembershi
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    /**
+     * Get the group associated with a user by user ID.
+     *
+     * @param userId The ID of the user.
+     * @return {@link ResponseEntity} containing the group associated with the user with HTTP status.
+     * If found, returns 200 OK; if not found, returns 404 NOT FOUND.
+     */
     @GetMapping("/by-user/{userId}")
     public ResponseEntity<GroupEntity> getGroupByUserId(@PathVariable UUID userId) {
         Optional<GroupEntity> group = repository.findGroupByUserId(userId);

@@ -11,7 +11,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import java.util.Base64;
 
-
+/**
+ * Controller handling user authentication through the login endpoint.
+ * Provides a method to authenticate users based on the 'Authorization' header containing username and password credentials.
+ */
 @RestController
 @RequestMapping("/v1/login")
 public class LoginController {

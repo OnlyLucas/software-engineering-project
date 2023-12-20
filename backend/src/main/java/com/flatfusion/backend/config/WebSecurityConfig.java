@@ -31,7 +31,13 @@ class WebSecurityConfig {
     @Autowired
     UserDetailsService userDetailsService;
 
-
+    /**
+     * Configures the security filter chain.
+     *
+     * @param http The HttpSecurity object to configure.
+     * @return The configured SecurityFilterChain.
+     * @throws Exception If an error occurs during configuration.
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -71,6 +77,11 @@ class WebSecurityConfig {
         return http.build();
     }
 
+    /**
+     * Configures the authentication provider.
+     *
+     * @return The configured DaoAuthenticationProvider.
+     */
     @Bean
     public DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
@@ -88,6 +99,13 @@ class WebSecurityConfig {
 //                .build();
 //    }
 
+    /**
+     * Configures the authentication manager.
+     *
+     * @param authConfig The AuthenticationConfiguration object.
+     * @return The configured AuthenticationManager.
+     * @throws Exception If an error occurs during configuration.
+     */
     @Bean
     public AuthenticationManager authManager(AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
