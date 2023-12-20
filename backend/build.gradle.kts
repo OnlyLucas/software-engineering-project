@@ -44,7 +44,6 @@ dependencies {
 	implementation("org.springdoc:springdoc-openapi-ui:1.7.0")
 	implementation("org.springdoc:springdoc-openapi-webmvc-core:1.7.0")
 
-
 	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson
 	runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.3")
 	implementation(kotlin("script-runtime"))
