@@ -93,12 +93,9 @@ public class FragmentGroceryListHistoryController extends Fragment {
         });
 
         // Remove an item when its row is long pressed
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                removeItem(i);
-                return false;
-            }
+        listView.setOnItemLongClickListener((adapterView, view, i, l) -> {
+            removeItem(i);
+            return false;
         });
 
         goBack.setOnClickListener(view -> {
