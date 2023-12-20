@@ -1,8 +1,8 @@
 package com.example.software_engineering_project.controller.budget;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.test.core.app.ActivityScenario;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
@@ -16,31 +16,27 @@ import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.TestUtils;
 import com.example.software_engineering_project.controller.ActivityLoginScreenController;
 import com.example.software_engineering_project.controller.ActivityMainScreenController;
-import com.example.software_engineering_project.controller.appsettings.FragmentSettingsController;
-import com.example.software_engineering_project.controller.budget.FragmentBudgetAddExpenseScreenController;
-import com.example.software_engineering_project.controller.budget.FragmentBudgetMainController;
 
-import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static androidx.core.content.MimeTypeFilter.matches;
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static org.hamcrest.CoreMatchers.allOf;
-
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-
 @RunWith(AndroidJUnit4.class)
 public class FragmentBudgetAddExpenseScreenControllerTest {
 
+    /**
+     * Rule to facilitate testing of {@link ActivityMainScreenController} using Espresso Intents.
+     * <p>
+     * This rule is used to launch and handle the lifecycle of the {@link ActivityMainScreenController}
+     * for testing purposes using {@link IntentsTestRule} provided by Espresso.
+     * <p>
+     * Preconditions: The {@link ActivityMainScreenController} must be a valid activity intended for testing.
+     * <p>
+     * This rule enables the setup and teardown of the activity lifecycle, allowing the execution of Espresso
+     * test cases within the context of the {@link ActivityMainScreenController} to test its UI interactions
+     * and Intent interactions with other activities.
+     */
     @Rule
     public IntentsTestRule<ActivityMainScreenController> activityRule = new IntentsTestRule<>(ActivityMainScreenController.class);
 

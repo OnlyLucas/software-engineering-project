@@ -1,8 +1,9 @@
 package com.example.software_engineering_project.controller.appsettings;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.test.core.app.ActivityScenario;
+import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withTagValue;
+
 import androidx.test.espresso.Espresso;
 import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.assertion.ViewAssertions;
@@ -12,25 +13,31 @@ import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withTagValue;
-
-import android.annotation.SuppressLint;
-
 import com.example.software_engineering_project.R;
 import com.example.software_engineering_project.TestUtils;
 import com.example.software_engineering_project.controller.ActivityLoginScreenController;
 import com.example.software_engineering_project.controller.ActivityMainScreenController;
 
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 @RunWith(AndroidJUnit4.class)
 public class FragmentSettingsControllerTest {
 
+    /**
+     * Rule to facilitate testing of {@link ActivityLoginScreenController} using Espresso Intents.
+     * <p>
+     * This rule is used to launch and handle the lifecycle of the {@link ActivityLoginScreenController}
+     * for testing purposes using {@link IntentsTestRule} provided by Espresso.
+     * <p>
+     * Preconditions: The {@link ActivityLoginScreenController} must be a valid activity intended for testing.
+     * <p>
+     * This rule enables the setup and teardown of the activity lifecycle, allowing the execution of Espresso
+     * test cases within the context of the {@link ActivityLoginScreenController} to test its UI interactions
+     * and Intent interactions with other activities.
+     */
     @Rule
     public IntentsTestRule<ActivityLoginScreenController> mActivityRule =
             new IntentsTestRule<>(ActivityLoginScreenController.class);
