@@ -131,6 +131,12 @@ public class FragmentManageFlatShareController extends Fragment {
 
         listView.setAdapter(adapter);
 
+        Group group = AppStateRepository.getCurrentGroupLiveData().getValue();
+        if(group != null){
+            nameManageFlatShare.setText(group.getName());
+            descriptionManageFlatShare.setText(group.getDescription());
+        }
+
         return fragmentView;
 
     }
