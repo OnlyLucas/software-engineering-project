@@ -78,7 +78,7 @@ public class FragmentBudgetDetailScreenController extends Fragment {
                             p.setPaid();
                             paymentParticipationRepository.update(p, context);
                         }
-                        ToastUtil.makeToast("Paid " + name, context);
+                        ToastUtil.makeToast(context.getString(R.string.paid_blank) + name, context);
                     }
                 });
     }
@@ -116,7 +116,7 @@ public class FragmentBudgetDetailScreenController extends Fragment {
                             p.setPaid();
                             paymentParticipationRepository.update(p, context);
                         }
-                        ToastUtil.makeToast("Paid " + name, context);
+                        ToastUtil.makeToast(context.getString(R.string.paid_blank) + name, context);
                     }
                 });
     }
@@ -241,7 +241,6 @@ public class FragmentBudgetDetailScreenController extends Fragment {
         if (list != null) {
             Double totalAmountOwe = new Double(0);
             // So far we only support euro as currency, but in this place a differentiation would be needed
-            String totalAmountOweString = String.format(Locale.getDefault(), "- %.2f", totalAmountOwe) + "€";
 
             for (Object[] object : list) {
                 if (object.length > 1 && object[1] instanceof Double) {
@@ -253,7 +252,8 @@ public class FragmentBudgetDetailScreenController extends Fragment {
             if (totalAmountOwe == 0.00) {
                 totalOweExpenses.setText(R.string.you_do_not_owe_any_money);
             } else {
-                totalOweExpenses.setText(getString(R.string.you_owe) + totalAmountOwe);
+                String totalAmountOweString = String.format(Locale.getDefault(), "%.2f", totalAmountOwe) + "€";
+                totalOweExpenses.setText(getString(R.string.you_owe) + totalAmountOweString);
             }
 
             return totalAmountOwe;

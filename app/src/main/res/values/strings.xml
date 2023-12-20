@@ -144,4 +144,5 @@
     <string name="password_successfully_changed">Password successfully changed</string>
     <string name="password_not_changed">Changing passwords was not successful</string>
     <string name="wrong_current_password">Wrong current password</string>
+    <string name="paid_blank">"Paid "</string>
 </resources>
