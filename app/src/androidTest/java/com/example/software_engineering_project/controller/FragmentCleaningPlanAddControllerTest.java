@@ -51,6 +51,7 @@ public class FragmentCleaningPlanAddControllerTest {
 
     @Before
     public void launchFragment() {
+
         // Launch the activity
         ActivityScenario<ActivityLoginScreenController> scenarioLogin = ActivityScenario.launch(ActivityLoginScreenController.class);
 
@@ -65,7 +66,6 @@ public class FragmentCleaningPlanAddControllerTest {
             throw new RuntimeException(e);
         }
 
-
         ActivityScenario<ActivityMainScreenController> scenario = ActivityScenario.launch(ActivityMainScreenController.class);
 
         // Use FragmentManager to add your fragment
@@ -77,6 +77,7 @@ public class FragmentCleaningPlanAddControllerTest {
         });
         // Use FragmentManager to add your fragment
         Espresso.onView(withId(R.id.addCleaningPlan)).perform(ViewActions.click());
+
     }
 
     @Test
@@ -116,7 +117,6 @@ public class FragmentCleaningPlanAddControllerTest {
         // Warte auf die Anzeige des "OK" oder "Speichern" Buttons
         // Hier kannst du die Textressource anpassen, die auf dem Button angezeigt wird
         Espresso.onView(withText(R.string.save)).perform(ViewActions.click());
-
 
     }
 
@@ -169,4 +169,3 @@ public class FragmentCleaningPlanAddControllerTest {
     }
 
 }
-
