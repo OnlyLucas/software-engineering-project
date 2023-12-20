@@ -35,6 +35,7 @@ public class GroupRESTController extends RESTController<GroupEntity>{
     @Autowired
     public GroupRESTController(GroupEntityRepository repository) {
         super(repository);
+        this.groupRepository = repository;
     }
 
 

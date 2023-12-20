@@ -32,6 +32,7 @@ public class GroupMembershipRESTController extends RESTController<GroupMembershi
     @Autowired
     public GroupMembershipRESTController(GroupMembershipEntityRepository repository) {
         super(repository);
+        this.repository = repository;
     }
 
     /**
@@ -58,10 +59,11 @@ public class GroupMembershipRESTController extends RESTController<GroupMembershi
         Optional<GroupEntity> group = repository.findGroupByUserId(userId);
         logger.info("Get group by user id: " + userId );
 
-        if (group != null) {
+        if (group.isPresent()) {
             return new ResponseEntity<>(group.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
 
