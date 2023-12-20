@@ -27,6 +27,23 @@ import org.junit.runners.MethodSorters;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FragmentGroceryListHistoryControllerTest {
 
+    /**
+     * Prepares the test environment by logging into the application and initializing a specific fragment.
+     * <p>
+     * Setup actions include:
+     * <ol>
+     *     <li>Initiating the application login process using {@link TestUtils#appLogin()}.</li>
+     *     <li>Launching the {@link FragmentGroceryListController} within {@link ActivityMainScreenController}.</li>
+     * </ol>
+     * <p>
+     * Preconditions: The application must be in a state where the specified fragment within
+     * the {@link ActivityMainScreenController} is accessible after a successful login.
+     * The method assumes the existence of the specified fragment and a valid navigation flow from
+     * the login screen to the {@link ActivityMainScreenController}.
+     * <p>
+     * This setup method prepares the testing environment by performing necessary actions such as login
+     * and launching a fragment for subsequent test execution.
+     */
     @Before
     public void setUp() {
 
@@ -39,23 +56,50 @@ public class FragmentGroceryListHistoryControllerTest {
 
     }
 
+    /**
+     * Creates test data by adding an item to the grocery list.
+     * <p>
+     * Test steps include:
+     * <ol>
+     *     <li>Enters a test item ("TestItemHistory") into the input field.</li>
+     *     <li>Clicks the "Enter" button to add the test item to the grocery list.</li>
+     * </ol>
+     * <p>
+     * Preconditions: The UI must have an input field to add items to the grocery list.
+     * The method assumes successful addition of the test item to the list after clicking the "Enter" button.
+     * <p>
+     * This method aims to create test data by adding a specific item to the grocery list for subsequent test cases.
+     */
     private void createTestData() {
+
         //Ein TestElemente erstellen
         Espresso.onView(withId(R.id.input))
                 .perform(ViewActions.typeText("TestItemHistory"), ViewActions.closeSoftKeyboard());
         Espresso.onView(withId(R.id.enter)).perform(ViewActions.click());
+
     }
 
+    /**
+     * Deletes test data by removing an item from the grocery list history.
+     * <p>
+     * Test steps include:
+     * <ol>
+     *     <li>Navigates to the grocery list history.</li>
+     *     <li>Waits for a specified time.</li>
+     *     <li>Removes the first item from the grocery list history.</li>
+     * </ol>
+     * <p>
+     * Preconditions: The UI must have a way to navigate to the grocery list history.
+     * The method assumes the existence of the grocery list history and the ability to remove items from it.
+     * <p>
+     * This method aims to delete test data by removing an item from the grocery list history for test cleanup purposes.
+     */
     private void deleteTestData(){
 
         //In History gehen
         Espresso.onView(withId(R.id.historyGroceryList)).perform(ViewActions.click());
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        TestUtils.waitingTime();
 
         //Element löschen
         Espresso.onData(Matchers.anything())
@@ -66,6 +110,21 @@ public class FragmentGroceryListHistoryControllerTest {
 
     }
 
+    /**
+     * Moves test data to the grocery list history by performing a specific action on an item.
+     * <p>
+     * Test steps include:
+     * <ol>
+     *     <li>Selects an item from the grocery list.</li>
+     *     <li>Performs an action to move the selected item to the grocery list history.</li>
+     * </ol>
+     * <p>
+     * Preconditions: The UI must have a way to interact with items in the grocery list.
+     * The method assumes the ability to perform actions to move items from the grocery list to its history.
+     * <p>
+     * This method aims to move specific test data to the grocery list history by performing a particular action
+     * on an item in the list.
+     */
     private void moveTestDataToHistory() {
 
         //Element in Historie verschieben
@@ -77,6 +136,24 @@ public class FragmentGroceryListHistoryControllerTest {
 
     }
 
+    /**
+     * Tests the functionality of moving an item from the current grocery list to its history.
+     * <p>
+     * Test steps include:
+     * <ol>
+     *     <li>Creates test data by adding an item to the grocery list.</li>
+     *     <li>Selects an item from the grocery list.</li>
+     *     <li>Performs an action to move the selected item to the grocery list history.</li>
+     *     <li>Deletes the test data by removing the item from the grocery list history.</li>
+     * </ol>
+     * <p>
+     * Preconditions: The UI must have functionalities to add items to the grocery list, move items to its history,
+     * and delete items from the grocery list history.
+     * The method assumes the existence of these functionalities for testing purposes.
+     * <p>
+     * This test method aims to validate the correct behavior of moving an item from the grocery list to its history
+     * and confirms the successful movement by deleting the moved item from the history.
+     */
     @Test
     public void moveToHistory() {
 
@@ -93,8 +170,27 @@ public class FragmentGroceryListHistoryControllerTest {
 
     }
 
+    /**
+     * Tests the functionality of deleting an item from the grocery list history.
+     * <p>
+     * Test steps include:
+     * <ol>
+     *     <li>Creates test data by adding an item to the grocery list.</li>
+     *     <li>Moves the test data to the grocery list history.</li>
+     *     <li>Navigates to the grocery list history.</li>
+     *     <li>Waits for a specified time.</li>
+     *     <li>Deletes the first item from the grocery list history.</li>
+     * </ol>
+     * <p>
+     * Preconditions: The UI must have functionalities to add items to the grocery list, move items to its history,
+     * navigate to the history, and delete items from the grocery list history.
+     * The method assumes the existence of these functionalities for testing purposes.
+     * <p>
+     * This test method aims to validate the correct behavior of deleting an item from the grocery list history
+     * after moving it from the current grocery list to the history.
+     */
     @Test
-    public void ydeleteFromHistoryButton() {
+    public void yDeleteFromHistoryButton() {
 
         createTestData();
         moveTestDataToHistory();
@@ -102,11 +198,7 @@ public class FragmentGroceryListHistoryControllerTest {
         //In History gehen
         Espresso.onView(withId(R.id.historyGroceryList)).perform(ViewActions.click());
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        TestUtils.waitingTime();
 
         //Element löschen
         Espresso.onData(Matchers.anything())
@@ -117,6 +209,25 @@ public class FragmentGroceryListHistoryControllerTest {
 
     }
 
+    /**
+     * Tests the functionality of deleting an item from the grocery list history.
+     * <p>
+     * Test steps include:
+     * <ol>
+     *     <li>Creates test data by adding an item to the grocery list.</li>
+     *     <li>Moves the test data to the grocery list history.</li>
+     *     <li>Navigates to the grocery list history.</li>
+     *     <li>Waits for a specified time.</li>
+     *     <li>Deletes the first item from the grocery list history by performing a long click.</li>
+     * </ol>
+     * <p>
+     * Preconditions: The UI must have functionalities to add items to the grocery list, move items to its history,
+     * navigate to the history, and perform long clicks to delete items from the grocery list history.
+     * The method assumes the existence of these functionalities for testing purposes.
+     * <p>
+     * This test method aims to validate the correct behavior of deleting an item from the grocery list history
+     * after moving it from the current grocery list to the history by performing a long click action.
+     */
     @Test
     public void zDeleteFromHistory() {
 
@@ -126,11 +237,7 @@ public class FragmentGroceryListHistoryControllerTest {
         //In History gehen
         Espresso.onView(withId(R.id.historyGroceryList)).perform(ViewActions.click());
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        TestUtils.waitingTime();
 
         //Element löschen
         Espresso.onData(Matchers.anything())

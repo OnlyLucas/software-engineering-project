@@ -25,6 +25,23 @@ import org.junit.runner.RunWith;
 @RunWith(AndroidJUnit4.class)
 public class FragmentBudgetMainControllerTest {
 
+    /**
+     * Prepares the test environment by initiating the application login and launching a specific fragment.
+     * <p>
+     * Setup actions include:
+     * <ol>
+     *     <li>Initiating the application login process using {@link TestUtils#appLogin()}.</li>
+     *     <li>Launching the {@link FragmentBudgetMainController} within {@link ActivityMainScreenController}.</li>
+     * </ol>
+     * <p>
+     * Preconditions: The application must be in a state where the specified fragment within
+     * the {@link ActivityMainScreenController} is accessible after a successful login.
+     * The method assumes the existence of the specified fragment and a valid navigation flow from
+     * the login screen to the {@link ActivityMainScreenController}.
+     * <p>
+     * This setup method prepares the testing environment by performing necessary actions such as login
+     * and fragment launching for subsequent test execution.
+     */
     @Before
     public void setUp() {
 
@@ -37,6 +54,21 @@ public class FragmentBudgetMainControllerTest {
 
     }
 
+    /**
+     * Tests the visibility and clickability of buttons within the fragment.
+     * <p>
+     * Test steps include:
+     * <ol>
+     *     <li>Verifies the visibility and clickability of the "Add Expense" button.</li>
+     *     <li>Verifies the visibility and clickability of the "Show Budget Detail" button.</li>
+     *     <li>Verifies the invisibility and non-clickability of the "Go Back" button.</li>
+     * </ol>
+     * <p>
+     * Preconditions: The fragment with the specified buttons must be accessible and displayed properly.
+     * The method assumes the existence of the specified buttons within the fragment layout.
+     * <p>
+     * This test method aims to ensure the expected visibility and clickability states of buttons within the fragment.
+     */
     @Test
     public void testButtonsVisibility() {
         // Überprüft die Sichtbarkeit und Klickbarkeit der Buttons im Fragment
@@ -55,6 +87,22 @@ public class FragmentBudgetMainControllerTest {
 
     }
 
+    /**
+     * Tests the functionality of the "Add Expense" button within the fragment.
+     * <p>
+     * Test steps include:
+     * <ol>
+     *     <li>Clicks on the "Add Expense" button.</li>
+     *     <li>Verifies whether the FragmentBudgetAddExpenseScreenController fragment is loaded after the click.</li>
+     *     <li>Verifies the appearance of the budget headline with the text "Add New Expense" after the click.</li>
+     * </ol>
+     * <p>
+     * Preconditions: The fragment containing the "Add Expense" button must be visible and accessible.
+     * The method assumes the existence of the specified buttons and fragments within the application's layout.
+     * <p>
+     * This test method aims to ensure the correct functionality of the "Add Expense" button by verifying
+     * the transition to the appropriate fragment and the displayed headline text.
+     */
     @Test
     public void testClickAddExpenseButton() {
         // Überprüft, ob der "Add Expense" Button korrekt funktioniert
