@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89099437-bd15-4ec1-af96-f9b07a22bad3" name="Changes" comment="Added Unit tests to back end">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/flatfusion/backend/controllers/PaymentParticipationRESTControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/test/java/com/flatfusion/backend/controllers/PaymentsChangeRESTControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/flatfusion/backend/LoginRESTControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/flatfusion/backend/controllers/LoginRESTControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/flatfusion/backend/controllers/PaymentChangesRESTControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/test/java/com/flatfusion/backend/controllers/UserRESTControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/test/java/com/flatfusion/backend/controllers/UserRESTControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,8 +146,8 @@
       <recent name="com.flatfusion.backend.entity" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.PaymentRESTControllerTest">
-    <configuration name="GroupMembershipRESTControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+  <component name="RunManager" selected="Gradle.PaymentsChangeRESTControllerTest">
+    <configuration name="GroupGroceryRESTControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/backend" />
@@ -160,30 +160,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;com.flatfusion.backend.controllers.GroupMembershipRESTControllerTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="GroupRESTControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/backend" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;com.flatfusion.backend.controllers.GroupRESTControllerTest&quot;" />
+            <option value="&quot;com.flatfusion.backend.controllers.GroupGroceryRESTControllerTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -262,6 +239,29 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="PaymentsChangeRESTControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/backend" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;com.flatfusion.backend.controllers.PaymentsChangeRESTControllerTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="backend [build &amp; bootRun]" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="env">
@@ -293,19 +293,19 @@
     </configuration>
     <list>
       <item itemvalue="Gradle.backend [build &amp; bootRun]" />
+      <item itemvalue="Gradle.GroupGroceryRESTControllerTest" />
+      <item itemvalue="Gradle.PaymentsChangeRESTControllerTest" />
       <item itemvalue="Gradle.LoginRESTControllerTest" />
       <item itemvalue="Gradle.PaymentParticipationRESTControllerTest" />
       <item itemvalue="Gradle.PaymentRESTControllerTest" />
-      <item itemvalue="Gradle.GroupMembershipRESTControllerTest" />
-      <item itemvalue="Gradle.GroupRESTControllerTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.PaymentRESTControllerTest" />
-        <item itemvalue="Gradle.PaymentParticipationRESTControllerTest" />
+        <item itemvalue="Gradle.PaymentsChangeRESTControllerTest" />
         <item itemvalue="Gradle.LoginRESTControllerTest" />
-        <item itemvalue="Gradle.GroupRESTControllerTest" />
-        <item itemvalue="Gradle.GroupMembershipRESTControllerTest" />
+        <item itemvalue="Gradle.PaymentRESTControllerTest" />
+        <item itemvalue="Gradle.GroupGroceryRESTControllerTest" />
+        <item itemvalue="Gradle.PaymentParticipationRESTControllerTest" />
       </list>
     </recent_temporary>
   </component>
