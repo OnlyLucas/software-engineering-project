@@ -40,7 +40,7 @@
     <string name="grocery_n_list">Einkaufs-\nliste</string>
     <string name="budget_n_">"Haushalts- \nbuch "</string>
     <string name="cleaning_n_plan">Putzplan\n</string>
-    <string name="settings_n_">Einstellungen</string>
+    <string name="settings_n_">Einstell- ungen</string>
     <string name="new_e_mail_saved">Neue E-Mail gespeichert</string>
     <string name="changes_discarded">Änderungen verworfen</string>
     <string name="new_password_saved">Neues Passwort gespeichert</string>
@@ -142,6 +142,6 @@
     <string name="you_do_not_owe_any_money">Sie schulden niemandem Geld.</string>
     <string name="you_owe">Sie schulden:</string>
     <string name="password_successfully_changed">Passwort erfolgreich geändert</string>
-    <string name="password_not_changed">Password konnte nicht geändert werden</string>
+    <string name="password_not_changed">Passwort konnte nicht geändert werden</string>
     <string name="wrong_current_password">Falsches aktuelles Passwort</string>
 </resources>
