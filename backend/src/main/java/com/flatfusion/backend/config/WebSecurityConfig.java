@@ -35,23 +35,16 @@ class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-//        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-//        // authenticationManagerBuilder.userDetailsService(userDetailsService);
-//        AuthenticationManager authenticationManager = authenticationManagerBuilder.build();
-
-//        http.
-//                authenticationManager(authenticationManager);
-
-
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        // Specifies urls accessible by authenticated user
+                        // Specifies access rules for the endpoints
+
+                        // Login and user registration allow all, as users do not a an account with credentials yet
                         .requestMatchers("/v1/auth/login").permitAll()
+                        .requestMatchers("/v1/users/create-with-password").permitAll()
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/test").permitAll()
-                        .requestMatchers("v1/groups/*").authenticated()
-                        .requestMatchers("/v1/users").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/v1/**").hasAnyAuthority("ADMIN", "USER", "READ", "READ_PRIVILEGE")
+                        .requestMatchers("/*").authenticated()
                 )
                 .authenticationProvider(authProvider())
                 .httpBasic(Customizer.withDefaults());
@@ -64,12 +57,6 @@ class WebSecurityConfig {
                     cors.disable();
                 })
                 ;
-//                .exceptionHandling((exceptions) -> exceptions
-//                        // If exception occurs, reroute to login
-//                    .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/v1/login"))
-//                )
-                //.oauth2ResourceServer((oauth2) -> oauth2.jwt((jwt) -> jwt.decoder(jwtDecoder())));
-                //.oauth2ResourceServer((resourceServer) -> resourceServer.jwt(Customizer.withDefaults()));
 
         http.sessionManagement((session) -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

@@ -29,7 +29,7 @@ public class CustomUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
         UserEntity user = userRepository.findByEmail(username);
         if (user == null) {
-            logger.debug("User details failed to load. Password:");
+            logger.debug("User details failed to load.");
             throw new UsernameNotFoundException(username);
         }
         UserDetails details = new CustomUserPrincipal(user);

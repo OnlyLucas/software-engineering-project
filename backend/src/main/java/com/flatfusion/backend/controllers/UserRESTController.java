@@ -3,6 +3,7 @@ package com.flatfusion.backend.controllers;
 import com.flatfusion.backend.entities.UserCreateEntity;
 import com.flatfusion.backend.entities.UserEntity;
 import com.flatfusion.backend.repositories.UserEntityRepository;
+import com.flatfusion.backend.requests.UserWithPasswordRequest;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,7 @@ public class UserRESTController extends RESTController<UserEntity>{
         super(repository);
     }
 
+    // Uses the PasswordEncoder Bean specified in the WebSecurityConfig
     @Autowired
     PasswordEncoder encoder;
 
@@ -129,19 +131,48 @@ public class UserRESTController extends RESTController<UserEntity>{
     /***
      *  This method creates a UserEntity from the entity given in the https request body.
      *  The password of the user is encrypted with a @{@link PasswordEncoder} before being saved to the db.
-     * @param entity {@link UserEntity} from the http body.
+     * @param entity {@link UserWithPasswordRequest} from the http body.
      * @return The created UserEntity as a http response.
      */
-    @Override
-    @PostMapping
-    public ResponseEntity<UserEntity> create(@RequestBody UserEntity entity) {
 
+    @PostMapping("/create-with-password")
+    public ResponseEntity<UserEntity> createWithPassword(@RequestBody UserWithPasswordRequest entity) {
+
+        UserEntity newUser = entity.getUser();
         String password = entity.getPassword();
-        String encryptedPassword = encoder.encode(password);
-        entity.setPassword(encryptedPassword);
 
-        UserEntity createdEntity = repository.save(entity);
-        logger.info("User created: " + createdEntity.getEmail());
+        if(newUser == null || password == null){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+
+        if(password.isBlank()){
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+
+        String email = newUser.getEmail();
+
+        UserEntity existingUser = repository.findByEmail(email);
+
+        if(existingUser != null){
+            // No creation as user already exists for this email
+            return new ResponseEntity<>(null, HttpStatus.CONFLICT);
+        }
+
+        String encryptedPassword = encoder.encode(password);
+        newUser.setPassword(encryptedPassword);
+
+        UserEntity createdEntity = repository.save(newUser);
+        logger.info("User created: " + createdEntity);
+
         return new ResponseEntity<>(createdEntity, HttpStatus.CREATED);
+    }
+
+
+    /**
+     *  // This default endpoint should not be used in this class and is therefore overridden.
+     */
+    @Override
+    public ResponseEntity<UserEntity> create(UserEntity entity) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

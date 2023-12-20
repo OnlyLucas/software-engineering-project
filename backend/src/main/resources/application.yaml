@@ -1,8 +1,12 @@
 spring:
-  profiles:
-    active: test
   mvc:
     log-request-details: true
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: ${db_user_name}
+    password: ${db_password}
+    url: ${db_url}
+
 server:
   port: 1337
   ssl:
